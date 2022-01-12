@@ -110,11 +110,11 @@ CreateStat({ id: 'shaman', max: 1, isHidden: false })
 CreateStat({ id: 'paladin', max: 1, isHidden: false })
 CreateStat({ id: 'bard', max: 1, isHidden: false })
 CreateStat({ id: 'level', max: 99, isHidden: false })
-CreateStat({ id: 'strength', count: 120, type: STAT.STRENGTH })
-CreateStat({ id: 'agility', count: 120, type: STAT.AGILITY })
-CreateStat({ id: 'stamina', count: 120, type: STAT.STAMINA })
-CreateStat({ id: 'intellect', count: 120, type: STAT.INTELLECT })
-CreateStat({ id: 'spirit', count: 120, type: STAT.SPIRIT })
+CreateStat({ id: 'strength', count: 120, type: STAT.STRENGTH, isHidden: false })
+CreateStat({ id: 'agility', count: 120, type: STAT.AGILITY, isHidden: false })
+CreateStat({ id: 'stamina', count: 120, type: STAT.STAMINA, isHidden: false })
+CreateStat({ id: 'intellect', count: 120, type: STAT.INTELLECT, isHidden: false })
+CreateStat({ id: 'spirit', count: 120, type: STAT.SPIRIT, isHidden: false })
 
 // ---
 
@@ -137,18 +137,6 @@ async function main () {
     base: 1194,
     itemSpells: [{ spell: 'test-spell', id: 'thing', isIgnoreILevel: true }],
   })
-
-  console.log(
-    item.itemSpells
-  )
-
-  console.log(
-    spell.asset.Name.enGB.get()
-  )
-
-  console.log(
-    item.asset.Name.enGB.get()
-  )
 }
 
 main()
@@ -161,9 +149,8 @@ lev.Effects.addMod((e => {
   e.Aura.MOD_INCREASE_SPEED.set()
   e.PointsBase.set(120)
 }))
-
-// lev.Effects.forEach(v => v.ChainAmplitude.set(0))
-
-lev.Effects.forEach(v => console.log(v.objectify()))
-
+lev.Visual.modRef(ref => {
+  const s = ref.StateKit.getRef()
+  const be = s.BaseEffect.getRef()
+})
 

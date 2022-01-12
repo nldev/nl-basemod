@@ -90,6 +90,27 @@ function TestCmdGetRandomPropertyOfFirstItemInBag (events: TSEvents) {
 }
 
 function TestCmdAddItemWithPlaceholderEnchant (events: TSEvents) {
+  events.SpellID.OnCast(13653, spell => {
+    const item = spell.GetCaster().ToPlayer().GetItemByGUID(
+      spell.GetTarget().GetGUID()
+    )
+  })
+  events.SpellID.OnCast(13653, spell => {
+    const item = spell.GetTarget()
+    const entry = item.GetEntry()
+    const guid = item.GetGUID()
+    const guidlow = item.GetGUIDLow()
+    const caster = spell.GetCaster()
+    if (caster.IsPlayer()) {
+      const player = caster.ToPlayer()
+      player.SendBroadcastMessage(`entry: ${entry}`)
+      player.SendBroadcastMessage(`guid: ${guid}`)
+      player.SendBroadcastMessage(`guidlow: ${guidlow}`)
+      const a = player.GetItemByGUID(guid)
+      const name = a.GetName()
+      player.SendBroadcastMessage(`name: ${name}`)
+    }
+  })
   events.Player.OnSay((player, message) => {
     let text = message.get()
 
@@ -97,8 +118,8 @@ function TestCmdAddItemWithPlaceholderEnchant (events: TSEvents) {
       let item = player.AddItem(2139, 1)
       item.SetEnchantment(9999, 0)
       item.SetEnchantment(1 + 10000, 2)
-      item.SetEnchantment(0 + 10000, 3)
-      item.SetEnchantment(0 + 10000, 4)
+      item.SetEnchantment(2 + 10000, 3)
+      item.SetEnchantment(3 + 10000, 4)
     }
   })
 }

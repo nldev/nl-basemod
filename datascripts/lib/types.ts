@@ -8,6 +8,7 @@ import {
    ITEM_SPELL_TRIGGER_SOULSTONE, ITEM_SPELL_TRIGGERS, NPC, QUERY_EFFECT_POINTS, QUERY_ICON,
    QUERY_ID, QUERY_MOUNT_NPC, SCHOOLS, SPELL,
 } from './constants'
+import { NWSpell } from './spell'
 
 export type Env = typeof ENV.DEV | typeof ENV.TEST | typeof ENV.PROD
 
@@ -142,4 +143,23 @@ export interface ItemSpell {
 export type ItemSpellOptions = Omit<Partial<ItemSpell>, 'spell'> & {
   iLevel: number
 }
+
+export interface BaseMissileOptions {
+  type: 'base'
+ // | 'copy' | 'create'
+
+}
+
+export interface CreateMissileOptions {
+}
+
+export type CopyMissileOptions = CreateMissileOptions & {
+}
+
+export interface Debug {
+  showAllAuras: boolean;
+  enableDebugScripts: boolean;
+}
+
+export type DebugOptions = Optional<Debug>
 
