@@ -1,4 +1,5 @@
 import { Spell as TSSpell } from 'tswow-stdlib/Spell/Spell'
+import { SpellEffect } from 'tswow-stdlib/Spell/SpellEffect'
 import { Asset, AssetOptions } from '../asset'
 
 import { CREATE_STAT_TASK } from '../constants'
@@ -6,36 +7,36 @@ import { Builder } from '../index'
 import { NWSpell } from '../spell'
 import { NWTask, TaskOptions, Template } from '../task'
 import { School, TSText } from '../types'
-import { capitalize, resolveSpeed } from '../utils'
+import { capitalize, resolveSpeed, times } from '../utils'
 
 export type STAT =
+  | 'MP5'
+  | 'HP5'
   | 'ARMOR'
-  | 'STRENGTH'
+  | 'SPIRIT'
   | 'AGILITY'
   | 'STAMINA'
+  | 'STRENGTH'
   | 'INTELLECT'
-  | 'SPIRIT'
+  | 'MOVESPEED'
+  | 'SPELL-POWER'
+  | 'ATTACK-POWER'
+  | 'ALL-RESIST'
+  | 'FIRE-DAMAGE'
+  | 'FIRE-RESIST'
+  | 'HOLY-DAMAGE'
+  | 'HOLY-RESIST'
+  | 'FROST-DAMAGE'
+  | 'FROST-RESIST'
+  | 'ARCANE-DAMAGE'
+  | 'ARCANE-RESIST'
+  | 'NATURE-DAMAGE'
+  | 'NATURE-RESIST'
+  | 'SHADOW-DAMAGE'
+  | 'SHADOW-RESIST'
   | 'CRITICAL-STRIKE'
   | 'ARMOR-PENETRATION'
   | 'SPELL-PENETRATION'
-  | 'MP5'
-  | 'HP5'
-  | 'MOVESPEED'
-  | 'ATTACK-POWER'
-  | 'SPELL-POWER'
-  | 'FIRE-DAMAGE'
-  | 'FROST-DAMAGE'
-  | 'NATURE-DAMAGE'
-  | 'SHADOW-DAMAGE'
-  | 'HOLY-DAMAGE'
-  | 'ARCANE-DAMAGE'
-  | 'ALL-RESIST'
-  | 'FIRE-RESIST'
-  | 'FROST-RESIST'
-  | 'NATURE-RESIST'
-  | 'SHADOW-RESIST'
-  | 'HOLY-RESIST'
-  | 'ARCANE-RESIST'
 
 export interface Stat extends Asset<TSSpell> {
   readonly prefix: string
@@ -74,14 +75,174 @@ export interface CreateStatOptions extends TaskOptions {
 }
 
 async function fn ($: Builder, stat: Stat) {
-  const {
-    id,
-    type = 'SPELL',
-    min = 0,
-    max = 255,
-    stacks = 1,
-    isHidden = false,
-  } = stat
+  const { type = 'ARMOR', stacks = 255 } = stat
+
+  for (let i of times(stacks)) {
+    switch (type) {
+      case 'HP5':
+        hp5(stat)
+        break
+      case 'MP5':
+        mp5(stat)
+        break
+      case 'ARMOR':
+        armor(stat)
+        break
+      case 'SPIRIT':
+        spirit(stat)
+        break
+      case 'AGILITY':
+        agility(stat)
+        break
+      case 'STAMINA':
+        stamina(stat)
+        break
+      case 'STRENGTH':
+        strength(stat)
+        break
+      case 'INTELLECT':
+        intellect(stat)
+        break
+      case 'MOVESPEED':
+        movespeed(stat)
+        break
+      case 'SPELL-POWER':
+        hp5(stat)
+        break
+      case 'ATTACK-POWER':
+        spellPower(stat)
+        break
+      case 'ALL-RESIST':
+        allResist(stat)
+        break
+      case 'FIRE-DAMAGE':
+        fireDamage(stat)
+        break
+      case 'FIRE-RESIST':
+        fireResist(stat)
+        break
+      case 'HOLY-DAMAGE':
+        holyDamage(stat)
+        break
+      case 'HOLY-RESIST':
+        holyResist(stat)
+        break
+      case 'FROST-DAMAGE':
+        frostDamage(stat)
+        break
+      case 'FROST-RESIST':
+        frostResist(stat)
+        break
+      case 'ARCANE-DAMAGE':
+        arcaneDamage(stat)
+        break
+      case 'ARCANE-RESIST':
+        arcaneResist(stat)
+        break
+      case 'NATURE-DAMAGE':
+        natureDamage(stat)
+        break
+      case 'NATURE-RESIST':
+        natureResist(stat)
+        break
+      case 'SHADOW-DAMAGE':
+        shadowDamage(stat)
+        break
+      case 'SHADOW-RESIST':
+        shadowResist(stat)
+        break
+      case 'CRITICAL-STRIKE':
+        criticalStrike(stat)
+        break
+      case 'ARMOR-PENETRATION':
+        armorPenetration(stat)
+        break
+      case 'SPELL-PENETRATION':
+        spellPenetration(stat)
+        break
+    }
+  }
+}
+
+function hp5 (s: Stat) {
+}
+
+function mp5 (s: Stat) {
+}
+
+function armor (s: Stat) {
+}
+
+function spirit (s: Stat) {
+}
+
+function agility (s: Stat) {
+}
+
+function stamina (s: Stat) {
+}
+
+function strength (s: Stat) {
+}
+
+function intellect (s: Stat) {
+}
+
+function movespeed (s: Stat) {
+}
+
+function spellPower (s: Stat) {
+}
+
+function attackPower (s: Stat) {
+}
+
+function allResist (s: Stat) {
+}
+
+function fireResist (s: Stat) {
+}
+
+function fireDamage (s: Stat) {
+}
+
+function holyResist (s: Stat) {
+}
+
+function holyDamage (s: Stat) {
+}
+
+function frostResist (s: Stat) {
+}
+
+function frostDamage (s: Stat) {
+}
+
+function arcaneResist (s: Stat) {
+}
+
+function arcaneDamage (s: Stat) {
+}
+
+function natureResist (s: Stat) {
+}
+
+function natureDamage (s: Stat) {
+}
+
+function shadowResist (s: Stat) {
+}
+
+function shadowDamage (s: Stat) {
+}
+
+function criticalStrike (s: Stat) {
+}
+
+function armorPenetration (s: Stat) {
+}
+
+function spellPenetration (s: Stat) {
 }
 
 // async function fn ($: Builder, stat: Stat) {

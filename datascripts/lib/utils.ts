@@ -69,6 +69,11 @@ export function englishify (text: TSText): string {
   return text.enGB ? text.enGB : ''
 }
 
+export function * times (amount: number) {
+  for (let i = 0; i < amount; i++)
+    yield i
+}
+
 let spell_id = 0
 let item_id = 0
 let npc_id = 0
