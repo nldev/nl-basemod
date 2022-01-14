@@ -6,10 +6,10 @@ import { CREATE_STAT_TASK } from '../constants'
 import { Builder } from '../index'
 import { NWSpell } from '../spell'
 import { NWTask, TaskOptions, Template } from '../task'
-import { School, TSText } from '../types'
+import { Nil, School, TSText } from '../types'
 import { capitalize, resolveSpeed, times } from '../utils'
 
-export type STAT =
+export type STAT_TYPE = Nil
   | 'MP5'
   | 'HP5'
   | 'ARMOR'
@@ -44,7 +44,7 @@ export interface Stat extends Asset<TSSpell> {
   readonly min: number
   readonly max: number
   readonly stacks: number
-  readonly type: STAT
+  readonly type: STAT_TYPE
   readonly isHidden: boolean
 }
 
@@ -74,175 +74,188 @@ export interface CreateStatOptions extends TaskOptions {
   id: typeof CREATE_STAT_TASK
 }
 
-async function fn ($: Builder, stat: Stat) {
-  const { type = 'ARMOR', stacks = 255 } = stat
+export class Helper {
+  constructor (public stat: Stat) {}
 
-  for (let i of times(stacks)) {
-    switch (type) {
-      case 'HP5':
-        hp5(stat)
-        break
-      case 'MP5':
-        mp5(stat)
-        break
-      case 'ARMOR':
-        armor(stat)
-        break
-      case 'SPIRIT':
-        spirit(stat)
-        break
-      case 'AGILITY':
-        agility(stat)
-        break
-      case 'STAMINA':
-        stamina(stat)
-        break
-      case 'STRENGTH':
-        strength(stat)
-        break
-      case 'INTELLECT':
-        intellect(stat)
-        break
-      case 'MOVESPEED':
-        movespeed(stat)
-        break
-      case 'SPELL-POWER':
-        hp5(stat)
-        break
-      case 'ATTACK-POWER':
-        spellPower(stat)
-        break
-      case 'ALL-RESIST':
-        allResist(stat)
-        break
-      case 'FIRE-DAMAGE':
-        fireDamage(stat)
-        break
-      case 'FIRE-RESIST':
-        fireResist(stat)
-        break
-      case 'HOLY-DAMAGE':
-        holyDamage(stat)
-        break
-      case 'HOLY-RESIST':
-        holyResist(stat)
-        break
-      case 'FROST-DAMAGE':
-        frostDamage(stat)
-        break
-      case 'FROST-RESIST':
-        frostResist(stat)
-        break
-      case 'ARCANE-DAMAGE':
-        arcaneDamage(stat)
-        break
-      case 'ARCANE-RESIST':
-        arcaneResist(stat)
-        break
-      case 'NATURE-DAMAGE':
-        natureDamage(stat)
-        break
-      case 'NATURE-RESIST':
-        natureResist(stat)
-        break
-      case 'SHADOW-DAMAGE':
-        shadowDamage(stat)
-        break
-      case 'SHADOW-RESIST':
-        shadowResist(stat)
-        break
-      case 'CRITICAL-STRIKE':
-        criticalStrike(stat)
-        break
-      case 'ARMOR-PENETRATION':
-        armorPenetration(stat)
-        break
-      case 'SPELL-PENETRATION':
-        spellPenetration(stat)
-        break
+  async run () {
+    const { type, stacks = 255 } = this.stat
+
+    for (let i of times(stacks)) {
+      switch (type) {
+        case 'HP5':
+          this.hp5(this.stat)
+          break
+        case 'MP5':
+          this.mp5(this.stat)
+          break
+        case 'ARMOR':
+          this.armor(this.stat)
+          break
+        case 'SPIRIT':
+          this.spirit(this.stat)
+          break
+        case 'AGILITY':
+          this.agility(this.stat)
+          break
+        case 'STAMINA':
+          this.stamina(this.stat)
+          break
+        case 'STRENGTH':
+          this.strength(this.stat)
+          break
+        case 'INTELLECT':
+          this.intellect(this.stat)
+          break
+        case 'MOVESPEED':
+          this.movespeed(this.stat)
+          break
+        case 'SPELL-POWER':
+          this.hp5(this.stat)
+          break
+        case 'ATTACK-POWER':
+          this.spellPower(this.stat)
+          break
+        case 'ALL-RESIST':
+          this.allResist(this.stat)
+          break
+        case 'FIRE-DAMAGE':
+          this.fireDamage(this.stat)
+          break
+        case 'FIRE-RESIST':
+          this.fireResist(this.stat)
+          break
+        case 'HOLY-DAMAGE':
+          this.holyDamage(this.stat)
+          break
+        case 'HOLY-RESIST':
+          this.holyResist(this.stat)
+          break
+        case 'FROST-DAMAGE':
+          this.frostDamage(this.stat)
+          break
+        case 'FROST-RESIST':
+          this.frostResist(this.stat)
+          break
+        case 'ARCANE-DAMAGE':
+          this.arcaneDamage(this.stat)
+          break
+        case 'ARCANE-RESIST':
+          this.arcaneResist(this.stat)
+          break
+        case 'NATURE-DAMAGE':
+          this.natureDamage(this.stat)
+          break
+        case 'NATURE-RESIST':
+          this.natureResist(this.stat)
+          break
+        case 'SHADOW-DAMAGE':
+          this.shadowDamage(this.stat)
+          break
+        case 'SHADOW-RESIST':
+          this.shadowResist(this.stat)
+          break
+        case 'CRITICAL-STRIKE':
+          this.criticalStrike(this.stat)
+          break
+        case 'ARMOR-PENETRATION':
+          this.armorPenetration(this.stat)
+          break
+        case 'SPELL-PENETRATION':
+          this.spellPenetration(this.stat)
+          break
+        default:
+          this.create(this.stat)
+          break
+      }
     }
+  }
+
+  public create (s: Stat) {
+  }
+
+  public hp5 (s: Stat) {
+  }
+
+  public mp5 (s: Stat) {
+  }
+
+  public armor (s: Stat) {
+  }
+
+  public spirit (s: Stat) {
+  }
+
+  public agility (s: Stat) {
+  }
+
+  public stamina (s: Stat) {
+  }
+
+  public strength (s: Stat) {
+  }
+
+  public intellect (s: Stat) {
+  }
+
+  public movespeed (s: Stat) {
+  }
+
+  public spellPower (s: Stat) {
+  }
+
+  public attackPower (s: Stat) {
+  }
+
+  public allResist (s: Stat) {
+  }
+
+  public fireResist (s: Stat) {
+  }
+
+  public fireDamage (s: Stat) {
+  }
+
+  public holyResist (s: Stat) {
+  }
+
+  public holyDamage (s: Stat) {
+  }
+
+  public frostResist (s: Stat) {
+  }
+
+  public frostDamage (s: Stat) {
+  }
+
+  public arcaneResist (s: Stat) {
+  }
+
+  public arcaneDamage (s: Stat) {
+  }
+
+  public natureResist (s: Stat) {
+  }
+
+  public natureDamage (s: Stat) {
+  }
+
+  public shadowResist (s: Stat) {
+  }
+
+  public shadowDamage (s: Stat) {
+  }
+
+  public criticalStrike (s: Stat) {
+  }
+
+  public armorPenetration (s: Stat) {
+  }
+
+  public spellPenetration (s: Stat) {
   }
 }
 
-function hp5 (s: Stat) {
-}
-
-function mp5 (s: Stat) {
-}
-
-function armor (s: Stat) {
-}
-
-function spirit (s: Stat) {
-}
-
-function agility (s: Stat) {
-}
-
-function stamina (s: Stat) {
-}
-
-function strength (s: Stat) {
-}
-
-function intellect (s: Stat) {
-}
-
-function movespeed (s: Stat) {
-}
-
-function spellPower (s: Stat) {
-}
-
-function attackPower (s: Stat) {
-}
-
-function allResist (s: Stat) {
-}
-
-function fireResist (s: Stat) {
-}
-
-function fireDamage (s: Stat) {
-}
-
-function holyResist (s: Stat) {
-}
-
-function holyDamage (s: Stat) {
-}
-
-function frostResist (s: Stat) {
-}
-
-function frostDamage (s: Stat) {
-}
-
-function arcaneResist (s: Stat) {
-}
-
-function arcaneDamage (s: Stat) {
-}
-
-function natureResist (s: Stat) {
-}
-
-function natureDamage (s: Stat) {
-}
-
-function shadowResist (s: Stat) {
-}
-
-function shadowDamage (s: Stat) {
-}
-
-function criticalStrike (s: Stat) {
-}
-
-function armorPenetration (s: Stat) {
-}
-
-function spellPenetration (s: Stat) {
+async function fn (stat: Stat) {
 }
 
 // async function fn ($: Builder, stat: Stat) {
