@@ -9,7 +9,8 @@ import { NWTask, TaskOptions, Template } from '../task'
 import { Nil, School, TSText } from '../types'
 import { capitalize, resolveSpeed, times } from '../utils'
 
-export type STAT_TYPE = Nil
+export type STAT_TYPE =
+  | Nil
   | 'MP5'
   | 'HP5'
   | 'ARMOR'
