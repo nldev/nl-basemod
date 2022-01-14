@@ -40,6 +40,7 @@ export type STAT_TYPE = Nil
 
 export interface Stat extends Asset<TSSpell> {
   readonly prefix: string
+  readonly name: TSText
   readonly spells: NWSpell[]
   readonly min: number
   readonly max: number
@@ -75,187 +76,200 @@ export interface CreateStatOptions extends TaskOptions {
 }
 
 export class Helper {
-  constructor (public stat: Stat) {}
+  constructor (public options: StatOptions, public builder: Builder) {}
 
   async run () {
-    const { type, stacks = 255 } = this.stat
+    const { type, stacks = 255 } = this.options
 
     for (let i of times(stacks)) {
       switch (type) {
         case 'HP5':
-          this.hp5(this.stat)
+          this.hp5()
           break
         case 'MP5':
-          this.mp5(this.stat)
+          this.mp5()
           break
         case 'ARMOR':
-          this.armor(this.stat)
+          this.armor()
           break
         case 'SPIRIT':
-          this.spirit(this.stat)
+          this.spirit()
           break
         case 'AGILITY':
-          this.agility(this.stat)
+          this.agility()
           break
         case 'STAMINA':
-          this.stamina(this.stat)
+          this.stamina()
           break
         case 'STRENGTH':
-          this.strength(this.stat)
+          this.strength()
           break
         case 'INTELLECT':
-          this.intellect(this.stat)
+          this.intellect()
           break
         case 'MOVESPEED':
-          this.movespeed(this.stat)
+          this.movespeed()
           break
         case 'SPELL-POWER':
-          this.hp5(this.stat)
+          this.hp5()
           break
         case 'ATTACK-POWER':
-          this.spellPower(this.stat)
+          this.spellPower()
           break
         case 'ALL-RESIST':
-          this.allResist(this.stat)
+          this.allResist()
           break
         case 'FIRE-DAMAGE':
-          this.fireDamage(this.stat)
+          this.fireDamage()
           break
         case 'FIRE-RESIST':
-          this.fireResist(this.stat)
+          this.fireResist()
           break
         case 'HOLY-DAMAGE':
-          this.holyDamage(this.stat)
+          this.holyDamage()
           break
         case 'HOLY-RESIST':
-          this.holyResist(this.stat)
+          this.holyResist()
           break
         case 'FROST-DAMAGE':
-          this.frostDamage(this.stat)
+          this.frostDamage()
           break
         case 'FROST-RESIST':
-          this.frostResist(this.stat)
+          this.frostResist()
           break
         case 'ARCANE-DAMAGE':
-          this.arcaneDamage(this.stat)
+          this.arcaneDamage()
           break
         case 'ARCANE-RESIST':
-          this.arcaneResist(this.stat)
+          this.arcaneResist()
           break
         case 'NATURE-DAMAGE':
-          this.natureDamage(this.stat)
+          this.natureDamage()
           break
         case 'NATURE-RESIST':
-          this.natureResist(this.stat)
+          this.natureResist()
           break
         case 'SHADOW-DAMAGE':
-          this.shadowDamage(this.stat)
+          this.shadowDamage()
           break
         case 'SHADOW-RESIST':
-          this.shadowResist(this.stat)
+          this.shadowResist()
           break
         case 'CRITICAL-STRIKE':
-          this.criticalStrike(this.stat)
+          this.criticalStrike()
           break
         case 'ARMOR-PENETRATION':
-          this.armorPenetration(this.stat)
+          this.armorPenetration()
           break
         case 'SPELL-PENETRATION':
-          this.spellPenetration(this.stat)
+          this.spellPenetration()
           break
         default:
-          this.create(this.stat)
+          await this.create(0)
           break
       }
     }
   }
 
-  public create (s: Stat) {
+  public async hp5 () {
   }
 
-  public hp5 (s: Stat) {
+  public async mp5 () {
   }
 
-  public mp5 (s: Stat) {
+  public async armor () {
   }
 
-  public armor (s: Stat) {
+  public async spirit () {
   }
 
-  public spirit (s: Stat) {
+  public async agility () {
   }
 
-  public agility (s: Stat) {
+  public async stamina () {
   }
 
-  public stamina (s: Stat) {
+  public async strength () {
   }
 
-  public strength (s: Stat) {
+  public async intellect () {
   }
 
-  public intellect (s: Stat) {
+  public async movespeed () {
   }
 
-  public movespeed (s: Stat) {
+  public async spellPower () {
   }
 
-  public spellPower (s: Stat) {
+  public async attackPower () {
   }
 
-  public attackPower (s: Stat) {
+  public async allResist () {
   }
 
-  public allResist (s: Stat) {
+  public async fireResist () {
   }
 
-  public fireResist (s: Stat) {
+  public async fireDamage () {
   }
 
-  public fireDamage (s: Stat) {
+  public async holyResist () {
   }
 
-  public holyResist (s: Stat) {
+  public async holyDamage () {
   }
 
-  public holyDamage (s: Stat) {
+  public async frostResist () {
   }
 
-  public frostResist (s: Stat) {
+  public async frostDamage () {
   }
 
-  public frostDamage (s: Stat) {
+  public async arcaneResist () {
   }
 
-  public arcaneResist (s: Stat) {
+  public async arcaneDamage () {
   }
 
-  public arcaneDamage (s: Stat) {
+  public async natureResist () {
   }
 
-  public natureResist (s: Stat) {
+  public async natureDamage () {
   }
 
-  public natureDamage (s: Stat) {
+  public async shadowResist () {
   }
 
-  public shadowResist (s: Stat) {
+  public async shadowDamage () {
   }
 
-  public shadowDamage (s: Stat) {
+  public async criticalStrike () {
   }
 
-  public criticalStrike (s: Stat) {
+  public async armorPenetration () {
   }
 
-  public armorPenetration (s: Stat) {
+  public async spellPenetration () {
   }
 
-  public spellPenetration (s: Stat) {
-  }
-}
+  public async create (index: number) {
+    // TODO: perform for loop here
+    // TODO: pass fns into here (strength, criticalStrike, etc)
+    const $ = this.builder
+    const id = (this.options.prefix || 'stat-') + index
+    const name =  (this.options.name || { enGB: 'Stat' })
 
-async function fn (stat: Stat) {
+    const spell = await $.Spell.add({
+      id,
+      name,
+      base: 26283,
+      description: name,
+      auraDescription: name,
+    })
+
+    spell.asset.Effects.clearAll()
+  }
+
 }
 
 // async function fn ($: Builder, stat: Stat) {
