@@ -215,6 +215,7 @@ export class Helper {
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
       .PointsBase.set(amount)
+      .PointsDieSides.set(0)
 
     return spell
   }
@@ -236,6 +237,7 @@ export class Helper {
       .PowerBase.set(amount)
       .PowerPerCombo.set(0)
       .PowerPerLevel.set(0)
+      .PowerDieSides.set(0)
 
     return spell
   }
@@ -257,6 +259,7 @@ export class Helper {
       .PowerBase.set(amount)
       .PowerPerCombo.set(0)
       .PowerPerLevel.set(0)
+      .PowerDieSides.set(0)
 
     return spell
   }
@@ -278,6 +281,7 @@ export class Helper {
       .PowerBase.set(amount)
       .PowerPerCombo.set(0)
       .PowerPerLevel.set(0)
+      .PowerDieSides.set(0)
 
     return spell
   }
@@ -293,6 +297,14 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      .Aura.MOD_STAT.set()
+      .Stat.SPIRIT.set()
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
+      .PointsBase.set(amount)
+      .PointsDieSides.set(0)
+
     return spell
   }
 
@@ -306,6 +318,14 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_STAT.set()
+      .Stat.AGILITY.set()
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
+      .PointsBase.set(amount)
+      .PointsDieSides.set(0)
 
     return spell
   }
@@ -321,6 +341,14 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      .Aura.MOD_STAT.set()
+      .Stat.STAMINA.set()
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
+      .PointsBase.set(amount)
+      .PointsDieSides.set(0)
+
     return spell
   }
 
@@ -334,6 +362,14 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_STAT.set()
+      .Stat.STRENGTH.set()
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
+      .PointsBase.set(amount)
+      .PointsDieSides.set(0)
 
     return spell
   }
@@ -349,6 +385,14 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      .Aura.MOD_STAT.set()
+      .Stat.INTELLECT.set()
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
+      .PointsBase.set(amount)
+      .PointsDieSides.set(0)
+
     return spell
   }
 
@@ -362,6 +406,14 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_INCREASE_SPEED.set()
+      .AsEffect.get()
+      .PointsBase.set(resolveSpeed(this.builder.baseSpeed, amount))
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
+      .PointsDieSides.set(0)
 
     return spell
   }
@@ -377,6 +429,19 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      .Aura.MOD_DAMAGE_DONE.set()
+      .School.FIRE.set(1)
+      .School.HOLY.set(1)
+      .School.FROST.set(1)
+      .School.ARCANE.set(1)
+      .School.NATURE.set(1)
+      .School.SHADOW.set(1)
+      .DamagePctBase.set(amount)
+      .DamagePctPerLevel.set(0)
+      .DamagePctDieSides.set(0)
+      .DamagePctPerCombo.set(0)
+
     return spell
   }
 
@@ -390,6 +455,14 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_DAMAGE_DONE.set()
+      .School.PHYSICAL.set(1)
+      .DamagePctBase.set(amount)
+      .DamagePctPerLevel.set(0)
+      .DamagePctDieSides.set(0)
+      .DamagePctPerCombo.set(0)
 
     return spell
   }
@@ -405,6 +478,19 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      .Aura.MOD_RESISTANCE.set()
+      .Resistance.FIRE.set(1)
+      .Resistance.HOLY.set(1)
+      .Resistance.FROST.set(1)
+      .Resistance.ARCANE.set(1)
+      .Resistance.NATURE.set(1)
+      .Resistance.SHADOW.set(1)
+      .PointsDieSides.set(0)
+      .PointsBase.set(0)
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
+
     return spell
   }
 
@@ -418,6 +504,14 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_RESISTANCE.set()
+      .Resistance.FIRE.set(1)
+      .PointsDieSides.set(0)
+      .PointsBase.set(0)
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
 
     return spell
   }
@@ -433,6 +527,14 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      .Aura.MOD_DAMAGE_DONE.set()
+      .School.FIRE.set(1)
+      .DamagePctBase.set(amount)
+      .DamagePctPerLevel.set(0)
+      .DamagePctDieSides.set(0)
+      .DamagePctPerCombo.set(0)
+
     return spell
   }
 
@@ -446,6 +548,14 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_RESISTANCE.set()
+      .Resistance.HOLY.set(1)
+      .PointsDieSides.set(0)
+      .PointsBase.set(0)
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
 
     return spell
   }
@@ -461,6 +571,15 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      .Aura.MOD_DAMAGE_DONE.set()
+      .School.HOLY.set(1)
+      .DamagePctBase.set(amount)
+      .DamagePctPerLevel.set(0)
+      .DamagePctDieSides.set(0)
+      .DamagePctPerCombo.set(0)
+
+
     return spell
   }
 
@@ -474,6 +593,14 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_RESISTANCE.set()
+      .Resistance.FROST.set(1)
+      .PointsDieSides.set(0)
+      .PointsBase.set(0)
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
 
     return spell
   }
@@ -489,6 +616,14 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      .Aura.MOD_DAMAGE_DONE.set()
+      .School.FROST.set(1)
+      .DamagePctBase.set(amount)
+      .DamagePctPerLevel.set(0)
+      .DamagePctDieSides.set(0)
+      .DamagePctPerCombo.set(0)
+
     return spell
   }
 
@@ -502,6 +637,14 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_RESISTANCE.set()
+      .Resistance.ARCANE.set(1)
+      .PointsDieSides.set(0)
+      .PointsBase.set(0)
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
 
     return spell
   }
@@ -517,6 +660,14 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      .Aura.MOD_DAMAGE_DONE.set()
+      .School.ARCANE.set(1)
+      .DamagePctBase.set(amount)
+      .DamagePctPerLevel.set(0)
+      .DamagePctDieSides.set(0)
+      .DamagePctPerCombo.set(0)
+
     return spell
   }
 
@@ -530,6 +681,14 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_RESISTANCE.set()
+      .Resistance.NATURE.set(1)
+      .PointsDieSides.set(0)
+      .PointsBase.set(0)
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
 
     return spell
   }
@@ -545,6 +704,14 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      .Aura.MOD_DAMAGE_DONE.set()
+      .School.NATURE.set(1)
+      .DamagePctBase.set(amount)
+      .DamagePctPerLevel.set(0)
+      .DamagePctDieSides.set(0)
+      .DamagePctPerCombo.set(0)
+
     return spell
   }
 
@@ -558,6 +725,14 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_RESISTANCE.set()
+      .Resistance.SHADOW.set(1)
+      .PointsDieSides.set(0)
+      .PointsBase.set(0)
+      .PointsPerLevel.set(0)
+      .PointsPerCombo.set(0)
 
     return spell
   }
@@ -573,6 +748,14 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      .Aura.MOD_DAMAGE_DONE.set()
+      .School.SHADOW.set(1)
+      .DamagePctBase.set(amount)
+      .DamagePctPerLevel.set(0)
+      .DamagePctDieSides.set(0)
+      .DamagePctPerCombo.set(0)
+
     return spell
   }
 
@@ -586,6 +769,13 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_CRIT_PCT.set()
+      .PercentBase.set(amount)
+      .PercentPerLevel.set(0)
+      .PercentDieSides.set(0)
+      .PercentPerCombo.set(0)
 
     return spell
   }
@@ -601,6 +791,13 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      // .Aura.ARMOR.set()
+      // .PercentBase.set(amount)
+      // .PercentPerLevel.set(0)
+      // .PercentDieSides.set(0)
+      // .PercentPerCombo.set(0)
+
     return spell
   }
 
@@ -615,183 +812,16 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.get(0)
+      // .Aura.ARMOR.set()
+      // .PercentBase.set(amount)
+      // .PercentPerLevel.set(0)
+      // .PercentDieSides.set(0)
+      // .PercentPerCombo.set(0)
+
     return spell
   }
 }
-
-// async function fn ($: Builder, stat: Stat) {
-//   const { type } = stat
-
-//   const min = stat.min || 1
-//   const max = stat.max || 0
-
-//   let spell: NWSpell
-//   let name: TSText
-//   let prefix: string
-//   let id: string
-//   let effect: SpellEffect
-
-//   for (let i = min; i <= max; i++) {
-//     switch (type) {
-//       case 'spell-pen':
-//         name = (stat.nameFn || statNameFn('Spell Penetration'))(i)
-//         prefix = stat.prefix || 'spell-pen-'
-//         id = prefix + i
-
-//         spell = await $.Spell.add({
-//           id,
-//           name,
-//           base: 26283,
-//           description: name,
-//           auraDescription: name,
-//         })
-
-//         spell.asset.Effects.clearAll()
-
-//         spell.asset.Effects.get(spell.asset.Effects.length - 1)
-//           .Aura.MOD_TARGET_RESISTANCE.set()
-//           .PointsPerLevel.set(0)
-//           .PointsPerCombo.set(0)
-//           .PointsBase.set(i)
-
-//         break
-//       case 'hp5':
-//         name = (stat.nameFn || statNameFn('health per 5 sec.'))(i)
-//         prefix = stat.prefix || 'hp5-'
-//         id = prefix + i
-
-//         spell = await $.Spell.add({
-//           id,
-//           name,
-//           base: 32703,
-//           description: name,
-//           auraDescription: name,
-//         })
-
-//         spell.asset.Effects.clearAll()
-
-//         spell.asset.Effects.get(0)
-//           .Aura.MOD_HEALTH_REGEN_IN_COMBAT.set()
-//           .PointsPerLevel.set(0)
-//           .PointsPerCombo.set(0)
-//           .PointsBase.set(i)
-//         break
-//       case 'movespeed':
-//         name = (stat.nameFn || statNameFn('Movespeed'))(i)
-//         prefix = stat.prefix || 'movepseed-'
-//         id = prefix + i
-
-//         spell = await $.Spell.add({
-//           id,
-//           name,
-//           base: 24090,
-//           description: name,
-//           auraDescription: name,
-//         })
-
-//         spell.asset.Effects.clearAll()
-
-//         spell.asset.Effects.get(0)
-//           .Aura.MOD_INCREASE_SPEED.set()
-//           .AsEffect.get()
-//           .PointsBase.set(resolveSpeed($.baseSpeed, i))
-//           .PointsPerLevel.set(0)
-//           .PointsPerCombo.set(0)
-
-//         break
-//       case 'spell-dmg':
-//         const school = stat.school || 'fire'
-
-//         name = (stat.nameFn || statNameFn(`${capitalize(school)} Spell Damage`))(i)
-//         prefix = stat.prefix || `${school}-dmg-`
-//         id = prefix + i
-
-//         spell = await $.Spell.add({
-//           id,
-//           name,
-//           base: 7684,
-//           description: name,
-//           auraDescription: name,
-//         })
-
-//         spell.asset.Effects.clearAll()
-
-//         effect = spell.asset.Effects.get(0)
-
-//         effect
-//           .PointsPerLevel.set(0)
-//           .PointsPerCombo.set(0)
-//           .PointsBase.set(i)
-
-//         const mask = effect
-//           .Aura.MOD_DAMAGE_DONE.set()
-//           .School
-
-//         switch (school) {
-//           case 'fire':
-//             mask.FIRE.set(true)
-//             break;
-//           case 'frost':
-//             mask.FROST.set(true)
-//             break;
-//           case 'nature':
-//             mask.NATURE.set(true)
-//             break;
-//           case 'Shadow':
-//             mask.SHADOW.set(true)
-//             break;
-//           case 'Holy':
-//             mask.HOLY.set(true)
-//             break;
-//           case 'Arcane':
-//             mask.ARCANE.set(true)
-//             break;
-//         }
-
-//         break
-//       case 'spell':
-//         name = (stat.nameFn || statNameFn('Spell Penetration'))(i)
-//         prefix = stat.prefix || 'spell-pen-'
-//         id = prefix + i
-
-//         spell = await $.Spell.add({
-//           id,
-//           name,
-//           base: 26283,
-//           description: name,
-//           auraDescription: name,
-//         })
-
-//         spell.asset.Effects.clearAll()
-
-//         effect = spell.asset.Effects.get(0)
-
-//         // FIXME
-
-//         break
-//       case 'proc':
-//         name = (stat.nameFn || statNameFn('Spell Penetration'))(i)
-//         prefix = stat.prefix || 'spell-pen-'
-//         id = prefix + i
-
-//         spell = await $.Spell.add({
-//           id,
-//           name,
-//           base: 16615,
-//           description: name,
-//           auraDescription: name,
-//         })
-
-//         spell.asset.Effects.clearAll()
-
-//         effect = spell.asset.Effects.get(0)
-
-//         // FIXME
-
-//         break
-//     }
-//   }
-// }
 
 // fire strike proc
 // base: 16614,
@@ -829,3 +859,4 @@ export class Helper {
 //     .AuraType.setProcTriggerSpell.add()
 //     .TriggeredSpell.add.set($.spells[`fire-strike-proc-${i}`].asset.ID)
 //     .TargetA.setDestTargetEnemy()
+//
