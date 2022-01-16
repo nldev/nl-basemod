@@ -17,6 +17,10 @@ export const noop = () => {}
 
 export const identity = <T>(x: T) => x
 
+export const identityPromise = async <T>(x: T) => await Promise.resolve(x)
+
+export const identityPromiseCreator = <T>(x: T) => async () => await Promise.resolve(x)
+
 export function isNil<T> (input?: T) {
   if (typeof input === 'undefined')
     return true
