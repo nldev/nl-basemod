@@ -40,6 +40,12 @@ export type STAT_TYPE =
   | 'CRITICAL-STRIKE'
   | 'ARMOR-PENETRATION'
   | 'SPELL-PENETRATION'
+  | 'FIRE-PENETRATION'
+  | 'HOLY-PENETRATION'
+  | 'FROST-PENETRATION'
+  | 'ARCANE-PENETRATION'
+  | 'NATURE-PENETRATION'
+  | 'SHADOW-PENETRATION'
 
 export interface Stat extends Asset<TSSpell> {
   readonly prefix: string
@@ -162,6 +168,24 @@ export class Helper {
         break
       case 'SPELL-PENETRATION':
         await this.create(this.SpellPenetration)
+        break
+      case 'FIRE-PENETRATION':
+        await this.create(this.SpellPenetration)
+        break
+      case 'HOLY-PENETRATION':
+        await this.create(this.HolyPenetration)
+        break
+      case 'FROST-PENETRATION':
+        await this.create(this.FrostPenetration)
+        break
+      case 'ARCANE-PENETRATION':
+        await this.create(this.ArcanePenetration)
+        break
+      case 'NATURE-PENETRATION':
+        await this.create(this.NaturePenetration)
+        break
+      case 'SHADOW-PENETRATION':
+        await this.create(this.ShadowPenetration)
         break
       default:
         await this.create()
@@ -792,11 +816,11 @@ export class Helper {
     })
 
     spell.asset.Effects.get(0)
-      // .Aura.ARMOR.set()
-      // .PercentBase.set(amount)
-      // .PercentPerLevel.set(0)
-      // .PercentDieSides.set(0)
-      // .PercentPerCombo.set(0)
+      .Aura.MOD_TARGET_ARMOR_PCT.set()
+      .PercentBase.set(amount)
+      .PercentPerLevel.set(0)
+      .PercentDieSides.set(0)
+      .PercentPerCombo.set(0)
 
     return spell
   }
@@ -813,11 +837,149 @@ export class Helper {
     })
 
     spell.asset.Effects.get(0)
-      // .Aura.ARMOR.set()
-      // .PercentBase.set(amount)
-      // .PercentPerLevel.set(0)
-      // .PercentDieSides.set(0)
-      // .PercentPerCombo.set(0)
+      .Aura.MOD_TARGET_RESISTANCE.set()
+      .Schools.FIRE.set(1)
+      .Schools.HOLY.set(1)
+      .Schools.FROST.set(1)
+      .Schools.ARCANE.set(1)
+      .Schools.NATURE.set(1)
+      .Schools.SHADOW.set(1)
+      .PointsBase.set(amount)
+      .PointsPerLevel.set(0)
+      .PointsDieSides.set(0)
+      .PointsPerCombo.set(0)
+
+    return spell
+  }
+
+  public async FirePenetration (amount: number) {
+    const name = StatName(this.options.name || { enGB: 'Fire Penetration' }, amount)
+
+    const spell = await this.builder.Spell.add({
+      name,
+      id: this.options.prefix || 'fire-penetration-' + amount,
+      base: STAT_BASE,
+      description: name,
+      auraDescription: name,
+    })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_TARGET_RESISTANCE.set()
+      .Schools.FIRE.set(1)
+      .PointsBase.set(amount)
+      .PointsPerLevel.set(0)
+      .PointsDieSides.set(0)
+      .PointsPerCombo.set(0)
+
+    return spell
+  }
+
+  public async HolyPenetration (amount: number) {
+    const name = StatName(this.options.name || { enGB: 'Holy Penetration' }, amount)
+
+    const spell = await this.builder.Spell.add({
+      name,
+      id: this.options.prefix || 'holy-penetration-' + amount,
+      base: STAT_BASE,
+      description: name,
+      auraDescription: name,
+    })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_TARGET_RESISTANCE.set()
+      .Schools.HOLY.set(1)
+      .PointsBase.set(amount)
+      .PointsPerLevel.set(0)
+      .PointsDieSides.set(0)
+      .PointsPerCombo.set(0)
+
+    return spell
+  }
+
+  public async FrostPenetration (amount: number) {
+    const name = StatName(this.options.name || { enGB: 'Frost Penetration' }, amount)
+
+    const spell = await this.builder.Spell.add({
+      name,
+      id: this.options.prefix || 'frost-penetration-' + amount,
+      base: STAT_BASE,
+      description: name,
+      auraDescription: name,
+    })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_TARGET_RESISTANCE.set()
+      .Schools.FROST.set(1)
+      .PointsBase.set(amount)
+      .PointsPerLevel.set(0)
+      .PointsDieSides.set(0)
+      .PointsPerCombo.set(0)
+
+    return spell
+  }
+
+  public async ArcanePenetration (amount: number) {
+    const name = StatName(this.options.name || { enGB: 'Arcane Penetration' }, amount)
+
+    const spell = await this.builder.Spell.add({
+      name,
+      id: this.options.prefix || 'arcane-penetration-' + amount,
+      base: STAT_BASE,
+      description: name,
+      auraDescription: name,
+    })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_TARGET_RESISTANCE.set()
+      .Schools.ARCANE.set(1)
+      .PointsBase.set(amount)
+      .PointsPerLevel.set(0)
+      .PointsDieSides.set(0)
+      .PointsPerCombo.set(0)
+
+    return spell
+  }
+
+  public async NaturePenetration (amount: number) {
+    const name = StatName(this.options.name || { enGB: 'Nature Penetration' }, amount)
+
+    const spell = await this.builder.Spell.add({
+      name,
+      id: this.options.prefix || 'nature-penetration-' + amount,
+      base: STAT_BASE,
+      description: name,
+      auraDescription: name,
+    })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_TARGET_RESISTANCE.set()
+      .Schools.NATURE.set(1)
+      .PointsBase.set(amount)
+      .PointsPerLevel.set(0)
+      .PointsDieSides.set(0)
+      .PointsPerCombo.set(0)
+
+    return spell
+  }
+
+  public async ShadowPenetration (amount: number) {
+    const name = StatName(this.options.name || { enGB: 'Shadow Penetration' }, amount)
+
+    const spell = await this.builder.Spell.add({
+      name,
+      id: this.options.prefix || 'shadow-penetration-' + amount,
+      base: STAT_BASE,
+      description: name,
+      auraDescription: name,
+    })
+
+    spell.asset.Effects.get(0)
+      .Aura.MOD_TARGET_RESISTANCE.set()
+      .Schools.SHADOW.set(1)
+      .PointsBase.set(amount)
+      .PointsPerLevel.set(0)
+      .PointsDieSides.set(0)
+      .PointsPerCombo.set(0)
 
     return spell
   }
