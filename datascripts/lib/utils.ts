@@ -15,6 +15,8 @@ import { Duration, ItemSpellTrigger, Queryable, QueryType, TSText } from './type
 
 export const noop = () => {}
 
+export const identity = <T>(x: T) => x
+
 export function isNil<T> (input?: T) {
   if (typeof input === 'undefined')
     return true
@@ -69,8 +71,8 @@ export function englishify (text: TSText): string {
   return text.enGB ? text.enGB : ''
 }
 
-export function * times (amount: number) {
-  for (let i = 0; i < amount; i++)
+export function * times (amount: number = 1) {
+  for (let i = 1; i < amount; i++)
     yield i
 }
 

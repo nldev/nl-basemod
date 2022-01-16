@@ -1,3 +1,4 @@
+import { noop } from 'nextgen-events'
 import { Spell as TSSpell } from 'tswow-stdlib/Spell/Spell'
 import { SpellEffect } from 'tswow-stdlib/Spell/SpellEffect'
 import { Asset, AssetOptions } from '../asset'
@@ -7,7 +8,7 @@ import { Builder } from '../index'
 import { NWSpell } from '../spell'
 import { NWTask, TaskOptions, Template } from '../task'
 import { Nil, School, TSText } from '../types'
-import { capitalize, resolveSpeed, times } from '../utils'
+import { capitalize, identity, resolveSpeed, times } from '../utils'
 
 export type STAT_TYPE =
   | Nil
@@ -80,195 +81,228 @@ export class Helper {
   constructor (public options: StatOptions, public builder: Builder) {}
 
   async run () {
-    const { type, stacks = 255 } = this.options
+    const { type } = this.options
 
-    for (let i of times(stacks)) {
-      switch (type) {
-        case 'HP5':
-          this.hp5()
-          break
-        case 'MP5':
-          this.mp5()
-          break
-        case 'ARMOR':
-          this.armor()
-          break
-        case 'SPIRIT':
-          this.spirit()
-          break
-        case 'AGILITY':
-          this.agility()
-          break
-        case 'STAMINA':
-          this.stamina()
-          break
-        case 'STRENGTH':
-          this.strength()
-          break
-        case 'INTELLECT':
-          this.intellect()
-          break
-        case 'MOVESPEED':
-          this.movespeed()
-          break
-        case 'SPELL-POWER':
-          this.hp5()
-          break
-        case 'ATTACK-POWER':
-          this.spellPower()
-          break
-        case 'ALL-RESIST':
-          this.allResist()
-          break
-        case 'FIRE-DAMAGE':
-          this.fireDamage()
-          break
-        case 'FIRE-RESIST':
-          this.fireResist()
-          break
-        case 'HOLY-DAMAGE':
-          this.holyDamage()
-          break
-        case 'HOLY-RESIST':
-          this.holyResist()
-          break
-        case 'FROST-DAMAGE':
-          this.frostDamage()
-          break
-        case 'FROST-RESIST':
-          this.frostResist()
-          break
-        case 'ARCANE-DAMAGE':
-          this.arcaneDamage()
-          break
-        case 'ARCANE-RESIST':
-          this.arcaneResist()
-          break
-        case 'NATURE-DAMAGE':
-          this.natureDamage()
-          break
-        case 'NATURE-RESIST':
-          this.natureResist()
-          break
-        case 'SHADOW-DAMAGE':
-          this.shadowDamage()
-          break
-        case 'SHADOW-RESIST':
-          this.shadowResist()
-          break
-        case 'CRITICAL-STRIKE':
-          this.criticalStrike()
-          break
-        case 'ARMOR-PENETRATION':
-          this.armorPenetration()
-          break
-        case 'SPELL-PENETRATION':
-          this.spellPenetration()
-          break
-        default:
-          await this.create(0)
-          break
-      }
+    switch (type) {
+      case 'HP5':
+        await this.create(this.hp5)
+        break
+      case 'MP5':
+        await this.create(this.mp5)
+        break
+      case 'ARMOR':
+        await this.create(this.armor)
+        break
+      case 'SPIRIT':
+        await this.create(this.spirit)
+        break
+      case 'AGILITY':
+        await this.create(this.agility)
+        break
+      case 'STAMINA':
+        await this.create(this.stamina)
+        break
+      case 'STRENGTH':
+        await this.create(this.strength)
+        break
+      case 'INTELLECT':
+        await this.create(this.intellect)
+        break
+      case 'MOVESPEED':
+        await this.create(this.movespeed)
+        break
+      case 'SPELL-POWER':
+        await this.create(this.hp5)
+        break
+      case 'ATTACK-POWER':
+        await this.create(this.spellPower)
+        break
+      case 'ALL-RESIST':
+        await this.create(this.allResist)
+        break
+      case 'FIRE-DAMAGE':
+        await this.create(this.fireDamage)
+        break
+      case 'FIRE-RESIST':
+        await this.create(this.fireResist)
+        break
+      case 'HOLY-DAMAGE':
+        await this.create(this.holyDamage)
+        break
+      case 'HOLY-RESIST':
+        await this.create(this.holyResist)
+        break
+      case 'FROST-DAMAGE':
+        await this.create(this.frostDamage)
+        break
+      case 'FROST-RESIST':
+        await this.create(this.frostResist)
+        break
+      case 'ARCANE-DAMAGE':
+        await this.create(this.arcaneDamage)
+        break
+      case 'ARCANE-RESIST':
+        await this.create(this.arcaneResist)
+        break
+      case 'NATURE-DAMAGE':
+        await this.create(this.natureDamage)
+        break
+      case 'NATURE-RESIST':
+        await this.create(this.natureResist)
+        break
+      case 'SHADOW-DAMAGE':
+        await this.create(this.shadowDamage)
+        break
+      case 'SHADOW-RESIST':
+        await this.create(this.shadowResist)
+        break
+      case 'CRITICAL-STRIKE':
+        await this.create(this.criticalStrike)
+        break
+      case 'ARMOR-PENETRATION':
+        await this.create(this.armorPenetration)
+        break
+      case 'SPELL-PENETRATION':
+        await this.create(this.spellPenetration)
+        break
+      default:
+        await this.create()
+        break
     }
+
   }
 
-  public async hp5 () {
+  public hp5 (spell: NWSpell) {
+    return spell
   }
 
-  public async mp5 () {
+  public mp5 (spell: NWSpell) {
+    return spell
   }
 
-  public async armor () {
+  public armor (spell: NWSpell) {
+    return spell
   }
 
-  public async spirit () {
+  public spirit (spell: NWSpell) {
+    return spell
   }
 
-  public async agility () {
+  public agility (spell: NWSpell) {
+    return spell
   }
 
-  public async stamina () {
+  public stamina (spell: NWSpell) {
+    return spell
   }
 
-  public async strength () {
+  public strength (spell: NWSpell) {
+    return spell
   }
 
-  public async intellect () {
+  public intellect (spell: NWSpell) {
+    return spell
   }
 
-  public async movespeed () {
+  public movespeed (spell: NWSpell) {
+    return spell
   }
 
-  public async spellPower () {
+  public spellPower (spell: NWSpell) {
+    return spell
   }
 
-  public async attackPower () {
+  public attackPower (spell: NWSpell) {
+    return spell
   }
 
-  public async allResist () {
+  public allResist (spell: NWSpell) {
+    return spell
   }
 
-  public async fireResist () {
+  public fireResist (spell: NWSpell) {
+    return spell
   }
 
-  public async fireDamage () {
+  public fireDamage (spell: NWSpell) {
+    return spell
   }
 
-  public async holyResist () {
+  public holyResist (spell: NWSpell) {
+    return spell
   }
 
-  public async holyDamage () {
+  public holyDamage (spell: NWSpell) {
+    return spell
   }
 
-  public async frostResist () {
+  public frostResist (spell: NWSpell) {
+    return spell
   }
 
-  public async frostDamage () {
+  public frostDamage (spell: NWSpell) {
+    return spell
   }
 
-  public async arcaneResist () {
+  public arcaneResist (spell: NWSpell) {
+    return spell
   }
 
-  public async arcaneDamage () {
+  public arcaneDamage (spell: NWSpell) {
+    return spell
   }
 
-  public async natureResist () {
+  public natureResist (spell: NWSpell) {
+    return spell
   }
 
-  public async natureDamage () {
+  public natureDamage (spell: NWSpell) {
+    return spell
   }
 
-  public async shadowResist () {
+  public shadowResist (spell: NWSpell) {
+    return spell
   }
 
-  public async shadowDamage () {
+  public shadowDamage (spell: NWSpell) {
+    return spell
   }
 
-  public async criticalStrike () {
+  public criticalStrike (spell: NWSpell) {
+    return spell
   }
 
-  public async armorPenetration () {
+  public armorPenetration (spell: NWSpell) {
+    return spell
   }
 
-  public async spellPenetration () {
+  public spellPenetration (spell: NWSpell) {
+    return spell
   }
 
-  public async create (index: number) {
+  public async create (fn: (spell: NWSpell) => NWSpell = identity) {
     // TODO: perform for loop here
     // TODO: pass fns into here (strength, criticalStrike, etc)
-    const $ = this.builder
-    const id = (this.options.prefix || 'stat-') + index
-    const name =  (this.options.name || { enGB: 'Stat' })
+    for (let i of times(this.options.max)) {
+      if (this.options.min && (i <= this.options.min))
+        continue
 
-    const spell = await $.Spell.add({
-      id,
-      name,
-      base: 26283,
-      description: name,
-      auraDescription: name,
-    })
+      const $ = this.builder
+      const id = (this.options.prefix || 'stat-') + i
+      const name =  (this.options.name || { enGB: 'Stat' })
 
-    spell.asset.Effects.clearAll()
+      const spell = await $.Spell.add({
+        id,
+        name,
+        base: 26283,
+        description: name,
+        auraDescription: name,
+      })
+
+      spell.asset.Effects.clearAll()
+
+      return fn(spell)
+    }
   }
 
 }
