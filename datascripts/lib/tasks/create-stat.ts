@@ -214,13 +214,17 @@ export class Helper {
   public async Default (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Stat' }, amount)
 
-    return await this.builder.Spell.add({
+    const spell = await this.builder.Spell.add({
       name,
       id: (this.options.prefix || 'stat-') + amount,
       base: STAT_BASE,
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
+
+    return spell
   }
 
   public async Hp5 (amount: number) {
@@ -233,6 +237,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_HEALTH_REGEN_IN_COMBAT.set()
@@ -254,6 +260,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_POWER_REGEN.set()
@@ -277,6 +285,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_POWER_REGEN.set()
       .PowerType.set('ENERGY')
@@ -298,6 +308,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_POWER_REGEN.set()
@@ -321,6 +333,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_STAT.set()
       .Stat.SPIRIT.set()
@@ -342,6 +356,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_STAT.set()
@@ -365,6 +381,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_STAT.set()
       .Stat.STAMINA.set()
@@ -386,6 +404,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_STAT.set()
@@ -409,6 +429,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_STAT.set()
       .Stat.INTELLECT.set()
@@ -431,6 +453,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_INCREASE_SPEED.set()
       .AsEffect.get()
@@ -452,6 +476,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_DAMAGE_DONE.set()
@@ -480,6 +506,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_DAMAGE_DONE.set()
       .School.PHYSICAL.set(1)
@@ -501,6 +529,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_RESISTANCE.set()
@@ -529,6 +559,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_RESISTANCE.set()
       .Resistance.FIRE.set(1)
@@ -550,6 +582,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_DAMAGE_DONE.set()
@@ -573,6 +607,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_RESISTANCE.set()
       .Resistance.HOLY.set(1)
@@ -594,6 +630,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_DAMAGE_DONE.set()
@@ -618,6 +656,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_RESISTANCE.set()
       .Resistance.FROST.set(1)
@@ -639,6 +679,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_DAMAGE_DONE.set()
@@ -662,6 +704,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_RESISTANCE.set()
       .Resistance.ARCANE.set(1)
@@ -683,6 +727,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_DAMAGE_DONE.set()
@@ -706,6 +752,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_RESISTANCE.set()
       .Resistance.NATURE.set(1)
@@ -727,6 +775,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_DAMAGE_DONE.set()
@@ -750,6 +800,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_RESISTANCE.set()
       .Resistance.SHADOW.set(1)
@@ -771,6 +823,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_DAMAGE_DONE.set()
@@ -794,6 +848,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_CRIT_PCT.set()
       .PercentBase.set(amount)
@@ -815,6 +871,8 @@ export class Helper {
       auraDescription: name,
     })
 
+    spell.asset.Effects.clearAll()
+
     spell.asset.Effects.get(0)
       .Aura.MOD_TARGET_ARMOR_PCT.set()
       .PercentBase.set(amount)
@@ -835,6 +893,8 @@ export class Helper {
       description: name,
       auraDescription: name,
     })
+
+    spell.asset.Effects.clearAll()
 
     spell.asset.Effects.get(0)
       .Aura.MOD_TARGET_RESISTANCE.set()
