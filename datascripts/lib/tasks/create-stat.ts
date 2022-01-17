@@ -92,6 +92,16 @@ export interface CreateStatOptions extends TaskOptions {
 export class Helper {
   constructor (public options: StatOptions, public builder: Builder) {}
 
+  public async create (Creator: (amount: number) => Promise<NWSpell> = this.Default) {
+    for (let i of times(this.options.max)) {
+      if (this.options.min && (i <= this.options.min))
+        continue
+
+      (await Creator(i)).asset
+        .Stacks.set(this.options.stacks || 0)
+    }
+  }
+
   async run () {
     const { type } = this.options
 
@@ -201,16 +211,6 @@ export class Helper {
       default:
         await this.create()
         break
-    }
-  }
-
-  public async create (Creator: (amount: number) => Promise<NWSpell> = this.Default) {
-    for (let i of times(this.options.max)) {
-      if (this.options.min && (i <= this.options.min))
-        continue
-
-      (await Creator(i)).asset
-        .Stacks.set(this.options.stacks || 0)
     }
   }
 
