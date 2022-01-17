@@ -75,8 +75,11 @@ export class CreateStat extends NWTask {
   static readonly id = CREATE_STAT_TASK
 
   async process (template: StatTemplate) {
-    // if (template.options.type)
-    //   await fn(this.builder, (template.options as Stat))
+    if (template.options.type) {
+      const $ = new Helper(template.options, this.builder)
+
+      await $.run()
+    }
   }
 }
 
@@ -194,20 +197,12 @@ export class Helper {
   }
 
   public async create (Creator: (amount: number) => Promise<NWSpell> = this.Default) {
-    // TODO: perform for loop here
-    // TODO: pass fns into here (strength, criticalStrike, etc)
     for (let i of times(this.options.max)) {
       if (this.options.min && (i <= this.options.min))
         continue
 
-      const $ = this.builder
-      const id = (this.options.prefix || 'stat-') + i
-      const name =  (this.options.name || { enGB: 'Stat' })
-
-      const spell = await Creator(i)
-      spell.asset.Effects.clearAll()
-
-      return spell
+      (await Creator(i)).asset
+        .Stacks.set(this.options.stacks || 0)
     }
   }
 
