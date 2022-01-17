@@ -11,6 +11,7 @@ import { Nil, TSText } from '../types'
 import { resolveSpeed, times } from '../utils'
 
 const STAT_BASE = 26283
+const DEFAULT_STACKS = 255
 
 export type STAT_TYPE =
   | Nil
@@ -90,21 +91,21 @@ export interface CreateStatOptions extends TaskOptions {
 }
 
 export class Helper {
-  constructor (public options: StatOptions, public builder: Builder) {
-    console.log(this.options)
-  }
+  constructor (public options: StatOptions, public builder: Builder) {}
 
   public async create (Creator: (amount: number) => Promise<NWSpell> = this.Default) {
-    for (let i of times(this.options.max)) {
+    const max = this.options.max || 1
+
+    for (let i = 1; i <= max; i++) {
       const isMin = this.options.min && (i <= this.options.min)
 
       if (!isMin)
         (await Creator(i)).asset
-          .Stacks.set(this.options.stacks || 0)
+          .Stacks.set(this.options.stacks || DEFAULT_STACKS)
     }
   }
 
-  async run () {
+  public async run () {
     const { type } = this.options
 
     switch (type) {
