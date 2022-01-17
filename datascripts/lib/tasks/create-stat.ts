@@ -7,8 +7,8 @@ import { CREATE_STAT_TASK } from '../constants'
 import { Builder } from '../index'
 import { NWSpell } from '../spell'
 import { NWTask, TaskOptions, Template } from '../task'
-import { Nil, School, TSText } from '../types'
-import { capitalize, identity, resolveSpeed, times } from '../utils'
+import { Nil, TSText } from '../types'
+import { resolveSpeed, times } from '../utils'
 
 const STAT_BASE = 26283
 
