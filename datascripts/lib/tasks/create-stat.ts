@@ -77,7 +77,7 @@ export class CreateStat extends NWTask {
   static readonly id = CREATE_STAT_TASK
 
   async process (template: StatTemplate) {
-    if (template.options.type) {
+    if (template.options && template.options.type) {
       const $ = new Helper(template.options, this.builder)
 
       await $.run()
