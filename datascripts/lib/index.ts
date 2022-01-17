@@ -423,24 +423,24 @@ export class Builder {
       error_count++
       this.log()
       this.log()
-      this.log(`ERROR #${error_count}`.replace(/./g, '='))
+      this.log(`ERROR #${error_count}`.replace(/./g, '==='))
       this.log(`ERROR #${error_count}`)
       this.log()
-      this.log('== TRACE ==')
+      this.log('=== TRACE ===')
       this.log(error)
-      this.log('== TRACE =='.replace(/./g, '='))
+      this.log('=============')
       this.log()
 
       if (log.info)
         log.info.forEach((v, i) => {
-          this.log(`== ${v.id.toUpperCase()} ==`)
+          this.log(`===  ${v.id.toUpperCase()}  ===`)
           this.log(v.fn(log.data))
-          this.log(`== ${v.id} ==`.replace(/./g, '='))
+          this.log(`===  ${v.id}  ===`.replace(/./g, '='))
           if (log.info && (i < (log.info.length - 1)))
             this.log()
         })
 
-      this.log(`ERROR #${error_count}`.replace(/./g, '='))
+      this.log(`ERROR #${error_count}`.replace(/./g, '==='))
       this.log('')
       this.log('')
     }
