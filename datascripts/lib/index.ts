@@ -433,9 +433,9 @@ export class Builder {
 
       if (log.info)
         log.info.forEach((v, i) => {
-          this.log(`===  ${v.id.toUpperCase()}  ===`)
+          this.log(`=== ${v.id.toUpperCase()} ===`)
           this.log(v.fn(log.data))
-          this.log(`===  ${v.id}  ===`.replace(/./g, '='))
+          this.log(`=== ${v.id} ===`.replace(/./g, '='))
           if (log.info && (i < (log.info.length - 1)))
             this.log()
         })
