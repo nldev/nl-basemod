@@ -28,6 +28,14 @@ async function main () {
   const $ = new Builder()
   
   await $.init()
+
+  const spell = await $.Item.add({
+    id: 'foo',
+  })
+
+  const item = await $.Item.add({
+    id: 'bar',
+  })
 }
 
 main()

@@ -138,6 +138,18 @@ export interface Options {
   templates?: Template[]
 }
 
+// FIXME: move this to types
+export interface ErrorData {
+  id: string
+  fn: ((...args: any[]) => any)
+}
+
+export interface ErrorLog {
+  message: ((...args: any[]) => string)
+  info?: ErrorData[]
+  data?: any
+}
+
 export class Builder {
   public readonly mod: string
 
@@ -235,6 +247,33 @@ export class Builder {
       ]
   }
 
+  private async attempt (fn: (...args: any[]) => any, log: ErrorLog) {
+    try {
+      return await fn()
+    } catch (error) {
+      console.log()
+      console.log()
+      console.log('ERROR!')
+      console.info()
+      console.info()
+      console.info('== TRACE ==')
+      console.info(error)
+      console.info('======')
+      console.info()
+
+      if (log.info)
+        log.info.forEach(i => {
+          console.info(`== ${i.id} ==`)
+          console.info(i.fn(log.data))
+          console.info('======')
+          console.info()
+        })
+
+      throw new Error(log.message(log.data))
+    }
+  }
+
+
   private async process () {
     const attempts: Attempt[] = []
 
@@ -250,7 +289,23 @@ export class Builder {
         for (const hook of this.Hook.list)
           await hook.onTaskProcessBegin(task, template)
 
-        await attempt.fn()
+        await this.attempt(attempt.fn, {
+          message: (d: any) => `failed at task '${d.task.id}'`,
+          info: [
+            {
+              id: 'task',
+              fn: (d: any) => d.task,
+            },
+            {
+              id: 'template',
+              fn: (d: any) => d.template,
+            },
+          ],
+          data: {
+            task,
+            template,
+          },
+        })
 
         // onTaskProcessSuccess
         for (const hook of this.Hook.list)
