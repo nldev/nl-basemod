@@ -15,6 +15,8 @@ const STAT_BASE = 26283
 export type STAT_TYPE =
   | Nil
   | 'MP5'
+  | 'EP5'
+  | 'RP5'
   | 'HP5'
   | 'SPIRIT'
   | 'AGILITY'
@@ -99,6 +101,12 @@ export class Helper {
         break
       case 'MP5':
         await this.create(this.Mp5)
+        break
+      case 'EP5':
+        await this.create(this.Ep5)
+        break
+      case 'RP5':
+        await this.create(this.Rp5)
         break
       case 'SPIRIT':
         await this.create(this.Spirit)

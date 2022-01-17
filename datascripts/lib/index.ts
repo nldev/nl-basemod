@@ -62,6 +62,7 @@ export const DEFAULT_OPTIONS: Required<Options> = {
     // 'create-mount': true,
     // 'create-npc': true,
     // 'create-spell': true,
+    'create-stat': true,
   },
   templates: [
     // ...STATS,
@@ -84,7 +85,7 @@ export const defaultConfig: Required<Config> = {
     // ObjectifyToJson,
   ],
   tasks: [
-    // CreateStat,
+    CreateStat,
     // CreateSpell,
     // CreateItem,
     // CreateNpc,
