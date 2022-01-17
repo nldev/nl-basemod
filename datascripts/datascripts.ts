@@ -8,7 +8,7 @@ function CreatePlaceholderEnchants () {
   special.Effect.set([0, 0, 0, 0, 0])
   special.ItemVisual.set(0)
   for (let i = 0; i <= 99999; i++) {
-    const enchant = std.DBC.SpellItemEnchantment.add(10000 + i)
+    const enchant = std.DBC.SpellItemEnchantment.add(9996 + i)
     const prop = std.DBC.ItemRandomProperties.add(10000 + i)
     enchant.Name.enGB.set('[placeholder ' + i + ']')
     enchant.Flags.set(0)
@@ -26,7 +26,7 @@ CreatePlaceholderEnchants()
 
 async function main () {
   const $ = new Builder()
-  
+
   await $.init()
 
   const spell = await $.Item.add({
