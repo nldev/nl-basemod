@@ -1,6 +1,7 @@
 import { std } from 'tswow-stdlib'
 import { Builder } from './lib'
 
+// FIXME: move this
 function CreatePlaceholderEnchants () {
   const special = std.DBC.SpellItemEnchantment.add(9999)
   special.Name.enGB.set('[special]')
