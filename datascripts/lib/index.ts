@@ -267,11 +267,18 @@ export class Builder {
           info: [
             {
               id: 'task',
-              fn: (d: any) => d.task,
+              fn: (d: any) => ({
+                id: d.task.id,
+                data: d.task.data,
+                isReducer: d.task.isReducer,
+              }),
             },
             {
               id: 'template',
-              fn: (d: any) => d.template,
+              fn: (d: any) => ({
+                id: d.template.id,
+                options: d.template.options,
+              }),
             },
           ],
           data: {
@@ -423,7 +430,7 @@ export class Builder {
 
       if (log.info)
         log.info.forEach(i => {
-          this.log(`== ${i.id} ==`)
+          this.log(`== ${i.id.toUpperCase()} ==`)
           this.log(i.fn(log.data))
           this.log('======')
           this.log()
@@ -432,7 +439,6 @@ export class Builder {
       throw new Error(log.message(log.data))
     }
   }
-
 
   public log (input: any = '', data?: LogData, type: LogType = 'log') {
     if (type === 'log')
