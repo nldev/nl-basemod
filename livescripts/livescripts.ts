@@ -199,14 +199,14 @@ function EquipSystem (events: TSEvents) {
 }
 
 export function Main (events: TSEvents) {
-  TestCmdGetRandomPropertyOfFirstItemInBag(events)
-  TestCmdAddItemWithPlaceholderEnchant(events)
-  TestCmdChangeFactionAlliance(events)
-  TestCmdChangeFactionHorde(events)
-  EquipSystem(events)
-  LevelUp(events)
-  ResetLevel(events)
-  TestCmdSetFFA(events)
-  TestCmdUnsetFFA(events)
+  // TestCmdGetRandomPropertyOfFirstItemInBag(events)
+  // TestCmdAddItemWithPlaceholderEnchant(events)
+  // TestCmdChangeFactionAlliance(events)
+  // TestCmdChangeFactionHorde(events)
+  // EquipSystem(events)
+  // LevelUp(events)
+  // ResetLevel(events)
+  // TestCmdSetFFA(events)
+  // TestCmdUnsetFFA(events)
 }
 
