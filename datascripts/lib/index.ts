@@ -247,33 +247,6 @@ export class Builder {
       ]
   }
 
-  private async attempt (fn: (...args: any[]) => any, log: ErrorLog) {
-    try {
-      return await fn()
-    } catch (error) {
-      console.log()
-      console.log()
-      console.log('ERROR!')
-      console.info()
-      console.info()
-      console.info('== TRACE ==')
-      console.info(error)
-      console.info('======')
-      console.info()
-
-      if (log.info)
-        log.info.forEach(i => {
-          console.info(`== ${i.id} ==`)
-          console.info(i.fn(log.data))
-          console.info('======')
-          console.info()
-        })
-
-      throw new Error(log.message(log.data))
-    }
-  }
-
-
   private async process () {
     const attempts: Attempt[] = []
 
@@ -433,6 +406,33 @@ export class Builder {
         return result
     }
   }
+
+  private async attempt (fn: (...args: any[]) => any, log: ErrorLog) {
+    try {
+      return await fn()
+    } catch (error) {
+      this.log()
+      this.log()
+      this.log('ERROR!')
+      this.log()
+      this.log()
+      this.log('== TRACE ==')
+      this.log(error)
+      this.log('======')
+      this.log()
+
+      if (log.info)
+        log.info.forEach(i => {
+          this.log(`== ${i.id} ==`)
+          this.log(i.fn(log.data))
+          this.log('======')
+          this.log()
+        })
+
+      throw new Error(log.message(log.data))
+    }
+  }
+
 
   public log (input: any = '', data?: LogData, type: LogType = 'log') {
     if (type === 'log')
