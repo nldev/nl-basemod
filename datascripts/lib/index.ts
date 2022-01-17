@@ -50,6 +50,8 @@ export const PROJECT = 'basemod'
 export const VERSION = '0.0.0'
 export const DEFAULT_SPEED = 0.7
 
+let error_count = 0
+
 export const DEFAULT_OPTIONS: Required<Options> = {
   mod: DEFAULT_MOD,
   version: VERSION,
@@ -418,25 +420,29 @@ export class Builder {
     try {
       return await fn()
     } catch (error) {
+      error_count++
       this.log()
       this.log()
-      this.log('ERROR!')
-      this.log()
+      this.log(`ERROR #${error_count}`.replace(/./g, '='))
+      this.log(`ERROR #${error_count}`)
       this.log()
       this.log('== TRACE ==')
       this.log(error)
-      this.log('======')
+      this.log('== TRACE =='.replace(/./g, '='))
       this.log()
 
       if (log.info)
-        log.info.forEach(i => {
-          this.log(`== ${i.id.toUpperCase()} ==`)
-          this.log(i.fn(log.data))
-          this.log('======')
-          this.log()
+        log.info.forEach((v, i) => {
+          this.log(`== ${v.id.toUpperCase()} ==`)
+          this.log(v.fn(log.data))
+          this.log(`== ${v.id} ==`.replace(/./g, '='))
+          if (log.info && (i < (log.info.length - 1)))
+            this.log()
         })
 
-      throw new Error(log.message(log.data))
+      this.log(`ERROR #${error_count}`.replace(/./g, '='))
+      this.log('')
+      this.log('')
     }
   }
 
