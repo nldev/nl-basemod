@@ -5,7 +5,7 @@ import { createTemplates } from '../task'
 export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
   {
     id: 'lesser-health-potion',
-    icon: { query: 'query-icon', subquery: 'item', id: 118 },
+    // icon: { query: 'query-icon', subquery: 'item', id: 118 },
     name: 'Lesser Health Potion',
     base: 118,
     // itemSpells: [
@@ -18,7 +18,7 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
 
   {
     id: 'lesser-mana-potion',
-    icon: { query: 'query-icon', subquery: 'item', id: 2455 },
+    // icon: { query: 'query-icon', subquery: 'item', id: 2455 },
     name: 'Lesser Mana Potion',
     base: 118,
     // itemSpells: [
@@ -31,7 +31,7 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
 
   {
     id: 'lesser-rejuvenation-potion',
-    icon: { query: 'query-icon', subquery: 'item', id: 2458 },
+    // icon: { query: 'query-icon', subquery: 'item', id: 2458 },
     name: 'Lesser Rejuvenation Potion',
     base: 118,
     // itemSpells: [
@@ -44,7 +44,7 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
 
   {
     id: 'health-potion',
-    icon: { query: 'query-icon', subquery: 'item', id: 929 },
+    // icon: { query: 'query-icon', subquery: 'item', id: 929 },
     name: 'Lesser Health Potion',
     base: 118,
     // itemSpells: [
@@ -57,7 +57,7 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
 
   {
     id: 'mana-potion',
-    icon: { query: 'query-icon', subquery: 'item', id: 3827 },
+    // icon: { query: 'query-icon', subquery: 'item', id: 3827 },
     name: 'Lesser Mana Potion',
     base: 118,
     // itemSpells: [
@@ -70,7 +70,7 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
 
   {
     id: 'rejuvenation-potion',
-    icon: { query: 'query-icon', subquery: 'item', id: 6048 },
+    // icon: { query: 'query-icon', subquery: 'item', id: 6048 },
     name: 'Lesser Rejuvenation Potion',
     base: 118,
     // itemSpells: [
@@ -83,7 +83,7 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
 
   {
     id: 'greater-health-potion',
-    icon: { query: 'query-icon', subquery: 'item', id: 32910 },
+    // icon: { query: 'query-icon', subquery: 'item', id: 32910 },
     name: 'Lesser Health Potion',
     base: 118,
     // itemSpells: [
@@ -96,7 +96,7 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
 
   {
     id: 'greater-mana-potion',
-    icon: { query: 'query-icon', subquery: 'item', id: 6149 },
+    // icon: { query: 'query-icon', subquery: 'item', id: 6149 },
     name: 'Lesser Mana Potion',
     base: 118,
     // itemSpells: [
@@ -109,7 +109,7 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
 
   {
     id: 'greater-rejuvenation-potion',
-    icon: { query: 'query-icon', subquery: 'item', id: 20007 },
+    // icon: { query: 'query-icon', subquery: 'item', id: 20007 },
     name: 'Lesser Rejuvenation Potion',
     base: 118,
     // itemSpells: [

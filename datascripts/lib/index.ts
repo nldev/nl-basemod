@@ -81,7 +81,7 @@ export type Json =
 export const defaultConfig: Required<Config> = {
   project: PROJECT,
   hooks: [
-    LogTasks,
+    // LogTasks,
     // ObjectifyToJson,
   ],
   tasks: [
