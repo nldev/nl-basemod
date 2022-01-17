@@ -98,7 +98,7 @@ export class Helper {
   public async create (Creator: (amount: number) => Promise<NWSpell> = this.Default) {
     const max = this.options.max || 1
 
-    for (let i = 1; i <= max; i++) {
+    for (let i of times(this.options.max)) {
       const isMin = this.options.min && (i <= this.options.min)
 
       if (!isMin)

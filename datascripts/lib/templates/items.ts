@@ -8,12 +8,12 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
     icon: { query: 'query-icon', subquery: 'item', id: 118 },
     name: 'Lesser Health Potion',
     base: 118,
-    itemSpells: [
-      {
-        id: 'on-consume',
-        spell: 'lesser-health-potion',
-      },
-    ],
+    // itemSpells: [
+    //   {
+    //     id: 'on-consume',
+    //     spell: 'lesser-health-potion',
+    //   },
+    // ],
   },
 
   {
@@ -21,12 +21,12 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
     icon: { query: 'query-icon', subquery: 'item', id: 2455 },
     name: 'Lesser Mana Potion',
     base: 118,
-    itemSpells: [
-      {
-        id: 'on-consume',
-        spell: 'lesser-mana-potion',
-      },
-    ],
+    // itemSpells: [
+    //   {
+    //     id: 'on-consume',
+    //     spell: 'lesser-mana-potion',
+    //   },
+    // ],
   },
 
   {
@@ -34,12 +34,12 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
     icon: { query: 'query-icon', subquery: 'item', id: 2458 },
     name: 'Lesser Rejuvenation Potion',
     base: 118,
-    itemSpells: [
-      {
-        id: 'on-consume',
-        spell: 'lesser-rejuvenation-potion',
-      },
-    ],
+    // itemSpells: [
+    //   {
+    //     id: 'on-consume',
+    //     spell: 'lesser-rejuvenation-potion',
+    //   },
+    // ],
   },
 
   {
@@ -47,12 +47,12 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
     icon: { query: 'query-icon', subquery: 'item', id: 929 },
     name: 'Lesser Health Potion',
     base: 118,
-    itemSpells: [
-      {
-        id: 'on-consume',
-        spell: 'health-potion',
-      },
-    ],
+    // itemSpells: [
+    //   {
+    //     id: 'on-consume',
+    //     spell: 'health-potion',
+    //   },
+    // ],
   },
 
   {
@@ -60,12 +60,12 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
     icon: { query: 'query-icon', subquery: 'item', id: 3827 },
     name: 'Lesser Mana Potion',
     base: 118,
-    itemSpells: [
-      {
-        id: 'on-consume',
-        spell: 'mana-potion',
-      },
-    ],
+    // itemSpells: [
+    //   {
+    //     id: 'on-consume',
+    //     spell: 'mana-potion',
+    //   },
+    // ],
   },
 
   {
@@ -73,12 +73,12 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
     icon: { query: 'query-icon', subquery: 'item', id: 6048 },
     name: 'Lesser Rejuvenation Potion',
     base: 118,
-    itemSpells: [
-      {
-        id: 'on-consume',
-        spell: 'rejuvenation-potion',
-      },
-    ],
+    // itemSpells: [
+    //   {
+    //     id: 'on-consume',
+    //     spell: 'rejuvenation-potion',
+    //   },
+    // ],
   },
 
   {
@@ -86,12 +86,12 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
     icon: { query: 'query-icon', subquery: 'item', id: 32910 },
     name: 'Lesser Health Potion',
     base: 118,
-    itemSpells: [
-      {
-        id: 'on-consume',
-        spell: 'greater-health-potion',
-      },
-    ],
+    // itemSpells: [
+    //   {
+    //     id: 'on-consume',
+    //     spell: 'greater-health-potion',
+    //   },
+    // ],
   },
 
   {
@@ -99,12 +99,12 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
     icon: { query: 'query-icon', subquery: 'item', id: 6149 },
     name: 'Lesser Mana Potion',
     base: 118,
-    itemSpells: [
-      {
-        id: 'on-consume',
-        spell: 'greater-mana-potion',
-      },
-    ],
+    // itemSpells: [
+    //   {
+    //     id: 'on-consume',
+    //     spell: 'greater-mana-potion',
+    //   },
+    // ],
   },
 
   {
@@ -112,12 +112,12 @@ export const ITEMS = createTemplates<ItemOptions>(CREATE_ITEM_TASK, [
     icon: { query: 'query-icon', subquery: 'item', id: 20007 },
     name: 'Lesser Rejuvenation Potion',
     base: 118,
-    itemSpells: [
-      {
-        id: 'on-consume',
-        spell: 'greater-rejuvenation-potion',
-      },
-    ],
+    // itemSpells: [
+    //   {
+    //     id: 'on-consume',
+    //     spell: 'greater-rejuvenation-potion',
+    //   },
+    // ],
   },
 ])
 

@@ -109,6 +109,7 @@ export class NWItem extends NWAsset<TSItem> implements Item {
       })
     }
 
+    console.log(this.itemSpells)
     if (!isAlreadyMaxSpells && this.itemSpells && Array.isArray(this.itemSpells)) {
       this.itemSpells.forEach((selector: ItemSpellSelectorPartial, index: number) => {
         if ((index + currentSpellCount + 1) >= MAX_ITEM_SPELL_COUNT)
