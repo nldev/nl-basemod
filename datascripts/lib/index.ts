@@ -421,8 +421,6 @@ export class Builder {
       return await fn()
     } catch (error) {
       error_count++
-      this.log()
-      this.log()
       this.log(`ERROR #${error_count}`.replace(/./g, '==='))
       this.log(`ERROR #${error_count}`)
       this.log()
