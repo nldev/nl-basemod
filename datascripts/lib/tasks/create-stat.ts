@@ -90,7 +90,9 @@ export interface CreateStatOptions extends TaskOptions {
 }
 
 export class Helper {
-  constructor (public options: StatOptions, public builder: Builder) {}
+  constructor (public options: StatOptions, public builder: Builder) {
+    console.log(this.options)
+  }
 
   public async create (Creator: (amount: number) => Promise<NWSpell> = this.Default) {
     for (let i of times(this.options.max)) {

@@ -71,7 +71,7 @@ export function englishify (text: TSText): string {
   return text.enGB ? text.enGB : ''
 }
 
-export function * times (amount: number = 1) {
+export const times = function * times (amount: number = 1) {
   for (let i = 1; i < amount; i++)
     yield i
 }
