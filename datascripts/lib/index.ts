@@ -290,7 +290,7 @@ export class Builder {
           },
         })
 
-        // FIXME remove all async stuff
+        // FIXME: remove all async stuff
         await new Promise<void>(resolve => {
           setTimeout(() => {
             resolve()
