@@ -45,7 +45,7 @@ import { STATS } from './templates/stats'
 import { Data, Env, LogData, Logger, LogType, Map, Queryable, QueryType, Value } from './types'
 import { noop, resolveIcon } from './utils'
 
-// TODO: move to constants
+// FIXME: move to constants
 export const PROJECT = 'basemod'
 export const VERSION = '0.0.0'
 export const DEFAULT_SPEED = 0.7
