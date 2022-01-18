@@ -260,6 +260,7 @@ export class Builder {
       }
 
       if (task.isReducer || (template.id === task.id)) {
+        console.log(template.id, ' ', task.id)
         // onTaskProcessBegin
         for (const hook of this.Hook.list)
           await hook.onTaskProcessBegin(task, template)
@@ -287,6 +288,13 @@ export class Builder {
             task,
             template,
           },
+        })
+
+        // FIXME remove all async stuff
+        await new Promise<void>(resolve => {
+          setTimeout(() => {
+            resolve()
+          }, 100)
         })
 
         // onTaskProcessSuccess
@@ -417,31 +425,33 @@ export class Builder {
   }
 
   private async attempt (fn: (...args: any[]) => any, log: ErrorLog) {
-    try {
-      return await fn()
-    } catch (error) {
-      error_count++
-      this.log(`ERROR #${error_count}`.replace(/./g, '==='))
-      this.log(`ERROR #${error_count}`)
-      this.log()
-      this.log('=== TRACE ===')
-      this.log(error)
-      this.log('=============')
-      this.log()
+    return await fn()
+    // try {
+    //   return await fn()
+    // } catch (error) {
+    //   error_count++
 
-      if (log.info)
-        log.info.forEach((v, i) => {
-          this.log(`=== ${v.id.toUpperCase()} ===`)
-          this.log(v.fn(log.data))
-          this.log(`=== ${v.id} ===`.replace(/./g, '='))
-          if (log.info && (i < (log.info.length - 1)))
-            this.log()
-        })
+    //   // this.log(`ERROR #${error_count}`.replace(/./g, '==='))
+    //   // this.log(`ERROR #${error_count}`)
+    //   // this.log()
+    //   // this.log('=== TRACE ===')
+    //   // this.log(error)
+    //   // this.log('=============')
+    //   // this.log()
 
-      this.log(`ERROR #${error_count}`.replace(/./g, '==='))
-      this.log('')
-      this.log('')
-    }
+    //   if (log.info)
+    //     log.info.forEach((v, i) => {
+    //       // this.log(`=== ${v.id.toUpperCase()} ===`)
+    //       // this.log(v.fn(log.data))
+    //       // this.log(`=== ${v.id} ===`.replace(/./g, '='))
+    //       // if (log.info && (i < (log.info.length - 1)))
+    //       //   this.log()
+    //     })
+
+    //   // this.log(`ERROR #${error_count}`.replace(/./g, '==='))
+    //   // this.log('')
+    //   // this.log('')
+    // }
   }
 
   public log (input: any = '', data?: LogData, type: LogType = 'log') {
