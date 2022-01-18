@@ -29,6 +29,9 @@ async function main () {
   const $ = new Builder()
 
   await $.init()
+
+  $.Spell.list.forEach(s => console.log(s.name.enGB))
+  $.Item.list.forEach(s => console.log(s.name.enGB))
 }
 
 main()

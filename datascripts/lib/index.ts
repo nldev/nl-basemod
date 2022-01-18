@@ -64,7 +64,7 @@ export const DEFAULT_OPTIONS: Required<Options> = {
     // 'create-npc': true,
     'create-item': true,
     'create-spell': true,
-    'create-stat': false,
+    'create-stat': true,
   },
   templates: [
     ...STATS,

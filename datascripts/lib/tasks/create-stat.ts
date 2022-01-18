@@ -70,8 +70,8 @@ export interface StatTemplate extends Template {
   options: StatOptions
 }
 
-export function StatName (text: string, amount: number) {
-  return `+${amount} ${text}`
+export const StatName = (text: TSText, amount: number) => {
+  return `+${amount} ${text.enGB}`
 }
 
 export class CreateStat extends NWTask {
@@ -91,14 +91,12 @@ export interface CreateStatOptions extends TaskOptions {
 }
 
 export class Helper {
-  constructor (public options: StatOptions, public builder: Builder) {
-    console.log(this.options)
-  }
+  constructor (public options: StatOptions, public builder: Builder) {}
 
   public async create (Creator: (amount: number) => Promise<NWSpell> = this.Default) {
     const max = this.options.max || 1
 
-    for (let i of times(this.options.max)) {
+    for (let i of times(max)) {
       const isMin = this.options.min && (i <= this.options.min)
 
       if (!isMin)
@@ -112,106 +110,106 @@ export class Helper {
 
     switch (type) {
       case 'HP5':
-        await this.create(this.Hp5)
+        await this.create(this.Hp5.bind(this))
         break
       case 'MP5':
-        await this.create(this.Mp5)
+        await this.create(this.Mp5.bind(this))
         break
       case 'EP5':
-        await this.create(this.Ep5)
+        await this.create(this.Ep5.bind(this))
         break
       case 'RP5':
-        await this.create(this.Rp5)
+        await this.create(this.Rp5.bind(this))
         break
       case 'SPIRIT':
-        await this.create(this.Spirit)
+        await this.create(this.Spirit.bind(this))
         break
       case 'AGILITY':
-        await this.create(this.Agility)
+        await this.create(this.Agility.bind(this))
         break
       case 'STAMINA':
-        await this.create(this.Stamina)
+        await this.create(this.Stamina.bind(this))
         break
       case 'STRENGTH':
-        await this.create(this.Strength)
+        await this.create(this.Strength.bind(this))
         break
       case 'INTELLECT':
-        await this.create(this.Intellect)
+        await this.create(this.Intellect.bind(this))
         break
       case 'MOVESPEED':
-        await this.create(this.Movespeed)
+        await this.create(this.Movespeed.bind(this))
         break
       case 'SPELL-POWER':
-        await this.create(this.Hp5)
+        await this.create(this.Hp5.bind(this))
         break
       case 'ATTACK-POWER':
-        await this.create(this.SpellPower)
+        await this.create(this.SpellPower.bind(this))
         break
       case 'ALL-RESIST':
-        await this.create(this.AllResist)
+        await this.create(this.AllResist.bind(this))
         break
       case 'FIRE-DAMAGE':
-        await this.create(this.FireDamage)
+        await this.create(this.FireDamage.bind(this))
         break
       case 'FIRE-RESIST':
-        await this.create(this.FireResist)
+        await this.create(this.FireResist.bind(this))
         break
       case 'HOLY-DAMAGE':
-        await this.create(this.HolyDamage)
+        await this.create(this.HolyDamage.bind(this))
         break
       case 'HOLY-RESIST':
-        await this.create(this.HolyResist)
+        await this.create(this.HolyResist.bind(this))
         break
       case 'FROST-DAMAGE':
-        await this.create(this.FrostDamage)
+        await this.create(this.FrostDamage.bind(this))
         break
       case 'FROST-RESIST':
-        await this.create(this.FrostResist)
+        await this.create(this.FrostResist.bind(this))
         break
       case 'ARCANE-DAMAGE':
-        await this.create(this.ArcaneDamage)
+        await this.create(this.ArcaneDamage.bind(this))
         break
       case 'ARCANE-RESIST':
-        await this.create(this.ArcaneResist)
+        await this.create(this.ArcaneResist.bind(this))
         break
       case 'NATURE-DAMAGE':
-        await this.create(this.NatureDamage)
+        await this.create(this.NatureDamage.bind(this))
         break
       case 'NATURE-RESIST':
-        await this.create(this.NatureResist)
+        await this.create(this.NatureResist.bind(this))
         break
       case 'SHADOW-DAMAGE':
-        await this.create(this.ShadowDamage)
+        await this.create(this.ShadowDamage.bind(this))
         break
       case 'SHADOW-RESIST':
-        await this.create(this.ShadowResist)
+        await this.create(this.ShadowResist.bind(this))
         break
       case 'CRITICAL-STRIKE':
-        await this.create(this.CriticalStrike)
+        await this.create(this.CriticalStrike.bind(this))
         break
       case 'ARMOR-PENETRATION':
-        await this.create(this.ArmorPenetration)
+        await this.create(this.ArmorPenetration.bind(this))
         break
       case 'SPELL-PENETRATION':
-        await this.create(this.SpellPenetration)
+        await this.create(this.SpellPenetration.bind(this))
         break
       case 'FIRE-PENETRATION':
-        await this.create(this.SpellPenetration)
+        await this.create(this.SpellPenetration.bind(this))
         break
       case 'HOLY-PENETRATION':
-        await this.create(this.HolyPenetration)
+        await this.create(this.HolyPenetration.bind(this))
         break
       case 'FROST-PENETRATION':
-        await this.create(this.FrostPenetration)
+        await this.create(this.FrostPenetration.bind(this))
         break
       case 'ARCANE-PENETRATION':
-        await this.create(this.ArcanePenetration)
+        await this.create(this.ArcanePenetration.bind(this))
         break
       case 'NATURE-PENETRATION':
-        await this.create(this.NaturePenetration)
+        await this.create(this.NaturePenetration.bind(this))
         break
       case 'SHADOW-PENETRATION':
-        await this.create(this.ShadowPenetration)
+        await this.create(this.ShadowPenetration.bind(this))
         break
       default:
         await this.create()
