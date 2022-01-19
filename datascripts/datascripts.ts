@@ -29,8 +29,6 @@ function main () {
   const $ = new Builder()
 
   $.init()
-
-  console.log($.Spell.get('critical-strike-20').asset.objectify())
 }
 
 main()

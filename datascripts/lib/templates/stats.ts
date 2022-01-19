@@ -53,7 +53,7 @@ export const STATS = createTemplates<StatOptions>(CREATE_STAT_TASK, [
   },
   {
     type: 'CRITICAL-STRIKE',
-    max: 200,
+    max: 100,
   },
   {
     type: 'ARMOR-PENETRATION',
