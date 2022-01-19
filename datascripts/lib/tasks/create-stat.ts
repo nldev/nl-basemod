@@ -70,8 +70,10 @@ export interface StatTemplate extends Template {
   options: StatOptions
 }
 
-export const StatName = (text: TSText, amount: number) => {
-  return `+${amount} ${text.enGB}`
+export const StatName = (text: TSText, amount: number, isPercentage: boolean = false) => {
+  return isPercentage
+    ? `+${amount}% ${text.enGB}`
+    : `+${amount} ${text.enGB}`
 }
 
 export class CreateStat extends NWTask {
@@ -246,12 +248,13 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_HEALTH_REGEN_IN_COMBAT.set()
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
       .PointsBase.set(amount)
       .PointsDieSides.set(0)
+    )
 
     return spell
   }
@@ -269,13 +272,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_POWER_REGEN.set()
       .PowerType.set('MANA')
       .PowerBase.set(amount)
       .PowerPerCombo.set(0)
       .PowerPerLevel.set(0)
       .PowerDieSides.set(0)
+    )
 
     return spell
   }
@@ -293,13 +297,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_POWER_REGEN.set()
       .PowerType.set('ENERGY')
       .PowerBase.set(amount)
       .PowerPerCombo.set(0)
       .PowerPerLevel.set(0)
       .PowerDieSides.set(0)
+    )
 
     return spell
   }
@@ -317,13 +322,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_POWER_REGEN.set()
       .PowerType.set('RAGE')
       .PowerBase.set(amount)
       .PowerPerCombo.set(0)
       .PowerPerLevel.set(0)
       .PowerDieSides.set(0)
+    )
 
     return spell
   }
@@ -341,13 +347,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_STAT.set()
       .Stat.SPIRIT.set()
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
       .PointsBase.set(amount)
       .PointsDieSides.set(0)
+    )
 
     return spell
   }
@@ -365,13 +372,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_STAT.set()
       .Stat.AGILITY.set()
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
       .PointsBase.set(amount)
       .PointsDieSides.set(0)
+    )
 
     return spell
   }
@@ -389,13 +397,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_STAT.set()
       .Stat.STAMINA.set()
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
       .PointsBase.set(amount)
       .PointsDieSides.set(0)
+    )
 
     return spell
   }
@@ -413,13 +422,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_STAT.set()
       .Stat.STRENGTH.set()
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
       .PointsBase.set(amount)
       .PointsDieSides.set(0)
+    )
 
     return spell
   }
@@ -437,13 +447,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_STAT.set()
       .Stat.INTELLECT.set()
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
       .PointsBase.set(amount)
       .PointsDieSides.set(0)
+    )
 
     return spell
   }
@@ -461,13 +472,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_INCREASE_SPEED.set()
       .AsEffect.get()
       .PointsBase.set(resolveSpeed(this.builder.baseSpeed, amount))
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
       .PointsDieSides.set(0)
+    )
 
     return spell
   }
@@ -485,7 +497,7 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_DAMAGE_DONE.set()
       .School.FIRE.set(1)
       .School.HOLY.set(1)
@@ -497,6 +509,7 @@ export class Helper {
       .DamagePctPerLevel.set(0)
       .DamagePctDieSides.set(0)
       .DamagePctPerCombo.set(0)
+    )
 
     return spell
   }
@@ -514,13 +527,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_DAMAGE_DONE.set()
       .School.PHYSICAL.set(1)
       .DamagePctBase.set(amount)
       .DamagePctPerLevel.set(0)
       .DamagePctDieSides.set(0)
       .DamagePctPerCombo.set(0)
+    )
 
     return spell
   }
@@ -538,7 +552,7 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_RESISTANCE.set()
       .Resistance.FIRE.set(1)
       .Resistance.HOLY.set(1)
@@ -550,6 +564,7 @@ export class Helper {
       .PointsBase.set(0)
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -567,13 +582,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_RESISTANCE.set()
       .Resistance.FIRE.set(1)
       .PointsDieSides.set(0)
       .PointsBase.set(0)
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -591,13 +607,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_DAMAGE_DONE.set()
       .School.FIRE.set(1)
       .DamagePctBase.set(amount)
       .DamagePctPerLevel.set(0)
       .DamagePctDieSides.set(0)
       .DamagePctPerCombo.set(0)
+    )
 
     return spell
   }
@@ -615,13 +632,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_RESISTANCE.set()
       .Resistance.HOLY.set(1)
       .PointsDieSides.set(0)
       .PointsBase.set(0)
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -639,13 +657,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_DAMAGE_DONE.set()
       .School.HOLY.set(1)
       .DamagePctBase.set(amount)
       .DamagePctPerLevel.set(0)
       .DamagePctDieSides.set(0)
       .DamagePctPerCombo.set(0)
+    )
 
 
     return spell
@@ -664,13 +683,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_RESISTANCE.set()
       .Resistance.FROST.set(1)
       .PointsDieSides.set(0)
       .PointsBase.set(0)
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -688,13 +708,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_DAMAGE_DONE.set()
       .School.FROST.set(1)
       .DamagePctBase.set(amount)
       .DamagePctPerLevel.set(0)
       .DamagePctDieSides.set(0)
       .DamagePctPerCombo.set(0)
+    )
 
     return spell
   }
@@ -712,13 +733,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_RESISTANCE.set()
       .Resistance.ARCANE.set(1)
       .PointsDieSides.set(0)
       .PointsBase.set(0)
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -736,13 +758,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_DAMAGE_DONE.set()
       .School.ARCANE.set(1)
       .DamagePctBase.set(amount)
       .DamagePctPerLevel.set(0)
       .DamagePctDieSides.set(0)
       .DamagePctPerCombo.set(0)
+    )
 
     return spell
   }
@@ -760,13 +783,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_RESISTANCE.set()
       .Resistance.NATURE.set(1)
       .PointsDieSides.set(0)
       .PointsBase.set(0)
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -784,13 +808,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_DAMAGE_DONE.set()
       .School.NATURE.set(1)
       .DamagePctBase.set(amount)
       .DamagePctPerLevel.set(0)
       .DamagePctDieSides.set(0)
       .DamagePctPerCombo.set(0)
+    )
 
     return spell
   }
@@ -808,13 +833,14 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_RESISTANCE.set()
       .Resistance.SHADOW.set(1)
       .PointsDieSides.set(0)
       .PointsBase.set(0)
       .PointsPerLevel.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -832,19 +858,20 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_DAMAGE_DONE.set()
       .School.SHADOW.set(1)
       .DamagePctBase.set(amount)
       .DamagePctPerLevel.set(0)
       .DamagePctDieSides.set(0)
       .DamagePctPerCombo.set(0)
+    )
 
     return spell
   }
 
   public CriticalStrike (amount: number) {
-    const name = StatName(this.options.name || { enGB: '% Critical Strike' }, amount)
+    const name = StatName(this.options.name || { enGB: 'Critical Strike' }, amount, true)
 
     const spell = this.builder.Spell.add({
       name,
@@ -856,12 +883,13 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_CRIT_PCT.set()
       .PercentBase.set(amount)
       .PercentPerLevel.set(0)
       .PercentDieSides.set(0)
       .PercentPerCombo.set(0)
+    )
 
     return spell
   }
@@ -879,12 +907,13 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_TARGET_ARMOR_PCT.set()
       .PercentBase.set(amount)
       .PercentPerLevel.set(0)
       .PercentDieSides.set(0)
       .PercentPerCombo.set(0)
+    )
 
     return spell
   }
@@ -902,7 +931,7 @@ export class Helper {
 
     spell.asset.Effects.clearAll()
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_TARGET_RESISTANCE.set()
       .Schools.FIRE.set(1)
       .Schools.HOLY.set(1)
@@ -914,6 +943,7 @@ export class Helper {
       .PointsPerLevel.set(0)
       .PointsDieSides.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -929,13 +959,14 @@ export class Helper {
       auraDescription: name,
     })
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_TARGET_RESISTANCE.set()
       .Schools.FIRE.set(1)
       .PointsBase.set(amount)
       .PointsPerLevel.set(0)
       .PointsDieSides.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -951,13 +982,14 @@ export class Helper {
       auraDescription: name,
     })
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_TARGET_RESISTANCE.set()
       .Schools.HOLY.set(1)
       .PointsBase.set(amount)
       .PointsPerLevel.set(0)
       .PointsDieSides.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -973,13 +1005,14 @@ export class Helper {
       auraDescription: name,
     })
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_TARGET_RESISTANCE.set()
       .Schools.FROST.set(1)
       .PointsBase.set(amount)
       .PointsPerLevel.set(0)
       .PointsDieSides.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -995,13 +1028,14 @@ export class Helper {
       auraDescription: name,
     })
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_TARGET_RESISTANCE.set()
       .Schools.ARCANE.set(1)
       .PointsBase.set(amount)
       .PointsPerLevel.set(0)
       .PointsDieSides.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -1017,13 +1051,14 @@ export class Helper {
       auraDescription: name,
     })
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_TARGET_RESISTANCE.set()
       .Schools.NATURE.set(1)
       .PointsBase.set(amount)
       .PointsPerLevel.set(0)
       .PointsDieSides.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
@@ -1039,13 +1074,14 @@ export class Helper {
       auraDescription: name,
     })
 
-    spell.asset.Effects.get(0)
+    spell.asset.Effects.addMod(f => f
       .Aura.MOD_TARGET_RESISTANCE.set()
       .Schools.SHADOW.set(1)
       .PointsBase.set(amount)
       .PointsPerLevel.set(0)
       .PointsDieSides.set(0)
       .PointsPerCombo.set(0)
+    )
 
     return spell
   }
