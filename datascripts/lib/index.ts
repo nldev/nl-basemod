@@ -290,13 +290,6 @@ export class Builder {
           },
         })
 
-        // FIXME: remove all async stuff
-        // new Promise<void>(resolve => {
-        //   setTimeout(() => {
-        //     resolve()
-        //   }, 100)
-        // })
-
         // onTaskProcessSuccess
         for (const hook of this.Hook.list)
           hook.onTaskProcessSuccess(task, template)
