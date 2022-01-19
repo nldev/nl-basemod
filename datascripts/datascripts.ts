@@ -29,14 +29,6 @@ function main () {
   const $ = new Builder()
 
   $.init()
-
-  $.Item.add({
-    id: 'footest',
-  })
-
-  $.Spell.add({
-    id: 'footest',
-  })
 }
 
 main()
