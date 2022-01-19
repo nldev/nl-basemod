@@ -99,8 +99,6 @@ export class Helper {
     for (let i of times(max)) {
       const isMin = this.options.min && (i <= this.options.min)
 
-      console.log(this.options.stacks)
-      console.log(isMin)
       if (!isMin)
         (Creator(i)).asset
           .Stacks.set(this.options.stacks || DEFAULT_STACKS)
@@ -112,109 +110,109 @@ export class Helper {
 
     switch (type) {
       case 'HP5':
-        this.create(this.Hp5.bind(this))
+        this.create.bind(this)((this.Hp5.bind(this)))
         break
       case 'MP5':
-        this.create(this.Mp5.bind(this))
+        this.create.bind(this)((this.Mp5.bind(this)))
         break
       case 'EP5':
-        this.create(this.Ep5.bind(this))
+        this.create.bind(this)((this.Ep5.bind(this)))
         break
       case 'RP5':
-        this.create(this.Rp5.bind(this))
+        this.create.bind(this)((this.Rp5.bind(this)))
         break
       case 'SPIRIT':
-        this.create(this.Spirit.bind(this))
+        this.create.bind(this)((this.Spirit.bind(this)))
         break
       case 'AGILITY':
-        this.create(this.Agility.bind(this))
+        this.create.bind(this)((this.Agility.bind(this)))
         break
       case 'STAMINA':
-        this.create(this.Stamina.bind(this))
+        this.create.bind(this)((this.Stamina.bind(this)))
         break
       case 'STRENGTH':
-        this.create(this.Strength.bind(this))
+        this.create.bind(this)((this.Strength.bind(this)))
         break
       case 'INTELLECT':
-        this.create(this.Intellect.bind(this))
+        this.create.bind(this)((this.Intellect.bind(this)))
         break
       case 'MOVESPEED':
-        this.create(this.Movespeed.bind(this))
+        this.create.bind(this)((this.Movespeed.bind(this)))
         break
       case 'SPELL-POWER':
-        this.create(this.Hp5.bind(this))
+        this.create.bind(this)((this.Hp5.bind(this)))
         break
       case 'ATTACK-POWER':
-        this.create(this.SpellPower.bind(this))
+        this.create.bind(this)((this.SpellPower.bind(this)))
         break
       case 'ALL-RESIST':
-        this.create(this.AllResist.bind(this))
+        this.create.bind(this)((this.AllResist.bind(this)))
         break
       case 'FIRE-DAMAGE':
-        this.create(this.FireDamage.bind(this))
+        this.create.bind(this)((this.FireDamage.bind(this)))
         break
       case 'FIRE-RESIST':
-        this.create(this.FireResist.bind(this))
+        this.create.bind(this)((this.FireResist.bind(this)))
         break
       case 'HOLY-DAMAGE':
-        this.create(this.HolyDamage.bind(this))
+        this.create.bind(this)((this.HolyDamage.bind(this)))
         break
       case 'HOLY-RESIST':
-        this.create(this.HolyResist.bind(this))
+        this.create.bind(this)((this.HolyResist.bind(this)))
         break
       case 'FROST-DAMAGE':
-        this.create(this.FrostDamage.bind(this))
+        this.create.bind(this)((this.FrostDamage.bind(this)))
         break
       case 'FROST-RESIST':
-        this.create(this.FrostResist.bind(this))
+        this.create.bind(this)((this.FrostResist.bind(this)))
         break
       case 'ARCANE-DAMAGE':
-        this.create(this.ArcaneDamage.bind(this))
+        this.create.bind(this)((this.ArcaneDamage.bind(this)))
         break
       case 'ARCANE-RESIST':
-        this.create(this.ArcaneResist.bind(this))
+        this.create.bind(this)((this.ArcaneResist.bind(this)))
         break
       case 'NATURE-DAMAGE':
-        this.create(this.NatureDamage.bind(this))
+        this.create.bind(this)((this.NatureDamage.bind(this)))
         break
       case 'NATURE-RESIST':
-        this.create(this.NatureResist.bind(this))
+        this.create.bind(this)((this.NatureResist.bind(this)))
         break
       case 'SHADOW-DAMAGE':
-        this.create(this.ShadowDamage.bind(this))
+        this.create.bind(this)((this.ShadowDamage.bind(this)))
         break
       case 'SHADOW-RESIST':
-        this.create(this.ShadowResist.bind(this))
+        this.create.bind(this)((this.ShadowResist.bind(this)))
         break
       case 'CRITICAL-STRIKE':
-        this.create(this.CriticalStrike.bind(this))
+        this.create.bind(this)((this.CriticalStrike.bind(this)))
         break
       case 'ARMOR-PENETRATION':
-        this.create(this.ArmorPenetration.bind(this))
+        this.create.bind(this)((this.ArmorPenetration.bind(this)))
         break
       case 'SPELL-PENETRATION':
-        this.create(this.SpellPenetration.bind(this))
+        this.create.bind(this)((this.SpellPenetration.bind(this)))
         break
       case 'FIRE-PENETRATION':
-        this.create(this.SpellPenetration.bind(this))
+        this.create.bind(this)((this.SpellPenetration.bind(this)))
         break
       case 'HOLY-PENETRATION':
-        this.create(this.HolyPenetration.bind(this))
+        this.create.bind(this)((this.HolyPenetration.bind(this)))
         break
       case 'FROST-PENETRATION':
-        this.create(this.FrostPenetration.bind(this))
+        this.create.bind(this)((this.FrostPenetration.bind(this)))
         break
       case 'ARCANE-PENETRATION':
-        this.create(this.ArcanePenetration.bind(this))
+        this.create.bind(this)((this.ArcanePenetration.bind(this)))
         break
       case 'NATURE-PENETRATION':
-        this.create(this.NaturePenetration.bind(this))
+        this.create.bind(this)((this.NaturePenetration.bind(this)))
         break
       case 'SHADOW-PENETRATION':
-        this.create(this.ShadowPenetration.bind(this))
+        this.create.bind(this)((this.ShadowPenetration.bind(this)))
         break
       default:
-        this.create()
+        this.create.bind(this)()
         break
     }
   }
