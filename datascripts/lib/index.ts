@@ -260,7 +260,6 @@ export class Builder {
       }
 
       if (task.isReducer || (template.id === task.id)) {
-        console.log(template.id, ' ', task.id)
         // onTaskProcessBegin
         for (const hook of this.Hook.list)
           hook.onTaskProcessBegin(task, template)

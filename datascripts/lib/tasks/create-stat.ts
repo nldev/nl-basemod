@@ -140,10 +140,10 @@ export class Helper {
         this.create.bind(this)((this.Movespeed.bind(this)))
         break
       case 'SPELL-POWER':
-        this.create.bind(this)((this.Hp5.bind(this)))
+        this.create.bind(this)((this.SpellPower.bind(this)))
         break
       case 'ATTACK-POWER':
-        this.create.bind(this)((this.SpellPower.bind(this)))
+        this.create.bind(this)((this.AttackPower.bind(this)))
         break
       case 'ALL-RESIST':
         this.create.bind(this)((this.AllResist.bind(this)))
@@ -194,7 +194,7 @@ export class Helper {
         this.create.bind(this)((this.SpellPenetration.bind(this)))
         break
       case 'FIRE-PENETRATION':
-        this.create.bind(this)((this.SpellPenetration.bind(this)))
+        this.create.bind(this)((this.FirePenetration.bind(this)))
         break
       case 'HOLY-PENETRATION':
         this.create.bind(this)((this.HolyPenetration.bind(this)))
