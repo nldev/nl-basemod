@@ -20,10 +20,10 @@ export type DirectSpellOptions = SpellOptions & {
 export class CreateDirectSpell extends NWTask {
   static readonly id = CREATE_DIRECT_SPELL_TASK
 
-  async process ({ options }: DirectSpellTemplate) {
+  process ({ options }: DirectSpellTemplate) {
     const $ = this.builder
 
-    const spell = await $.Spell.add({
+    const spell = $.Spell.add({
       ...options,
       base: options.base || DEFAULT_SPELL_BASE,
     })

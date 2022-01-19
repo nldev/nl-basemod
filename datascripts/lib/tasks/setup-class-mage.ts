@@ -4,7 +4,7 @@ import { NWTask, TaskOptions } from '../task'
 export class SetupClassMage extends NWTask {
   static readonly id = SETUP_CLASS_MAGE_TASK
 
-  async setup () {
+  setup () {
   }
 }
 

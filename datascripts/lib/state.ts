@@ -9,7 +9,7 @@ export interface Readable<T extends NWEntity> {
 }
 
 export interface Writable<T extends NWEntity, O extends EntityOptions> extends Readable<T> {
-  add: (options: O) => Promise<T>
+  add: (options: O) => T
 }
 
 export abstract class NWState<T extends NWEntity> implements Readable<T> {

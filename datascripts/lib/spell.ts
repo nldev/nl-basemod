@@ -128,10 +128,10 @@ export class NWSpell extends NWAsset<TSSpell> implements Spell {
 }
 
 export class SpellState extends BaseState<NWSpell> implements Writable<NWSpell, SpellOptions> {
-  public async add (options: SpellOptions = {}) {
+  public add (options: SpellOptions = {}) {
     // OnSpellAddBegin
     for (const hook of this.builder.Hook.list)
-      await hook.onSpellAddBegin(options)
+      hook.onSpellAddBegin(options)
 
     const spell = new NWSpell(options, this.builder)
 
@@ -139,7 +139,7 @@ export class SpellState extends BaseState<NWSpell> implements Writable<NWSpell, 
 
     // OnSpellAddSuccess
     for (const hook of this.builder.Hook.list)
-      await hook.onSpellAddSuccess(spell)
+      hook.onSpellAddSuccess(spell)
 
     return spell
   }

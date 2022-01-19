@@ -5,7 +5,7 @@ import { StatOptions } from '../tasks/create-stat'
 export const STATS = createTemplates<StatOptions>(CREATE_STAT_TASK, [
   {
     type: 'HP5',
-    max: 1,
+    max: 200
   },
   // {
   //   type: 'MP5',

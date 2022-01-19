@@ -10,8 +10,8 @@ export interface SpellTemplate extends Template {
 export class CreateSpell extends NWTask {
   static readonly id = CREATE_SPELL_TASK
 
-  async process (template: Template<SpellOptions, typeof CREATE_SPELL_TASK>) {
-    await this.builder.Spell.add(template.options)
+  process (template: Template<SpellOptions, typeof CREATE_SPELL_TASK>) {
+    this.builder.Spell.add(template.options)
   }
 }
 

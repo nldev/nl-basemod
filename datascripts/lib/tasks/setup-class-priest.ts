@@ -4,7 +4,7 @@ import { NWTask, TaskOptions } from '../task'
 export class SetupClassPriest extends NWTask {
   static readonly id = SETUP_CLASS_PRIEST_TASK
 
-  async setup () {
+  setup () {
   }
 }
 

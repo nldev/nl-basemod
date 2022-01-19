@@ -25,10 +25,10 @@ CreatePlaceholderEnchants()
 
 // ---
 
-async function main () {
+function main () {
   const $ = new Builder()
 
-  await $.init()
+  $.init()
 }
 
 main()

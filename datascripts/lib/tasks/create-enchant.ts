@@ -15,7 +15,7 @@ export interface MountTemplate extends Template {
 export class CreateEnchant extends NWTask {
   static readonly id = CREATE_ENCHANT_TASK
 
-  async process (template: MountTemplate) {
+  process (template: MountTemplate) {
   }
 }
 

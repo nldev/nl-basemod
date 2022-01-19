@@ -77,11 +77,11 @@ export const StatName = (text: TSText, amount: number) => {
 export class CreateStat extends NWTask {
   static readonly id = CREATE_STAT_TASK
 
-  async process (template: StatTemplate) {
+  process (template: StatTemplate) {
     if (template.options && template.options.type) {
       const $ = new Helper(template.options, this.builder)
 
-      await $.run()
+      $.run()
     }
   }
 }
@@ -93,134 +93,136 @@ export interface CreateStatOptions extends TaskOptions {
 export class Helper {
   constructor (public options: StatOptions, public builder: Builder) {}
 
-  public async create (Creator: (amount: number) => Promise<NWSpell> = this.Default) {
+  public create (Creator: (amount: number) => NWSpell = this.Default) {
     const max = this.options.max || 1
 
     for (let i of times(max)) {
       const isMin = this.options.min && (i <= this.options.min)
 
+      console.log(this.options.stacks)
+      console.log(isMin)
       if (!isMin)
-        (await Creator(i)).asset
+        (Creator(i)).asset
           .Stacks.set(this.options.stacks || DEFAULT_STACKS)
     }
   }
 
-  public async run () {
+  public run () {
     const { type } = this.options
 
     switch (type) {
       case 'HP5':
-        await this.create(this.Hp5.bind(this))
+        this.create(this.Hp5.bind(this))
         break
       case 'MP5':
-        await this.create(this.Mp5.bind(this))
+        this.create(this.Mp5.bind(this))
         break
       case 'EP5':
-        await this.create(this.Ep5.bind(this))
+        this.create(this.Ep5.bind(this))
         break
       case 'RP5':
-        await this.create(this.Rp5.bind(this))
+        this.create(this.Rp5.bind(this))
         break
       case 'SPIRIT':
-        await this.create(this.Spirit.bind(this))
+        this.create(this.Spirit.bind(this))
         break
       case 'AGILITY':
-        await this.create(this.Agility.bind(this))
+        this.create(this.Agility.bind(this))
         break
       case 'STAMINA':
-        await this.create(this.Stamina.bind(this))
+        this.create(this.Stamina.bind(this))
         break
       case 'STRENGTH':
-        await this.create(this.Strength.bind(this))
+        this.create(this.Strength.bind(this))
         break
       case 'INTELLECT':
-        await this.create(this.Intellect.bind(this))
+        this.create(this.Intellect.bind(this))
         break
       case 'MOVESPEED':
-        await this.create(this.Movespeed.bind(this))
+        this.create(this.Movespeed.bind(this))
         break
       case 'SPELL-POWER':
-        await this.create(this.Hp5.bind(this))
+        this.create(this.Hp5.bind(this))
         break
       case 'ATTACK-POWER':
-        await this.create(this.SpellPower.bind(this))
+        this.create(this.SpellPower.bind(this))
         break
       case 'ALL-RESIST':
-        await this.create(this.AllResist.bind(this))
+        this.create(this.AllResist.bind(this))
         break
       case 'FIRE-DAMAGE':
-        await this.create(this.FireDamage.bind(this))
+        this.create(this.FireDamage.bind(this))
         break
       case 'FIRE-RESIST':
-        await this.create(this.FireResist.bind(this))
+        this.create(this.FireResist.bind(this))
         break
       case 'HOLY-DAMAGE':
-        await this.create(this.HolyDamage.bind(this))
+        this.create(this.HolyDamage.bind(this))
         break
       case 'HOLY-RESIST':
-        await this.create(this.HolyResist.bind(this))
+        this.create(this.HolyResist.bind(this))
         break
       case 'FROST-DAMAGE':
-        await this.create(this.FrostDamage.bind(this))
+        this.create(this.FrostDamage.bind(this))
         break
       case 'FROST-RESIST':
-        await this.create(this.FrostResist.bind(this))
+        this.create(this.FrostResist.bind(this))
         break
       case 'ARCANE-DAMAGE':
-        await this.create(this.ArcaneDamage.bind(this))
+        this.create(this.ArcaneDamage.bind(this))
         break
       case 'ARCANE-RESIST':
-        await this.create(this.ArcaneResist.bind(this))
+        this.create(this.ArcaneResist.bind(this))
         break
       case 'NATURE-DAMAGE':
-        await this.create(this.NatureDamage.bind(this))
+        this.create(this.NatureDamage.bind(this))
         break
       case 'NATURE-RESIST':
-        await this.create(this.NatureResist.bind(this))
+        this.create(this.NatureResist.bind(this))
         break
       case 'SHADOW-DAMAGE':
-        await this.create(this.ShadowDamage.bind(this))
+        this.create(this.ShadowDamage.bind(this))
         break
       case 'SHADOW-RESIST':
-        await this.create(this.ShadowResist.bind(this))
+        this.create(this.ShadowResist.bind(this))
         break
       case 'CRITICAL-STRIKE':
-        await this.create(this.CriticalStrike.bind(this))
+        this.create(this.CriticalStrike.bind(this))
         break
       case 'ARMOR-PENETRATION':
-        await this.create(this.ArmorPenetration.bind(this))
+        this.create(this.ArmorPenetration.bind(this))
         break
       case 'SPELL-PENETRATION':
-        await this.create(this.SpellPenetration.bind(this))
+        this.create(this.SpellPenetration.bind(this))
         break
       case 'FIRE-PENETRATION':
-        await this.create(this.SpellPenetration.bind(this))
+        this.create(this.SpellPenetration.bind(this))
         break
       case 'HOLY-PENETRATION':
-        await this.create(this.HolyPenetration.bind(this))
+        this.create(this.HolyPenetration.bind(this))
         break
       case 'FROST-PENETRATION':
-        await this.create(this.FrostPenetration.bind(this))
+        this.create(this.FrostPenetration.bind(this))
         break
       case 'ARCANE-PENETRATION':
-        await this.create(this.ArcanePenetration.bind(this))
+        this.create(this.ArcanePenetration.bind(this))
         break
       case 'NATURE-PENETRATION':
-        await this.create(this.NaturePenetration.bind(this))
+        this.create(this.NaturePenetration.bind(this))
         break
       case 'SHADOW-PENETRATION':
-        await this.create(this.ShadowPenetration.bind(this))
+        this.create(this.ShadowPenetration.bind(this))
         break
       default:
-        await this.create()
+        this.create()
         break
     }
   }
 
-  public async Default (amount: number) {
+  public Default (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Stat' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: (this.options.prefix || 'stat-') + amount,
       base: STAT_BASE,
@@ -233,10 +235,10 @@ export class Helper {
     return spell
   }
 
-  public async Hp5 (amount: number) {
+  public Hp5 (amount: number) {
     const name = StatName(this.options.name || { enGB: 'health per 5 sec.' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'hp5-' + amount,
       base: STAT_BASE,
@@ -256,10 +258,10 @@ export class Helper {
     return spell
   }
 
-  public async Mp5 (amount: number) {
+  public Mp5 (amount: number) {
     const name = StatName(this.options.name || { enGB: 'mana per 5 sec.' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'mp5-' + amount,
       base: STAT_BASE,
@@ -280,10 +282,10 @@ export class Helper {
     return spell
   }
 
-  public async Ep5 (amount: number) {
+  public Ep5 (amount: number) {
     const name = StatName(this.options.name || { enGB: 'energy per 5 sec.' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'ep5-' + amount,
       base: STAT_BASE,
@@ -304,10 +306,10 @@ export class Helper {
     return spell
   }
 
-  public async Rp5 (amount: number) {
+  public Rp5 (amount: number) {
     const name = StatName(this.options.name || { enGB: 'rage per 5 sec.' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'rp5-' + amount,
       base: STAT_BASE,
@@ -328,10 +330,10 @@ export class Helper {
     return spell
   }
 
-  public async Spirit (amount: number) {
+  public Spirit (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Spirit' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'spirit-' + amount,
       base: STAT_BASE,
@@ -352,10 +354,10 @@ export class Helper {
     return spell
   }
 
-  public async Agility (amount: number) {
+  public Agility (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Agility' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'agility-' + amount,
       base: STAT_BASE,
@@ -376,10 +378,10 @@ export class Helper {
     return spell
   }
 
-  public async Stamina (amount: number) {
+  public Stamina (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Stamina' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'stamina-' + amount,
       base: STAT_BASE,
@@ -400,10 +402,10 @@ export class Helper {
     return spell
   }
 
-  public async Strength (amount: number) {
+  public Strength (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Strength' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'strength-' + amount,
       base: STAT_BASE,
@@ -424,10 +426,10 @@ export class Helper {
     return spell
   }
 
-  public async Intellect (amount: number) {
+  public Intellect (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Intellect' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'intellect-' + amount,
       base: STAT_BASE,
@@ -448,10 +450,10 @@ export class Helper {
     return spell
   }
 
-  public async Movespeed (amount: number) {
+  public Movespeed (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Movespeed' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'movespeed-' + amount,
       base: STAT_BASE,
@@ -472,10 +474,10 @@ export class Helper {
     return spell
   }
 
-  public async SpellPower (amount: number) {
+  public SpellPower (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Spell Power' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'sp-' + amount,
       base: STAT_BASE,
@@ -501,10 +503,10 @@ export class Helper {
     return spell
   }
 
-  public async AttackPower (amount: number) {
+  public AttackPower (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Attack Power' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'ap-' + amount,
       base: STAT_BASE,
@@ -525,10 +527,10 @@ export class Helper {
     return spell
   }
 
-  public async AllResist (amount: number) {
+  public AllResist (amount: number) {
     const name = StatName(this.options.name || { enGB: 'All Resist' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'all-resist-' + amount,
       base: STAT_BASE,
@@ -554,10 +556,10 @@ export class Helper {
     return spell
   }
 
-  public async FireResist (amount: number) {
+  public FireResist (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Fire Resist' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'fire-resist-' + amount,
       base: STAT_BASE,
@@ -578,10 +580,10 @@ export class Helper {
     return spell
   }
 
-  public async FireDamage (amount: number) {
+  public FireDamage (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Fire Damage' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'stat-' + amount,
       base: STAT_BASE,
@@ -602,10 +604,10 @@ export class Helper {
     return spell
   }
 
-  public async HolyResist (amount: number) {
+  public HolyResist (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Holy Resist' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'holy-resist-' + amount,
       base: STAT_BASE,
@@ -626,10 +628,10 @@ export class Helper {
     return spell
   }
 
-  public async HolyDamage (amount: number) {
+  public HolyDamage (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Holy Damage' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'holy-damage-' + amount,
       base: STAT_BASE,
@@ -651,10 +653,10 @@ export class Helper {
     return spell
   }
 
-  public async FrostResist (amount: number) {
+  public FrostResist (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Frost Resist' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'frost-resist-' + amount,
       base: STAT_BASE,
@@ -675,10 +677,10 @@ export class Helper {
     return spell
   }
 
-  public async FrostDamage (amount: number) {
+  public FrostDamage (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Frost Damage' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'frost-damage-' + amount,
       base: STAT_BASE,
@@ -699,10 +701,10 @@ export class Helper {
     return spell
   }
 
-  public async ArcaneResist (amount: number) {
+  public ArcaneResist (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Arcane Resist' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'arcane-resist-' + amount,
       base: STAT_BASE,
@@ -723,10 +725,10 @@ export class Helper {
     return spell
   }
 
-  public async ArcaneDamage (amount: number) {
+  public ArcaneDamage (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Arcane Damage' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'arcane-damage-' + amount,
       base: STAT_BASE,
@@ -747,10 +749,10 @@ export class Helper {
     return spell
   }
 
-  public async NatureResist (amount: number) {
+  public NatureResist (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Nature Resist' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'nature-resist-' + amount,
       base: STAT_BASE,
@@ -771,10 +773,10 @@ export class Helper {
     return spell
   }
 
-  public async NatureDamage (amount: number) {
+  public NatureDamage (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Nature Damage' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'nature-damage-' + amount,
       base: STAT_BASE,
@@ -795,10 +797,10 @@ export class Helper {
     return spell
   }
 
-  public async ShadowResist (amount: number) {
+  public ShadowResist (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Shadow Resist' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'shadow-resist-' + amount,
       base: STAT_BASE,
@@ -819,10 +821,10 @@ export class Helper {
     return spell
   }
 
-  public async ShadowDamage (amount: number) {
+  public ShadowDamage (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Shadow Damage' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'shadow-damage-' + amount,
       base: STAT_BASE,
@@ -843,10 +845,10 @@ export class Helper {
     return spell
   }
 
-  public async CriticalStrike (amount: number) {
+  public CriticalStrike (amount: number) {
     const name = StatName(this.options.name || { enGB: '% Critical Strike' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'critical-strike-' + amount,
       base: STAT_BASE,
@@ -866,10 +868,10 @@ export class Helper {
     return spell
   }
 
-  public async ArmorPenetration (amount: number) {
+  public ArmorPenetration (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Armor Penetration' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'armor-penetration-' + amount,
       base: STAT_BASE,
@@ -889,10 +891,10 @@ export class Helper {
     return spell
   }
 
-  public async SpellPenetration (amount: number) {
+  public SpellPenetration (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Spell Penetration' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'spell-penetration-' + amount,
       base: STAT_BASE,
@@ -918,10 +920,10 @@ export class Helper {
     return spell
   }
 
-  public async FirePenetration (amount: number) {
+  public FirePenetration (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Fire Penetration' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'fire-penetration-' + amount,
       base: STAT_BASE,
@@ -940,10 +942,10 @@ export class Helper {
     return spell
   }
 
-  public async HolyPenetration (amount: number) {
+  public HolyPenetration (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Holy Penetration' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'holy-penetration-' + amount,
       base: STAT_BASE,
@@ -962,10 +964,10 @@ export class Helper {
     return spell
   }
 
-  public async FrostPenetration (amount: number) {
+  public FrostPenetration (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Frost Penetration' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'frost-penetration-' + amount,
       base: STAT_BASE,
@@ -984,10 +986,10 @@ export class Helper {
     return spell
   }
 
-  public async ArcanePenetration (amount: number) {
+  public ArcanePenetration (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Arcane Penetration' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'arcane-penetration-' + amount,
       base: STAT_BASE,
@@ -1006,10 +1008,10 @@ export class Helper {
     return spell
   }
 
-  public async NaturePenetration (amount: number) {
+  public NaturePenetration (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Nature Penetration' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'nature-penetration-' + amount,
       base: STAT_BASE,
@@ -1028,10 +1030,10 @@ export class Helper {
     return spell
   }
 
-  public async ShadowPenetration (amount: number) {
+  public ShadowPenetration (amount: number) {
     const name = StatName(this.options.name || { enGB: 'Shadow Penetration' }, amount)
 
-    const spell = await this.builder.Spell.add({
+    const spell = this.builder.Spell.add({
       name,
       id: this.options.prefix || 'shadow-penetration-' + amount,
       base: STAT_BASE,

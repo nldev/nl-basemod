@@ -15,7 +15,7 @@ export interface ProfessionTemplate extends Template {
 export class CreateProfession extends NWTask {
   static readonly id = CREATE_PROFESSION_TASK
 
-  async process (template: ProfessionTemplate) {
+  process (template: ProfessionTemplate) {
   }
 }
 

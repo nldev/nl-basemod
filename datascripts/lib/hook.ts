@@ -8,18 +8,18 @@ import { NWTask, Template } from './task'
 import { Data } from './types'
 
 export interface Hook {
-  onInitBegin: () => Promise<void>,
-  onInitSuccess: () => Promise<void>,
-  onSpellAddBegin: (options: SpellOptions) => Promise<void>,
-  onSpellAddSuccess: (spell: Spell) => Promise<void>,
-  onItemAddBegin: (options: ItemOptions) => Promise<void>,
-  onItemAddSuccess: (item: Item) => Promise<void>,
-  onNpcAddBegin: (options: NpcOptions) => Promise<void>,
-  onNpcAddSuccess: (npc: Npc) => Promise<void>,
-  onStoreAddBegin: (options: EntityOptions) => Promise<void>,
-  onStoreAddSuccess: (npc: Entity) => Promise<void>,
-  onTaskProcessBegin: (task: NWTask, template: Template) => Promise<void>,
-  onTaskProcessSuccess: (task: NWTask, template: Template) => Promise<void>,
+  onInitBegin: () => void,
+  onInitSuccess: () => void,
+  onSpellAddBegin: (options: SpellOptions) => void,
+  onSpellAddSuccess: (spell: Spell) => void,
+  onItemAddBegin: (options: ItemOptions) => void,
+  onItemAddSuccess: (item: Item) => void,
+  onNpcAddBegin: (options: NpcOptions) => void,
+  onNpcAddSuccess: (npc: Npc) => void,
+  onStoreAddBegin: (options: EntityOptions) => void,
+  onStoreAddSuccess: (npc: Entity) => void,
+  onTaskProcessBegin: (task: NWTask, template: Template) => void,
+  onTaskProcessSuccess: (task: NWTask, template: Template) => void,
 }
 
 export interface HookConstructor<O extends Data = Data> {
@@ -46,31 +46,31 @@ export abstract class NWHook<O extends Data = Data> extends NWEntity implements 
     this.options = options.options
   }
 
-  public async setup () {}
+  public setup () {}
 
-  public async onInitBegin () {}
+  public onInitBegin () {}
 
-  public async onInitSuccess () {}
+  public onInitSuccess () {}
 
-  public async onSpellAddBegin (options: SpellOptions) {}
+  public onSpellAddBegin (options: SpellOptions) {}
 
-  public async onSpellAddSuccess (spell: Spell) {}
+  public onSpellAddSuccess (spell: Spell) {}
 
-  public async onItemAddBegin (options: ItemOptions) {}
+  public onItemAddBegin (options: ItemOptions) {}
 
-  public async onItemAddSuccess (item: Item) {}
+  public onItemAddSuccess (item: Item) {}
 
-  public async onNpcAddBegin (options: NpcOptions) {}
+  public onNpcAddBegin (options: NpcOptions) {}
 
-  public async onNpcAddSuccess (npc: Npc) {}
+  public onNpcAddSuccess (npc: Npc) {}
 
-  public async onStoreAddBegin (options: EntityOptions) {}
+  public onStoreAddBegin (options: EntityOptions) {}
 
-  public async onStoreAddSuccess (entity: Entity) {}
+  public onStoreAddSuccess (entity: Entity) {}
 
-  public async onTaskProcessBegin (task: NWTask, template: Template) {}
+  public onTaskProcessBegin (task: NWTask, template: Template) {}
 
-  public async onTaskProcessSuccess (task: NWTask, template: Template) {}
+  public onTaskProcessSuccess (task: NWTask, template: Template) {}
 }
 
 export class HookState extends BaseState<NWHook> implements Readable<NWHook> {}

@@ -28,7 +28,7 @@ export type MountOptions = AssetOptions<Mount>
 export class CreateMount extends NWTask {
   static readonly id = CREATE_MOUNT_TASK
 
-  async process (template: MountTemplate) {
+  process (template: MountTemplate) {
     const $ = this.builder
 
     const baseSpellNpcId = template.options.base
@@ -37,7 +37,7 @@ export class CreateMount extends NWTask {
     const baseNpc = $.std.CreatureTemplates.load(baseNpcId)
     const name = template.options.name || baseNpc.Name.enGB.get()
 
-    const npc = await $.Npc.add(
+    const npc = $.Npc.add(
       {
         ...(template.options.npcOptions || {}),
         name,
@@ -76,7 +76,7 @@ export class CreateMount extends NWTask {
     const isFasterSwimmingMount =
       !isFasterGround && isFasterSwimming && !isFasterFlying
 
-    const mount = await $.Spell.add({
+    const mount = $.Spell.add({
       ...template.options,
       base: 470,
     })

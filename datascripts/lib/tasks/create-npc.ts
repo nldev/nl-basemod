@@ -10,8 +10,8 @@ export interface NpcTemplate extends Template {
 export class CreateNpc extends NWTask {
   static readonly id = CREATE_NPC_TASK
 
-  async process (template: NpcTemplate) {
-    await this.builder.Npc.add(template.options)
+  process (template: NpcTemplate) {
+    this.builder.Npc.add(template.options)
   }
 }
 

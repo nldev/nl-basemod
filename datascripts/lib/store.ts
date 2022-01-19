@@ -4,10 +4,10 @@ import { BaseState, Writable } from './state'
 export class Store extends NWEntity {}
 
 export class StoreState extends BaseState<Store> implements Writable<Store, EntityOptions> {
-  public async add (options: EntityOptions = {}) {
+  public add (options: EntityOptions = {}) {
     // OnStoreAddBegin
     for (const hook of this.builder.Hook.list)
-      await hook.onStoreAddBegin(options)
+      hook.onStoreAddBegin(options)
 
     const entity = new Store(options.id)
 
@@ -15,7 +15,7 @@ export class StoreState extends BaseState<Store> implements Writable<Store, Enti
 
     // OnStoreAddSuccess
     for (const hook of this.builder.Hook.list)
-      await hook.onStoreAddSuccess(entity)
+      hook.onStoreAddSuccess(entity)
 
     return entity
   }

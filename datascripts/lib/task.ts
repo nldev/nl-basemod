@@ -5,9 +5,9 @@ import { Data } from './types'
 
 export interface Task<O = any, K extends string = string> {
   id: string
-  setup: () => Promise<void>
-  load: () => Promise<Template[]>
-  process: (template: Template<O, K>) => Promise<void>
+  setup: () => void
+  load: () => Template[]
+  process: (template: Template<O, K>) => void
 }
 
 export interface Template<O = any, K extends string = string> {
@@ -18,7 +18,7 @@ export interface Template<O = any, K extends string = string> {
 export interface Attempt {
   template: Template
   task: NWTask
-  fn: () => Promise<void>
+  fn: () => void
 }
 
 export interface TaskConstructor<O extends Data = Data> {
@@ -57,17 +57,17 @@ export abstract class NWTask<O extends Data = Data> extends NWEntity implements 
     this.isReducer = !!options.isReducer
   }
 
-  public async setup () {}
+  public setup () {}
 
-  public async load () { return ([] as Template[]) }
+  public load () { return ([] as Template[]) }
 
-  public async process (template: Template) {}
+  public process (template: Template) {}
 }
 
 export class TaskState extends BaseState<NWTask> implements Readable<NWTask> {
-  public async process<T extends Template> (template: T) {
+  public process<T extends Template> (template: T) {
     for (let task of this.list)
       if (task.isReducer || (template.id === task.id))
-        await task.process(template)
+        task.process(template)
   }
 }

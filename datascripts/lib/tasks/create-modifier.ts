@@ -24,12 +24,12 @@ export interface ModifierTemplate extends Template {
 export class CreateModifier extends NWTask {
   static readonly id = CREATE_MODIFIER_TASK
 
-  async setup () {
+  setup () {
     this.clean()
     this.init()
   }
 
-  async process (template: ModifierTemplate) {
+  process (template: ModifierTemplate) {
     this.builder.sql.Databases.world_dest.write(
       sql.modifiers.command.insert({
         ...template.options,

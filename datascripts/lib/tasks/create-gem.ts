@@ -15,7 +15,7 @@ export interface MountTemplate extends Template {
 export class CreateGem extends NWTask {
   static readonly id = CREATE_GEM_TASK
 
-  async process (template: MountTemplate) {
+  process (template: MountTemplate) {
   }
 }
 

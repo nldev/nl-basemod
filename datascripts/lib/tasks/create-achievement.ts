@@ -15,7 +15,7 @@ export interface AchievementTemplate extends Template {
 export class CreateAchievement extends NWTask {
   static readonly id = CREATE_ACHIEVEMENT_TASK
 
-  async process (template: AchievementTemplate) {
+  process (template: AchievementTemplate) {
   }
 }
 

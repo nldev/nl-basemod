@@ -4,7 +4,7 @@ import { NWTask, TaskOptions } from '../task'
 export class SetupClassPaladin extends NWTask {
   static readonly id = SETUP_CLASS_PALADIN_TASK
 
-  async setup () {
+  setup () {
   }
 }
 

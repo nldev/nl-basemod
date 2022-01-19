@@ -198,10 +198,10 @@ export class NWItem extends NWAsset<TSItem> implements Item {
 }
 
 export class ItemState extends BaseState<NWItem> implements Writable<NWItem, ItemOptions> {
-  public async add (options: ItemOptions = {}) {
+  public add (options: ItemOptions = {}) {
     // OnItemAddBegin
     for (const hook of this.builder.Hook.list)
-      await hook.onItemAddBegin(options)
+      hook.onItemAddBegin(options)
 
     const item = new NWItem(options, this.builder)
 
@@ -209,7 +209,7 @@ export class ItemState extends BaseState<NWItem> implements Writable<NWItem, Ite
 
     // OnItemAddSuccess
     for (const hook of this.builder.Hook.list)
-      await hook.onItemAddSuccess(item)
+      hook.onItemAddSuccess(item)
 
     return item
   }

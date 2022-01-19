@@ -114,10 +114,10 @@ export const defaultConfig: Required<Config> = {
 }
 
 export function Build (config?: Config) {
-  return async (options?: Options) => {
+  return (options?: Options) => {
     const $ = new Builder(config, options)
 
-    await $.init()
+    $.init()
 
     return $
   }
@@ -233,39 +233,39 @@ export class Builder {
     }, {}), this)
   }
 
-  private async setup () {
+  private setup () {
     for (const hook of this.Hook.list)
-      await hook.setup()
+      hook.setup()
 
     for (const task of this.Task.list)
-      await task.setup()
+      task.setup()
   }
 
-  private async load (): Promise<void> {
+  private load () {
     for (const task of this.Task.list)
       this.templates = [
         ...this.templates,
-        ...await task.load(),
+        ...task.load(),
       ]
   }
 
-  private async process () {
+  private process () {
     const attempts: Attempt[] = []
 
     for (const template of this.templates) for (const task of this.Task.list) {
       const attempt: Attempt = {
         template,
         task,
-        fn: async () => await task.process(template),
+        fn: () => task.process(template),
       }
 
       if (task.isReducer || (template.id === task.id)) {
         console.log(template.id, ' ', task.id)
         // onTaskProcessBegin
         for (const hook of this.Hook.list)
-          await hook.onTaskProcessBegin(task, template)
+          hook.onTaskProcessBegin(task, template)
 
-        await this.attempt(attempt.fn, {
+        this.attempt(attempt.fn, {
           message: (d: any) => `failed at task '${d.task.id}'`,
           info: [
             {
@@ -291,40 +291,40 @@ export class Builder {
         })
 
         // FIXME: remove all async stuff
-        await new Promise<void>(resolve => {
-          setTimeout(() => {
-            resolve()
-          }, 100)
-        })
+        // new Promise<void>(resolve => {
+        //   setTimeout(() => {
+        //     resolve()
+        //   }, 100)
+        // })
 
         // onTaskProcessSuccess
         for (const hook of this.Hook.list)
-          await hook.onTaskProcessSuccess(task, template)
+          hook.onTaskProcessSuccess(task, template)
       }
     }
 
     for (const attempt of attempts) {
         const { task, template } = attempt
-        await attempt.fn()
+        attempt.fn()
 
         // onTaskProcessSuccess
         for (const hook of this.Hook.list)
-          await hook.onTaskProcessSuccess(task, template)
+          hook.onTaskProcessSuccess(task, template)
     }
   }
 
-  public async init () {
+  public init () {
     // onInitBegin
     for (const hook of this.Hook.list)
-      await hook.onInitBegin()
+      hook.onInitBegin()
 
-    await this.setup()
-    await this.load()
-    await this.process()
+    this.setup()
+    this.load()
+    this.process()
 
     // OnInitSuccess
     for (const hook of this.Hook.list)
-      await hook.onInitSuccess()
+      hook.onInitSuccess()
   }
 
   public query <T extends number = number>(options?: Queryable<number, QueryType>, defaultValue?: T): number
@@ -424,34 +424,8 @@ export class Builder {
     }
   }
 
-  private async attempt (fn: (...args: any[]) => any, log: ErrorLog) {
-    return await fn()
-    // try {
-    //   return await fn()
-    // } catch (error) {
-    //   error_count++
-
-    //   // this.log(`ERROR #${error_count}`.replace(/./g, '==='))
-    //   // this.log(`ERROR #${error_count}`)
-    //   // this.log()
-    //   // this.log('=== TRACE ===')
-    //   // this.log(error)
-    //   // this.log('=============')
-    //   // this.log()
-
-    //   if (log.info)
-    //     log.info.forEach((v, i) => {
-    //       // this.log(`=== ${v.id.toUpperCase()} ===`)
-    //       // this.log(v.fn(log.data))
-    //       // this.log(`=== ${v.id} ===`.replace(/./g, '='))
-    //       // if (log.info && (i < (log.info.length - 1)))
-    //       //   this.log()
-    //     })
-
-    //   // this.log(`ERROR #${error_count}`.replace(/./g, '==='))
-    //   // this.log('')
-    //   // this.log('')
-    // }
+  private attempt (fn: (...args: any[]) => any, log: ErrorLog) {
+    return fn()
   }
 
   public log (input: any = '', data?: LogData, type: LogType = 'log') {

@@ -66,10 +66,10 @@ export class NWNpc extends NWAsset<TSNpc> implements Npc {
 }
 
 export class NpcState extends BaseState<NWNpc> implements Writable<NWNpc, NpcOptions> {
-  public async add (options: NpcOptions = {}) {
+  public add (options: NpcOptions = {}) {
     // OnNpcAddBegin
     for (const hook of this.builder.Hook.list)
-      await hook.onNpcAddBegin(options)
+      hook.onNpcAddBegin(options)
 
     const npc = new NWNpc(options, this.builder)
 
@@ -77,7 +77,7 @@ export class NpcState extends BaseState<NWNpc> implements Writable<NWNpc, NpcOpt
 
     // OnNpcAddSuccess
     for (const hook of this.builder.Hook.list)
-      await hook.onNpcAddSuccess(npc)
+      hook.onNpcAddSuccess(npc)
 
     return npc
   }

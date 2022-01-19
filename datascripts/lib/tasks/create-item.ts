@@ -10,8 +10,8 @@ export interface ItemTemplate extends Template {
 export class CreateItem extends NWTask {
   static readonly id = CREATE_ITEM_TASK
 
-  async process (template: ItemTemplate) {
-    await this.builder.Item.add(template.options)
+  process (template: ItemTemplate) {
+    this.builder.Item.add(template.options)
   }
 }
 

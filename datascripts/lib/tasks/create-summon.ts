@@ -15,7 +15,7 @@ export interface SummonTemplate extends Template {
 export class CreateSummon extends NWTask {
   static readonly id = CREATE_SUMMON_TASK
 
-  async process (template: SummonTemplate) {
+  process (template: SummonTemplate) {
   }
 }
 
