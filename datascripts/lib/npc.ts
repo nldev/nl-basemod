@@ -4,7 +4,6 @@ import { Builder } from './'
 import { Asset, AssetOptions, NWAsset } from './asset'
 import { ASSET_TYPE, DEFAULT_NPC_BASE, DEFAULT_NPC_NAME } from './constants'
 import { BaseState, Writable } from './state'
-import { UniqueId } from './utils'
 
 export type PetSpells =
   | [number, number, number, number]
@@ -57,7 +56,7 @@ export class NWNpc extends NWAsset<TSNpc> implements Npc {
 
     return this.builder.std.CreatureTemplates.create(
       this.builder.mod,
-      UniqueId('npc', this.id),
+      this.id,
       this.base,
     )
   }

@@ -32,11 +32,6 @@ export const DEFAULT_MOUNT_NPC_BASE = 308 // FIXME: add real npc id
 
 export const DEFAULT_DIRECT_SPELL_BASE = 133 // FIXME: add real npc id
 
-export const SPELL_ID_PREFIX = 's--'
-export const ITEM_ID_PREFIX = 'i--'
-export const NPC_ID_PREFIX = 'n--'
-export const OTHER_ID_PREFIX = 'o--'
-
 export const ASSET_TYPE: Map<AssetType> = {
   SPELL: SPELL,
   ITEM: ITEM,

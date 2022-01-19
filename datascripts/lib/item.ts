@@ -9,7 +9,7 @@ import {
 } from './constants'
 import { BaseState, Writable } from './state'
 import { Queryable, TSText } from './types'
-import { ItemSpellCount, ItemSpellTrigger, localeify, UniqueId } from './utils'
+import { ItemSpellCount, ItemSpellTrigger, localeify } from './utils'
 
 export type ItemSpellSelection = {
   spell: string,
@@ -189,7 +189,7 @@ export class NWItem extends NWAsset<TSItem> implements Item {
 
     return this.builder.std.Items.create(
       this.builder.mod,
-      UniqueId('item', this.id),
+      this.id,
       this.base,
     )
   }

@@ -2,16 +2,11 @@ import { std } from 'tswow-stdlib'
 import { Achievement as TSAchievement } from 'tswow-stdlib/Achievement/Achievement'
 import { ItemTemplate as TSItem } from 'tswow-stdlib/Item/ItemTemplate'
 import { Spell as TSSpell } from 'tswow-stdlib/Spell/Spell'
-// import { LocSystem } from 'wotlkdata/cell/systems/CellSystem'
 import { loc_constructor } from 'wotlkdata/wotlkdata/primitives'
 
-import { Builder } from './'
 import { AssetType, TSAsset } from './asset'
-import {
-    ASSET_TYPE, DEFAULT_ICON_SPELL_BASE, ITEM_ID_PREFIX, ITEM_SPELL_TRIGGERS, NPC_ID_PREFIX,
-    OTHER_ID_PREFIX, SPELL_ID_PREFIX, UNNAMED,
-} from './constants'
-import { Duration, ItemSpellTrigger, Queryable, QueryType, TSText } from './types'
+import { ASSET_TYPE, DEFAULT_ICON_SPELL_BASE, ITEM_SPELL_TRIGGERS, UNNAMED } from './constants'
+import { Duration, ItemSpellTrigger, TSText } from './types'
 
 export const noop = () => {}
 
@@ -86,33 +81,20 @@ export function NextId (type: AssetType) {
     case ASSET_TYPE.SPELL:
       spell_id += 1
 
-      return `${SPELL_ID_PREFIX}${UNNAMED}-${spell_id}`
+      return `${UNNAMED}-${spell_id}`
     case ASSET_TYPE.ITEM:
       item_id += 1
 
-      return `${ITEM_ID_PREFIX}${UNNAMED}-${item_id}`
+      return `${UNNAMED}-${item_id}`
     case ASSET_TYPE.NPC:
       npc_id += 1
 
-      return `${NPC_ID_PREFIX}${UNNAMED}-${npc_id}`
+      return `${UNNAMED}-${npc_id}`
     default:
       other_id += 1
 
-      return `${OTHER_ID_PREFIX}${UNNAMED}-${other_id}`
+      return `${UNNAMED}-${other_id}`
   }
-}
-
-export function UniqueId (type: AssetType, id: string) {
-  if (type === ASSET_TYPE.SPELL)
-    return SPELL_ID_PREFIX + id
-
-  if (type === ASSET_TYPE.ITEM)
-    return ITEM_ID_PREFIX + id
-
-  if (type === ASSET_TYPE.NPC)
-    return NPC_ID_PREFIX + id
-
-  return OTHER_ID_PREFIX + id
 }
 
 export function RandomId (length: number = 8) {

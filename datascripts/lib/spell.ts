@@ -10,7 +10,7 @@ import {
 } from './constants'
 import { BaseState, Writable } from './state'
 import { AssetId, ItemSpell, ItemSpellOptions, Map, Queryable, TSText } from './types'
-import { localeify, UniqueId } from './utils'
+import { localeify } from './utils'
 
 export interface Spell extends Asset<TSSpell> {
   readonly icon: Queryable<string, typeof QUERY_ICON>
@@ -76,7 +76,7 @@ export class NWSpell extends NWAsset<TSSpell> implements Spell {
 
     return this.builder.std.Spells.create(
       this.builder.mod,
-      UniqueId(ASSET_TYPE.SPELL, this.id),
+      this.id,
       this.base,
     )
   }
