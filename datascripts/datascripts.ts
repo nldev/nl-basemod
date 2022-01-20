@@ -41,10 +41,10 @@ function main () {
     .PointsBase.set(70)
 
   zeal.asset.Effects.get(1)
-    .Aura.MOD_SILENCE.set()
+    .Aura.MOD_PACIFY.set()
 
-  zeal.asset.Duration.setSimple(resolveDuration(10), 0, resolveDuration(10))
-  zeal.asset.Cooldown.set(resolveDuration(3), 0, 0, 0)
+  zeal.asset.Duration.setSimple(resolveDuration(2), 0, resolveDuration(3))
+  zeal.asset.Cooldown.set(resolveDuration(1), 0, 0, 0)
 
   console.log(zeal.asset.objectify())
 }
