@@ -38,10 +38,10 @@ function main () {
   })
 
   zeal.asset.Effects.get(0)
+    .PointsBase.set(70)
 
   zeal.asset.Effects.get(1)
     .Aura.MOD_SILENCE.set()
-    .ImplicitTargetA.UNIT_CASTER.set()
 
   zeal.asset.Duration.setSimple(resolveDuration(10), 0, resolveDuration(10))
   zeal.asset.Cooldown.set(resolveDuration(3), 0, 0, 0)
