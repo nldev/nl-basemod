@@ -41,7 +41,7 @@ function main () {
     .PointsBase.set(70)
 
   zeal.asset.Effects.addMod(effect => effect
-    .Aura.MOD_PACIFY.set()
+    .Aura.MOD_PACIFY_SILENCE.set()
     .ImplicitTargetA.UNIT_CASTER.set()
   )
 
@@ -49,6 +49,8 @@ function main () {
   zeal.asset.Cooldown.set(resolveDuration(1), 0, 0, 0)
 
   console.log(zeal.asset.objectify())
+  console.log(zeal.asset.Effects.get(0).objectify())
+  console.log(zeal.asset.Effects.get(1).objectify())
 }
 
 main()
