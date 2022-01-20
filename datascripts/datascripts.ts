@@ -46,6 +46,7 @@ function main () {
     .ImplicitTargetA.UNIT_CASTER.set()
   )
 
+  zeal.asset.Attributes.IGNORE_CASTER_AURAS.set(true)
   zeal.asset.Duration.setSimple(resolveDuration(2), 0, resolveDuration(3))
   zeal.asset.Cooldown.set(resolveDuration(1), 0, 0, 0)
 
