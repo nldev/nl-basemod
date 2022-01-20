@@ -40,8 +40,10 @@ function main () {
   zeal.asset.Effects.get(0)
     .PointsBase.set(70)
 
-  zeal.asset.Effects.get(1)
+  zeal.asset.Effects.addMod(effect => effect
     .Aura.MOD_PACIFY.set()
+    .ImplicitTargetA.UNIT_CASTER.set()
+  )
 
   zeal.asset.Duration.setSimple(resolveDuration(2), 0, resolveDuration(3))
   zeal.asset.Cooldown.set(resolveDuration(1), 0, 0, 0)
