@@ -47,9 +47,21 @@ function main () {
   )
 
   zeal.asset.Attributes.IGNORE_IMMUNE_FLAGS.set(1)
-  zeal.asset.Duration.setSimple(0, 0, 0)
+  zeal.asset.Duration.setSimple(-1, undefined, undefined)
   zeal.asset.Cooldown.set(resolveDuration(1), 0, 0, 0)
   zeal.asset.Icon.setPath($.std.Spells.load(54154).Icon.getPath())
+
+  zeal.asset.InlineScripts.OnCheckCast((spell, result) => {
+    let id = spell.GetSpellInfo().GetEntry()
+    let caster = spell.GetCaster()
+
+    if (caster.HasAura(id))
+      caster.RemoveAura(id)
+
+    if (caster.IsPlayer())
+      caster.ToPlayer().SendBroadcastMessage('ran')
+
+  })
 
   const visual = zeal.asset.Visual.getRef()
   visual.StateKit.getRefCopy().clear()
