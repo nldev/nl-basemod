@@ -38,15 +38,12 @@ function main () {
   })
 
   zeal.asset.Effects.get(0)
-    .Aura.MOD_INCREASE_SPEED.set()
-    .PercentBase.set(70)
-    .PercentDieSides.set(0)
 
   zeal.asset.Effects.get(1)
     .Aura.MOD_SILENCE.set()
     .ImplicitTargetA.UNIT_CASTER.set()
 
-  zeal.asset.Duration.set(resolveDuration(10))
+  zeal.asset.Duration.setSimple(resolveDuration(10), 0, resolveDuration(10))
   zeal.asset.Cooldown.set(resolveDuration(3), 0, 0, 0)
 
   console.log(zeal.asset.objectify())
