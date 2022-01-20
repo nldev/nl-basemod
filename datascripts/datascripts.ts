@@ -42,14 +42,14 @@ function main () {
 
   zeal.asset.Effects.addMod(effect => effect
     .Type.APPLY_AURA.set()
-    .Aura.MOD_PACIFY.set()
+    .Aura.MOD_PACIFY_SILENCE.set()
     .ImplicitTargetA.UNIT_CASTER.set()
   )
 
   zeal.asset.Attributes.IGNORE_IMMUNE_FLAGS.set(1)
   zeal.asset.Duration.setSimple(resolveDuration(1), 0, resolveDuration(2))
   zeal.asset.Cooldown.set(resolveDuration(1), 0, 0, 0)
-  zeal.asset.Icon.setPath($.std.Spells.load(54154).Icon.getPath())
+  zeal.asset.Icon.setPath($.std.Spells.load(20101).Icon.getPath())
 
   zeal.asset.InlineScripts.OnCast(spell => {
     let id = spell.GetSpellInfo().GetEntry()
