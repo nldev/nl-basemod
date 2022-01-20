@@ -38,7 +38,7 @@ function main () {
   })
 
   zeal.asset.Effects.get(0)
-    .PointsBase.set(70)
+    .PointsBase.set(50)
 
   zeal.asset.Effects.addMod(effect => effect
     .Type.APPLY_AURA.set()
@@ -47,8 +47,12 @@ function main () {
   )
 
   zeal.asset.Attributes.IGNORE_IMMUNE_FLAGS.set(1)
-  zeal.asset.Duration.setSimple(resolveDuration(2), 0, resolveDuration(3))
+  zeal.asset.Duration.setSimple(0, 0, 0)
   zeal.asset.Cooldown.set(resolveDuration(1), 0, 0, 0)
+  zeal.asset.Icon.setPath($.std.Spells.load(54154).Icon.getPath())
+
+  const visual = zeal.asset.Visual.getRef()
+  visual.StateKit.getRefCopy().clear()
 
   console.log(zeal.asset.objectify())
   console.log(zeal.asset.Effects.get(0).objectify())
