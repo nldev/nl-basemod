@@ -49,7 +49,7 @@ function main () {
   )
 
   zeal.asset.Attributes.IGNORE_IMMUNE_FLAGS.set(1)
-  zeal.asset.Duration.setSimple(resolveDuration(0.5), 0, resolveDuration(2))
+  zeal.asset.Duration.setSimple(resolveDuration(0.5), 0, resolveDuration(1))
   zeal.asset.Cooldown.set(resolveDuration(1), 0, 0, 0)
   zeal.asset.Icon.setPath($.std.Spells.load(20101).Icon.getPath())
 
