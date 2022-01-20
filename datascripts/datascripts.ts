@@ -68,6 +68,8 @@ function main () {
   const visual = zeal.asset.Visual.getRef()
   visual.StateKit.getRefCopy().clear()
 
+  // TODO: beast within - disappear hunter + control pet + random facing corpse spawn
+
   console.log(zeal.asset.objectify())
   console.log(zeal.asset.Effects.get(0).objectify())
   console.log(zeal.asset.Effects.get(1).objectify())
