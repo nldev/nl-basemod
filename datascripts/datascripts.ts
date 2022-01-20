@@ -38,7 +38,9 @@ function main () {
   })
 
   zeal.asset.Effects.get(0)
-    .PointsBase.set(100)
+    .Type.APPLY_AURA.set()
+    .Aura.MOD_MINIMUM_SPEED.set()
+    .PercentBase.set(300)
 
   zeal.asset.Effects.addMod(effect => effect
     .Type.APPLY_AURA.set()
@@ -47,7 +49,7 @@ function main () {
   )
 
   zeal.asset.Attributes.IGNORE_IMMUNE_FLAGS.set(1)
-  zeal.asset.Duration.setSimple(resolveDuration(1), 0, resolveDuration(2))
+  zeal.asset.Duration.setSimple(resolveDuration(0.5), 0, resolveDuration(2))
   zeal.asset.Cooldown.set(resolveDuration(1), 0, 0, 0)
   zeal.asset.Icon.setPath($.std.Spells.load(20101).Icon.getPath())
 
