@@ -41,6 +41,7 @@ function main () {
     .PointsBase.set(70)
 
   zeal.asset.Effects.addMod(effect => effect
+    .Type.APPLY_AURA.set()
     .Aura.MOD_PACIFY_SILENCE.set()
     .ImplicitTargetA.UNIT_CASTER.set()
   )
