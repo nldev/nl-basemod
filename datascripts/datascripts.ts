@@ -37,19 +37,14 @@ function main () {
     base: 2983,
   })
 
-  zeal.asset.Effects.clearAll()
+  zeal.asset.Effects.get(0)
+    .Aura.MOD_INCREASE_SPEED.set()
+    .PercentBase.set(70)
+    .PercentDieSides.set(0)
 
-  zeal.asset.Effects.addMod(effect => {
-    effect
-      .Aura.MOD_INCREASE_SPEED.set()
-      .PercentBase.set(70)
-      .PercentDieSides.set(0)
-  })
-
-  zeal.asset.Effects.addMod(effect => {
-    effect
-      .Aura.MOD_SILENCE.set()
-  })
+  zeal.asset.Effects.get(1)
+    .Aura.MOD_SILENCE.set()
+    .ImplicitTargetA.UNIT_CASTER.set()
 
   zeal.asset.Duration.set(resolveDuration(10))
   zeal.asset.Cooldown.set(resolveDuration(3), 0, 0, 0)
