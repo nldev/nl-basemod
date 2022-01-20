@@ -42,7 +42,7 @@ function main () {
 
   zeal.asset.Effects.addMod(effect => effect
     .Type.APPLY_AURA.set()
-    .Aura.MOD_SILENCE.set()
+    .Aura.MOD_PACIFY.set()
     .ImplicitTargetA.UNIT_CASTER.set()
   )
 
