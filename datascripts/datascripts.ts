@@ -51,8 +51,8 @@ function main () {
       .Aura.MOD_SILENCE.set()
   })
 
-  zeal.asset.Duration.set(resolveDuration([10]))
-  zeal.asset.Cooldown.set(resolveDuration(30), 0, 0, 0)
+  zeal.asset.Duration.set(resolveDuration(10))
+  zeal.asset.Cooldown.set(resolveDuration(3), 0, 0, 0)
 
   console.log(zeal.asset.objectify())
 }
