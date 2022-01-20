@@ -123,30 +123,30 @@ export function resolveIcon (asset: TSAsset) {
 }
 
 export function resolveDuration (input: Duration = 0) {
+  // seconds
   if (typeof input === 'number')
-    return input
+    return input * 1000
 
   let sum = 0
 
-  // seconds
   if (input[0])
-    sum += input[0] * 10000
+    sum += input[0] * 1000
 
   // minutes
   if (input[1])
-    sum += input[1] * 10000 * 60
+    sum += input[1] * 1000 * 60
 
   // hours
   if (input[2])
-    sum += input[2] * 10000 * 60 * 60
+    sum += input[2] * 1000 * 60 * 60
 
   // days
   if (input[3])
-    sum += input[3] * 10000 * 60 * 60 * 24
+    sum += input[3] * 1000 * 60 * 60 * 24
 
   // weeks
   if (input[3])
-    sum += input[3] * 10000 * 60 * 60 * 24 * 7
+    sum += input[3] * 1000 * 60 * 60 * 24 * 7
 
   return sum
 }

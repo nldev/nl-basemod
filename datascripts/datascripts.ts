@@ -1,5 +1,6 @@
 import { std } from 'tswow-stdlib'
 import { Builder } from './lib'
+import { resolveDuration } from './lib/utils'
 
 // FIXME: move this
 function CreatePlaceholderEnchants () {
@@ -29,6 +30,31 @@ function main () {
   const $ = new Builder()
 
   $.init()
+
+  const zeal = $.Spell.add({
+    id: 'zeal',
+    name: 'Zeal',
+    base: 2983,
+  })
+
+  zeal.asset.Effects.clearAll()
+
+  zeal.asset.Effects.addMod(effect => {
+    effect
+      .Aura.MOD_INCREASE_SPEED.set()
+      .PercentBase.set(70)
+      .PercentDieSides.set(0)
+  })
+
+  zeal.asset.Effects.addMod(effect => {
+    effect
+      .Aura.MOD_SILENCE.set()
+  })
+
+  zeal.asset.Duration.set(resolveDuration([10]))
+  zeal.asset.Cooldown.set(resolveDuration(30), 0, 0, 0)
+
+  console.log(zeal.asset.objectify())
 }
 
 main()
