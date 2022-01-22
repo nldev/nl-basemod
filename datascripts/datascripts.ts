@@ -53,18 +53,6 @@ function main () {
   zeal.asset.Cooldown.set(0, 0, 0, 0)
   zeal.asset.Icon.setPath($.std.Spells.load(20101).Icon.getPath())
 
-  zeal.asset.InlineScripts.OnCast(spell => {
-    let id = spell.GetSpellInfo().GetEntry()
-    let caster = spell.GetCaster().ToUnit()
-
-    if (caster.HasAura(id))
-      caster.RemoveAura(id)
-
-    if (caster.IsPlayer())
-      caster.ToPlayer().SendBroadcastMessage('ran')
-
-  })
-
   const visual = zeal.asset.Visual.getRef()
   visual.StateKit.getRefCopy().clear()
 
