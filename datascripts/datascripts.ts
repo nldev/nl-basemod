@@ -58,10 +58,15 @@ function main () {
 
   // TODO: beast within - disappear hunter + control pet + random facing corpse spawn
 
-  console.log(zeal.asset.objectify())
-  console.log(zeal.asset.Effects.get(0).objectify())
-  console.log(zeal.asset.Effects.get(1).objectify())
+  const map = $.std.Maps.create($.mod, 'dev').Directory.set('dev')
+
+  map.Expansion.set(0)
+  map.Name.enGB.set('DevLand')
+
+  console.log(map.ID)
+  console.log(map.objectify())
 }
+
 
 main()
 
