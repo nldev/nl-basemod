@@ -58,7 +58,7 @@ function main () {
 
   // TODO: beast within - disappear hunter + control pet + random facing corpse spawn
 
-  const map = $.std.Maps.create($.mod, 'dev').Directory.set('dev')
+ const map = $.std.Maps.create($.mod, 'dev').Directory.set('dev')
 
   map.Expansion.set(0)
   map.Name.enGB.set('DevLand')
