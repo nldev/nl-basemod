@@ -76,6 +76,7 @@ function main () {
       a.Name.enGB.set('World')
       console.log(a.row.Lightid.get())
       console.log(a.row.LiquidTypeID.get())
+      console.log(a.row.objectify())
     })
   })
 }
