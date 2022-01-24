@@ -70,6 +70,7 @@ function main () {
   })
 
   $.std.Areas.forEach(a => {
+    console.log(a.Name.enGB.get(), ': ', a.Light.get())
     if (a.Name.enGB.get() !== 'Outland')
       return
 
@@ -78,6 +79,7 @@ function main () {
     console.log(a.row.Lightid.get())
     console.log(a.row.LiquidTypeID.get())
     console.log(a.row.objectify())
+    console.log(a.objectify())
   })
 }
 
