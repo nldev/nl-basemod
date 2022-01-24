@@ -82,7 +82,9 @@ function main () {
     if (l.row.MapID.get() === 530) {
       l.row.MapID.set(map.ID)
       l.row.LightParamsID.get().forEach(ID => {
-        $.dbc.LightParams.query({ ID }).LightSkyboxID.set(553)
+        console.log(ID)
+        if (ID)
+          $.dbc.LightParams.query({ ID }).LightSkyboxID.set(553)
       })
     }
   })
