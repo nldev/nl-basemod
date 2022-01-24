@@ -76,10 +76,6 @@ function main () {
 
     a.Map.set(map.ID)
     a.Name.enGB.set('World')
-    console.log(a.row.Lightid.get())
-    console.log(a.row.LiquidTypeID.get())
-    console.log(a.row.objectify())
-    console.log(a.objectify())
   })
 
   $.std.Lights.filter({}).forEach(l => {
