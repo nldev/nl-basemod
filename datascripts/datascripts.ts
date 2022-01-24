@@ -78,11 +78,15 @@ function main () {
     a.Name.enGB.set('World')
   })
 
-  // $.std.Lights.filter({}).forEach(l => {
-  //   if (l.row.MapID.get() === 530) {
-  //     l.row.MapID.set(map.ID)
-  //   }
-  // })
+  $.std.Lights.filter({}).forEach(l => {
+    if (l.row.MapID.get() === 530) {
+      l.row.MapID.set(map.ID)
+      console.log(l.row.LightParamsID.get())
+      l.row.LightParamsID.get().forEach(ID => {
+        $.dbc.LightParams.query({ ID }).LightSkyboxID.set(553)
+      })
+    }
+  })
 }
 
 
