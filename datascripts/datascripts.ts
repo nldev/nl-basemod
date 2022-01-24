@@ -68,15 +68,13 @@ function main () {
     if (m.Name.enGB.get() !== 'Outland')
       return
 
-    m.Name.enGB.set('World')
-
     $.std.Areas.forEach(a => {
       if (a.Name.enGB.get() !== 'Nagrand')
         return
 
       a.Map.set(map.ID)
-      a.Name.enGB.set('Island')
-      map.AreaTable.set(a.ParentArea.get())
+      a.Name.enGB.set('World')
+      console.log($.std.Lights.load(a.Light.get()).objectify())
     })
   })
 }
