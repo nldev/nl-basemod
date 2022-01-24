@@ -74,7 +74,8 @@ function main () {
 
       a.Map.set(map.ID)
       a.Name.enGB.set('World')
-      console.log($.std.Lights.load(a.Light.get()).objectify())
+      console.log(a.row.Lightid.get())
+      console.log(a.row.LiquidTypeID.get())
     })
   })
 }
