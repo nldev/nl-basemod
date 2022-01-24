@@ -81,6 +81,10 @@ function main () {
     console.log(a.row.objectify())
     console.log(a.objectify())
   })
+
+  $.std.Lights.filter({}).forEach(l => {
+    console.log(l.row.ID.get())
+  })
 }
 
 
