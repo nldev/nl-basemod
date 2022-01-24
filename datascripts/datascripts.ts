@@ -61,23 +61,23 @@ function main () {
   const map = $.std.Maps.create($.mod, 'dev').Directory.set('dev')
 
   map.Expansion.set(0)
-  map.Name.enGB.set('DevLand')
+  map.Name.enGB.set('Dev')
   map.TimeofDayOverride.set(0)
 
   $.std.Maps.forEach(m => {
     if (m.Name.enGB.get() !== 'Outland')
       return
+  })
 
-    $.std.Areas.forEach(a => {
-      if (a.Name.enGB.get() !== 'Nagrand Arena')
-        return
+  $.std.Areas.forEach(a => {
+    if (a.Name.enGB.get() !== 'Outland')
+      return
 
-      a.Map.set(map.ID)
-      a.Name.enGB.set('World')
-      console.log(a.row.Lightid.get())
-      console.log(a.row.LiquidTypeID.get())
-      console.log(a.row.objectify())
-    })
+    a.Map.set(map.ID)
+    a.Name.enGB.set('World')
+    console.log(a.row.Lightid.get())
+    console.log(a.row.LiquidTypeID.get())
+    console.log(a.row.objectify())
   })
 }
 
