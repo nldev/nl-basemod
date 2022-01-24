@@ -67,10 +67,8 @@ function main () {
   $.std.Maps.forEach(m => {
     if (m.Name.enGB.get() !== 'Outland')
       return
-    console.log(m.row.objectify())
 
     $.std.Areas.forEach(a => {
-      console.log(a.Name.enGB.get())
       if (a.Name.enGB.get() !== 'Nagrand Arena')
         return
 
