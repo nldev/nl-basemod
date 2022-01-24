@@ -68,10 +68,7 @@ function main () {
     if (m.Name.enGB.get() !== 'Outland')
       return
 
-    map.AreaTable.set(m.ID)
     m.Name.enGB.set('World')
-
-    const i = m.AreaTable.get()
 
     $.std.Areas.forEach(a => {
       if (a.Name.enGB.get() !== 'Nagrand')
@@ -79,6 +76,7 @@ function main () {
 
       a.Map.set(map.ID)
       a.Name.enGB.set('Island')
+      map.AreaTable.set(a.ParentArea.get())
     })
   })
 }
