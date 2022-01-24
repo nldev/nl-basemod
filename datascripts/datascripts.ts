@@ -81,7 +81,6 @@ function main () {
   $.std.Lights.filter({}).forEach(l => {
     if (l.row.MapID.get() === 530) {
       l.row.MapID.set(map.ID)
-      console.log(l.row.LightParamsID.get())
       l.row.LightParamsID.get().forEach(ID => {
         $.dbc.LightParams.query({ ID }).LightSkyboxID.set(553)
       })
