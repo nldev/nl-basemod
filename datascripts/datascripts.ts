@@ -71,16 +71,18 @@ function main () {
 
   $.std.Areas.forEach(a => {
     console.log(a.Name.enGB.get(), ': ', a.Light.get())
-    if (a.Name.enGB.get() !== 'Outland')
+    if (a.Name.enGB.get() !== 'Nagrand')
       return
 
     a.Map.set(map.ID)
     a.Name.enGB.set('World')
   })
 
-  $.std.Lights.filter({}).forEach(l => {
-    console.log(l.row.ID.get())
-  })
+  // $.std.Lights.filter({}).forEach(l => {
+  //   if (l.row.MapID.get() === 530) {
+  //     l.row.MapID.set(map.ID)
+  //   }
+  // })
 }
 
 
