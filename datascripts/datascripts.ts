@@ -70,6 +70,7 @@ function main () {
     console.log(m.row.objectify())
 
     $.std.Areas.forEach(a => {
+      console.log(a.Name.enGB.get())
       if (a.Name.enGB.get() !== 'Nagrand')
         return
 
