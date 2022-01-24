@@ -71,7 +71,7 @@ function main () {
 
     $.std.Areas.forEach(a => {
       console.log(a.Name.enGB.get())
-      if (a.Name.enGB.get() !== 'Nagrand')
+      if (a.Name.enGB.get() !== 'Nagrand Arena')
         return
 
       a.Map.set(map.ID)
