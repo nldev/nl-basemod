@@ -58,13 +58,29 @@ function main () {
 
   // TODO: beast within - disappear hunter + control pet + random facing corpse spawn
 
- const map = $.std.Maps.create($.mod, 'dev').Directory.set('dev')
+  const map = $.std.Maps.create($.mod, 'dev').Directory.set('dev')
 
   map.Expansion.set(0)
   map.Name.enGB.set('DevLand')
+  map.TimeofDayOverride.set(0)
 
-  console.log(map.ID)
-  console.log(map.objectify())
+  $.std.Maps.forEach(m => {
+    if (m.Name.enGB.get() !== 'Outland')
+      return
+
+    map.AreaTable.set(m.ID)
+    m.Name.enGB.set('World')
+
+    const i = m.AreaTable.get()
+
+    $.std.Areas.forEach(a => {
+      if (a.Name.enGB.get() !== 'Nagrand')
+        return
+
+      a.Map.set(map.ID)
+      a.Name.enGB.set('Island')
+    })
+  })
 }
 
 
