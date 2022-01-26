@@ -10,6 +10,5 @@ talents.SetBackdropColor(0, 0, 0, 1)
 talents.SetPoint('CENTER', 'UIParent', 'CENTER', 0, 0)
 talents.Show()
 
-
 SendChatMessage('hello world', 'SAY')
 
