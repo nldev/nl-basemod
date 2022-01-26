@@ -1,5 +1,4 @@
 const talents = CreateFrame('Frame', 'foo')
-console.log('hello world')
 
 talents.SetWidth(800)
 talents.SetHeight(800)
