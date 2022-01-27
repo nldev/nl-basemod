@@ -108,8 +108,8 @@ class Grid {
 
     this.frame.SetBackdropColor(0, 0, 0, 1)
     this.frame.SetSize(this.params.gridWidth, this.params.gridHeight)
-
-    console.log('got here')
+    console.log(`${this.params.gridWidth}`)
+    console.log(`${this.params.gridHeight}`)
   }
 
   public add (frame: WoWAPI.Frame) {
