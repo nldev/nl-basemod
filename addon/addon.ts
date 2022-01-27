@@ -161,6 +161,48 @@ function TestFrame () {
   return frame
 }
 
+let s = CreateFrame('Frame', null, UIParent)
+
+s.SetBackdrop({
+  bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+  edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+  tile: true, tileSize: 16, edgeSize: 16,
+  insets: { left: 4, right: 4, top: 4, bottom: 4 },
+})
+
+s.SetBackdropColor(0, 0, 0, 1)
+s.SetSize(800, 800)
+s.SetPoint('CENTER')
+
+const scrollframe = CreateFrame('ScrollFrame', 'ANewScrollFrame', null, 'UIPanelScrollFrameTemplate')
+const scrollchild = CreateFrame('Frame')
+
+const scrollbarName = scrollframe.GetName()
+
+const scrollbar = _G[scrollbarName + 'ScrollBar']
+const scrollupbutton = _G[scrollbarName + 'ScrollBarScrollUpButton']
+const scrolldownbutton = _G[scrollbarName + 'ScrollBarScrollDownButton']
+
+scrollupbutton.ClearAllPoints()
+scrollupbutton.SetPoint('TOPRIGHT', scrollframe, 'TOPRIGHT', -2, -2)
+
+scrolldownbutton.ClearAllPoints()
+scrolldownbutton.SetPoint('BOTTOMRIGHT', scrollframe, 'BOTTOMRIGHT', -2, 2)
+
+scrollbar.ClearAllPoints()
+scrollbar.SetPoint('TOP', scrollupbutton, 'BOTTOM', 0, -2)
+scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
+
+scrollframe.SetScrollChild(scrollchild)
+scrollframe.SetAllPoints(s)
+
+scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
+
+const moduleoptions = CreateFrame('Frame', null, scrollchild)
+moduleoptions.SetAllPoints(scrollchild)
+
+// -----
+
 const grid = new Grid()
 
 grid.add(TestFrame())
@@ -203,50 +245,10 @@ grid.add(TestFrame())
 grid.add(TestFrame())
 grid.add(TestFrame())
 
-let s = CreateFrame('Frame', null, UIParent)
-
-s.SetBackdrop({
-  bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-  edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-  tile: true, tileSize: 16, edgeSize: 16,
-  insets: { left: 4, right: 4, top: 4, bottom: 4 },
-})
-
-s.SetBackdropColor(0, 0, 0, 1)
-s.SetSize(800, 800)
-s.SetPoint('CENTER')
-
-const scrollframe = CreateFrame('ScrollFrame', 'ANewScrollFrame', null, 'UIPanelScrollFrameTemplate')
-const scrollchild = CreateFrame('Frame')
-
-const scrollbarName = scrollframe.GetName()
-
-const scrollbar = _G[scrollbarName + 'ScrollBar']
-const scrollupbutton = _G[scrollbarName + 'ScrollBarScrollUpButton']
-const scrolldownbutton = _G[scrollbarName + 'ScrollBarScrollDownButton']
-
-scrollupbutton.ClearAllPoints()
-scrollupbutton.SetPoint('TOPRIGHT', scrollframe, 'TOPRIGHT', -2, -2)
-
-scrolldownbutton.ClearAllPoints()
-scrolldownbutton.SetPoint('BOTTOMRIGHT', scrollframe, 'BOTTOMRIGHT', -2, 2)
-
-scrollbar.ClearAllPoints()
-scrollbar.SetPoint('TOP', scrollupbutton, 'BOTTOM', 0, -2)
-scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
-
-scrollframe.SetScrollChild(scrollchild)
-scrollframe.SetAllPoints(s)
-
-scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
-
-const moduleoptions = CreateFrame('Frame', null, scrollchild)
-moduleoptions.SetAllPoints(scrollchild)
-
 grid.frame.SetParent(moduleoptions)
 grid.frame.SetPoint('TOPLEFT')
 
-// -----
+// -------
 
 console.log('addon loaded')
 
