@@ -58,6 +58,8 @@ const CELL_OPTIONS: CellOptions = {
 }
 
 class Cell {
+  private frame: WoWAPI.Frame
+
   constructor (private options: CellOptions = CELL_OPTIONS) {
   }
 }
@@ -74,6 +76,7 @@ const ROW_OPTIONS: RowOptions = {
 
 class Row {
   private cells: Mapping<Cell> = {}
+  private frame: WoWAPI.Frame
 
   constructor (private options: RowOptions = ROW_OPTIONS) {
   }
@@ -94,6 +97,7 @@ const GRID_OPTIONS: GridOptions = {
 class Grid {
   private cells: Mapping<Cell> = {}
   private rows: Row[] = []
+  private frame: WoWAPI.Frame
 
   constructor (private options: GridOptions = GRID_OPTIONS) {
   }
