@@ -48,14 +48,14 @@ class GridItem {
   constructor (public params: IGridItem) {
     this.frame = CreateFrame('Frame', null, this.params.parent)
 
-    this.frame.SetBackdrop({
-      bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-      edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-      tile: true, tileSize: 16, edgeSize: 16,
-      insets: { left: 4, right: 4, top: 4, bottom: 4 },
-    })
+    // this.frame.SetBackdrop({
+    //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+    //   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    //   tile: true, tileSize: 16, edgeSize: 16,
+    //   insets: { left: 4, right: 4, top: 4, bottom: 4 },
+    // })
 
-    this.frame.SetBackdropColor(0, 0, 0, 1)
+    // this.frame.SetBackdropColor(0, 0, 0, 1)
     this.frame.SetSize(this.params.width, this.params.height)
     this.frame.SetPoint('TOPLEFT', this.params.x, this.params.y)
     this.frame.SetParent(this.params.parent)
@@ -75,7 +75,7 @@ interface IGrid {
 type GridOptions = Partial<IGrid>
 
 const DEFAULT_GRID_OPTIONS: IGrid = {
-  itemsPerRow: 4,
+  itemsPerRow: 8,
   rowHeight: 100,
   gridHeight: 800,
   gridWidth: 800,
@@ -97,7 +97,7 @@ class Grid {
 
     this.itemWidth = this.params.gridWidth / this.params.itemsPerRow
 
-    this.frame = CreateFrame('Frame', null, UIParent)
+    this.frame = CreateFrame('ScrollFrame', null, UIParent)
 
     this.frame.SetBackdrop({
       bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -140,36 +140,61 @@ class Grid {
 
 const grid = new Grid()
 
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
-grid.add(CreateFrame('Frame'))
+function TestFrame () {
+  const frame = CreateFrame('Frame', null, UIParent)
+
+  frame.SetBackdrop({
+    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    tile: true, tileSize: 16, edgeSize: 16,
+    insets: { left: 4, right: 4, top: 4, bottom: 4 },
+  })
+
+  frame.SetBackdropColor(0, 0, 0, 1)
+  frame.SetSize(50, 50)
+
+  return frame
+}
+
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
+grid.add(TestFrame())
 
 // -----
 
