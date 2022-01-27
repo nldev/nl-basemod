@@ -38,10 +38,39 @@ counter.SetSize(20, 20)
 counter.SetPoint('TOPLEFT')
 
 // -----
-//
-const num = counter.CreateFontString()
-num.SetText('1')
-num.SetPoint('CENTER')
+
+// const num = counter.CreateFontString(null, 'OVERLAY', 'GameTooltipText')
+// num.SetPoint('CENTER', 0, 0)
+// num.SetText('0')
+
+class Cell {
+  constructor () {
+  }
+}
+
+class Row {
+  constructor () {
+  }
+}
+
+interface GridOptions {
+}
+
+class Grid {
+  constructor (public options: GridOptions) {
+    console.log(options)
+    console.log('hello')
+  }
+}
+
+const grid = new Grid({})
+
+const list = [null, null, null, null, null, null, null, null]
+
+
+list.forEach((_, i) => {
+})
+
 
 // -----
 
