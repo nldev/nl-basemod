@@ -81,6 +81,7 @@ const DEFAULT_GRID_OPTIONS: IGrid = {
 }
 
 class Grid {
+  // private list: GridItem[]
   public frame: WoWAPI.Frame
   public params: IGrid
 
@@ -141,6 +142,9 @@ class Grid {
     }
 
     console.log('changed params')
+
+    // this.list.push(item)
+    // console.log('pushed to list')
   }
 }
 
