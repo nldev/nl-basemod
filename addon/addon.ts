@@ -58,7 +58,7 @@ const CELL_OPTIONS: CellOptions = {
 }
 
 class Cell {
-  constructor () {
+  constructor (private options: CellOptions = CELL_OPTIONS) {
   }
 }
 
@@ -73,23 +73,27 @@ const ROW_OPTIONS: RowOptions = {
 }
 
 class Row {
-  constructor () {
+  private cells: Mapping<Cell> = {}
+
+  constructor (private options: RowOptions = ROW_OPTIONS) {
   }
 }
 
 interface GridOptions {
   rowSize: number
-  widthPerSize: number
+  rowHeight: number
+  cellWidth: number
 }
 
 const GRID_OPTIONS: GridOptions = {
   rowSize: 3,
-  widthPerSize: 100,
+  rowHeight: 100,
+  cellWidth: 100,
 }
 
 class Grid {
-  private items: [] = []
-  private rows: Mapping<Row> = {}
+  private cells: Mapping<Cell> = {}
+  private rows: Row[] = []
 
   constructor (private options: GridOptions = GRID_OPTIONS) {
   }
