@@ -133,6 +133,7 @@ function TestFrame () {
   const texture = frame.CreateTexture()
   texture.SetTexture('Interface/Icons/Spell_Frost_WindWalkOn')
   texture.SetAllPoints()
+  SetDesaturation(texture, true)
 
   frame.SetBackdropColor(0, 0, 0, 1)
   frame.SetSize(50, 50)

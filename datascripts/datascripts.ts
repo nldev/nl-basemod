@@ -57,7 +57,7 @@ function main () {
   const visual = zeal.asset.Visual.getRef()
   visual.StateKit.getRefCopy().clear()
 
-  // TODO: beast within - disappear hunter + control pet + random facing corpse spawn
+  // TODO: hunter spell - disappear hunter + control pet + random facing corpse spawn
 
   const map = $.std.Maps.create($.mod, 'dev').Directory.set('dev')
 
