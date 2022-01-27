@@ -82,14 +82,13 @@ class Grid {
   private list: GridItem[]
 
   public frame: WoWAPI.Frame
+  public params: IGrid
 
   public itemHeight: number = 0
   public itemWidth: number = 0
   public index: number = 0
   public x: number = 0
   public y: number = 0
-
-  public params: IGrid
 
   constructor (private options: GridOptions = DEFAULT_GRID_OPTIONS) {
     this.params = { ...DEFAULT_GRID_OPTIONS, ...this.options }
