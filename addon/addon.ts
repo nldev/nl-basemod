@@ -72,8 +72,10 @@ class GridItem {
 
     this.frame.SetBackdropColor(0, 0, 0, 1)
     this.frame.SetSize(this.params.width, this.params.height)
+    this.frame.SetPoint('TOPLEFT', null, 'TOPLEFT', this.params.x, this.params.y)
 
     this.params.child.SetParent(this.frame)
+    this.params.child.SetPoint('CENTER')
   }
 }
 
