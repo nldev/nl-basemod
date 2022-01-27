@@ -43,9 +43,25 @@ counter.SetPoint('TOPLEFT')
 // num.SetPoint('CENTER', 0, 0)
 // num.SetText('0')
 
+interface Mapping<T = any> {
+  [key: string]: T
+}
+
+interface CellOptions {
+}
+
+const CELL_OPTIONS: CellOptions = {
+}
+
 class Cell {
   constructor () {
   }
+}
+
+interface RowOptions {
+}
+
+const ROW_OPTIONS: RowOptions = {
 }
 
 class Row {
@@ -54,23 +70,29 @@ class Row {
 }
 
 interface GridOptions {
+  elementsPerRow: number
+}
+
+const GRID_OPTIONS: GridOptions = {
+  elementsPerRow: 6,
 }
 
 class Grid {
-  constructor (public options: GridOptions) {
-    console.log(options)
-    console.log('hello')
+  private items: [] = []
+  private rows: Mapping<Row> = {}
+
+  constructor (private options: GridOptions = GRID_OPTIONS) {
+
+  }
+
+  private add (id: string, index: number = 0) {
+  }
+
+  private remove (id: string) {
   }
 }
 
-const grid = new Grid({})
-
-const list = [null, null, null, null, null, null, null, null]
-
-
-list.forEach((_, i) => {
-})
-
+const grid = new Grid()
 
 // -----
 
