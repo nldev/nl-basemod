@@ -48,9 +48,13 @@ interface Mapping<T = any> {
 }
 
 interface CellOptions {
+  size: number
+  width: number
 }
 
 const CELL_OPTIONS: CellOptions = {
+  size: 1,
+  width: 100,
 }
 
 class Cell {
@@ -59,9 +63,13 @@ class Cell {
 }
 
 interface RowOptions {
+  size: number,
+  height: number,
 }
 
 const ROW_OPTIONS: RowOptions = {
+  size: 3,
+  height: 100,
 }
 
 class Row {
@@ -70,11 +78,13 @@ class Row {
 }
 
 interface GridOptions {
-  elementsPerRow: number
+  rowSize: number
+  widthPerSize: number
 }
 
 const GRID_OPTIONS: GridOptions = {
-  elementsPerRow: 6,
+  rowSize: 3,
+  widthPerSize: 100,
 }
 
 class Grid {
@@ -82,10 +92,9 @@ class Grid {
   private rows: Mapping<Row> = {}
 
   constructor (private options: GridOptions = GRID_OPTIONS) {
-
   }
 
-  private add (id: string, index: number = 0) {
+  private add (/* frame: WoWAPI.Frame, */id: string, index: number = 0) {
   }
 
   private remove (id: string) {
