@@ -56,10 +56,10 @@ interface IGrid {
 type GridOptions = Partial<IGrid>
 
 const DEFAULT_GRID_OPTIONS: IGrid = {
-  itemsPerRow: 5,
+  itemsPerRow: 4,
   rowHeight: 100,
   gridHeight: 400,
-  gridWidth: 493,
+  gridWidth: 450,
 }
 
 class Grid {
@@ -161,18 +161,18 @@ function TestFrame () {
   return frame
 }
 
-let s = CreateFrame('Frame', null, UIParent)
+let a = CreateFrame('Frame', null, UIParent)
 
-s.SetBackdrop({
+a.SetBackdrop({
   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
   tile: true, tileSize: 16, edgeSize: 16,
   insets: { left: 4, right: 4, top: 4, bottom: 4 },
 })
 
-s.SetBackdropColor(0, 0, 0, 1)
-s.SetSize(800, 800)
-s.SetPoint('CENTER')
+a.SetBackdropColor(0, 0, 0, 1)
+a.SetSize(800, 800)
+a.SetPoint('CENTER')
 
 const scrollframe = CreateFrame('ScrollFrame', 'ANewScrollFrame', null, 'UIPanelScrollFrameTemplate')
 const scrollchild = CreateFrame('Frame')
@@ -193,19 +193,26 @@ scrollbar.ClearAllPoints()
 scrollbar.SetPoint('TOP', scrollupbutton, 'BOTTOM', 0, -2)
 scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
 
-s.SetSize(s.GetWidth() * 0.667, s.GetHeight() * 0.667)
+a.SetSize(a.GetWidth() * 0.667, a.GetHeight() * 0.667)
 scrollframe.SetScale(0.667)
 
 scrollframe.SetScrollChild(scrollchild)
-scrollframe.SetAllPoints(s)
+
+const b = CreateFrame('Frame', null, UIParent)
+b.SetSize(a.GetWidth() * 0.95, a.GetHeight() * 0.95)
+b.SetParent(a)
+b.SetPoint('CENTER')
+
+scrollframe.SetAllPoints(b)
 
 scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
 
 const moduleoptions = CreateFrame('Frame', null, scrollchild)
 moduleoptions.SetAllPoints(scrollchild)
 
-s.SetFrameLevel(0)
-moduleoptions.SetFrameLevel(1)
+a.SetFrameLevel(0)
+// b.SetFrameLevel(1)
+moduleoptions.SetFrameLevel(2)
 
 // -----
 
