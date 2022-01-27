@@ -24,6 +24,7 @@ import { CreateNpc } from './tasks/create-npc'
 import { CreateProfession } from './tasks/create-profession'
 import { CreateSpell } from './tasks/create-spell'
 import { CreateStat } from './tasks/create-stat'
+import { CreateTalent } from './tasks/create-talent'
 import { GenerateEquipment } from './tasks/generate-equipment'
 import { SetupCharacterCreation } from './tasks/setup-character-creation'
 import { SetupClassDruid } from './tasks/setup-class-druid'
@@ -42,6 +43,7 @@ import { MOUNTS } from './templates/mounts'
 import { NPCS } from './templates/npcs'
 import { SPELLS } from './templates/spells'
 import { STATS } from './templates/stats'
+import { TALENTS } from './templates/talents'
 import { Data, Env, LogData, Logger, LogType, Map, Queryable, QueryType, Value } from './types'
 import { noop, resolveIcon } from './utils'
 
@@ -49,8 +51,6 @@ import { noop, resolveIcon } from './utils'
 export const PROJECT = 'basemod'
 export const VERSION = '0.0.0'
 export const DEFAULT_SPEED = 0.7
-
-let error_count = 0
 
 export const DEFAULT_OPTIONS: Required<Options> = {
   mod: DEFAULT_MOD,
@@ -65,11 +65,13 @@ export const DEFAULT_OPTIONS: Required<Options> = {
     'create-item': true,
     'create-spell': true,
     'create-stat': true,
+    'create-talent': true,
   },
   templates: [
     ...STATS,
     ...SPELLS,
     ...ITEMS,
+    ...TALENTS,
     // ...NPCS,
     // ...MODIFIERS,
     // ...MOUNTS,
@@ -90,6 +92,7 @@ export const defaultConfig: Required<Config> = {
     CreateStat,
     CreateSpell,
     CreateItem,
+    CreateTalent,
     // CreateNpc,
     // CreateModifier,
     // CreateMount,

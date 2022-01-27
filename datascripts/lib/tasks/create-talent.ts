@@ -19,7 +19,11 @@ export class CreateTalent extends NWTask {
   static readonly id = CREATE_TALENT_TASK
 
   process (template: TalentTemplate) {
-    console.log(template)
+    if (typeof template.options.spell === 'number') {
+      const spell = this.builder.std.Spells.load(template.options.spell)
+
+      console.log(spell.objectify())
+    }
   }
 }
 

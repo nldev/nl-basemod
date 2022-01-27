@@ -6,7 +6,7 @@ import { createTemplates } from '../task'
 export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'improved-eviscerate',
-    spell: 0,
+    spell: 14164,
     cost: 100,
     class: ROGUE,
   },
