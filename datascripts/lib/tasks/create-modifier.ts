@@ -4,6 +4,7 @@ import { NWTask, TaskOptions, Template } from '../task'
 import { AssetId } from '../types'
 
 export type ModifierEffect = 0 | 1 | 2 | 3
+
 export interface Modifier {
   modifier: AssetId
   modified: AssetId

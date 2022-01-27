@@ -2,7 +2,7 @@
 import { CREATE_TALENT_TASK } from '../constants'
 import { ItemOptions } from '../item'
 import { NWTask, TaskOptions, Template } from '../task'
-import { AssetId } from '../types'
+import { AssetId, Optional } from '../types'
 
 export interface Talent {
   id: string
@@ -10,11 +10,9 @@ export interface Talent {
   cost: number
 }
 
-export type TalentOptions = Partial<Talent>
-
 export interface TalentTemplate extends Template {
   id: typeof CREATE_TALENT_TASK
-  options: TalentOptions
+  options: Talent
 }
 
 export class CreateTalent extends NWTask {
