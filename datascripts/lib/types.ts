@@ -165,7 +165,7 @@ export interface Debug {
 
 export type DebugOptions = Optional<Debug>
 
-export type Class =
+export type CharacterClass =
   | typeof WARRIOR
   | typeof ROGUE
   | typeof DRUID
