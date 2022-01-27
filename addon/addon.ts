@@ -88,7 +88,7 @@ class Grid {
 
   public itemWidth: number
 
-  public index: number = -1
+  public index: number = 0
   public x: number = 0
   public y: number = 0
 
@@ -114,6 +114,13 @@ class Grid {
   public add (frame: WoWAPI.Frame) {
     const isEndOfRow = this.index === (this.params.itemsPerRow - 1)
 
+    console.log(`index: ${this.index}`)
+    console.log(`width: ${this.itemWidth}`)
+    console.log(`height: ${this.params.rowHeight}`)
+    console.log(`x: ${this.x}`)
+    console.log(`y: ${this.y}`)
+    console.log('------------------')
+
     const item = new GridItem({
       parent: this.frame,
       child: frame,
@@ -124,6 +131,8 @@ class Grid {
       y: this.y,
     })
 
+    console.log('created the item')
+
     if (isEndOfRow) {
       this.index = 0
       this.x = 0
@@ -133,11 +142,29 @@ class Grid {
       this.x += this.itemWidth
     }
 
+    console.log('changed params')
+
     this.list.push(item)
+
+    console.log('pushed to list')
   }
 }
 
 const grid = new Grid()
+
+const a = CreateFrame('Frame')
+const b = CreateFrame('Frame')
+const c = CreateFrame('Frame')
+const d = CreateFrame('Frame')
+const e = CreateFrame('Frame')
+const f = CreateFrame('Frame')
+
+grid.add(a)
+grid.add(b)
+grid.add(c)
+grid.add(d)
+grid.add(e)
+grid.add(f)
 
 // -----
 
