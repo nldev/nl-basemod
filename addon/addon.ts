@@ -123,7 +123,6 @@ class Grid {
       y: this.y,
     })
 
-
     if (isEndOfRow) {
       this.index = 0
       this.x = 0
@@ -132,6 +131,8 @@ class Grid {
       this.index++
       this.x += this.itemWidth
     }
+
+    this.list.push(item)
   }
 }
 
