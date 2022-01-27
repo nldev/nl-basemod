@@ -123,25 +123,28 @@ class Grid {
   }
 
   public add (frame: WoWAPI.Frame) {
-    if (this.index === (this.params.itemsPerRow - 1)) {
+    const isEndOfRow = this.index === (this.params.itemsPerRow - 1)
+
+    if (isEndOfRow) {
       this.index = 0
-
-      const item = new GridItem({
-        parent: this.frame,
-        child: frame,
-        index: this.index,
-        height: this.params.rowHeight,
-        width: this.itemWidth,
-        x: this.x,
-        y: this.y,
-      })
-
-      this.x += this.itemWidth
-    } else {
-      this.x += 0
+      this.x = 0
       this.y += this.params.gridHeight
-      this.index++
+    } else {
+      this.x += this.itemWidth
     }
+
+    const item = new GridItem({
+      parent: this.frame,
+      child: frame,
+      index: this.index,
+      height: this.params.rowHeight,
+      width: this.itemWidth,
+      x: this.x,
+      y: this.y,
+    })
+
+    if (!isEndOfRow)
+      this.index++
   }
 }
 
