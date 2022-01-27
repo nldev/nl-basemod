@@ -66,7 +66,6 @@ const DEFAULT_GRID_OPTIONS: IGrid = {
   width: 100,
 }
 
-
 class Grid {
   private list: GridItem[]
   private frame: WoWAPI.Frame
