@@ -59,6 +59,7 @@ interface IGridItem {
 
 class GridItem {
   constructor (public params: IGridItem) {
+    // talents.SetPoint('CENTER', null, 'CENTER', this.x, this.y)
   }
 }
 
@@ -90,8 +91,20 @@ class Grid {
   public x: number = 0
   public y: number = 0
 
-  constructor (private options: GridOptions = DEFAULT_GRID_OPTIONS) {
-    this.params = { ...DEFAULT_GRID_OPTIONS, ...this.options }
+  constructor (options: GridOptions = DEFAULT_GRID_OPTIONS) {
+    this.params = { ...DEFAULT_GRID_OPTIONS, ...options }
+
+    this.frame = CreateFrame('Frame', null, UIParent)
+
+    this.frame.SetBackdrop({
+      bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+      edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+      tile: true, tileSize: 16, edgeSize: 16,
+      insets: { left: 4, right: 4, top: 4, bottom: 4 },
+    })
+
+    this.frame.SetBackdropColor(0, 0, 0, 1)
+    this.frame.SetSize(this.params.gridWidth, this.params.gridHeight)
   }
 
   public add (frame: WoWAPI.Frame) {
@@ -105,7 +118,7 @@ class Grid {
       y: this.y,
     })
 
-    if (this.index === this.options.itemsPerRow) {
+    if (this.index === (this.params.itemsPerRow - 1)) {
       this.index = 0
     } else {
       this.index++
