@@ -52,6 +52,19 @@ class GridItem {
   }
 }
 
+interface GridOptions {
+  itemsPerRow: number
+  rowHeight: number
+  width: number
+}
+
+const DEFAULT_GRID_OPTIONS: GridOptions = {
+  itemsPerRow: 4,
+  rowHeight: 100,
+  width: 100,
+}
+
+
 class Grid {
   private list: GridItem[]
   private frame: WoWAPI.Frame
@@ -60,7 +73,7 @@ class Grid {
   private height: number = 0
   private width: number = 0
 
-  constructor (private itemsPerRow: number = 4) {
+  constructor (private itemsPerRow: number = 4, heightPerRow: number = 100, widthPerRow: number = 100) {
   }
 
   public add (frame: WoWAPI.Frame) {
