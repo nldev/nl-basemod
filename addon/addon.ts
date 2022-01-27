@@ -49,7 +49,7 @@ interface Mapping<T = any> {
 
 interface IGridItem {
   parent: WoWAPI.Frame
-  frame: WoWAPI.Frame
+  child: WoWAPI.Frame
   index: number
   height: number
   width: number
@@ -109,8 +109,8 @@ class Grid {
 
   public add (frame: WoWAPI.Frame) {
     const item = new GridItem({
-      frame,
       parent: this.frame,
+      child: frame,
       index: this.index,
       height: this.itemHeight,
       width: this.itemWidth,
