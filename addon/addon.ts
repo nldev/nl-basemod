@@ -265,6 +265,3 @@ grid.frame.SetPoint('TOPLEFT')
 
 console.log('addon loaded')
 
-if (SetDesaturation)
-  console.log('didnt crash')
-
