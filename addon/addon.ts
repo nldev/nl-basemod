@@ -48,6 +48,7 @@ interface Mapping<T = any> {
 }
 
 interface IGridItem {
+  parent: WoWAPI.Frame
   frame: WoWAPI.Frame
   index: number
   height: number
@@ -57,7 +58,7 @@ interface IGridItem {
 }
 
 class GridItem {
-  constructor (private params: IGridItem) {
+  constructor (public params: IGridItem) {
   }
 }
 
@@ -79,15 +80,16 @@ const DEFAULT_GRID_OPTIONS: IGrid = {
 
 class Grid {
   private list: GridItem[]
-  private frame: WoWAPI.Frame
 
-  private itemHeight: number = 0
-  private itemWidth: number = 0
-  private index: number = 0
-  private x: number = 0
-  private y: number = 0
+  public frame: WoWAPI.Frame
 
-  private params: IGrid
+  public itemHeight: number = 0
+  public itemWidth: number = 0
+  public index: number = 0
+  public x: number = 0
+  public y: number = 0
+
+  public params: IGrid
 
   constructor (private options: GridOptions = DEFAULT_GRID_OPTIONS) {
     this.params = { ...DEFAULT_GRID_OPTIONS, ...this.options }
@@ -96,6 +98,7 @@ class Grid {
   public add (frame: WoWAPI.Frame) {
     const item = new GridItem({
       frame,
+      parent: this.frame,
       index: this.index,
       height: this.itemHeight,
       width: this.itemWidth,
