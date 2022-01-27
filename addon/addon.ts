@@ -131,7 +131,6 @@ function TestFrame () {
   })
   const texture = frame.CreateTexture()
   texture.SetTexture('Interface/Icons/Ability_Rogue_Eviscerate')
-  texture.SetAllPoints()
   // SetDesaturation(texture, true)
 
   frame.SetBackdropColor(0, 0, 0, 1)
