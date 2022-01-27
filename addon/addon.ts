@@ -66,10 +66,10 @@ class Grid {
   public add (frame: WoWAPI.Frame) {
     const item = new GridItem(frame, this.index)
 
-    if (this.index !== this.itemsPerRow) {
-      this.index++
-    } else {
+    if (this.index === this.itemsPerRow) {
       this.index = 0
+    } else {
+      this.index++
     }
   }
 }
