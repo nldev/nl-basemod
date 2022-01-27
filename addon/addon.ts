@@ -125,10 +125,14 @@ function TestFrame () {
   const frame = CreateFrame('Frame', null, UIParent)
 
   frame.SetBackdrop({
-    bgFile: 'Interface/Icons/Spell_Frost_WindWalkOn',
+    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
     edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    tile: true, tileSize: 16, edgeSize: 16,
     insets: { left: 4, right: 4, top: 4, bottom: 4 },
   })
+  const texture = frame.CreateTexture()
+  texture.SetTexture('Interface/Icons/Spell_Frost_WindWalkOn')
+  texture.SetAllPoints()
 
   frame.SetBackdropColor(0, 0, 0, 1)
   frame.SetSize(50, 50)
@@ -145,6 +149,7 @@ function TestFrame () {
   counter.SetBackdropColor(0, 0, 0, 1)
   counter.SetSize(30, 18)
   counter.SetPoint('BOTTOM', 0, -8)
+  //  bgFile: 'Interface/Icons/Spell_Frost_WindWalkOn',
 
   const text = counter.CreateFontString(null, 'OVERLAY', 'GameTooltipText')
 
