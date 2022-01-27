@@ -131,6 +131,7 @@ function TestFrame () {
   })
   const texture = frame.CreateTexture()
   texture.SetTexture('Interface/Icons/Ability_Rogue_Eviscerate')
+  texture.SetAllPoints(frame)
   // SetDesaturation(texture, true)
 
   frame.SetBackdropColor(0, 0, 0, 1)
@@ -199,6 +200,9 @@ scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
 
 const moduleoptions = CreateFrame('Frame', null, scrollchild)
 moduleoptions.SetAllPoints(scrollchild)
+
+s.SetFrameLevel(0)
+moduleoptions.SetFrameLevel(1)
 
 // -----
 
