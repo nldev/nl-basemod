@@ -73,13 +73,13 @@ class Grid {
   private height: number = 0
   private width: number = 0
 
-  constructor (private itemsPerRow: number = 4, heightPerRow: number = 100, widthPerRow: number = 100) {
+  constructor (private options: GridOptions = DEFAULT_GRID_OPTIONS) {
   }
 
   public add (frame: WoWAPI.Frame) {
     const item = new GridItem(frame, this.index)
 
-    if (this.index === this.itemsPerRow) {
+    if (this.index === this.options.itemsPerRow) {
       this.index = 0
     } else {
       this.index++
