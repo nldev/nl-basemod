@@ -52,13 +52,15 @@ class GridItem {
   }
 }
 
-interface GridOptions {
+interface IGrid {
   itemsPerRow: number
   rowHeight: number
   width: number
 }
 
-const DEFAULT_GRID_OPTIONS: GridOptions = {
+type GridOptions = Partial<IGrid>
+
+const DEFAULT_GRID_OPTIONS: IGrid = {
   itemsPerRow: 4,
   rowHeight: 100,
   width: 100,
@@ -74,6 +76,7 @@ class Grid {
   private width: number = 0
 
   constructor (private options: GridOptions = DEFAULT_GRID_OPTIONS) {
+    this.options = { ...DEFAULT_GRID_OPTIONS, ...this.options }
   }
 
   public add (frame: WoWAPI.Frame) {
