@@ -154,7 +154,7 @@ function TestFrame () {
   const text = counter.CreateFontString(null, 'OVERLAY', 'GameTooltipText')
 
   text.SetPoint('CENTER', 0, 0)
-  text.SetText('0/3')
+  text.SetText('3c')
   text.SetFont('Fonts\\FRIZQT__.TTF', 11)
 
 
@@ -260,6 +260,7 @@ grid.add(TestFrame())
 
 grid.frame.SetParent(moduleoptions)
 grid.frame.SetPoint('TOPLEFT')
+
 
 // -------
 

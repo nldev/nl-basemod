@@ -48,6 +48,8 @@ export interface Map<T> {
 
 export type Optional<T> = Mutable<Partial<T>>
 
+export type Nullable<T> = T | null | undefined
+
 // FIXME
 // export type TSText<T = any> = string | loc_constructor | LocSystem<T>
 export type TSText = string | loc_constructor | any
