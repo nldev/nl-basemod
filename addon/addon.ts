@@ -136,7 +136,7 @@ class Grid {
     if (isEndOfRow) {
       this.index = 0
       this.x = 0
-      this.y += this.params.rowHeight
+      this.y -= this.params.rowHeight
     } else {
       this.index++
       this.x += this.itemWidth
