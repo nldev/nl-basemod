@@ -193,6 +193,9 @@ scrollbar.ClearAllPoints()
 scrollbar.SetPoint('TOP', scrollupbutton, 'BOTTOM', 0, -2)
 scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
 
+s.SetSize(s.GetWidth() * 0.667, s.GetHeight() * 0.667)
+scrollframe.SetScale(0.667)
+
 scrollframe.SetScrollChild(scrollchild)
 scrollframe.SetAllPoints(s)
 
