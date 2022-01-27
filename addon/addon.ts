@@ -9,25 +9,6 @@
 
 // -----
 
-// const counter = CreateFrame('Frame', null, talents)
-//
-// counter.SetBackdrop({
-//   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-//   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-//   tile: true, tileSize: 16, edgeSize: 16,
-//   insets: { left: 0, right: 0, top: 0, bottom: 0 },
-// })
-//
-// counter.SetBackdropColor(0, 0, 0, 1)
-// counter.SetSize(20, 20)
-// counter.SetPoint('TOPLEFT')
-
-// -----
-
-// const num = counter.CreateFontString(null, 'OVERLAY', 'GameTooltipText')
-// num.SetPoint('CENTER', 0, 0)
-// num.SetText('0')
-
 interface Mapping<T = any> {
   [key: string]: T
 }
@@ -152,6 +133,25 @@ function TestFrame () {
 
   frame.SetBackdropColor(0, 0, 0, 1)
   frame.SetSize(50, 50)
+
+  const counter = CreateFrame('Frame', null, frame)
+
+  counter.SetBackdrop({
+    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    tile: true, tileSize: 16, edgeSize: 16,
+    insets: { left: 0, right: 0, top: 0, bottom: 0 },
+  })
+
+  counter.SetBackdropColor(0, 0, 0, 1)
+  counter.SetSize(36, 20)
+  counter.SetPoint('BOTTOM', 0, -5)
+
+  const text = counter.CreateFontString(null, 'OVERLAY', 'GameTooltipText')
+
+  text.SetPoint('CENTER', 0, 0)
+  text.SetText('0/3')
+
 
   return frame
 }
