@@ -47,40 +47,6 @@ interface Mapping<T = any> {
   [key: string]: T
 }
 
-interface CellOptions {
-  size: number
-  width: number
-}
-
-const CELL_OPTIONS: CellOptions = {
-  size: 1,
-  width: 100,
-}
-
-class Cell {
-  private frame: WoWAPI.Frame
-
-  constructor (private options: CellOptions = CELL_OPTIONS) {
-  }
-}
-
-interface RowOptions {
-  size: number,
-  height: number,
-}
-
-const ROW_OPTIONS: RowOptions = {
-  size: 3,
-  height: 100,
-}
-
-class Row {
-  private frame: WoWAPI.Frame
-  private cells: Mapping<Cell> = {}
-
-  constructor (private options: RowOptions = ROW_OPTIONS) {
-  }
-}
 
 interface GridOptions {
   rowSize: number
@@ -96,8 +62,6 @@ const GRID_OPTIONS: GridOptions = {
 
 class Grid {
   private frame: WoWAPI.Frame
-  private cells: Mapping<Cell> = {}
-  private rows: Row[] = []
 
   constructor (private options: GridOptions = GRID_OPTIONS) {
   }
