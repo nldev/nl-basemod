@@ -47,29 +47,29 @@ interface Mapping<T = any> {
   [key: string]: T
 }
 
-
-interface GridOptions {
-  rowSize: number
-  rowHeight: number
-  cellWidth: number
-}
-
-const GRID_OPTIONS: GridOptions = {
-  rowSize: 3,
-  rowHeight: 100,
-  cellWidth: 100,
+class GridItem {
+  constructor (public frame: WoWAPI.Frame, public index: number) {
+  }
 }
 
 class Grid {
+  private list: GridItem[]
   private frame: WoWAPI.Frame
 
-  constructor (private options: GridOptions = GRID_OPTIONS) {
+  private index: number = 0
+  private height: number = 0
+  private width: number = 0
+
+  constructor (private itemsPerRow: number = 4) {
   }
 
-  private add (/* frame: WoWAPI.Frame, */id: string, index: number = 0) {
-  }
+  public add (frame: WoWAPI.Frame) {
+    const item = new GridItem(frame, this.index)
 
-  private remove (id: string) {
+    if (!(this.index % this.itemsPerRow)) {
+    }
+
+    this.index++
   }
 }
 
