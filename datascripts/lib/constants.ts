@@ -32,6 +32,16 @@ export const DEFAULT_MOUNT_NPC_BASE = 308 // FIXME: add real npc id
 
 export const DEFAULT_DIRECT_SPELL_BASE = 133 // FIXME: add real npc id
 
+export const WARRIOR = 'warrior'
+export const ROGUE = 'rogue'
+export const DRUID = 'druid'
+export const MAGE = 'mage'
+export const WARLOCK = 'warlock'
+export const SHAMAN = 'shaman'
+export const PRIEST = 'priest'
+export const PALADIN = 'paladin'
+export const HUNTER = 'hunter'
+
 export const ASSET_TYPE: Map<AssetType> = {
   SPELL: SPELL,
   ITEM: ITEM,

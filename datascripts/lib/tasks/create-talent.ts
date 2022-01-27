@@ -1,13 +1,13 @@
-
 import { CREATE_TALENT_TASK } from '../constants'
 import { ItemOptions } from '../item'
 import { NWTask, TaskOptions, Template } from '../task'
-import { AssetId, Optional } from '../types'
+import { AssetId, Optional, CharacterClass } from '../types'
 
 export interface Talent {
   id: string
   spell: AssetId
   cost: number
+  class: CharacterClass
 }
 
 export interface TalentTemplate extends Template {

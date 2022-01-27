@@ -6,7 +6,7 @@ import {
    ACHIEVEMENT, ENV, ITEM, ITEM_SPELL_TRIGGER_CHANCE_ON_HIT, ITEM_SPELL_TRIGGER_LEARN_SPELL,
    ITEM_SPELL_TRIGGER_ON_EQUIP, ITEM_SPELL_TRIGGER_ON_USE, ITEM_SPELL_TRIGGER_ON_USE_NO_DELAY,
    ITEM_SPELL_TRIGGER_SOULSTONE, ITEM_SPELL_TRIGGERS, NPC, QUERY_EFFECT_POINTS, QUERY_ICON,
-   QUERY_ID, QUERY_MOUNT_NPC, SCHOOLS, SPELL,
+   QUERY_ID, QUERY_MOUNT_NPC, SCHOOLS, SPELL, ROGUE, WARRIOR, DRUID, MAGE, WARLOCK, SHAMAN, PRIEST, PALADIN, HUNTER
 } from './constants'
 import { NWSpell } from './spell'
 
@@ -164,4 +164,15 @@ export interface Debug {
 }
 
 export type DebugOptions = Optional<Debug>
+
+export type Class =
+  | typeof WARRIOR
+  | typeof ROGUE
+  | typeof DRUID
+  | typeof MAGE
+  | typeof WARLOCK
+  | typeof SHAMAN
+  | typeof PRIEST
+  | typeof PALADIN
+  | typeof HUNTER
 
