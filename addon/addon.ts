@@ -29,14 +29,14 @@ class GridItem {
   constructor (public params: IGridItem) {
     this.frame = CreateFrame('Frame', null, this.params.parent)
 
-    this.frame.SetBackdrop({
-      bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-      edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-      tile: true, tileSize: 16, edgeSize: 16,
-      insets: { left: 4, right: 4, top: 4, bottom: 4 },
-    })
+    // this.frame.SetBackdrop({
+    //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+    //   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    //   tile: true, tileSize: 16, edgeSize: 16,
+    //   insets: { left: 4, right: 4, top: 4, bottom: 4 },
+    // })
 
-    this.frame.SetBackdropColor(0, 0, 0, 1)
+    // this.frame.SetBackdropColor(0, 0, 0, 1)
     this.frame.SetSize(this.params.width, this.params.height)
     this.frame.SetPoint('TOPLEFT', this.params.x, this.params.y)
     this.frame.SetParent(this.params.parent)
@@ -56,10 +56,10 @@ interface IGrid {
 type GridOptions = Partial<IGrid>
 
 const DEFAULT_GRID_OPTIONS: IGrid = {
-  itemsPerRow: 8,
+  itemsPerRow: 5,
   rowHeight: 100,
-  gridHeight: 800,
-  gridWidth: 800,
+  gridHeight: 400,
+  gridWidth: 493,
 }
 
 class Grid {
@@ -237,7 +237,6 @@ scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
 
 scrollframe.SetScrollChild(scrollchild)
 scrollframe.SetAllPoints(s)
-
 
 scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
 
