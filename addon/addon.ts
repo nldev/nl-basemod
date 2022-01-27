@@ -207,7 +207,7 @@ grid.add(TestFrame())
 //
 // ---
 
-let s = CreateFrame("Frame", null, UIParent)
+let s = CreateFrame('Frame', null, UIParent)
 
 s.SetBackdrop({
   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -220,24 +220,24 @@ s.SetBackdropColor(0, 0, 0, 1)
 s.SetSize(800, 800)
 s.SetPoint('CENTER')
 
-const scrollframe = CreateFrame("ScrollFrame", "ANewScrollFrame", null, "UIPanelScrollFrameTemplate")
-const scrollchild = CreateFrame("Frame") // ; -- not sure what happens if you do, but to be safe, don't parent this yet (or do anything with it)
+const scrollframe = CreateFrame('ScrollFrame', 'ANewScrollFrame', null, 'UIPanelScrollFrameTemplate')
+const scrollchild = CreateFrame('Frame')
 
 const scrollbarName = scrollframe.GetName()
 
-const scrollbar = _G[scrollbarName + "ScrollBar"]
-const scrollupbutton = _G[scrollbarName + "ScrollBarScrollUpButton"]
-const scrolldownbutton = _G[scrollbarName + "ScrollBarScrollDownButton"]
+const scrollbar = _G[scrollbarName + 'ScrollBar']
+const scrollupbutton = _G[scrollbarName + 'ScrollBarScrollUpButton']
+const scrolldownbutton = _G[scrollbarName + 'ScrollBarScrollDownButton']
 
 scrollupbutton.ClearAllPoints()
-scrollupbutton.SetPoint("TOPRIGHT", scrollframe, "TOPRIGHT", -2, -2)
+scrollupbutton.SetPoint('TOPRIGHT', scrollframe, 'TOPRIGHT', -2, -2)
 
 scrolldownbutton.ClearAllPoints()
-scrolldownbutton.SetPoint("BOTTOMRIGHT", scrollframe, "BOTTOMRIGHT", -2, 2)
+scrolldownbutton.SetPoint('BOTTOMRIGHT', scrollframe, 'BOTTOMRIGHT', -2, 2)
 
 scrollbar.ClearAllPoints()
-scrollbar.SetPoint("TOP", scrollupbutton, "BOTTOM", 0, -2)
-scrollbar.SetPoint("BOTTOM", scrolldownbutton, "TOP", 0, 2)
+scrollbar.SetPoint('TOP', scrollupbutton, 'BOTTOM', 0, -2)
+scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
 
 scrollframe.SetScrollChild(scrollchild)
 scrollframe.SetAllPoints(s)
@@ -245,13 +245,13 @@ scrollframe.SetAllPoints(s)
 
 scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
 
-const moduleoptions = CreateFrame("Frame", null, scrollchild)
+const moduleoptions = CreateFrame('Frame', null, scrollchild)
 moduleoptions.SetAllPoints(scrollchild)
 
 const fs = moduleoptions.CreateFontString(null, 'OVERLAY', 'GameTooltipText')
 
-fs.SetText("This is a test.")
-fs.SetPoint("BOTTOMLEFT", moduleoptions, "BOTTOMLEFT", 20, 60)
+fs.SetText('This is a test.')
+fs.SetPoint('BOTTOMLEFT', moduleoptions, 'BOTTOMLEFT', 20, 60)
 
 
 // -----
