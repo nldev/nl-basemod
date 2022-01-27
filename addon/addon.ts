@@ -130,9 +130,9 @@ function TestFrame () {
     insets: { left: 4, right: 4, top: 4, bottom: 4 },
   })
   const texture = frame.CreateTexture()
-  texture.SetTexture('Interface/Icons/Spell_Frost_WindWalkOn')
+  texture.SetTexture('Interface/Icons/Ability_Rogue_Eviscerate')
   texture.SetAllPoints()
-  SetDesaturation(texture, true)
+  // SetDesaturation(texture, true)
 
   frame.SetBackdropColor(0, 0, 0, 1)
   frame.SetSize(50, 50)

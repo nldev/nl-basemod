@@ -51,8 +51,8 @@ function main () {
   zeal.asset.Attributes.IGNORE_IMMUNE_FLAGS.set(1)
   zeal.asset.Duration.setSimple(resolveDuration(0.5), 0, resolveDuration(1))
   zeal.asset.Cooldown.set(0, 0, 0, 0)
-  zeal.asset.Icon.setPath($.std.Spells.load(20101).Icon.getPath())
-  console.log(zeal.asset.Icon.getPath())
+  console.log($.std.Spells.load(2098).Icon.getPath())
+  2098
 
   const visual = zeal.asset.Visual.getRef()
   visual.StateKit.getRefCopy().clear()
