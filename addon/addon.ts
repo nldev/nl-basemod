@@ -139,18 +139,19 @@ function TestFrame () {
   counter.SetBackdrop({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
     edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    tile: true, tileSize: 16, edgeSize: 16,
+    tile: true, tileSize: 12, edgeSize: 12,
     insets: { left: 0, right: 0, top: 0, bottom: 0 },
   })
 
   counter.SetBackdropColor(0, 0, 0, 1)
-  counter.SetSize(36, 20)
-  counter.SetPoint('BOTTOM', 0, -5)
+  counter.SetSize(30, 18)
+  counter.SetPoint('BOTTOM', 0, -8)
 
   const text = counter.CreateFontString(null, 'OVERLAY', 'GameTooltipText')
 
   text.SetPoint('CENTER', 0, 0)
   text.SetText('0/3')
+  text.SetFont('Fonts\\FRIZQT__.TTF', 11)
 
 
   return frame

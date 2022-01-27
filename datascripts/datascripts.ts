@@ -52,6 +52,7 @@ function main () {
   zeal.asset.Duration.setSimple(resolveDuration(0.5), 0, resolveDuration(1))
   zeal.asset.Cooldown.set(0, 0, 0, 0)
   zeal.asset.Icon.setPath($.std.Spells.load(20101).Icon.getPath())
+  console.log(zeal.asset.Icon.getPath())
 
   const visual = zeal.asset.Visual.getRef()
   visual.StateKit.getRefCopy().clear()
@@ -70,7 +71,7 @@ function main () {
   })
 
   $.std.Areas.forEach(a => {
-    console.log(a.Name.enGB.get(), ': ', a.Light.get())
+    // console.log(a.Name.enGB.get(), ': ', a.Light.get())
     if (a.Name.enGB.get() !== 'Nagrand')
       return
 
@@ -82,7 +83,7 @@ function main () {
     if (l.row.MapID.get() === 530) {
       l.row.MapID.set(map.ID)
       l.row.LightParamsID.get().forEach(ID => {
-        console.log(ID)
+        // console.log(ID)
         if (ID) {
           const p = $.dbc.LightParams.query({ ID })
 
