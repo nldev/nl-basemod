@@ -119,6 +119,17 @@ function main () {
   })
 
   $.Task.process({
+    id: 'insert-server-data',
+    options: {
+      data: {
+        table: '',
+        some_text: 'text',
+        some_numbers: 16,
+      }
+    },
+  })
+
+  $.Task.process({
     id: 'insert-client-data',
     options: {
       data: {
@@ -131,7 +142,7 @@ function main () {
           arr: ['string'],
         },
       },
-    }
+    },
   })
 }
 

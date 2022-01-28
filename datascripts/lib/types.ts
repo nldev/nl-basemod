@@ -177,7 +177,15 @@ export type CharacterClass =
   | typeof HUNTER
 
 export interface ExportData {
-  target: string
   data: any
+}
+
+export interface ClientExportData extends ExportData {
+  module: string
+}
+
+export interface ServerExportData extends ExportData {
+  table: string
+  database: string
 }
 

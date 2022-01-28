@@ -11,6 +11,7 @@ export class InsertServerData extends NWTask {
   static readonly id = INSERT_SERVER_DATA_TASK
 
   process (template: ServerDataTemplate) {
+    this.builder.ClientData(data, target)
   }
 }
 
