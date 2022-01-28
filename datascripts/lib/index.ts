@@ -209,8 +209,10 @@ export class Builder {
     this.templates = options.templates || []
     this.baseSpeed = options.baseSpeed || 1
 
-    if (fs.existsSync(ADDON_PATH))
-      fs.rmdirSync(ADDON_PATH, { recursive: true })
+      if (fs.existsSync(ADDON_PATH)) {
+        fs.rmdirSync(ADDON_PATH, { recursive: true })
+        fs.mkdirSync(ADDON_PATH, { recursive: true })
+      }
   }
 
   private hooks (options: Options, config: Config) {
