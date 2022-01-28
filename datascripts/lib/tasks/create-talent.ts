@@ -1,12 +1,13 @@
 import { CLASS_IDS, CLASS_MASKS, CREATE_TALENT_TASK } from '../constants'
 import { NWTask, TaskOptions, Template } from '../task'
 import { AssetId, CharacterClass } from '../types'
+import { createClassMask } from '../utils'
 
 export interface Talent {
   id: string
   spell: AssetId
   cost: number
-  class: CharacterClass
+  class: CharacterClass[]
 }
 
 export interface TalentTemplate extends Template {
@@ -57,13 +58,6 @@ export class CreateTalent extends NWTask {
             size: 16,
           },
         },
-        {
-          name: 'class_id',
-          type: 'smallint',
-          typeParams: {
-            size: 16,
-          },
-        },
       ],
     })
   }
@@ -77,8 +71,17 @@ export class CreateTalent extends NWTask {
       id: template.options.id,
       spell: asset.ID,
       cost: template.options.cost,
-      class_mask: CLASS_MASKS[template.options.class],
-      class_id: CLASS_IDS[template.options.class],
+      class_mask: createClassMask(...template.options.class),
+      icon: asset.Icon.getPath(),
+    })
+
+    this.builder.ClientData('talents', {
+      [template.options.id]: {
+        spell: asset.ID,
+        cost: template.options.cost,
+        class_mask: createClassMask(...template.options.class),
+        icon: asset.Icon.getPath(),
+      }
     })
   }
 }
