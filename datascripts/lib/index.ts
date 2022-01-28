@@ -187,8 +187,8 @@ export class Builder {
   public readonly Task: TaskState
 
   public readonly baseSpeed: number
+  public readonly tablePrefix: string
 
-  protected readonly tablePrefix: string
   protected readonly spells: SpellOptions[] = []
   protected readonly items: ItemOptions[] = []
   protected readonly npcs: NpcOptions[] = []
