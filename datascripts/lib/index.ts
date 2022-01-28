@@ -68,7 +68,7 @@ export const DEFAULT_OPTIONS: Required<Options> = {
   hooks: {},
   tasks: {
     // 'create-modifier': true,
-    // 'create-mount': true,
+    'create-mount': true,
     // 'create-npc': true,
     'create-item': true,
     'create-spell': true,
@@ -86,7 +86,7 @@ export const DEFAULT_OPTIONS: Required<Options> = {
     ...TALENTS,
     // ...NPCS,
     // ...MODIFIERS,
-    // ...MOUNTS,
+    ...MOUNTS,
   ],
 }
 
