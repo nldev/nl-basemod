@@ -741,7 +741,8 @@ export class Builder {
 
     const query = lines.join('\n')
 
-    db.write(query)
+    console.log(query)
+    // db.write(query)
   }
 
   ServerData (data: any, table: string = 'json', database: Database = 'world') {
@@ -780,7 +781,8 @@ export class Builder {
 
     const query = lines.join('\n')
 
-    db.write(query)
+    // db.write(query)
+    console.log(query)
   }
 
   ClientData (data: any, module: string = 'index') {
@@ -805,7 +807,8 @@ export class Builder {
       this.modules[module] = true
     }
 
-    fs.writeFileSync(filePath, code, { encoding: 'utf8' })
+    console.log(code)
+    // fs.writeFileSync(filePath, code, { encoding: 'utf8' })
   }
 }
 
