@@ -190,8 +190,8 @@ export class Builder {
   protected readonly npcs: NpcOptions[] = []
 
   protected templates: Template[]
-  protected modules: Map<boolean> = {}
-  protected tables: Map<boolean> = {}
+  protected addonFiles: Map<boolean> = {}
+  protected databaseTables: Map<boolean> = {}
 
   protected readonly logger: Logger
 
@@ -538,7 +538,7 @@ export class Builder {
 
     lines.push(');')
 
-    this.tables[options.name] = true
+    this.databaseTables[options.name] = true
 
     const db = (options.database === 'auth')
       ? this.sql.Databases.auth
@@ -550,8 +550,8 @@ export class Builder {
     db.write(query)
   }
 
-  ServerData (data: any, table: string = 'json', database: Database = 'world') {
-    if (!this.tables[table])
+  ServerData (table: string, data: any, database: Database = 'world') {
+    if (!this.databaseTables[table])
       return console.error(`Database table ${database}.${table} does not exist. Could not insert data: `, data)
 
     let lines = [`insert into ${table} (`]
@@ -590,26 +590,26 @@ export class Builder {
     db.write(query)
   }
 
-  ClientData (data: any, module: string = 'index') {
+  ClientData (file: string, data: any) {
     const list: string[] = []
 
     for (const key of Object.keys(data))
       list.push(`export const ${key} = ${JSON.stringify(data[key])}`)
 
     const dataPath = ADDON_PATH + '\\data'
-    const filePath = `${dataPath}\\${module}.ts`
+    const filePath = `${dataPath}\\${file}.ts`
 
     if (!fs.existsSync(dataPath))
       fs.mkdirSync(dataPath)
 
     let code = list.join('\n')
 
-    if (this.modules[module]) {
+    if (this.addonFiles[file]) {
       const existing = fs.readFileSync(filePath, { encoding: 'utf8' })
 
       code = existing + code
     } else {
-      this.modules[module] = true
+      this.addonFiles[file] = true
     }
 
     console.log(code)

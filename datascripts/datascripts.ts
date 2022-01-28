@@ -121,6 +121,11 @@ function main () {
     }
   })
 
+  $.ServerData('foo', {
+    some_text: 'hehe',
+    some_numbers: 888,
+  })
+
   for (const i of times(10)) {
     $.Task.process({
       id: 'insert-server-data',
