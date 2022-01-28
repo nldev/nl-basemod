@@ -11,7 +11,7 @@ export class InsertClientData extends NWTask {
   static readonly id = INSERT_CLIENT_DATA_TASK
 
   process ({ options: { data, target } }: ClientDataTemplate) {
-    this.builder.ClientData(data, target)
+    this.builder.ClientData(target, data)
   }
 }
 
