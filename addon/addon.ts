@@ -1,6 +1,6 @@
-import { o } from './data/foo'
+import { obj } from './data/foo'
 
-console.log(o)
+console.log(obj.arr[0])
 
 // const btn = CreateFrame('Button', null, UIParent, 'UIPanelButtonTemplate')
 //

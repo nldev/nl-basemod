@@ -369,6 +369,7 @@ export interface SQLTable {
   name: string
   columns: SQLColumnDefinition[]
   database?: Database
+  isPersist?: boolean
 }
 
 export type CharacterClass =
