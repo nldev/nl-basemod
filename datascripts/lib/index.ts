@@ -781,8 +781,8 @@ export class Builder {
 
     const query = lines.join('\n')
 
-    // db.write(query)
     console.log(query)
+    // db.write(query)
   }
 
   ClientData (data: any, module: string = 'index') {
