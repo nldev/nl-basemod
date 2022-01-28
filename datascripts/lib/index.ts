@@ -196,9 +196,9 @@ export class Builder {
   protected readonly addonFiles: Map<boolean> = {}
   protected readonly databaseTables: Map<boolean> = {}
 
-  protected templates: Template[]
-
   protected readonly logger: Logger
+
+  protected templates: Template[]
 
   constructor (
     public config: Config = defaultConfig,
