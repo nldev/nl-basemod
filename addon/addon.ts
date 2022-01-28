@@ -1,6 +1,6 @@
-import { obj } from './data/foo'
+import * as TALENTS from './data/talents'
 
-console.log(obj.arr[0])
+console.log(TALENTS.IMPROVED_EVISCERATE.spell_id)
 
 // const btn = CreateFrame('Button', null, UIParent, 'UIPanelButtonTemplate')
 //

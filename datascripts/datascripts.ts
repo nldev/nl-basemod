@@ -53,7 +53,7 @@ function main () {
   zeal.asset.Cooldown.set(0, 0, 0, 0)
 
   const visual = zeal.asset.Visual.getRef()
-  visual.StateKit.getRefCopy().clear()
+  visual.StateKit.getRef().clear()
 
   // TODO: hunter spell - disappear hunter + control pet + random facing corpse spawn
 
