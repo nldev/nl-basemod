@@ -5,7 +5,7 @@ import { DBC, SQL } from 'wotlkdata'
 import { TSAsset } from './asset'
 import {
     DEFAULT_ICON_SPELL_BASE, DEFAULT_MOD, DEFAULT_MOUNT_NPC_BASE, DEFAULT_SPELL_BASE, ENV,
-    QUERY_EFFECT_POINTS, QUERY_ICON, QUERY_ID, QUERY_MOUNT_NPC, TABLE_PREFIX,
+    QUERY_EFFECT_POINTS, QUERY_ICON, QUERY_ID, QUERY_MOUNT_NPC, DEFAULT_TABLE_PREFIX,
 } from './constants'
 import { HookConstructor, HookOptions, HookState, NWHook } from './hook'
 import { LogTasks } from './hooks/log-tasks'
@@ -64,6 +64,7 @@ export const DEFAULT_OPTIONS: Required<Options> = {
   version: VERSION,
   env: ENV.DEV,
   baseSpeed: DEFAULT_SPEED,
+  tablePrefix: DEFAULT_TABLE_PREFIX,
   hooks: {},
   tasks: {
     // 'create-modifier': true,
@@ -152,6 +153,7 @@ export interface Options {
   version: string
   env: Env
   baseSpeed: number
+  tablePrefix?: string
   hooks?: Map<HookOptions | boolean>
   tasks?: Map<TaskOptions | boolean>
   templates?: Template[]
@@ -186,6 +188,7 @@ export class Builder {
 
   public readonly baseSpeed: number
 
+  protected readonly tablePrefix: string
   protected readonly spells: SpellOptions[] = []
   protected readonly items: ItemOptions[] = []
   protected readonly npcs: NpcOptions[] = []
@@ -209,6 +212,7 @@ export class Builder {
 
     this.templates = options.templates || []
     this.baseSpeed = options.baseSpeed || 1
+    this.tablePrefix = options.tablePrefix || DEFAULT_TABLE_PREFIX
 
     if (fs.existsSync(ADDON_DATA_PATH))
       fs.rmdirSync(ADDON_DATA_PATH, { recursive: true })
@@ -470,9 +474,9 @@ export class Builder {
     const lines = []
 
     if (!options.isPersist)
-      lines.push(`drop table if exists ${TABLE_PREFIX}${options.name};`)
+      lines.push(`drop table if exists ${this.tablePrefix}${options.name};`)
 
-    lines.push(`create table if not exists ${TABLE_PREFIX}${options.name} (`)
+    lines.push(`create table if not exists ${this.tablePrefix}${options.name} (`)
 
     let primaryKey
 
@@ -555,9 +559,9 @@ export class Builder {
 
   public ServerData (table: string, data: any, database: Database = 'world') {
     if (!this.databaseTables[table])
-      throw new Error(`Database table ${database}.${TABLE_PREFIX}${table} does not exist, cannot insert record.`)
+      throw new Error(`Database table ${database}.${this.tablePrefix}${table} does not exist, cannot insert record.`)
 
-    let lines = [`insert into ${TABLE_PREFIX}${table} (`]
+    let lines = [`insert into ${this.tablePrefix}${table} (`]
 
     const columns = []
     const values = []
