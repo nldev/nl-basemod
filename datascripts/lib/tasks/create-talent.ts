@@ -1,7 +1,6 @@
 import { CREATE_TALENT_TASK } from '../constants'
-import { ItemOptions } from '../item'
 import { NWTask, TaskOptions, Template } from '../task'
-import { AssetId, Optional, CharacterClass } from '../types'
+import { AssetId, CharacterClass } from '../types'
 
 export interface Talent {
   id: string
@@ -22,7 +21,8 @@ export class CreateTalent extends NWTask {
     if (typeof template.options.spell === 'number') {
       const spell = this.builder.std.Spells.load(template.options.spell)
 
-      console.log(spell.objectify())
+      // console.log(template)
+      // console.log(spell.objectify())
     }
   }
 }
