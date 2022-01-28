@@ -525,10 +525,10 @@ export class Builder {
       lines.push(line)
     }
 
-    lines[lines.length - 1].slice(0, -1)
-
     if (primaryKey)
-      lines.push(`  primary key (${primaryKey})`)
+      lines.push(`  primary key (${primaryKey}),`)
+
+    lines[lines.length - 1] = lines[lines.length - 1].slice(0, -1)
 
     lines.push(');')
 
@@ -559,18 +559,14 @@ export class Builder {
       columns.push(`  ${key},`)
 
       if (typeof value === 'string') {
-        values.push(`  '${value}',`)
+        values.push(`  ''${value}'',`)
       } else {
         values.push(`  ${value},`)
       }
     }
 
-    console.log(columns[columns.length - 1] + 'end')
-    console.log(values[values.length - 1] + 'end')
-    columns[columns.length - 1].slice(0, -1)
-    values[values.length - 1].slice(0, -1)
-    console.log(columns[columns.length - 1] + 'end')
-    console.log(values[values.length - 1] + 'end')
+    columns[columns.length - 1] = columns[columns.length - 1].slice(0, -1)
+    values[values.length - 1] = values[values.length - 1].slice(0, -1)
 
     lines = lines.concat(columns)
     lines.push(') values (')
@@ -585,7 +581,7 @@ export class Builder {
     const query = lines.join('\n')
 
     console.log(query)
-    // db.write(query)
+    db.write(query)
   }
 
   ClientData (data: any, module: string = 'index') {
@@ -611,7 +607,7 @@ export class Builder {
     }
 
     console.log(code)
-    // fs.writeFileSync(filePath, code, { encoding: 'utf8' })
+    fs.writeFileSync(filePath, code, { encoding: 'utf8' })
   }
 }
 
