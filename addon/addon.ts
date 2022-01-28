@@ -265,7 +265,6 @@ grid.add(TestFrame())
 grid.frame.SetParent(moduleoptions)
 grid.frame.SetPoint('TOPLEFT')
 
-
 // -------
 
 console.log('addon loaded')
