@@ -1,10 +1,10 @@
 import { INSERT_SERVER_DATA_TASK } from '../constants'
 import { NWTask, TaskOptions, Template } from '../task'
-import { Json } from '../types'
+import { ExportData } from '../types'
 
 export interface ServerDataTemplate extends Template {
   id: typeof INSERT_SERVER_DATA_TASK
-  options: Json
+  options: ExportData
 }
 
 export class InsertServerData extends NWTask {

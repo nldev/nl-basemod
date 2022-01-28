@@ -91,16 +91,43 @@ function main () {
     }
   })
 
+  $.Table({
+    name: 'foo',
+    columns: [
+      {
+        name: 'id',
+        type: 'smallint',
+        options: {
+          size: 6,
+        }
+      },
+      {
+        name: 'some_text',
+        type: 'mediumtext',
+      },
+      {
+        name: 'some_numbers',
+        type: 'int',
+        options: {
+          size: 5,
+        }
+      },
+    ],
+  })
+
   $.Task.process({
     id: 'insert-client-data',
     options: {
-      s: '"world"',
-      n: 5,
-      b: false,
-      u: null,
-      a: ['hello'],
-      o: {
-        arr: ['string'],
+      target: 'foo',
+      data: {
+        s: '"world"',
+        n: 5,
+        b: false,
+        u: null,
+        a: ['hello'],
+        o: {
+          arr: ['string'],
+        },
       },
     }
   })

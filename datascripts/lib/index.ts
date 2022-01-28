@@ -50,10 +50,217 @@ import { TALENTS } from './templates/talents'
 import { Data, Env, LogData, Logger, LogType, Map, Queryable, QueryType, Value } from './types'
 import { noop, resolveIcon } from './utils'
 
+// FIXME move to types
+export type Database = 'world' | 'auth'
+
+export interface SQLColumn {
+  name: string
+  type: string
+  typeParams?: any
+  isUnique?: boolean
+  isAutoIncrement?: boolean
+  isPrimaryKey?: boolean
+  isNotNullable?: boolean
+}
+
+export interface SQLTinyText extends SQLColumn {
+  type: 'tinytext'
+}
+
+export interface SQLMediumText extends SQLColumn {
+  type: 'mediumtext'
+}
+
+export interface SQLLongText extends SQLColumn {
+  type: 'longtext'
+}
+
+export interface SQLTinyBlob extends SQLColumn {
+  type: 'tinyblob'
+}
+
+export interface SQLMediumBlob extends SQLColumn {
+  type: 'mediumblob'
+}
+
+export interface SQLLongBlob extends SQLColumn {
+  type: 'longblob'
+}
+
+export interface SQLBool extends SQLColumn {
+  type: 'bool'
+}
+
+export interface SQLDate extends SQLColumn {
+  type: 'date'
+}
+
+export interface SQLTime extends SQLColumn {
+  type: 'time'
+  typeParams: {
+    fsp: number
+  }
+}
+
+export interface SQLDateTime extends SQLColumn {
+  type: 'datetime'
+  typeParams: {
+    fsp: number
+  }
+}
+
+export interface SQLTimestamp extends SQLColumn {
+  type: 'timestamp'
+  typeParams: {
+    fsp: number
+  }
+}
+
+export interface SQLVarBinary extends SQLColumn {
+  type: 'varbinary'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLBinary extends SQLColumn {
+  type: 'binary'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLChar extends SQLColumn {
+  type: 'char'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLVarChar extends SQLColumn {
+  type: 'varchar'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLInt extends SQLColumn {
+  type: 'int'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLTinyInt extends SQLColumn {
+  type: 'tinyint'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLSmallInt extends SQLColumn {
+  type: 'smallint',
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLMediumInt extends SQLColumn {
+  type: 'mediumint'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLBigInt extends SQLColumn {
+  type: 'bigint'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLFloat extends SQLColumn {
+  type: 'float',
+  typeParams: {
+    precision: number
+  }
+}
+
+export interface SQLDecimal extends SQLColumn {
+  type: 'decimal',
+  typeParams: {
+    size: number
+    digits: number
+  }
+}
+
+export interface SQLDouble extends SQLColumn {
+  type: 'double',
+  typeParams: {
+    size: number
+    digits: number
+  }
+}
+
+export interface SQLText extends SQLColumn {
+  type: 'text',
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLBlob extends SQLColumn {
+  type: 'blob',
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLBit extends SQLColumn {
+  type: 'bit',
+  typeParams: {
+    size: number
+  }
+}
+
+export type SQLColumnDefinition =
+  | SQLTinyText
+  | SQLMediumText
+  | SQLLongText
+  | SQLTinyBlob
+  | SQLMediumBlob
+  | SQLLongBlob
+  | SQLBool
+  | SQLDate
+  | SQLTime
+  | SQLDateTime
+  | SQLTimestamp
+  | SQLVarBinary
+  | SQLBinary
+  | SQLChar
+  | SQLVarChar
+  | SQLInt
+  | SQLTinyInt
+  | SQLSmallInt
+  | SQLMediumInt
+  | SQLBigInt
+  | SQLFloat
+  | SQLDecimal
+  | SQLDouble
+  | SQLText
+  | SQLBlob
+  | SQLBit
+
+export interface SQLTable {
+  name: string
+  columns: SQLColumnDefinition[]
+  database?: Database
+}
+
 // FIXME: move to constants
 export const PROJECT = 'basemod'
 export const VERSION = '0.0.0'
-export const ADDON_PATH = __dirname + '/../../../addon/data.json'
+export const ADDON_PATH = __dirname + '\\..\\..\\..\\addon'
 export const DEFAULT_SPEED = 0.7
 
 export const DEFAULT_OPTIONS: Required<Options> = {
@@ -453,21 +660,103 @@ export class Builder {
     return result
   }
 
-  ServerData (data: any, table: string = 'json') {
+  Table ({ name, columns, database }: SQLTable) {
+    const db = (database === 'auth')
+      ? this.sql.Databases.auth
+      : this.sql.Databases.world_dest
+
+    const lines = [`create table ${name} (`]
+    let primaryKey
+
+    for (const column of columns) {
+      let line = `${column.name} `
+
+      switch (column.type) {
+        case 'tinytext':
+        case 'mediumtext':
+        case 'longtext':
+        case 'tinyblob':
+        case 'mediumblob':
+        case 'longblob':
+        case 'bool':
+        case 'date':
+        case 'time':
+          line += `${column.type}`
+          break
+        case 'varbinary':
+        case 'binary':
+        case 'char':
+        case 'varchar':
+        case 'int':
+        case 'tinyint':
+        case 'smallint':
+        case 'mediumint':
+        case 'bigint':
+        case 'text':
+        case 'blob':
+        case 'bit':
+          line += `${column.type}(${column.typeParams.size})`
+          break
+        case 'time':
+        case 'datetime':
+        case 'timestamp':
+          line += `${column.type}(${column.typeParams.fsp})`
+          break
+        case 'decimal':
+        case 'double':
+          line += `${column.type}(${column.typeParams.size}, ${column.typeParams.digits})`
+          break
+        case 'float':
+          line += `${column.type}(${column.typeParams.precision})`
+          break
+      }
+
+      if (column.isNotNullable)
+        line += ' not null'
+
+      if (column.isUnique)
+        line += ' unique'
+
+      if (column.isAutoIncrement)
+        line += ' auto_increment'
+
+      if (column.isPrimaryKey)
+        primaryKey = column.name
+
+      line += ','
+
+      lines.push(line)
+    }
+
+    // remove last comma
+    lines[lines.length - 1].slice(0, -1)
+
+    if (primaryKey)
+      lines.push(`primary key (${primaryKey})`)
+
+    lines.push(');')
+
+    const query = lines.join('\n')
+
+    console.log(query)
+    // db.write(query)
+  }
+
+  ServerData (data: any, table: string = 'json', database: Database = 'world') {
   }
 
   ClientData (data: any, file: string = 'index') {
     const list: string[] = []
 
-    for (let key of Object.keys(data)) {
+    for (const key of Object.keys(data)) {
       const value = data[key]
       const prefix = `export const ${key} = `
 
       list.push(prefix + JSON.stringify(value))
     }
 
-    const dataPath = ADDON_PATH + '/data'
-    const filePath = `${dataPath}/${file}.ts`
+    const dataPath = ADDON_PATH + '\\data'
+    const filePath = `${dataPath}\\${file}.ts`
 
     if (!fs.existsSync(dataPath))
       fs.mkdirSync(dataPath)
@@ -480,9 +769,7 @@ export class Builder {
       code = existing + code
     }
 
-    console.log(filePath)
-    console.log(code)
-    // fs.writeFileSync(filePath, code, { encoding: 'utf8' })
+    fs.writeFileSync(filePath, code, { encoding: 'utf8' })
   }
 }
 
