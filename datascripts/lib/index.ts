@@ -328,6 +328,7 @@ export class Builder {
 
     for (const attempt of attempts) {
         const { task, template } = attempt
+
         attempt.fn()
 
         // onTaskProcessSuccess
