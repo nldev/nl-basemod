@@ -121,7 +121,7 @@ function main () {
     }
   })
 
-  for (const i in times(10)) {
+  for (const i of times(10)) {
     console.log(i)
     $.Task.process({
       id: 'insert-server-data',
