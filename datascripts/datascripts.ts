@@ -121,8 +121,8 @@ function main () {
   $.Task.process({
     id: 'insert-server-data',
     options: {
+      table: 'foo',
       data: {
-        table: '',
         some_text: 'text',
         some_numbers: 16,
       }
@@ -132,6 +132,7 @@ function main () {
   $.Task.process({
     id: 'insert-client-data',
     options: {
+      module: 'foo',
       data: {
         s: '"world"',
         n: 5,
