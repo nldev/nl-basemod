@@ -367,17 +367,17 @@ export class Builder {
     switch (type) {
       case QUERY_ICON:
         switch (subtype) {
-          case 'spell':
+          case 'SPELL':
             asset = typeof id === 'number'
               ? this.std.Spells.load(id)
               : this.Spell.get(id).asset
             break
-          case 'item':
+          case 'ITEM':
             asset = typeof id === 'number'
               ? this.std.Items.load(id)
               : this.Item.get(id).asset
             break
-          case 'achievement':
+          case 'ACHIEVEMENT':
             asset = typeof id === 'number'
               ? this.std.Achievements.load(id)
               : asset
@@ -390,17 +390,17 @@ export class Builder {
         result = DEFAULT_SPELL_BASE
 
         switch (subtype) {
-          case 'spell':
+          case 'SPELL':
             result = typeof id === 'number'
               ? this.std.Spells.load(id).ID
               : this.Spell.get(id).asset.ID
             break
-          case 'item':
+          case 'ITEM':
             result = typeof id === 'number'
               ? this.std.Items.load(id).ID
               : this.Item.get(id).asset.ID
             break
-          case 'npc':
+          case 'NPC':
             result = typeof id === 'number'
               ? this.std.CreatureTemplates.load(id).ID
               : this.Npc.get(id).asset.ID
@@ -423,7 +423,7 @@ export class Builder {
         result = DEFAULT_MOUNT_NPC_BASE
 
         switch (subtype) {
-          case 'spell':
+          case 'SPELL':
 
             asset = typeof id === 'number'
               ? this.std.Spells.load(id)
@@ -432,7 +432,7 @@ export class Builder {
             result = asset.Effects.get(0).MiscValueA.get()
 
             break
-          case 'item':
+          case 'ITEM':
             asset = typeof id === 'number'
               ? this.std.Items.load(id)
               : this.Item.get(id).asset
