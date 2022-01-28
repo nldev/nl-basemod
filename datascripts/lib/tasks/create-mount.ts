@@ -228,8 +228,6 @@ export class CreateMount extends NWTask {
       0,
       resolveDuration(template.options.duration),
     )
-
-    console.log(asset.ID)
   }
 }
 
