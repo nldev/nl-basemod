@@ -92,6 +92,37 @@ function main () {
   })
 
   $.Task.process({
+    id: 'create-table',
+    options: {
+      name: 'foo',
+      columns: [
+        {
+          name: 'id',
+          type: 'mediumint',
+          typeParams: {
+            size: 6,
+          },
+          isPrimaryKey: true,
+          isAutoIncrement: true,
+          isNotNullable: true,
+        },
+        {
+          name: 'some_text',
+          type: 'mediumtext',
+        },
+        {
+          name: 'some_numbers',
+          typeParams: {
+            size: 6,
+          },
+          type: 'mediumint',
+        },
+      ],
+    }
+  })
+
+
+  $.Task.process({
     id: 'insert-server-data',
     options: {
       table: 'foo',
