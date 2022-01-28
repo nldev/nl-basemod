@@ -559,7 +559,7 @@ export class Builder {
       columns.push(`  ${key},`)
 
       if (typeof value === 'string') {
-        values.push(`  ''${value}'',`)
+        values.push(`  '${value}',`)
       } else {
         values.push(`  ${value},`)
       }
