@@ -121,7 +121,6 @@ function main () {
     }
   })
 
-
   $.Task.process({
     id: 'insert-server-data',
     options: {

@@ -26,6 +26,7 @@ import { CreateProfession } from './tasks/create-profession'
 import { CreateSpell } from './tasks/create-spell'
 import { CreateStat } from './tasks/create-stat'
 import { CreateTalent } from './tasks/create-talent'
+import { CreateTable } from './tasks/create-table'
 import { GenerateEquipment } from './tasks/generate-equipment'
 import { SetupCharacterCreation } from './tasks/setup-character-creation'
 import { SetupClassDruid } from './tasks/setup-class-druid'
@@ -40,7 +41,6 @@ import { SetupClassWarrior } from './tasks/setup-class-warrior'
 import { SetupSkills } from './tasks/setup-skills'
 import { InsertServerData } from './tasks/insert-server-data'
 import { InsertClientData } from './tasks/insert-client-data'
-import { CreateTable } from './tasks/create-table'
 import { ITEMS } from './templates/items'
 import { MODIFIERS } from './templates/modifiers'
 import { MOUNTS } from './templates/mounts'
@@ -74,10 +74,12 @@ export const DEFAULT_OPTIONS: Required<Options> = {
     'create-spell': true,
     'create-stat': true,
     'create-talent': true,
-    'insert-client-data': true,
+    'create-table': true,
     'insert-server-data': true,
+    'insert-client-data': true,
   },
   templates: [
+    ...TABLES,
     ...STATS,
     ...SPELLS,
     ...ITEMS,
@@ -103,6 +105,7 @@ export const defaultConfig: Required<Config> = {
     CreateSpell,
     CreateItem,
     CreateTalent,
+    CreateTable,
     InsertServerData,
     InsertClientData,
     // CreateNpc,
