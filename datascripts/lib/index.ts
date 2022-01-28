@@ -57,7 +57,9 @@ export const PROJECT = 'basemod'
 export const VERSION = '0.0.0'
 export const ADDON_PATH = __dirname + '\\..\\..\\..\\addon'
 export const ADDON_DATA_PATH = ADDON_PATH + '\\data'
-export const DEFAULT_SPEED = 0.7
+// FIXME
+// export const DEFAULT_SPEED = 0.7
+export const DEFAULT_SPEED = 1
 
 export const DEFAULT_OPTIONS: Required<Options> = {
   mod: DEFAULT_MOD,

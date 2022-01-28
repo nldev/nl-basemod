@@ -82,6 +82,8 @@ export class CreateMount extends NWTask {
     })
     const { asset } = mount
 
+    asset.Effects.clearAll()
+
     asset
       .CastTime.setSimple(resolveDuration([1.5]))
       .Attributes.IS_ABILITY.set(true)
@@ -98,9 +100,11 @@ export class CreateMount extends NWTask {
       .DefenseType.set(0)
       .Mechanic.set(21)
       .SchoolMask.PHYSICAL.set(true)
-      .Effects.get(0).Aura.MOUNTED.set()
+      .Effects.addMod(mod => mod
+        .Aura.MOUNTED.set()
         .CreatureTemplate.set(npc.asset.ID)
         .ImplicitTargetA.UNIT_CASTER.set()
+      )
 
     if (template.options.base)
       asset.Visual.getRef().cloneFromSpell(template.options.base)
