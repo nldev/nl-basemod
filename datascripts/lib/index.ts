@@ -732,7 +732,7 @@ export class Builder {
     lines[lines.length - 1].slice(0, -1)
 
     if (primaryKey)
-      lines.push(`primary key (${primaryKey})`)
+      lines.push(`  primary key (${primaryKey})`)
 
     lines.push(');')
 
