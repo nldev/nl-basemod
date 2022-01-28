@@ -79,21 +79,21 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
   {
     name: 'Riding Turtle',
     npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 30174 },
-    duration: [0, 30],
+    duration: [0, 10],
     swimSpeed: 150,
   },
 
   {
     name: 'Sea Turtle',
     npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 64731 },
-    duration: [0, 30],
+    duration: [0, 10],
     swimSpeed: 300,
   },
 
   {
     name: 'Flying Machine',
     npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 44153 },
-    duration: [0, 30],
+    duration: [0, 10],
     speed: 40,
     flightSpeed: 40,
   },
@@ -101,7 +101,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
   {
     name: 'Bronze Drake',
     npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 59569 },
-    duration: [0, 30],
+    duration: [0, 10],
     speed: 100,
     flightSpeed: 300,
   },
@@ -109,7 +109,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
   {
     name: 'Blue Drake',
     npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 59568 },
-    duration: [0, 30],
+    duration: [0, 10],
     speed: 100,
     flightSpeed: 300,
   },
@@ -117,7 +117,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
   {
     name: 'Red Drake',
     npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 59570 },
-    duration: [0, 30],
+    duration: [0, 10],
     speed: 100,
     flightSpeed: 300,
   },
@@ -125,7 +125,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
   {
     name: 'White Drake',
     npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 60025 },
-    duration: [0, 30],
+    duration: [0, 10],
     speed: 100,
     flightSpeed: 300,
   },
@@ -133,7 +133,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
   {
     name: 'Black Drake',
     npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 59650 },
-    duration: [0, 30],
+    duration: [0, 10],
     speed: 100,
     flightSpeed: 300,
   },
@@ -141,7 +141,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
   {
     name: 'Green Drake',
     npc: 27692,
-    duration: [0, 30],
+    duration: [0, 10],
     speed: 100,
     flightSpeed: 300,
   },
