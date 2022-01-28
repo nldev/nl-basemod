@@ -556,7 +556,7 @@ export class Builder {
 
   ServerData (table: string, data: any, database: Database = 'world') {
     if (!this.databaseTables[table])
-      throw new Error(`Database table ${database}.${table} does not exist.`)
+      throw new Error(`Database table ${database}.${table} does not exist, cannot insert record.`)
 
     let lines = [`insert into ${table} (`]
 
