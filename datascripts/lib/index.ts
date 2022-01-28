@@ -328,6 +328,7 @@ export const defaultConfig: Required<Config> = {
     // SetupClassWarrior,
     // SetupSkills,
   ],
+  addonModules: ['index'],
   logger: noop,
 }
 
@@ -346,6 +347,7 @@ export interface Config {
   hooks?: HookConstructor[]
   tasks?: TaskConstructor[]
   logger?: Logger
+  addonModules: string[],
 }
 
 export interface Options {
@@ -738,15 +740,17 @@ export class Builder {
 
     const query = lines.join('\n')
 
-    console.log(query)
-    // db.write(query)
+    db.write(query)
   }
 
   ServerData (data: any, table: string = 'json', database: Database = 'world') {
   }
 
-  ClientData (data: any, file: string = 'index') {
+  ClientData (data: any, module: string = 'index') {
     const list: string[] = []
+
+    if (!this.config.addonModules.includes(module))
+      return
 
     for (const key of Object.keys(data)) {
       const value = data[key]
@@ -756,7 +760,7 @@ export class Builder {
     }
 
     const dataPath = ADDON_PATH + '\\data'
-    const filePath = `${dataPath}\\${file}.ts`
+    const filePath = `${dataPath}\\${module}.ts`
 
     if (!fs.existsSync(dataPath))
       fs.mkdirSync(dataPath)

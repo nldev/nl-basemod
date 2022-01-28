@@ -121,7 +121,6 @@ function main () {
   $.Task.process({
     id: 'insert-client-data',
     options: {
-      target: 'foo',
       data: {
         s: '"world"',
         n: 5,
