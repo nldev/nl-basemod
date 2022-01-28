@@ -5,7 +5,7 @@ import { DBC, SQL } from 'wotlkdata'
 import { TSAsset } from './asset'
 import {
     DEFAULT_ICON_SPELL_BASE, DEFAULT_MOD, DEFAULT_MOUNT_NPC_BASE, DEFAULT_SPELL_BASE, ENV,
-    QUERY_EFFECT_POINTS, QUERY_ICON, QUERY_ID, QUERY_MOUNT_NPC,
+    QUERY_EFFECT_POINTS, QUERY_ICON, QUERY_ID, QUERY_MOUNT_NPC, TABLE_PREFIX,
 } from './constants'
 import { HookConstructor, HookOptions, HookState, NWHook } from './hook'
 import { LogTasks } from './hooks/log-tasks'
@@ -470,9 +470,9 @@ export class Builder {
     const lines = []
 
     if (!options.isPersist)
-      lines.push(`drop table if exists __${options.name};`)
+      lines.push(`drop table if exists ${TABLE_PREFIX}${options.name};`)
 
-    lines.push(`create table if not exists __${options.name} (`)
+    lines.push(`create table if not exists ${TABLE_PREFIX}${options.name} (`)
 
     let primaryKey
 
@@ -555,9 +555,9 @@ export class Builder {
 
   public ServerData (table: string, data: any, database: Database = 'world') {
     if (!this.databaseTables[table])
-      throw new Error(`Database table ${database}.__${table} does not exist, cannot insert record.`)
+      throw new Error(`Database table ${database}.${TABLE_PREFIX}${table} does not exist, cannot insert record.`)
 
-    let lines = [`insert into __${table} (`]
+    let lines = [`insert into ${TABLE_PREFIX}${table} (`]
 
     const columns = []
     const values = []
