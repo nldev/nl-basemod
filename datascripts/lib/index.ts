@@ -1,3 +1,4 @@
+import fs from 'fs'
 import { std } from 'tswow-stdlib'
 import { DBC, SQL } from 'wotlkdata'
 
@@ -52,6 +53,7 @@ import { noop, resolveIcon } from './utils'
 // FIXME: move to constants
 export const PROJECT = 'basemod'
 export const VERSION = '0.0.0'
+export const ADDON_PATH = __dirname + '/../../../addon/data.json'
 export const DEFAULT_SPEED = 0.7
 
 export const DEFAULT_OPTIONS: Required<Options> = {
@@ -449,6 +451,38 @@ export class Builder {
       result = input.objectify()
 
     return result
+  }
+
+  ServerData (data: any, table: string = 'json') {
+  }
+
+  ClientData (data: any, file: string = 'index') {
+    const list: string[] = []
+
+    for (let key of Object.keys(data)) {
+      const value = data[key]
+      const prefix = `export const ${key} = `
+
+      list.push(prefix + JSON.stringify(value))
+    }
+
+    const dataPath = ADDON_PATH + '/data'
+    const filePath = `${dataPath}/${file}.ts`
+
+    if (!fs.existsSync(dataPath))
+      fs.mkdirSync(dataPath)
+
+    let code = list.join('\n')
+
+    if (fs.existsSync(filePath)) {
+      const existing = fs.readFileSync(filePath, { encoding: 'utf8' })
+
+      code = existing + code
+    }
+
+    console.log(filePath)
+    console.log(code)
+    // fs.writeFileSync(filePath, code, { encoding: 'utf8' })
   }
 }
 

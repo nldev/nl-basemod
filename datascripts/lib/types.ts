@@ -176,3 +176,8 @@ export type CharacterClass =
   | typeof PALADIN
   | typeof HUNTER
 
+export interface ExportData {
+  target: string
+  data: any
+}
+
