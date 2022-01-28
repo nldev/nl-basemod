@@ -665,7 +665,7 @@ export class Builder {
       ? this.sql.Databases.auth
       : this.sql.Databases.world_dest
 
-    const lines = [`create table ${name} (`]
+    const lines = [`create table if not exists ${name} (`]
     let primaryKey
 
     for (const column of columns) {
