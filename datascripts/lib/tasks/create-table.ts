@@ -1,14 +1,10 @@
 import { CREATE_TABLE_TASK } from '../constants'
 import { NWTask, Template } from '../task'
-import { Database, SQLTable } from '../types'
+import { TableOptions } from '../types'
 
 export interface TableTemplate extends Template {
   id: typeof CREATE_TABLE_TASK
   options: TableOptions
-}
-
-export type TableOptions = SQLTable & {
-  database?: Database
 }
 
 export class CreateTable extends NWTask {

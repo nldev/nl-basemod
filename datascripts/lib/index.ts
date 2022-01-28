@@ -49,7 +49,7 @@ import { SPELLS } from './templates/spells'
 import { STATS } from './templates/stats'
 import { TALENTS } from './templates/talents'
 import { TABLES } from './templates/tables'
-import { Data, Database, Env, LogData, Logger, LogType, Map, Queryable, QueryType, SQLTable, Value } from './types'
+import { Data, Database, Env, LogData, Logger, LogType, Map, Queryable, QueryType, TableOptions, Value } from './types'
 import { noop, resolveIcon } from './utils'
 
 // FIXME move to types
@@ -459,7 +459,7 @@ export class Builder {
     return result
   }
 
-  Table ({ name, columns, database }: SQLTable) {
+  Table ({ name, columns, database }: TableOptions) {
     const lines = [`create table if not exists ${name} (`]
     let primaryKey
 

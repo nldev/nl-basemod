@@ -371,6 +371,10 @@ export interface SQLTable {
   database: Database
 }
 
+export type TableOptions = SQLTable & {
+  database?: Database
+}
+
 export type CharacterClass =
   | typeof WARRIOR
   | typeof ROGUE
