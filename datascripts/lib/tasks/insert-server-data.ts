@@ -11,7 +11,7 @@ export class InsertServerData extends NWTask {
   static readonly id = INSERT_SERVER_DATA_TASK
 
   process ({ options: { data, table, database } }: ServerDataTemplate) {
-    console.log(database)
+    console.log(table)
     this.builder.ServerData(data, table, database)
   }
 }
