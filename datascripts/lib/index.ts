@@ -669,7 +669,7 @@ export class Builder {
     let primaryKey
 
     for (const column of columns) {
-      let line = `${column.name} `
+      let line = `  ${column.name} `
 
       switch (column.type) {
         case 'tinytext':
