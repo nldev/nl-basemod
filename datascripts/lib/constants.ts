@@ -2,18 +2,18 @@ import { AssetType } from './asset'
 import { ItemSpellTrigger, Map, Query } from './types'
 
 export const ENV = {
-  DEV: 'dev',
-  TEST: 'test',
-  PROD: 'prod',
+  DEV: 'DEV',
+  TEST: 'TEST',
+  PROD: 'PROD',
 }
 
-export const SPELL = 'spell'
-export const ITEM = 'item'
-export const NPC = 'npc'
-export const ACHIEVEMENT = 'achievement'
-export const UNNAMED = 'unnamed'
+export const SPELL = 'SPELL'
+export const ITEM = 'ITEM'
+export const NPC = 'NPC'
+export const ACHIEVEMENT = 'ACHIEVEMENT'
+export const UNNAMED = 'UNNAMED'
 
-export const DEFAULT_MOD = 'basemod'
+export const DEFAULT_MOD = 'BASEMOD'
 
 export const DEFAULT_SPELL_BASE = 133
 export const DEFAULT_SPELL_NAME = 'Spell'
@@ -32,15 +32,27 @@ export const DEFAULT_MOUNT_NPC_BASE = 308 // FIXME: add real npc id
 
 export const DEFAULT_DIRECT_SPELL_BASE = 133 // FIXME: add real npc id
 
-export const WARRIOR = 'warrior'
-export const ROGUE = 'rogue'
-export const DRUID = 'druid'
-export const MAGE = 'mage'
-export const WARLOCK = 'warlock'
-export const SHAMAN = 'shaman'
-export const PRIEST = 'priest'
-export const PALADIN = 'paladin'
-export const HUNTER = 'hunter'
+export const WARRIOR = 'WARRIOR'
+export const ROGUE = 'ROGUE'
+export const DRUID = 'DRUID'
+export const MAGE = 'MAGE'
+export const WARLOCK = 'WARLOCK'
+export const SHAMAN = 'SHAMAN'
+export const PRIEST = 'PRIEST'
+export const PALADIN = 'PALADIN'
+export const HUNTER = 'HUNTER'
+
+export const CLASS_MASKS: Map<number> = {
+  [WARRIOR]: 0,
+  [ROGUE]: 0,
+  [DRUID]: 0,
+  [MAGE]: 0,
+  [WARLOCK]: 0,
+  [SHAMAN]: 0,
+  [PRIEST]: 0,
+  [PALADIN]: 0,
+  [HUNTER]: 0,
+}
 
 export const ASSET_TYPE: Map<AssetType> = {
   SPELL: SPELL,
@@ -50,58 +62,58 @@ export const ASSET_TYPE: Map<AssetType> = {
 }
 
 export const SCHOOLS = {
-  FIRE: 'fire',
-  FROST: 'frost',
-  NATURE: 'nature',
-  SHADOW: 'shadow',
-  HOLY: 'holy',
-  ARCANE: 'arcane',
+  FIRE: 'FIRE',
+  FROST: 'FROST',
+  NATURE: 'NATURE',
+  SHADOW: 'SHADOW',
+  HOLY: 'HOLY',
+  ARCANE: 'ARCANE',
 }
 
 export const BASE_MOUNT_SPEED = 80
 
-export const CREATE_ACHIEVEMENT_TASK = 'create-achievement'
-export const CREATE_ENCHANT_TASK = 'create-enchant'
-export const CREATE_ITEM_TASK = 'create-item'
-export const CREATE_GEM_TASK = 'create-gem'
-export const CREATE_NPC_TASK = 'create-npc'
-export const CREATE_MODIFIER_TASK = 'create-modifier'
-export const CREATE_MOUNT_TASK = 'create-mount'
-export const CREATE_PET_TASK = 'create-pet'
-export const CREATE_PROFESSION_TASK = 'create-profession'
-export const CREATE_SPELL_TASK = 'create-spell'
-export const CREATE_STAT_TASK = 'create-stat'
-export const CREATE_SUMMON_TASK = 'create-summon'
-export const SETUP_CHARACTER_CREATION_TASK = 'setup-character-creation'
-export const GENERATE_EQUIPMENT_TASK = 'generate-equipment'
-export const SETUP_CLASS_DRUID_TASK = 'setup-class-druid'
-export const SETUP_CLASS_HUNTER_TASK = 'setup-class-hunter'
-export const SETUP_CLASS_MAGE_TASK = 'setup-class-mage'
-export const SETUP_CLASS_PALADIN_TASK = 'setup-class-paladin'
-export const SETUP_CLASS_PRIEST_TASK = 'setup-class-priest'
-export const SETUP_CLASS_ROGUE_TASK = 'setup-class-rogue'
-export const SETUP_CLASS_SHAMAN_TASK = 'setup-class-shaman'
-export const SETUP_CLASS_WARLOCK_TASK = 'setup-class-warlock'
-export const SETUP_CLASS_WARRIOR_TASK = 'setup-class-warrior'
-export const CREATE_DIRECT_SPELL_TASK = 'create-direct-spell'
-export const CREATE_EFFECT_OVER_TIME_SPELL_TASK = 'create-effect-over-time-spell'
-export const CREATE_RANGED_SPELL_TASK = 'create-ranged-spell'
-export const SETUP_SKILLS_TASK = 'setup-skills'
-export const CREATE_CONSUMABLE_TASK = 'create-consumable'
-export const CREATE_TALENT_TASK = 'create-talent'
-export const CREATE_TABLE_TASK = 'create-table'
-export const INSERT_SERVER_DATA_TASK = 'insert-server-data'
-export const INSERT_CLIENT_DATA_TASK = 'insert-client-data'
+export const CREATE_ACHIEVEMENT_TASK = 'CREATE-ACHIEVEMENT'
+export const CREATE_ENCHANT_TASK = 'CREATE-ENCHANT'
+export const CREATE_ITEM_TASK = 'CREATE-ITEM'
+export const CREATE_GEM_TASK = 'CREATE-GEM'
+export const CREATE_NPC_TASK = 'CREATE-NPC'
+export const CREATE_MODIFIER_TASK = 'CREATE-MODIFIER'
+export const CREATE_MOUNT_TASK = 'CREATE-MOUNT'
+export const CREATE_PET_TASK = 'CREATE-PET'
+export const CREATE_PROFESSION_TASK = 'CREATE-PROFESSION'
+export const CREATE_SPELL_TASK = 'CREATE-SPELL'
+export const CREATE_STAT_TASK = 'CREATE-STAT'
+export const CREATE_SUMMON_TASK = 'CREATE-SUMMON'
+export const SETUP_CHARACTER_CREATION_TASK = 'SETUP-CHARACTER-CREATION'
+export const GENERATE_EQUIPMENT_TASK = 'GENERATE-EQUIPMENT'
+export const SETUP_CLASS_DRUID_TASK = 'SETUP-CLASS-DRUID'
+export const SETUP_CLASS_HUNTER_TASK = 'SETUP-CLASS-HUNTER'
+export const SETUP_CLASS_MAGE_TASK = 'SETUP-CLASS-MAGE'
+export const SETUP_CLASS_PALADIN_TASK = 'SETUP-CLASS-PALADIN'
+export const SETUP_CLASS_PRIEST_TASK = 'SETUP-CLASS-PRIEST'
+export const SETUP_CLASS_ROGUE_TASK = 'SETUP-CLASS-ROGUE'
+export const SETUP_CLASS_SHAMAN_TASK = 'SETUP-CLASS-SHAMAN'
+export const SETUP_CLASS_WARLOCK_TASK = 'SETUP-CLASS-WARLOCK'
+export const SETUP_CLASS_WARRIOR_TASK = 'SETUP-CLASS-WARRIOR'
+export const CREATE_DIRECT_SPELL_TASK = 'CREATE-DIRECT-SPELL'
+export const CREATE_EFFECT_OVER_TIME_SPELL_TASK = 'CREATE-EFFECT-OVER-TIME-SPELL'
+export const CREATE_RANGED_SPELL_TASK = 'CREATE-RANGED-SPELL'
+export const SETUP_SKILLS_TASK = 'SETUP-SKILLS'
+export const CREATE_CONSUMABLE_TASK = 'CREATE-CONSUMABLE'
+export const CREATE_TALENT_TASK = 'CREATE-TALENT'
+export const CREATE_TABLE_TASK = 'CREATE-TABLE'
+export const INSERT_SERVER_DATA_TASK = 'INSERT-SERVER-DATA'
+export const INSERT_CLIENT_DATA_TASK = 'INSERT-CLIENT-DATA'
 
-export const QUERY_ID = 'query-id'
-export const QUERY_ICON = 'query-icon'
-export const QUERY_EFFECT_POINTS = 'query-effect-points'
-export const QUERY_MOUNT_NPC = 'query-mount-npc'
+export const QUERY_ID = 'QUERY-ID'
+export const QUERY_ICON = 'QUERY-ICON'
+export const QUERY_EFFECT_POINTS = 'QUERY-EFFECT-POINTS'
+export const QUERY_MOUNT_NPC = 'QUERY-MOUNT-NPC'
 // FIXME: implement these
-export const QUERY_DIRECT_SPELL = 'query-direct-spell'
-export const QUERY_ENCHANT = 'query-enchant'
-export const QUERY_GEM = 'query-gem'
-export const QUERY_MODIFIER = 'query-modifier'
+export const QUERY_DIRECT_SPELL = 'QUERY-DIRECT-SPELL'
+export const QUERY_ENCHANT = 'QUERY-ENCHANT'
+export const QUERY_GEM = 'QUERY-GEM'
+export const QUERY_MODIFIER = 'QUERY-MODIFIER'
 
 export const DEFAULT_ICON_QUERY: Query<typeof QUERY_ICON> = {
   query: QUERY_ICON,
@@ -118,7 +130,7 @@ export const ITEM_SPELL_TRIGGER_CHANCE_ON_HIT = 'CHANCE_ON_HIT'
 export const ITEM_SPELL_TRIGGER_SOULSTONE = 'SOULSTONE'
 export const ITEM_SPELL_TRIGGER_LEARN_SPELL = 'LEARN_SPELL'
 
-export const DEFAULT_ITEM_SPELL_TRIGGER_ID = 'default'
+export const DEFAULT_ITEM_SPELL_TRIGGER_ID = 'DEFAULT'
 
 export const ITEM_SPELL_TRIGGERS: Map<ItemSpellTrigger> = {
   [ITEM_SPELL_TRIGGER_ON_EQUIP]: ITEM_SPELL_TRIGGER_ON_EQUIP,

@@ -18,6 +18,40 @@ export class CreateTalent extends NWTask {
   static readonly id = CREATE_TALENT_TASK
 
   setup () {
+    this.builder.Table({
+      name: 'talents',
+      database: 'world',
+      columns: [
+        {
+          name: 'id',
+          type: 'mediumint',
+          typeParams: {
+            size: 16,
+          },
+        },
+        {
+          name: 'spell_id',
+          type: 'mediumint',
+          typeParams: {
+            size: 16,
+          },
+        },
+        {
+          name: 'cost',
+          type: 'smallint',
+          typeParams: {
+            size: 8,
+          },
+        },
+        {
+          name: 'class',
+          type: 'smallint',
+          typeParams: {
+            size: 8,
+          },
+        },
+      ],
+    })
   }
 
   process (template: TalentTemplate) {
