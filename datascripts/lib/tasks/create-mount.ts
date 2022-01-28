@@ -200,7 +200,7 @@ export class CreateMount extends NWTask {
 
     const ground = resolveSpeed($.baseSpeed, speed)
 
-    asset.Effects.get(1)
+    asset.Effects.addGet()
       .Aura.MOD_INCREASE_MOUNTED_SPEED.set()
       .PercentBase.set(Math.min(ground, 1))
       .ImplicitTargetA.UNIT_CASTER.set()
@@ -208,7 +208,7 @@ export class CreateMount extends NWTask {
     if (isFlying) {
       const air = resolveSpeed($.baseSpeed, flightSpeed)
 
-      asset.Effects.get(2)
+      asset.Effects.addGet()
         .Aura.MOD_INCREASE_MOUNTED_FLIGHT_SPEED.set()
         .PercentBase.set(Math.min(air, 1))
         .ImplicitTargetA.UNIT_CASTER.set()
@@ -217,7 +217,7 @@ export class CreateMount extends NWTask {
     if (isSwimming) {
       const water = resolveSpeed($.baseSpeed, swimSpeed)
 
-      asset.Effects.get(2)
+      asset.Effects.addGet()
         .Aura.MOD_INCREASE_SWIM_SPEED.set()
         .PercentBase.set(Math.min(water, 1))
         .ImplicitTargetA.UNIT_CASTER.set()
