@@ -100,6 +100,11 @@ export class CreateMount extends NWTask {
       .DefenseType.set(0)
       .Mechanic.set(21)
       .SchoolMask.PHYSICAL.set(true)
+      .Effects.addGet()
+        .Type.APPLY_AURA.set()
+        .Aura.MOUNTED.set()
+        .CreatureTemplate.set(npc.asset.ID)
+        .ImplicitTargetA.UNIT_CASTER.set()
 
     if (template.options.base)
       asset.Visual.getRef().cloneFromSpell(template.options.base)
@@ -205,7 +210,7 @@ export class CreateMount extends NWTask {
       .PercentBase.set(Math.min(ground, 1))
       .ImplicitTargetA.UNIT_CASTER.set()
 
-    if (isFlying) {
+    if (isFasterFlyingMount) {
       const air = resolveSpeed($.baseSpeed, flightSpeed)
 
       asset.Effects.addGet()
@@ -215,7 +220,7 @@ export class CreateMount extends NWTask {
         .ImplicitTargetA.UNIT_CASTER.set()
     }
 
-    if (isSwimming) {
+    if (isFasterSwimmingMount) {
       const water = resolveSpeed($.baseSpeed, swimSpeed)
 
       asset.Effects.addGet()
