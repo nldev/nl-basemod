@@ -103,7 +103,7 @@ export class CreateMount extends NWTask {
         .ImplicitTargetA.UNIT_CASTER.set()
 
     if (template.options.base)
-      asset.Visual.getRefCopy().cloneFromSpell(template.options.base)
+      asset.Visual.getRef().cloneFromSpell(template.options.base)
 
     if (template.options.isCannotUseInCombat)
       asset.Attributes.CANNOT_USE_IN_COMBAT.set(true)
@@ -223,7 +223,7 @@ export class CreateMount extends NWTask {
         .ImplicitTargetA.UNIT_CASTER.set()
     }
 
-    asset.Duration.getRefCopy().set(
+    asset.Duration.setSimple(
       resolveDuration(template.options.duration),
       0,
       resolveDuration(template.options.duration),
