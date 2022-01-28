@@ -463,7 +463,10 @@ export class Builder {
   }
 
   Table (options: SQLTable) {
-    const lines = [`create table if not exists ${this.mod}_${options.name} (`]
+    const lines = [
+      `drop table ${this.mod}_${options};`,
+      `create table if not exists ${this.mod}_${options.name} (`
+    ]
     let primaryKey
 
     for (const column of options.columns) {
