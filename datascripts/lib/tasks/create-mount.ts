@@ -83,7 +83,7 @@ export class CreateMount extends NWTask {
     const { asset } = mount
 
     asset
-      .CastTime.set(resolveDuration([1.5]))
+      .CastTime.setSimple(resolveDuration([1.5]))
       .Attributes.IS_ABILITY.set(true)
       .Attributes.IS_HIDDEN_FROM_LOG.set(true)
       .Attributes.OUTDOORS_ONLY.set(true)
