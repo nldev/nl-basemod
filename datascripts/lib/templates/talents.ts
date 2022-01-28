@@ -1,4 +1,3 @@
-
 import { CREATE_TALENT_TASK, ROGUE } from '../constants'
 import { Talent } from '../tasks/create-talent'
 import { createTemplates } from '../task'
