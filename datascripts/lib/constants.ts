@@ -129,5 +129,5 @@ export const ITEM_SPELL_TRIGGERS: Map<ItemSpellTrigger> = {
   [ITEM_SPELL_TRIGGER_LEARN_SPELL]: ITEM_SPELL_TRIGGER_LEARN_SPELL,
 }
 
-export const TABLE_PREFIX = '__'
+export const DEFAULT_TABLE_PREFIX = '__'
 
