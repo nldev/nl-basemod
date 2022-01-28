@@ -13,7 +13,7 @@ export const NPC = 'NPC'
 export const ACHIEVEMENT = 'ACHIEVEMENT'
 export const UNNAMED = 'UNNAMED'
 
-export const DEFAULT_MOD = 'basemod'
+export const DEFAULT_MOD = 'BASEMOD'
 
 export const DEFAULT_SPELL_BASE = 133
 export const DEFAULT_SPELL_NAME = 'Spell'
