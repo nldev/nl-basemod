@@ -6,8 +6,6 @@ import { NWTask, TaskOptions, Template } from '../task'
 import { Duration, Queryable } from '../types'
 import { resolveDuration, resolveSpeed } from '../utils'
 
-let doOnce = false
-
 export interface MountTemplate extends Template {
   id: typeof CREATE_MOUNT_TASK
   options: MountOptions
@@ -241,10 +239,6 @@ export class CreateMount extends NWTask {
       0,
       resolveDuration(template.options.duration),
     )
-
-    if (isFasterFlying && !doOnce) {
-      doOnce = true
-    }
   }
 }
 
