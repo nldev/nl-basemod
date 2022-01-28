@@ -29,6 +29,7 @@ export class CreateMount extends NWTask {
   static readonly id = CREATE_MOUNT_TASK
 
   process (template: MountTemplate) {
+    console.log(template)
     const $ = this.builder
 
     const baseSpellNpcId = template.options.base
