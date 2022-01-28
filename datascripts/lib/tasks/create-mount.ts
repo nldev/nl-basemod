@@ -231,6 +231,3 @@ export class CreateMount extends NWTask {
   }
 }
 
-export interface CreateMountOptions extends TaskOptions {
-  id: typeof CREATE_MOUNT_TASK
-}

@@ -19,6 +19,3 @@ export class CreateGem extends NWTask {
   }
 }
 
-export interface CreateGemOptions extends TaskOptions {
-  id: typeof CREATE_GEM_TASK
-}

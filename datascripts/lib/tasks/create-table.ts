@@ -15,5 +15,3 @@ export class CreateTable extends NWTask {
   }
 }
 
-export interface CreateTableaOptions extends TaskOptions {}
-

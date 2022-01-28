@@ -15,4 +15,3 @@ export class CreateNpc extends NWTask {
   }
 }
 
-export interface CreateNpcOptions extends TaskOptions {}

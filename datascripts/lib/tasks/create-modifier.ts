@@ -53,6 +53,3 @@ export class CreateModifier extends NWTask {
   }
 }
 
-export interface CreateModifierOptions extends TaskOptions {
-  id: typeof CREATE_MODIFIER_TASK
-}

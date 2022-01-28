@@ -19,6 +19,3 @@ export class CreateProfession extends NWTask {
   }
 }
 
-export interface CreateProfessionOptions extends TaskOptions {
-  id: typeof CREATE_PROFESSION_TASK
-}

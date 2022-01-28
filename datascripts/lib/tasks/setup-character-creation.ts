@@ -8,6 +8,3 @@ export class SetupCharacterCreation extends NWTask {
   }
 }
 
-export interface SetupCharacterCreationOptions extends TaskOptions {
-  id: typeof SETUP_CHARACTER_CREATION_TASK
-}

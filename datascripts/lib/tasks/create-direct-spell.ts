@@ -30,7 +30,3 @@ export class CreateDirectSpell extends NWTask {
   }
 }
 
-export interface CreateDirectSpellOptions extends TaskOptions {
-  id: typeof CREATE_DIRECT_SPELL_TASK
-}
-

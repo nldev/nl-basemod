@@ -15,5 +15,3 @@ export class CreateItem extends NWTask {
   }
 }
 
-export interface CreateItemOptions extends TaskOptions {}
-

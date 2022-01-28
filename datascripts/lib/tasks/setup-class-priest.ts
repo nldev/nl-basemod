@@ -8,6 +8,3 @@ export class SetupClassPriest extends NWTask {
   }
 }
 
-export interface SetupClassPriestOptions extends TaskOptions {
-  id: typeof SETUP_CLASS_PRIEST_TASK
-}

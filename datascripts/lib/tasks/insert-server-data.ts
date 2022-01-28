@@ -15,5 +15,3 @@ export class InsertServerData extends NWTask {
   }
 }
 
-export interface InsertServerDataOptions extends TaskOptions {}
-

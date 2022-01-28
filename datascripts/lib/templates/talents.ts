@@ -10,3 +10,4 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
     class: ROGUE,
   },
 ])
+

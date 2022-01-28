@@ -8,6 +8,3 @@ export class SetupSkills extends NWTask {
   }
 }
 
-export interface SetupSkillsOptions extends TaskOptions {
-  id: typeof SETUP_SKILLS_TASK
-}

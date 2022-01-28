@@ -8,6 +8,3 @@ export class SetupClassMage extends NWTask {
   }
 }
 
-export interface SetupClassMageOptions extends TaskOptions {
-  id: typeof SETUP_CLASS_MAGE_TASK
-}

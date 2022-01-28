@@ -15,5 +15,3 @@ export class InsertClientData extends NWTask {
   }
 }
 
-export interface InsertClientDataOptions extends TaskOptions {}
-

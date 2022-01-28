@@ -8,6 +8,3 @@ export class SetupClassShaman extends NWTask {
   }
 }
 
-export interface SetupClassShamanOptions extends TaskOptions {
-  id: typeof SETUP_CLASS_SHAMAN_TASK
-}

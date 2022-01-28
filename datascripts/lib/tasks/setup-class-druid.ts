@@ -8,6 +8,3 @@ export class SetupClassDruid extends NWTask {
   }
 }
 
-export interface SetupClassDruidOptions extends TaskOptions {
-  id: typeof SETUP_CLASS_DRUID_TASK
-}

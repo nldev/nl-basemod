@@ -19,6 +19,3 @@ export class CreateEnchant extends NWTask {
   }
 }
 
-export interface CreatePetOptions extends TaskOptions {
-  id: typeof CREATE_ENCHANT_TASK
-}

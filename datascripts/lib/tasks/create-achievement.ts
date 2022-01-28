@@ -19,6 +19,3 @@ export class CreateAchievement extends NWTask {
   }
 }
 
-export interface CreateAchievementOptions extends TaskOptions {
-  id: typeof CREATE_ACHIEVEMENT_TASK
-}

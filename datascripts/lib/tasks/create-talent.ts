@@ -27,5 +27,3 @@ export class CreateTalent extends NWTask {
   }
 }
 
-export interface CreateTalentOptions extends TaskOptions {}
-

@@ -8,6 +8,3 @@ export class SetupClassWarlock extends NWTask {
   }
 }
 
-export interface SetupClassWarlockOptions extends TaskOptions {
-  id: typeof SETUP_CLASS_WARLOCK_TASK
-}

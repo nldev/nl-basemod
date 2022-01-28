@@ -8,6 +8,3 @@ export class SetupClassHunter extends NWTask {
   }
 }
 
-export interface SetupClassHunterOptions extends TaskOptions {
-  id: typeof SETUP_CLASS_HUNTER_TASK
-}

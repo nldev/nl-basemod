@@ -8,6 +8,3 @@ export class SetupClassPaladin extends NWTask {
   }
 }
 
-export interface SetupClassPaladinOptions extends TaskOptions {
-  id: typeof SETUP_CLASS_PALADIN_TASK
-}

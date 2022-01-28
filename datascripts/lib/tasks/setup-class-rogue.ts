@@ -8,6 +8,3 @@ export class SetupClassRogue extends NWTask {
   }
 }
 
-export interface SetupClassRogueOptions extends TaskOptions {
-  id: typeof SETUP_CLASS_ROGUE_TASK
-}

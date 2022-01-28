@@ -18,7 +18,3 @@ export class CreateSummon extends NWTask {
   process (template: SummonTemplate) {
   }
 }
-
-export interface CreateSummonOptions extends TaskOptions {
-  id: typeof CREATE_SUMMON_TASK
-}

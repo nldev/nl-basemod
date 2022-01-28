@@ -8,6 +8,3 @@ export class GenerateEquipment extends NWTask {
   }
 }
 
-export interface GenerateEquipmentOptions extends TaskOptions {
-  id: typeof GENERATE_EQUIPMENT_TASK
-}

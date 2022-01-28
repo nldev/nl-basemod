@@ -8,6 +8,3 @@ export class SetupClassWarrior extends NWTask {
   }
 }
 
-export interface SetupClassWarriorOptions extends TaskOptions {
-  id: typeof SETUP_CLASS_WARRIOR_TASK
-}

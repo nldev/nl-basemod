@@ -15,4 +15,3 @@ export class CreateSpell extends NWTask {
   }
 }
 
-export interface CreateSpellOptions extends TaskOptions {}
