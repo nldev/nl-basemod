@@ -1,3 +1,7 @@
+import { o } from './data/foo'
+
+console.log(o)
+
 // const btn = CreateFrame('Button', null, UIParent, 'UIPanelButtonTemplate')
 //
 // btn.SetPoint('TOPLEFT')

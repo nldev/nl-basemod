@@ -137,12 +137,7 @@ function main () {
     options: {
       module: 'foo',
       data: {
-        s: '"world"',
-        n: 5,
-        b: false,
-        u: null,
-        a: ['hello'],
-        o: {
+        obj: {
           arr: ['string'],
         },
       },
