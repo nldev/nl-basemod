@@ -122,7 +122,7 @@ export class CreateMount extends NWTask {
     }
 
     // FIXME: do this stuff before creating spell
-    if (isDefaultIcon && typeof template.options.npc === 'object' && template.options.npc.subquery === 'spell')
+    if (isDefaultIcon && typeof template.options.npc === 'object' && template.options.npc.subquery === 'SPELL')
       asset.Icon.set(
         typeof template.options.npc.id === 'string'
           ? $.Spell.get(template.options.npc.id).asset.Icon.get()
