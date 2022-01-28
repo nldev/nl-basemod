@@ -165,6 +165,212 @@ export interface Debug {
 
 export type DebugOptions = Optional<Debug>
 
+export type Database = 'world' | 'auth'
+
+export interface SQLColumn {
+  name: string
+  type: string
+  typeParams?: any
+  isUnique?: boolean
+  isAutoIncrement?: boolean
+  isPrimaryKey?: boolean
+  isNotNullable?: boolean
+}
+
+export interface SQLTinyText extends SQLColumn {
+  type: 'tinytext'
+}
+
+export interface SQLMediumText extends SQLColumn {
+  type: 'mediumtext'
+}
+
+export interface SQLLongText extends SQLColumn {
+  type: 'longtext'
+}
+
+export interface SQLTinyBlob extends SQLColumn {
+  type: 'tinyblob'
+}
+
+export interface SQLMediumBlob extends SQLColumn {
+  type: 'mediumblob'
+}
+
+export interface SQLLongBlob extends SQLColumn {
+  type: 'longblob'
+}
+
+export interface SQLBool extends SQLColumn {
+  type: 'bool'
+}
+
+export interface SQLDate extends SQLColumn {
+  type: 'date'
+}
+
+export interface SQLTime extends SQLColumn {
+  type: 'time'
+  typeParams: {
+    fsp: number
+  }
+}
+
+export interface SQLDateTime extends SQLColumn {
+  type: 'datetime'
+  typeParams: {
+    fsp: number
+  }
+}
+
+export interface SQLTimestamp extends SQLColumn {
+  type: 'timestamp'
+  typeParams: {
+    fsp: number
+  }
+}
+
+export interface SQLVarBinary extends SQLColumn {
+  type: 'varbinary'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLBinary extends SQLColumn {
+  type: 'binary'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLChar extends SQLColumn {
+  type: 'char'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLVarChar extends SQLColumn {
+  type: 'varchar'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLInt extends SQLColumn {
+  type: 'int'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLTinyInt extends SQLColumn {
+  type: 'tinyint'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLSmallInt extends SQLColumn {
+  type: 'smallint',
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLMediumInt extends SQLColumn {
+  type: 'mediumint'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLBigInt extends SQLColumn {
+  type: 'bigint'
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLFloat extends SQLColumn {
+  type: 'float',
+  typeParams: {
+    precision: number
+  }
+}
+
+export interface SQLDecimal extends SQLColumn {
+  type: 'decimal',
+  typeParams: {
+    size: number
+    digits: number
+  }
+}
+
+export interface SQLDouble extends SQLColumn {
+  type: 'double',
+  typeParams: {
+    size: number
+    digits: number
+  }
+}
+
+export interface SQLText extends SQLColumn {
+  type: 'text',
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLBlob extends SQLColumn {
+  type: 'blob',
+  typeParams: {
+    size: number
+  }
+}
+
+export interface SQLBit extends SQLColumn {
+  type: 'bit',
+  typeParams: {
+    size: number
+  }
+}
+
+export type SQLColumnDefinition =
+  | SQLTinyText
+  | SQLMediumText
+  | SQLLongText
+  | SQLTinyBlob
+  | SQLMediumBlob
+  | SQLLongBlob
+  | SQLBool
+  | SQLDate
+  | SQLTime
+  | SQLDateTime
+  | SQLTimestamp
+  | SQLVarBinary
+  | SQLBinary
+  | SQLChar
+  | SQLVarChar
+  | SQLInt
+  | SQLTinyInt
+  | SQLSmallInt
+  | SQLMediumInt
+  | SQLBigInt
+  | SQLFloat
+  | SQLDecimal
+  | SQLDouble
+  | SQLText
+  | SQLBlob
+  | SQLBit
+
+export interface SQLTable {
+  name: string
+  columns: SQLColumnDefinition[]
+  database?: Database
+}
+
 export type CharacterClass =
   | typeof WARRIOR
   | typeof ROGUE
@@ -186,6 +392,6 @@ export interface ClientExportData extends ExportData {
 
 export interface ServerExportData extends ExportData {
   table: string
-  database: string
+  database: Database
 }
 
