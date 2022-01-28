@@ -82,16 +82,17 @@ export class CreateTalent extends NWTask {
       talent_id: template.options.id,
       spell_id: asset.ID,
       cost: template.options.cost,
-      icon: asset.Icon.getPath(),
+      icon: asset.Icon.getPath().replace(/\\/, '/'),
       class_mask: createClassMask(...template.options.class),
     })
 
     this.builder.ClientData('talents', {
       [template.options.id]: {
-        spell: asset.ID,
+        talent_id: template.options.id,
+        spell_id: asset.ID,
         cost: template.options.cost,
+        icon: asset.Icon.getPath().replace(/\\/, '/'),
         class_mask: createClassMask(...template.options.class),
-        icon: asset.Icon.getPath(),
       }
     })
 
