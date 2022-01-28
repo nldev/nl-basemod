@@ -463,7 +463,7 @@ export class Builder {
   }
 
   Table (options: SQLTable) {
-    const lines = [`create table if not exists ${options.name} (`]
+    const lines = [`create table if not exists ${this.mod}_${options.name} (`]
     let primaryKey
 
     for (const column of options.columns) {
@@ -548,7 +548,7 @@ export class Builder {
     if (!this.tables[table])
       return console.error(`Database table ${database}.${table} does not exist. Could not insert data: `, data)
 
-    let lines = [`insert into ${table} (`]
+    let lines = [`insert into ${this.mod}_${table} (`]
 
     const columns = []
     const values = []
