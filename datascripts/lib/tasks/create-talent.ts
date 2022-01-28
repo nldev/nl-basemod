@@ -82,7 +82,7 @@ export class CreateTalent extends NWTask {
       talent_id: template.options.id,
       spell_id: asset.ID,
       cost: template.options.cost,
-      icon: asset.Icon.getPath().replace(/\\/, '/'),
+      icon: asset.Icon.getPath().replace(/\\/g, '/'),
       class_mask: createClassMask(...template.options.class),
     })
 
@@ -91,7 +91,7 @@ export class CreateTalent extends NWTask {
         talent_id: template.options.id,
         spell_id: asset.ID,
         cost: template.options.cost,
-        icon: asset.Icon.getPath().replace(/\\/, '/'),
+        icon: asset.Icon.getPath().replace(/\\/g, '/'),
         class_mask: createClassMask(...template.options.class),
       }
     })
