@@ -111,13 +111,13 @@ export function RandomId (length: number = 8) {
 
 export function resolveIcon (asset: TSAsset) {
   if (asset instanceof TSAchievement)
-    return asset.Icon.get()
+    return asset.Icon.getPath()
 
   if (asset instanceof TSItem)
     return asset.DisplayInfo.getRef().Icon.get()
 
   if (asset instanceof TSSpell)
-    return asset.Icon.get() || 200
+    return asset.Icon.getPath()
 
   return std.Spells.load(DEFAULT_ICON_SPELL_BASE).Icon.get()
 }

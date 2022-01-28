@@ -369,17 +369,17 @@ export class Builder {
             asset = typeof id === 'number'
               ? this.std.Spells.load(id)
               : this.Spell.get(id).asset
-              break
+            break
           case 'item':
             asset = typeof id === 'number'
               ? this.std.Items.load(id)
               : this.Item.get(id).asset
-              break
+            break
           case 'achievement':
             asset = typeof id === 'number'
               ? this.std.Achievements.load(id)
               : asset
-              break
+            break
         }
 
         return resolveIcon(asset)
@@ -392,17 +392,17 @@ export class Builder {
             result = typeof id === 'number'
               ? this.std.Spells.load(id).ID
               : this.Spell.get(id).asset.ID
-              break
+            break
           case 'item':
             result = typeof id === 'number'
               ? this.std.Items.load(id).ID
               : this.Item.get(id).asset.ID
-              break
+            break
           case 'npc':
             result = typeof id === 'number'
               ? this.std.CreatureTemplates.load(id).ID
               : this.Npc.get(id).asset.ID
-              break
+            break
         }
 
         return result
