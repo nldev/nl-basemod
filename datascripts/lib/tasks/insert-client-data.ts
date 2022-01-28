@@ -15,42 +15,13 @@ export class InsertClientData extends NWTask {
 
     for (let key of Object.keys(template.options)) {
       const value = template.options[key]
-      const prefix = `const ${key} = `
+      const prefix = `export const ${key} = `
 
-      if (isNil(value)) {
-        list.push(`const ${key} = null`)
-        continue
-      }
-
-      if (Array.isArray(value)) {
-        list.push(prefix + JSON.stringify(value))
-        continue
-      }
-
-      if (typeof value === 'object') {
-        list.push(prefix + JSON.stringify(value))
-        continue
-      }
-
-      if (typeof value === 'string') {
-        list.push(prefix + `\`${value}\``)
-        continue
-      }
-
-      if (typeof value === 'number') {
-        list.push(prefix + value)
-        continue
-      }
-
-      if (typeof value === 'boolean') {
-        list.push(
-          value
-            ? prefix + 'true'
-            : prefix + 'false'
-        )
-        continue
-      }
+      list.push(prefix + JSON.stringify(value))
     }
+
+    const data = list.join('\n')
+    console.log(data)
   }
 }
 

@@ -94,13 +94,13 @@ function main () {
   $.Task.process({
     id: 'insert-client-data',
     options: {
-      s: 'world',
+      s: '"world"',
       n: 5,
       b: false,
       u: null,
       a: ['hello'],
       o: {
-        arr: ['string']
+        arr: ['string'],
       },
     }
   })
