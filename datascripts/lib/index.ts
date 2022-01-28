@@ -550,7 +550,6 @@ export class Builder {
 
     const query = lines.join('\n')
 
-    console.log(query)
     db.write(query)
   }
 
@@ -590,7 +589,6 @@ export class Builder {
 
     const query = lines.join('\n')
 
-    console.log(query)
     db.write(query)
   }
 
@@ -615,7 +613,6 @@ export class Builder {
       this.addonFiles[file] = true
     }
 
-    console.log(code)
     fs.writeFileSync(filePath, code, { encoding: 'utf8' })
   }
 }
