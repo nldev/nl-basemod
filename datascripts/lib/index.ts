@@ -467,7 +467,7 @@ export class Builder {
     let primaryKey
 
     for (const column of options.columns) {
-      let line = `  ${column.name} `
+      let line = `  ${column.name} ${column.type}`
 
       switch (column.type) {
         case 'tinytext':
@@ -479,7 +479,6 @@ export class Builder {
         case 'bool':
         case 'date':
         case 'time':
-          line += `${column.type}`
           break
         case 'varbinary':
         case 'binary':
@@ -493,19 +492,19 @@ export class Builder {
         case 'text':
         case 'blob':
         case 'bit':
-          line += `${column.type}(${column.typeParams.size})`
+          line += `(${column.typeParams.size})`
           break
         case 'time':
         case 'datetime':
         case 'timestamp':
-          line += `${column.type}(${column.typeParams.fsp})`
+          line += `(${column.typeParams.fsp})`
           break
         case 'decimal':
         case 'double':
-          line += `${column.type}(${column.typeParams.size}, ${column.typeParams.digits})`
+          line += `(${column.typeParams.size}, ${column.typeParams.digits})`
           break
         case 'float':
-          line += `${column.type}(${column.typeParams.precision})`
+          line += `(${column.typeParams.precision})`
           break
       }
 
@@ -542,7 +541,7 @@ export class Builder {
     const query = lines.join('\n')
 
     console.log(query)
-    // db.write(query)
+    db.write(query)
   }
 
   ServerData (data: any, table: string = 'json', database: Database = 'world') {
@@ -568,6 +567,8 @@ export class Builder {
 
     columns[columns.length - 1].slice(0, -1)
     values[values.length - 1].slice(0, -1)
+    console.log(columns[columns.length - 1])
+    console.log(values[values.length - 1])
 
     lines = lines.concat(columns)
     lines.push(') values (')
