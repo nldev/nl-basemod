@@ -89,6 +89,7 @@ export const CREATE_RANGED_SPELL_TASK = 'create-ranged-spell'
 export const SETUP_SKILLS_TASK = 'setup-skills'
 export const CREATE_CONSUMABLE_TASK = 'create-consumable'
 export const CREATE_TALENT_TASK = 'create-talent'
+export const CREATE_TABLE_TASK = 'create-table'
 export const INSERT_SERVER_DATA_TASK = 'insert-server-data'
 export const INSERT_CLIENT_DATA_TASK = 'insert-client-data'
 
