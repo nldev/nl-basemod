@@ -1,7 +1,5 @@
 import * as TALENTS from './data/talents'
 
-console.log(TALENTS.IMPROVED_EVISCERATE.spell_id)
-
 // const btn = CreateFrame('Button', null, UIParent, 'UIPanelButtonTemplate')
 //
 // btn.SetPoint('TOPLEFT')
@@ -124,47 +122,6 @@ class Grid {
   }
 }
 
-function TestFrame () {
-  const frame = CreateFrame('Frame', null, UIParent)
-
-  frame.SetBackdrop({
-    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    tile: true, tileSize: 16, edgeSize: 16,
-    insets: { left: 4, right: 4, top: 4, bottom: 4 },
-  })
-  const texture = frame.CreateTexture()
-  texture.SetTexture('Interface/Icons/Ability_Rogue_Eviscerate')
-  texture.SetAllPoints(frame)
-  // SetDesaturation(texture, true)
-
-  frame.SetBackdropColor(0, 0, 0, 1)
-  frame.SetSize(50, 50)
-
-  const counter = CreateFrame('Frame', null, frame)
-
-  counter.SetBackdrop({
-    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    tile: true, tileSize: 12, edgeSize: 12,
-    insets: { left: 0, right: 0, top: 0, bottom: 0 },
-  })
-
-  counter.SetBackdropColor(0, 0, 0, 1)
-  counter.SetSize(30, 18)
-  counter.SetPoint('BOTTOM', 0, -8)
-  //  bgFile: 'Interface/Icons/Spell_Frost_WindWalkOn',
-
-  const text = counter.CreateFontString(null, 'OVERLAY', 'GameTooltipText')
-
-  text.SetPoint('CENTER', 0, 0)
-  text.SetText('3c')
-  text.SetFont('Fonts\\FRIZQT__.TTF', 11)
-
-
-  return frame
-}
-
 let a = CreateFrame('Frame', null, UIParent)
 
 a.SetBackdrop({
@@ -218,49 +175,61 @@ a.SetFrameLevel(0)
 // b.SetFrameLevel(1)
 moduleoptions.SetFrameLevel(2)
 
-// -----
+// ------
+
+interface Talent {
+  talent_id: string
+  spell_id: number
+  cost: number
+  icon: string
+  class_mask: number
+}
+
+function TestFrame (talent: Talent) {
+  const frame = CreateFrame('Frame', null, UIParent)
+
+  frame.SetBackdrop({
+    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    tile: true, tileSize: 16, edgeSize: 16,
+    insets: { left: 4, right: 4, top: 4, bottom: 4 },
+  })
+
+  const texture = frame.CreateTexture()
+  texture.SetTexture(talent.icon)
+  texture.SetAllPoints(frame)
+  // SetDesaturation(texture, true)
+
+  frame.SetBackdropColor(0, 0, 0, 1)
+  frame.SetSize(50, 50)
+
+  const counter = CreateFrame('Frame', null, frame)
+
+  counter.SetBackdrop({
+    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    tile: true, tileSize: 12, edgeSize: 12,
+    insets: { left: 0, right: 0, top: 0, bottom: 0 },
+  })
+
+  counter.SetBackdropColor(0, 0, 0, 1)
+  counter.SetSize(50, 18)
+  counter.SetPoint('BOTTOM', 0, -8)
+  //  bgFile: 'Interface/Icons/Spell_Frost_WindWalkOn',
+
+  const text = counter.CreateFontString(null, 'OVERLAY', 'GameTooltipText')
+
+  text.SetPoint('CENTER', 0, 0)
+  text.SetText(`${talent.cost}c`)
+  text.SetFont('Fonts\\FRIZQT__.TTF', 11)
+
+  return frame
+}
 
 const grid = new Grid()
 
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
-grid.add(TestFrame())
+for (const key of Object.keys(TALENTS))
+  grid.add(TestFrame(TALENTS[key]))
 
 grid.frame.SetParent(moduleoptions)
 grid.frame.SetPoint('TOPLEFT')
