@@ -1,6 +1,6 @@
 import { std } from 'tswow-stdlib'
 import { Builder } from './lib'
-import { resolveDuration } from './lib/utils'
+import { resolveDuration, times } from './lib/utils'
 
 // FIXME: move this
 function CreatePlaceholderEnchants () {
@@ -121,16 +121,19 @@ function main () {
     }
   })
 
-  $.Task.process({
-    id: 'insert-server-data',
-    options: {
-      table: 'foo',
-      data: {
-        some_text: 'text',
-        some_numbers: 16,
-      }
-    },
-  })
+  for (const i in times(10)) {
+    console.log(i)
+    $.Task.process({
+      id: 'insert-server-data',
+      options: {
+        table: 'foo',
+        data: {
+          some_text: 'text',
+          some_numbers: i + 100,
+        }
+      },
+    })
+  }
 
   $.Task.process({
     id: 'insert-client-data',
