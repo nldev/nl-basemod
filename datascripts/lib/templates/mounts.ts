@@ -71,7 +71,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
     icon: { query: QUERY_ICON, subquery: 'item', id: 11110 },
     npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 65917 },
     flightSpeed: 0,
-    duration: [8],
+    duration: [6],
     isCannotUseInCombat: false,
     isOutdoorsOnly: false,
   },
