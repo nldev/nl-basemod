@@ -459,11 +459,11 @@ export class Builder {
     return result
   }
 
-  Table ({ name, columns, database }: TableOptions) {
-    const lines = [`create table if not exists ${name} (`]
+  Table (options: TableOptions) {
+    const lines = [`create table if not exists ${options.name} (`]
     let primaryKey
 
-    for (const column of columns) {
+    for (const column of options.columns) {
       let line = `  ${column.name} `
 
       switch (column.type) {
@@ -530,9 +530,9 @@ export class Builder {
 
     lines.push(');')
 
-    this.tables[name] = true
+    this.tables[options.name] = true
 
-    const db = (database === 'auth')
+    const db = (options.database === 'auth')
       ? this.sql.Databases.auth
       : this.sql.Databases.world_dest
 
