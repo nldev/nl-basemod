@@ -45,7 +45,7 @@ export class CreateMount extends NWTask {
       }
     )
 
-    const speed = template.options.speed || 100 // FIXME
+    const speed = template.options.speed || 1
     const swimSpeed = template.options.swimSpeed || 0
     const flightSpeed = template.options.flightSpeed || 0
 
@@ -100,11 +100,12 @@ export class CreateMount extends NWTask {
       .DefenseType.set(0)
       .Mechanic.set(21)
       .SchoolMask.PHYSICAL.set(true)
-      .Effects.addGet()
+      .Effects.addMod(mod => mod
         .Type.APPLY_AURA.set()
         .Aura.MOUNTED.set()
         .CreatureTemplate.set(npc.asset.ID)
         .ImplicitTargetA.UNIT_CASTER.set()
+      )
 
     if (template.options.base)
       asset.Visual.getRef().cloneFromSpell(template.options.base)
@@ -204,30 +205,36 @@ export class CreateMount extends NWTask {
 
     const ground = resolveSpeed($.baseSpeed, speed)
 
-    asset.Effects.addGet()
+    asset.Effects.addMod(mod => mod
       .Type.APPLY_AURA.set()
       .Aura.MOD_INCREASE_MOUNTED_SPEED.set()
-      .PercentBase.set(Math.min(ground, 1))
+      .PercentBase.set(ground)
+      .PercentDieSides.set(0)
       .ImplicitTargetA.UNIT_CASTER.set()
+    )
 
-    if (isFlying && !isFasterSwimming) {
+    if (isFasterFlying && !isFasterSwimming) {
       const air = resolveSpeed($.baseSpeed, flightSpeed)
 
-      asset.Effects.addGet()
+      asset.Effects.addMod(mod => mod
         .Type.APPLY_AURA.set()
         .Aura.MOD_INCREASE_MOUNTED_FLIGHT_SPEED.set()
-        .PercentBase.set(Math.min(air, 1))
+        .PercentBase.set(air)
+        .PercentDieSides.set(0)
         .ImplicitTargetA.UNIT_CASTER.set()
+      )
     }
 
     if (isFasterSwimming) {
       const water = resolveSpeed($.baseSpeed, swimSpeed)
 
-      asset.Effects.addGet()
+      asset.Effects.addMod(mod => mod
         .Type.APPLY_AURA.set()
         .Aura.MOD_INCREASE_SWIM_SPEED.set()
-        .PercentBase.set(Math.min(water, 1))
+        .PercentBase.set(water)
+        .PercentDieSides.set(0)
         .ImplicitTargetA.UNIT_CASTER.set()
+      )
     }
 
     asset.Duration.setSimple(
@@ -235,6 +242,10 @@ export class CreateMount extends NWTask {
       0,
       resolveDuration(template.options.duration),
     )
+
+    console.log(asset.Effects.get(0).objectify())
+    console.log(asset.Effects.get(1).objectify())
+    console.log(asset.Effects.get(2).objectify())
   }
 }
 
