@@ -368,10 +368,6 @@ export type SQLColumnDefinition =
 export interface SQLTable {
   name: string
   columns: SQLColumnDefinition[]
-  database: Database
-}
-
-export type TableOptions = SQLTable & {
   database?: Database
 }
 

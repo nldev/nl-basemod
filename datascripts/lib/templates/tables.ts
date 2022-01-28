@@ -1,8 +1,8 @@
 import { CREATE_TABLE_TASK } from '../constants'
 import { createTemplates } from '../task'
-import { TableOptions } from '../types'
+import { SQLTable } from '../types'
 
-export const TABLES = createTemplates<TableOptions>(CREATE_TABLE_TASK, [
+export const TABLES = createTemplates<SQLTable>(CREATE_TABLE_TASK, [
 ])
 
 
