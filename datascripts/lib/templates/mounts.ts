@@ -5,71 +5,71 @@ import { MountOptions } from '../tasks/create-mount'
 export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
   {
     name: 'Black Horse',
-    icon: { query: QUERY_ICON, subquery: 'spell', id: 472 },
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 470 },
+    icon: { query: QUERY_ICON, subquery: 'SPELL', id: 472 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 470 },
     speed: BASE_MOUNT_SPEED,
   },
 
   {
     name: 'White Horse',
-    icon: { query: QUERY_ICON, subquery: 'spell', id: 472 },
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 16083 },
+    icon: { query: QUERY_ICON, subquery: 'SPELL', id: 472 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 16083 },
     speed: BASE_MOUNT_SPEED,
   },
 
   {
     name: 'Pinto Horse',
-    icon: { query: QUERY_ICON, subquery: 'spell', id: 472 },
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 472 },
+    icon: { query: QUERY_ICON, subquery: 'SPELL', id: 472 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 472 },
     speed: BASE_MOUNT_SPEED,
   },
 
   {
     name: 'Brown Horse',
-    icon: { query: QUERY_ICON, subquery: 'spell', id: 472 },
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 458 },
+    icon: { query: QUERY_ICON, subquery: 'SPELL', id: 472 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 458 },
     speed: BASE_MOUNT_SPEED,
   },
 
   {
     name: 'Chestnut Horse',
-    icon: { query: QUERY_ICON, subquery: 'spell', id: 472 },
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 6648 },
+    icon: { query: QUERY_ICON, subquery: 'SPELL', id: 472 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 6648 },
     speed: BASE_MOUNT_SPEED,
   },
 
   {
     name: 'Palomino Horse',
-    icon: { query: QUERY_ICON, subquery: 'spell', id: 472 },
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 16082 },
+    icon: { query: QUERY_ICON, subquery: 'SPELL', id: 472 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 16082 },
     speed: BASE_MOUNT_SPEED,
   },
 
   {
     name: 'Battlestrider',
-    icon: { query: QUERY_ICON, subquery: 'spell', id: 23223 },
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 63638 },
+    icon: { query: QUERY_ICON, subquery: 'SPELL', id: 23223 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 63638 },
     speed: 1000,
   },
 
   {
     name: 'Superstrider',
-    icon: { query: QUERY_ICON, subquery: 'spell', id: 23223 },
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 23223 },
+    icon: { query: QUERY_ICON, subquery: 'SPELL', id: 23223 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 23223 },
     speed: 2000,
   },
 
   {
     name: 'Ultrastrider',
-    icon: { query: QUERY_ICON, subquery: 'spell', id: 23223 },
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 22719 },
+    icon: { query: QUERY_ICON, subquery: 'SPELL', id: 23223 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 22719 },
     speed: 3000,
   },
 
   {
     name: 'Magic Rooster',
-    icon: { query: QUERY_ICON, subquery: 'item', id: 11110 },
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 65917 },
+    icon: { query: QUERY_ICON, subquery: 'ITEM', id: 11110 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 65917 },
     flightSpeed: 0,
     duration: [6],
     isCannotUseInCombat: false,
@@ -78,21 +78,21 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
 
   {
     name: 'Riding Turtle',
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 30174 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 30174 },
     duration: [0, 10],
     swimSpeed: 150,
   },
 
   {
     name: 'Sea Turtle',
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 64731 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 64731 },
     duration: [0, 10],
     swimSpeed: 300,
   },
 
   {
     name: 'Flying Machine',
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 44153 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 44153 },
     duration: [0, 10],
     speed: 40,
     flightSpeed: 40,
@@ -100,7 +100,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
 
   {
     name: 'Bronze Drake',
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 59569 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 59569 },
     duration: [0, 10],
     speed: 100,
     flightSpeed: 300,
@@ -108,7 +108,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
 
   {
     name: 'Blue Drake',
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 59568 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 59568 },
     duration: [0, 10],
     speed: 100,
     flightSpeed: 300,
@@ -116,7 +116,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
 
   {
     name: 'Red Drake',
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 59570 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 59570 },
     duration: [0, 10],
     speed: 100,
     flightSpeed: 300,
@@ -124,7 +124,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
 
   {
     name: 'White Drake',
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 60025 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 60025 },
     duration: [0, 10],
     speed: 100,
     flightSpeed: 300,
@@ -132,7 +132,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
 
   {
     name: 'Black Drake',
-    npc: { query: QUERY_MOUNT_NPC, subquery: 'spell', id: 59650 },
+    npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 59650 },
     duration: [0, 10],
     speed: 100,
     flightSpeed: 300,
