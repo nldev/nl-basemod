@@ -193,9 +193,10 @@ export class Builder {
   protected readonly items: ItemOptions[] = []
   protected readonly npcs: NpcOptions[] = []
 
+  protected readonly addonFiles: Map<boolean> = {}
+  protected readonly databaseTables: Map<boolean> = {}
+
   protected templates: Template[]
-  protected addonFiles: Map<boolean> = {}
-  protected databaseTables: Map<boolean> = {}
 
   protected readonly logger: Logger
 
