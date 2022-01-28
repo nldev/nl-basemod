@@ -368,7 +368,7 @@ export type SQLColumnDefinition =
 export interface SQLTable {
   name: string
   columns: SQLColumnDefinition[]
-  database?: Database
+  database: Database
 }
 
 export type CharacterClass =
