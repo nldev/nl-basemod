@@ -56,6 +56,7 @@ import { noop, resolveIcon } from './utils'
 export const PROJECT = 'basemod'
 export const VERSION = '0.0.0'
 export const ADDON_PATH = __dirname + '\\..\\..\\..\\addon'
+export const ADDON_DATA_PATH = ADDON_PATH + '\\data'
 export const DEFAULT_SPEED = 0.7
 
 export const DEFAULT_OPTIONS: Required<Options> = {
@@ -209,10 +210,10 @@ export class Builder {
     this.templates = options.templates || []
     this.baseSpeed = options.baseSpeed || 1
 
-    if (fs.existsSync(ADDON_PATH))
-      fs.rmdirSync(ADDON_PATH, { recursive: true })
+    if (fs.existsSync(ADDON_DATA_PATH))
+      fs.rmdirSync(ADDON_DATA_PATH, { recursive: true })
 
-    fs.mkdirSync(ADDON_PATH, { recursive: true })
+    fs.mkdirSync(ADDON_DATA_PATH, { recursive: true })
   }
 
   private hooks (options: Options, config: Config) {
@@ -599,11 +600,10 @@ export class Builder {
     for (const key of Object.keys(data))
       list.push(`export const ${key} = ${JSON.stringify(data[key])}`)
 
-    const dataPath = ADDON_PATH + '\\data'
-    const filePath = `${dataPath}\\${file}.ts`
+    const filePath = `${ADDON_DATA_PATH}\\${file}.ts`
 
-    if (!fs.existsSync(dataPath))
-      fs.mkdirSync(dataPath)
+    if (!fs.existsSync(ADDON_DATA_PATH))
+      fs.mkdirSync(ADDON_DATA_PATH)
 
     let code = list.join('\n')
 
