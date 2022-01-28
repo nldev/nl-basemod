@@ -1,4 +1,4 @@
-import { CREATE_TALENT_TASK } from '../constants'
+import { CLASS_IDS, CLASS_MASKS, CREATE_TALENT_TASK } from '../constants'
 import { NWTask, TaskOptions, Template } from '../task'
 import { AssetId, CharacterClass } from '../types'
 
@@ -51,7 +51,14 @@ export class CreateTalent extends NWTask {
           },
         },
         {
-          name: 'class',
+          name: 'class_mask',
+          type: 'smallint',
+          typeParams: {
+            size: 16,
+          },
+        },
+        {
+          name: 'class_id',
           type: 'smallint',
           typeParams: {
             size: 16,
@@ -62,9 +69,17 @@ export class CreateTalent extends NWTask {
   }
 
   process (template: TalentTemplate) {
-    if (typeof template.options.spell === 'number') {
-      const spell = this.builder.std.Spells.load(template.options.spell)
-    }
+    const asset = typeof template.options.spell === 'string'
+       ? this.builder.Spell.get(template.options.spell).asset
+       : this.builder.std.Spells.load(template.options.spell)
+
+    this.builder.ServerData('talents', {
+      id: template.options.id,
+      spell: asset.ID,
+      cost: template.options.cost,
+      class_mask: CLASS_MASKS[template.options.class],
+      class_id: CLASS_IDS[template.options.class],
+    })
   }
 }
 
