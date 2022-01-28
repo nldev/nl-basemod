@@ -45,9 +45,9 @@ export class CreateMount extends NWTask {
       }
     )
 
-    const speed = ((typeof template.options.speed === 'number') && template.options.speed) || -1
-    const swimSpeed = ((typeof template.options.swimSpeed === 'number') && template.options.swimSpeed) || -1
-    const flightSpeed = ((typeof template.options.flightSpeed === 'number') && template.options.flightSpeed) || -1
+    const speed = (typeof template.options.speed === 'number') ? template.options.speed : -1
+    const swimSpeed = (typeof template.options.swimSpeed === 'number') ? template.options.swimSpeed : -1
+    const flightSpeed = (typeof template.options.flightSpeed === 'number') ? template.options.flightSpeed : -1
 
     const isDefaultIcon = !template.options.icon
     const isDefaultDescription = !template.options.description
