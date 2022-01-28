@@ -565,6 +565,8 @@ export class Builder {
       }
     }
 
+    console.log(columns[columns.length - 1] + 'end')
+    console.log(values[values.length - 1] + 'end')
     columns[columns.length - 1].slice(0, -1)
     values[values.length - 1].slice(0, -1)
     console.log(columns[columns.length - 1] + 'end')
