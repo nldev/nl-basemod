@@ -55,7 +55,7 @@ function main () {
   const visual = zeal.asset.Visual.getRef()
   visual.StateKit.getRefCopy().clear()
 
-  console.log($.Spell.get('green-drake'))
+  $.Spell.list.forEach(s => console.log(s))
 
   // TODO: hunter spell - disappear hunter + control pet + random facing corpse spawn
 
