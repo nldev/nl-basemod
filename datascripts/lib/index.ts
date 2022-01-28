@@ -328,7 +328,6 @@ export const defaultConfig: Required<Config> = {
     // SetupClassWarrior,
     // SetupSkills,
   ],
-  addonModules: ['index'],
   logger: noop,
 }
 
@@ -347,7 +346,6 @@ export interface Config {
   hooks?: HookConstructor[]
   tasks?: TaskConstructor[]
   logger?: Logger
-  addonModules: string[],
 }
 
 export interface Options {
@@ -394,6 +392,8 @@ export class Builder {
   protected readonly npcs: NpcOptions[] = []
 
   protected templates: Template[]
+  protected modules: Map<boolean> = {}
+  protected tables: Map<boolean> = {}
 
   protected readonly logger: Logger
 
@@ -663,10 +663,6 @@ export class Builder {
   }
 
   Table ({ name, columns, database }: SQLTable) {
-    const db = (database === 'auth')
-      ? this.sql.Databases.auth
-      : this.sql.Databases.world_dest
-
     const lines = [`create table if not exists ${name} (`]
     let primaryKey
 
@@ -730,7 +726,6 @@ export class Builder {
       lines.push(line)
     }
 
-    // remove last comma
     lines[lines.length - 1].slice(0, -1)
 
     if (primaryKey)
@@ -738,26 +733,61 @@ export class Builder {
 
     lines.push(');')
 
+    this.tables[name] = true
+
+    const db = (database === 'auth')
+      ? this.sql.Databases.auth
+      : this.sql.Databases.world_dest
+
     const query = lines.join('\n')
 
     db.write(query)
   }
 
   ServerData (data: any, table: string = 'json', database: Database = 'world') {
+    if (!this.tables[table])
+      return console.error(`Database table ${database}.${table} does not exist. Could not insert data: `, data)
+
+    let lines = [`insert into ${table} (`]
+
+    const columns = []
+    const values = []
+
+    for (const key of Object.keys(data)) {
+      const value = data[key]
+
+      columns.push(`  ${key},`)
+
+      if (typeof value === 'string') {
+        values.push(`  '${value}',`)
+      } else {
+        values.push(`  ${value},`)
+      }
+    }
+
+    columns[columns.length - 1].slice(0, -1)
+    values[values.length - 1].slice(0, -1)
+
+    lines = lines.concat(columns)
+    lines.push(') values (')
+
+    lines = lines.concat(values)
+    lines.push(');')
+
+    const db = (database === 'auth')
+      ? this.sql.Databases.auth
+      : this.sql.Databases.world_dest
+
+    const query = lines.join('\n')
+
+    db.write(query)
   }
 
   ClientData (data: any, module: string = 'index') {
     const list: string[] = []
 
-    if (!this.config.addonModules.includes(module))
-      return
-
-    for (const key of Object.keys(data)) {
-      const value = data[key]
-      const prefix = `export const ${key} = `
-
-      list.push(prefix + JSON.stringify(value))
-    }
+    for (const key of Object.keys(data))
+      list.push(`export const ${key} = ${JSON.stringify(data[key])}`)
 
     const dataPath = ADDON_PATH + '\\data'
     const filePath = `${dataPath}\\${module}.ts`
@@ -767,10 +797,12 @@ export class Builder {
 
     let code = list.join('\n')
 
-    if (fs.existsSync(filePath)) {
+    if (this.modules[module]) {
       const existing = fs.readFileSync(filePath, { encoding: 'utf8' })
 
       code = existing + code
+    } else {
+      this.modules[module] = true
     }
 
     fs.writeFileSync(filePath, code, { encoding: 'utf8' })
