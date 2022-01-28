@@ -96,10 +96,13 @@ function main () {
     columns: [
       {
         name: 'id',
-        type: 'smallint',
-        options: {
+        type: 'mediumint',
+        typeParams: {
           size: 6,
-        }
+        },
+        isPrimaryKey: true,
+        isAutoIncrement: true,
+        isNotNullable: true,
       },
       {
         name: 'some_text',
@@ -107,10 +110,10 @@ function main () {
       },
       {
         name: 'some_numbers',
-        type: 'int',
-        options: {
-          size: 5,
-        }
+        typeParams: {
+          size: 6,
+        },
+        type: 'mediumint',
       },
     ],
   })
