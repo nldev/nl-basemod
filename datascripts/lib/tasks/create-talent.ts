@@ -44,10 +44,17 @@ export class CreateTalent extends NWTask {
           },
         },
         {
+          name: 'icon',
+          type: 'mediumint',
+          typeParams: {
+            size: 16,
+          },
+        },
+        {
           name: 'class',
           type: 'smallint',
           typeParams: {
-            size: 8,
+            size: 16,
           },
         },
       ],

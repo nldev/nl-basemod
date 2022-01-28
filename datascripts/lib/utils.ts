@@ -5,8 +5,8 @@ import { Spell as TSSpell } from 'tswow-stdlib/Spell/Spell'
 import { loc_constructor } from 'wotlkdata/wotlkdata/primitives'
 
 import { AssetType, TSAsset } from './asset'
-import { ASSET_TYPE, DEFAULT_ICON_SPELL_BASE, ITEM_SPELL_TRIGGERS, UNNAMED } from './constants'
-import { Duration, ItemSpellTrigger, TSText } from './types'
+import { ASSET_TYPE, CLASS_MASKS, DEFAULT_ICON_SPELL_BASE, ITEM_SPELL_TRIGGERS, UNNAMED } from './constants'
+import { CharacterClass, CharacterRace, Duration, ItemSpellTrigger, Map, TSText } from './types'
 
 export const noop = () => {}
 
@@ -200,5 +200,35 @@ export function ItemSpellCount (asset: TSItem) {
     count++
 
   return count
+}
+
+export function createRaceMask (...chrRaces: CharacterRace[]) {
+  const used: Map<boolean> = {}
+
+  let mask = 0
+
+  for (let chrClass of chrRaces) {
+    if (!used[chrClass]) {
+      mask += CLASS_MASKS[chrClass]
+      used[chrClass] = true
+    }
+  }
+
+  return mask
+}
+
+export function createClassMask (...chrClasses: CharacterClass[]) {
+  const used: Map<boolean> = {}
+
+  let mask = 0
+
+  for (let chrClass of chrClasses) {
+    if (!used[chrClass]) {
+      mask += CLASS_MASKS[chrClass]
+      used[chrClass] = true
+    }
+  }
+
+  return mask
 }
 

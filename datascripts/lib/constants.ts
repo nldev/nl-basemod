@@ -43,15 +43,64 @@ export const PALADIN = 'PALADIN'
 export const HUNTER = 'HUNTER'
 
 export const CLASS_MASKS: Map<number> = {
-  [WARRIOR]: 0,
-  [ROGUE]: 0,
-  [DRUID]: 0,
-  [MAGE]: 0,
-  [WARLOCK]: 0,
-  [SHAMAN]: 0,
-  [PRIEST]: 0,
-  [PALADIN]: 0,
-  [HUNTER]: 0,
+  [WARRIOR]: 1,
+  [PALADIN]: 2,
+  [HUNTER]: 4,
+  [ROGUE]: 8,
+  [PRIEST]: 16,
+  [SHAMAN]: 64,
+  [MAGE]: 128,
+  [WARLOCK]: 256,
+  [DRUID]: 1024,
+}
+
+export const CLASS_IDS: Map<number> = {
+  [WARRIOR]: 1,
+  [PALADIN]: 2,
+  [HUNTER]: 3,
+  [ROGUE]: 4,
+  [PRIEST]: 5,
+  [SHAMAN]: 7,
+  [MAGE]: 8,
+  [WARLOCK]: 9,
+  [DRUID]: 11,
+}
+
+export const HUMAN = 'HUMAN'
+export const ORC = 'ORC'
+export const DWARF = 'DWARF'
+export const NIGHT_ELF = 'NIGHT_ELF'
+export const UNDEAD = 'UNDEAD'
+export const TAUREN = 'TAUREN'
+export const GNOME = 'GNOME'
+export const TROLL = 'TROLL'
+export const BLOOD_ELF = 'BLOOD_ELF'
+export const DRAENEI = 'DRAENEI'
+
+export const RACE_MASKS: Map<number> = {
+  [HUMAN]: 1,
+  [ORC]: 2,
+  [DWARF]: 4,
+  [NIGHT_ELF]: 8,
+  [UNDEAD]: 16,
+  [TAUREN]: 32,
+  [GNOME]: 64,
+  [TROLL]: 128,
+  [BLOOD_ELF]: 512,
+  [DRAENEI]: 1024,
+}
+
+export const RACE_IDS: Map<number> = {
+  [HUMAN]: 1,
+  [ORC]: 2,
+  [DWARF]: 3,
+  [NIGHT_ELF]: 4,
+  [UNDEAD]: 5,
+  [TAUREN]: 6,
+  [GNOME]: 7,
+  [TROLL]: 8,
+  [BLOOD_ELF]: 10,
+  [DRAENEI]: 11,
 }
 
 export const ASSET_TYPE: Map<AssetType> = {
