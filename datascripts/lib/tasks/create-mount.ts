@@ -45,7 +45,7 @@ export class CreateMount extends NWTask {
       }
     )
 
-    const speed = template.options.speed || 1
+    const speed = template.options.speed || 0
     const swimSpeed = template.options.swimSpeed || 0
     const flightSpeed = template.options.flightSpeed || 0
 
