@@ -38,6 +38,11 @@ export function titleCaseToDashCase (string: string) {
     .toLowerCase()
 }
 
+
+export function dashCaseToConstantCase (string: string) {
+  return string.toUpperCase().replace(/-/g, '_')
+}
+
 export function dashCaseToTitleCase (string: string) {
   return capitalize(string.replace('-', ' '))
 }

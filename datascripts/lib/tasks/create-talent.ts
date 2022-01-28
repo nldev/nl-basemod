@@ -72,8 +72,6 @@ export class CreateTalent extends NWTask {
   }
 
   process (template: TalentTemplate) {
-    console.log(template)
-
     const asset = typeof template.options.spell === 'string'
        ? this.builder.Spell.get(template.options.spell).asset
        : this.builder.std.Spells.load(template.options.spell)

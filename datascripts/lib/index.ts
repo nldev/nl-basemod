@@ -50,7 +50,7 @@ import { STATS } from './templates/stats'
 import { TALENTS } from './templates/talents'
 import { TABLES } from './templates/tables'
 import { Data, Database, Env, LogData, Logger, LogType, Map, Queryable, QueryType, SQLTable, Value } from './types'
-import { noop, resolveIcon } from './utils'
+import { dashCaseToConstantCase, noop, resolveIcon } from './utils'
 
 // FIXME: move to constants
 export const PROJECT = 'basemod'
@@ -604,7 +604,7 @@ export class Builder {
     const list: string[] = []
 
     for (const key of Object.keys(data))
-      list.push(`export const ${key} = ${JSON.stringify(data[key])}`)
+      list.push(`export const ${dashCaseToConstantCase(key)} = ${JSON.stringify(data[key])}`)
 
     const filePath = `${ADDON_DATA_PATH}\\${file}.ts`
 
