@@ -24,11 +24,19 @@ export class CreateTalent extends NWTask {
       database: 'world',
       columns: [
         {
-          name: 'id',
+          name: 'entry',
           type: 'mediumint',
           typeParams: {
             size: 16,
           },
+          isAutoIncrement: true,
+          isPrimaryKey: true,
+          isNotNullable: true,
+        },
+        {
+          name: 'talent_id',
+          type: 'mediumtext',
+          isNotNullable: true,
         },
         {
           name: 'spell_id',
@@ -36,27 +44,28 @@ export class CreateTalent extends NWTask {
           typeParams: {
             size: 16,
           },
+          isNotNullable: true,
         },
         {
           name: 'cost',
-          type: 'smallint',
-          typeParams: {
-            size: 8,
-          },
-        },
-        {
-          name: 'icon',
           type: 'mediumint',
           typeParams: {
             size: 16,
           },
+          isNotNullable: true,
+        },
+        {
+          name: 'icon',
+          type: 'mediumtext',
+          isNotNullable: true,
         },
         {
           name: 'class_mask',
-          type: 'smallint',
+          type: 'mediumint',
           typeParams: {
             size: 16,
           },
+          isNotNullable: true,
         },
       ],
     })
@@ -70,11 +79,11 @@ export class CreateTalent extends NWTask {
        : this.builder.std.Spells.load(template.options.spell)
 
     this.builder.ServerData('talents', {
-      id: template.options.id,
-      spell: asset.ID,
+      talent_id: template.options.id,
+      spell_id: asset.ID,
       cost: template.options.cost,
-      class_mask: createClassMask(...template.options.class),
       icon: asset.Icon.getPath(),
+      class_mask: createClassMask(...template.options.class),
     })
 
     this.builder.ClientData('talents', {
