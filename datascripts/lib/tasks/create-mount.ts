@@ -45,9 +45,9 @@ export class CreateMount extends NWTask {
       }
     )
 
-    const speed = template.options.speed || 0
-    const swimSpeed = template.options.swimSpeed || 0
-    const flightSpeed = template.options.flightSpeed || 0
+    const speed = (typeof template.options.speed === 'number' && template.options.speed) || -1
+    const swimSpeed = (typeof template.options.swimSpeed === 'number' && template.options.swimSpeed) || -1
+    const flightSpeed = (typeof template.options.flightSpeed === 'number' && template.options.flightSpeed) || -1
 
     const isDefaultIcon = !template.options.icon
     const isDefaultDescription = !template.options.description
@@ -213,7 +213,7 @@ export class CreateMount extends NWTask {
       .ImplicitTargetA.UNIT_CASTER.set()
     )
 
-    if (isFasterFlying && !isFasterSwimming) {
+    if (isFlying) {
       const air = resolveSpeed($.baseSpeed, flightSpeed)
 
       asset.Effects.addMod(mod => mod
@@ -225,7 +225,7 @@ export class CreateMount extends NWTask {
       )
     }
 
-    if (isFasterSwimming) {
+    if (isSwimming) {
       const water = resolveSpeed($.baseSpeed, swimSpeed)
 
       asset.Effects.addMod(mod => mod
@@ -242,10 +242,6 @@ export class CreateMount extends NWTask {
       0,
       resolveDuration(template.options.duration),
     )
-
-    console.log(asset.Effects.get(0).objectify())
-    console.log(asset.Effects.get(1).objectify())
-    console.log(asset.Effects.get(2).objectify())
   }
 }
 
