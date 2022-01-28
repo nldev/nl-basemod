@@ -6,6 +6,8 @@ import { NWTask, TaskOptions, Template } from '../task'
 import { Duration, Queryable } from '../types'
 import { resolveDuration, resolveSpeed } from '../utils'
 
+let doOnce = false
+
 export interface MountTemplate extends Template {
   id: typeof CREATE_MOUNT_TASK
   options: MountOptions
@@ -100,7 +102,8 @@ export class CreateMount extends NWTask {
       .DefenseType.set(0)
       .Mechanic.set(21)
       .SchoolMask.PHYSICAL.set(true)
-      .Effects.addMod(mod => mod
+      .Effects.addFreeEffect(mod => mod
+        .Type.APPLY_AURA.set()
         .Aura.MOUNTED.set()
         .CreatureTemplate.set(npc.asset.ID)
         .ImplicitTargetA.UNIT_CASTER.set()
@@ -204,7 +207,8 @@ export class CreateMount extends NWTask {
 
     const ground = resolveSpeed($.baseSpeed, speed)
 
-    asset.Effects.addMod(mod => mod
+    asset.Effects.addFreeEffect(mod => mod
+      .Type.APPLY_AURA.set()
       .Aura.MOD_INCREASE_MOUNTED_SPEED.set()
       .PercentBase.set(Math.min(ground, 1))
       .ImplicitTargetA.UNIT_CASTER.set()
@@ -213,7 +217,8 @@ export class CreateMount extends NWTask {
     if (isFlying) {
       const air = resolveSpeed($.baseSpeed, flightSpeed)
 
-      asset.Effects.addMod(mod => mod
+      asset.Effects.addFreeEffect(mod => mod
+        .Type.APPLY_AURA.set()
         .Aura.MOD_INCREASE_MOUNTED_FLIGHT_SPEED.set()
         .PercentBase.set(Math.min(air, 1))
         .ImplicitTargetA.UNIT_CASTER.set()
@@ -223,7 +228,8 @@ export class CreateMount extends NWTask {
     if (isSwimming) {
       const water = resolveSpeed($.baseSpeed, swimSpeed)
 
-      asset.Effects.addMod(mod => mod
+      asset.Effects.addFreeEffect(mod => mod
+        .Type.APPLY_AURA.set()
         .Aura.MOD_INCREASE_SWIM_SPEED.set()
         .PercentBase.set(Math.min(water, 1))
         .ImplicitTargetA.UNIT_CASTER.set()
@@ -235,6 +241,10 @@ export class CreateMount extends NWTask {
       0,
       resolveDuration(template.options.duration),
     )
+
+    if (isFasterFlying && !doOnce) {
+      doOnce = true
+    }
   }
 }
 
