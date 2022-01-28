@@ -210,7 +210,7 @@ export class CreateMount extends NWTask {
       .PercentBase.set(Math.min(ground, 1))
       .ImplicitTargetA.UNIT_CASTER.set()
 
-    if (isFasterFlyingMount) {
+    if (isFlying && !isFasterSwimming) {
       const air = resolveSpeed($.baseSpeed, flightSpeed)
 
       asset.Effects.addGet()
@@ -220,7 +220,7 @@ export class CreateMount extends NWTask {
         .ImplicitTargetA.UNIT_CASTER.set()
     }
 
-    if (isFasterSwimmingMount) {
+    if (isFasterSwimming) {
       const water = resolveSpeed($.baseSpeed, swimSpeed)
 
       asset.Effects.addGet()
