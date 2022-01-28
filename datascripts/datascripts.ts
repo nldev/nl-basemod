@@ -126,11 +126,22 @@ function main () {
     some_numbers: 888,
   })
 
+  $.Task.process({
+    id: 'insert-server-data',
+    options: {
+      target: 'foo',
+      data: {
+        some_text: ':)',
+        some_numbers: 888,
+      }
+    },
+  })
+
   for (const i of times(10)) {
     $.Task.process({
       id: 'insert-server-data',
       options: {
-        table: 'foo',
+        target: 'foo',
         data: {
           some_text: 'text',
           some_numbers: i + 100,
@@ -142,7 +153,7 @@ function main () {
   $.Task.process({
     id: 'insert-client-data',
     options: {
-      module: 'foo',
+      target: 'foo',
       data: {
         obj: {
           arr: ['string'],
