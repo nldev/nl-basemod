@@ -17,12 +17,12 @@ export interface TalentTemplate extends Template {
 export class CreateTalent extends NWTask {
   static readonly id = CREATE_TALENT_TASK
 
+  setup () {
+  }
+
   process (template: TalentTemplate) {
     if (typeof template.options.spell === 'number') {
       const spell = this.builder.std.Spells.load(template.options.spell)
-
-      // console.log(template)
-      // console.log(spell.objectify())
     }
   }
 }
