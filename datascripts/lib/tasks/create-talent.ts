@@ -83,6 +83,8 @@ export class CreateTalent extends NWTask {
         icon: asset.Icon.getPath(),
       }
     })
+
+    console.log(template)
   }
 }
 
