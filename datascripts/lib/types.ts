@@ -385,10 +385,7 @@ export type CharacterClass =
 
 export interface ExportData {
   data: any
-}
-
-export interface ClientExportData extends ExportData {
-  module: string
+  target: string
 }
 
 export interface ServerExportData extends ExportData {
