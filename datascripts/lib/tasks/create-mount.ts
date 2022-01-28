@@ -46,8 +46,8 @@ export class CreateMount extends NWTask {
     )
 
     const speed = template.options.speed || 100 // FIXME
-    const swimSpeed = template.options.speed || 0
-    const flightSpeed = template.options.speed || 0
+    const swimSpeed = template.options.swimSpeed || 0
+    const flightSpeed = template.options.flightSpeed || 0
 
     const isDefaultIcon = !template.options.icon
     const isDefaultDescription = !template.options.description
@@ -200,27 +200,30 @@ export class CreateMount extends NWTask {
 
     const ground = resolveSpeed($.baseSpeed, speed)
 
-    asset.Effects.addGet()
+    asset.Effects.addMod(mod => mod
       .Aura.MOD_INCREASE_MOUNTED_SPEED.set()
       .PercentBase.set(Math.min(ground, 1))
       .ImplicitTargetA.UNIT_CASTER.set()
+    )
 
     if (isFlying) {
       const air = resolveSpeed($.baseSpeed, flightSpeed)
 
-      asset.Effects.addGet()
+      asset.Effects.addMod(mod => mod
         .Aura.MOD_INCREASE_MOUNTED_FLIGHT_SPEED.set()
         .PercentBase.set(Math.min(air, 1))
         .ImplicitTargetA.UNIT_CASTER.set()
+      )
     }
 
     if (isSwimming) {
       const water = resolveSpeed($.baseSpeed, swimSpeed)
 
-      asset.Effects.addGet()
+      asset.Effects.addMod(mod => mod
         .Aura.MOD_INCREASE_SWIM_SPEED.set()
         .PercentBase.set(Math.min(water, 1))
         .ImplicitTargetA.UNIT_CASTER.set()
+      )
     }
 
     asset.Duration.setSimple(
