@@ -209,7 +209,7 @@ export class Builder {
     this.templates = options.templates || []
     this.baseSpeed = options.baseSpeed || 1
 
-    if (!fs.existsSync(ADDON_PATH))
+    if (fs.existsSync(ADDON_PATH))
       fs.rmdirSync(ADDON_PATH, { recursive: true })
   }
 
