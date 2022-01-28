@@ -1,17 +1,17 @@
 import { INSERT_CLIENT_DATA_TASK } from '../constants'
 import { NWTask, TaskOptions, Template } from '../task'
-import { Json } from '../types'
 import { isNil } from '../utils'
 
 export interface ClientDataTemplate extends Template {
   id: typeof INSERT_CLIENT_DATA_TASK
-  options: Json
+  options: any
 }
 
 export class InsertClientData extends NWTask {
   static readonly id = INSERT_CLIENT_DATA_TASK
 
   process (template: ClientDataTemplate) {
+    console.log('did a thing')
     const list: string[] = []
 
     for (let key of Object.keys(template.options)) {

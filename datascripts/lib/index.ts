@@ -37,6 +37,8 @@ import { SetupClassShaman } from './tasks/setup-class-shaman'
 import { SetupClassWarlock } from './tasks/setup-class-warlock'
 import { SetupClassWarrior } from './tasks/setup-class-warrior'
 import { SetupSkills } from './tasks/setup-skills'
+import { InsertServerData } from './tasks/insert-server-data'
+import { InsertClientData } from './tasks/insert-client-data'
 import { ITEMS } from './templates/items'
 import { MODIFIERS } from './templates/modifiers'
 import { MOUNTS } from './templates/mounts'
@@ -66,6 +68,8 @@ export const DEFAULT_OPTIONS: Required<Options> = {
     'create-spell': true,
     'create-stat': true,
     'create-talent': true,
+    'insert-client-data': true,
+    'insert-server-data': true,
   },
   templates: [
     ...STATS,
@@ -93,6 +97,8 @@ export const defaultConfig: Required<Config> = {
     CreateSpell,
     CreateItem,
     CreateTalent,
+    InsertServerData,
+    InsertClientData,
     // CreateNpc,
     // CreateModifier,
     // CreateMount,
