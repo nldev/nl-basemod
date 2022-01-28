@@ -466,13 +466,13 @@ export class Builder {
     return result
   }
 
-  Table (options: SQLTable) {
+  public Table (options: SQLTable) {
     const lines = []
 
     if (!options.isPersist)
-      lines.push(`drop table if exists ${options.name};`)
+      lines.push(`drop table if exists __${options.name};`)
 
-    lines.push(`create table if not exists ${options.name} (`)
+    lines.push(`create table if not exists __${options.name} (`)
 
     let primaryKey
 
@@ -554,11 +554,11 @@ export class Builder {
     db.write(query)
   }
 
-  ServerData (table: string, data: any, database: Database = 'world') {
+  public ServerData (table: string, data: any, database: Database = 'world') {
     if (!this.databaseTables[table])
-      throw new Error(`Database table ${database}.${table} does not exist, cannot insert record.`)
+      throw new Error(`Database table ${database}.__${table} does not exist, cannot insert record.`)
 
-    let lines = [`insert into ${table} (`]
+    let lines = [`insert into __${table} (`]
 
     const columns = []
     const values = []
@@ -594,7 +594,7 @@ export class Builder {
     db.write(query)
   }
 
-  ClientData (file: string, data: any) {
+  public ClientData (file: string, data: any) {
     const list: string[] = []
 
     for (const key of Object.keys(data))
