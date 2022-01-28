@@ -669,7 +669,6 @@ export class Builder {
     let primaryKey
 
     for (const column of columns) {
-      console.log(column)
       let line = `${column.name} `
 
       switch (column.type) {
