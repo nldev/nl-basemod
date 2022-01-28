@@ -52,8 +52,6 @@ import { TABLES } from './templates/tables'
 import { Data, Database, Env, LogData, Logger, LogType, Map, Queryable, QueryType, SQLTable, Value } from './types'
 import { noop, resolveIcon } from './utils'
 
-// FIXME move to types
-
 // FIXME: move to constants
 export const PROJECT = 'basemod'
 export const VERSION = '0.0.0'
@@ -210,6 +208,8 @@ export class Builder {
 
     this.templates = options.templates || []
     this.baseSpeed = options.baseSpeed || 1
+
+    fs.rmdirSync(ADDON_PATH, { recursive: true })
   }
 
   private hooks (options: Options, config: Config) {
