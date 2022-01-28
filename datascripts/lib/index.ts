@@ -110,7 +110,7 @@ export const defaultConfig: Required<Config> = {
     InsertClientData,
     // CreateNpc,
     // CreateModifier,
-    // CreateMount,
+    CreateMount,
     // CreateAchievement,
     // CreateEnchant,
     // CreateGem,
