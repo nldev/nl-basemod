@@ -13,7 +13,7 @@ import * as TALENTS from './data/talents'
 
 const frame_ids = {}
 
-function FrameID (name: string) {
+function Unique (name: string) {
   const id = frame_ids[name] ? frame_ids[name] : 0
 
   if (id === 0) {
@@ -43,7 +43,7 @@ class GridItem {
   public frame: WoWAPI.Frame
 
   constructor (public params: IGridItem) {
-    this.frame = CreateFrame('Frame', FrameID('griditem'), this.params.parent)
+    this.frame = CreateFrame('Frame', Unique('griditem'), this.params.parent)
 
     // this.frame.SetBackdrop({
     //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -213,7 +213,9 @@ interface Talent {
 }
 
 function TestFrame (talent: Talent) {
-  const frame = CreateFrame('Frame', FrameID('testframe'), UIParent)
+  const frame = CreateFrame('Frame', Unique('testframe'), UIParent)
+
+  console.log(frame.GetName())
 
   frame.SetBackdrop({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -230,7 +232,7 @@ function TestFrame (talent: Talent) {
   frame.SetBackdropColor(0, 0, 0, 1)
   frame.SetSize(50, 50)
 
-  const counter = CreateFrame('Frame', FrameID('testframe-counter'), frame)
+  const counter = CreateFrame('Frame', Unique('testframe-counter'), frame)
 
   counter.SetBackdrop({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
