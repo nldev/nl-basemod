@@ -1,19 +1,28 @@
-let isLoading = true
+export class Root {
+  private isLoading = true
 
-function load () {
-  if (isLoading) {
-    const player = UnitGUID('player')
+  public init () {
 
-    if (player) {
-      const info = GetPlayerInfoByGUID(player)
+  }
 
-      if (info[0]) {
-        isLoading = false
+  public start () {
+    if (this.isLoading) {
+      const player = UnitGUID('player')
 
-        init()
+      if (player) {
+        const info = GetPlayerInfoByGUID(player)
+
+        if (info[0]) {
+          this.isLoading = false
+
+          init()
+        }
       }
     }
   }
+}
+
+function load () {
 }
 
 function init () {
