@@ -329,7 +329,6 @@ function init () {
       return
 
     console.log(a)
-
     isLoading = false
   }
 }
