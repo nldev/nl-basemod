@@ -11,16 +11,16 @@ import * as TALENTS from './data/talents'
 
 // -----
 
-const frame_ids = {}
+const names = {}
 
 function Unique (name: string) {
-  const id = frame_ids[name] ? frame_ids[name] : 0
+  const id = names[name] ? names[name] : 0
 
   if (id === 0) {
-    frame_ids[name] = 0
+    names[name] = 0
   }
 
-  frame_ids[name]++
+  names[name]++
 
   return `${name}-${id}`
 }
