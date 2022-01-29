@@ -10,10 +10,10 @@ function load () {
   if (isLoading) {
     const player = UnitGUID('player')
 
-    if (!player) {
+    if (player) {
       const info = GetPlayerInfoByGUID(player)
 
-      if (!info[0]) {
+      if (info[0]) {
         isLoading = false
 
         init()
@@ -23,19 +23,13 @@ function load () {
 }
 
 function init () {
-  const grid = new Grid()
-
-  for (const key of Object.keys(TALENTS))
-    grid.add(TalentButton(TALENTS[key]))
-
-  grid.frame.SetParent(moduleoptions)
-  grid.frame.SetPoint('TOPLEFT')
+  console.log('loaded')
 }
 
 const root = CreateFrame('Frame', 'root', UIParent)
 
 root.SetScript('OnUpdate', () => {
-  init()
+  load()
 })
 
 // const btn = CreateFrame('Button', null, UIParent, 'UIPanelButtonTemplate')
