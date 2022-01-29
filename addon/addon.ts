@@ -25,11 +25,13 @@ interface IGridItem {
   y: number
 }
 
+let griditem_id = 0
+
 class GridItem {
   public frame: WoWAPI.Frame
 
   constructor (public params: IGridItem) {
-    this.frame = CreateFrame('Frame', null, this.params.parent)
+    this.frame = CreateFrame('Frame', `griditem_${griditem_id}`, this.params.parent)
 
     // this.frame.SetBackdrop({
     //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -45,6 +47,8 @@ class GridItem {
 
     this.params.child.SetParent(this.frame)
     this.params.child.SetPoint('CENTER')
+
+    griditem_id++
   }
 }
 
@@ -80,7 +84,7 @@ class Grid {
 
     this.itemWidth = this.params.gridWidth / this.params.itemsPerRow
 
-    this.frame = CreateFrame('ScrollFrame', null, UIParent)
+    this.frame = CreateFrame('ScrollFrame', 'grid', UIParent)
 
     // this.frame.SetBackdrop({
     //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -122,7 +126,9 @@ class Grid {
   }
 }
 
-let a = CreateFrame('Frame', null, UIParent)
+// ------
+
+let a = CreateFrame('Frame', 'a', UIParent)
 
 a.SetBackdrop({
   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -135,8 +141,18 @@ a.SetBackdropColor(0, 0, 0, 1)
 a.SetSize(800, 800)
 a.SetPoint('CENTER')
 
-const scrollframe = CreateFrame('ScrollFrame', 'ANewScrollFrame', null, 'UIPanelScrollFrameTemplate')
-const scrollchild = CreateFrame('Frame')
+a.SetScript('OnEnter', () => console.log('hello'))
+a.RegisterForDrag('LeftButton')
+a.RegisterForDrag('Button4')
+a.RegisterForDrag('Button5')
+a.RegisterForDrag('Middle')
+a.RegisterForDrag('RightButton')
+a.SetMovable(true)
+a.SetScript('OnDragStart', f => f.StartMoving())
+a.SetScript('OnDragStop', f => f.StopMovingOrSizing())
+
+const scrollframe = CreateFrame('ScrollFrame', 'scrollframe', null, 'UIPanelScrollFrameTemplate')
+const scrollchild = CreateFrame('Frame', 'scrollchild')
 
 const scrollbarName = scrollframe.GetName()
 
@@ -159,7 +175,7 @@ a.SetSize(a.GetWidth() * 0.667, a.GetHeight() * 0.667)
 scrollframe.SetScale(0.667)
 scrollframe.SetScrollChild(scrollchild)
 
-const b = CreateFrame('Frame', null, UIParent)
+const b = CreateFrame('Frame', 'b', UIParent)
 
 b.SetSize(a.GetWidth() * 0.95, a.GetHeight() * 0.95)
 b.SetParent(a)
@@ -169,11 +185,11 @@ scrollframe.SetAllPoints(b)
 
 scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
 
-const moduleoptions = CreateFrame('Frame', null, scrollchild)
+const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
 moduleoptions.SetAllPoints(scrollchild)
 
 a.SetFrameLevel(0)
-// b.SetFrameLevel(1)
+b.SetFrameLevel(1)
 moduleoptions.SetFrameLevel(2)
 
 // ------
@@ -186,8 +202,10 @@ interface Talent {
   class_mask: number
 }
 
+let frame_id = 0
+
 function TestFrame (talent: Talent) {
-  const frame = CreateFrame('Frame', null, UIParent)
+  const frame = CreateFrame('Frame', `testframe-${frame_id}`, UIParent)
 
   frame.SetBackdrop({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -204,7 +222,7 @@ function TestFrame (talent: Talent) {
   frame.SetBackdropColor(0, 0, 0, 1)
   frame.SetSize(50, 50)
 
-  const counter = CreateFrame('Frame', null, frame)
+  const counter = CreateFrame('Frame', `testframe-counter-${frame_id}`, frame)
 
   counter.SetBackdrop({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -224,9 +242,9 @@ function TestFrame (talent: Talent) {
   text.SetText(`${talent.cost}c`)
   text.SetFont('Fonts\\FRIZQT__.TTF', 11)
 
-  frame.SetScript('OnLoad', () => console.log('loaded'))
+  // frame.SetScript('OnLoad', () => console.log('loaded'))
   frame.SetFrameLevel(3)
-  frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
+  // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
   frame.SetScript('OnEnter', frame => {
     console.log(`enter ${talent.spell_id}`)
     GameTooltip.SetText('')
@@ -235,12 +253,15 @@ function TestFrame (talent: Talent) {
     GameTooltip.AddLine('line 3')
     GameTooltip.AddLine('line 4')
     GameTooltip.Show()
+    GameTooltip.SetOwner(frame, 'RIGHT')
   })
 
   frame.SetScript('OnLeave', frame => {
     console.log(`leave ${talent.spell_id}`)
     GameTooltip.Hide()
   })
+
+  frame_id++
 
   return frame
 }
