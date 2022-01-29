@@ -202,13 +202,8 @@ moduleoptions.SetFrameLevel(2)
 
 class Talents {
   constructor (public talents: Mapping<Talent>) {
-    // const info = GetPlayerInfoByGUID(UnitGUID('player'))
-    console.log(talents['IMPROVED_EVISCERATE'].id)
-    console.log(talents['IMPROVED_EVISCERATE'].icon)
-    console.log(talents['IMPROVED_EVISCERATE'].cost)
-    console.log(talents['IMPROVED_EVISCERATE'].spellId)
-    console.log(talents['IMPROVED_EVISCERATE'].class.ROGUE)
-    console.log(talents['IMPROVED_EVISCERATE'].classMask)
+    const info = GetPlayerInfoByGUID(UnitGUID('player'))
+    console.log(info)
   }
 }
 
@@ -267,7 +262,6 @@ function TestFrame (talent: Talent) {
   // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
   frame.SetScript('OnEnter', frame => {
     const unit = UnitGUID('player')
-    console.log(unit)
     SetDesaturation(texture, false)
     console.log(`enter ${talent.spellId}`)
     GameTooltip.SetOwner(a, 'ANCHOR_CURSOR')
@@ -285,14 +279,20 @@ function TestFrame (talent: Talent) {
 }
 
 const talentsMap: Mapping<Talent> = TALENTS as any
-const talents = new Talents(talentsMap)
 
 const grid = new Grid()
 
-grid.frame.SetScript('OnLoad', () => {
-  const unit = UnitGUID('player')
-  console.log(unit)
-})
+grid.frame.SetScript('OnUpdate', main)
+
+let init = true
+
+function main () {
+  if (init) {
+    const talents = new Talents(talentsMap)
+
+    init = false
+  }
+}
 
 for (const key of Object.keys(TALENTS))
   grid.add(TestFrame(TALENTS[key]))
