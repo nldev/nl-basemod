@@ -225,6 +225,7 @@ function TestFrame (talent: Talent) {
   text.SetFont('Fonts\\FRIZQT__.TTF', 11)
 
   frame.SetScript('OnEnter', frame => {
+    console.log(`enter ${talent.spell_id}`)
     GameTooltip.SetText('')
     GameTooltip.AddLine('line 1')
     GameTooltip.AddLine('line 2')
@@ -234,6 +235,7 @@ function TestFrame (talent: Talent) {
   })
 
   frame.SetScript('OnLeave', frame => {
+    console.log(`leave ${talent.spell_id}`)
     GameTooltip.Hide()
   })
 
