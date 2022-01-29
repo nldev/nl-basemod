@@ -306,9 +306,7 @@ for (const key of Object.keys(TALENTS))
 grid.frame.SetParent(moduleoptions)
 grid.frame.SetPoint('TOPLEFT')
 
-Events.System.OnPlayerLogin(a, () => {
- const foo = new Foo()
-})
+Events.System.OnPlayerEnteringWorld(a, () => console.log('hello'))
 
 // -------
 
