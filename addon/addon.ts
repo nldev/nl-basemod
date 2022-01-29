@@ -151,7 +151,6 @@ a.SetBackdropColor(0, 0, 0, 1)
 a.SetSize(800, 800)
 a.SetPoint('CENTER')
 
-a.SetScript('OnEnter', () => console.log('hello'))
 a.EnableMouse(true)
 a.RegisterForDrag('RightButton')
 a.SetMovable(true)
@@ -212,8 +211,6 @@ interface Talent {
 function TestFrame (talent: Talent) {
   const frame = CreateFrame('Frame', Unique('testframe'), UIParent)
 
-  console.log(frame.GetName())
-
   frame.SetBackdrop({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
     edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
@@ -251,6 +248,7 @@ function TestFrame (talent: Talent) {
 
   // frame.SetScript('OnLoad', () => console.log('loaded'))
   frame.SetFrameLevel(3)
+  frame.EnableMouse(true)
   // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
   frame.SetScript('OnEnter', frame => {
     console.log(`enter ${talent.spell_id}`)
