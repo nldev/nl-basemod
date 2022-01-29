@@ -155,11 +155,12 @@ scrollbar.SetPoint('TOP', scrollupbutton, 'BOTTOM', 0, -2)
 scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
 
 a.SetSize(a.GetWidth() * 0.667, a.GetHeight() * 0.667)
-scrollframe.SetScale(0.667)
 
+scrollframe.SetScale(0.667)
 scrollframe.SetScrollChild(scrollchild)
 
 const b = CreateFrame('Frame', null, UIParent)
+
 b.SetSize(a.GetWidth() * 0.95, a.GetHeight() * 0.95)
 b.SetParent(a)
 b.SetPoint('CENTER')
@@ -222,6 +223,19 @@ function TestFrame (talent: Talent) {
   text.SetPoint('CENTER', 0, 0)
   text.SetText(`${talent.cost}c`)
   text.SetFont('Fonts\\FRIZQT__.TTF', 11)
+
+  frame.SetScript('OnEnter', frame => {
+    GameTooltip.SetText('')
+    GameTooltip.AddLine('line 1')
+    GameTooltip.AddLine('line 2')
+    GameTooltip.AddLine('line 3')
+    GameTooltip.AddLine('line 4')
+    GameTooltip.Show()
+  })
+
+  frame.SetScript('OnLeave', frame => {
+    GameTooltip.Hide()
+  })
 
   return frame
 }
