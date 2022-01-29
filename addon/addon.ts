@@ -200,12 +200,20 @@ moduleoptions.SetFrameLevel(2)
 
 // ------
 
+class Talents {
+  constructor () {
+  }
+}
+
+// ------
+
 interface Talent {
-  talent_id: string
-  spell_id: number
+  talentId: string
+  spellId: number
   cost: number
   icon: string
-  class_mask: number
+  class: Mapping<boolean>
+  classMask: number
 }
 
 function TestFrame (talent: Talent) {
@@ -252,15 +260,15 @@ function TestFrame (talent: Talent) {
   // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
   frame.SetScript('OnEnter', frame => {
     SetDesaturation(texture, false)
-    console.log(`enter ${talent.spell_id}`)
+    console.log(`enter ${talent.spellId}`)
     GameTooltip.SetOwner(a, 'ANCHOR_CURSOR')
-    GameTooltip.SetHyperlink(`spell:${talent.spell_id}`)
+    GameTooltip.SetHyperlink(`spell:${talent.spellId}`)
     GameTooltip.Show()
   })
 
   frame.SetScript('OnLeave', frame => {
     SetDesaturation(texture, true)
-    console.log(`leave ${talent.spell_id}`)
+    console.log(`leave ${talent.spellId}`)
     GameTooltip.Hide()
   })
 

@@ -384,6 +384,31 @@ export type CharacterRace =
   | typeof BLOOD_ELF
   | typeof DRAENEI
 
+export interface RaceMap<T = boolean> {
+  HUMAN: T
+  ORC: T
+  DWARF: T
+  NIGHT_ELF: T
+  UNDEAD: T
+  TAUREN: T
+  GNOME: T
+  TROLL: T
+  BLOOD_ELF: T
+  DRAENEI: T
+}
+
+export interface ClassMap<T = boolean> {
+  WARRIOR: T
+  ROGUE: T
+  DRUID: T
+  MAGE: T
+  WARLOCK: T
+  SHAMAN: T
+  PRIEST: T
+  PALADIN: T
+  HUNTER: T
+}
+
 export type CharacterClass =
   | typeof WARRIOR
   | typeof ROGUE

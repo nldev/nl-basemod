@@ -1,13 +1,13 @@
-import { CLASS_IDS, CLASS_MASKS, CREATE_TALENT_TASK } from '../constants'
-import { NWTask, TaskOptions, Template } from '../task'
-import { AssetId, CharacterClass } from '../types'
+import { CREATE_TALENT_TASK } from '../constants'
+import { NWTask, Template } from '../task'
+import { AssetId, CharacterClass, ClassMap } from '../types'
 import { createClassMask } from '../utils'
 
 export interface Talent {
   id: string
   spell: AssetId
   cost: number
-  class: CharacterClass[]
+  class: ClassMap | CharacterClass
 }
 
 export interface TalentTemplate extends Template {
@@ -34,12 +34,12 @@ export class CreateTalent extends NWTask {
           isNotNullable: true,
         },
         {
-          name: 'talent_id',
+          name: 'talentId',
           type: 'mediumtext',
           isNotNullable: true,
         },
         {
-          name: 'spell_id',
+          name: 'spellId',
           type: 'mediumint',
           typeParams: {
             size: 16,
@@ -60,7 +60,7 @@ export class CreateTalent extends NWTask {
           isNotNullable: true,
         },
         {
-          name: 'class_mask',
+          name: 'classMask',
           type: 'mediumint',
           typeParams: {
             size: 16,
@@ -76,21 +76,28 @@ export class CreateTalent extends NWTask {
        ? this.builder.Spell.get(template.options.spell).asset
        : this.builder.std.Spells.load(template.options.spell)
 
+    const classes: CharacterClass[] = Object.keys(template.options.class) as any
+
+    const classMask = typeof template.options.class === 'string'
+      ? createClassMask(template.options.class)
+      : createClassMask(...classes)
+
     this.builder.ServerData('talents', {
-      talent_id: template.options.id,
-      spell_id: asset.ID,
+      classMask,
+      talentId: template.options.id,
+      spellId: asset.ID,
       cost: template.options.cost,
       icon: asset.Icon.getPath().replace(/\\/g, '/'),
-      class_mask: createClassMask(...template.options.class),
     })
 
     this.builder.ClientData('talents', {
       [template.options.id]: {
-        talent_id: template.options.id,
-        spell_id: asset.ID,
+        classMask,
+        talentId: template.options.id,
+        spellId: asset.ID,
         cost: template.options.cost,
         icon: asset.Icon.getPath().replace(/\\/g, '/'),
-        class_mask: createClassMask(...template.options.class),
+        class: template.options.class
       }
     })
 
