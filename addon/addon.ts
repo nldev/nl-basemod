@@ -1,5 +1,48 @@
 import * as TALENTS from './data/talents'
 
+const talentsMap: Mapping<Talent> = TALENTS as any
+
+// --------
+
+let isLoading = true
+
+function load () {
+  if (isLoading) {
+    const player = UnitGUID('player')
+
+    if (!player)
+      return
+
+    const info = GetPlayerInfoByGUID(player)
+
+
+    if (!info[0])
+      return
+
+    isLoading = false
+
+    init()
+  }
+}
+
+function init () {
+  const grid = new Grid()
+
+  for (const key of Object.keys(TALENTS))
+    grid.add(TalentButton(TALENTS[key]))
+
+  grid.frame.SetParent(moduleoptions)
+  grid.frame.SetPoint('TOPLEFT')
+
+  console.log('addon loaded')
+}
+
+const root = CreateFrame('Frame', 'root', UIParent)
+
+root.SetScript('OnUpdate', () => {
+  init()
+})
+
 // const btn = CreateFrame('Button', null, UIParent, 'UIPanelButtonTemplate')
 //
 // btn.SetPoint('TOPLEFT')
@@ -235,7 +278,7 @@ interface Talent {
   classMask: number
 }
 
-function TestFrame (talent: Talent) {
+function TalentButton (talent: Talent) {
   const frame = CreateFrame('Frame', Unique('testframe'), UIParent)
 
   frame.SetBackdrop({
@@ -277,6 +320,9 @@ function TestFrame (talent: Talent) {
   // frame.SetScript('OnLoad', () => console.log('loaded'))
   frame.SetFrameLevel(3)
   frame.EnableMouse(true)
+
+  frame.SetScript('OnClick', () => console.log(`clicked ${talent.spellId}`))
+
   // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
   frame.SetScript('OnEnter', frame => {
     const unit = UnitGUID('player')
@@ -296,45 +342,4 @@ function TestFrame (talent: Talent) {
   return frame
 }
 
-const talentsMap: Mapping<Talent> = TALENTS as any
-
-const grid = new Grid()
-
-for (const key of Object.keys(TALENTS))
-  grid.add(TestFrame(TALENTS[key]))
-
-grid.frame.SetParent(moduleoptions)
-grid.frame.SetPoint('TOPLEFT')
-
-// --------
-
-let isLoading = true
-
-function init () {
-  if (isLoading) {
-    const player = UnitGUID('player')
-
-    if (!player)
-      return
-
-    const [a] = GetPlayerInfoByGUID(player)
-
-
-    if (!a)
-      return
-
-    console.log(a)
-    isLoading = false
-  }
-}
-
-const root = CreateFrame('Frame', 'root', UIParent)
-
-root.SetScript('OnUpdate', () => {
-  init()
-})
-
-// -------
-
-console.log('addon loaded')
 
