@@ -258,7 +258,8 @@ function TestFrame (talent: Talent) {
     GameTooltip.AddLine('line 2')
     GameTooltip.AddLine('line 3')
     GameTooltip.AddLine('line 4')
-    GameTooltip.SetOwner(frame, 'CENTER')
+    GameTooltip.SetOwner(a, 'ANCHOR_CURSOR')
+    console.log(GameTooltip.GetAnchorType())
     GameTooltip.Show()
   })
 
