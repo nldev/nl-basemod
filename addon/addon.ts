@@ -252,13 +252,14 @@ function TestFrame (talent: Talent) {
   // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
   frame.SetScript('OnEnter', frame => {
     console.log(`enter ${talent.spell_id}`)
-    GameTooltip.SetText('')
+    GameTooltip.ClearLines()
+    GameTooltip.AppendText('(appended)')
     GameTooltip.AddLine('line 1')
     GameTooltip.AddLine('line 2')
     GameTooltip.AddLine('line 3')
     GameTooltip.AddLine('line 4')
+    GameTooltip.SetOwner(frame, 'CENTER')
     GameTooltip.Show()
-    GameTooltip.SetOwner(frame, 'RIGHT')
   })
 
   frame.SetScript('OnLeave', frame => {
