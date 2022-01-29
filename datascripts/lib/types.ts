@@ -171,7 +171,6 @@ export interface SQLColumn {
   name: string
   type: string
   typeParams?: any
-  isUnique?: boolean
   isAutoIncrement?: boolean
   isPrimaryKey?: boolean
   isNotNullable?: boolean

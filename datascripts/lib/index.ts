@@ -529,9 +529,6 @@ export class Builder {
       if (column.isNotNullable)
         line += ' not null'
 
-      if (column.isUnique)
-        line += ' unique'
-
       if (column.isAutoIncrement)
         line += ' auto_increment'
 

@@ -24,9 +24,18 @@ export class CreateTalent extends NWTask {
       database: 'world',
       columns: [
         {
+          name: 'entry',
+          type: 'mediumint',
+          typeParams: {
+            size: 16,
+          },
+          isPrimaryKey: true,
+          isNotNullable: true,
+          isAutoIncrement: true,
+        },
+        {
           name: 'id',
           type: 'mediumtext',
-          isPrimaryKey: true,
           isNotNullable: true,
         },
         {
