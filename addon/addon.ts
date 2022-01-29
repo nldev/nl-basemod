@@ -224,6 +224,9 @@ function TestFrame (talent: Talent) {
   text.SetText(`${talent.cost}c`)
   text.SetFont('Fonts\\FRIZQT__.TTF', 11)
 
+  frame.SetScript('OnLoad', () => console.log('loaded'))
+  frame.SetFrameLevel(3)
+  frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
   frame.SetScript('OnEnter', frame => {
     console.log(`enter ${talent.spell_id}`)
     GameTooltip.SetText('')
