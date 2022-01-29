@@ -1,4 +1,5 @@
 import '../global'
+import { Mapping } from '../types'
 import { Unique } from '../utils'
 import * as TALENTS from '../../data/talents'
 
