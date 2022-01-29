@@ -312,7 +312,6 @@ function TalentButton (talent: Talent) {
 
   // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spellId}`))
 
-  // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
   frame.SetScript('OnEnter', frame => {
     const unit = UnitGUID('player')
     SetDesaturation(texture, false)
