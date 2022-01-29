@@ -10,18 +10,15 @@ function load () {
   if (isLoading) {
     const player = UnitGUID('player')
 
-    if (!player)
-      return
+    if (!player) {
+      const info = GetPlayerInfoByGUID(player)
 
-    const info = GetPlayerInfoByGUID(player)
+      if (!info[0]) {
+        isLoading = false
 
-
-    if (!info[0])
-      return
-
-    isLoading = false
-
-    init()
+        init()
+      }
+    }
   }
 }
 
@@ -33,8 +30,6 @@ function init () {
 
   grid.frame.SetParent(moduleoptions)
   grid.frame.SetPoint('TOPLEFT')
-
-  console.log('addon loaded')
 }
 
 const root = CreateFrame('Frame', 'root', UIParent)
@@ -321,7 +316,7 @@ function TalentButton (talent: Talent) {
   frame.SetFrameLevel(3)
   frame.EnableMouse(true)
 
-  frame.SetScript('OnClick', () => console.log(`clicked ${talent.spellId}`))
+  // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spellId}`))
 
   // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
   frame.SetScript('OnEnter', frame => {
