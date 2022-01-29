@@ -11,6 +11,20 @@ import * as TALENTS from './data/talents'
 
 // -----
 
+const frame_ids = {}
+
+function FrameID (name: string) {
+  const id = frame_ids[name] ? frame_ids[name] : 0
+
+  if (id === 0) {
+    frame_ids[name] = 0
+  }
+
+  frame_ids[name]++
+
+  return `${name}-${id}`
+}
+
 interface Mapping<T = any> {
   [key: string]: T
 }
@@ -25,13 +39,11 @@ interface IGridItem {
   y: number
 }
 
-let griditem_id = 0
-
 class GridItem {
   public frame: WoWAPI.Frame
 
   constructor (public params: IGridItem) {
-    this.frame = CreateFrame('Frame', `griditem_${griditem_id}`, this.params.parent)
+    this.frame = CreateFrame('Frame', FrameID('griditem'), this.params.parent)
 
     // this.frame.SetBackdrop({
     //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -47,8 +59,6 @@ class GridItem {
 
     this.params.child.SetParent(this.frame)
     this.params.child.SetPoint('CENTER')
-
-    griditem_id++
   }
 }
 
@@ -202,10 +212,8 @@ interface Talent {
   class_mask: number
 }
 
-let frame_id = 0
-
 function TestFrame (talent: Talent) {
-  const frame = CreateFrame('Frame', `testframe-${frame_id}`, UIParent)
+  const frame = CreateFrame('Frame', FrameID('testframe'), UIParent)
 
   frame.SetBackdrop({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -222,7 +230,7 @@ function TestFrame (talent: Talent) {
   frame.SetBackdropColor(0, 0, 0, 1)
   frame.SetSize(50, 50)
 
-  const counter = CreateFrame('Frame', `testframe-counter-${frame_id}`, frame)
+  const counter = CreateFrame('Frame', FrameID('testframe-counter'), frame)
 
   counter.SetBackdrop({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -260,8 +268,6 @@ function TestFrame (talent: Talent) {
     console.log(`leave ${talent.spell_id}`)
     GameTooltip.Hide()
   })
-
-  frame_id++
 
   return frame
 }
