@@ -24,18 +24,9 @@ export class CreateTalent extends NWTask {
       database: 'world',
       columns: [
         {
-          name: 'entry',
-          type: 'mediumint',
-          typeParams: {
-            size: 16,
-          },
-          isAutoIncrement: true,
-          isPrimaryKey: true,
-          isNotNullable: true,
-        },
-        {
-          name: 'talentId',
+          name: 'id',
           type: 'mediumtext',
+          isPrimaryKey: true,
           isNotNullable: true,
         },
         {
@@ -82,7 +73,7 @@ export class CreateTalent extends NWTask {
 
     this.builder.ServerData('talents', {
       classMask,
-      talentId: template.options.id,
+      id: template.options.id,
       spellId: asset.ID,
       cost: template.options.cost,
       icon: asset.Icon.getPath().replace(/\\/g, '/'),
@@ -91,7 +82,7 @@ export class CreateTalent extends NWTask {
     this.builder.ClientData('talents', {
       [template.options.id]: {
         classMask,
-        talentId: template.options.id,
+        id: template.options.id,
         spellId: asset.ID,
         cost: template.options.cost,
         icon: asset.Icon.getPath().replace(/\\/g, '/'),

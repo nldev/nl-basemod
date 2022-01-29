@@ -201,14 +201,20 @@ moduleoptions.SetFrameLevel(2)
 // ------
 
 class Talents {
-  constructor () {
+  constructor (public talents: Mapping<Talent>) {
+    console.log(talents['IMPROVED_EVISCERATE'].id)
+    console.log(talents['IMPROVED_EVISCERATE'].icon)
+    console.log(talents['IMPROVED_EVISCERATE'].cost)
+    console.log(talents['IMPROVED_EVISCERATE'].spellId)
+    console.log(talents['IMPROVED_EVISCERATE'].class.ROGUE)
+    console.log(talents['IMPROVED_EVISCERATE'].classMask)
   }
 }
 
 // ------
 
 interface Talent {
-  talentId: string
+  id: string
   spellId: number
   cost: number
   icon: string
@@ -274,6 +280,9 @@ function TestFrame (talent: Talent) {
 
   return frame
 }
+
+const talentsList: Mapping<Talent> = TALENTS as any
+const talents = new Talents(talentsList)
 
 const grid = new Grid()
 
