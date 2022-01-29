@@ -252,14 +252,8 @@ function TestFrame (talent: Talent) {
   // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
   frame.SetScript('OnEnter', frame => {
     console.log(`enter ${talent.spell_id}`)
-    GameTooltip.ClearLines()
-    GameTooltip.AppendText('(appended)')
-    GameTooltip.AddLine('line 1')
-    GameTooltip.AddLine('line 2')
-    GameTooltip.AddLine('line 3')
-    GameTooltip.AddLine('line 4')
     GameTooltip.SetOwner(a, 'ANCHOR_CURSOR')
-    console.log(GameTooltip.GetAnchorType())
+    GameTooltip.SetHyperlink(`spell:${talent.spell_id}`)
     GameTooltip.Show()
   })
 
