@@ -251,9 +251,9 @@ function TestFrame (talent: Talent) {
   SetDesaturation(texture, true)
 
   frame.SetBackdropColor(0, 0, 0, 1)
-  frame.SetSize(50, 50)
 
   const counter = CreateFrame('Frame', Unique('testframe-counter'), frame)
+  frame.SetSize(50, 50)
 
   counter.SetBackdrop({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
