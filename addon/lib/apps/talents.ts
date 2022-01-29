@@ -13,7 +13,10 @@ interface Talent {
   classMask: number
 }
 
-function TalentButton (talent: Talent) {
+class TalentButton {
+}
+
+function _TalentButton (talent: Talent) {
   const frame = CreateFrame('Frame', Unique('testframe'), UIParent)
 
   frame.SetBackdrop({
