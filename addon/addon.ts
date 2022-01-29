@@ -202,8 +202,14 @@ moduleoptions.SetFrameLevel(2)
 
 class Talents {
   constructor (public talents: Mapping<Talent>) {
-    const info = GetPlayerInfoByGUID(UnitGUID('player'))
-    console.log(info)
+    const info: any = GetPlayerInfoByGUID(UnitGUID('player'))
+    console.log(info.localizedClass)
+    console.log(info.englishClass)
+    console.log(info.localizedRace)
+    console.log(info.englishRace)
+    console.log(info.sex)
+    console.log(info.race)
+    console.log(info.realm)
   }
 }
 
