@@ -221,7 +221,7 @@ function TestFrame (talent: Talent) {
   const texture = frame.CreateTexture()
   texture.SetTexture(talent.icon)
   texture.SetAllPoints(frame)
-  // SetDesaturation(texture, true)
+  SetDesaturation(texture, true)
 
   frame.SetBackdropColor(0, 0, 0, 1)
   frame.SetSize(50, 50)
@@ -243,7 +243,7 @@ function TestFrame (talent: Talent) {
   const text = counter.CreateFontString(null, 'OVERLAY', 'GameTooltipText')
 
   text.SetPoint('CENTER', 0, 0)
-  text.SetText(`${talent.cost}c`)
+  text.SetText(`${talent.cost}`)
   text.SetFont('Fonts\\FRIZQT__.TTF', 11)
 
   // frame.SetScript('OnLoad', () => console.log('loaded'))
@@ -251,6 +251,7 @@ function TestFrame (talent: Talent) {
   frame.EnableMouse(true)
   // frame.SetScript('OnClick', () => console.log(`clicked ${talent.spell_id}`))
   frame.SetScript('OnEnter', frame => {
+    SetDesaturation(texture, false)
     console.log(`enter ${talent.spell_id}`)
     GameTooltip.SetOwner(a, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`spell:${talent.spell_id}`)
@@ -258,6 +259,7 @@ function TestFrame (talent: Talent) {
   })
 
   frame.SetScript('OnLeave', frame => {
+    SetDesaturation(texture, true)
     console.log(`leave ${talent.spell_id}`)
     GameTooltip.Hide()
   })
