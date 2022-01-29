@@ -306,7 +306,44 @@ for (const key of Object.keys(TALENTS))
 grid.frame.SetParent(moduleoptions)
 grid.frame.SetPoint('TOPLEFT')
 
-Events.System.OnPlayerEnteringWorld(a, () => console.log('hello'))
+
+
+const root = CreateFrame('Frame', 'root', UIParent)
+
+root.SetScript('OnUpdate', () => {
+})
+
+let isLoading = true
+
+function init () {
+  if (isLoading) {
+    const player = UnitGUID('player')
+
+    if (!player)
+      return
+
+    const [a] = GetPlayerInfoByGUID(player)
+
+
+    if (!a)
+      return
+
+    console.log(a)
+
+    isLoading = false
+  }
+}
+
+
+Events.System.OnVariablesLoaded(a, () => {
+  const player = UnitGUID('player')
+
+  console.log(player)
+
+  const [a] = GetPlayerInfoByGUID(player)
+
+  console.log(`${a}`)
+})
 
 // -------
 
