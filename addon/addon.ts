@@ -331,4 +331,3 @@ function TalentButton (talent: Talent) {
   return frame
 }
 
-
