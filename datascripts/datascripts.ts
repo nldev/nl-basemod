@@ -52,6 +52,8 @@ function main () {
   zeal.asset.Duration.setSimple(resolveDuration(0.5), 0, resolveDuration(1))
   zeal.asset.Cooldown.set(0, 0, 0, 0)
 
+  zeal.asset.Power.setMana(0, 50, 0, 0 ,0)
+
   const visual = zeal.asset.Visual.getRef()
   visual.StateKit.getRef().clear()
 

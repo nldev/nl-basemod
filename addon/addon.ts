@@ -200,16 +200,27 @@ moduleoptions.SetFrameLevel(2)
 
 // ------
 
-class Talents {
-  constructor (public talents: Mapping<Talent>) {
-    const info: any = GetPlayerInfoByGUID(UnitGUID('player'))
-    console.log(info.localizedClass)
-    console.log(info.englishClass)
-    console.log(info.localizedRace)
-    console.log(info.englishRace)
-    console.log(info.sex)
-    console.log(info.race)
-    console.log(info.realm)
+class Foo {
+  constructor () {
+    this.load()
+  }
+
+  private load () {
+    const player = UnitGUID('player')
+
+    if (!player)
+      return this.load()
+
+    const [localizedClass] = GetPlayerInfoByGUID(UnitGUID('player'))
+
+    if (!localizedClass)
+      return this.load()
+
+    this.init()
+  }
+
+  private init () {
+    console.log('is loaded')
   }
 }
 
@@ -256,6 +267,7 @@ function TestFrame (talent: Talent) {
   counter.SetPoint('BOTTOM', 0, -8)
   //  bgFile: 'Interface/Icons/Spell_Frost_WindWalkOn',
 
+
   const text = counter.CreateFontString(null, 'OVERLAY', 'GameTooltipText')
 
   text.SetPoint('CENTER', 0, 0)
@@ -288,23 +300,15 @@ const talentsMap: Mapping<Talent> = TALENTS as any
 
 const grid = new Grid()
 
-grid.frame.SetScript('OnUpdate', main)
-
-let init = true
-
-function main () {
-  if (init) {
-    const talents = new Talents(talentsMap)
-
-    init = false
-  }
-}
-
 for (const key of Object.keys(TALENTS))
   grid.add(TestFrame(TALENTS[key]))
 
 grid.frame.SetParent(moduleoptions)
 grid.frame.SetPoint('TOPLEFT')
+
+Events.System.OnPlayerLogin(a, () => {
+ const foo = new Foo()
+})
 
 // -------
 
