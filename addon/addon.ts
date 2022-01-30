@@ -1,11 +1,4 @@
-import { ROGUE } from './constants'
-import { App } from './basemod/app'
-import { foo } from './basemod/foo'
-
-App()
-console.log(foo[0])
-
-console.log(ROGUE)
+import { app } from './basemod/foo'
 
 // const container = new Container($ => {
 //   console.log($.playerInfo.name)

@@ -1,6 +1,5 @@
-import { foo } from './foo'
-
-export const App = () => {
-    foo.push('hello')
+export class App {
+  act () {
+      console.log('hello world')
+  }
 }
-
