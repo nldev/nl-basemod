@@ -1,10 +1,20 @@
+import '../global'
+
 export class Root {
   private isLoading = true
 
-  public init () {
+  public frame: WoWAPI.Frame
+
+  constructor (public cb: (root: Root) => void) {
+    this.frame = CreateFrame('Frame', 'root', UIParent)
+    this.frame.SetScript('OnUpdate', this.load)
   }
 
-  public start () {
+  public init () {
+    this.cb(this)
+  }
+
+  public load () {
     if (this.isLoading) {
       const player = UnitGUID('player')
 
@@ -14,22 +24,10 @@ export class Root {
         if (info[0]) {
           this.isLoading = false
 
-          init()
+          this.init()
         }
       }
     }
   }
 }
 
-function load () {
-}
-
-function init () {
-  console.log('loaded')
-}
-
-export const root = CreateFrame('Frame', 'root', UIParent)
-
-root.SetScript('OnUpdate', () => {
-  load()
-})
