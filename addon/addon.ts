@@ -1,8 +1,6 @@
-import { app } from './basemod/foo'
-import { hello } from './basemod/bar'
+import $ from './basemod/index'
 
-hello()
-
+console.log($)
 // const container = new Container($ => {
 //   console.log($.playerInfo.name)
 //   console.log($.playerInfo.chrClass)
