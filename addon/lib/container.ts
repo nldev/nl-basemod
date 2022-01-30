@@ -8,7 +8,7 @@ export class Container {
   public playerInfo: PlayerInfo
   public components: Mapping<Component>
 
-  constructor () {
+  constructor (protected onInit: ($: Container) => void) {
     this.root = CreateFrame('Frame')
 
     this.root.SetScript('OnUpdate', () => this.load())
@@ -24,6 +24,7 @@ export class Container {
       const info = GetPlayerInfoByGUID(player)
 
       if (info[0]) {
+        console.log('hello')
         this.playerInfo = {
           name: info[5].toLowerCase(),
           chrRace: info[2].toUpperCase() as CharacterRace,
@@ -33,13 +34,11 @@ export class Container {
 
         this.isLoaded = true
 
-        return this.init()
+        console.log('hello')
+        return this.onInit(this)
       }
 
       this.load()
     }
-  }
-
-  protected init () {
   }
 }
