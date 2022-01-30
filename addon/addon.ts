@@ -42,31 +42,25 @@ export type CharacterRace =
   | typeof BLOOD_ELF
   | typeof DRAENEI
 
-interface PlayerInfo {
+export interface PlayerInfo {
   name: string
-  race: CharacterRace
-  class: CharacterClass
+  chrRace: CharacterRace
+  chrClass: CharacterClass
   level: number
 }
 
-interface Mapping<T> {
+export interface Mapping<T> {
   [key: string]: T
 }
 
-interface ComponentOptions {}
+export interface ComponentOptions {}
 
-type Component<
+export type Component<
   O extends ComponentOptions = ComponentOptions,
   T extends WoWAPI.UIObject = WoWAPI.Frame,
 > = (options: O) => T
 
-export function App () {
-  console.log(
-    container.playerInfo.name
-  )
-}
-
-class Container {
+export class Container {
   protected isLoaded: boolean = false
   protected isInit: boolean = false
 
@@ -92,8 +86,8 @@ class Container {
       if (info[0]) {
         this.playerInfo = {
           name: info[5].toLowerCase(),
-          race: info[2].toUpperCase() as CharacterRace,
-          class: info[0].toUpperCase() as CharacterClass,
+          chrRace: info[2].toUpperCase() as CharacterRace,
+          chrClass: info[0].toUpperCase() as CharacterClass,
           level: info[4],
         }
 
@@ -111,5 +105,15 @@ class Container {
   }
 }
 
-const container = new Container()
+export const container = new Container()
+
+export function App () {
+  const $ = container
+  const { name, level, chrRace, chrClass } = $.playerInfo
+
+  console.log(`name: ${name}`)
+  console.log(`level: ${level}`)
+  console.log(`chrRace: ${chrRace}`)
+  console.log(`chrClass: ${chrClass}`)
+}
 
