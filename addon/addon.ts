@@ -1,6 +1,7 @@
 import { CharacterClass, CharacterRace, Component, Mapping, PlayerInfo } from './lib/types'
 
 function App () {
+  console.log($.playerInfo.chrClass)
 }
 
 export class Container {
@@ -47,6 +48,8 @@ export class Container {
   }
 }
 
-export default new Container()
+const $ = new Container()
+
+export default $
 
 
