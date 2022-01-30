@@ -1,10 +1,10 @@
-import '../global'
+// import '../global'
 
-export type Size = [number, number]
+// export type Size = [number, number]
 
-export type Color = [number, number, number, number]
+// export type Color = [number, number, number, number]
 
-export interface Mapping<T = any> {
-  [key: string]: T
-}
+// export interface Mapping<T = any> {
+//   [key: string]: T
+// }
 
