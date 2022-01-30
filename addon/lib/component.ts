@@ -3,6 +3,16 @@ import { UI } from '.'
 import { Unique } from './utils'
 import { Color, Size } from './types'
 
+type RelativeTo = WoWAPI.Region | string
+
+interface Point {
+  point: WoWAPI.Point
+  relativeTo?: RelativeTo
+  relativePoint?: WoWAPI.Point
+  offsetX?: number
+  offsetY?: number
+}
+
 export interface Background {
   bgFile: string
   edgeFile: string
@@ -35,7 +45,7 @@ export const DEFAULT_BACKGROUND: Background = {
   color: [0, 0, 0, 1],
 }
 
-export interface ComponentOptions<T = WoWAPI.UIObject> {
+export interface ComponentOptions<T = WoWAPI.Region> {
   parent?: T | 'root'
   name?: string
   isPrefix?: boolean
@@ -43,6 +53,7 @@ export interface ComponentOptions<T = WoWAPI.UIObject> {
   id?: number
   background?: Background
   size?: Size
+  point?: Point
 }
 
 export abstract class Component<T> {
@@ -73,17 +84,28 @@ export class Frame extends Component<WoWAPI.Frame> {
     if (this.options.size)
       this.Size(...this.options.size)
 
+    if (this.options.point)
+      this.Point(this.options.point)
+
     if (this.options.background)
       this.Background(this.options.background)
 
     return this.frame
   }
 
+  public SetAllPoints (relativeTo: RelativeTo) {
+    this.frame.SetAllPoints()
+  }
+
+  public Point ({ point, relativeTo, relativePoint, offsetX, offsetY }: Point) {
+    this.frame.SetPoint(point, relativeTo, relativePoint, offsetX, offsetY)
+  }
+
   public Size (width: number, height: number) {
     this.frame.SetSize(width, height)
   }
 
-  public Background (options: BackgroundOptions) {
+  public Background (options: BackgroundOptions = DEFAULT_BACKGROUND) {
     const background: Background = { ...DEFAULT_BACKGROUND, ...options }
 
     this.frame.SetBackdrop(background)
