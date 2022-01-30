@@ -1,7 +1,5 @@
-import { CharacterClass, CharacterRace, Component, Mapping, PlayerInfo } from './lib/types'
-
-function App () {
-}
+import { App } from './main'
+import { CharacterClass, CharacterRace, Component, Mapping, PlayerInfo } from './types'
 
 export class Container {
   protected isLoaded: boolean = false
@@ -44,9 +42,9 @@ export class Container {
   }
 
   protected init () {
+    App(this)
   }
 }
 
 export default new Container()
-
 
