@@ -1,8 +1,21 @@
 import '../global'
-import { Frame } from '../component'
+import { ComponentOptions, Frame } from '../component'
 import { Unique } from '../utils'
+import { Size } from '../types'
 
-class Grid extends Frame {
+interface GridOptions extends ComponentOptions {
+  itemsPerRow?: number
+  rowHeight?: number
+  size: Size
+}
+
+class Grid extends Frame<GridOptions> {
+  // private list: GridItem[]
+
+  private itemsPerRow: number
+  private rowHeight: number
+  private size: Size
+
   private itemWidth: number
   private index: number = 0
   private x: number = 0
@@ -11,6 +24,7 @@ class Grid extends Frame {
   // protected defaultType: WoWAPI.FrameType = 'ScrollFrame'
 
   protected onCreate () {
+    // this.Background()
   }
 }
 
