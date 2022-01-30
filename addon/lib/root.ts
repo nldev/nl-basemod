@@ -2,7 +2,6 @@ export class Root {
   private isLoading = true
 
   public init () {
-
   }
 
   public start () {
