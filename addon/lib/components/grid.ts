@@ -6,7 +6,6 @@ import { Size } from '../types'
 interface GridOptions extends ComponentOptions {
   itemsPerRow?: number
   rowHeight?: number
-  size: Size
 }
 
 class Grid extends Frame<GridOptions> {
@@ -14,7 +13,6 @@ class Grid extends Frame<GridOptions> {
 
   private itemsPerRow: number
   private rowHeight: number
-  private size: Size
 
   private itemWidth: number
   private index: number = 0
@@ -24,9 +22,39 @@ class Grid extends Frame<GridOptions> {
   // protected defaultType: WoWAPI.FrameType = 'ScrollFrame'
 
   protected onCreate () {
+    this.itemWidth = this.options.size[0] / this.options.itemsPerRow
     // this.Background()
   }
+
+//
+//   public add (frame: WoWAPI.Frame) {
+//     const isEndOfRow = this.index === (this.params.itemsPerRow - 1)
+//
+//     new GridItem({
+//       parent: this.frame,
+//       child: frame,
+//       index: this.index,
+//       height: this.params.rowHeight,
+//       width: this.itemWidth,
+//       x: this.x,
+//       y: this.y,
+//     })
+//
+//     if (isEndOfRow) {
+//       this.index = 0
+//       this.x = 0
+//       this.y -= this.params.rowHeight
+//     } else {
+//       this.index++
+//       this.x += this.itemWidth
+//     }
+//
+//     // this.list.push(item)
+//     // console.log('pushed to list')
+//   }
 }
+
+  console.log(Grid)
 
 
 // interface IGridItem {

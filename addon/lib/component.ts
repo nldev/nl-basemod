@@ -47,21 +47,24 @@ export const DEFAULT_BACKGROUND: Background = {
 }
 
 export interface ComponentOptions<T = WoWAPI.Region> {
+  size: Size
   parent?: T | 'root'
   name?: string
   isPrefix?: boolean
   inherits?: string
   id?: number
   background?: Background
-  size?: Size
   point?: Point
   setAllPoints?: RelativeTo
 }
 
-export abstract class Component<T> {
+export abstract class Component<T, O extends ComponentOptions = ComponentOptions> {
   public frame: T
+  public size: Size
 
-  constructor (public ui: UI, protected options: ComponentOptions) {
+  constructor (public ui: UI, protected options: O) {
+    this.size = this.options.size
+
     this.create()
     this.onCreate()
   }
@@ -71,7 +74,7 @@ export abstract class Component<T> {
   protected onCreate () {}
 }
 
-export class Frame extends Component<WoWAPI.Frame> {
+export class Frame<O extends ComponentOptions = ComponentOptions> extends Component<WoWAPI.Frame, O> {
   protected create () {
     const { parent, name, isPrefix, inherits, id } = this.options
 
