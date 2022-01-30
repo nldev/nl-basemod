@@ -1,4 +1,7 @@
 import { app } from './basemod/foo'
+import { hello } from './basemod/bar'
+
+hello()
 
 // const container = new Container($ => {
 //   console.log($.playerInfo.name)

@@ -1,5 +1,5 @@
 export class App {
   act () {
-      console.log('hello world')
+      console.log('hello world!')
   }
 }
