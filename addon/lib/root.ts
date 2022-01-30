@@ -1,5 +1,3 @@
-import '../global'
-
 export class Root {
   private isLoading = true
 
@@ -26,4 +24,5 @@ export class Root {
     }
   }
 }
+
 
