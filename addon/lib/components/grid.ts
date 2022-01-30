@@ -11,7 +11,6 @@ class Grid extends Component {
   // protected defaultType: WoWAPI.FrameType = 'ScrollFrame'
 
   protected onCreate () {
-    this.frame
   }
 }
 

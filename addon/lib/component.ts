@@ -35,9 +35,8 @@ export const DEFAULT_BACKGROUND: Background = {
   color: [0, 0, 0, 1],
 }
 
-export interface ComponentOptions {
-  type?: WoWAPI.FrameType
-  parent?: WoWAPI.UIObject | 'root'
+export interface ComponentOptions<T = WoWAPI.UIObject> {
+  parent?: T | 'root'
   name?: string
   isPrefix?: boolean
   inherits?: string
@@ -45,23 +44,25 @@ export interface ComponentOptions {
   background?: Background
 }
 
-export class Component {
-  public frame: WoWAPI.UIObject
+export abstract class Component<T> {
+  public frame: T
 
-  protected defaultType: WoWAPI.FrameType
-
-  constructor (public ui: UI, private options: ComponentOptions) {
+  constructor (public ui: UI, protected options: ComponentOptions) {
     this.create()
     this.onCreate()
   }
 
-  private create () {
-    const { type = 'Frame', parent, name, isPrefix, inherits, id } = this.options
+  protected abstract create (): T
 
-    const x = CreateFrame('ScrollFrame')
+  protected onCreate () {}
+}
+
+export class Frame extends Component<WoWAPI.Frame> {
+  protected create () {
+    const { parent, name, isPrefix, inherits, id } = this.options
 
     this.frame = CreateFrame(
-      type || this.defaultType,
+      'Frame',
       isPrefix ? Unique(name) : name,
       (parent === 'root') ? this.ui.root.frame : parent,
       inherits,
@@ -74,17 +75,19 @@ export class Component {
     return this.frame
   }
 
-  public Background (options: BackgroundOptions = DEFAULT_BACKGROUND) {
-    const background: Background = { ...DEFAULT_BACKGROUND, ...options }
+  public Size (width: number, height: number) {
+    const frame = Convert<WoWAPI.ScrollFrame>(this.frame)
 
-    if (this.frame.GetObjectType() === 'Frame') {
-      const frame = Convert<WoWAPI.Frame>(this.frame)
-
-      frame.SetBackdrop(background)
-      frame.SetBackdropColor(...background.color)
-    }
+    frame.SetSize(width, height)
   }
 
-  protected onCreate () {}
+  public Background (options: BackgroundOptions) {
+    const background: Background = { ...DEFAULT_BACKGROUND, ...options }
+
+    const frame = Convert<WoWAPI.Frame>(this.frame)
+
+    frame.SetBackdrop(background)
+    frame.SetBackdropColor(...background.color)
+  }
 }
 
