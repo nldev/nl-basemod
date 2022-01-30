@@ -1,7 +1,7 @@
 import '../global'
 import { UI } from '.'
-import { Convert, Unique } from './utils'
-import { Color } from './types'
+import { Unique } from './utils'
+import { Color, Size } from './types'
 
 export interface Background {
   bgFile: string
@@ -42,6 +42,7 @@ export interface ComponentOptions<T = WoWAPI.UIObject> {
   inherits?: string
   id?: number
   background?: Background
+  size?: Size
 }
 
 export abstract class Component<T> {
@@ -69,6 +70,9 @@ export class Frame extends Component<WoWAPI.Frame> {
       id,
     )
 
+    if (this.options.size)
+      this.Size(...this.options.size)
+
     if (this.options.background)
       this.Background(this.options.background)
 
@@ -76,18 +80,14 @@ export class Frame extends Component<WoWAPI.Frame> {
   }
 
   public Size (width: number, height: number) {
-    const frame = Convert<WoWAPI.ScrollFrame>(this.frame)
-
-    frame.SetSize(width, height)
+    this.frame.SetSize(width, height)
   }
 
   public Background (options: BackgroundOptions) {
     const background: Background = { ...DEFAULT_BACKGROUND, ...options }
 
-    const frame = Convert<WoWAPI.Frame>(this.frame)
-
-    frame.SetBackdrop(background)
-    frame.SetBackdropColor(...background.color)
+    this.frame.SetBackdrop(background)
+    this.frame.SetBackdropColor(...background.color)
   }
 }
 
