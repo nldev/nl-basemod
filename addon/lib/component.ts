@@ -1,22 +1,36 @@
 // import '../global'
 
-export interface Container {
-  Root: WoWAPI.Frame
-  Components: {
-    Frame
-    Button
-  }
-}
-//
-export type Component<C extends WoWAPI.UIObject = WoWAPI.Frame, O = any> = ($: Container, options: O) => C
+import { Root } from "./root"
 
-export const Frame: Component = ($: Container, options: any) => {
+export type Component<
+  C extends WoWAPI.UIObject = WoWAPI.Frame,
+  O = any,
+  D extends Container = Container,
+> = ($: D, options: O) => C
+
+export const Frame: Component = () => {
   return CreateFrame('Frame')
 }
 
-export const Button: Component = ($: Container, options: any) => {
+export const Button: Component = () => {
   return CreateFrame('Button')
 }
+
+export class Container {
+  root: Root
+  components: {
+    Frame
+    Button
+  } = {
+    Frame,
+    Button,
+  }
+
+  constructor () {
+    const x = this.components.Frame()
+  }
+}
+
 
 
 // import { UI } from '.'
