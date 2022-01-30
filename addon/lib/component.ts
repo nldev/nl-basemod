@@ -4,7 +4,7 @@ import { Unique } from './utils'
 
 export interface ComponentOptions {
   type?: WoWAPI.FrameType
-  parent?: WoWAPI.Frame
+  parent?: WoWAPI.Frame | 'root'
   name?: string
   isPrefix?: boolean
   inherits?: string
@@ -24,7 +24,13 @@ export class Component {
   private create () {
     const { type = 'Frame', parent, name, isPrefix, inherits, id } = this.options
 
-    this.frame = CreateFrame(type || this.defaultType, isPrefix ? Unique(name) : name, parent, inherits, id)
+    this.frame = CreateFrame(
+      type || this.defaultType,
+      isPrefix ? Unique(name) : name,
+      (parent === 'root') ? this.ui.root.frame : parent,
+      inherits,
+      id,
+    )
 
     return this.frame
   }
