@@ -1,8 +1,8 @@
 import '../global'
-import { Component } from '../component'
+import { Frame } from '../component'
 import { Unique } from '../utils'
 
-class Grid extends Component {
+class Grid extends Frame {
   private itemWidth: number
   private index: number = 0
   private x: number = 0
