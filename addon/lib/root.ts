@@ -7,7 +7,7 @@ export class Root {
 
   constructor (public onLoad: () => void) {
     this.frame = CreateFrame('Frame', 'root', UIParent)
-    this.frame.SetScript('OnUpdate', this.load)
+    this.frame.SetScript('OnUpdate', () => this.load())
   }
 
   public init () {

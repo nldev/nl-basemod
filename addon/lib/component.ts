@@ -1,5 +1,5 @@
 import '../global'
-import { UI } from './ui'
+import { UI } from '.'
 import { Unique } from './utils'
 
 export interface ComponentOptions {
