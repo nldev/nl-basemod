@@ -2,8 +2,9 @@ import '../global'
 import { UI } from '.'
 import { Unique } from './utils'
 import { Color, Size } from './types'
+import { ROOT, PARENT } from './constants'
 
-type RelativeTo = WoWAPI.Region | string
+type RelativeTo = WoWAPI.Region | typeof ROOT | typeof PARENT | string
 
 interface Point {
   point: WoWAPI.Point
@@ -54,6 +55,7 @@ export interface ComponentOptions<T = WoWAPI.Region> {
   background?: Background
   size?: Size
   point?: Point
+  setAllPoints?: RelativeTo
 }
 
 export abstract class Component<T> {
@@ -90,11 +92,19 @@ export class Frame extends Component<WoWAPI.Frame> {
     if (this.options.background)
       this.Background(this.options.background)
 
+    if (this.options.setAllPoints)
+
     return this.frame
   }
 
   public SetAllPoints (relativeTo: RelativeTo) {
-    this.frame.SetAllPoints()
+    if (relativeTo === ROOT) {
+      this.frame.SetAllPoints(this.ui.root.frame)
+    } else if (relativeTo === PARENT) {
+      this.frame.SetAllPoints(this.options.parent)
+    } else {
+      this.frame.SetAllPoints(relativeTo)
+    }
   }
 
   public Point ({ point, relativeTo, relativePoint, offsetX, offsetY }: Point) {
@@ -106,6 +116,7 @@ export class Frame extends Component<WoWAPI.Frame> {
   }
 
   public Background (options: BackgroundOptions = DEFAULT_BACKGROUND) {
+    // FIXME: use fallbacks from ui
     const background: Background = { ...DEFAULT_BACKGROUND, ...options }
 
     this.frame.SetBackdrop(background)
