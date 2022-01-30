@@ -1,6 +1,6 @@
 // import '../global'
 //
-export type Component<O = any, C extends WoWAPI.UIObject = WoWAPI.Frame> = ($: Container, options: O) => C
+export type Component<C extends WoWAPI.UIObject = WoWAPI.Frame, O = any> = ($: Container, options: O) => C
 
 interface Container {
   Components: {
