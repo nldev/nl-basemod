@@ -1,5 +1,5 @@
 import '../global'
-import { Root } from './root'
+import { UI } from './ui'
 import { Unique } from './utils'
 
 export interface ComponentOptions {
@@ -16,7 +16,7 @@ export class Component {
 
   private defaultType: WoWAPI.FrameType = 'Frame'
 
-  constructor (public root: Root, private options: ComponentOptions) {
+  constructor (public ui: UI, private options: ComponentOptions) {
     this.create()
     this.onCreate()
   }

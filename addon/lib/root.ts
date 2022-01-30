@@ -5,13 +5,13 @@ export class Root {
 
   public frame: WoWAPI.Frame
 
-  constructor (public cb: (root: Root) => void) {
+  constructor (public onLoad: () => void) {
     this.frame = CreateFrame('Frame', 'root', UIParent)
     this.frame.SetScript('OnUpdate', this.load)
   }
 
   public init () {
-    this.cb(this)
+    this.onLoad()
   }
 
   public load () {
