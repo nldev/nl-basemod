@@ -1,12 +1,8 @@
 const root = CreateFrame('Frame')
 
-Events.System.OnPlayerEnteringWorld(root, () => {
-  console.log('hello')
-  // const x = GetPlayerInfoByGUID(UnitGUID('player'))
-  // console.log(x[0])
-  // console.log(x[1])
-  // console.log(x[2])
-  // console.log(x[3])
-  // console.log(x[4])
-  // console.log(x[5])
+Events.System.OnPlayerLogin(root, (x, y, z) => {
+  console.log(x)
+  console.log(y)
+  console.log(z)
 })
+
