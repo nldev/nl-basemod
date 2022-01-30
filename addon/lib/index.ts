@@ -1,6 +1,3 @@
-export interface Config {
-}
-
 import '../global'
 import { Root } from './root'
 

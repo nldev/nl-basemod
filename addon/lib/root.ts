@@ -10,10 +10,6 @@ export class Root {
     this.frame.SetScript('OnUpdate', () => this.load())
   }
 
-  public init () {
-    this.onLoad()
-  }
-
   public load () {
     if (this.isLoading) {
       const player = UnitGUID('player')
@@ -24,7 +20,7 @@ export class Root {
         if (info[0]) {
           this.isLoading = false
 
-          this.init()
+          this.onLoad()
         }
       }
     }
