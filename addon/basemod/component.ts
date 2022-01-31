@@ -316,6 +316,8 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       if (!state.preventDefault)
         frame.StopMovingOrSizing()
     })
+
+    return this
   }
 
   public Size (width: number, height: number) {

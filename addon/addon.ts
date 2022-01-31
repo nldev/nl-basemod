@@ -7,14 +7,10 @@ render($ => {
     .Size(500, 500)
     .Backdrop()
     .Point('CENTER')
-    .Padding(20)
+    .Padding(10)
     .Execute(() => console.log('ran'))
+    .Drag('RightButton')
 
-  a.ref.EnableMouse(true)
-  a.ref.RegisterForDrag('RightButton')
-  a.ref.SetMovable(true)
-  a.ref.SetScript('OnDragStart', f => f.StartMoving())
-  a.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
 
   Scroll({ name: 'bar' })
     .Point('CENTER')
