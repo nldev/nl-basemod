@@ -96,16 +96,8 @@ export abstract class Instance<
   public parent: WoWAPI.UIObject
 
   constructor (public options: O, public children?: Instance[]) {
-    this.create()
-    this.prepare()
-    this.setup()
-    this.init()
-  }
-
-  protected abstract create (name?: string, parent?: WoWAPI.UIObject): void
-
-  private prepare () {
-    const $ = Get()
+    if (this.options.prefix && this.options.name)
+      throw new Error('Component cannot have both a name and a prefix')
 
     this.name = this.options.name
       ? this.options.name
@@ -113,9 +105,15 @@ export abstract class Instance<
       ? Unique(this.options.prefix)
       : null
 
+    this.create()
+    this.prepare()
+    this.setup()
+    this.init()
+  }
 
-    if (this.options.prefix && this.options.name)
-      throw new Error('Component cannot have both a name and a prefix')
+  protected abstract create (name?: string, parent?: WoWAPI.UIObject): void
+  private prepare () {
+    const $ = Get()
 
     if (this.children)
       this.children.forEach(child => child.ref.SetParent(this.ref))
