@@ -7,15 +7,14 @@ interface PlayerInfo {
   level: number
 }
 
-export class State {
+export class Container {
   protected isLoaded: boolean = false
   protected isInit: boolean = false
 
   public root: WoWAPI.Frame
   public playerInfo: PlayerInfo
-  // public components: Mapping<Component>
 
-  constructor (protected onInit: ($: State) => void, isDummy: boolean = false) {
+  constructor (protected onInit: ($: Container) => void, isDummy: boolean = false) {
     if (!isDummy) {
       this.root = CreateFrame('Frame', 'root', UIParent)
       this.root.SetScript('OnUpdate', () => this.load())
@@ -41,22 +40,11 @@ export class State {
 
         this.isLoaded = true
 
-        console.log(this.playerInfo.name)
-        console.log(this.playerInfo.chrRace)
-        console.log(this.playerInfo.chrClass)
-        console.log(this.playerInfo.level)
-
-        console.log('loaded')
-        console.log('a new one')
-
         this.onInit(this)
       }
 
       this.load()
     }
-  }
-
-  public init () {
   }
 }
 
