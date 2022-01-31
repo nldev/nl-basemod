@@ -1,11 +1,9 @@
-import { GetContainer } from './basemod/state'
-// import { Container } from './basemod/container'
+import Global from './basemod/global'
+import { App } from './basemod/app'
 
-// state.container = new Container()
-//
-//
-const $ = GetContainer()
-console.log($.root.GetName())
+const $ = Global()
+
+$.app = new App()
 
 // const container = new Container($ => {
 //   console.log($.playerInfo.name)
