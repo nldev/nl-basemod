@@ -4,6 +4,9 @@ export interface ScrollOptions extends FrameOptions {}
 
 export class ScrollElement extends FrameElement {
   protected init () {
+    this.ref.SetPoint('CENTER')
+    this.Size(400, 400)
+    this.Backdrop()
     // a.SetBackdrop({
     //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
     //   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
@@ -38,16 +41,16 @@ export class ScrollElement extends FrameElement {
 
     this.ref.SetSize(this.ref.GetWidth() * 0.667, this.ref.GetHeight() * 0.667)
 
-    this.ref.SetScale(0.667)
     scrollframe.SetScrollChild(scrollchild)
 
     const b = CreateFrame('Frame', 'b', UIParent)
 
-    b.SetSize(this.ref.GetWidth() * 0.95, this.ref.GetHeight() * 0.95)
+    b.SetSize(this.ref.GetWidth() * 0.9, this.ref.GetHeight() * 0.9)
     b.SetParent(this.ref)
     b.SetPoint('CENTER')
 
     scrollframe.SetAllPoints(b)
+    scrollframe.SetScale(0.667)
 
     scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
 
