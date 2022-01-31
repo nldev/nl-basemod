@@ -79,6 +79,8 @@ export class Component<
 }
 
 export interface FrameOptions extends ComponentOptions {
+  point?: Point
+  allPoints?: RelativeRegion
   bgOptions?: BackdropOptions
   colorOptions?: ColorOptions
 }
