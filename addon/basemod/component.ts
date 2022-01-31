@@ -409,6 +409,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
   }
 
   public Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
+    if (this.options)
     this.ref.SetParent(parent)
 
     return this

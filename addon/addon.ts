@@ -14,10 +14,10 @@ render($ => {
 
 
   Scroll({ name: 'bar' })
-    .Point('CENTER')
     .Parent(a.ref)
+    .AllPoints(a.ref)
     .Size(600, 600)
-    .Z(1)
+    .Z(6)
     .Click('LeftButton', () => console.log($.playerInfo.name))
 })
 
