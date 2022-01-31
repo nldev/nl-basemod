@@ -1,14 +1,15 @@
 import { App } from './app'
+import { noop } from './utils'
 
-const state = {
-  app: new App(noop, true)
+interface State {
+  app: App
 }
 
-export const State = () => state
+const state: any = {}
 
-export const init = (onInit: (app: App) => void) => {
-  const state = State()
+export const Get = () => (state as State).app
 
+export const init = (onInit: ($: App) => void) => {
   state.app = new App(onInit)
 
   return state.app

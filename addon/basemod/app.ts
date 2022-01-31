@@ -17,7 +17,7 @@ export class App {
 
   constructor (protected onInit: ($: App) => void, isDummy: boolean = false) {
     if (!isDummy) {
-      this.root = CreateFrame('Frame')
+      this.root = CreateFrame('Frame', 'root', UIParent)
       this.root.SetScript('OnUpdate', () => this.load())
     }
   }
@@ -49,7 +49,7 @@ export class App {
         console.log('loaded')
         console.log('a new one')
 
-        this.onInit()
+        this.onInit(this)
       }
 
       this.load()
