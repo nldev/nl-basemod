@@ -75,6 +75,16 @@ export interface FrameOnClick {
   handler: FrameClickHandler
 }
 
+export type PreventDefault = () => void
+
+export type FrameDragStartHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, preventDefault: PreventDefault) => void
+export type FrameDragStopHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, preventDefault: PreventDefault) => void
+
+export interface FrameOnDrag {
+  button: WoWAPI.MouseButton
+  handler: FrameClickHandler
+}
+
 export interface FullPoint {
   point: WoWAPI.Point
   relativeTo?: RelativeRegion
@@ -267,6 +277,36 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     })
 
     return this
+  }
+
+  public Drag (type: WoWAPI.MouseButton, startHandler: FrameDragStartHandler, stopHandler: FrameDragStopHandler) {
+    this.ref.EnableMouse(true)
+    this.ref.RegisterForDrag(type)
+    this.ref.SetMovable(true)
+    this.ref.SetScript('OnDragStart', (frame, type) => {
+      const state = { preventDefault: false }
+
+      const preventDefault = () => state.preventDefault = true
+
+      startHandler(frame, type, preventDefault)
+
+      console.log(type)
+
+      if (!state.preventDefault)
+        frame.StartMoving()
+    })
+    this.ref.SetScript('OnDragStop', (frame) => {
+      const state = { preventDefault: false }
+
+      const preventDefault = () => state.preventDefault = true
+
+      stopHandler(frame, type, preventDefault)
+
+      console.log(type)
+
+      if (!state.preventDefault)
+        frame.StopMovingOrSizing()
+    })
   }
 
   public Size (width: number, height: number) {

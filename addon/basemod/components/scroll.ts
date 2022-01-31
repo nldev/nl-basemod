@@ -16,11 +16,11 @@ export class ScrollElement extends FrameElement {
     //   insets: { left: 4, right: 4, top: 4, bottom: 4 },
     // })
 
-    this.ref.EnableMouse(true)
-    this.ref.RegisterForDrag('RightButton')
-    this.ref.SetMovable(true)
-    this.ref.SetScript('OnDragStart', f => f.StartMoving())
-    this.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
+    // this.ref.EnableMouse(true)
+    // this.ref.RegisterForDrag('RightButton')
+    // this.ref.SetMovable(true)
+    // this.ref.SetScript('OnDragStart', f => f.StartMoving())
+    // this.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
 
     const scrollframe = CreateFrame('ScrollFrame', 'scrollframe', null, 'UIPanelScrollFrameTemplate')
     const scrollchild = CreateFrame('Frame', 'scrollchild')
