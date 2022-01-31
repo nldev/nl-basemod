@@ -8,13 +8,7 @@ render($ => {
     .Backdrop()
     .Point('CENTER')
     .Padding(50)
-    .Children([
-      Frame()
-        .Size(300, 300)
-        .Backdrop()
-        .Point('TOPLEFT')
-        .Execute(() => console.log('ran'))
-    ])
+    .Execute(() => console.log('ran'))
 
   // Scroll({ name: 'bar' })
   //   .Backdrop()

@@ -94,7 +94,7 @@ export interface ComponentOptions {
 export type Component<
   O extends ComponentOptions = ComponentOptions,
   T extends Element = Element,
-> = (options?: O, children?: FrameElement[]) => T
+> = (options?: O) => T
 
 export abstract class Element<
   O extends ComponentOptions = ComponentOptions,
@@ -105,7 +105,7 @@ export abstract class Element<
   public parent: WoWAPI.Frame
   public inner: WoWAPI.Frame
 
-  constructor (public options: O, public children: FrameElement[] = []) {
+  constructor (public options: O) {
     if (this.options.prefix && this.options.name)
       throw new Error('Component cannot have both a name and a prefix')
 
@@ -126,23 +126,6 @@ export abstract class Element<
   public abstract setup (): void
 
   protected init () {}
-
-  public Children (children: FrameElement[]) {
-    // this.children.forEach(child => {
-    //   child.ref.SetParent(UIParent)
-    //   child.ref.Hide()
-    // })
-
-    this.children = children
-
-    this.children.forEach(child => {
-      child.ref.SetParent(this.inner ? this.inner : this.ref)
-
-      child.setup()
-    })
-
-    return this
-  }
 
   private mount () {
     const $ = Get()
@@ -205,25 +188,14 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 
   public Padding (amount: number) {
-    if (amount === 0) {
-      this.children.forEach(child => {
-        child.ref.SetParent(this.ref)
-        child.Point(this.point)
-      })
-
+    if (amount === 0)
       return this
-    }
 
     this.inner = CreateFrame('Frame', null, this.ref)
 
     this.inner.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
     this.inner.SetParent(this.ref)
     this.inner.SetPoint('CENTER')
-
-    this.children.forEach(child => {
-      child.ref.SetParent(this.inner)
-      child.Point(this.point)
-    })
 
     return this
   }
@@ -304,9 +276,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     if (height)
       this.ref.SetHeight(width)
 
-    this.width = width || this.ref.GetWidth()
-    this.height = height || this.ref.GetHeight()
-
     return this
   }
 
@@ -323,8 +292,8 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 }
 
-export const Frame: Component<FrameOptions, FrameElement> = (options = {}, children) =>
-  new FrameElement(options, children)
+export const Frame: Component<FrameOptions, FrameElement> = (options = {}) =>
+  new FrameElement(options)
 
 export interface ButtonOptions extends ComponentOptions {
   point?: Point
@@ -381,7 +350,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
   }
 }
 
-export const Button: Component<ButtonOptions, ButtonElement> = (options = {}, children) =>
-    new ButtonElement(options, children)
+export const Button: Component<ButtonOptions, ButtonElement> = (options = {}) =>
+    new ButtonElement(options)
 
 
