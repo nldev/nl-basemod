@@ -3,10 +3,11 @@ import { FrameElement, FrameOptions, Component, Frame } from '../component'
 export interface ScrollOptions extends FrameOptions {}
 
 export class ScrollElement extends FrameElement {
+  protected container: WoWAPI.Frame
+
   protected init () {
     this.ref.SetPoint('CENTER')
     this.Size(400, 400)
-    this.Backdrop()
     // a.SetBackdrop({
     //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
     //   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
@@ -61,7 +62,7 @@ export class ScrollElement extends FrameElement {
     b.SetFrameLevel(1)
     moduleoptions.SetFrameLevel(2)
 
-    console.log('hello')
+    this.container = moduleoptions
   }
 }
 
