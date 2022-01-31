@@ -3,15 +3,15 @@ import { Frame } from './basemod/component'
 import { Scroll } from './basemod/components/scroll'
 
 render($ => {
-  console.log($.playerInfo.name)
+  const f = Frame().Backdrop().Parent($.root)
 
   return Scroll({ name: 'scrollable' }, [
-    Frame({ name: 'hello', isPrefix: true }),
-    Frame({ name: 'hello', isPrefix: true }),
-    Frame({ name: 'hello', isPrefix: true }, [
+    Frame({ prefix: 'hello' }),
+    Frame({ prefix: 'hello' }),
+    Frame({ prefix: 'hello' }, [
       Frame(null, [
         Frame(null, [
-          Frame(),
+          f,
           Frame(),
           Frame(),
         ]),

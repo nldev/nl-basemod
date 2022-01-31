@@ -78,7 +78,7 @@ export interface Point {
 
 export interface ComponentOptions {
   name?: string
-  isPrefix?: boolean
+  prefix?: string
 }
 
 export abstract class Component<
@@ -87,8 +87,11 @@ export abstract class Component<
 > {
   public ref: T
 
-  constructor (public options?: O, public children?: Component[]) {
+  constructor (public options?: O, public children: Component[] = []) {
     this.create()
+
+    if (options.prefix && options.name)
+      throw new Error('Component cannot have both a name and a prefix')
 
     if (children)
       children.forEach(child => child.ref.SetParent(this.ref))
@@ -99,6 +102,10 @@ export abstract class Component<
   protected abstract create (): void
 
   protected init () {}
+
+  public Children (children?: Component[]) {
+    this.children.forEach(child => child.ref.SetParent(UIParent))
+  }
 }
 
 export interface FrameOptions extends ComponentOptions {
@@ -120,13 +127,13 @@ export class FrameComponent<O extends FrameOptions = FrameOptions> extends Compo
     const $ = Get()
     const { options } = this
 
-    this.ref = CreateFrame(
-      'Frame',
-      options.name
-        ? (options.isPrefix ? Unique(options.name) : options.name)
-        : null,
-      $.root,
-    )
+    let name = options.name
+      ? options.name
+      : options.prefix
+      ? Unique(options.prefix)
+      : null
+
+    this.ref = CreateFrame('Frame', name, $.root)
 
     if (options.size)
       this.Size(options.size)
@@ -146,6 +153,8 @@ export class FrameComponent<O extends FrameOptions = FrameOptions> extends Compo
 
   Parent<T extends WoWAPI.UIObject = WoWAPI.Frame> (parent: T) {
     this.ref.SetParent(parent)
+
+    return this
   }
 
   Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
@@ -157,6 +166,7 @@ export class FrameComponent<O extends FrameOptions = FrameOptions> extends Compo
       ...(bgOptions ? bgOptions : {}),
       }
     }
+
     this.ref.SetBackdrop(backdrop)
 
     const color: Color = {
@@ -165,20 +175,28 @@ export class FrameComponent<O extends FrameOptions = FrameOptions> extends Compo
     }
 
     this.ref.SetBackdropColor(color.red, color.green, color.blue, color.alpha)
+
+    return this
   }
 
   Point (options: Point) {
     this.ref.SetPoint(options.point, options.relativeTo, options.relativePoint, options.offsetX, options.offsetY)
+
+    return this
   }
 
   AllPoints (relativeRegion?: RelativeRegion) {
     this.ref.SetAllPoints(relativeRegion)
+
+    return this
   }
 
   Click (options: Click) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(options.clickType)
     this.ref.SetScript('OnClick', options.handler)
+
+    return this
   }
 
   Size (options: Size) {
@@ -187,6 +205,8 @@ export class FrameComponent<O extends FrameOptions = FrameOptions> extends Compo
 
     if (options.height)
       this.ref.SetHeight(options.width)
+
+    return this
   }
 }
 
