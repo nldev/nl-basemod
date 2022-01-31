@@ -5,6 +5,7 @@ export interface ScrollOptions extends FrameOptions {
 
 export class ScrollComponent extends FrameComponent {
   protected init () {
+    console.log('hello from scroll')
   }
 }
 

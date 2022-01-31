@@ -87,16 +87,13 @@ export abstract class Component<
 > {
   public ref: T
 
-  constructor (public options?: O, public children?: Component[], onMounted?: (this: Component) => void) {
+  constructor (public options?: O, public children?: Component[]) {
     this.create()
 
     if (children)
       children.forEach(child => child.ref.SetParent(this.ref))
 
     this.init()
-
-    if (onMounted)
-    onMounted.bind(this)
   }
 
   protected abstract create (): void
@@ -193,7 +190,7 @@ export class FrameComponent<O extends FrameOptions = FrameOptions> extends Compo
   }
 }
 
-export function Frame (options: FrameOptions = DEFAULT_FRAME_OPTIONS, children?: Component[], onMounted?: (this: Component) => void) {
-  return new FrameComponent(options, children, onMounted)
+export function Frame (options: FrameOptions = DEFAULT_FRAME_OPTIONS, children?: Component[]) {
+  return new FrameComponent(options, children)
 }
 
