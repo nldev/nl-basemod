@@ -286,29 +286,43 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     this.ref.SetMovable(true)
 
     this.ref.SetScript('OnDragStart', (frame, type) => {
+      console.log('start')
       const state = { preventDefault: false }
+      console.log('start here')
 
       const preventDefault = () => { state.preventDefault = true }
+      console.log('start here')
 
       startHandler(frame, type, () => preventDefault())
+      console.log('start here')
 
       console.log(type)
 
       if (!state.preventDefault)
         frame.StartMoving()
+
+      console.log('start here')
     })
 
     this.ref.SetScript('OnDragStop', (frame) => {
+      console.log('stop')
       const state = { preventDefault: false }
+      console.log('stop here')
 
       const preventDefault = () => state.preventDefault = true
+      console.log('stop here')
+
 
       stopHandler(frame, type, () => preventDefault())
+      console.log('stop here')
+
 
       console.log(type)
 
       if (!state.preventDefault)
         frame.StopMovingOrSizing()
+
+      console.log('stop here')
     })
 
     return this
