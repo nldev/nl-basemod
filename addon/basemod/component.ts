@@ -129,7 +129,6 @@ export class Frame extends Component<FrameOptions> {
 
     if (options.click)
       this.Click(options.click)
-
   }
 
   Parent<T extends WoWAPI.UIObject = WoWAPI.Frame> (parent: T) {

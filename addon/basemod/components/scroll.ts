@@ -1,9 +1,11 @@
 import { Frame, FrameOptions } from '../component'
 
-interface ScrollOptions extends FrameOptions {
+export interface ScrollOptions extends FrameOptions {
 }
 
-class Scroll extends Frame {
+export class Scroll extends Frame {
+  protected init () {
+  }
 }
 
 // let a = CreateFrame('Frame', 'a', UIParent)
