@@ -21,7 +21,7 @@ export class ScrollElement extends FrameElement {
     // this.ref.SetMovable(true)
     // this.ref.SetScript('OnDragStart', f => f.StartMoving())
     // this.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
-    this.Drag('LeftButton')
+    this.Drag('RightButton')
 
     const scrollframe = CreateFrame('ScrollFrame', 'scrollframe', null, 'UIPanelScrollFrameTemplate')
     const scrollchild = CreateFrame('Frame', 'scrollchild')

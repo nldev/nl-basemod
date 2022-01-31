@@ -284,6 +284,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     this.ref.EnableMouse(true)
     this.ref.RegisterForDrag(type)
     this.ref.SetMovable(true)
+
     this.ref.SetScript('OnDragStart', (frame, type) => {
       const state = { preventDefault: false }
 
@@ -296,6 +297,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       if (!state.preventDefault)
         frame.StartMoving()
     })
+
     this.ref.SetScript('OnDragStop', (frame) => {
       const state = { preventDefault: false }
 
