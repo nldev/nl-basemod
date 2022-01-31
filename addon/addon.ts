@@ -9,6 +9,7 @@ render($ => {
     .Point('CENTER')
     .Padding(10)
     .Execute(() => console.log('ran'))
+    .Z(5)
     .Drag('RightButton')
 
 
@@ -16,6 +17,7 @@ render($ => {
     .Point('CENTER')
     .Parent(a.ref)
     .Size(600, 600)
+    .Z(1)
     .Click('LeftButton', () => console.log($.playerInfo.name))
 })
 

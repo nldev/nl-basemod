@@ -282,8 +282,11 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
   public Drag (type: WoWAPI.MouseButton, startHandler?: FrameDragStartHandler, stopHandler?: FrameDragStopHandler) {
     this.ref.EnableMouse(true)
+    console.log('here')
     this.ref.RegisterForDrag(type)
+    console.log('here')
     this.ref.SetMovable(true)
+    console.log('here')
 
     this.ref.SetScript('OnDragStart', (frame, type) => {
       console.log('start')
@@ -304,6 +307,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
       console.log('start here')
     })
+    console.log('here')
 
     this.ref.SetScript('OnDragStop', (frame) => {
       console.log('stop')
@@ -325,6 +329,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
       console.log('stop here')
     })
+    console.log('here')
 
     return this
   }
@@ -340,7 +345,15 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 
   public Z (level: number) {
-    this.ref.SetFrameLevel(level)
+    let frame = this.ref
+
+    if (this.inner) {
+      this.ref.SetFrameLevel(level - 1)
+
+      frame = this.inner
+    }
+
+    frame.SetFrameLevel(level)
 
     return this
   }
