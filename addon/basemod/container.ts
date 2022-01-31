@@ -4,7 +4,8 @@ interface PlayerInfo {
   name: string
 
 }
-class Container {
+
+export class Container {
   constructor () {
   }
 
