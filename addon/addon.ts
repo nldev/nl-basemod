@@ -19,4 +19,3 @@ render($ => {
     .Click('LeftButton', () => console.log($.playerInfo.name))
 })
 
-
