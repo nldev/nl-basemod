@@ -54,6 +54,16 @@ const DEFAULT_COLOR = {
   alpha: 1,
 }
 
+export type RelativeRegion = string | WoWAPI.Region
+
+export interface Point {
+  point: WoWAPI.Point
+  relativeTo?: RelativeRegion,
+  relativePoint?: WoWAPI.Point,
+  offsetX?: number
+  offsetY?: number
+}
+
 export interface ComponentOptions {
   name?: string
   isPrefix?: boolean
@@ -114,4 +124,15 @@ export class Frame extends Component {
 
     this.ref.SetBackdropColor(color.red, color.green, color.blue, color.alpha)
   }
+
+  Point (options: Point) {
+    this.ref.SetPoint(options.point, options.relativeTo, options.relativePoint, options.offsetX, options.offsetY)
+  }
+
+  SetAllPoints (relativeRegion?: RelativeRegion) {
+    this.ref.SetAllPoints(relativeRegion)
+  }
 }
+
+// (method) WoWAPI.Region.SetPoint(point: WoWAPI.Point, relativeTo: string | WoWAPI.Region, relativePoint: WoWAPI.Point, offsetX: number, offsetY: number): void (+3 overloads)
+// ─────────────────────────────────────────────────────────────────────────────────────────────
