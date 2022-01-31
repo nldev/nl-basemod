@@ -109,8 +109,6 @@ export abstract class Element<
     if (this.options.prefix && this.options.name)
       throw new Error('Component cannot have both a name and a prefix')
 
-    const $ = Get()
-
     this.name = this.options.name
       ? this.options.name
       : this.options.prefix
@@ -118,9 +116,6 @@ export abstract class Element<
       : null
 
     this.create()
-
-    this.parent = this.options.parent || $.root
-
     this.setup()
     this.init()
     this.mount()
@@ -142,6 +137,7 @@ export abstract class Element<
 
     this.children.forEach(child => {
       child.ref.SetParent(this.inner ? this.inner : this.ref)
+
       child.setup()
     })
 
@@ -150,9 +146,6 @@ export abstract class Element<
 
   private mount () {
     const $ = Get()
-
-    if (this.children)
-      this.children.forEach(child => child.ref.SetParent(this.ref))
 
     this.parent = this.options.parent || $.root
   }
@@ -176,7 +169,7 @@ export const DEFAULT_FRAME_OPTIONS = {
 
 export class FrameElement<O extends FrameOptions = FrameOptions> extends Element<O, WoWAPI.Frame> {
   protected create () {
-    this.ref = CreateFrame('Frame', this.name, this.parent)
+    this.ref = CreateFrame('Frame', this.name)
   }
 
   public setup () {
@@ -222,7 +215,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     this.inner.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
     this.inner.SetParent(this.ref)
-    this.inner.SetPoint('CENTER', this.ref, 'CENTER')
+    this.inner.SetPoint('CENTER')
 
     this.children.forEach(child => {
       child.ref.SetParent(this.inner)
