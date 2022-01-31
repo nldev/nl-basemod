@@ -1,4 +1,4 @@
-import { init, Get } from './basemod/app'
+import { init } from './basemod/app'
 import { Frame } from './basemod/component'
 
 init($ => {

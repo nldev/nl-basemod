@@ -71,7 +71,8 @@ export interface Point {
   offsetY?: number
 }
 
-export interface ComponentOptions {
+export interface ComponentOptions<P extends WoWAPI.UIObject = WoWAPI.Frame> {
+  parent?: P
   name?: string
   isPrefix?: boolean
 }
@@ -85,7 +86,7 @@ export class Component<
   constructor (options?: O) {}
 }
 
-export interface FrameOptions extends ComponentOptions {
+export interface FrameOptions<P extends WoWAPI.UIObject = WoWAPI.Frame> extends ComponentOptions<P> {
   point?: Point
   allPoints?: RelativeRegion
   bg?: BackdropOptions
