@@ -1,4 +1,4 @@
-import $ from './basemod/index'
+import { container } from './basemod/index'
 
 // const container = new Container($ => {
 //   console.log($.playerInfo.name)

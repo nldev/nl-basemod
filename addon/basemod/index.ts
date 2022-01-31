@@ -1,4 +1,4 @@
 import { Container } from './container'
 
 
-export default new Container()
+export const container = new Container()
