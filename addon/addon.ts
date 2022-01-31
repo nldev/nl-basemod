@@ -7,7 +7,7 @@ render($ => Frame({ name: 'bar' })
   .Size(500, 500)
   .Backdrop()
   .Z(5)
-  .Click('LeftButtonDown', () => console.log('hello'))
+  .Click('LeftButton', () => console.log($.playerInfo.name))
 )
 
 
