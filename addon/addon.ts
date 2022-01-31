@@ -3,7 +3,11 @@ import { Scroll } from './basemod/components/scroll'
 import { Frame } from './basemod/component'
 
 render($ => {
-  Scroll()
+  const scroll = Scroll({ name: 'foo' }, [
+    Frame(),
+  ])
+
+  console.log(scroll.ref.GetName())
 })
   // .Backdrop()
   // .Parent($.root)
