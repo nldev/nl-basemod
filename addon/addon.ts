@@ -15,17 +15,4 @@ render($ => {
 
   console.log(scroll.ref.GetName())
 })
-  // .Backdrop()
-  // .Parent($.root)
-  // .Children([
-  //   Frame({ prefix: 'hello' }),
-  //   Frame({ prefix: 'hello' }),
-  //   Frame({ prefix: 'hello' }, [
-  //     Frame(null, [
-  //       Frame(null, [
-  //         Frame(),
-  //         Frame(),
-  //       ]),
-  //     ]),
-  //   ]),
-  // ])
+
