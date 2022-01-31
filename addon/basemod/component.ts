@@ -128,7 +128,7 @@ export abstract class Element<
 
   protected abstract create (name?: string, parent?: WoWAPI.Frame): void
 
-  protected abstract setup (): void
+  public abstract setup (): void
 
   protected init () {}
 
@@ -140,7 +140,10 @@ export abstract class Element<
 
     this.children = children
 
-    this.children.forEach(child => child.ref.SetParent(this.inner ? this.inner : this.ref))
+    this.children.forEach(child => {
+      child.ref.SetParent(this.inner ? this.inner : this.ref)
+      child.setup()
+    })
 
     return this
   }
@@ -176,7 +179,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     this.ref = CreateFrame('Frame', this.name, this.parent)
   }
 
-  protected setup () {
+  public setup () {
     const { options } = this
 
     if (options.size)
@@ -311,7 +314,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     return this
   }
 
-  public Run (fn: (frame: FrameElement) => void) {
+  public Execute (fn: (frame: FrameElement) => void) {
     fn(this)
 
     return this
@@ -339,7 +342,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
     this.ref = CreateFrame('Button', this.name, this.parent)
   }
 
-  protected setup () {
+  public setup () {
     const { options } = this
 
     // if (options.size)
