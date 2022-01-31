@@ -1,11 +1,16 @@
 import { Unique } from './utils'
 import { Get } from './app'
 
+export interface Size {
+  width?: number
+  height?: number
+}
+
 export interface Color {
-  red: number
-  green: number
-  blue: number
-  alpha: number
+  red?: number
+  green?: number
+  blue?: number
+  alpha?: number
 }
 
 export type ColorOptions = Partial<Color>
@@ -71,9 +76,10 @@ export interface Point {
   offsetY?: number
 }
 
-export interface ComponentOptions {
+export interface ComponentOptions<T extends WoWAPI.UIObject = WoWAPI.Region> {
   name?: string
   isPrefix?: boolean
+  children?: T[]
 }
 
 export abstract class Component<
@@ -83,11 +89,15 @@ export abstract class Component<
   public ref: T
 
   constructor (protected options?: O) {
-    this.ready()
+    this.create()
+
+    if (this.options.children)
+      this.options.children.forEach(child => child.SetParent(this.ref))
+
     this.init()
   }
 
-  protected abstract ready (): void
+  protected abstract create (): void
 
   protected init () {}
 }
@@ -98,6 +108,7 @@ export interface FrameOptions extends ComponentOptions {
   bg?: BackdropOptions
   color?: ColorOptions
   click?: Click
+  size?: Size
 }
 
 export const DEFAULT_FRAME_OPTIONS = {
@@ -106,7 +117,7 @@ export const DEFAULT_FRAME_OPTIONS = {
 }
 
 export class FrameComponent extends Component<FrameOptions> {
-  protected ready () {
+  protected create () {
     const $ = Get()
     const { options } = this
 
@@ -117,6 +128,9 @@ export class FrameComponent extends Component<FrameOptions> {
         : null,
       $.root,
     )
+
+    if (options.size)
+      this.Size(options.size)
 
     if (options.bg)
       this.Backdrop(options.bg, this.options.color)
@@ -166,6 +180,14 @@ export class FrameComponent extends Component<FrameOptions> {
     this.ref.RegisterForClicks(options.clickType)
     this.ref.EnableMouse(true)
     this.ref.SetScript('OnClick', options.handler)
+  }
+
+  Size (options: Size) {
+    if (options.width)
+      this.ref.SetWidth(options.width)
+
+    if (options.height)
+      this.ref.SetHeight(options.width)
   }
 }
 
