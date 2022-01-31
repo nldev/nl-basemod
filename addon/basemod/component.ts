@@ -293,7 +293,8 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       const preventDefault = () => { state.preventDefault = true }
       console.log('start here')
 
-      startHandler(frame, type, () => preventDefault())
+      if (startHandler)
+        startHandler(frame, type, () => preventDefault())
       console.log('start here')
 
       console.log(type)
@@ -313,7 +314,9 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       console.log('stop here')
 
 
-      stopHandler(frame, type, () => preventDefault())
+
+      if (stopHandler)
+        stopHandler(frame, type, () => preventDefault())
       console.log('stop here')
 
 
