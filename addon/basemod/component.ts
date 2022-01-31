@@ -5,7 +5,5 @@ export const Frame = () => {
 
   const component = CreateFrame('Frame', null, $.root)
 
-  console.log($.playerInfo.chrClass.toLowerCase() + ' sucks!')
-
   return component
 }
