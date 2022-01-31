@@ -103,6 +103,7 @@ export abstract class Element<
   public ref: T
   public name: string
   public parent: WoWAPI.Frame
+  public inner: WoWAPI.Frame
 
   constructor (public options: O, public children?: Element[]) {
     if (this.options.prefix && this.options.name)
@@ -134,7 +135,7 @@ export abstract class Element<
 
     this.children = children
 
-    this.children.forEach(child => child.ref.SetParent(this.ref))
+    this.children.forEach(child => child.ref.SetParent(this.inner ? this.inner : this.ref))
 
     return this
   }
@@ -157,6 +158,7 @@ export interface FrameOptions extends ComponentOptions {
   onClick?: FrameOnClick
   size?: Size
   z?: number
+  padding?: number
 }
 
 export const DEFAULT_FRAME_OPTIONS = {
@@ -192,6 +194,21 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     if (options.parent)
       this.Parent(options.parent)
+
+    if (options.padding)
+      this.Padding(options.padding)
+  }
+
+  public Padding (amount: number) {
+    if (amount === 0)
+      return delete this.inner
+
+    this.inner = CreateFrame('Frame', null, this.ref)
+
+    this.inner.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
+    this.inner.SetParent(this.ref)
+    this.inner.SetPoint('CENTER')
+
   }
 
   public Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
@@ -240,7 +257,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
   public Click (type: WoWAPI.MouseButton, handler: FrameClickHandler) {
     this.ref.EnableMouse(true)
-    this.ref.SetScript('OnMouseDown', (frame, button) => {
+    this.ref.SetScript('OnMouseUp', (frame, button) => {
       if (type === button)
         handler(frame, button)
     })
@@ -385,4 +402,5 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
 
 export const Button: Component<ButtonOptions, ButtonElement> = (options = {}, children) =>
     new ButtonElement(options, children)
+
 
