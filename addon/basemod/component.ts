@@ -129,7 +129,7 @@ export class Frame extends Component {
     this.ref.SetPoint(options.point, options.relativeTo, options.relativePoint, options.offsetX, options.offsetY)
   }
 
-  SetAllPoints (relativeRegion?: RelativeRegion) {
+  AllPoints (relativeRegion?: RelativeRegion) {
     this.ref.SetAllPoints(relativeRegion)
   }
 }
