@@ -61,7 +61,7 @@ export const DEFAULT_COLOR = {
 
 export type RelativeRegion = string | WoWAPI.Region
 
-export type ClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, down: boolean) => void
+export type ClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T) => void
 
 export interface OnClick {
   clickType: ClickType
@@ -231,8 +231,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   public Click (type: ClickType, handler: ClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
-
-    this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
+    this.ref.SetScript('OnMouseDown', frame => handler(frame))
 
     return this
   }
@@ -342,9 +341,10 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
   }
 
   public Click (type: ClickType, handler: ClickHandler) {
+    console.log('hello')
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
-    this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
+    this.ref.SetScript('OnClick', () => console.log('hello'))
 
     return this
   }
