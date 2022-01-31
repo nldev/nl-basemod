@@ -149,6 +149,7 @@ export interface FrameOptions extends ComponentOptions {
   color?: ColorOptions
   onClick?: OnClick
   size?: Size
+  z?: number
 }
 
 export const DEFAULT_FRAME_OPTIONS = {
@@ -178,6 +179,9 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     if (options.onClick)
       this.Click(options.onClick.clickType, options.onClick.handler)
+
+    if (options.z)
+      this.ref.SetFrameLevel(options.z)
   }
 
   public Parent<T extends WoWAPI.UIObject = WoWAPI.Frame> (parent: T) {
@@ -238,12 +242,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     if (height)
       this.ref.SetHeight(width)
-
-    return this
-  }
-
-  public Run (fn: (element: FrameElement) => void) {
-    fn(this)
 
     return this
   }
