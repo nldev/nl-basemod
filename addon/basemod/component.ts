@@ -279,7 +279,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     return this
   }
 
-  public Drag (type: WoWAPI.MouseButton, startHandler: FrameDragStartHandler, stopHandler: FrameDragStopHandler) {
+  public Drag (type: WoWAPI.MouseButton, startHandler?: FrameDragStartHandler, stopHandler?: FrameDragStopHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForDrag(type)
     this.ref.SetMovable(true)
