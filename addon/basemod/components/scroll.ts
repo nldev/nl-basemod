@@ -1,9 +1,5 @@
 import { FrameElement, FrameOptions, Component, Frame } from '../component'
 
-const x: Component = () => Frame()
-
-x()
-
 export interface ScrollOptions extends FrameOptions {}
 
 export class ScrollElement extends FrameElement {
