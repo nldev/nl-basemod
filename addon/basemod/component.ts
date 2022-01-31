@@ -1,16 +1,16 @@
 import { Unique } from './utils'
 import { Get } from './app'
 
-interface Color {
+export interface Color {
   red: number
   green: number
   blue: number
   alpha: number
 }
 
-type ColorOptions = Partial<Color>
+export type ColorOptions = Partial<Color>
 
-interface Backdrop {
+export interface Backdrop {
   bgFile: string
   edgeFile: string
   tile: boolean
@@ -24,7 +24,7 @@ interface Backdrop {
   },
 }
 
-type BackdropOptions = Partial<Backdrop>
+export type BackdropOptions = Partial<Backdrop>
 
 // this.frame.SetBackdrop({
 //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -33,7 +33,7 @@ type BackdropOptions = Partial<Backdrop>
 //   insets: { left: 4, right: 4, top: 4, bottom: 4 },
 // })
 
-const DEFAULT_BACKDROP = {
+export const DEFAULT_BACKDROP = {
   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
   tile: true,
@@ -47,7 +47,7 @@ const DEFAULT_BACKDROP = {
   },
 }
 
-const DEFAULT_COLOR = {
+export const DEFAULT_COLOR = {
   red: 0,
   green: 0,
   blue: 0,
@@ -56,9 +56,9 @@ const DEFAULT_COLOR = {
 
 export type RelativeRegion = string | WoWAPI.Region
 
-type ClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, down: boolean) => void
+export type ClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, down: boolean) => void
 
-interface Click {
+export interface Click {
   clickType: ClickType
   handler: ClickHandler
 }
@@ -71,8 +71,7 @@ export interface Point {
   offsetY?: number
 }
 
-export interface ComponentOptions<P extends WoWAPI.UIObject = WoWAPI.Frame> {
-  parent?: P
+export interface ComponentOptions {
   name?: string
   isPrefix?: boolean
 }
@@ -86,7 +85,7 @@ export class Component<
   constructor (options?: O) {}
 }
 
-export interface FrameOptions<P extends WoWAPI.UIObject = WoWAPI.Frame> extends ComponentOptions<P> {
+export interface FrameOptions extends ComponentOptions {
   point?: Point
   allPoints?: RelativeRegion
   bg?: BackdropOptions
@@ -94,7 +93,7 @@ export interface FrameOptions<P extends WoWAPI.UIObject = WoWAPI.Frame> extends 
   click?: Click
 }
 
-const DEFAULT_FRAME_OPTIONS = {
+export const DEFAULT_FRAME_OPTIONS = {
   bg: DEFAULT_BACKDROP,
   color: DEFAULT_COLOR,
 }
@@ -124,6 +123,10 @@ export class Frame extends Component {
 
     if (options.click)
       this.Click(options.click)
+  }
+
+  Parent<T extends WoWAPI.UIObject = WoWAPI.Frame> (parent: T) {
+    this.ref.SetParent(parent)
   }
 
   Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
