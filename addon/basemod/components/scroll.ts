@@ -6,9 +6,6 @@ export class ScrollElement extends FrameElement {
   protected container: WoWAPI.Frame
 
   protected init () {
-    this.ref.SetAllPoints(this.parent)
-    this.Size(600, 600)
-
     // a.SetBackdrop({
     //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
     //   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',

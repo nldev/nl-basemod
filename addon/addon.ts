@@ -9,15 +9,11 @@ render($ => {
     .Point('CENTER')
     .Padding(10)
     .Execute(() => console.log('ran'))
-    .Z(5)
+    .Z(99)
     .Drag('RightButton')
-
-
-  Scroll({ name: 'bar' })
-    .Parent(a.ref)
-    .AllPoints(a.ref)
-    .Size(600, 600)
-    .Z(6)
     .Click('LeftButton', () => console.log($.playerInfo.name))
+
+
+  Scroll({ name: 'bar', size: { width: 500, height: 500 }, parent: a.ref, allPoints: a.ref, z: 5 })
 })
 
