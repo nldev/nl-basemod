@@ -112,6 +112,7 @@ export abstract class Instance<
   }
 
   protected abstract create (name?: string, parent?: WoWAPI.UIObject): void
+
   private prepare () {
     const $ = Get()
 
@@ -164,13 +165,13 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
       this.Click(options.onClick.clickType, options.onClick.handler)
   }
 
-  Parent<T extends WoWAPI.UIObject = WoWAPI.Frame> (parent: T) {
+  public Parent<T extends WoWAPI.UIObject = WoWAPI.Frame> (parent: T) {
     this.ref.SetParent(parent)
 
     return this
   }
 
-  Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
+  public Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
     const backdrop: Backdrop = {
       ...DEFAULT_BACKDROP,
       ...bgOptions,
@@ -192,19 +193,19 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
     return this
   }
 
-  Point (options: Point) {
+  public Point (options: Point) {
     this.ref.SetPoint(options.point, options.relativeTo, options.relativePoint, options.offsetX, options.offsetY)
 
     return this
   }
 
-  AllPoints (relativeRegion?: RelativeRegion) {
+  public AllPoints (relativeRegion?: RelativeRegion) {
     this.ref.SetAllPoints(relativeRegion)
 
     return this
   }
 
-  Click (type: ClickType, handler: ClickHandler) {
+  public Click (type: ClickType, handler: ClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
     this.ref.SetScript('OnClick', handler)
@@ -212,7 +213,7 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
     return this
   }
 
-  Size (options: Size) {
+  public Size (options: Size) {
     if (options.width)
       this.ref.SetWidth(options.width)
 
