@@ -1,6 +1,6 @@
 import { render } from './basemod/app'
-import { Scroll } from './basemod/components/scroll'
 import { Frame } from './basemod/component'
+import { Scroll } from './basemod/components/scroll'
 
 render($ => {
   const scroll = Scroll({ name: 'bar' }, [

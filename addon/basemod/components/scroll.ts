@@ -1,7 +1,6 @@
 import { FrameInstance, FrameOptions, Component } from '../component'
 
-export interface ScrollOptions extends FrameOptions {
-}
+export interface ScrollOptions extends FrameOptions {}
 
 export class ScrollInstance extends FrameInstance {
   protected init () {
