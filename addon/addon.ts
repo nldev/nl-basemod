@@ -1,9 +1,9 @@
 import { init } from './basemod/app'
-import { Frame } from './basemod/component'
+import { Scroll } from './basemod/components/scroll'
 
 init($ => {
-  const frame = new Frame({ name: 'helloworld' })
+  const scroll = Scroll({ name: 'scrollable' })
 
-  console.log(frame.ref.GetName())
+  console.log(scroll.ref.GetName())
 })
 

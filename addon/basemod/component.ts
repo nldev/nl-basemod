@@ -105,7 +105,7 @@ export const DEFAULT_FRAME_OPTIONS = {
   color: DEFAULT_COLOR,
 }
 
-export class Frame extends Component<FrameOptions> {
+export class FrameComponent extends Component<FrameOptions> {
   protected ready () {
     const $ = Get()
     const { options } = this
@@ -167,5 +167,9 @@ export class Frame extends Component<FrameOptions> {
     this.ref.EnableMouse(true)
     this.ref.SetScript('OnClick', options.handler)
   }
+}
+
+export function Frame (options: FrameOptions) {
+  return new FrameComponent(options)
 }
 
