@@ -2,11 +2,12 @@ import '../global'
 
 interface PlayerInfo {
   name: string
-
 }
 
 export class Container {
   constructor () {
+    console.log('got here')
+    this.load()
   }
 
   load () {
@@ -19,6 +20,8 @@ export class Container {
 
     if (!info[0])
       return this.load()
+
+      console.log('got here again')
 
     return this.ready()
   }

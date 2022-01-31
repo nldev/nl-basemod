@@ -1,4 +1,5 @@
-export class App {
-  act () {
-  }
-}
+// export class App {
+//   act () {
+//       console.log('hello world!')
+//   }
+// }
