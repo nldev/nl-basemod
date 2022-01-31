@@ -9,7 +9,7 @@ const app: App = ({} as any)
 
 export const Get = () => app.state
 
-export const init = (onInit: ($: App) => void) => {
+export const init = (onInit: ($: State) => void) => {
   app.state = new State(onInit)
 
   return app.state
