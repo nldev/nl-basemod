@@ -9,13 +9,12 @@ render($ => {
     .Point('CENTER')
     .Padding(20)
     .Children([
-      Frame({ allPoints: 'CENTER' }, [
+      Frame({ allPoints: 'CENTER', size: { width: 500, height: 500 } }, [
         Frame()
-          .Backdrop()
           .Size(300, 300)
+          .Backdrop()
           .Point({
             point: 'TOPLEFT',
-            relativeTo: 'parent',
           })
           .Run(() => console.log('ran'))
       ]),
