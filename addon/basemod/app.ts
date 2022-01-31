@@ -15,9 +15,11 @@ export class App {
   public playerInfo: PlayerInfo
   // public components: Mapping<Component>
 
-  constructor () {
-    this.root = CreateFrame('Frame')
-    this.root.SetScript('OnUpdate', () => this.load())
+  constructor (isDummy: boolean = false) {
+    if (!isDummy) {
+      this.root = CreateFrame('Frame')
+      this.root.SetScript('OnUpdate', () => this.load())
+    }
   }
 
   protected load () {

@@ -4,8 +4,10 @@ interface Global {
   app: App
 }
 
-export const state: Global = {}
+const $: Global = {
+  app: new App(true)
+}
 
-export default () => state
+export default () => $
 
 
