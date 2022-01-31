@@ -26,6 +26,13 @@ export const Frame: Component = (options = DEFAULT_FRAME_OPTIONS) => {
   return component
 }
 
+interface Color {
+  red: number
+  green: number
+  blue: number
+  alpha: number
+}
+
 interface Backdrop {
   bgFile?: string
   edgeFile?: string
@@ -37,7 +44,8 @@ interface Backdrop {
     right?: number
     top?: number
     bottom?: number
-  }
+  },
+  Color?: Color
 }
 
 function SetBackdrop () {
