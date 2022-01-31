@@ -1,18 +1,17 @@
 import { Container } from './container'
-import { noop } from './utils'
 
 interface App {
-  state: Container
+  container: Container
 }
 
 const app: App = ({} as any)
 
-export const Get = () => app.state
+export const Get = () => app.container
 
 export const init = (onInit: ($: Container) => void) => {
-  app.state = new Container(onInit)
+  app.container = new Container(onInit)
 
-  return app.state
+  return app.container
 }
 
 
