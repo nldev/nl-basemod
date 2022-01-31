@@ -7,33 +7,6 @@ interface PlayerInfo {
   level: number
 }
 
-// export class Container {
-//   public root: WoWAPI.Frame
-//
-//   constructor () {
-//     this.root = CreateFrame('Frame', 'root', UIParent)
-//
-//     this.root.SetScript('OnUpdate', () => this.load())
-//   }
-//
-//   load () {
-//     const player = UnitGUID('player')
-//
-//     if (player) {
-//       const info = GetPlayerInfoByGUID(player)
-//
-//       if (info[0])
-//         return this.ready()
-//     }
-//
-//     return this.load()
-//   }
-//
-//   ready () {
-//     console.log('got to ready state')
-//   }
-// }
-
 export class Container {
   protected isLoaded: boolean = false
   protected isInit: boolean = false
@@ -44,7 +17,6 @@ export class Container {
 
   constructor () {
     this.root = CreateFrame('Frame')
-
     this.root.SetScript('OnUpdate', () => this.load())
   }
 
