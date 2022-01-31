@@ -89,9 +89,7 @@ export abstract class Component<
 
   protected abstract ready (): void
 
-  protected init () {
-
-  }
+  protected init () {}
 }
 
 export interface FrameOptions extends ComponentOptions {
