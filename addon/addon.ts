@@ -16,7 +16,6 @@ render($ => {
   a.ref.SetScript('OnDragStart', f => f.StartMoving())
   a.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
 
-
   Scroll({ name: 'bar' })
     .Point('CENTER')
     .Parent(a.ref)
