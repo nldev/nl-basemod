@@ -61,11 +61,18 @@ export const DEFAULT_COLOR = {
 
 export type RelativeRegion = string | WoWAPI.Region
 
-export type ClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T) => void
+export type FrameClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton) => void
 
-export interface OnClick {
-  clickType: ClickType
-  handler: ClickHandler
+export type ButtonClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, down: Boolean) => void
+
+export interface ButtonOnClick {
+  type: ClickType
+  handler: ButtonClickHandler
+}
+
+export interface FrameOnClick {
+  button: WoWAPI.MouseButton
+  handler: FrameClickHandler
 }
 
 export interface FullPoint {
@@ -147,7 +154,7 @@ export interface FrameOptions extends ComponentOptions {
   allPoints?: RelativeRegion
   bg?: BackdropOptions
   color?: ColorOptions
-  onClick?: OnClick
+  onClick?: FrameOnClick
   size?: Size
   z?: number
 }
@@ -178,7 +185,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       this.AllPoints(options.allPoints)
 
     if (options.onClick)
-      this.Click(options.onClick.clickType, options.onClick.handler)
+      this.Click(options.onClick.button, options.onClick.handler)
 
     if (options.z)
       this.Z(options.z)
@@ -228,10 +235,12 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     return this
   }
 
-  public Click (type: ClickType, handler: ClickHandler) {
+  public Click (type: WoWAPI.MouseButton, handler: FrameClickHandler) {
     this.ref.EnableMouse(true)
-    this.ref.RegisterForClicks(type)
-    this.ref.SetScript('OnMouseDown', frame => handler(frame))
+    this.ref.SetScript('OnMouseDown', (frame, button) => {
+      if (type === button)
+        handler(frame, button)
+    })
 
     return this
   }
@@ -259,7 +268,7 @@ export const Frame: Component<FrameOptions, FrameElement> = (options = {}, child
 export interface ButtonOptions extends ComponentOptions {
   point?: Point
   allPoints?: RelativeRegion
-  onClick?: OnClick
+  onClick?: ButtonOnClick
   size?: Size
   z?: number
 }
@@ -290,7 +299,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
       this.AllPoints(options.allPoints)
 
     if (options.onClick)
-      this.Click(options.onClick.clickType, options.onClick.handler)
+      this.Click(options.onClick.type, options.onClick.handler)
 
     if (options.z)
       this.Z(options.z)
@@ -340,11 +349,10 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
     return this
   }
 
-  public Click (type: ClickType, handler: ClickHandler) {
-    console.log('hello')
+  public Click (type: ClickType, handler: ButtonClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
-    this.ref.SetScript('OnClick', () => console.log('hello'))
+    this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
 
     return this
   }
