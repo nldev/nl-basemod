@@ -1,5 +1,10 @@
+import { CharacterRace, CharacterClass } from './types'
+
 interface PlayerInfo {
   name: string
+  chrRace: CharacterRace
+  chrClass: CharacterClass
+  level: number
 }
 
 // export class Container {
@@ -53,19 +58,21 @@ export class Container {
       const info = GetPlayerInfoByGUID(player)
 
       if (info[0]) {
-        console.log('hello')
-
-        // this.playerInfo = {
-        //   name: info[5].toLowerCase(),
-        //   chrRace: info[2].toUpperCase() as CharacterRace,
-        //   chrClass: info[0].toUpperCase() as CharacterClass,
-        //   level: info[4],
-        // }
+        this.playerInfo = {
+          name: info[5].toLowerCase(),
+          chrRace: info[2].toUpperCase() as CharacterRace,
+          chrClass: info[0].toUpperCase() as CharacterClass,
+          level: info[4],
+        }
 
         this.isLoaded = true
 
+        console.log(this.playerInfo.name)
+        console.log(this.playerInfo.chrRace)
+        console.log(this.playerInfo.chrClass)
+        console.log(this.playerInfo.level)
+
         console.log('loaded')
-        // return this.onInit(this)
       }
 
       this.load()

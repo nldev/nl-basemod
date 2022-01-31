@@ -1,7 +1,4 @@
-// import { container } from './basemod/index'
-import { Container } from './basemod/container'
-
-export const container = new Container()
+import { container } from './basemod/singleton'
 
 
 // const container = new Container($ => {
