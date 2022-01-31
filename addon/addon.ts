@@ -15,6 +15,6 @@ render($ => Scroll({ name: 'bar' })
       ]),
     ]),
   ])
-  .Click('LeftButtonDown', () => console.log('hello'))
+  // .Click('LeftButtonDown', () => console.log('hello'))
 )
 
