@@ -1,4 +1,4 @@
-import { init, Get } from './basemod/state'
+import { init, Get } from './basemod/app'
 import { Frame } from './basemod/component'
 
 init(() => {
