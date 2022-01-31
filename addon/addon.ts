@@ -12,9 +12,6 @@ init($ => {
         Frame(),
       ]),
     ],
-    function () {
-      console.log(this.ref)
-    }
   )
 
   console.log(scroll.ref.GetName())
