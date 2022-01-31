@@ -10,9 +10,18 @@ render($ => {
     .Padding(50)
     .Execute(() => console.log('ran'))
 
-  // Scroll({ name: 'bar' })
-  //   .Backdrop()
-  //   .Click('LeftButton', () => console.log($.playerInfo.name))
+  a.ref.EnableMouse(true)
+  a.ref.RegisterForDrag('RightButton')
+  a.ref.SetMovable(true)
+  a.ref.SetScript('OnDragStart', f => f.StartMoving())
+  a.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
+
+
+  Scroll({ name: 'bar' })
+    .Point('CENTER')
+    .Parent(a.ref)
+    .Size(600, 600)
+    .Click('LeftButton', () => console.log($.playerInfo.name))
 })
 
 

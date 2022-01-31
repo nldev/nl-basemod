@@ -6,20 +6,12 @@ export class ScrollElement extends FrameElement {
   protected container: WoWAPI.Frame
 
   protected init () {
-    this.ref.SetPoint('CENTER')
-    this.Size(400, 400)
     // a.SetBackdrop({
     //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
     //   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
     //   tile: true, tileSize: 16, edgeSize: 16,
     //   insets: { left: 4, right: 4, top: 4, bottom: 4 },
     // })
-
-    this.ref.EnableMouse(true)
-    this.ref.RegisterForDrag('RightButton')
-    this.ref.SetMovable(true)
-    this.ref.SetScript('OnDragStart', f => f.StartMoving())
-    this.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
 
     const scrollframe = CreateFrame('ScrollFrame', 'scrollframe', null, 'UIPanelScrollFrameTemplate')
     const scrollchild = CreateFrame('Frame', 'scrollchild')
@@ -46,7 +38,7 @@ export class ScrollElement extends FrameElement {
 
     const b = CreateFrame('Frame', 'b', UIParent)
 
-    b.SetSize(this.ref.GetWidth() * 0.9, this.ref.GetHeight() * 0.9)
+    b.SetSize(this.ref.GetWidth(), this.ref.GetHeight())
     b.SetParent(this.ref)
     b.SetPoint('CENTER')
 
@@ -69,6 +61,6 @@ export class ScrollElement extends FrameElement {
 export const Scroll: Component<
   ScrollOptions,
   ScrollElement
-> = (options = {}, children) =>
-  new ScrollElement(options, children)
+> = (options = {}) =>
+  new ScrollElement(options)
 
