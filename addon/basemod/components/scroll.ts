@@ -8,7 +8,10 @@ export class ScrollInstance extends FrameInstance {
   }
 }
 
-export const Scroll: Component<ScrollOptions> = (options = {}, children) =>
+export const Scroll: Component<
+  ScrollOptions,
+  ScrollInstance
+> = (options = {}, children) =>
   new ScrollInstance(options, children)
 
 // let a = CreateFrame('Frame', 'a', UIParent)

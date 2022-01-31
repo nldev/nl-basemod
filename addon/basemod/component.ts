@@ -224,6 +224,6 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
   }
 }
 
-export const Frame: Component<FrameOptions> = (options = {}, children) =>
+export const Frame: Component<FrameOptions, FrameInstance> = (options = {}, children) =>
   new FrameInstance(options, children)
 
