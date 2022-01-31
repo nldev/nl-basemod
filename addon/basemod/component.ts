@@ -349,7 +349,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
     return this
   }
 
-  public Click (type: ClickType, handler: ButtonClickHandler) {
+  public Click (type, handler: ButtonClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
     this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
