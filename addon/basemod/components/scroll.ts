@@ -5,11 +5,11 @@ export interface ScrollOptions extends FrameOptions {
 
 export class ScrollComponent extends FrameComponent {
   protected init () {
-    console.log('hello from scroll')
+    console.log(`hello from ${this.name}`)
   }
 }
 
-export function Scroll (options?: ScrollOptions, children?: Component[]) {
+export function Scroll (options: ScrollOptions = {}, children?: Component[]) {
   return new ScrollComponent(options, children)
 }
 

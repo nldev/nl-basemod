@@ -90,7 +90,7 @@ export abstract class Component<
   public name: string
   public parent: WoWAPI.UIObject
 
-  constructor (public options?: O, public children?: Component[]) {
+  constructor (public options: O, public children?: Component[]) {
     const $ = Get()
 
     this.name = options.name
@@ -220,7 +220,7 @@ export class FrameComponent<O extends FrameOptions = FrameOptions> extends Compo
   }
 }
 
-export function Frame (options?: FrameOptions, children?: Component[]) {
+export function Frame (options: FrameOptions = {}, children?: Component[]) {
   return new FrameComponent(options, children)
 }
 

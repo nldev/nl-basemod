@@ -3,8 +3,14 @@ import { Scroll } from './basemod/components/scroll'
 import { Frame } from './basemod/component'
 
 render($ => {
-  const scroll = Scroll({ name: 'foo' }, [
-    Frame(),
+  const scroll = Scroll({ name: 'bar' }, [
+    Frame({}, [
+      Frame({}, [
+        Frame(),
+        Frame(),
+        Frame(),
+      ]),
+    ]),
   ])
 
   console.log(scroll.ref.GetName())
