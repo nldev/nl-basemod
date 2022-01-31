@@ -79,7 +79,6 @@ export interface Point {
 export interface ComponentOptions {
   name?: string
   isPrefix?: boolean
-  onMounted?: () => void
 }
 
 export abstract class Component<
@@ -95,9 +94,6 @@ export abstract class Component<
       children.forEach(child => child.ref.SetParent(this.ref))
 
     this.init()
-
-    if (options.onMounted)
-      options.onMounted()
   }
 
   protected abstract create (): void
@@ -119,7 +115,7 @@ export const DEFAULT_FRAME_OPTIONS = {
   color: DEFAULT_COLOR,
 }
 
-export class FrameComponent extends Component<FrameOptions> {
+export class FrameComponent extends Component<FrameOptions, WoWAPI.Frame> {
   protected create () {
     const $ = Get()
     const { options } = this
