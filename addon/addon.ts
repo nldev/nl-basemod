@@ -7,7 +7,7 @@ render($ => {
     .Size(500, 500)
     .Backdrop()
     .Point('CENTER')
-    .Padding(50)
+    .Padding(20)
     .Execute(() => console.log('ran'))
 
   a.ref.EnableMouse(true)
