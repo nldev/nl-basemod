@@ -125,6 +125,19 @@ export abstract class Instance<
   protected abstract setup (): void
 
   protected init () {}
+
+  public Children (children: Instance[]) {
+    this.children.forEach(child => {
+      child.ref.SetParent(UIParent)
+      child.ref.Hide()
+    })
+
+    this.children = children
+
+    this.children.forEach(child => child.ref.SetParent(this.ref))
+
+    return this
+  }
 }
 
 export interface FrameOptions extends ComponentOptions {
