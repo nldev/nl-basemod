@@ -1,4 +1,4 @@
-import { noop, Unique } from './utils'
+import { Unique } from './utils'
 import { Get } from './app'
 
 interface Color {
@@ -88,13 +88,14 @@ export class Component<
 export interface FrameOptions extends ComponentOptions {
   point?: Point
   allPoints?: RelativeRegion
-  bgOptions?: BackdropOptions
-  colorOptions?: ColorOptions
+  bg?: BackdropOptions
+  color?: ColorOptions
+  click?: Click
 }
 
 const DEFAULT_FRAME_OPTIONS = {
-  bgOptions: DEFAULT_BACKDROP,
-  colorOptions: DEFAULT_COLOR,
+  bg: DEFAULT_BACKDROP,
+  color: DEFAULT_COLOR,
 }
 
 export class Frame extends Component {
@@ -111,14 +112,17 @@ export class Frame extends Component {
       $.root,
     )
 
-    if (options.bgOptions)
-      this.Backdrop(options.bgOptions, options.colorOptions)
+    if (options.bg)
+      this.Backdrop(options.bg, options.color)
 
     if (options.point)
       this.Point(options.point)
 
     if (options.allPoints)
       this.AllPoints(options.allPoints)
+
+    if (options.click)
+      this.Click(options.click)
   }
 
   Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
@@ -148,7 +152,7 @@ export class Frame extends Component {
     this.ref.SetAllPoints(relativeRegion)
   }
 
-  Mouse (options: Click) {
+  Click (options: Click) {
     this.ref.RegisterForClicks(options.clickType)
     this.ref.EnableMouse(true)
     this.ref.SetScript('OnClick', options.handler)
