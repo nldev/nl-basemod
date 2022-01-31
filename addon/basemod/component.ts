@@ -87,13 +87,16 @@ export abstract class Component<
 > {
   public ref: T
 
-  constructor (protected options?: O, protected children?: Component[]) {
+  constructor (public options?: O, public children?: Component[], onMounted?: (this: Component) => void) {
     this.create()
 
     if (children)
       children.forEach(child => child.ref.SetParent(this.ref))
 
     this.init()
+
+    if (onMounted)
+    onMounted.bind(this)
   }
 
   protected abstract create (): void
@@ -115,7 +118,7 @@ export const DEFAULT_FRAME_OPTIONS = {
   color: DEFAULT_COLOR,
 }
 
-export class FrameComponent extends Component<FrameOptions, WoWAPI.Frame> {
+export class FrameComponent<O extends FrameOptions = FrameOptions> extends Component<O, WoWAPI.Frame> {
   protected create () {
     const $ = Get()
     const { options } = this
@@ -190,7 +193,7 @@ export class FrameComponent extends Component<FrameOptions, WoWAPI.Frame> {
   }
 }
 
-export function Frame (options: FrameOptions = DEFAULT_FRAME_OPTIONS, children?: Component[]) {
-  return new FrameComponent(options)
+export function Frame (options: FrameOptions = DEFAULT_FRAME_OPTIONS, children?: Component[], onMounted?: (this: Component) => void) {
+  return new FrameComponent(options, children, onMounted)
 }
 

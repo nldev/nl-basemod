@@ -8,8 +8,8 @@ export class ScrollComponent extends FrameComponent {
   }
 }
 
-export function Scroll (options: ScrollOptions, children: Component[]) {
-  return new ScrollComponent(options)
+export function Scroll (options: ScrollOptions, children?: Component[], onMounted?: (this: Component) => void) {
+  return new ScrollComponent(options, children, onMounted)
 }
 
 // let a = CreateFrame('Frame', 'a', UIParent)
