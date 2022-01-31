@@ -1,4 +1,4 @@
-import { Instance, FrameInstance, FrameOptions, Component } from '../component'
+import { FrameInstance, FrameOptions, Component } from '../component'
 
 export interface ScrollOptions extends FrameOptions {
 }

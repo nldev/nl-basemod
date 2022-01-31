@@ -98,14 +98,11 @@ export abstract class Instance<
   constructor (public options: O, public children?: Instance[]) {
     this.create()
     this.prepare()
+    this.setup()
     this.init()
   }
 
   protected abstract create (name?: string, parent?: WoWAPI.UIObject): void
-
-  protected abstract setup (): void
-
-  protected init () {}
 
   private prepare () {
     const $ = Get()
@@ -124,9 +121,11 @@ export abstract class Instance<
       this.children.forEach(child => child.ref.SetParent(this.ref))
 
     this.parent = this.options.parent || $.root
-
-    this.setup()
   }
+
+  protected abstract setup (): void
+
+  protected init () {}
 }
 
 export interface FrameOptions extends ComponentOptions {
@@ -150,9 +149,6 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
 
   protected setup () {
     const { options } = this
-
-    if (options.parent)
-      this.Parent(options.parent)
 
     if (options.size)
       this.Size(options.size)
