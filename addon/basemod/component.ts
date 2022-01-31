@@ -134,5 +134,3 @@ export class Frame extends Component {
   }
 }
 
-// (method) WoWAPI.Region.SetPoint(point: WoWAPI.Point, relativeTo: string | WoWAPI.Region, relativePoint: WoWAPI.Point, offsetX: number, offsetY: number): void (+3 overloads)
-// ─────────────────────────────────────────────────────────────────────────────────────────────
