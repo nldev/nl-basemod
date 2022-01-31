@@ -56,6 +56,13 @@ const DEFAULT_COLOR = {
 
 export type RelativeRegion = string | WoWAPI.Region
 
+type ClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, down: boolean) => void
+
+interface Click {
+  clickType: ClickType
+  handler: ClickHandler
+}
+
 export interface Point {
   point: WoWAPI.Point
   relativeTo?: RelativeRegion,
@@ -146,12 +153,5 @@ export class Frame extends Component {
     this.ref.EnableMouse(true)
     this.ref.SetScript('OnClick', options.handler)
   }
-}
-
-type ClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, down: boolean) => void
-
-interface Click {
-  clickType: ClickType
-  handler: ClickHandler
 }
 
