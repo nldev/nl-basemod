@@ -313,8 +313,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       const preventDefault = () => state.preventDefault = true
       console.log('stop here')
 
-
-
       if (stopHandler)
         stopHandler(frame, type, () => preventDefault())
       console.log('stop here')
