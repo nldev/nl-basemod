@@ -76,13 +76,22 @@ export interface ComponentOptions {
   isPrefix?: boolean
 }
 
-export class Component<
+export abstract class Component<
   O extends ComponentOptions = ComponentOptions,
   T extends WoWAPI.UIObject = WoWAPI.Frame,
 > {
   public ref: T
 
-  constructor (options?: O) {}
+  constructor (protected options?: O) {
+    this.ready()
+    this.init()
+  }
+
+  protected abstract ready (): void
+
+  protected init () {
+
+  }
 }
 
 export interface FrameOptions extends ComponentOptions {
@@ -98,11 +107,10 @@ export const DEFAULT_FRAME_OPTIONS = {
   color: DEFAULT_COLOR,
 }
 
-export class Frame extends Component {
-  constructor (options: FrameOptions = DEFAULT_FRAME_OPTIONS) {
-    super(options)
-
+export class Frame extends Component<FrameOptions> {
+  protected ready () {
     const $ = Get()
+    const { options } = this
 
     this.ref = CreateFrame(
       'Frame',
@@ -113,7 +121,7 @@ export class Frame extends Component {
     )
 
     if (options.bg)
-      this.Backdrop(options.bg, options.color)
+      this.Backdrop(options.bg, this.options.color)
 
     if (options.point)
       this.Point(options.point)
@@ -123,6 +131,7 @@ export class Frame extends Component {
 
     if (options.click)
       this.Click(options.click)
+
   }
 
   Parent<T extends WoWAPI.UIObject = WoWAPI.Frame> (parent: T) {
