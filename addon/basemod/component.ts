@@ -1,4 +1,4 @@
-import { Unique } from './utils'
+import { noop, Unique } from './utils'
 import { Get } from './app'
 
 interface Color {
@@ -106,6 +106,12 @@ export class Frame extends Component {
 
     if (options.bgOptions)
       this.Backdrop(options.bgOptions, options.colorOptions)
+
+    if (options.point)
+      this.Point(options.point)
+
+    if (options.allPoints)
+      this.AllPoints(options.allPoints)
   }
 
   Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
@@ -134,5 +140,18 @@ export class Frame extends Component {
   AllPoints (relativeRegion?: RelativeRegion) {
     this.ref.SetAllPoints(relativeRegion)
   }
+
+  Mouse (options: Click) {
+    this.ref.RegisterForClicks(options.clickType)
+    this.ref.EnableMouse(true)
+    this.ref.SetScript('OnClick', options.handler)
+  }
+}
+
+type ClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, down: boolean) => void
+
+interface Click {
+  clickType: ClickType
+  handler: ClickHandler
 }
 
