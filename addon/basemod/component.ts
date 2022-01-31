@@ -68,13 +68,15 @@ export interface OnClick {
   handler: ClickHandler
 }
 
-export interface Point {
+export interface FullPoint {
   point: WoWAPI.Point
   relativeTo?: RelativeRegion,
   relativePoint?: WoWAPI.Point,
   offsetX?: number
   offsetY?: number
 }
+
+export type Point = FullPoint | WoWAPI.Point
 
 export interface ComponentOptions {
   name?: string
@@ -84,10 +86,10 @@ export interface ComponentOptions {
 
 export type Component<
   O extends ComponentOptions = ComponentOptions,
-  T extends Instance = Instance,
-> = (options?: O, children?: Instance[]) => T
+  T extends Element = Element,
+> = (options?: O, children?: Element[]) => T
 
-export abstract class Instance<
+export abstract class Element<
   O extends ComponentOptions = ComponentOptions,
   T extends WoWAPI.UIObject = WoWAPI.Frame,
 > {
@@ -95,7 +97,7 @@ export abstract class Instance<
   public name: string
   public parent: WoWAPI.UIObject
 
-  constructor (public options: O, public children?: Instance[]) {
+  constructor (public options: O, public children?: Element[]) {
     if (this.options.prefix && this.options.name)
       throw new Error('Component cannot have both a name and a prefix')
 
@@ -126,7 +128,7 @@ export abstract class Instance<
 
   protected init () {}
 
-  public Children (children: Instance[]) {
+  public Children (children: Element[]) {
     this.children.forEach(child => {
       child.ref.SetParent(UIParent)
       child.ref.Hide()
@@ -154,7 +156,7 @@ export const DEFAULT_FRAME_OPTIONS = {
   color: DEFAULT_COLOR,
 }
 
-export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instance<O, WoWAPI.Frame> {
+export class FrameElement<O extends FrameOptions = FrameOptions> extends Element<O, WoWAPI.Frame> {
   protected create () {
     this.ref = CreateFrame('Frame', this.name, this.parent)
   }
@@ -207,7 +209,11 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
   }
 
   public Point (options: Point) {
-    this.ref.SetPoint(options.point, options.relativeTo, options.relativePoint, options.offsetX, options.offsetY)
+    if (typeof options === 'string') {
+      this.ref.SetPoint(options)
+    } else {
+      this.ref.SetPoint(options.point, options.relativeTo, options.relativePoint, options.offsetX, options.offsetY)
+    }
 
     return this
   }
@@ -237,6 +243,6 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
   }
 }
 
-export const Frame: Component<FrameOptions, FrameInstance> = (options = {}, children) =>
-  new FrameInstance(options, children)
+export const Frame: Component<FrameOptions, FrameElement> = (options = {}, children) =>
+  new FrameElement(options, children)
 
