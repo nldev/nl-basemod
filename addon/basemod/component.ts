@@ -79,6 +79,7 @@ export interface Point {
 export interface ComponentOptions {
   name?: string
   prefix?: string
+  parent?: WoWAPI.UIObject
 }
 
 export abstract class Component<
@@ -86,30 +87,37 @@ export abstract class Component<
   T extends WoWAPI.UIObject = WoWAPI.Frame,
 > {
   public ref: T
+  public name: string
+  public parent: WoWAPI.UIObject
 
-  constructor (public options?: O, public children: Component[] = []) {
+  constructor (public options?: O, public children?: Component[]) {
+    const $ = Get()
+
+    this.name = options.name
+      ? options.name
+      : options.prefix
+      ? Unique(options.prefix)
+      : null
+
     this.create()
+    this.ready()
 
     if (options.prefix && options.name)
       throw new Error('Component cannot have both a name and a prefix')
 
-    if (children)
-      this.Children(children)
+    if (this.children)
+      this.children.forEach(child => child.ref.SetParent(this.ref))
+
+    this.parent = this.options.parent || $.root
 
     this.init()
   }
 
-  protected abstract create (): void
+  protected abstract ready (): void
+
+  protected abstract create (name?: string, parent?: WoWAPI.UIObject): void
 
   protected init () {}
-
-  public Children (children?: Component[]) {
-    this.children.forEach(child => child.ref.SetParent(UIParent))
-
-    this.children = children
-
-    this.children.forEach(child => child.ref.SetParent(this.ref))
-  }
 }
 
 export interface FrameOptions extends ComponentOptions {
@@ -128,16 +136,14 @@ export const DEFAULT_FRAME_OPTIONS = {
 
 export class FrameComponent<O extends FrameOptions = FrameOptions> extends Component<O, WoWAPI.Frame> {
   protected create () {
-    const $ = Get()
+    this.ref = CreateFrame('Frame', this.name, this.parent)
+  }
+
+  protected ready () {
     const { options } = this
 
-    let name = options.name
-      ? options.name
-      : options.prefix
-      ? Unique(options.prefix)
-      : null
-
-    this.ref = CreateFrame('Frame', name, $.root)
+    if (options.parent)
+      this.Parent(options.parent)
 
     if (options.size)
       this.Size(options.size)
@@ -214,7 +220,7 @@ export class FrameComponent<O extends FrameOptions = FrameOptions> extends Compo
   }
 }
 
-export function Frame (options: FrameOptions = DEFAULT_FRAME_OPTIONS, children?: Component[]) {
+export function Frame (options?: FrameOptions, children?: Component[]) {
   return new FrameComponent(options, children)
 }
 

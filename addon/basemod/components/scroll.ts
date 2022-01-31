@@ -9,7 +9,7 @@ export class ScrollComponent extends FrameComponent {
   }
 }
 
-export function Scroll (options: ScrollOptions, children?: Component[]) {
+export function Scroll (options?: ScrollOptions, children?: Component[]) {
   return new ScrollComponent(options, children)
 }
 
