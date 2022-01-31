@@ -94,7 +94,7 @@ export abstract class Component<
       throw new Error('Component cannot have both a name and a prefix')
 
     if (children)
-      children.forEach(child => child.ref.SetParent(this.ref))
+      this.Children(children)
 
     this.init()
   }
@@ -105,6 +105,10 @@ export abstract class Component<
 
   public Children (children?: Component[]) {
     this.children.forEach(child => child.ref.SetParent(UIParent))
+
+    this.children = children
+
+    this.children.forEach(child => child.ref.SetParent(this.ref))
   }
 }
 

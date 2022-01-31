@@ -3,15 +3,12 @@ import { Frame } from './basemod/component'
 import { Scroll } from './basemod/components/scroll'
 
 render($ => {
-  const f = Frame().Backdrop().Parent($.root)
-
-  return Scroll({ name: 'scrollable' }, [
+  return Frame().Backdrop().Parent($.root).Children([
     Frame({ prefix: 'hello' }),
     Frame({ prefix: 'hello' }),
     Frame({ prefix: 'hello' }, [
       Frame(null, [
         Frame(null, [
-          f,
           Frame(),
           Frame(),
         ]),
