@@ -9,10 +9,16 @@ render($ => {
     .Point('CENTER')
     .Padding(20)
     .Children([
-      Frame()
-        .Backdrop()
-        .Size(300, 300)
-        .Point({ point: 'TOPLEFT', relativeTo: 'parent', relativePoint: 'TOPLEFT' })
+      Frame({ allPoints: 'CENTER' }, [
+        Frame()
+          .Backdrop()
+          .Size(300, 300)
+          .Point({
+            point: 'TOPLEFT',
+            relativeTo: 'parent',
+          })
+          .Run(() => console.log('ran'))
+      ]),
     ])
   // Scroll({ name: 'bar' })
   //   .Backdrop()

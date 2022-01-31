@@ -109,6 +109,8 @@ export abstract class Element<
     if (this.options.prefix && this.options.name)
       throw new Error('Component cannot have both a name and a prefix')
 
+    const $ = Get()
+
     this.name = this.options.name
       ? this.options.name
       : this.options.prefix
@@ -116,6 +118,9 @@ export abstract class Element<
       : null
 
     this.create()
+
+    this.parent = this.options.parent || $.root
+
     this.setup()
     this.init()
     this.mount()
@@ -214,7 +219,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     this.inner.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
     this.inner.SetParent(this.ref)
-    this.inner.SetPoint('CENTER')
+    this.inner.SetPoint('CENTER', this.ref, 'CENTER')
 
     this.children.forEach(child => {
       child.ref.SetParent(this.inner)
@@ -257,10 +262,10 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     if (typeof options === 'string') {
       this.ref.SetPoint(options)
     } else {
-      let relativeTo
+      let relativeTo = null
 
       if (options.relativeTo === 'parent')
-        relativeTo = this.ref.GetParent()
+        relativeTo = this.parent
 
       if (options.relativeTo === 'root')
         relativeTo = $.root
@@ -272,6 +277,9 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 
   public AllPoints (relativeRegion?: RelativeRegion) {
+    if (relativeRegion === 'parent')
+      relativeRegion = this.parent
+
     this.ref.SetAllPoints(relativeRegion)
 
     return this
@@ -299,6 +307,12 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
   public Z (level: number) {
     this.ref.SetFrameLevel(level)
+
+    return this
+  }
+
+  public Run (fn: (frame: FrameElement) => void) {
+    fn(this)
 
     return this
   }
