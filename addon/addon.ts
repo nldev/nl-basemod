@@ -1,11 +1,12 @@
-import State from './basemod/state'
-import { App } from './basemod/app'
+import { init } from './basemod/state'
 
-const state = State()
+init($ => {
+  console.log('second')
+})
 
-state.app = new App()
+console.log('first')
 
-const $ = state.app
+
 
 // const container = new Container($ => {
 //   console.log($.playerInfo.name)

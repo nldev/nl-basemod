@@ -15,7 +15,7 @@ export class App {
   public playerInfo: PlayerInfo
   // public components: Mapping<Component>
 
-  constructor (isDummy: boolean = false) {
+  constructor (protected onInit: ($: App) => void, isDummy: boolean = false) {
     if (!isDummy) {
       this.root = CreateFrame('Frame')
       this.root.SetScript('OnUpdate', () => this.load())
@@ -48,6 +48,8 @@ export class App {
 
         console.log('loaded')
         console.log('a new one')
+
+        this.onInit()
       }
 
       this.load()
