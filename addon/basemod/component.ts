@@ -63,7 +63,7 @@ export type RelativeRegion = string | WoWAPI.Region
 
 export type ClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, down: boolean) => void
 
-export interface Click {
+export interface OnClick {
   clickType: ClickType
   handler: ClickHandler
 }
@@ -131,7 +131,7 @@ export interface FrameOptions extends ComponentOptions {
   allPoints?: RelativeRegion
   bg?: BackdropOptions
   color?: ColorOptions
-  click?: Click
+  onClick?: OnClick
   size?: Size
 }
 
@@ -160,8 +160,8 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
     if (options.allPoints)
       this.AllPoints(options.allPoints)
 
-    if (options.click)
-      this.Click(options.click)
+    if (options.onClick)
+      this.Click(options.onClick.clickType, options.onClick.handler)
   }
 
   Parent<T extends WoWAPI.UIObject = WoWAPI.Frame> (parent: T) {
@@ -204,10 +204,10 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
     return this
   }
 
-  Click (options: Click) {
+  Click (type: ClickType, handler: ClickHandler) {
     this.ref.EnableMouse(true)
-    this.ref.RegisterForClicks(options.clickType)
-    this.ref.SetScript('OnClick', options.handler)
+    this.ref.RegisterForClicks(type)
+    this.ref.SetScript('OnClick', handler)
 
     return this
   }
