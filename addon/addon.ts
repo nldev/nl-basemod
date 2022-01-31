@@ -13,6 +13,8 @@ render($ => {
     ]),
   ])
 
+  scroll.Click('LeftButtonDown', () => console.log('hello'))
+
   console.log(scroll.ref.GetName())
 })
 
