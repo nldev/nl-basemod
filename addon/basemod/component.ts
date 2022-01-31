@@ -65,7 +65,7 @@ export class Component<
 > {
   public ref: T
 
-  constructor (protected options?: O) {}
+  constructor (options?: O) {}
 }
 
 export interface FrameOptions extends ComponentOptions {
@@ -79,7 +79,7 @@ const DEFAULT_FRAME_OPTIONS = {
 }
 
 export class Frame extends Component {
-  constructor (protected options: FrameOptions = DEFAULT_FRAME_OPTIONS) {
+  constructor (options: FrameOptions = DEFAULT_FRAME_OPTIONS) {
     super(options)
 
     const $ = Get()
@@ -91,12 +91,19 @@ export class Frame extends Component {
         : null,
       $.root,
     )
+
+    if (options.bgOptions)
+      this.Backdrop(options.bgOptions, options.colorOptions)
   }
 
   Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
     const backdrop: Backdrop = {
       ...DEFAULT_BACKDROP,
       ...bgOptions,
+      insets: {
+      ...DEFAULT_BACKDROP.insets,
+      ...(bgOptions ? bgOptions : {}),
+      }
     }
     this.ref.SetBackdrop(backdrop)
 
