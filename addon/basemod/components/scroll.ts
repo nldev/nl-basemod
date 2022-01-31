@@ -41,13 +41,12 @@ export class ScrollElement extends FrameElement {
     this.ref.SetScale(0.667)
     scrollframe.SetScrollChild(scrollchild)
 
-    const b = CreateFrame('Frame', 'b', this.ref)
+    const b = CreateFrame('Frame', 'b', UIParent)
 
     b.SetSize(this.ref.GetWidth() * 0.95, this.ref.GetHeight() * 0.95)
-    // b.SetParent(this.ref)
+    b.SetParent(this.ref)
     b.SetPoint('CENTER')
 
-    scrollframe.SetParent(b)
     scrollframe.SetAllPoints(b)
 
     scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
@@ -58,10 +57,6 @@ export class ScrollElement extends FrameElement {
     this.ref.SetFrameLevel(0)
     b.SetFrameLevel(1)
     moduleoptions.SetFrameLevel(2)
-
-    const c = Frame({ name: 'test', parent: moduleoptions })
-
-    c.Size(500, 1000)
 
     console.log('hello')
   }
