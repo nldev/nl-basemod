@@ -81,7 +81,7 @@ export type Point = FullPoint | WoWAPI.Point
 export interface ComponentOptions {
   name?: string
   prefix?: string
-  parent?: WoWAPI.Region
+  parent?: WoWAPI.Frame
 }
 
 export type Component<
@@ -95,7 +95,7 @@ export abstract class Element<
 > {
   public ref: T
   public name: string
-  public parent: WoWAPI.Region
+  public parent: WoWAPI.Frame
 
   constructor (public options: O, public children?: Element[]) {
     if (this.options.prefix && this.options.name)
@@ -113,7 +113,7 @@ export abstract class Element<
     this.init()
   }
 
-  protected abstract create (name?: string, parent?: WoWAPI.Region): void
+  protected abstract create (name?: string, parent?: WoWAPI.Frame): void
 
   private prepare () {
     const $ = Get()
@@ -184,7 +184,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       this.Z(options.z)
   }
 
-  public Parent<T extends WoWAPI.Region = WoWAPI.Frame> (parent: T) {
+  public Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
     this.ref.SetParent(parent)
 
     return this
@@ -231,8 +231,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   public Click (type: ClickType, handler: ClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
-
-    console.log('hello')
 
     this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
 
@@ -299,7 +297,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
       this.Z(options.z)
   }
 
-  public Parent<T extends WoWAPI.Region = WoWAPI.Frame> (parent: T) {
+  public Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
     this.ref.SetParent(parent)
 
     return this
