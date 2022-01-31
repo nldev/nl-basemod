@@ -13,6 +13,10 @@ render($ => {
     ]),
   ])
 
+  scroll.ref.Show()
+  scroll.Point({ point: 'CENTER' })
+  scroll.Size(500, 500)
+  scroll.Backdrop()
   scroll.Click('LeftButtonDown', () => console.log('hello'))
 
   console.log(scroll.ref.GetName())

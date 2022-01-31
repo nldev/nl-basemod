@@ -208,7 +208,7 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
   public Click (type: ClickType, handler: ClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
-    this.ref.SetScript('OnClick', handler)
+    this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
 
     return this
   }
