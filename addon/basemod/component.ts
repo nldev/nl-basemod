@@ -105,7 +105,7 @@ export abstract class Element<
   public parent: WoWAPI.Frame
   public inner: WoWAPI.Frame
 
-  constructor (public options: O, public children?: Element[]) {
+  constructor (public options: O, public children: Element[] = []) {
     if (this.options.prefix && this.options.name)
       throw new Error('Component cannot have both a name and a prefix')
 
@@ -200,8 +200,13 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 
   public Padding (amount: number) {
-    if (amount === 0)
+    if (amount === 0) {
+      this.children.forEach(child => {
+        child.ref.SetParent(this.ref)
+      })
+
       return delete this.inner
+    }
 
     this.inner = CreateFrame('Frame', null, this.ref)
 
@@ -209,6 +214,9 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     this.inner.SetParent(this.ref)
     this.inner.SetPoint('CENTER')
 
+    this.children.forEach(child => {
+      child.ref.SetParent(this.inner)
+    })
   }
 
   public Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
