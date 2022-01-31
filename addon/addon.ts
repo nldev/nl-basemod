@@ -1,19 +1,21 @@
-import { init } from './basemod/app'
+import { render } from './basemod/app'
 import { Frame } from './basemod/component'
 import { Scroll } from './basemod/components/scroll'
 
-init($ => {
-  const scroll = Scroll(
-    { name: 'scrollable' },
-    [
-      Frame({ name: 'hello', isPrefix: true }),
-      Frame({ name: 'hello', isPrefix: true }),
-      Frame({ name: 'hello', isPrefix: true }, [
-        Frame(),
+render($ => {
+  console.log($.playerInfo.name)
+
+  return Scroll({ name: 'scrollable' }, [
+    Frame({ name: 'hello', isPrefix: true }),
+    Frame({ name: 'hello', isPrefix: true }),
+    Frame({ name: 'hello', isPrefix: true }, [
+      Frame(null, [
+        Frame(null, [
+          Frame(),
+          Frame(),
+          Frame(),
+        ]),
       ]),
-    ],
-  )
-
-  console.log(scroll.ref.GetName())
+    ]),
+  ])
 })
-

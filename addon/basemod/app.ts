@@ -8,7 +8,7 @@ const app: App = ({} as any)
 
 export const Get = () => app.container
 
-export const init = (onInit: ($: Container) => void) => {
+export const render = (onInit: ($: Container) => void) => {
   app.container = new Container(onInit)
 
   return app.container

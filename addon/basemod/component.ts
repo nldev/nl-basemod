@@ -176,8 +176,8 @@ export class FrameComponent<O extends FrameOptions = FrameOptions> extends Compo
   }
 
   Click (options: Click) {
-    this.ref.RegisterForClicks(options.clickType)
     this.ref.EnableMouse(true)
+    this.ref.RegisterForClicks(options.clickType)
     this.ref.SetScript('OnClick', options.handler)
   }
 
