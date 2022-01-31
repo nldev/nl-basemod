@@ -82,7 +82,12 @@ export interface ComponentOptions {
   parent?: WoWAPI.UIObject
 }
 
-export abstract class Component<
+export type Component<
+  O extends ComponentOptions = ComponentOptions,
+  T extends Instance = Instance,
+> = (options?: O, children?: Instance[]) => T
+
+export abstract class Instance<
   O extends ComponentOptions = ComponentOptions,
   T extends WoWAPI.UIObject = WoWAPI.Frame,
 > {
@@ -90,19 +95,29 @@ export abstract class Component<
   public name: string
   public parent: WoWAPI.UIObject
 
-  constructor (public options: O, public children?: Component[]) {
+  constructor (public options: O, public children?: Instance[]) {
+    this.create()
+    this.prepare()
+    this.init()
+  }
+
+  protected abstract create (name?: string, parent?: WoWAPI.UIObject): void
+
+  protected abstract setup (): void
+
+  protected init () {}
+
+  private prepare () {
     const $ = Get()
 
-    this.name = options.name
-      ? options.name
-      : options.prefix
-      ? Unique(options.prefix)
+    this.name = this.options.name
+      ? this.options.name
+      : this.options.prefix
+      ? Unique(this.options.prefix)
       : null
 
-    this.create()
-    this.ready()
 
-    if (options.prefix && options.name)
+    if (this.options.prefix && this.options.name)
       throw new Error('Component cannot have both a name and a prefix')
 
     if (this.children)
@@ -110,14 +125,8 @@ export abstract class Component<
 
     this.parent = this.options.parent || $.root
 
-    this.init()
+    this.setup()
   }
-
-  protected abstract ready (): void
-
-  protected abstract create (name?: string, parent?: WoWAPI.UIObject): void
-
-  protected init () {}
 }
 
 export interface FrameOptions extends ComponentOptions {
@@ -134,12 +143,12 @@ export const DEFAULT_FRAME_OPTIONS = {
   color: DEFAULT_COLOR,
 }
 
-export class FrameComponent<O extends FrameOptions = FrameOptions> extends Component<O, WoWAPI.Frame> {
+export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instance<O, WoWAPI.Frame> {
   protected create () {
     this.ref = CreateFrame('Frame', this.name, this.parent)
   }
 
-  protected ready () {
+  protected setup () {
     const { options } = this
 
     if (options.parent)
@@ -220,7 +229,6 @@ export class FrameComponent<O extends FrameOptions = FrameOptions> extends Compo
   }
 }
 
-export function Frame (options: FrameOptions = {}, children?: Component[]) {
-  return new FrameComponent(options, children)
-}
+export const Frame: Component<FrameOptions> = (options = {}, children) =>
+  new FrameInstance(options, children)
 

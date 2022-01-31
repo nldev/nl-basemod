@@ -1,17 +1,16 @@
-import { Component, FrameComponent, FrameOptions } from '../component'
+import { Instance, FrameInstance, FrameOptions, Component } from '../component'
 
 export interface ScrollOptions extends FrameOptions {
 }
 
-export class ScrollComponent extends FrameComponent {
+export class ScrollInstance extends FrameInstance {
   protected init () {
     console.log(`hello from ${this.name}`)
   }
 }
 
-export function Scroll (options: ScrollOptions = {}, children?: Component[]) {
-  return new ScrollComponent(options, children)
-}
+export const Scroll: Component<ScrollOptions> = (options = {}, children) =>
+  new ScrollInstance(options, children)
 
 // let a = CreateFrame('Frame', 'a', UIParent)
 
