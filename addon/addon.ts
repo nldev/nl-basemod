@@ -1,9 +1,10 @@
 import { init, Get } from './basemod/app'
 import { Frame } from './basemod/component'
 
-init(() => {
-  const $ = Get()
+init($ => {
   const frame = Frame()
+
+  console.log(frame)
 })
 
 // const container = new Container($ => {

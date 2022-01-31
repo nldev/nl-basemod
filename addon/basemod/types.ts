@@ -31,18 +31,4 @@ export type CharacterRace =
   | typeof BLOOD_ELF
   | typeof DRAENEI
 
-export interface PlayerInfo {
-  name: string
-  chrRace: CharacterRace
-  chrClass: CharacterClass
-  level: number
-}
-
-export interface ComponentOptions {}
-
-export type Component<
-  O extends ComponentOptions = ComponentOptions,
-  T extends WoWAPI.UIObject = WoWAPI.Frame,
-> = (options: O) => T
-
 
