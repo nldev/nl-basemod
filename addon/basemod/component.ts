@@ -81,7 +81,7 @@ export type Point = FullPoint | WoWAPI.Point
 export interface ComponentOptions {
   name?: string
   prefix?: string
-  parent?: WoWAPI.UIObject
+  parent?: WoWAPI.Region
 }
 
 export type Component<
@@ -95,7 +95,7 @@ export abstract class Element<
 > {
   public ref: T
   public name: string
-  public parent: WoWAPI.UIObject
+  public parent: WoWAPI.Region
 
   constructor (public options: O, public children?: Element[]) {
     if (this.options.prefix && this.options.name)
@@ -113,7 +113,7 @@ export abstract class Element<
     this.init()
   }
 
-  protected abstract create (name?: string, parent?: WoWAPI.UIObject): void
+  protected abstract create (name?: string, parent?: WoWAPI.Region): void
 
   private prepare () {
     const $ = Get()
@@ -181,10 +181,10 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       this.Click(options.onClick.clickType, options.onClick.handler)
 
     if (options.z)
-      this.ref.SetFrameLevel(options.z)
+      this.Z(options.z)
   }
 
-  public Parent<T extends WoWAPI.UIObject = WoWAPI.Frame> (parent: T) {
+  public Parent<T extends WoWAPI.Region = WoWAPI.Frame> (parent: T) {
     this.ref.SetParent(parent)
 
     return this
@@ -229,8 +229,11 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 
   public Click (type: ClickType, handler: ClickHandler) {
-    this.ref.RegisterForClicks(type)
     this.ref.EnableMouse(true)
+    this.ref.RegisterForClicks(type)
+
+    console.log('hello')
+
     this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
 
     return this
@@ -245,6 +248,12 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     return this
   }
+
+  public Z (level: number) {
+    this.ref.SetFrameLevel(level)
+
+    return this
+  }
 }
 
 export const Frame: Component<FrameOptions, FrameElement> = (options = {}, children) =>
@@ -255,6 +264,7 @@ export interface ButtonOptions extends ComponentOptions {
   allPoints?: RelativeRegion
   onClick?: OnClick
   size?: Size
+  z?: number
 }
 
 export const DEFAULT_BUTTON_OPTIONS = {
@@ -284,9 +294,12 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
 
     if (options.onClick)
       this.Click(options.onClick.clickType, options.onClick.handler)
+
+    if (options.z)
+      this.Z(options.z)
   }
 
-  public Parent<T extends WoWAPI.UIObject = WoWAPI.Frame> (parent: T) {
+  public Parent<T extends WoWAPI.Region = WoWAPI.Frame> (parent: T) {
     this.ref.SetParent(parent)
 
     return this
@@ -331,8 +344,8 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
   }
 
   public Click (type: ClickType, handler: ClickHandler) {
-    this.ref.RegisterForClicks(type)
     this.ref.EnableMouse(true)
+    this.ref.RegisterForClicks(type)
     this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
 
     return this
@@ -350,6 +363,12 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
 
   public Run (fn: (element: ButtonElement) => void) {
     fn(this)
+
+    return this
+  }
+
+  public Z (level: number) {
+    this.ref.SetFrameLevel(level)
 
     return this
   }
