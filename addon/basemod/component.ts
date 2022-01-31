@@ -59,7 +59,7 @@ export const DEFAULT_COLOR = {
   alpha: 1,
 }
 
-export type RelativeRegion = string | WoWAPI.Region
+export type RelativeRegion = string | 'root' | 'parent' | WoWAPI.Region
 
 export type FrameClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton) => void
 
@@ -77,8 +77,8 @@ export interface FrameOnClick {
 
 export interface FullPoint {
   point: WoWAPI.Point
-  relativeTo?: RelativeRegion,
-  relativePoint?: WoWAPI.Point,
+  relativeTo?: RelativeRegion
+  relativePoint?: WoWAPI.Point
   offsetX?: number
   offsetY?: number
 }
@@ -205,7 +205,9 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
         child.ref.SetParent(this.ref)
       })
 
-      return delete this.inner
+      delete this.inner
+
+      return this
     }
 
     this.inner = CreateFrame('Frame', null, this.ref)
@@ -217,6 +219,8 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     this.children.forEach(child => {
       child.ref.SetParent(this.inner)
     })
+
+    return this
   }
 
   public Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
@@ -248,10 +252,20 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 
   public Point (options: Point) {
+    const $ = Get()
+
     if (typeof options === 'string') {
       this.ref.SetPoint(options)
     } else {
-      this.ref.SetPoint(options.point, options.relativeTo, options.relativePoint, options.offsetX, options.offsetY)
+      let relativeTo
+
+      if (options.relativeTo === 'parent')
+        relativeTo = this.ref.GetParent()
+
+      if (options.relativeTo === 'root')
+        relativeTo = $.root
+
+      this.ref.SetPoint(options.point, relativeTo, options.relativePoint, options.offsetX, options.offsetY)
     }
 
     return this
@@ -314,23 +328,23 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
   protected setup () {
     const { options } = this
 
-    if (options.size)
-      this.Size(options.size.width, options.size.height)
+    // if (options.size)
+    //   this.Size(options.size.width, options.size.height)
 
     // if (options.bg)
     //   this.Backdrop(options.bg, this.options.color)
 
-    if (options.point)
-      this.Point(options.point)
+    // if (options.point)
+    //   this.Point(options.point)
 
-    if (options.allPoints)
-      this.AllPoints(options.allPoints)
+    // if (options.allPoints)
+    //   this.AllPoints(options.allPoints)
 
     if (options.onClick)
       this.Click(options.onClick.type, options.onClick.handler)
 
-    if (options.z)
-      this.Z(options.z)
+    // if (options.z)
+    //   this.Z(options.z)
   }
 
   public Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
@@ -339,70 +353,10 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
     return this
   }
 
-  public Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
-    const backdrop: Backdrop = {
-      ...DEFAULT_BACKDROP,
-      ...bgOptions,
-      insets: {
-      ...DEFAULT_BACKDROP.insets,
-      ...(bgOptions ? bgOptions : {}),
-      }
-    }
-
-    this.ref.SetBackdrop(backdrop)
-
-    const color: Color = {
-      ...DEFAULT_COLOR,
-      ...colorOptions,
-    }
-
-    this.ref.SetBackdropColor(color.red, color.green, color.blue, color.alpha)
-
-    return this
-  }
-
-  public Point (options: Point) {
-    if (typeof options === 'string') {
-      this.ref.SetPoint(options)
-    } else {
-      this.ref.SetPoint(options.point, options.relativeTo, options.relativePoint, options.offsetX, options.offsetY)
-    }
-
-    return this
-  }
-
-  public AllPoints (relativeRegion?: RelativeRegion) {
-    this.ref.SetAllPoints(relativeRegion)
-
-    return this
-  }
-
   public Click (type, handler: ButtonClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
     this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
-
-    return this
-  }
-
-  public Size (width: number, height: number) {
-    if (width)
-      this.ref.SetWidth(width)
-
-    if (height)
-      this.ref.SetHeight(width)
-
-    return this
-  }
-
-  public Run (fn: (element: ButtonElement) => void) {
-    fn(this)
-
-    return this
-  }
-
-  public Z (level: number) {
-    this.ref.SetFrameLevel(level)
 
     return this
   }
