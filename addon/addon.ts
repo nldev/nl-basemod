@@ -3,17 +3,15 @@ import { Frame } from './basemod/component'
 import { Scroll } from './basemod/components/scroll'
 
 render($ => {
-  const a = Frame()
-    .Size(500, 500)
+  const a = Frame({ padding: 10, size: { width: 500, height: 500 }, z: 99 })
     .Backdrop()
     .Point('CENTER')
-    .Padding(10)
     .Execute(() => console.log('ran'))
-    .Z(99)
+    .Z(5)
     .Drag('RightButton')
     .Click('LeftButton', () => console.log($.playerInfo.name))
 
 
-  Scroll({ name: 'bar', size: { width: 500, height: 500 }, parent: a.ref, allPoints: a.ref, z: 5 })
+  Scroll({ name: 'bar', size: { width: 500, height: 500 }, parent: a.inner, allPoints: a.ref, z: 99 })
 })
 
