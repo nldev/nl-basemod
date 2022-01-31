@@ -150,7 +150,7 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
     const { options } = this
 
     if (options.size)
-      this.Size(options.size)
+      this.Size(options.size.width, options.size.height)
 
     if (options.bg)
       this.Backdrop(options.bg, this.options.color)
@@ -213,12 +213,12 @@ export class FrameInstance<O extends FrameOptions = FrameOptions> extends Instan
     return this
   }
 
-  public Size (options: Size) {
-    if (options.width)
-      this.ref.SetWidth(options.width)
+  public Size (width: number, height: number) {
+    if (width)
+      this.ref.SetWidth(width)
 
-    if (options.height)
-      this.ref.SetHeight(options.width)
+    if (height)
+      this.ref.SetHeight(width)
 
     return this
   }
