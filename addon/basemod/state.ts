@@ -1,9 +1,9 @@
 import { App } from './app'
 
-const _ = {
+const state = {
   app: new App(true)
 }
 
-export default () => _
+export default () => state
 
 

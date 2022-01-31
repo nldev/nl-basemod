@@ -1,9 +1,11 @@
-import Global from './basemod/global'
+import State from './basemod/state'
 import { App } from './basemod/app'
 
-const $ = Global()
+const state = State()
 
-$.app = new App()
+state.app = new App()
+
+const $ = state.app
 
 // const container = new Container($ => {
 //   console.log($.playerInfo.name)
