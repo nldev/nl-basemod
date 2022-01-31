@@ -1,4 +1,4 @@
-import { FrameComponent, FrameOptions } from '../component'
+import { Component, FrameComponent, FrameOptions } from '../component'
 
 export interface ScrollOptions extends FrameOptions {
 }
@@ -8,7 +8,7 @@ export class ScrollComponent extends FrameComponent {
   }
 }
 
-export function Scroll (options: ScrollOptions) {
+export function Scroll (options: ScrollOptions, children: Component[]) {
   return new ScrollComponent(options)
 }
 

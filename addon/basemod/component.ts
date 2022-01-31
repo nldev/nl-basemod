@@ -76,10 +76,10 @@ export interface Point {
   offsetY?: number
 }
 
-export interface ComponentOptions<T extends WoWAPI.UIObject = WoWAPI.Region> {
+export interface ComponentOptions {
   name?: string
   isPrefix?: boolean
-  children?: T[]
+  onMounted?: () => void
 }
 
 export abstract class Component<
@@ -88,13 +88,16 @@ export abstract class Component<
 > {
   public ref: T
 
-  constructor (protected options?: O) {
+  constructor (protected options?: O, protected children?: Component[]) {
     this.create()
 
-    if (this.options.children)
-      this.options.children.forEach(child => child.SetParent(this.ref))
+    if (children)
+      children.forEach(child => child.ref.SetParent(this.ref))
 
     this.init()
+
+    if (options.onMounted)
+      options.onMounted()
   }
 
   protected abstract create (): void
@@ -191,7 +194,7 @@ export class FrameComponent extends Component<FrameOptions> {
   }
 }
 
-export function Frame (options: FrameOptions) {
+export function Frame (options: FrameOptions = DEFAULT_FRAME_OPTIONS, children?: Component[]) {
   return new FrameComponent(options)
 }
 
