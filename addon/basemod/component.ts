@@ -151,6 +151,33 @@ export abstract class Element<
     this._parent = parent
   }
 
+  public Show (force?: boolean) {
+    if (!force)
+      this.isHidden = false
+
+    const frame = (this.ref as any) as WoWAPI.Frame
+
+    if (frame.Show)
+      frame.Show()
+
+    this.children.forEach(child => child.Show(true))
+  }
+
+  public Hide (force?: boolean) {
+    if (!force)
+      this.isHidden = true
+
+    const frame = (this.ref as any) as WoWAPI.Frame
+
+    if (frame.Hide)
+      frame.Hide()
+
+    this.children.forEach(child => child.Hide(true))
+  }
+
+  public Toggle () {
+  }
+
   protected register () {
     const $ = Get()
 
