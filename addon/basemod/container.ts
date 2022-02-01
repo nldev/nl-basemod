@@ -44,8 +44,6 @@ export class Container {
 
         this.onInit(this)
       }
-
-      this.load()
     }
   }
 

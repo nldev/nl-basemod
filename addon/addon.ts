@@ -14,6 +14,7 @@ render($ => {
   })
     .OnClick('LeftButton', () => console.log($.playerInfo.name))
     .OnDrag('RightButton')
+    // .OnClick('Middle', frame => frame.Hide())
 
   const s = Scroll({
     name: 'testscroll',
