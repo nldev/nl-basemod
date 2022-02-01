@@ -484,7 +484,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
     this._parent = parent
   }
 
-  public OnClick (type: WoWAPI.ClickType, handler: ButtonClickHandler) {
+  public OnClick (type: ClickType, handler: ButtonClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
     this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
