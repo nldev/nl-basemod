@@ -50,7 +50,7 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
     moduleoptions.SetFrameStrata(this.strata || 'LOW')
     moduleoptions.SetFrameLevel((this.z || 0))
 
-    this.inner = moduleoptions
+    this.Inner(moduleoptions)
   }
 }
 
