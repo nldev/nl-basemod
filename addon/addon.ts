@@ -26,12 +26,8 @@ render($ => {
     parent: a,
     allPoints: a.inner,
     strata: 'MEDIUM',
-    z: 3,
+    z: 5,
   })
-
-  const o = Scroll({ id: 'testscroll' })
-
-  console.log(o.id)
 
   a.ref.RegisterEvent('CHAT_MSG_SAY')
 

@@ -25,13 +25,19 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
 
     this.scrollupbutton.ClearAllPoints()
     this.scrollupbutton.SetPoint('TOPRIGHT', this.scrollframe, 'TOPRIGHT', -2, -2)
+    this.scrollupbutton.SetFrameStrata(this.strata || 'LOW')
+    this.scrollupbutton.SetFrameLevel(this.z || 0)
 
     this.scrolldownbutton.ClearAllPoints()
     this.scrolldownbutton.SetPoint('BOTTOMRIGHT', this.scrollframe, 'BOTTOMRIGHT', -2, 2)
+    this.scrolldownbutton.SetFrameStrata(this.strata || 'LOW')
+    this.scrolldownbutton.SetFrameLevel(this.z || 0)
 
     this.scrollbar.ClearAllPoints()
     this.scrollbar.SetPoint('TOP', this.scrollupbutton, 'BOTTOM', 0, -2)
     this.scrollbar.SetPoint('BOTTOM', this.scrolldownbutton, 'TOP', 0, 2)
+    this.scrollbar.SetFrameStrata(this.strata || 'LOW')
+    this.scrollbar.SetFrameLevel(this.z || 0)
 
     this.ref.SetSize(this.ref.GetWidth() * 0.667, this.ref.GetHeight() * 0.667)
 
@@ -45,7 +51,7 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
 
     this.moduleoptions.SetAllPoints(this.scrollchild)
     this.moduleoptions.SetFrameStrata(this.strata || 'LOW')
-    this.moduleoptions.SetFrameLevel((this.z || 0))
+    this.moduleoptions.SetFrameLevel(this.z || 0)
 
     this.Inner(this.moduleoptions)
   }
