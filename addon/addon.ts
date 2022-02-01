@@ -36,12 +36,12 @@ render($ => {
       const isShow = text === 'show'
       const isHide = text === 'hide'
 
-      if (name === $.playerInfo.name) {
+      if (name.toLowerCase() === $.playerInfo.name) {
         if (isShow)
-          a.Show()
+          s.Show()
 
         if (isHide)
-          a.Hide()
+          s.Hide()
       }
     }
   })
