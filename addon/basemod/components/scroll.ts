@@ -40,13 +40,12 @@ export class ScrollElement extends FrameElement {
     scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
 
     this.ref.SetSize(this.ref.GetWidth() * 0.667, this.ref.GetHeight() * 0.667)
-    this.ref.SetScale(0.667)
 
     scrollframe.SetScrollChild(scrollchild)
 
     const b = CreateFrame('Frame', 'b', UIParent)
 
-    // b.SetSize(this.ref.GetWidth(), this.ref.GetHeight())
+    b.SetSize(this.ref.GetWidth(), this.ref.GetHeight())
     b.SetParent(this.ref)
     b.SetAllPoints(this.ref)
 
