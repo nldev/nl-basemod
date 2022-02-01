@@ -120,7 +120,7 @@ export abstract class Element<
 
   public children: Element<any, any>[] = []
 
-  constructor (public options: O) {
+  constructor (protected options: O, children: Element<any, any>[] = []) {
     if (this.options.prefix && this.options.name)
       throw new Error('Component cannot have both a name and a prefix')
 
@@ -134,7 +134,7 @@ export abstract class Element<
     this.setup()
     this.init()
     this.mount()
-    this.register()
+    this.register(children)
   }
 
   public get parent () {
@@ -166,6 +166,8 @@ export abstract class Element<
       this.inner.Show()
 
     this.onShow()
+
+    return this
   }
 
   protected onShow () {}
@@ -185,22 +187,31 @@ export abstract class Element<
       this.inner.Show()
 
     this.onHide()
+
+    return this
   }
 
   protected onHide () {}
 
   public Toggle () {
+    if (this.isHidden) {
+      this.Show()
+    } else {
+      this.Hide()
+    }
   }
 
-  protected register () {
+  protected register (children: Element<any, any>[]) {
     const $ = Get()
 
     $.register(this)
+
+    children.forEach(child => child.parent = this)
   }
 
   protected abstract create (name?: string, parent?: Element<any, any>): void
 
-  public abstract setup (): void
+  protected abstract setup (): void
 
   protected init () {}
 
@@ -272,7 +283,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     this.ref = CreateFrame('Frame', this.name)
   }
 
-  public setup () {
+  protected setup () {
     const { options } = this
 
     if (options.size)
@@ -522,7 +533,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
     this.ref = CreateFrame('Button', this.name, this.parent.ref)
   }
 
-  public setup () {
+  protected setup () {
     const { options } = this
 
     // if (options.size)

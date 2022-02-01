@@ -29,12 +29,15 @@ render($ => {
 
   const o = Scroll({ name: 'testscroll' })
 
+  console.log(o.name)
+
   a.ref.RegisterEvent('CHAT_MSG_SAY')
 
   a.ref.SetScript('OnEvent', (frame, event, text: string, name: string) => {
     if (event === 'CHAT_MSG_SAY') {
       const isShow = text === 'show'
       const isHide = text === 'hide'
+      const isToggle = text === 'toggle'
 
       if (name.toLowerCase() === $.playerInfo.name) {
         if (isShow)
@@ -42,6 +45,9 @@ render($ => {
 
         if (isHide)
           a.Hide()
+
+        if (isToggle)
+          a.Toggle()
       }
     }
   })
