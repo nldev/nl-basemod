@@ -213,8 +213,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     this.inner.SetParent(this.ref)
     this.inner.SetPoint('CENTER')
 
-    this.inner.SetBackdrop(DEFAULT_BACKDROP)
-
     const z = this.options.z || 0
 
     this.inner.SetFrameLevel(z)
