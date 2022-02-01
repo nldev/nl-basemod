@@ -4,7 +4,6 @@ import { Scroll } from './basemod/components/scroll'
 
 render($ => {
   const a = Frame({
-    padding: 60,
     size: { width: 300, height: 300 },
     z: 2,
     bg: {},
@@ -13,6 +12,8 @@ render($ => {
     onClick: { type: 'LeftButton', handler: () => console.log($.playerInfo.name) },
     onDrag: { type: 'RightButton' },
   })
+  .Padding(60)
+  .Z(2)
 
   a.ref.SetFrameStrata('BACKGROUND')
   a.inner.SetFrameStrata('BACKGROUND')
@@ -22,8 +23,8 @@ render($ => {
     size: { width: a.ref.GetWidth(), height: a.ref.GetHeight() },
     parent: a.inner,
     allPoints: a.inner,
-    z: 5,
   })
+  .Z(5)
 
   s.ref.SetFrameStrata('HIGH')
 })
