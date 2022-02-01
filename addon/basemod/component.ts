@@ -174,11 +174,11 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   public setup () {
     const { options } = this
 
-    if (options.padding)
-      this.Padding(options.padding)
-
     if (options.size)
       this.Size(options.size.width, options.size.height)
+
+    if (options.padding)
+      this.Padding(options.padding)
 
     if (options.bg)
       this.Backdrop(options.bg, this.options.color)
@@ -213,8 +213,16 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     this.inner.SetParent(this.ref)
     this.inner.SetPoint('CENTER')
 
+    this.inner.SetBackdrop(DEFAULT_BACKDROP)
+
+    const z = this.options.z || 0
+
+    this.inner.SetFrameLevel(z)
+    this.ref.SetFrameLevel(z - 1)
+
     console.log('padding end')
     return this
+
   }
 
   public Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
