@@ -5,23 +5,22 @@ export interface ScrollOptions extends FrameOptions {
 }
 
 export class ScrollElement extends FrameElement<ScrollOptions> {
-  protected container: WoWAPI.Frame
+  protected scrollframe: WoWAPI.ScrollFrame = CreateFrame('ScrollFrame', 'scrollframe', null, 'UIPanelScrollFrameTemplate')
 
   protected init () {
-    const scrollframe = CreateFrame('ScrollFrame', 'scrollframe', null, 'UIPanelScrollFrameTemplate')
     const scrollchild = CreateFrame('Frame', 'scrollchild')
 
-    const scrollbarName = scrollframe.GetName()
+    const scrollbarName = this.scrollframe.GetName()
 
     const scrollbar = _G[scrollbarName + 'ScrollBar']
     const scrollupbutton = _G[scrollbarName + 'ScrollBarScrollUpButton']
     const scrolldownbutton = _G[scrollbarName + 'ScrollBarScrollDownButton']
 
     scrollupbutton.ClearAllPoints()
-    scrollupbutton.SetPoint('TOPRIGHT', scrollframe, 'TOPRIGHT', -2, -2)
+    scrollupbutton.SetPoint('TOPRIGHT', this.scrollframe, 'TOPRIGHT', -2, -2)
 
     scrolldownbutton.ClearAllPoints()
-    scrolldownbutton.SetPoint('BOTTOMRIGHT', scrollframe, 'BOTTOMRIGHT', -2, 2)
+    scrolldownbutton.SetPoint('BOTTOMRIGHT', this.scrollframe, 'BOTTOMRIGHT', -2, 2)
 
     scrollbar.ClearAllPoints()
     scrollbar.SetPoint('TOP', scrollupbutton, 'BOTTOM', 0, -2)
@@ -29,11 +28,11 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
 
     this.ref.SetSize(this.ref.GetWidth() * 0.667, this.ref.GetHeight() * 0.667)
 
-    scrollframe.SetScrollChild(scrollchild)
-    scrollframe.SetAllPoints(this.ref)
-    scrollframe.SetScale(0.667)
+    this.scrollframe.SetScrollChild(scrollchild)
+    this.scrollframe.SetAllPoints(this.ref)
+    this.scrollframe.SetScale(0.667)
 
-    scrollchild.SetSize(scrollframe.GetWidth(), this.options.scrollHeight || (scrollframe.GetHeight() * 2))
+    scrollchild.SetSize(this.scrollframe.GetWidth(), this.options.scrollHeight || (this.scrollframe.GetHeight() * 2))
 
     const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
 
@@ -41,7 +40,9 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
     moduleoptions.SetFrameStrata(this.strata || 'LOW')
     moduleoptions.SetFrameLevel((this.z || 0))
 
-    this.container = moduleoptions
+    console.log('before')
+    this.inner = moduleoptions
+    console.log('after')
   }
 }
 

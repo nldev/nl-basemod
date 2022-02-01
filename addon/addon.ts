@@ -22,5 +22,16 @@ render($ => {
     strata: 'MEDIUM',
     z: 3,
   })
+
+
+  const test = Frame({
+    size: { width: 50, height: 50 },
+    color: { red: 1 },
+    bg: {},
+    z: 4,
+    parent: s.inner,
+    point: 'CENTER',
+    strata: 'HIGH',
+  })
 })
 
