@@ -5,11 +5,11 @@ import { Scroll } from './basemod/components/scroll'
 render($ => {
   const a = Frame({
     size: { width: 300, height: 300 },
-    padding: 50,
+    padding: 40,
     point: 'CENTER',
     bg: {},
     z: 2,
-    strata: 'MEDIUM',
+    strata: 'LOW',
   })
     .OnClick('LeftButton', () => console.log($.playerInfo.name))
     .OnDrag('RightButton')
@@ -19,7 +19,8 @@ render($ => {
     size: { width: a.ref.GetWidth(), height: a.ref.GetHeight() },
     parent: a.inner,
     allPoints: a.inner,
-    strata: 'HIGH',
+    strata: 'MEDIUM',
+    z: 3,
   })
 })
 
