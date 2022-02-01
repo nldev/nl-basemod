@@ -12,7 +12,10 @@ render($ => {
     z: 2,
     strata: 'LOW',
   })
-    .OnClick('LeftButton', e => e.children.forEach(child => console.log(child.ref.GetName())))
+    .OnClick('LeftButton', e => {
+      console.log(e.children.length)
+      e.children.forEach(child => console.log(child.ref.GetName()))
+    })
     .OnDrag('RightButton')
 
   const s = Scroll({

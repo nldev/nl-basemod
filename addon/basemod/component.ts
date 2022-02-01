@@ -193,8 +193,14 @@ export abstract class Element<
   private mount () {
     const $ = Get()
 
-    if (this.options.parent)
+    if (this.options.parent) {
       this.parent = this.options.parent
+    } else {
+      const frame = (this.ref as any) as WoWAPI.Frame
+
+      if (frame.SetParent)
+        frame.SetParent(UIParent)
+    }
   }
 }
 
@@ -250,12 +256,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     if (options.allPoints)
       this.AllPoints(options.allPoints)
-
-    if (options.parent) {
-      this.parent = options.parent
-    } else {
-      this.ref.SetParent(UIParent)
-    }
 
     if (options.strata)
       this.Strata(options.strata)
