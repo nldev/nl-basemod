@@ -389,6 +389,8 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       this.inner.SetFrameStrata(strata)
 
     this.strata = strata
+
+    return this
   }
 
   public Execute (fn: (frame: FrameElement) => void) {
