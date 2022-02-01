@@ -38,10 +38,10 @@ render($ => {
 
       if (name.toLowerCase() === $.playerInfo.name) {
         if (isShow)
-          s.Show()
+          a.Show()
 
         if (isHide)
-          s.Hide()
+          a.Hide()
       }
     }
   })
