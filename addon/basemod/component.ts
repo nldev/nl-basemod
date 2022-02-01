@@ -97,7 +97,7 @@ export interface FullPoint {
 export type Point = FullPoint | WoWAPI.Point
 
 export interface ComponentOptions {
-  name?: string
+  name: string
   prefix?: string
   parent?: WoWAPI.Frame
 }
@@ -224,7 +224,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     if (amount === 0)
       return this
 
-    const frame = CreateFrame('Frame', null, this.ref)
+    const frame = CreateFrame('Frame', this.name + '-padding', this.ref)
 
     frame.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
 
@@ -409,7 +409,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 }
 
-export const Frame: Component<FrameOptions, FrameElement> = (options = {}) =>
+export const Frame: Component<FrameOptions, FrameElement> = options =>
   new FrameElement(options)
 
 export interface ButtonOptions extends ComponentOptions {
@@ -469,7 +469,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
   }
 }
 
-export const Button: Component<ButtonOptions, ButtonElement> = (options = {}) =>
+export const Button: Component<ButtonOptions, ButtonElement> = options =>
     new ButtonElement(options)
 
 

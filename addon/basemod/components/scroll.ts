@@ -16,9 +16,9 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
   }
 
   protected init () {
-    this.scrollframe = CreateFrame('ScrollFrame', 'scrollframe', null, 'UIPanelScrollFrameTemplate')
+    this.scrollframe = CreateFrame('ScrollFrame', this.name + '-scrollframe', null, 'UIPanelScrollFrameTemplate')
 
-    const scrollchild = CreateFrame('Frame', 'scrollchild')
+    const scrollchild = CreateFrame('Frame', this.name + '-scrollchild')
 
     const scrollbarName = this.scrollframe.GetName()
 
@@ -44,7 +44,7 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
 
     scrollchild.SetSize(this.scrollframe.GetWidth(), this.options.scrollHeight || (this.scrollframe.GetHeight() * 2))
 
-    const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
+    const moduleoptions = CreateFrame('Frame', this.name + '-moduleoptions', scrollchild)
 
     moduleoptions.SetAllPoints(scrollchild)
     moduleoptions.SetFrameStrata(this.strata || 'LOW')

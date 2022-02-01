@@ -4,6 +4,7 @@ import { Scroll } from './basemod/components/scroll'
 
 render($ => {
   const a = Frame({
+    name: 'a',
     size: { width: 300, height: 300 },
     padding: 40,
     point: 'CENTER',
@@ -15,7 +16,7 @@ render($ => {
     .OnDrag('RightButton')
 
   const s = Scroll({
-    name: 'bar',
+    name: 'testscroll',
     size: { width: a.ref.GetWidth(), height: a.ref.GetHeight() },
     parent: a.inner,
     allPoints: a.inner,

@@ -1,15 +1,20 @@
 // import { Unique } from "../utils"
 import { FrameElement, FrameOptions, Component, Frame } from '../component'
 
-interface GridOptions extends FrameOptions {
+export interface GridOptions extends FrameOptions {
   itemsPerRow: number
   rowHeight: number
   gridHeight: number
   gridWidth: number
 }
 
-class Grid extends FrameElement<GridOptions> {
-  // protected list: GridItem[] = []
+class GridItem extends FrameElement {
+  init () {
+  }
+}
+
+export class Grid extends FrameElement<GridOptions> {
+  protected list: GridItem[] = []
   protected itemWidth: number
   protected index: number = 0
   protected x: number = 0
@@ -18,7 +23,7 @@ class Grid extends FrameElement<GridOptions> {
   protected itemsPerRow: number
   protected rowHeight: number
 
-  protected init () {
+  init () {
     this.itemsPerRow = this.options.itemsPerRow || 3
     this.rowHeight = this.options.rowHeight || 100
     this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
