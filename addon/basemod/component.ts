@@ -357,40 +357,36 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 
   public Size (width: number, height: number) {
-    console.log('size start')
     if (width)
       this.ref.SetWidth(width)
 
     if (height)
       this.ref.SetHeight(width)
 
-    console.log('size end')
+    this.size = { width: this.ref.GetWidth(), height: this.ref.GetHeight() }
+
     return this
   }
 
   public Z (level: number) {
-    console.log('z start')
-    let frame = this.ref
+    this.ref.SetFrameLevel(level)
 
     if (this.inner) {
-      this.ref.SetFrameLevel(level - 1)
-
-      frame = this.inner
+      this.inner.SetFrameLevel(level)
     }
 
-    frame.SetFrameLevel(level)
+    this.z = level
 
-    console.log('z end')
     return this
   }
 
   public Strata (strata: WoWAPI.FrameStrata) {
-    this.strata = strata
-
     this.ref.SetFrameStrata(strata)
 
     if (this.inner)
       this.inner.SetFrameStrata(strata)
+
+    this.strata = strata
   }
 
   public Execute (fn: (frame: FrameElement) => void) {
