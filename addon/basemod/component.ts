@@ -154,6 +154,7 @@ export interface FrameOptions extends ComponentOptions {
   onDrag?: FrameOnDrag
   size?: Size
   z?: number
+  strata?: WoWAPI.FrameStrata
   padding?: number
 }
 
@@ -163,10 +164,19 @@ export const DEFAULT_FRAME_OPTIONS = {
 }
 
 export class FrameElement<O extends FrameOptions = FrameOptions> extends Element<O, WoWAPI.Frame> {
-  protected point: Point
   protected height: number
   protected width: number
+  protected size: Size
+  protected padding: number
+  protected bg: BackdropOptions
+  protected color: ColorOptions
+  protected point: Point
+  protected allPoints: RelativeRegion
   protected strata: WoWAPI.FrameStrata
+  protected z: number
+
+  protected onClick: FrameOnClick
+  protected onDrag: FrameOnDrag
 
   protected create () {
     this.ref = CreateFrame('Frame', this.name)
@@ -192,6 +202,9 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     if (options.parent)
       this.Parent(options.parent)
+
+    if (options.strata)
+      this.Strata(options.strata)
 
     if (options.z)
       this.Z(options.z)
@@ -227,11 +240,12 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   public Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
     this.ref.SetParent(parent)
 
+    this.parent = parent
+
     return this
   }
 
   public Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
-    console.log('backdrop start')
     const backdrop: Backdrop = {
       ...DEFAULT_BACKDROP,
       ...bgOptions,
@@ -250,7 +264,9 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     this.ref.SetBackdropColor(color.red, color.green, color.blue, color.alpha)
 
-    console.log('backdrop end')
+    this.bg = bgOptions
+    this.color = colorOptions
+
     return this
   }
 
