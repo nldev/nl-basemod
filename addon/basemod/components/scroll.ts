@@ -13,7 +13,6 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
   protected moduleoptions: WoWAPI.Frame
 
   init () {
-    this.ref.SetAllPoints(this.parent.ref)
     this.scrollframe = CreateFrame('ScrollFrame', this.id + '-scrollframe', null, 'UIPanelScrollFrameTemplate')
     this.scrollchild = CreateFrame('Frame', this.id + '-scrollchild')
 
