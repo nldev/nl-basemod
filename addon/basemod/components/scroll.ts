@@ -19,6 +19,7 @@ export class ScrollElement extends FrameElement {
     // this.ref.SetScript('OnDragStart', f => f.StartMoving())
     // this.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
 
+    console.log('got here')
     const scrollframe = CreateFrame('ScrollFrame', 'scrollframe', null, 'UIPanelScrollFrameTemplate')
     const scrollchild = CreateFrame('Frame', 'scrollchild')
 
@@ -39,14 +40,15 @@ export class ScrollElement extends FrameElement {
     scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
 
     this.ref.SetSize(this.ref.GetWidth() * 0.667, this.ref.GetHeight() * 0.667)
+    this.ref.SetScale(0.667)
 
     scrollframe.SetScrollChild(scrollchild)
 
     const b = CreateFrame('Frame', 'b', UIParent)
 
-    b.SetSize(this.ref.GetWidth(), this.ref.GetHeight())
+    // b.SetSize(this.ref.GetWidth(), this.ref.GetHeight())
     b.SetParent(this.ref)
-    b.SetPoint('CENTER')
+    b.SetAllPoints(this.ref)
 
     scrollframe.SetAllPoints(b)
     scrollframe.SetScale(0.667)
@@ -61,6 +63,8 @@ export class ScrollElement extends FrameElement {
     moduleoptions.SetFrameLevel(2)
 
     this.container = moduleoptions
+
+    console.log('then got here')
   }
 }
 

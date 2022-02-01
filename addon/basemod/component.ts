@@ -189,14 +189,17 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     if (options.allPoints)
       this.AllPoints(options.allPoints)
 
-    if (options.onClick)
-      this.Click(options.onClick.button, options.onClick.handler)
-
     if (options.parent)
       this.Parent(options.parent)
 
     if (options.z)
       this.Z(options.z)
+
+    if (options.onDrag)
+      this.Drag(options.onDrag.button, options.onDrag.startHandler, options.onDrag.stopHandler)
+
+    if (options.onClick)
+      this.Click(options.onClick.button, options.onClick.handler)
   }
 
   public Padding (amount: number) {
