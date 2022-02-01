@@ -14,7 +14,6 @@ render($ => {
     onClick: { button: 'LeftButton', handler: () => console.log($.playerInfo.name) }
   })
 
-
   const s = Scroll({
     name: 'bar',
     size: { width: 500, height: 500 },
