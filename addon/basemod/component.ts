@@ -156,6 +156,7 @@ export interface FrameOptions extends ComponentOptions {
   z?: number
   strata?: WoWAPI.FrameStrata
   padding?: number
+  inner?: WoWAPI.Frame
 }
 
 export const DEFAULT_FRAME_OPTIONS = {
@@ -214,6 +215,9 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     if (options.padding)
       this.Padding(options.padding)
+
+    if (options.inner)
+      this.Inner(options.inner)
   }
 
   protected Padding (amount: number) {

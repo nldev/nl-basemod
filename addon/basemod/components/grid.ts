@@ -9,7 +9,7 @@ interface GridOptions extends FrameOptions {
 }
 
 class Grid extends FrameElement<GridOptions> {
-// protected list: GridItem[] = []
+  // protected list: GridItem[] = []
   protected itemWidth: number
   protected index: number = 0
   protected x: number = 0
