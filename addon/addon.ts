@@ -5,16 +5,14 @@ import { Scroll } from './basemod/components/scroll'
 render($ => {
   const a = Frame({
     size: { width: 300, height: 300 },
-    z: 2,
-    bg: {},
-    color: {},
+    padding: 50,
     point: 'CENTER',
-    onClick: { type: 'LeftButton', handler: () => console.log($.playerInfo.name) },
-    onDrag: { type: 'RightButton' },
-    strata: 'BACKGROUND',
+    bg: {},
+    z: 2,
+    strata: 'MEDIUM',
   })
-  .Padding(60)
-  .Z(2)
+    .OnClick('LeftButton', () => console.log($.playerInfo.name))
+    .OnDrag('RightButton')
 
   const s = Scroll({
     name: 'bar',
@@ -23,6 +21,5 @@ render($ => {
     allPoints: a.inner,
     strata: 'HIGH',
   })
-  .Z(5)
 })
 

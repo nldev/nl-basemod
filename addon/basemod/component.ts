@@ -207,16 +207,16 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       this.Z(options.z)
 
     if (options.onDrag)
-      this.Drag(options.onDrag.type, options.onDrag.startHandler, options.onDrag.stopHandler)
+      this.OnDrag(options.onDrag.type, options.onDrag.startHandler, options.onDrag.stopHandler)
 
     if (options.onClick)
-      this.Click(options.onClick.type, options.onClick.handler)
+      this.OnClick(options.onClick.type, options.onClick.handler)
 
     if (options.padding)
       this.Padding(options.padding)
   }
 
-  public Padding (amount: number) {
+  protected Padding (amount: number) {
     if (amount === 0)
       return this
 
@@ -239,7 +239,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
   }
 
-  public Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
+  protected Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
     this.ref.SetParent(parent)
 
     this.parent = parent
@@ -266,13 +266,13 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     this.ref.SetBackdropColor(color.red, color.green, color.blue, color.alpha)
 
-    this.bg = bgOptions
-    this.color = colorOptions
+    this.bg = backdrop
+    this.color = color
 
     return this
   }
 
-  public Point (options: Point) {
+  protected Point (options: Point) {
     const $ = Get()
 
     if (typeof options === 'string') {
@@ -294,7 +294,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     return this
   }
 
-  public AllPoints (relativeRegion?: RelativeRegion) {
+  protected AllPoints (relativeRegion?: RelativeRegion) {
     if (relativeRegion === 'parent')
       relativeRegion = this.parent
 
@@ -305,7 +305,45 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     return this
   }
 
-  public Click (type: WoWAPI.MouseButton, handler: FrameClickHandler) {
+  protected Size (width: number, height: number) {
+    if (width)
+      this.ref.SetWidth(width)
+
+    if (height)
+      this.ref.SetHeight(width)
+
+    this.size = { width: this.ref.GetWidth(), height: this.ref.GetHeight() }
+
+    if (this.inner)
+      this.Padding(this.padding)
+
+    return this
+  }
+
+  protected Z (level: number) {
+    this.ref.SetFrameLevel(level)
+
+    if (this.inner) {
+      this.inner.SetFrameLevel(level)
+    }
+
+    this.z = level
+
+    return this
+  }
+
+  protected Strata (strata: WoWAPI.FrameStrata) {
+    this.ref.SetFrameStrata(strata)
+
+    if (this.inner)
+      this.inner.SetFrameStrata(strata)
+
+    this.strata = strata
+
+    return this
+  }
+
+  public OnClick (type: WoWAPI.MouseButton, handler: FrameClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.SetScript('OnMouseUp', (frame, button) => {
       if (type === button)
@@ -320,7 +358,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     return this
   }
 
-  public Drag (type: WoWAPI.MouseButton, startHandler?: FrameDragStartHandler, stopHandler?: FrameDragStopHandler) {
+  public OnDrag (type: WoWAPI.MouseButton, startHandler?: FrameDragStartHandler, stopHandler?: FrameDragStopHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForDrag(type)
     this.ref.SetMovable(true)
@@ -354,47 +392,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       startHandler,
       stopHandler,
     }
-
-    return this
-  }
-
-  public Size (width: number, height: number) {
-    if (width)
-      this.ref.SetWidth(width)
-
-    if (height)
-      this.ref.SetHeight(width)
-
-    this.size = { width: this.ref.GetWidth(), height: this.ref.GetHeight() }
-
-    return this
-  }
-
-  public Z (level: number) {
-    this.ref.SetFrameLevel(level)
-
-    if (this.inner) {
-      this.inner.SetFrameLevel(level)
-    }
-
-    this.z = level
-
-    return this
-  }
-
-  public Strata (strata: WoWAPI.FrameStrata) {
-    this.ref.SetFrameStrata(strata)
-
-    if (this.inner)
-      this.inner.SetFrameStrata(strata)
-
-    this.strata = strata
-
-    return this
-  }
-
-  public Execute (fn: (frame: FrameElement) => void) {
-    fn(this)
 
     return this
   }
@@ -437,7 +434,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
     //   this.AllPoints(options.allPoints)
 
     if (options.onClick)
-      this.Click(options.onClick.type, options.onClick.handler)
+      this.OnClick(options.onClick.type, options.onClick.handler)
 
     // if (options.z)
     //   this.Z(options.z)
@@ -450,7 +447,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
     return this
   }
 
-  public Click (type, handler: ButtonClickHandler) {
+  public OnClick (type, handler: ButtonClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
     this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
