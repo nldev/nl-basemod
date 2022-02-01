@@ -1,8 +1,10 @@
 import { FrameElement, FrameOptions, Component, Frame } from '../component'
 
-export interface ScrollOptions extends FrameOptions {}
+export interface ScrollOptions extends FrameOptions {
+  scrollHeight?: number
+}
 
-export class ScrollElement extends FrameElement {
+export class ScrollElement extends FrameElement<ScrollOptions> {
   protected container: WoWAPI.Frame
 
   protected init () {
@@ -31,7 +33,7 @@ export class ScrollElement extends FrameElement {
     scrollframe.SetAllPoints(this.ref)
     scrollframe.SetScale(0.667)
 
-    scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
+    scrollchild.SetSize(scrollframe.GetWidth(), this.options.scrollHeight || (scrollframe.GetHeight() * 2))
 
     const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
 
