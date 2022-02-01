@@ -166,6 +166,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   protected point: Point
   protected height: number
   protected width: number
+  protected strata: WoWAPI.FrameStrata
 
   protected create () {
     this.ref = CreateFrame('Frame', this.name)
@@ -376,6 +377,15 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     console.log('z end')
     return this
+  }
+
+  public Strata (strata: WoWAPI.FrameStrata) {
+    this.strata = strata
+
+    this.ref.SetFrameStrata(strata)
+
+    if (this.inner)
+      this.inner.SetFrameStrata(strata)
   }
 
   public Execute (fn: (frame: FrameElement) => void) {
