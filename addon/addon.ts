@@ -31,7 +31,6 @@ render($ => {
 
   const o = Scroll({ id: 'testscroll' })
 
-
   console.log(o.id)
 
   a.ref.RegisterEvent('CHAT_MSG_SAY')
