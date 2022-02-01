@@ -111,11 +111,14 @@ export abstract class Element<
   O extends ComponentOptions = ComponentOptions,
   T extends WoWAPI.UIObject = WoWAPI.Frame,
 > {
+  protected _parent: Element<any, any>
+  protected isHidden: boolean
+
   public ref: T
   public name: string
   public inner: WoWAPI.Frame
 
-  public _parent: Element<any, any>
+  public children: Element<any, any>[]
 
   constructor (public options: O) {
     if (this.options.prefix && this.options.name)
@@ -138,7 +141,13 @@ export abstract class Element<
     return this._parent
   }
 
+  protected Parent (parent: Element<any, any>) {}
+
   public set parent (parent: Element<any, any>) {
+    this.Parent(parent)
+
+    parent.children.push(this)
+
     this._parent = parent
   }
 
@@ -240,9 +249,8 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       this.Inner(options.inner)
   }
 
-  public set parent (parent: Element<any, any>) {
+  protected Parent (parent: Element<any, any>) {
     this.ref.SetParent(parent.ref)
-    this._parent = parent
   }
 
   protected Padding (amount: number) {
@@ -479,9 +487,8 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
     //   this.Z(options.z)
   }
 
-  public set parent (parent: Element<any, any>) {
+  protected Parent (parent: Element<any, any>) {
     this.ref.SetParent(parent.ref)
-    this._parent = parent
   }
 
   public OnClick (type: ClickType, handler: ButtonClickHandler) {
