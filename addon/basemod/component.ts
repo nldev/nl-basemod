@@ -99,7 +99,7 @@ export type Point = FullPoint | WoWAPI.Point
 export interface ComponentOptions {
   name: string
   prefix?: string
-  parent?: WoWAPI.Frame
+  parent?: Element<any, any>
 }
 
 export type Component<
@@ -113,8 +113,9 @@ export abstract class Element<
 > {
   public ref: T
   public name: string
-  public parent: WoWAPI.Frame
   public inner: WoWAPI.Frame
+
+  public _parent: Element<any, any>
 
   constructor (public options: O) {
     if (this.options.prefix && this.options.name)
@@ -133,13 +134,24 @@ export abstract class Element<
     this.register()
   }
 
+  public get parent () {
+    return this._parent
+  }
+
+  public set parent (parent: Element<any, any>) {
+    this.parent = parent
+    // this.ref.SetParent(parent)
+
+  }
+
+
   protected register () {
     const $ = Get()
 
     $.register(this)
   }
 
-  protected abstract create (name?: string, parent?: WoWAPI.Frame): void
+  protected abstract create (name?: string, parent?: Element<any, any>): void
 
   public abstract setup (): void
 
@@ -148,7 +160,7 @@ export abstract class Element<
   private mount () {
     const $ = Get()
 
-    this.parent = this.options.parent || $.root
+    this.parent = this.options.parent
   }
 }
 
@@ -206,7 +218,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       this.AllPoints(options.allPoints)
 
     if (options.parent)
-      this.Parent(options.parent)
+      this.parent = options.parent
 
     if (options.strata)
       this.Strata(options.strata)
@@ -231,7 +243,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     if (amount === 0)
       return this
 
-    const frame = Frame({ name: this.name  + '-padding', parent: this.ref })
+    const frame = Frame({ name: this.name  + '-padding', parent: this })
 
     frame.ref.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
 
@@ -256,14 +268,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     this.inner.SetFrameStrata(strata)
     this.ref.SetFrameStrata(strata)
-  }
-
-  protected Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
-    this.ref.SetParent(parent)
-
-    this.parent = parent
-
-    return this
   }
 
   public Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
@@ -315,7 +319,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
   protected AllPoints (relativeRegion?: RelativeRegion) {
     if (relativeRegion === 'parent')
-      relativeRegion = this.parent
+      relativeRegion = this.parent.ref
 
     this.ref.SetAllPoints(relativeRegion)
 
@@ -444,7 +448,7 @@ export const DEFAULT_BUTTON_OPTIONS = {
 
 export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Element<O, WoWAPI.Button> {
   protected create () {
-    this.ref = CreateFrame('Button', this.name, this.parent)
+    this.ref = CreateFrame('Button', this.name, this.parent.ref)
   }
 
   public setup () {
@@ -467,14 +471,6 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
 
     // if (options.z)
     //   this.Z(options.z)
-  }
-
-  protected Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
-    this.ref.SetParent(parent)
-
-    this.parent = parent
-
-    return this
   }
 
   public OnClick (type, handler: ButtonClickHandler) {

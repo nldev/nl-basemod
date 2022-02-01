@@ -19,7 +19,7 @@ render($ => {
   const s = Scroll({
     name: 'testscroll',
     size: { width: a.ref.GetWidth(), height: a.ref.GetHeight() },
-    parent: a.inner,
+    parent: a,
     allPoints: a.inner,
     strata: 'MEDIUM',
     z: 3,
