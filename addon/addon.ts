@@ -23,5 +23,8 @@ render($ => {
     strata: 'MEDIUM',
     z: 3,
   })
+
+  console.log(s.inner.GetName())
 })
+
 

@@ -419,12 +419,11 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 export function CreateElement<
   O extends ComponentOptions = ComponentOptions,
   E extends Element = Element,
-> (options: O, creator: (options: O) => E) {
-  const $ = Get()
+> (options: O, component: (options: O) => E) {
+  const existing = Get().elements[options.name]
+  const element = existing || component(options)
 
-  return $.elements[options.name]
-    ? $.elements[options.name]
-    : creator(options)
+  return element
 }
 
 export const Frame: Component<FrameOptions, FrameElement> = options =>
