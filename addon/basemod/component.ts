@@ -174,6 +174,9 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   public setup () {
     const { options } = this
 
+    if (options.padding)
+      this.Padding(options.padding)
+
     if (options.size)
       this.Size(options.size.width, options.size.height)
 
@@ -192,14 +195,12 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     if (options.parent)
       this.Parent(options.parent)
 
-    if (options.padding)
-      this.Padding(options.padding)
-
     if (options.z)
       this.Z(options.z)
   }
 
   public Padding (amount: number) {
+    console.log('padding start')
     if (amount === 0)
       return this
 
@@ -209,6 +210,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     this.inner.SetParent(this.ref)
     this.inner.SetPoint('CENTER')
 
+    console.log('padding end')
     return this
   }
 
@@ -219,6 +221,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 
   public Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
+    console.log('backdrop start')
     const backdrop: Backdrop = {
       ...DEFAULT_BACKDROP,
       ...bgOptions,
@@ -237,10 +240,12 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     this.ref.SetBackdropColor(color.red, color.green, color.blue, color.alpha)
 
+    console.log('backdrop end')
     return this
   }
 
   public Point (options: Point) {
+    console.log('point start')
     const $ = Get()
 
     if (typeof options === 'string') {
@@ -259,6 +264,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       this.ref.SetPoint(options.point, relativeTo, options.relativePoint, options.offsetX, options.offsetY)
     }
 
+    console.log('point end')
     return this
   }
 
@@ -336,16 +342,19 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 
   public Size (width: number, height: number) {
+    console.log('size start')
     if (width)
       this.ref.SetWidth(width)
 
     if (height)
       this.ref.SetHeight(width)
 
+    console.log('size end')
     return this
   }
 
   public Z (level: number) {
+    console.log('z start')
     let frame = this.ref
 
     if (this.inner) {
@@ -356,6 +365,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     frame.SetFrameLevel(level)
 
+    console.log('z end')
     return this
   }
 

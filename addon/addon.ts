@@ -14,12 +14,12 @@ render($ => {
     onDrag: { button: 'RightButton' },
   })
 
-  const s = Scroll({
-    name: 'bar',
-    size: { width: 500, height: 500 },
-    parent: a.inner,
-    allPoints: a.ref,
-    z: 99
-  })
+  // const s = Scroll({
+  //   name: 'bar',
+  //   size: { width: 500, height: 500 },
+  //   parent: a.inner,
+  //   allPoints: a.ref,
+  //   z: 99
+  // })
 })
 
