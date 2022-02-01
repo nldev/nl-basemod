@@ -139,11 +139,8 @@ export abstract class Element<
   }
 
   public set parent (parent: Element<any, any>) {
-    this.parent = parent
-    // this.ref.SetParent(parent)
-
+    this._parent = parent
   }
-
 
   protected register () {
     const $ = Get()
@@ -160,7 +157,8 @@ export abstract class Element<
   private mount () {
     const $ = Get()
 
-    this.parent = this.options.parent
+    if (this.options.parent)
+      this.parent = this.options.parent
   }
 }
 
@@ -217,8 +215,11 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     if (options.allPoints)
       this.AllPoints(options.allPoints)
 
-    if (options.parent)
+    if (options.parent) {
       this.parent = options.parent
+    } else {
+      this.ref.SetParent(UIParent)
+    }
 
     if (options.strata)
       this.Strata(options.strata)
@@ -237,6 +238,11 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     if (options.inner)
       this.Inner(options.inner)
+  }
+
+  public set parent (parent: Element<any, any>) {
+    this.ref.SetParent(parent.ref)
+    this._parent = parent
   }
 
   protected Padding (amount: number) {
@@ -473,7 +479,12 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
     //   this.Z(options.z)
   }
 
-  public OnClick (type, handler: ButtonClickHandler) {
+  public set parent (parent: Element<any, any>) {
+    this.ref.SetParent(parent.ref)
+    this._parent = parent
+  }
+
+  public OnClick (type: WoWAPI.ClickType, handler: ButtonClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
     this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))

@@ -7,14 +7,6 @@ export interface ScrollOptions extends FrameOptions {
 export class ScrollElement extends FrameElement<ScrollOptions> {
   protected scrollframe: WoWAPI.ScrollFrame
 
-  protected Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
-    this.ref.SetParent(parent)
-
-    this.parent = parent
-
-    return this
-  }
-
   protected init () {
     this.scrollframe = CreateFrame('ScrollFrame', this.name + '-scrollframe', null, 'UIPanelScrollFrameTemplate')
 
