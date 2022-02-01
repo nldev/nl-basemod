@@ -1,4 +1,4 @@
-import { FrameElement, FrameOptions, Component, Frame } from '../component'
+import { FrameElement, FrameOptions, Component, Frame, CreateElement } from '../component'
 
 export interface ScrollOptions extends FrameOptions {
   scrollHeight?: number
@@ -54,9 +54,6 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
   }
 }
 
-export const Scroll: Component<
-  ScrollOptions,
-  ScrollElement
-> = options =>
-  new ScrollElement(options)
+export const Scroll: Component<ScrollOptions, ScrollElement> = options =>
+    CreateElement(options, options => new ScrollElement(options))
 

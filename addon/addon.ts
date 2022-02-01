@@ -24,7 +24,8 @@ render($ => {
     z: 3,
   })
 
-  console.log(s.inner.GetName())
-})
+  const o = Scroll({ name: 'testscroll' })
 
+  console.log(o.inner.GetName())
+})
 
