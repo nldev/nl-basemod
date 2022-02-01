@@ -130,6 +130,13 @@ export abstract class Element<
     this.setup()
     this.init()
     this.mount()
+    this.register()
+  }
+
+  protected register () {
+    const $ = Get()
+
+    $.register(this)
   }
 
   protected abstract create (name?: string, parent?: WoWAPI.Frame): void
@@ -224,11 +231,11 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     if (amount === 0)
       return this
 
-    const frame = CreateFrame('Frame', this.name + '-padding', this.ref)
+    const frame = Frame({ name: this.name  + '-padding', parent: this.ref })
 
-    frame.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
+    frame.ref.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
 
-    this.Inner(frame)
+    this.Inner(frame.ref)
 
     this.inner.SetPoint('CENTER')
 
@@ -409,8 +416,19 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 }
 
+export function CreateElement<
+  O extends ComponentOptions = ComponentOptions,
+  E extends Element = Element,
+> (options: O, creator: (options: O) => E) {
+  const $ = Get()
+
+  return $.elements[options.name]
+    ? $.elements[options.name]
+    : creator(options)
+}
+
 export const Frame: Component<FrameOptions, FrameElement> = options =>
-  new FrameElement(options)
+  CreateElement(options, options => new FrameElement(options))
 
 export interface ButtonOptions extends ComponentOptions {
   point?: Point
@@ -470,6 +488,6 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
 }
 
 export const Button: Component<ButtonOptions, ButtonElement> = options =>
-    new ButtonElement(options)
+    CreateElement(options, options => new ButtonElement(options))
 
 

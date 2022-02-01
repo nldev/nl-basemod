@@ -4,7 +4,7 @@ import { BLOOD_ELF, DRAENEI, DRUID, DWARF, GNOME, HUMAN, HUNTER, MAGE, NIGHT_ELF
 
 // export type Color = [number, number, number, number]
 
-export interface Mapping<T> {
+export interface Mapping<T = any> {
   [key: string]: T
 }
 

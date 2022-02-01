@@ -1,4 +1,5 @@
-import { CharacterRace, CharacterClass } from './types'
+import { CharacterRace, CharacterClass, Mapping } from './types'
+import { Element } from './component'
 
 interface PlayerInfo {
   name: string
@@ -11,6 +12,7 @@ export class Container {
   protected isLoaded: boolean = false
   protected isInit: boolean = false
 
+  public elements: Mapping = {}
   public root: WoWAPI.Frame
   public playerInfo: PlayerInfo
 
@@ -45,6 +47,10 @@ export class Container {
 
       this.load()
     }
+  }
+
+  public register (element: Element<any, any>) {
+    this.elements[element.name] = element
   }
 }
 
