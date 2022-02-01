@@ -71,7 +71,7 @@ export interface ButtonOnClick {
 }
 
 export interface FrameOnClick {
-  button: WoWAPI.MouseButton
+  type: WoWAPI.MouseButton
   handler: FrameClickHandler
 }
 
@@ -81,7 +81,7 @@ export type FrameDragStartHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(fra
 export type FrameDragStopHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, preventDefault: PreventDefault) => void
 
 export interface FrameOnDrag {
-  button: WoWAPI.MouseButton
+  type: WoWAPI.MouseButton
   startHandler?: FrameDragStartHandler
   stopHandler?: FrameDragStopHandler
 }
@@ -210,10 +210,10 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       this.Z(options.z)
 
     if (options.onDrag)
-      this.Drag(options.onDrag.button, options.onDrag.startHandler, options.onDrag.stopHandler)
+      this.Drag(options.onDrag.type, options.onDrag.startHandler, options.onDrag.stopHandler)
 
     if (options.onClick)
-      this.Click(options.onClick.button, options.onClick.handler)
+      this.Click(options.onClick.type, options.onClick.handler)
   }
 
   public Padding (amount: number) {
@@ -271,7 +271,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 
   public Point (options: Point) {
-    console.log('point start')
     const $ = Get()
 
     if (typeof options === 'string') {
@@ -285,12 +284,11 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       if (options.relativeTo === 'root')
         relativeTo = $.root
 
-      this.point = options
-
       this.ref.SetPoint(options.point, relativeTo, options.relativePoint, options.offsetX, options.offsetY)
     }
 
-    console.log('point end')
+    this.point = options
+
     return this
   }
 
@@ -299,6 +297,8 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
       relativeRegion = this.parent
 
     this.ref.SetAllPoints(relativeRegion)
+
+    this.allPoints = relativeRegion
 
     return this
   }
@@ -310,59 +310,48 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
         handler(frame, button)
     })
 
+    this.onClick = {
+      type,
+      handler,
+    }
+
     return this
   }
 
   public Drag (type: WoWAPI.MouseButton, startHandler?: FrameDragStartHandler, stopHandler?: FrameDragStopHandler) {
     this.ref.EnableMouse(true)
-    console.log('here')
     this.ref.RegisterForDrag(type)
-    console.log('here')
     this.ref.SetMovable(true)
-    console.log('here')
 
     this.ref.SetScript('OnDragStart', (frame, type) => {
-      console.log('start')
       const state = { preventDefault: false }
-      console.log('start here')
 
       const preventDefault = () => { state.preventDefault = true }
-      console.log('start here')
 
       if (startHandler)
         startHandler(frame, type, () => preventDefault())
-      console.log('start here')
-
-      console.log(type)
 
       if (!state.preventDefault)
         frame.StartMoving()
-
-      console.log('start here')
     })
-    console.log('here')
 
     this.ref.SetScript('OnDragStop', (frame) => {
-      console.log('stop')
       const state = { preventDefault: false }
-      console.log('stop here')
 
       const preventDefault = () => state.preventDefault = true
-      console.log('stop here')
 
       if (stopHandler)
         stopHandler(frame, type, () => preventDefault())
-      console.log('stop here')
-
-
-      console.log(type)
 
       if (!state.preventDefault)
         frame.StopMovingOrSizing()
-
-      console.log('stop here')
     })
-    console.log('here')
+
+    this.onDrag = {
+      type,
+      startHandler,
+      stopHandler,
+    }
 
     return this
   }
