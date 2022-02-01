@@ -29,6 +29,21 @@ render($ => {
 
   const o = Scroll({ name: 'testscroll' })
 
-  console.log(o.inner.GetName())
+  a.ref.RegisterEvent('CHAT_MSG_SAY')
+
+  a.ref.SetScript('OnEvent', (frame, event, text: string, name: string) => {
+    if (event === 'CHAT_MSG_SAY') {
+      const isShow = text === 'show'
+      const isHide = text === 'hide'
+
+      if (name === $.playerInfo.name) {
+        if (isShow)
+          a.Show()
+
+        if (isHide)
+          a.Hide()
+      }
+    }
+  })
 })
 

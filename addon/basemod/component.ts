@@ -161,7 +161,14 @@ export abstract class Element<
       frame.Show()
 
     this.children.forEach(child => child.Show(true))
+
+    if (this.inner)
+      this.inner.Show()
+
+    this.onShow()
   }
+
+  protected onShow () {}
 
   public Hide (force?: boolean) {
     if (!force)
@@ -173,7 +180,14 @@ export abstract class Element<
       frame.Hide()
 
     this.children.forEach(child => child.Hide(true))
+
+    if (this.inner)
+      this.inner.Show()
+
+    this.onHide()
   }
+
+  protected onHide () {}
 
   public Toggle () {
   }
@@ -200,6 +214,22 @@ export abstract class Element<
 
       if (frame.SetParent)
         frame.SetParent(UIParent)
+
+      if (this.parent) {
+        const parentRef = this.parent.ref as WoWAPI.Frame
+
+        if (parentRef.IsShown) {
+          const isShown = parentRef.IsShown()
+
+          const ref = (this.ref as any) as WoWAPI.Frame
+
+          if (isShown) {
+            ref.Show()
+          } else {
+            ref.Hide()
+          }
+        }
+      }
     }
   }
 }
