@@ -12,9 +12,8 @@ render($ => {
     z: 2,
     strata: 'LOW',
   })
-    .OnClick('LeftButton', () => console.log($.playerInfo.name))
+    .OnClick('LeftButton', e => e.children.forEach(child => console.log(child.ref.GetName())))
     .OnDrag('RightButton')
-    // .OnClick('Middle', frame => frame.Hide())
 
   const s = Scroll({
     name: 'testscroll',

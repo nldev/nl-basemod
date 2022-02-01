@@ -1,5 +1,5 @@
 import { CharacterRace, CharacterClass, Mapping } from './types'
-import { Element, Frame } from './component'
+import { Element } from './component'
 
 interface PlayerInfo {
   name: string
@@ -13,13 +13,13 @@ export class Container {
   protected isInit: boolean = false
 
   public elements: Mapping = {}
-  public root: Element<any, any>
+  public root: WoWAPI.Frame
   public playerInfo: PlayerInfo
 
   constructor (protected onInit: ($: Container) => void, isDummy: boolean = false) {
     if (!isDummy) {
-      this.root = Frame({ name: 'root'  })
-      this.root.ref.SetScript('OnUpdate', () => this.load())
+      this.root = CreateFrame('Frame', 'root', UIParent)
+      this.root.SetScript('OnUpdate', () => this.load())
     }
   }
 

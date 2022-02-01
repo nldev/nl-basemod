@@ -61,9 +61,9 @@ export const DEFAULT_COLOR = {
 
 export type RelativeRegion = string | 'root' | 'parent' | WoWAPI.Region
 
-export type FrameClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton) => void
+export type FrameClickHandler = (element: Element<any, any>, button: WoWAPI.MouseButton) => void
 
-export type ButtonClickHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, down: Boolean) => void
+export type ButtonClickHandler = (element: Element<any, any>, button: WoWAPI.MouseButton, down: Boolean) => void
 
 export interface ButtonOnClick {
   type: ClickType
@@ -77,8 +77,8 @@ export interface FrameOnClick {
 
 export type PreventDefault = () => void
 
-export type FrameDragStartHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, preventDefault: PreventDefault) => void
-export type FrameDragStopHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(frame: T, button: WoWAPI.MouseButton, preventDefault: PreventDefault) => void
+export type FrameDragStartHandler = (frame: Element<any, any>, button: WoWAPI.MouseButton, preventDefault: PreventDefault) => void
+export type FrameDragStopHandler = (frame: Element<any, any>, button: WoWAPI.MouseButton, preventDefault: PreventDefault) => void
 
 export interface FrameOnDrag {
   type: WoWAPI.MouseButton
@@ -118,7 +118,7 @@ export abstract class Element<
   public name: string
   public inner: WoWAPI.Frame
 
-  public children: Element<any, any>[]
+  public children: Element<any, any>[] = []
 
   constructor (public options: O) {
     if (this.options.prefix && this.options.name)
@@ -409,9 +409,9 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
   public OnClick (type: WoWAPI.MouseButton, handler: FrameClickHandler) {
     this.ref.EnableMouse(true)
-    this.ref.SetScript('OnMouseUp', (frame, button) => {
+    this.ref.SetScript('OnMouseUp', (_, button) => {
       if (type === button)
-        handler(frame, button)
+        handler(this, button)
     })
 
     this.onClick = {
@@ -427,28 +427,28 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     this.ref.RegisterForDrag(type)
     this.ref.SetMovable(true)
 
-    this.ref.SetScript('OnDragStart', (frame, type) => {
+    this.ref.SetScript('OnDragStart', (_, type) => {
       const state = { preventDefault: false }
 
       const preventDefault = () => { state.preventDefault = true }
 
       if (startHandler)
-        startHandler(frame, type, () => preventDefault())
+        startHandler(this, type, () => preventDefault())
 
       if (!state.preventDefault)
-        frame.StartMoving()
+        this.ref.StartMoving()
     })
 
-    this.ref.SetScript('OnDragStop', (frame) => {
+    this.ref.SetScript('OnDragStop', () => {
       const state = { preventDefault: false }
 
       const preventDefault = () => state.preventDefault = true
 
       if (stopHandler)
-        stopHandler(frame, type, () => preventDefault())
+        stopHandler(this, type, () => preventDefault())
 
       if (!state.preventDefault)
-        frame.StopMovingOrSizing()
+        this.ref.StopMovingOrSizing()
     })
 
     this.onDrag = {
@@ -521,7 +521,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
   public OnClick (type: ClickType, handler: ButtonClickHandler) {
     this.ref.EnableMouse(true)
     this.ref.RegisterForClicks(type)
-    this.ref.SetScript('OnClick', (frame, button, down) => handler(frame, button, down))
+    this.ref.SetScript('OnClick', (_, button, down) => handler(this, button, down))
 
     return this
   }
