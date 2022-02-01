@@ -5,9 +5,19 @@ export interface ScrollOptions extends FrameOptions {
 }
 
 export class ScrollElement extends FrameElement<ScrollOptions> {
-  protected scrollframe: WoWAPI.ScrollFrame = CreateFrame('ScrollFrame', 'scrollframe', null, 'UIPanelScrollFrameTemplate')
+  protected scrollframe: WoWAPI.ScrollFrame
+
+  protected Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
+    this.ref.SetParent(parent)
+
+    this.parent = parent
+
+    return this
+  }
 
   protected init () {
+    this.scrollframe = CreateFrame('ScrollFrame', 'scrollframe', null, 'UIPanelScrollFrameTemplate')
+
     const scrollchild = CreateFrame('Frame', 'scrollchild')
 
     const scrollbarName = this.scrollframe.GetName()
@@ -40,9 +50,7 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
     moduleoptions.SetFrameStrata(this.strata || 'LOW')
     moduleoptions.SetFrameLevel((this.z || 0))
 
-    console.log('before')
     this.inner = moduleoptions
-    console.log('after')
   }
 }
 

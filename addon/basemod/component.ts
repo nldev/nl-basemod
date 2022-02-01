@@ -220,23 +220,31 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     if (amount === 0)
       return this
 
-    this.inner = CreateFrame('Frame', null, this.ref)
+    const frame = CreateFrame('Frame', null, this.ref)
 
-    this.inner.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
-    this.inner.SetParent(this.ref)
+    frame.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
+
+    this.Inner(frame)
+
     this.inner.SetPoint('CENTER')
 
+    return this
+  }
+
+  public Inner (frame: WoWAPI.Frame) {
+    this.inner = frame
+
+    this.inner.SetParent(this.ref)
+
     const z = this.z || 0
-    const strata = this.strata || 'BACKGROUND'
 
     this.inner.SetFrameLevel(z)
     this.ref.SetFrameLevel(z - 1)
 
+    const strata = this.strata || 'BACKGROUND'
+
     this.inner.SetFrameStrata(strata)
     this.ref.SetFrameStrata(strata)
-
-    return this
-
   }
 
   protected Parent<T extends WoWAPI.Frame = WoWAPI.Frame> (parent: T) {
