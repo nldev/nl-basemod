@@ -6,7 +6,7 @@ render($ => {
   const a = Frame({
     id: 'a',
     size: { width: 300, height: 300 },
-    padding: 40,
+    padding: 80,
     point: 'CENTER',
     bg: {},
     z: 2,

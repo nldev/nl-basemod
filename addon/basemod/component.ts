@@ -400,7 +400,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
   protected AllPoints (relativeRegion?: RelativeRegion) {
     if (relativeRegion === 'parent')
-      relativeRegion = this.parent.ref
+      relativeRegion = this.parent.inner || this.parent.ref
 
     this.ref.SetAllPoints(relativeRegion)
 
