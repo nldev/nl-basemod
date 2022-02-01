@@ -99,6 +99,7 @@ export type Point = FullPoint | WoWAPI.Point
 export interface ComponentOptions {
   id: string
   prefix?: string
+  existing?: WoWAPI.Frame
   parent?: Element<any, any>
 }
 
