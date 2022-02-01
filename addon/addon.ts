@@ -4,9 +4,9 @@ import { Scroll } from './basemod/components/scroll'
 
 render($ => {
   const a = Frame({
-    padding: 30,
+    padding: 60,
     size: { width: 300, height: 300 },
-    z: 50,
+    z: 2,
     bg: {},
     color: {},
     point: 'CENTER',
@@ -14,12 +14,17 @@ render($ => {
     onDrag: { button: 'RightButton' },
   })
 
+  a.ref.SetFrameStrata('BACKGROUND')
+  a.inner.SetFrameStrata('BACKGROUND')
+
   const s = Scroll({
     name: 'bar',
     size: { width: a.ref.GetWidth(), height: a.ref.GetHeight() },
     parent: a.inner,
     allPoints: a.inner,
-    z: 99,
+    z: 5,
   })
+
+  s.ref.SetFrameStrata('HIGH')
 })
 
