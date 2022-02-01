@@ -10,8 +10,8 @@ render($ => {
     bg: {},
     color: {},
     point: 'CENTER',
-    onClick: { button: 'LeftButton', handler: () => console.log($.playerInfo.name) },
-    onDrag: { button: 'RightButton' },
+    onClick: { type: 'LeftButton', handler: () => console.log($.playerInfo.name) },
+    onDrag: { type: 'RightButton' },
   })
 
   a.ref.SetFrameStrata('BACKGROUND')

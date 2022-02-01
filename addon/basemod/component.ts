@@ -188,9 +188,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     if (options.size)
       this.Size(options.size.width, options.size.height)
 
-    if (options.padding)
-      this.Padding(options.padding)
-
     if (options.bg)
       this.Backdrop(options.bg, this.options.color)
 
@@ -214,10 +211,12 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     if (options.onClick)
       this.Click(options.onClick.type, options.onClick.handler)
+
+    if (options.padding)
+      this.Padding(options.padding)
   }
 
   public Padding (amount: number) {
-    console.log('padding start')
     if (amount === 0)
       return this
 
@@ -227,12 +226,15 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     this.inner.SetParent(this.ref)
     this.inner.SetPoint('CENTER')
 
-    const z = this.options.z || 0
+    const z = this.z || 0
+    const strata = this.strata || 'BACKGROUND'
 
     this.inner.SetFrameLevel(z)
     this.ref.SetFrameLevel(z - 1)
 
-    console.log('padding end')
+    this.inner.SetFrameStrata(strata)
+    this.ref.SetFrameStrata(strata)
+
     return this
 
   }
