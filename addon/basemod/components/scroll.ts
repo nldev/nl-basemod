@@ -13,9 +13,9 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
   protected moduleoptions: WoWAPI.Frame
 
   init () {
-    this.scrollframe = CreateFrame('ScrollFrame', this.name + '-scrollframe', null, 'UIPanelScrollFrameTemplate')
+    this.scrollframe = CreateFrame('ScrollFrame', this.id + '-scrollframe', null, 'UIPanelScrollFrameTemplate')
 
-    this.scrollchild = CreateFrame('Frame', this.name + '-scrollchild')
+    this.scrollchild = CreateFrame('Frame', this.id + '-scrollchild')
 
     const scrollbarName = this.scrollframe.GetName()
 
@@ -41,7 +41,7 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
 
     this.scrollchild.SetSize(this.scrollframe.GetWidth(), this.options.scrollHeight || (this.scrollframe.GetHeight() * 2))
 
-    this.moduleoptions = CreateFrame('Frame', this.name + '-moduleoptions', this.scrollchild)
+    this.moduleoptions = CreateFrame('Frame', this.id + '-moduleoptions', this.scrollchild)
 
     this.moduleoptions.SetAllPoints(this.scrollchild)
     this.moduleoptions.SetFrameStrata(this.strata || 'LOW')

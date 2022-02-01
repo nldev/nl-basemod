@@ -97,7 +97,7 @@ export interface FullPoint {
 export type Point = FullPoint | WoWAPI.Point
 
 export interface ComponentOptions {
-  name: string
+  id: string
   prefix?: string
   parent?: Element<any, any>
 }
@@ -115,17 +115,16 @@ export abstract class Element<
   protected isHidden: boolean
 
   public ref: T
-  public name: string
+  public id: string
   public inner: WoWAPI.Frame
-
   public children: Element<any, any>[] = []
 
   constructor (protected options: O, children: Element<any, any>[] = []) {
-    if (this.options.prefix && this.options.name)
-      throw new Error('Component cannot have both a name and a prefix')
+    if (this.options.prefix && this.options.id)
+      throw new Error('Component cannot have both an id and a prefix')
 
-    this.name = this.options.name
-      ? this.options.name
+    this.id = this.options.id
+      ? this.options.id
       : this.options.prefix
       ? Unique(this.options.prefix)
       : null
@@ -209,7 +208,7 @@ export abstract class Element<
     children.forEach(child => child.parent = this)
   }
 
-  protected abstract create (name?: string, parent?: Element<any, any>): void
+  protected abstract create (id?: string, parent?: Element<any, any>): void
 
   protected abstract setup (): void
 
@@ -280,7 +279,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   protected onDrag: FrameOnDrag
 
   protected create () {
-    this.ref = CreateFrame('Frame', this.name)
+    this.ref = CreateFrame('Frame', this.id)
   }
 
   protected setup () {
@@ -325,7 +324,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     if (amount === 0)
       return this
 
-    const frame = Frame({ name: this.name  + '-padding', parent: this })
+    const frame = Frame({ id: this.id  + '-padding', parent: this })
 
     frame.ref.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
 
@@ -506,7 +505,7 @@ export function CreateElement<
   O extends ComponentOptions = ComponentOptions,
   E extends Element = Element,
 > (options: O, component: (options: O) => E) {
-  const existing = Get().elements[options.name]
+  const existing = Get().elements[options.id]
   const element = existing || component(options)
 
   return element
@@ -530,7 +529,7 @@ export const DEFAULT_BUTTON_OPTIONS = {
 
 export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Element<O, WoWAPI.Button> {
   protected create () {
-    this.ref = CreateFrame('Button', this.name, this.parent.ref)
+    this.ref = CreateFrame('Button', this.id, this.parent.ref)
   }
 
   protected setup () {

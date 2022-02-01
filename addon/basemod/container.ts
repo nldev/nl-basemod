@@ -48,7 +48,7 @@ export class Container {
   }
 
   public register (element: Element<any, any>) {
-    this.elements[element.name] = element
+    this.elements[element.id] = element
   }
 }
 

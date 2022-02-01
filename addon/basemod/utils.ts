@@ -2,15 +2,15 @@ export const noop = () => {}
 
 const names = {}
 
-export function Unique (name: string) {
-  const id = names[name] ? names[name] : 0
+export function Unique (id: string) {
+  const _id = names[id] ? names[id] : 0
 
-  if (id === 0) {
-    names[name] = 0
+  if (_id === 0) {
+    names[id] = 0
   }
 
-  names[name]++
+  names[id]++
 
-  return `${name}-${id}`
+  return `${id}-${_id}`
 }
 

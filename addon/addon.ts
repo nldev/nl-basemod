@@ -4,7 +4,7 @@ import { Scroll } from './basemod/components/scroll'
 
 render($ => {
   const a = Frame({
-    name: 'a',
+    id: 'a',
     size: { width: 300, height: 300 },
     padding: 40,
     point: 'CENTER',
@@ -19,7 +19,7 @@ render($ => {
     .OnDrag('RightButton')
 
   const s = Scroll({
-    name: 'testscroll',
+    id: 'testscroll',
     size: { width: a.ref.GetWidth(), height: a.ref.GetHeight() },
     parent: a,
     allPoints: a.inner,
@@ -27,19 +27,20 @@ render($ => {
     z: 3,
   })
 
-  const o = Scroll({ name: 'testscroll' })
+  const o = Scroll({ id: 'testscroll' })
 
-  console.log(o.name)
+
+  console.log(o.id)
 
   a.ref.RegisterEvent('CHAT_MSG_SAY')
 
-  a.ref.SetScript('OnEvent', (frame, event, text: string, name: string) => {
+  a.ref.SetScript('OnEvent', (frame, event, text: string, id: string) => {
     if (event === 'CHAT_MSG_SAY') {
       const isShow = text === 'show'
       const isHide = text === 'hide'
       const isToggle = text === 'toggle'
 
-      if (name.toLowerCase() === $.playerInfo.name) {
+      if (id.toLowerCase() === $.playerInfo.name) {
         if (isShow)
           a.Show()
 
