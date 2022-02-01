@@ -82,8 +82,8 @@ export type FrameDragStopHandler = <T extends WoWAPI.Region = WoWAPI.Frame>(fram
 
 export interface FrameOnDrag {
   button: WoWAPI.MouseButton
-  startHandler: FrameDragStartHandler
-  stopHandler: FrameDragStopHandler
+  startHandler?: FrameDragStartHandler
+  stopHandler?: FrameDragStopHandler
 }
 
 export interface FullPoint {
@@ -151,6 +151,7 @@ export interface FrameOptions extends ComponentOptions {
   bg?: BackdropOptions
   color?: ColorOptions
   onClick?: FrameOnClick
+  onDrag?: FrameOnDrag
   size?: Size
   z?: number
   padding?: number
