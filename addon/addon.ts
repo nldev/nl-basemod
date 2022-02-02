@@ -40,6 +40,7 @@ render($ => {
 
   const test = Frame({
     id: 'anothertestframe',
+    parent: g,
     size: { width: 100, height: 100 },
     bg: {},
     color: { red: 1 },
