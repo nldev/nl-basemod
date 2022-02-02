@@ -618,49 +618,93 @@ export interface NFrameOnDrag {
   startHandler?: NFrameDragStartHandler
   stopHandler?: NFrameDragStopHandler
 }
+export interface NBackground {
+  bgFile: string
+  edgeFile: string
+  tile: boolean
+  tileSize: number
+  edgeSize: number
+  insets: {
+    left: number
+    right: number
+    top: number
+    bottom: number
+  },
+  red?: number
+  green?: number
+  blue?: number
+  alpha?: number
+}
+export interface NBaseBox {
+  z: number
+  strata: WoWAPI.FrameStrata
+}
+export interface NFullBox extends NBaseBox {
+  type: 'full'
+}
+export interface NCenterBox extends NBaseBox {
+  type: 'center'
+  width: number
+  height: number
+}
+export interface NPointBox extends NBaseBox {
+  type: 'point'
+  width: number
+  height: number
+  point: Point
+}
+export interface NPositionBox extends NBaseBox {
+  type: 'position'
+  width: number
+  height: number
+  point: Point
+  x: number
+  y: number
+}
+export interface NEventHandler {
+}
+export interface NClickEventHandler extends NEventHandler {
+}
+export interface NDragEventHandler extends NEventHandler {
+}
+export type NBox = NCenterBox | NPointBox | NPositionBox | NFullBox
 export class NElement {
-  protected isHidden: boolean
+  public primary: NElement
 
-  public parent: NElement
-  public attach: NElement
-  public padding: number
-  // FIXME use a single interface for backdrop
-  // public backdrop: BackdropOptions
-  // public color: ColorOptions
-  // FIXME use a single interface for positioning + sizing
-  // public point: Point
-  // public allPoints: NRelativeRegion
-  // public height: number
-  // public width: number
   // FIXME do not track handlers (allow more than one)
   // public onClick: NFrameOnClick
   // public onDrag: NFrameOnDrag
-  // FIXME use a single interface for z / strata
-  // public strata: WoWAPI.FrameStrata
-  // public z: number
-
-  public children: Mapping<NElement> = {}
 
   constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
     this.id = id
 
     if (!ref)
       this.ref = CreateFrame('Frame', id)
+
+    this.primary = this
   }
 
-  protected Attach (child: NElement) {
-    child.Parent(this.attach || this.parent)
-  }
+  // children
+  public children: Mapping<NElement> = {}
 
   public get list () {
     return Object.keys(this.children).map(key => this.children[key])
   }
 
-  public Reset () {
-    this.Parent(this.parent)
+  // internal
+  protected Update () {
+    this.Parent()
+    this.Visibility()
   }
 
-  public Visibility (bool: boolean, force?: boolean) {
+  protected Attach (child: NElement) {
+    child.Parent(this.primary)
+  }
+
+  // visibility
+  public isVisible: boolean
+
+  public Visibility (bool: boolean = this.isVisible, force?: boolean) {
     if (bool) {
       this.Show(force)
     } else {
@@ -669,16 +713,16 @@ export class NElement {
   }
 
   public Toggle (force?: boolean) {
-    if (this.isHidden) {
-      this.Show(force)
-    } else {
+    if (this.isVisible) {
       this.Hide(force)
+    } else {
+      this.Show(force)
     }
   }
 
   public Show (force?: boolean) {
     if (!force)
-      this.isHidden = false
+      this.isVisible = true
 
     this.ref.Show()
 
@@ -687,17 +731,59 @@ export class NElement {
 
   public Hide (force?: boolean) {
     if (!force)
-      this.isHidden = true
+      this.isVisible = false
 
     this.ref.Hide()
 
     return this
   }
 
+  // box
+  // FIXME
+  public box: NBox
+
+  public Box (box: NBox = this.box) {
+    return this
+  }
+
+  // padding
+  // FIXME
+  public padding: number
+
+  public Padding (amount: number) {
+    if (amount === 0)
+      return this
+
+    const frame = new NElement(this.id + '-padding')
+      .Parent(this)
+      // .Size(this)
+
+    frame.ref.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
+
+    // this.Inner(frame.ref)
+
+    // this.inner.SetPoint('CENTER')
+
+    return this
+  }
+
+  // parent
+  public parent: NElement
+
   public Parent (parent: NElement = this.parent) {
     this.parent = parent
 
     // FIXME: assign parent
+
+    return this
+  }
+
+  // backdrop
+  // FIXME
+  public background: NBackground
+
+  public Background (background: NBackground = this.background) {
+    this.background = background
 
     return this
   }
