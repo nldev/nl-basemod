@@ -619,23 +619,87 @@ export interface NFrameOnDrag {
   stopHandler?: NFrameDragStopHandler
 }
 export class NElement {
-  public readonly parent: NElement
-  public readonly isHidden: boolean
-  public readonly id: string
-  public readonly ref: WoWAPI.Frame
-  public readonly attach: NElement
-  public readonly children: Mapping<Element>
-  public readonly height: number
-  public readonly width: number
-  public readonly size: Size
-  public readonly padding: number
-  public readonly backdrop: BackdropOptions
-  public readonly color: ColorOptions
-  public readonly point: Point
-  public readonly allPoints: NRelativeRegion
-  public readonly strata: WoWAPI.FrameStrata
-  public readonly z: number
-  public readonly onClick: NFrameOnClick
-  public readonly onDrag: NFrameOnDrag
+  protected isHidden: boolean
+
+  public parent: NElement
+  public attach: NElement
+  public padding: number
+  // FIXME use a single interface for backdrop
+  // public backdrop: BackdropOptions
+  // public color: ColorOptions
+  // FIXME use a single interface for positioning + sizing
+  // public point: Point
+  // public allPoints: NRelativeRegion
+  // public height: number
+  // public width: number
+  // FIXME do not track handlers (allow more than one)
+  // public onClick: NFrameOnClick
+  // public onDrag: NFrameOnDrag
+  // FIXME use a single interface for z / strata
+  // public strata: WoWAPI.FrameStrata
+  // public z: number
+
+  public children: Mapping<NElement> = {}
+
+  constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
+    this.id = id
+
+    if (!ref)
+      this.ref = CreateFrame('Frame', id)
+  }
+
+  protected Attach (child: NElement) {
+    child.Parent(this.attach || this.parent)
+  }
+
+  public get list () {
+    return Object.keys(this.children).map(key => this.children[key])
+  }
+
+  public Reset () {
+    this.Parent(this.parent)
+  }
+
+  public Visibility (bool: boolean, force?: boolean) {
+    if (bool) {
+      this.Show(force)
+    } else {
+      this.Hide(force)
+    }
+  }
+
+  public Toggle (force?: boolean) {
+    if (this.isHidden) {
+      this.Show(force)
+    } else {
+      this.Hide(force)
+    }
+  }
+
+  public Show (force?: boolean) {
+    if (!force)
+      this.isHidden = false
+
+    this.ref.Show()
+
+    return this
+  }
+
+  public Hide (force?: boolean) {
+    if (!force)
+      this.isHidden = true
+
+    this.ref.Hide()
+
+    return this
+  }
+
+  public Parent (parent: NElement = this.parent) {
+    this.parent = parent
+
+    // FIXME: assign parent
+
+    return this
+  }
 }
 
