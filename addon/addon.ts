@@ -39,11 +39,14 @@ render($ => {
     z: 6,
   })
 
+  s.Attach(g)
+
   const aa = Frame({
     id: 'aa',
     size: { width: 60, height: 60 },
     bg: {},
     color: { red: 1, blue: 1 },
+    strata: 'LOW',
   })
 
   const ab = Frame({
@@ -51,6 +54,7 @@ render($ => {
     size: { width: 60, height: 60 },
     bg: {},
     color: { green: 1, red: 1, },
+    strata: 'LOW',
   })
 
   const ac = Frame({
@@ -58,6 +62,7 @@ render($ => {
     size: { width: 60, height: 60 },
     bg: {},
     color: { red: 1 },
+    strata: 'LOW',
   })
 
   const ad = Frame({
@@ -65,6 +70,7 @@ render($ => {
     size: { width: 60, height: 60 },
     bg: {},
     color: { green: 1 },
+    strata: 'LOW',
   })
 
   const test = Frame({
@@ -72,6 +78,7 @@ render($ => {
     size: { width: 60, height: 60 },
     bg: {},
     color: { blue: 1 },
+    strata: 'LOW',
   })
 
   g.Add(test)

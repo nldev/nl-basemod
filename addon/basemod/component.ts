@@ -346,7 +346,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
     return this
   }
 
-  public Inner (frame: WoWAPI.Frame) {
+  protected Inner (frame: WoWAPI.Frame) {
     this.inner = frame
 
     this.inner.SetParent(this.ref)

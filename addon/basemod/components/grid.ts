@@ -77,10 +77,18 @@ export class GridElement extends FrameElement<GridOptions> {
       },
     })
 
-    const ref = item.inner || item.ref
+    // const ref = item.inner || item.ref
 
-    ref.SetFrameStrata(this.strata)
-    ref.SetFrameLevel(this.z)
+    // item.ref.SetFrameStrata(this.strata)
+    // item.ref.SetFrameLevel(this.z)
+
+    // if (item.inner) {
+    //   item.ref.SetFrameStrata(this.strata)
+    //   item.ref.SetFrameLevel(this.z)
+    // }
+
+    // ref.SetFrameStrata(this.strata)
+    // ref.SetFrameLevel(this.z)
 
     if (isEndOfRow) {
       this.index = 0

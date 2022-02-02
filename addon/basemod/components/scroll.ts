@@ -1,4 +1,4 @@
-import { FrameElement, FrameOptions, Component, Frame, CreateElement } from '../component'
+import { FrameElement, FrameOptions, Component, Element, CreateElement } from '../component'
 
 export interface ScrollOptions extends FrameOptions {
   scrollHeight?: number
@@ -39,12 +39,12 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
     this.scrollbar.SetFrameLevel(this.z || 0)
 
     // this.ref.SetSize(this.ref.GetWidth() * 0.667, this.ref.GetHeight() * 0.667)
-
-    this.scrollframe.SetScrollChild(this.scrollchild)
+    //
     this.scrollframe.SetParent(this.ref)
+    this.scrollframe.SetScrollChild(this.scrollchild)
     this.scrollframe.SetAllPoints(this.ref)
 
-    this.scrollchild.SetSize(this.scrollframe.GetWidth(), this.options.scrollHeight || (this.scrollframe.GetHeight() * 2))
+    this.scrollchild.SetSize(this.scrollframe.GetWidth() - 30, this.options.scrollHeight || (this.scrollframe.GetHeight() * 2))
 
     this.moduleoptions = CreateFrame('Frame', this.id + '-moduleoptions', this.scrollchild)
 
@@ -52,7 +52,7 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
     this.moduleoptions.SetFrameStrata(this.strata || 'LOW')
     this.moduleoptions.SetFrameLevel(this.z || 0)
 
-    this.Inner(this.moduleoptions)
+    // this.Inner(this.moduleoptions)
   }
 
   onShow () {
@@ -68,6 +68,12 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
     this.scrollchild.Hide()
     this.scrollupbutton.Hide()
     this.moduleoptions.Hide()
+  }
+
+  public Attach (element: Element<any, WoWAPI.Frame>) {
+    element.ref.SetParent(this.moduleoptions)
+    element.ref.ClearAllPoints()
+    element.ref.SetAllPoints(this.moduleoptions)
   }
 }
 
