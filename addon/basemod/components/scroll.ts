@@ -49,8 +49,6 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
     this.moduleoptions.SetAllPoints(this.scrollchild)
     this.moduleoptions.SetFrameStrata(this.strata || 'LOW')
     this.moduleoptions.SetFrameLevel(this.z || 0)
-
-    // this.Inner(this.moduleoptions)
   }
 
   onShow () {
