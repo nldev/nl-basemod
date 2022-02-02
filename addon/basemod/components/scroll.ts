@@ -38,8 +38,6 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
     this.scrollbar.SetFrameStrata(this.strata || 'LOW')
     this.scrollbar.SetFrameLevel(this.z || 0)
 
-    // this.ref.SetSize(this.ref.GetWidth() * 0.667, this.ref.GetHeight() * 0.667)
-    //
     this.scrollframe.SetParent(this.ref)
     this.scrollframe.SetScrollChild(this.scrollchild)
     this.scrollframe.SetAllPoints(this.ref)

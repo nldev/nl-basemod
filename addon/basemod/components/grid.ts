@@ -56,10 +56,11 @@ export class GridElement extends FrameElement<GridOptions> {
     this.ref.SetAllPoints(this.parent.inner || this.parent.ref)
     this.itemsPerRow = this.options.itemsPerRow || 3
     this.rowHeight = this.options.rowHeight || 100
-    this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
   }
 
   public Add (item: Element<any, WoWAPI.Frame>) {
+    this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
+
     const isEndOfRow = this.index === (this.itemsPerRow - 1)
 
     const element = new GridItem({
