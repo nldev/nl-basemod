@@ -1,5 +1,6 @@
 // import { Unique } from "../utils"
 import { FrameElement, FrameOptions, Component, Frame, Element } from '../component'
+import { Unique } from '../utils'
 
 export interface GridOptions extends FrameOptions {
   itemsPerRow: number
@@ -8,25 +9,44 @@ export interface GridOptions extends FrameOptions {
   gridWidth: number
 }
 
-export interface GridItemOptions {
+export interface GridItemOptions extends FrameOptions {
   // parent: Element<any, any>
   // inner: Element<any, any>
-  item: Element<any, any>
+  item: Element<any, WoWAPI.Frame>
   index: number
-  height: number
-  width: number
   x: number
   y: number
 }
 
-class GridItem extends FrameElement {
-  protected index: number
-  protected height: number
-  protected width: number
+class GridItem extends FrameElement<GridItemOptions> {
+  public index: number
+  public item: Element<any, WoWAPI.Frame>
+
   protected x: number
   protected y: number
 
   init () {
+    this.item = this.options.item
+    this.index = this.options.index
+    this.x = this.options.x
+    this.y = this.options.y
+
+
+    if (this.strata)
+      this.item.ref.SetFrameStrata(this.strata)
+
+    if (this.z)
+      this.item.ref.SetFrameLevel(this.z)
+
+    this.item.parent = this
+    this.item.ref.SetPoint('CENTER')
+    // this.params.child.SetParent(this.frame)
+    // this.params.child.SetPoint('CENTER')
+
+    // this.frame.SetSize(this.params.width, this.params.height)
+    // this.frame.SetParent(this.params.parent)
+    this.ref.SetPoint('TOPLEFT', this.x, this.y)
+
   }
 }
 
@@ -46,114 +66,41 @@ export class Grid extends FrameElement<GridOptions> {
     this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
   }
 
-  public Add () {
+  public Add (item: Element<any, WoWAPI.Frame>) {
+    const isEndOfRow = this.index === (this.itemsPerRow - 1)
+
+    const element = new GridItem({
+      item,
+      id: Unique(`${this.id}-griditem`),
+      index: this.index,
+      x: this.x,
+      y: this.y,
+      z: this.z + 1,
+      strata: this.strata,
+      size: {
+        height: this.rowHeight,
+        width: this.itemWidth,
+      },
+    })
+
+    if (isEndOfRow) {
+      this.index = 0
+      this.x = 0
+      this.y -= this.rowHeight
+    } else {
+      this.index++
+      this.x += this.itemWidth
+    }
+
+    this.list.push(element)
+  }
+
+  onShow () {
+    this.list.forEach(item => item.Show(true))
+  }
+
+  onHide () {
+    this.list.forEach(item => item.Hide(true))
   }
 }
-
-//interface IGridItem {
-//  parent: WoWAPI.Frame
-//  child: WoWAPI.Frame
-//  index: number
-//  height: number
-//  width: number
-//  x: number
-//  y: number
-//}
-
-//class GridItem {
-//  public frame: WoWAPI.Frame
-
-//  constructor (public params: IGridItem) {
-//    this.frame = CreateFrame('Frame', Unique('griditem'), this.params.parent)
-
-//    // this.frame.SetBackdrop({
-//    //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-//    //   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-//    //   tile: true, tileSize: 16, edgeSize: 16,
-//    //   insets: { left: 4, right: 4, top: 4, bottom: 4 },
-//    // })
-
-//    // this.frame.SetBackdropColor(0, 0, 0, 1)
-//    this.frame.SetSize(this.params.width, this.params.height)
-//    this.frame.SetPoint('TOPLEFT', this.params.x, this.params.y)
-//    this.frame.SetParent(this.params.parent)
-
-//    this.params.child.SetParent(this.frame)
-//    this.params.child.SetPoint('CENTER')
-//  }
-//}
-
-//interface IGrid {
-//  itemsPerRow: number
-//  rowHeight: number
-//  gridHeight: number
-//  gridWidth: number
-//}
-
-//type GridOptions = Partial<IGrid>
-
-//const DEFAULT_GRID_OPTIONS: IGrid = {
-//  itemsPerRow: 4,
-//  rowHeight: 100,
-//  gridHeight: 400,
-//  gridWidth: 450,
-//}
-//class Grid {
-//  private list: GridItem[]
-//  public frame: WoWAPI.Frame
-//  public params: IGrid
-
-//  public itemWidth: number
-
-//  public index: number = 0
-//  public x: number = 0
-//  public y: number = 0
-
-//  constructor (options: GridOptions = DEFAULT_GRID_OPTIONS) {
-//    this.params = { ...DEFAULT_GRID_OPTIONS, ...options }
-
-//    this.itemWidth = this.params.gridWidth / this.params.itemsPerRow
-
-//    this.frame = CreateFrame('ScrollFrame', 'grid', UIParent)
-
-//    // this.frame.SetBackdrop({
-//    //   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-//    //   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-//    //   tile: true, tileSize: 16, edgeSize: 16,
-//    //   insets: { left: 4, right: 4, top: 4, bottom: 4 },
-//    // })
-
-//    // this.frame.SetBackdropColor(0, 0, 0, 1)
-
-//    this.frame.SetSize(this.params.gridWidth, this.params.gridHeight)
-//    this.frame.SetPoint('CENTER')
-//  }
-
-//  public add (frame: WoWAPI.Frame) {
-//    const isEndOfRow = this.index === (this.params.itemsPerRow - 1)
-
-//    new GridItem({
-//      parent: this.frame,
-//      child: frame,
-//      index: this.index,
-//      height: this.params.rowHeight,
-//      width: this.itemWidth,
-//      x: this.x,
-//      y: this.y,
-//    })
-
-//    if (isEndOfRow) {
-//      this.index = 0
-//      this.x = 0
-//      this.y -= this.params.rowHeight
-//    } else {
-//      this.index++
-//      this.x += this.itemWidth
-//    }
-
-//    // this.list.push(item)
-//    // console.log('pushed to list')
-//  }
-//}
-
 
