@@ -1,5 +1,5 @@
 // import { Unique } from "../utils"
-import { FrameElement, FrameOptions, Component, Frame } from '../component'
+import { FrameElement, FrameOptions, Component, Frame, Element } from '../component'
 
 export interface GridOptions extends FrameOptions {
   itemsPerRow: number
@@ -9,7 +9,9 @@ export interface GridOptions extends FrameOptions {
 }
 
 export interface GridItemOptions {
-  child: Element
+  // parent: Element<any, any>
+  // inner: Element<any, any>
+  item: Element<any, any>
   index: number
   height: number
   width: number
@@ -18,7 +20,12 @@ export interface GridItemOptions {
 }
 
 class GridItem extends FrameElement {
-  protected
+  protected index: number
+  protected height: number
+  protected width: number
+  protected x: number
+  protected y: number
+
   init () {
   }
 }
