@@ -1,5 +1,6 @@
 import { Unique } from './utils'
 import { Get } from './app'
+import { Mapping } from './types'
 
 export interface Size {
   width?: number
@@ -585,4 +586,56 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
 export const Button: Component<ButtonOptions, ButtonElement> = options =>
     CreateElement(options, options => new ButtonElement(options))
 
+
+// REFACTOR
+export type NRelativeRegion = string | NElement
+export interface NFrameOnClick {
+  type: WoWAPI.MouseButton
+  handler: NFrameClickHandler
+}
+export type NFrameDragStartHandler =
+  (
+    frame: NElement,
+    button: WoWAPI.MouseButton,
+    preventDefault: () => void
+  ) => void
+
+export type NFrameDragStopHandler =
+  (
+    frame: NElement,
+    button: WoWAPI.MouseButton,
+    preventDefault: () => void
+  ) => void
+
+export type NFrameClickHandler =
+  (
+    element: NElement,
+    button: WoWAPI.MouseButton
+  ) => void
+
+export interface NFrameOnDrag {
+  type: WoWAPI.MouseButton
+  startHandler?: NFrameDragStartHandler
+  stopHandler?: NFrameDragStopHandler
+}
+export class NElement {
+  public readonly parent: NElement
+  public readonly isHidden: boolean
+  public readonly id: string
+  public readonly ref: WoWAPI.Frame
+  public readonly attach: NElement
+  public readonly children: Mapping<Element>
+  protected height: number
+  protected width: number
+  protected size: Size
+  protected padding: number
+  protected backdrop: BackdropOptions
+  protected color: ColorOptions
+  protected point: Point
+  protected allPoints: NRelativeRegion
+  protected strata: WoWAPI.FrameStrata
+  protected z: number
+  protected onClick: NFrameOnClick
+  protected onDrag: NFrameOnDrag
+}
 

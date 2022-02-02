@@ -2,6 +2,7 @@ import { render } from './basemod/app'
 import { Frame } from './basemod/component'
 import { Scroll } from './basemod/components/scroll'
 import { Grid } from './basemod/components/grid'
+import { Mapping } from './basemod/types'
 
 render($ => {
   const a = Frame({
@@ -108,4 +109,5 @@ render($ => {
     }
   })
 })
+
 
