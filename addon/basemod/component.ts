@@ -625,17 +625,17 @@ export class NElement {
   public readonly ref: WoWAPI.Frame
   public readonly attach: NElement
   public readonly children: Mapping<Element>
-  protected height: number
-  protected width: number
-  protected size: Size
-  protected padding: number
-  protected backdrop: BackdropOptions
-  protected color: ColorOptions
-  protected point: Point
-  protected allPoints: NRelativeRegion
-  protected strata: WoWAPI.FrameStrata
-  protected z: number
-  protected onClick: NFrameOnClick
-  protected onDrag: NFrameOnDrag
+  public readonly height: number
+  public readonly width: number
+  public readonly size: Size
+  public readonly padding: number
+  public readonly backdrop: BackdropOptions
+  public readonly color: ColorOptions
+  public readonly point: Point
+  public readonly allPoints: NRelativeRegion
+  public readonly strata: WoWAPI.FrameStrata
+  public readonly z: number
+  public readonly onClick: NFrameOnClick
+  public readonly onDrag: NFrameOnDrag
 }
 
