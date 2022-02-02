@@ -54,14 +54,19 @@ export class GridElement extends FrameElement<GridOptions> {
   protected rowHeight: number
 
   init () {
+    console.log('1')
     this.itemsPerRow = this.options.itemsPerRow || 3
+    console.log('2')
     this.rowHeight = this.options.rowHeight || 100
+    console.log('3')
     this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
-
-    console.log('hello world')
+    console.log('4')
+    this.ref.SetAllPoints(this.parent.inner || this.parent.ref)
+    console.log('5')
   }
 
   public Add (item: Element<any, WoWAPI.Frame>) {
+    console.log('start')
     const isEndOfRow = this.index === (this.itemsPerRow - 1)
 
     const element = new GridItem({
@@ -89,6 +94,7 @@ export class GridElement extends FrameElement<GridOptions> {
     }
 
     this.list.push(element)
+    console.log('start')
   }
 
   onShow () {

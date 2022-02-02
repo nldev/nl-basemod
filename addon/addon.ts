@@ -32,10 +32,20 @@ render($ => {
 
   const g = Grid({
     id: 'testgrid',
-    parent: s.,
+    parent: s,
+    bg: {},
     itemsPerRow: 4,
     rowHeight: 100,
   })
+
+  const test = Frame({
+    id: 'testframe',
+    size: { width: 100, height: 100 },
+    bg: {},
+    color: { red: 1 },
+  })
+
+  g.Add(test)
 
   a.ref.RegisterEvent('CHAT_MSG_SAY')
 

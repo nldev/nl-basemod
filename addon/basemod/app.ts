@@ -6,6 +6,9 @@ interface App {
 
 const app: App = ({} as any)
 
+
+_G['app'] = app
+
 export const Get = () => app.container
 
 export const render = (onInit: ($: Container) => void) => {
@@ -13,5 +16,4 @@ export const render = (onInit: ($: Container) => void) => {
 
   return app.container
 }
-
 
