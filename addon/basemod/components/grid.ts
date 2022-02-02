@@ -23,7 +23,7 @@ class GridItem extends FrameElement<GridItemOptions> {
   protected x: number
   protected y: number
 
-  init () {
+  protected init () {
     this.item = this.options.item
     this.index = this.options.index
     this.x = this.options.x
@@ -36,7 +36,6 @@ class GridItem extends FrameElement<GridItemOptions> {
       this.item.ref.SetFrameLevel(this.z)
 
     this.item.parent = this
-    console.log(this.x, this.y)
 
     this.ref.SetPoint('TOPLEFT', this.x, this.y)
     this.item.ref.SetPoint('CENTER')
@@ -53,11 +52,11 @@ export class GridElement extends FrameElement<GridOptions> {
   protected itemsPerRow: number
   protected rowHeight: number
 
-  init () {
+  protected init () {
+    this.ref.SetAllPoints(this.parent.inner || this.parent.ref)
     this.itemsPerRow = this.options.itemsPerRow || 3
     this.rowHeight = this.options.rowHeight || 100
     this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
-    this.ref.SetAllPoints(this.parent.inner || this.parent.ref)
   }
 
   public Add (item: Element<any, WoWAPI.Frame>) {
@@ -71,7 +70,6 @@ export class GridElement extends FrameElement<GridOptions> {
       x: this.x,
       y: this.y,
       z: (this.z || 0) + 1,
-      allPoints: this.ref,
       strata: this.strata,
       size: {
         height: this.rowHeight,
@@ -79,10 +77,15 @@ export class GridElement extends FrameElement<GridOptions> {
       },
     })
 
+    const ref = item.inner || item.ref
+
+    ref.SetFrameStrata(this.strata)
+    ref.SetFrameLevel(this.z)
+
     if (isEndOfRow) {
       this.index = 0
       this.x = 0
-      this.y -= this.rowHeight
+      this.y -= (this.rowHeight * 2)
     } else {
       this.index++
       this.x += this.itemWidth

@@ -12,7 +12,7 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
   protected scrolldownbutton: WoWAPI.Frame
   protected moduleoptions: WoWAPI.Frame
 
-  init () {
+  protected init () {
     this.scrollframe = CreateFrame('ScrollFrame', this.id + '-scrollframe', null, 'UIPanelScrollFrameTemplate')
     this.scrollchild = CreateFrame('Frame', this.id + '-scrollchild')
 
@@ -38,11 +38,11 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
     this.scrollbar.SetFrameStrata(this.strata || 'LOW')
     this.scrollbar.SetFrameLevel(this.z || 0)
 
-    this.ref.SetSize(this.ref.GetWidth() * 0.667, this.ref.GetHeight() * 0.667)
+    // this.ref.SetSize(this.ref.GetWidth() * 0.667, this.ref.GetHeight() * 0.667)
 
     this.scrollframe.SetScrollChild(this.scrollchild)
+    this.scrollframe.SetParent(this.ref)
     this.scrollframe.SetAllPoints(this.ref)
-    this.scrollframe.SetScale(0.667)
 
     this.scrollchild.SetSize(this.scrollframe.GetWidth(), this.options.scrollHeight || (this.scrollframe.GetHeight() * 2))
 

@@ -6,7 +6,7 @@ import { Grid } from './basemod/components/grid'
 render($ => {
   const a = Frame({
     id: 'a',
-    size: { width: 800, height: 800 },
+    size: { width: 600, height: 600 },
     padding: 50,
     point: 'CENTER',
     bg: {},
@@ -33,49 +33,45 @@ render($ => {
   const g = Grid({
     id: 'testgrid',
     parent: s,
-    bg: {},
     itemsPerRow: 4,
-    rowHeight: 100,
+    rowHeight: 60,
+    strata: 'MEDIUM',
+    z: 6,
   })
 
   const aa = Frame({
     id: 'aa',
-    parent: g,
-    size: { width: 100, height: 100 },
+    size: { width: 60, height: 60 },
     bg: {},
-    color: { red: 1 },
+    color: { red: 1, blue: 1 },
   })
 
   const ab = Frame({
     id: 'ab',
-    parent: g,
-    size: { width: 100, height: 100 },
+    size: { width: 60, height: 60 },
     bg: {},
-    color: { red: 1 },
+    color: { green: 1, red: 1, },
   })
 
   const ac = Frame({
     id: 'ac',
-    parent: g,
-    size: { width: 100, height: 100 },
+    size: { width: 60, height: 60 },
     bg: {},
     color: { red: 1 },
   })
 
   const ad = Frame({
     id: 'ad',
-    parent: g,
-    size: { width: 100, height: 100 },
+    size: { width: 60, height: 60 },
     bg: {},
-    color: { red: 1 },
+    color: { green: 1 },
   })
 
   const test = Frame({
     id: 'anothertestframe',
-    parent: g,
-    size: { width: 100, height: 100 },
+    size: { width: 60, height: 60 },
     bg: {},
-    color: { red: 1 },
+    color: { blue: 1 },
   })
 
   g.Add(test)
