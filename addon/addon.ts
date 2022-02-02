@@ -39,7 +39,7 @@ render($ => {
   })
 
   const test = Frame({
-    id: 'testframe',
+    id: 'anothertestframe',
     size: { width: 100, height: 100 },
     bg: {},
     color: { red: 1 },
