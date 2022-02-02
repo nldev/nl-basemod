@@ -1,12 +1,10 @@
 // import { Unique } from "../utils"
-import { FrameElement, FrameOptions, Component, Frame, Element } from '../component'
+import { FrameElement, FrameOptions, Component, Element, CreateElement } from '../component'
 import { Unique } from '../utils'
 
 export interface GridOptions extends FrameOptions {
   itemsPerRow: number
   rowHeight: number
-  gridHeight: number
-  gridWidth: number
 }
 
 export interface GridItemOptions extends FrameOptions {
@@ -40,17 +38,12 @@ class GridItem extends FrameElement<GridItemOptions> {
 
     this.item.parent = this
     this.item.ref.SetPoint('CENTER')
-    // this.params.child.SetParent(this.frame)
-    // this.params.child.SetPoint('CENTER')
 
-    // this.frame.SetSize(this.params.width, this.params.height)
-    // this.frame.SetParent(this.params.parent)
     this.ref.SetPoint('TOPLEFT', this.x, this.y)
-
   }
 }
 
-export class Grid extends FrameElement<GridOptions> {
+export class GridElement extends FrameElement<GridOptions> {
   protected list: GridItem[] = []
   protected itemWidth: number
   protected index: number = 0
@@ -64,6 +57,8 @@ export class Grid extends FrameElement<GridOptions> {
     this.itemsPerRow = this.options.itemsPerRow || 3
     this.rowHeight = this.options.rowHeight || 100
     this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
+
+    console.log('hello world')
   }
 
   public Add (item: Element<any, WoWAPI.Frame>) {
@@ -76,6 +71,7 @@ export class Grid extends FrameElement<GridOptions> {
       x: this.x,
       y: this.y,
       z: this.z + 1,
+      parent: this,
       strata: this.strata,
       size: {
         height: this.rowHeight,
@@ -103,4 +99,7 @@ export class Grid extends FrameElement<GridOptions> {
     this.list.forEach(item => item.Hide(true))
   }
 }
+
+export const Grid: Component<GridOptions, GridElement> = options =>
+    CreateElement(options, options => new GridElement(options))
 

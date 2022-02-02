@@ -1,6 +1,7 @@
 import { render } from './basemod/app'
 import { Frame } from './basemod/component'
 import { Scroll } from './basemod/components/scroll'
+import { Grid } from './basemod/components/grid'
 
 render($ => {
   const a = Frame({
@@ -27,6 +28,13 @@ render($ => {
     allPoints: a.inner,
     strata: 'MEDIUM',
     z: 5,
+  })
+
+  const g = Grid({
+    id: 'testgrid',
+    parent: s.,
+    itemsPerRow: 4,
+    rowHeight: 100,
   })
 
   a.ref.RegisterEvent('CHAT_MSG_SAY')

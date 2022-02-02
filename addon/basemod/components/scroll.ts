@@ -72,5 +72,5 @@ export class ScrollElement extends FrameElement<ScrollOptions> {
 }
 
 export const Scroll: Component<ScrollOptions, ScrollElement> = options =>
-    CreateElement(options, options => new ScrollElement(options))
+  CreateElement(options, options => new ScrollElement(options))
 

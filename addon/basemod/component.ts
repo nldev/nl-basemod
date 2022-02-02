@@ -324,7 +324,11 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   }
 
   protected Parent (parent: Element<any, any>) {
-    this.ref.SetParent(parent.ref)
+    if (this.inner) {
+      this.ref.SetParent(parent.inner)
+    } else {
+      this.ref.SetParent(parent.ref)
+    }
   }
 
   protected Padding (amount: number) {
@@ -562,7 +566,11 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
   }
 
   protected Parent (parent: Element<any, any>) {
-    this.ref.SetParent(parent.ref)
+    if (this.inner) {
+      this.ref.SetParent(parent.inner)
+    } else {
+      this.ref.SetParent(parent.ref)
+    }
   }
 
   public OnClick (type: ClickType, handler: ButtonClickHandler) {
