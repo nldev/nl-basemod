@@ -635,26 +635,36 @@ export interface NBackground {
   blue?: number
   alpha?: number
 }
+export const BOX_FULL = 'BOX_FULL'
+export const BOX_CENTER = 'BOX_CENTER'
+export const BOX_POINT = 'BOX_POINT'
+export const BOX_POSITION = 'BOX_POSITION'
+export type NFullBoxType = typeof BOX_FULL
+export type NCenterBoxType = typeof BOX_CENTER
+export type NPointBoxType = typeof BOX_POINT
+export type NPositionBoxType = typeof BOX_POSITION
+export type NBoxType = NFullBoxType | NCenterBoxType | NPointBoxType | NPositionBoxType
 export interface NBaseBox {
+  type: NBoxType
   z: number
   strata: WoWAPI.FrameStrata
 }
 export interface NFullBox extends NBaseBox {
-  type: 'full'
+  type: NFullBoxType
 }
 export interface NCenterBox extends NBaseBox {
-  type: 'center'
+  type: NCenterBoxType
   width: number
   height: number
 }
 export interface NPointBox extends NBaseBox {
-  type: 'point'
+  type: NPointBoxType
   width: number
   height: number
   point: Point
 }
 export interface NPositionBox extends NBaseBox {
-  type: 'position'
+  type: NPositionBoxType
   width: number
   height: number
   point: Point
@@ -670,10 +680,6 @@ export interface NDragEventHandler extends NEventHandler {
 export type NBox = NCenterBox | NPointBox | NPositionBox | NFullBox
 export class NElement {
   public primary: NElement
-
-  // FIXME do not track handlers (allow more than one)
-  // public onClick: NFrameOnClick
-  // public onDrag: NFrameOnDrag
 
   constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
     this.id = id
@@ -786,6 +792,13 @@ export class NElement {
     this.background = background
 
     return this
+  }
+
+  // event handlers
+  // FIXME
+  public handlers: [] = []
+
+  public Script (handler: NEventHandler) {
   }
 }
 
