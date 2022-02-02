@@ -6,7 +6,6 @@ interface App {
 
 const app: App = ({} as any)
 
-
 _G['app'] = app
 
 export const Get = () => app.container
