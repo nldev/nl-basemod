@@ -63,7 +63,7 @@ render($ => {
   })
 
   const ad = Frame({
-    id: 'ac',
+    id: 'ad',
     parent: g,
     size: { width: 100, height: 100 },
     bg: {},
