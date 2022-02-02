@@ -24,22 +24,31 @@ class GridItem extends FrameElement<GridItemOptions> {
   protected y: number
 
   init () {
+    console.log('7')
     this.item = this.options.item
+    console.log('8')
     this.index = this.options.index
+    console.log('9')
     this.x = this.options.x
+    console.log('10')
     this.y = this.options.y
-
+    console.log('11')
 
     if (this.strata)
       this.item.ref.SetFrameStrata(this.strata)
+    console.log('12')
 
     if (this.z)
       this.item.ref.SetFrameLevel(this.z)
+    console.log('13')
 
     this.item.parent = this
+    console.log('14')
     this.item.ref.SetPoint('CENTER')
+    console.log('15')
 
     this.ref.SetPoint('TOPLEFT', this.x, this.y)
+    console.log('16')
   }
 }
 
@@ -63,6 +72,7 @@ export class GridElement extends FrameElement<GridOptions> {
     console.log('4')
     this.ref.SetAllPoints(this.parent.inner || this.parent.ref)
     console.log('5')
+    console.log('6')
   }
 
   public Add (item: Element<any, WoWAPI.Frame>) {
