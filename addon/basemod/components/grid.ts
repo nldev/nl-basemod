@@ -29,7 +29,6 @@ class GridItem extends FrameElement<GridItemOptions> {
     this.x = this.options.x
     this.y = this.options.y
 
-
     if (this.strata)
       this.item.ref.SetFrameStrata(this.strata)
 
@@ -54,10 +53,10 @@ export class GridElement extends FrameElement<GridOptions> {
   protected rowHeight: number
 
   init () {
-    console.log(this.parent)
     this.itemsPerRow = this.options.itemsPerRow || 3
     this.rowHeight = this.options.rowHeight || 100
     this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
+    this.ref.SetAllPoints(this.parent.inner || this.parent.ref)
   }
 
   public Add (item: Element<any, WoWAPI.Frame>) {
@@ -71,12 +70,12 @@ export class GridElement extends FrameElement<GridOptions> {
       x: this.x,
       y: this.y,
       z: (this.z || 0) + 1,
-      // allPoints: this.ref,
-      // strata: this.strata,
-      // size: {
-      //   height: this.rowHeight,
-      //   width: this.itemWidth,
-      // },
+      allPoints: this.ref,
+      strata: this.strata,
+      size: {
+        height: this.rowHeight,
+        width: this.itemWidth,
+      },
     })
 
     if (isEndOfRow) {

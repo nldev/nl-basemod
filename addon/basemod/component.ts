@@ -138,8 +138,8 @@ export abstract class Element<
     }
 
     this.setup()
-    this.init()
     this.mount()
+    this.init()
     this.register(children)
   }
 

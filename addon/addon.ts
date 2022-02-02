@@ -38,6 +38,38 @@ render($ => {
     rowHeight: 100,
   })
 
+  const aa = Frame({
+    id: 'aa',
+    parent: g,
+    size: { width: 100, height: 100 },
+    bg: {},
+    color: { red: 1 },
+  })
+
+  const ab = Frame({
+    id: 'ab',
+    parent: g,
+    size: { width: 100, height: 100 },
+    bg: {},
+    color: { red: 1 },
+  })
+
+  const ac = Frame({
+    id: 'ac',
+    parent: g,
+    size: { width: 100, height: 100 },
+    bg: {},
+    color: { red: 1 },
+  })
+
+  const ad = Frame({
+    id: 'ac',
+    parent: g,
+    size: { width: 100, height: 100 },
+    bg: {},
+    color: { red: 1 },
+  })
+
   const test = Frame({
     id: 'anothertestframe',
     parent: g,
@@ -47,6 +79,10 @@ render($ => {
   })
 
   g.Add(test)
+  g.Add(aa)
+  g.Add(ab)
+  g.Add(ac)
+  g.Add(ad)
 
   a.ref.RegisterEvent('CHAT_MSG_SAY')
 
