@@ -36,19 +36,20 @@ class GridItem extends FrameElement<GridItemOptions> {
       this.item.ref.SetFrameLevel(this.z)
 
     this.item.parent = this
-    this.item.ref.SetPoint('CENTER')
+    console.log(this.x, this.y)
 
     this.ref.SetPoint('TOPLEFT', this.x, this.y)
+    this.item.ref.SetPoint('CENTER')
   }
 }
 
 export class GridElement extends FrameElement<GridOptions> {
   protected list: GridItem[] = []
-  protected itemWidth: number
   protected index: number = 0
   protected x: number = 0
   protected y: number = 0
 
+  protected itemWidth: number
   protected itemsPerRow: number
   protected rowHeight: number
 

@@ -6,7 +6,7 @@ import { Grid } from './basemod/components/grid'
 render($ => {
   const a = Frame({
     id: 'a',
-    size: { width: 300, height: 300 },
+    size: { width: 800, height: 800 },
     padding: 50,
     point: 'CENTER',
     bg: {},
