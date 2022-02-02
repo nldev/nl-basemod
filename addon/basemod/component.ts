@@ -99,7 +99,8 @@ export type Point = FullPoint | WoWAPI.Point
 export interface ComponentOptions {
   id: string
   prefix?: string
-  existing?: WoWAPI.Frame
+  frame?: WoWAPI.Frame
+  inner?: WoWAPI.Frame
   parent?: Element<any, any>
 }
 
@@ -130,7 +131,12 @@ export abstract class Element<
       ? Unique(this.options.prefix)
       : null
 
-    this.create()
+    if (this.options.frame) {
+      this.ref = (this.options.frame as any)
+    } else {
+      this.create()
+    }
+
     this.setup()
     this.init()
     this.mount()

@@ -8,7 +8,17 @@ export interface GridOptions extends FrameOptions {
   gridWidth: number
 }
 
+export interface GridItemOptions {
+  child: Element
+  index: number
+  height: number
+  width: number
+  x: number
+  y: number
+}
+
 class GridItem extends FrameElement {
+  protected
   init () {
   }
 }
