@@ -27,7 +27,8 @@ render($ => {
     })
     .Padding(50)
 
-  const b = () => new NElement('b')
+  const b = new NElement('b')
+    .Parent(a)
     .Style({
       bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
       edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
@@ -51,9 +52,6 @@ render($ => {
     .Style({
       red: 1,
     })
-
-console.log(a.ref.GetParent().GetName())
-console.log(a.inner.ref.GetParent().GetName())
 
   // const a = Frame({
   //   id: 'a',
