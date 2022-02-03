@@ -824,8 +824,12 @@ export class NElement {
       let height = box.height
 
       if (box.isPercent) {
-        width = this.inner.ref.GetWidth() * width
-        height = this.inner.ref.GetHeight() * height
+        console.log(this.parent.ref.GetWidth())
+        console.log(this.parent.inner.ref.GetWidth())
+        console.log(this.parent.ref.GetHeight())
+        console.log(this.parent.inner.ref.GetHeight())
+        width = this.parent.ref.GetWidth() * width
+        height = this.parent.ref.GetHeight() * height
       }
 
       this.ref.SetSize(box.width, box.height)

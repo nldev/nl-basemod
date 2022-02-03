@@ -46,8 +46,8 @@ render($ => {
   b.Box({
     type: 'BOX_CENTER',
     isPercent: true,
-    width: 10,
-    height: 10,
+    width: 50,
+    height: 50,
   })
 
   // const a = Frame({
