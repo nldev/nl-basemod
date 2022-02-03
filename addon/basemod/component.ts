@@ -700,7 +700,7 @@ export type NBox =
   | NPositionBox
   | NFullBox
 export class NElement {
-  public primary: NElement
+  public inner: NElement
 
   constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
     this.id = id
@@ -708,7 +708,7 @@ export class NElement {
     if (!ref)
       this.ref = CreateFrame('Frame', id)
 
-    this.primary = this
+    this.inner = this
   }
 
   // children
@@ -739,7 +739,13 @@ export class NElement {
   }
 
   protected attach (child: NElement) {
-    child.Parent(this.primary)
+    child.Parent(this.inner)
+  }
+
+  // inner
+  public Inner (inner: NElement = this.inner) {
+    this.inner.Parent(this.parent)
+    this.inner = inner
   }
 
   // visibility
@@ -817,20 +823,13 @@ export class NElement {
     if (amount === 0)
       return this
 
-    this.primary = new NElement(this.id + '-padding')
+    this.Inner(new NElement(this.id + '-padding')
       .Parent(this)
       .Box({
         type: 'BOX_CENTER',
         width: this.ref.GetWidth() - amount,
         height: this.ref.GetHeight() - amount,
-      })
-      // .Size(this)
-
-    // frame.ref.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
-
-    // this.Inner(frame.ref)
-
-    // this.inner.SetPoint('CENTER')
+      }))
 
     return this
   }
@@ -848,7 +847,6 @@ export class NElement {
 
   // background
   // FIXME
-  // FIXME use presets on container
   protected style: NStyle
 
   public Style (style: NStyle = this.style) {
