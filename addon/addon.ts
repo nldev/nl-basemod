@@ -28,7 +28,6 @@ render($ => {
   })
   a.Padding(20)
   const b = new NElement('b')
-  b.Parent(a)
   b.Style({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
     edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
@@ -43,6 +42,7 @@ render($ => {
     },
     blue: 1,
   })
+  b.Parent(a)
   b.Box({
     type: 'BOX_CENTER',
     width: 300,
