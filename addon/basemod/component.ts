@@ -650,25 +650,25 @@ export interface NBaseBox {
   z?: number
   strata?: WoWAPI.FrameStrata
 }
+export interface NSizableBox extends NBaseBox {
+  width: number
+  height: number
+  isPercent: boolean
+}
+export interface NPointableBox extends NSizableBox {
+  point: Point
+}
 export interface NFullBox extends NBaseBox {
   type: NFullBoxType
 }
-export interface NCenterBox extends NBaseBox {
+export interface NCenterBox extends NSizableBox {
   type: NCenterBoxType
-  width: number
-  height: number
 }
-export interface NPointBox extends NBaseBox {
+export interface NPointBox extends NPointableBox {
   type: NPointBoxType
-  point: Point
-  width: number
-  height: number
 }
-export interface NPositionBox extends NBaseBox {
+export interface NPositionBox extends NPointableBox {
   type: NPositionBoxType
-  point: Point
-  width: number
-  height: number
   x: number
   y: number
 }
@@ -827,20 +827,21 @@ export class NElement {
   }
 
   // padding
-  // FIXME
   protected padding: number
 
   public Padding (amount: number = this.padding) {
     if (amount === 0)
       return this
 
-    this.Inner(new NElement(this.id + '-padding')
-      .Parent(this)
-      .Box({
-        type: 'BOX_CENTER',
-        width: this.ref.GetWidth() - amount,
-        height: this.ref.GetHeight() - amount,
-      }))
+    const inner = new NElement(this.id + '-padding')
+
+    this.Inner(inner)
+
+    inner.Box({
+      type: 'BOX_CENTER',
+      width: this.ref.GetWidth() - amount,
+      height: this.ref.GetHeight() - amount,
+    })
 
     return this
   }
@@ -858,11 +859,24 @@ export class NElement {
   }
 
   // background
-  // FIXME
   protected style: NStyle
 
   public Style (style: NStyle = this.style) {
     this.style = style
+
+    const insets = {
+      top: (this.style.insets && this.style.insets.top) || 0,
+      right: (this.style.insets && this.style.insets.right) || 0,
+      bottom: (this.style.insets && this.style.insets.bottom) || 0,
+      left: (this.style.insets && this.style.insets.left ) || 0,
+    }
+
+    this.ref.SetBackdrop({
+      ...style,
+      insets,
+    })
+
+    this.ref.SetBackdropColor(style.red || 0, style.green || 0, style.blue || 0, style.alpha || 1)
 
     return this
   }
