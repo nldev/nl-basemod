@@ -859,7 +859,7 @@ export class NElement {
       this.inner.ref.SetFrameStrata(box.strata)
     }
 
-    this.Update({ [UPDATE_FLAG_PADDING]: true })
+    this.list.forEach(e => e.Box())
 
     return this
   }
@@ -881,6 +881,8 @@ export class NElement {
       width: this.ref.GetWidth() - amount,
       height: this.ref.GetHeight() - amount,
     })
+
+    this.Update({ [UPDATE_FLAG_BOX]: true })
 
     return this
   }
