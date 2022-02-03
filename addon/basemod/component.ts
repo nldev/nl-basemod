@@ -716,7 +716,7 @@ export class NElement {
   }
 
   // internal
-  protected update (toUpdate?: UpdateFlagMap) {
+  public Update (toUpdate?: UpdateFlagMap) {
     if (toUpdate[UPDATE_FLAG_PARENT])
       this.Parent()
 
@@ -733,7 +733,7 @@ export class NElement {
       this.Visibility()
   }
 
-  protected updateAll (toIgnore?: UpdateFlagMap) {
+  public UpdateAll (toIgnore?: UpdateFlagMap) {
     if (!toIgnore[UPDATE_FLAG_PARENT])
       this.Parent()
 
@@ -761,7 +761,7 @@ export class NElement {
     this.inner.Parent(this)
     this.inner = inner
 
-    this.update({ [UPDATE_FLAG_PARENT]: true, [UPDATE_FLAG_PADDING]: true })
+    this.Update({ [UPDATE_FLAG_PARENT]: true, [UPDATE_FLAG_PADDING]: true })
   }
 
   // visibility
@@ -868,7 +868,7 @@ export class NElement {
       this.inner.ref.SetFrameStrata(box.strata)
     }
 
-    this.update({ [UPDATE_FLAG_PADDING]: true })
+    this.Update({ [UPDATE_FLAG_PADDING]: true })
 
     return this
   }
@@ -903,7 +903,7 @@ export class NElement {
     // FIXME: assign parent
     this.ref.SetParent(parent.ref)
 
-    this.update({ [UPDATE_FLAG_BOX]: true })
+    this.Update({ [UPDATE_FLAG_BOX]: true })
 
     return this
   }
