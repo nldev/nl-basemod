@@ -1,7 +1,7 @@
 export const noop = () => {}
 
-export const isNil = (value: any) =>
-  (typeof value === 'undefined') && (value !== null)
+export const isNil = <T>(value: T) =>
+  (typeof value === 'undefined') || (value !== null)
 
 const names = {}
 

@@ -639,12 +639,10 @@ export interface NStyle {
 export const BOX_FULL = 'BOX_FULL'
 export const BOX_CENTER = 'BOX_CENTER'
 export const BOX_POINT = 'BOX_POINT'
-export const BOX_POSITION = 'BOX_POSITION'
 export type NFullBoxType = typeof BOX_FULL
 export type NCenterBoxType = typeof BOX_CENTER
 export type NPointBoxType = typeof BOX_POINT
-export type NPositionBoxType = typeof BOX_POSITION
-export type NBoxType = NFullBoxType | NCenterBoxType | NPointBoxType | NPositionBoxType
+export type NBoxType = NFullBoxType | NCenterBoxType | NPointBoxType
 export interface NBaseBox {
   type: NBoxType
   z?: number
@@ -655,23 +653,22 @@ export interface NSizableBox extends NBaseBox {
   height: number
   isPercent?: boolean
 }
-export interface NPointableBox extends NSizableBox {
-  point: WoWAPI.Point
-}
 export interface NFullBox extends NBaseBox {
   type: NFullBoxType
 }
 export interface NCenterBox extends NSizableBox {
   type: NCenterBoxType
 }
-export interface NPointBox extends NPointableBox {
+export interface NPointBox extends NSizableBox {
   type: NPointBoxType
+  point: WoWAPI.Point
+  x?: number
+  y?: number
 }
-export interface NPositionBox extends NPointableBox {
-  type: NPositionBoxType
-  x: number
-  y: number
-}
+export type NBox =
+  | NCenterBox
+  | NPointBox
+  | NFullBox
 export interface NEventHandler {
 }
 export interface NClickEventHandler extends NEventHandler {
@@ -694,11 +691,13 @@ export type UpdateFlag =
   | UpdatePaddingFlag
   | UpdateStyleFlag
   | UpdateBoxFlag
-export type NBox =
-  | NCenterBox
-  | NPointBox
-  | NPositionBox
-  | NFullBox
+export interface UpdateFlagMap {
+  [UPDATE_FLAG_PARENT]?: boolean
+  [UPDATE_FLAG_PADDING]?: boolean
+  [UPDATE_FLAG_VISIBILITY]?: boolean
+  [UPDATE_FLAG_STYLE]?: boolean
+  [UPDATE_FLAG_BOX]?: boolean
+}
 export class NElement {
   constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
     this.id = id
@@ -717,22 +716,37 @@ export class NElement {
   }
 
   // internal
-  protected update (toUpdate?: Mapping<UpdateFlag>) {
-    const isUpdateAll = !toUpdate
-
-    if (isUpdateAll || toUpdate[UPDATE_FLAG_PARENT])
+  protected update (toUpdate?: UpdateFlagMap) {
+    if (toUpdate[UPDATE_FLAG_PARENT])
       this.Parent()
 
-    if (isUpdateAll || toUpdate[UPDATE_FLAG_BOX])
+    if (toUpdate[UPDATE_FLAG_BOX])
       this.Box()
 
-    if (isUpdateAll || toUpdate[UPDATE_FLAG_PADDING])
+    if (toUpdate[UPDATE_FLAG_PADDING])
       this.Padding()
 
-    if (isUpdateAll || toUpdate[UPDATE_FLAG_STYLE])
+    if (toUpdate[UPDATE_FLAG_STYLE])
       this.Style()
 
-    if (isUpdateAll || toUpdate[UPDATE_FLAG_VISIBILITY])
+    if (toUpdate[UPDATE_FLAG_VISIBILITY])
+      this.Visibility()
+  }
+
+  protected updateAll (toIgnore?: UpdateFlagMap) {
+    if (!toIgnore[UPDATE_FLAG_PARENT])
+      this.Parent()
+
+    if (!toIgnore[UPDATE_FLAG_BOX])
+      this.Box()
+
+    if (!toIgnore[UPDATE_FLAG_PADDING])
+      this.Padding()
+
+    if (!toIgnore[UPDATE_FLAG_STYLE])
+      this.Style()
+
+    if (!toIgnore[UPDATE_FLAG_VISIBILITY])
       this.Visibility()
   }
 
@@ -746,6 +760,8 @@ export class NElement {
   public Inner (inner: NElement = this.inner) {
     this.inner.Parent(this)
     this.inner = inner
+
+    this.update({ [UPDATE_FLAG_PARENT]: true, [UPDATE_FLAG_PADDING]: true })
   }
 
   // visibility
@@ -801,10 +817,11 @@ export class NElement {
   }
 
   // box
-  // FIXME
   protected box: NBox
 
   public Box (box: NBox = this.box) {
+    this.ref.ClearAllPoints()
+
     if (box.type === BOX_CENTER) {
       this.ref.SetPoint('CENTER')
 
@@ -836,23 +853,17 @@ export class NElement {
       this.ref.SetPoint(box.point)
     }
 
-    if (box.type === BOX_POSITION) {
-      let width = box.width
-      let height = box.height
-
-      if (box.isPercent) {
-        width = this.inner.ref.GetWidth() * width
-        height = this.inner.ref.GetHeight() * height
-      }
-
-      this.ref.SetSize(width, height)
-      this.ref.SetPoint(box.point, box.x, box.y)
+    if (box.z) {
+      this.ref.SetFrameLevel(box.z)
+      this.inner.ref.SetFrameLevel(box.z)
     }
 
-    this.ref.SetFrameLevel(box.z)
-    this.inner.ref.SetFrameLevel(box.z)
-    this.ref.SetFrameStrata(box.strata)
-    this.inner.ref.SetFrameStrata(box.strata)
+    if (box.strata) {
+      this.ref.SetFrameStrata(box.strata)
+      this.inner.ref.SetFrameStrata(box.strata)
+    }
+
+    this.update({ [UPDATE_FLAG_PADDING]: true })
 
     return this
   }
@@ -875,6 +886,8 @@ export class NElement {
       height: this.ref.GetHeight() - amount,
     })
 
+    this.update({ [UPDATE_FLAG_STYLE]: true })
+
     return this
   }
 
@@ -886,6 +899,8 @@ export class NElement {
 
     // FIXME: assign parent
     this.ref.SetParent(parent.ref)
+
+    this.update({ [UPDATE_FLAG_BOX]: true })
 
     return this
   }
