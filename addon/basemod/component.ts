@@ -757,8 +757,9 @@ export class NElement {
   public inner: NElement
 
   public Inner (inner: NElement = this.inner) {
-    this.inner.Parent(this)
+    console.log(inner.ref.GetName())
     this.inner = inner
+    this.inner.ref.SetParent(this.ref)
   }
 
   // visibility
@@ -879,6 +880,7 @@ export class NElement {
 
     const id = this.id + '-padding'
     const inner = (this.inner.id === id) ? this.inner : new NElement(id)
+    console.log(id)
 
     this.Inner(inner)
 
