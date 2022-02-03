@@ -757,8 +757,11 @@ export class NElement {
   public inner: NElement
 
   public Inner (inner: NElement = this.inner) {
-    this.inner.ref.SetParent(this.ref)
+    inner.ref.SetParent(this.ref)
+
     this.inner = inner
+
+    return this
   }
 
   // visibility
@@ -867,6 +870,8 @@ export class NElement {
 
     this.list.forEach(e => e.Box())
 
+    this.box = box
+
     return this
   }
 
@@ -887,6 +892,8 @@ export class NElement {
       width: this.ref.GetWidth() - amount,
       height: this.ref.GetHeight() - amount,
     })
+
+    this.padding = amount
 
     this.Update({ [UPDATE_FLAG_BOX]: true })
 
