@@ -1,4 +1,4 @@
-import { Unique } from './utils'
+import { isNil, Unique } from './utils'
 import { Get } from './app'
 import { Mapping } from './types'
 
@@ -653,10 +653,10 @@ export interface NBaseBox {
 export interface NSizableBox extends NBaseBox {
   width: number
   height: number
-  isPercent: boolean
+  isPercent?: boolean
 }
 export interface NPointableBox extends NSizableBox {
-  point: Point
+  point: WoWAPI.Point
 }
 export interface NFullBox extends NBaseBox {
   type: NFullBoxType
@@ -806,34 +806,66 @@ export class NElement {
 
   public Box (box: NBox = this.box) {
     if (box.type === BOX_CENTER) {
+      this.ref.SetPoint('CENTER')
 
-      return this
+      let width = box.width
+      let height = box.height
+
+      if (box.isPercent) {
+        width = this.inner.ref.GetWidth() * width
+        height = this.inner.ref.GetHeight() * height
+      }
+
+      this.ref.SetSize(box.width, box.height)
     }
 
     if (box.type === BOX_FULL) {
-
-      return this
+      this.ref.SetAllPoints(this.parent.inner.ref)
     }
 
     if (box.type === BOX_POINT) {
+      let width = box.width
+      let height = box.height
 
-      return this
+      if (box.isPercent) {
+        width = this.inner.ref.GetWidth() * width
+        height = this.inner.ref.GetHeight() * height
+      }
+
+      this.ref.SetSize(width, height)
+      this.ref.SetPoint(box.point)
     }
 
     if (box.type === BOX_POSITION) {
+      let width = box.width
+      let height = box.height
 
-      return this
+      if (box.isPercent) {
+        width = this.inner.ref.GetWidth() * width
+        height = this.inner.ref.GetHeight() * height
+      }
+
+      this.ref.SetSize(width, height)
+      this.ref.SetPoint(box.point, box.x, box.y)
     }
+
+    this.ref.SetFrameLevel(box.z)
+    this.inner.ref.SetFrameLevel(box.z)
+    this.ref.SetFrameStrata(box.strata)
+    this.inner.ref.SetFrameStrata(box.strata)
+
+    return this
   }
 
   // padding
   protected padding: number
 
   public Padding (amount: number = this.padding) {
-    if (amount === 0)
+    if (isNil(amount))
       return this
 
-    const inner = new NElement(this.id + '-padding')
+    const id = this.id + '-padding'
+    const inner = this.inner.id === id ? this.inner : new NElement(id)
 
     this.Inner(inner)
 

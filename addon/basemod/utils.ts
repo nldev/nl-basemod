@@ -1,5 +1,8 @@
 export const noop = () => {}
 
+export const isNil = (value: any) =>
+  (typeof value === 'undefined') && (value !== null)
+
 const names = {}
 
 export function Unique (id: string) {
