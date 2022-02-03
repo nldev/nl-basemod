@@ -49,6 +49,9 @@ render($ => {
     width: 0.5,
     height: 0.5,
   })
+  b.Style({
+    red: 1,
+  })
 
   // const a = Frame({
   //   id: 'a',

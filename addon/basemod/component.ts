@@ -903,24 +903,27 @@ export class NElement {
   }
 
   // background
-  protected style: NStyle = {}
+  protected style: NStyle = {
+    insets: {}
+  }
 
   public Style (style: NStyle = this.style) {
-    this.style = style
-
     const insets = {
-      top: (this.style.insets && this.style.insets.top) || 0,
-      right: (this.style.insets && this.style.insets.right) || 0,
-      bottom: (this.style.insets && this.style.insets.bottom) || 0,
-      left: (this.style.insets && this.style.insets.left ) || 0,
+      top: (style.insets && style.insets.top) || this.style.insets.top || 0,
+      right: (style.insets && style.insets.right) || this.style.insets.right || 0,
+      bottom: (style.insets && style.insets.bottom) || this.style.insets.bottom || 0,
+      left: (style.insets && style.insets.left) || this.style.insets.left || 0,
     }
 
     this.ref.SetBackdrop({
+      ...this.style,
       ...style,
       insets,
     })
 
-    this.ref.SetBackdropColor(style.red || 0, style.green || 0, style.blue || 0, style.alpha || 1)
+    this.ref.SetBackdropColor(style.red || this.style.red || 0, style.green || this.style.green || 0, style.blue || this.style.blue || 0, style.alpha || this.style.alpha || 1)
+
+    this.style = style
 
     return this
   }
