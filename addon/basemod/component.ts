@@ -618,7 +618,7 @@ export interface NFrameOnDrag {
   startHandler?: NFrameDragStartHandler
   stopHandler?: NFrameDragStopHandler
 }
-export interface NBackground {
+export interface NStyle {
   preset?: string
   bgFile?: string
   edgeFile?: string
@@ -681,18 +681,18 @@ export interface NDragEventHandler extends NEventHandler {
 export const UPDATE_FLAG_PARENT = 'UPDATE_FLAG_PARENT'
 export const UPDATE_FLAG_VISIBILITY = 'UPDATE_FLAG_VISIBILITY'
 export const UPDATE_FLAG_PADDING = 'UPDATE_FLAG_PADDING'
-export const UPDATE_FLAG_BACKGROUND = 'UPDATE_FLAG_BACKGROUND'
+export const UPDATE_FLAG_STYLE = 'UPDATE_FLAG_STYLE'
 export const UPDATE_FLAG_BOX = 'UPDATE_FLAG_BOX'
 export type UpdateParentFlag = typeof UPDATE_FLAG_PARENT
 export type UpdateVisibilityFlag = typeof UPDATE_FLAG_VISIBILITY
 export type UpdatePaddingFlag = typeof UPDATE_FLAG_PADDING
-export type UpdateBackgroundFlag = typeof UPDATE_FLAG_BACKGROUND
+export type UpdateStyleFlag = typeof UPDATE_FLAG_STYLE
 export type UpdateBoxFlag = typeof UPDATE_FLAG_BOX
 export type UpdateFlag =
   | UpdateParentFlag
   | UpdateVisibilityFlag
   | UpdatePaddingFlag
-  | UpdateBackgroundFlag
+  | UpdateStyleFlag
   | UpdateBoxFlag
 export type NBox =
   | NCenterBox
@@ -731,8 +731,8 @@ export class NElement {
     if (isUpdateAll || toUpdate[UPDATE_FLAG_PADDING])
       this.Padding()
 
-    if (isUpdateAll || toUpdate[UPDATE_FLAG_BACKGROUND])
-      this.Background()
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_STYLE])
+      this.Style()
 
     if (isUpdateAll || toUpdate[UPDATE_FLAG_VISIBILITY])
       this.Visibility()
@@ -846,13 +846,13 @@ export class NElement {
     return this
   }
 
-  // backdrop
+  // background
   // FIXME
   // FIXME use presets on container
-  protected background: NBackground
+  protected style: NStyle
 
-  public Background (background: NBackground = this.background) {
-    this.background = background
+  public Style (style: NStyle = this.style) {
+    this.style = style
 
     return this
   }
