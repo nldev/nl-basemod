@@ -702,7 +702,7 @@ export type NBox =
 export class NElement {
   public primary: NElement
 
-  constructor (public readonly id: string, protected readonly ref?: WoWAPI.Frame) {
+  constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
     this.id = id
 
     if (!ref)
@@ -788,7 +788,25 @@ export class NElement {
   protected box: NBox
 
   public Box (box: NBox = this.box) {
-    return this
+    if (box.type === BOX_CENTER) {
+
+      return this
+    }
+
+    if (box.type === BOX_FULL) {
+
+      return this
+    }
+
+    if (box.type === BOX_POINT) {
+
+      return this
+    }
+
+    if (box.type === BOX_POSITION) {
+
+      return this
+    }
   }
 
   // padding
@@ -830,6 +848,7 @@ export class NElement {
 
   // backdrop
   // FIXME
+  // FIXME use presets on container
   protected background: NBackground
 
   public Background (background: NBackground = this.background) {
