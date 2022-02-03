@@ -705,7 +705,11 @@ export class NElement {
     if (!ref)
       this.ref = CreateFrame('Frame', id)
 
+    if (this.id === 'root')
+      this.Parent()
+
     this.inner = this
+
   }
 
   // children
@@ -892,7 +896,12 @@ export class NElement {
   // parent
   protected parent: NElement = null
 
-  public Parent (parent: NElement = this.parent) {
+  public Parent (parent: NElement = this.parent, ref: WoWAPI.Frame = parent.ref) {
+    if (this.id === 'root') {
+      parent = this
+      ref = ref || UIParent
+    }
+
     this.parent = parent
 
     this.ref.SetParent(parent.ref)
