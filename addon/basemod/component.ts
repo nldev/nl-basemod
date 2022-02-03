@@ -660,15 +660,15 @@ export interface NCenterBox extends NBaseBox {
 }
 export interface NPointBox extends NBaseBox {
   type: NPointBoxType
+  point: Point
   width: number
   height: number
-  point: Point
 }
 export interface NPositionBox extends NBaseBox {
   type: NPositionBoxType
+  point: Point
   width: number
   height: number
-  point: Point
   x: number
   y: number
 }
@@ -728,14 +728,14 @@ export class NElement {
     if (isUpdateAll || toUpdate[UPDATE_FLAG_BOX])
       this.Box()
 
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_PADDING])
+      this.Padding()
+
     if (isUpdateAll || toUpdate[UPDATE_FLAG_BACKGROUND])
       this.Background()
 
     if (isUpdateAll || toUpdate[UPDATE_FLAG_VISIBILITY])
       this.Visibility()
-
-    if (isUpdateAll || toUpdate[UPDATE_FLAG_PADDING])
-      this.Padding()
   }
 
   protected attach (child: NElement) {
@@ -799,11 +799,16 @@ export class NElement {
     if (amount === 0)
       return this
 
-    const frame = new NElement(this.id + '-padding')
+    this.primary = new NElement(this.id + '-padding')
       .Parent(this)
+      .Box({
+        type: 'BOX_CENTER',
+        width: this.ref.GetWidth() - amount,
+        height: this.ref.GetHeight() - amount,
+      })
       // .Size(this)
 
-    frame.ref.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
+    // frame.ref.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
 
     // this.Inner(frame.ref)
 
