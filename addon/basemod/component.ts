@@ -678,7 +678,27 @@ export interface NClickEventHandler extends NEventHandler {
 }
 export interface NDragEventHandler extends NEventHandler {
 }
-export type NBox = NCenterBox | NPointBox | NPositionBox | NFullBox
+export const UPDATE_FLAG_PARENT = 'UPDATE_FLAG_PARENT'
+export const UPDATE_FLAG_VISIBILITY = 'UPDATE_FLAG_VISIBILITY'
+export const UPDATE_FLAG_PADDING = 'UPDATE_FLAG_PADDING'
+export const UPDATE_FLAG_BACKGROUND = 'UPDATE_FLAG_BACKGROUND'
+export const UPDATE_FLAG_BOX = 'UPDATE_FLAG_BOX'
+export type UpdateParentFlag = typeof UPDATE_FLAG_PARENT
+export type UpdateVisibilityFlag = typeof UPDATE_FLAG_VISIBILITY
+export type UpdatePaddingFlag = typeof UPDATE_FLAG_PADDING
+export type UpdateBackgroundFlag = typeof UPDATE_FLAG_BACKGROUND
+export type UpdateBoxFlag = typeof UPDATE_FLAG_BOX
+export type UpdateFlag =
+  | UpdateParentFlag
+  | UpdateVisibilityFlag
+  | UpdatePaddingFlag
+  | UpdateBackgroundFlag
+  | UpdateBoxFlag
+export type NBox =
+  | NCenterBox
+  | NPointBox
+  | NPositionBox
+  | NFullBox
 export class NElement {
   public primary: NElement
 
@@ -699,19 +719,23 @@ export class NElement {
   }
 
   // internal
-  protected update (toUpdate?: Mapping<boolean>) {
+  protected update (toUpdate?: Mapping<UpdateFlag>) {
     const isUpdateAll = !toUpdate
 
-    if (isUpdateAll || toUpdate['parent'])
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_PARENT])
       this.Parent()
-    if (isUpdateAll || toUpdate['visibility'])
-      this.Visibility()
-    if (isUpdateAll || toUpdate['padding'])
-      this.Padding()
-    if (isUpdateAll || toUpdate['background'])
-      this.Background()
-    if (isUpdateAll || toUpdate['box'])
+
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_BOX])
       this.Box()
+
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_BACKGROUND])
+      this.Background()
+
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_VISIBILITY])
+      this.Visibility()
+
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_PADDING])
+      this.Padding()
   }
 
   protected attach (child: NElement) {
