@@ -716,38 +716,29 @@ export class NElement {
   }
 
   // internal
-  public Update (toUpdate?: UpdateFlagMap) {
-    if (toUpdate[UPDATE_FLAG_PARENT])
+  public Update (toUpdate?: UpdateFlagMap, recurse?: boolean) {
+    let isUpdateAll = false
+
+    if (!toUpdate)
+      isUpdateAll = true
+
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_PARENT])
       this.Parent()
 
-    if (toUpdate[UPDATE_FLAG_BOX])
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_BOX])
       this.Box()
 
-    if (toUpdate[UPDATE_FLAG_PADDING])
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_PADDING])
       this.Padding()
 
-    if (toUpdate[UPDATE_FLAG_STYLE])
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_STYLE])
       this.Style()
 
-    if (toUpdate[UPDATE_FLAG_VISIBILITY])
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_VISIBILITY])
       this.Visibility()
-  }
 
-  public UpdateAll (toIgnore?: UpdateFlagMap) {
-    if (!toIgnore[UPDATE_FLAG_PARENT])
-      this.Parent()
-
-    if (!toIgnore[UPDATE_FLAG_BOX])
-      this.Box()
-
-    if (!toIgnore[UPDATE_FLAG_PADDING])
-      this.Padding()
-
-    if (!toIgnore[UPDATE_FLAG_STYLE])
-      this.Style()
-
-    if (!toIgnore[UPDATE_FLAG_VISIBILITY])
-      this.Visibility()
+    if (recurse)
+      this.list.forEach(e => e.Update(toUpdate, true))
   }
 
   protected attach (child: NElement) {
@@ -900,7 +891,6 @@ export class NElement {
   public Parent (parent: NElement = this.parent) {
     this.parent = parent
 
-    // FIXME: assign parent
     this.ref.SetParent(parent.ref)
 
     this.Update({ [UPDATE_FLAG_BOX]: true })
