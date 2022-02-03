@@ -700,6 +700,7 @@ export interface UpdateFlagMap {
 }
 export class NElement {
   constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
+    this.inner = this
     this.id = id
 
     if (!ref)
@@ -707,9 +708,6 @@ export class NElement {
 
     if (this.id === 'root')
       this.Parent()
-
-    this.inner = this
-
   }
 
   // children
@@ -900,7 +898,7 @@ export class NElement {
   // parent
   protected parent: NElement = null
 
-  public Parent (parent: NElement = this.parent, ref: WoWAPI.Frame) {
+  public Parent (parent: NElement = this.parent, ref?: WoWAPI.Frame) {
     ref = parent ? parent.inner.ref : ref
     if (this.id === 'root') {
       parent = null
