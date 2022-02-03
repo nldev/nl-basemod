@@ -700,8 +700,6 @@ export type NBox =
   | NPositionBox
   | NFullBox
 export class NElement {
-  public inner: NElement
-
   constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
     this.id = id
 
@@ -743,6 +741,8 @@ export class NElement {
   }
 
   // inner
+  public inner: NElement
+
   public Inner (inner: NElement = this.inner) {
     this.inner.Parent(this.parent)
     this.inner = inner
