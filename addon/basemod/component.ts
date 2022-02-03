@@ -647,8 +647,8 @@ export type NPositionBoxType = typeof BOX_POSITION
 export type NBoxType = NFullBoxType | NCenterBoxType | NPointBoxType | NPositionBoxType
 export interface NBaseBox {
   type: NBoxType
-  z: number
-  strata: WoWAPI.FrameStrata
+  z?: number
+  strata?: WoWAPI.FrameStrata
 }
 export interface NFullBox extends NBaseBox {
   type: NFullBoxType
@@ -714,7 +714,7 @@ export class NElement {
   // children
   protected children: Mapping<NElement> = {}
 
-  public get childList () {
+  public get list () {
     return Object.keys(this.children).map(key => this.children[key])
   }
 
@@ -743,7 +743,7 @@ export class NElement {
   }
 
   // visibility
-  public isVisible: boolean
+  protected isVisible: boolean
 
   public Visibility (bool: boolean = this.isVisible, force?: boolean) {
     if (bool) {
@@ -785,7 +785,7 @@ export class NElement {
 
   // box
   // FIXME
-  public box: NBox
+  protected box: NBox
 
   public Box (box: NBox = this.box) {
     return this
@@ -793,7 +793,7 @@ export class NElement {
 
   // padding
   // FIXME
-  public padding: number
+  protected padding: number
 
   public Padding (amount: number = this.padding) {
     if (amount === 0)
@@ -818,7 +818,7 @@ export class NElement {
   }
 
   // parent
-  public parent: NElement
+  protected parent: NElement
 
   public Parent (parent: NElement = this.parent) {
     this.parent = parent
@@ -830,7 +830,7 @@ export class NElement {
 
   // backdrop
   // FIXME
-  public background: NBackground
+  protected background: NBackground
 
   public Background (background: NBackground = this.background) {
     this.background = background
@@ -840,7 +840,7 @@ export class NElement {
 
   // event handlers
   // FIXME
-  public handlers: [] = []
+  protected handlers: [] = []
 
   public Script (handler: NEventHandler) {
     return this
