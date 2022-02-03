@@ -896,13 +896,13 @@ export class NElement {
 
   public Parent (parent: NElement = this.parent, ref: WoWAPI.Frame = parent.ref) {
     if (this.id === 'root') {
-      parent = null
+      parent = this
       ref = ref || UIParent
     }
 
     this.parent = parent
 
-    this.ref.SetParent(parent.ref)
+    this.ref.SetParent(ref)
 
     this.Update({ [UPDATE_FLAG_BOX]: true })
 

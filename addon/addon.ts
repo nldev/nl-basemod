@@ -6,49 +6,52 @@ import { NElement } from './basemod/component'
 // import { Mapping } from './basemod/types'
 
 render($ => {
-  const a = new NElement('a')
-  a.Style({
-    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    tile: true,
-    tileSize: 16,
-    edgeSize: 16,
-    insets: {
-      left: 4,
-      right: 4,
-      top: 4,
-      bottom: 4,
-    },
-  })
-  a.Box({
-    type: 'BOX_FULL',
-  })
-  a.Padding(20)
+  const a = new NElement('root')
+    .Style({
+      bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+      edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+      tile: true,
+      tileSize: 16,
+      edgeSize: 16,
+      insets: {
+        left: 4,
+        right: 4,
+        top: 4,
+        bottom: 4,
+      },
+    })
+    .Box({
+      type: 'BOX_CENTER',
+      width: 500,
+      height: 500,
+    })
+    .Padding(20)
+
   const b = new NElement('b')
-  b.Style({
-    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    tile: true,
-    tileSize: 16,
-    edgeSize: 16,
-    insets: {
-      left: 4,
-      right: 4,
-      top: 4,
-      bottom: 4,
-    },
-    blue: 1,
-  })
-  b.Parent(a)
-  b.Box({
-    type: 'BOX_CENTER',
-    isPercent: true,
-    width: 0.5,
-    height: 0.5,
-  })
-  b.Style({
-    red: 1,
-  })
+    .Style({
+      bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+      edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+      tile: true,
+      tileSize: 16,
+      edgeSize: 16,
+      insets: {
+        left: 4,
+        right: 4,
+        top: 4,
+        bottom: 4,
+      },
+      blue: 1,
+    })
+    .Parent(a)
+    .Box({
+      type: 'BOX_CENTER',
+      isPercent: true,
+      width: 0.5,
+      height: 0.5,
+    })
+    .Style({
+      red: 1,
+    })
 
   // const a = Frame({
   //   id: 'a',
