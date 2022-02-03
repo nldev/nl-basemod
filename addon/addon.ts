@@ -45,8 +45,9 @@ render($ => {
   b.Parent(a)
   b.Box({
     type: 'BOX_CENTER',
-    width: 300,
-    height: 300,
+    isPercent: true,
+    width: 10,
+    height: 10,
   })
 
   // const a = Frame({
