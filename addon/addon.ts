@@ -6,7 +6,7 @@ import { NElement } from './basemod/component'
 // import { Mapping } from './basemod/types'
 
 render($ => {
-  const a = new NElement('a')
+  const a = new NElement('root')
   a.ref.SetParent(UIParent)
   a.Style({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
