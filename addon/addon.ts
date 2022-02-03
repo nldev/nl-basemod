@@ -28,13 +28,13 @@ render($ => {
     .Padding(200)
 
   const b = new NElement('b')
-    .Parent(a)
     .Box({
       type: 'BOX_CENTER',
       isPercent: true,
       width: 0.5,
       height: 0.5,
     })
+    .Parent(a)
     .Style({
       bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
       edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
