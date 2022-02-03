@@ -699,16 +699,18 @@ export class NElement {
   }
 
   // internal
-  protected update (toUpdate: Mapping<boolean>) {
-    if (toUpdate['parent'])
+  protected update (toUpdate?: Mapping<boolean>) {
+    const isUpdateAll = !toUpdate
+
+    if (isUpdateAll || toUpdate['parent'])
       this.Parent()
-    if (toUpdate['visibility'])
+    if (isUpdateAll || toUpdate['visibility'])
       this.Visibility()
-    if (toUpdate['padding'])
+    if (isUpdateAll || toUpdate['padding'])
       this.Padding()
-    if (toUpdate['background'])
+    if (isUpdateAll || toUpdate['background'])
       this.Background()
-    if (toUpdate['box'])
+    if (isUpdateAll || toUpdate['box'])
       this.Box()
   }
 
