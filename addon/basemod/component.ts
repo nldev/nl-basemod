@@ -938,7 +938,7 @@ export class NElement {
       left: (style.insets && style.insets.left) || this.style.insets.left || 0,
     }
 
-    this.ref.SetBackdrop({
+    style = ({
       ...this.style,
       ...style,
       insets,
