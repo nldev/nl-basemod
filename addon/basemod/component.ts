@@ -886,8 +886,6 @@ export class NElement {
       height: this.ref.GetHeight() - amount,
     })
 
-    this.update({ [UPDATE_FLAG_STYLE]: true })
-
     return this
   }
 

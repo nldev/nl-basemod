@@ -26,6 +26,7 @@ render($ => {
     width: 500,
     height: 500,
   })
+  a.Padding(20)
   // const a = Frame({
   //   id: 'a',
   //   size: { width: 600, height: 600 },
