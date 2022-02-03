@@ -619,16 +619,17 @@ export interface NFrameOnDrag {
   stopHandler?: NFrameDragStopHandler
 }
 export interface NBackground {
-  bgFile: string
-  edgeFile: string
-  tile: boolean
-  tileSize: number
-  edgeSize: number
-  insets: {
-    left: number
-    right: number
-    top: number
-    bottom: number
+  preset?: string
+  bgFile?: string
+  edgeFile?: string
+  tile?: boolean
+  tileSize?: number
+  edgeSize?: number
+  insets?: {
+    left?: number
+    right?: number
+    top?: number
+    bottom?: number
   },
   red?: number
   green?: number
@@ -681,7 +682,7 @@ export type NBox = NCenterBox | NPointBox | NPositionBox | NFullBox
 export class NElement {
   public primary: NElement
 
-  constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
+  constructor (public readonly id: string, protected readonly ref?: WoWAPI.Frame) {
     this.id = id
 
     if (!ref)
@@ -691,16 +692,24 @@ export class NElement {
   }
 
   // children
-  public children: Mapping<NElement> = {}
+  protected children: Mapping<NElement> = {}
 
-  public get list () {
+  public get childList () {
     return Object.keys(this.children).map(key => this.children[key])
   }
 
   // internal
-  protected Update () {
-    this.Parent()
-    this.Visibility()
+  protected Update (toUpdate: Mapping<boolean>) {
+    if (toUpdate['parent'])
+      this.Parent()
+    if (toUpdate['visibility'])
+      this.Visibility()
+    if (toUpdate['padding'])
+      this.Padding()
+    if (toUpdate['background'])
+      this.Background()
+    if (toUpdate['box'])
+      this.Box()
   }
 
   protected Attach (child: NElement) {
@@ -756,7 +765,7 @@ export class NElement {
   // FIXME
   public padding: number
 
-  public Padding (amount: number) {
+  public Padding (amount: number = this.padding) {
     if (amount === 0)
       return this
 
