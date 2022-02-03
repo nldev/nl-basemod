@@ -817,7 +817,11 @@ export class NElement {
   }
 
   // box
-  protected box: NBox
+  protected box: NBox = {
+    type: 'BOX_CENTER',
+    width: 0,
+    height: 0,
+  }
 
   public Box (box: NBox = this.box) {
     this.ref.ClearAllPoints()
@@ -837,7 +841,8 @@ export class NElement {
     }
 
     if (box.type === BOX_FULL) {
-      this.ref.SetAllPoints(this.parent.inner.ref)
+      const mount = this.parent ? this.parent.inner.ref : UIParent
+      this.ref.SetAllPoints(mount)
     }
 
     if (box.type === BOX_POINT) {
@@ -869,7 +874,7 @@ export class NElement {
   }
 
   // padding
-  protected padding: number
+  protected padding: number = null
 
   public Padding (amount: number = this.padding) {
     if (isNil(amount))
@@ -890,7 +895,7 @@ export class NElement {
   }
 
   // parent
-  protected parent: NElement
+  protected parent: NElement = null
 
   public Parent (parent: NElement = this.parent) {
     this.parent = parent
@@ -904,7 +909,7 @@ export class NElement {
   }
 
   // background
-  protected style: NStyle
+  protected style: NStyle = {}
 
   public Style (style: NStyle = this.style) {
     this.style = style
