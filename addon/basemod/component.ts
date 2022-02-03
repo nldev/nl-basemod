@@ -751,6 +751,8 @@ export class NElement {
     } else {
       this.Hide(force)
     }
+
+    return this
   }
 
   public Toggle (force?: boolean) {
@@ -759,6 +761,8 @@ export class NElement {
     } else {
       this.Show(force)
     }
+
+    return this
   }
 
   public Show (force?: boolean) {
@@ -834,6 +838,7 @@ export class NElement {
   public handlers: [] = []
 
   public Script (handler: NEventHandler) {
+    return this
   }
 }
 
