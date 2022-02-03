@@ -7,7 +7,6 @@ import { NElement } from './basemod/component'
 
 render($ => {
   const a = new NElement('a')
-  a.ref.SetParent(UIParent)
   a.Style({
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
     edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
@@ -22,9 +21,7 @@ render($ => {
     },
   })
   a.Box({
-    type: 'BOX_CENTER',
-    width: 500,
-    height: 500,
+    type: 'BOX_FULL',
   })
   a.Padding(20)
   const b = new NElement('b')
