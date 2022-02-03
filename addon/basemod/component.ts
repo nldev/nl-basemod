@@ -878,7 +878,7 @@ export class NElement {
       return this
 
     const id = this.id + '-padding'
-    const inner = this.inner.id === id ? this.inner : new NElement(id)
+    const inner = (this.inner.id === id) ? this.inner : new NElement(id)
 
     this.Inner(inner)
 

@@ -25,7 +25,7 @@ render($ => {
       width: 500,
       height: 500,
     })
-    .Padding(20)
+    .Padding(50)
 
   const b = new NElement('b')
     .Style({
@@ -52,6 +52,9 @@ render($ => {
     .Style({
       red: 1,
     })
+
+  const v = b.ref.GetParent().GetName()
+  console.log(v)
 
   // const a = Frame({
   //   id: 'a',
