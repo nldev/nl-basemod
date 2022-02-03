@@ -907,7 +907,10 @@ export class NElement {
     insets: {}
   }
 
-  public Style (style: NStyle = this.style) {
+  public Style (style: NStyle = this.style, reset?: boolean) {
+    if (reset)
+      this.style = { insets: {} }
+
     const insets = {
       top: (style.insets && style.insets.top) || this.style.insets.top || 0,
       right: (style.insets && style.insets.right) || this.style.insets.right || 0,
