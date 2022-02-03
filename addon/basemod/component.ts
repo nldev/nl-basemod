@@ -699,7 +699,7 @@ export class NElement {
   }
 
   // internal
-  protected Update (toUpdate: Mapping<boolean>) {
+  protected update (toUpdate: Mapping<boolean>) {
     if (toUpdate['parent'])
       this.Parent()
     if (toUpdate['visibility'])
@@ -712,7 +712,7 @@ export class NElement {
       this.Box()
   }
 
-  protected Attach (child: NElement) {
+  protected attach (child: NElement) {
     child.Parent(this.primary)
   }
 
