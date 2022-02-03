@@ -896,7 +896,7 @@ export class NElement {
 
   public Parent (parent: NElement = this.parent, ref: WoWAPI.Frame = parent.ref) {
     if (this.id === 'root') {
-      parent = this
+      parent = null
       ref = ref || UIParent
     }
 
