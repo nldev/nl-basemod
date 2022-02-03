@@ -44,10 +44,10 @@ render($ => {
     })
     .Parent(a)
     .Box({
-      type: 'BOX_CENTER',
-      isPercent: true,
-      width: 0.5,
-      height: 0.5,
+      type: 'BOX_FULL',
+      // isPercent: true,
+      // width: 0.5,
+      // height: 0.5,
     })
     .Style({
       red: 1,

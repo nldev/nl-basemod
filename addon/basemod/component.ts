@@ -759,8 +759,6 @@ export class NElement {
   public Inner (inner: NElement = this.inner) {
     this.inner.Parent(this)
     this.inner = inner
-
-    this.Update({ [UPDATE_FLAG_PARENT]: true, [UPDATE_FLAG_PADDING]: true })
   }
 
   // visibility
