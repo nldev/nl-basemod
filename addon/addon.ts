@@ -7,6 +7,12 @@ import { NElement } from './basemod/component'
 
 render($ => {
   const a = new NElement('root')
+    .Padding(200)
+    .Box({
+      type: 'BOX_CENTER',
+      width: 500,
+      height: 500,
+    })
     .Style({
       bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
       edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
@@ -20,15 +26,8 @@ render($ => {
         bottom: 4,
       },
     })
-    .Box({
-      type: 'BOX_CENTER',
-      width: 500,
-      height: 500,
-    })
-    .Padding(50)
 
   const b = new NElement('b')
-    .Parent(a)
     .Style({
       bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
       edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
@@ -43,14 +42,15 @@ render($ => {
       },
       blue: 1,
     })
+    .Style({
+      red: 1,
+    })
+    .Parent(a)
     .Box({
       type: 'BOX_FULL',
       // isPercent: true,
       // width: 0.5,
       // height: 0.5,
-    })
-    .Style({
-      red: 1,
     })
 
   // const a = Frame({
