@@ -713,7 +713,7 @@ export class NElement {
   }
 
   // children
-  protected children: Mapping<NElement> = {}
+  public children: Mapping<NElement> = {}
 
   public get list () {
     return Object.keys(this.children).map(key => this.children[key])
@@ -747,6 +747,12 @@ export class NElement {
 
   protected attach (child: NElement) {
     child.Parent(this.inner)
+  }
+
+  protected get parentRef () {
+    return this.parent
+      ? this.parent.inner.ref
+      : UIParent
   }
 
   // inner
@@ -828,15 +834,15 @@ export class NElement {
       let height = box.height
 
       if (box.isPercent) {
-        width = this.parent.inner.ref.GetWidth() * width
-        height = this.parent.inner.ref.GetHeight() * height
+        width = this.parentRef.GetWidth() * width
+        height = this.parentRef.GetHeight() * height
       }
 
       this.ref.SetSize(width, height)
     }
 
     if (box.type === BOX_FULL) {
-      const mount = this.parent ? this.parent.inner.ref : UIParent
+      const mount = this.parentRef
       this.ref.SetAllPoints(mount)
     }
 
@@ -845,8 +851,8 @@ export class NElement {
       let height = box.height
 
       if (box.isPercent) {
-        width = this.parent.inner.ref.GetWidth() * width
-        height = this.parent.inner.ref.GetHeight() * height
+        width = this.parentRef.GetWidth() * width
+        height = this.parentRef.GetHeight() * height
       }
 
       this.ref.SetSize(width, height)
