@@ -744,49 +744,60 @@ export class NElement {
   public inner: NElement
 
   public Inner (inner: NElement = this.inner) {
-    this.inner.Parent(this.parent)
+    this.inner.Parent(this)
     this.inner = inner
   }
 
   // visibility
-  protected isVisible: boolean
+  protected isVisible: boolean = true
+  protected isVisibilityLocked: boolean = false
 
-  public Visibility (bool: boolean = this.isVisible, force?: boolean) {
+  public Visibility (bool: boolean = this.isVisible, lock: boolean = this.isVisibilityLocked, force?: boolean) {
+    this.isVisibilityLocked = lock
+
     if (bool) {
-      this.Show(force)
+      this.Show(force, lock)
     } else {
-      this.Hide(force)
+      this.Hide(force, lock)
     }
 
     return this
   }
 
-  public Toggle (force?: boolean) {
+  public Toggle (force?: boolean, overrideLock?: boolean) {
     if (this.isVisible) {
-      this.Hide(force)
+      this.Hide(force, overrideLock)
     } else {
-      this.Show(force)
+      this.Show(force, overrideLock)
     }
 
     return this
   }
 
-  public Show (force?: boolean) {
-    if (!force)
-      this.isVisible = true
+  public Show (force?: boolean, overrideLock?: boolean) {
+    if (this.isVisibilityLocked && !overrideLock) {
+      if (!force)
+        this.isVisible = true
 
-    this.ref.Show()
+      this.ref.Show()
 
-    return this
+      this.list.forEach(e => e.Show(true))
+
+      return this
+    }
   }
 
-  public Hide (force?: boolean) {
-    if (!force)
-      this.isVisible = false
+  public Hide (force?: boolean, overrideLock?: boolean) {
+    if (this.isVisibilityLocked && !overrideLock) {
+      if (!force)
+        this.isVisible = false
 
-    this.ref.Hide()
+      this.ref.Hide()
 
-    return this
+      this.list.forEach(e => e.Hide(true))
+
+      return this
+    }
   }
 
   // box
@@ -841,6 +852,7 @@ export class NElement {
     this.parent = parent
 
     // FIXME: assign parent
+    this.ref.SetParent(parent.ref)
 
     return this
   }
