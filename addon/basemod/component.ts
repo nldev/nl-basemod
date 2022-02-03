@@ -868,9 +868,11 @@ export class NElement {
       this.inner.ref.SetFrameStrata(box.strata)
     }
 
+    this.box = box
+
     this.list.forEach(e => e.Box())
 
-    this.box = box
+    this.Update({ [UPDATE_FLAG_STYLE]: true })
 
     return this
   }
