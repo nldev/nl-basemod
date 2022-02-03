@@ -54,6 +54,7 @@ render($ => {
     })
 
   const v = b.ref.GetParent().GetName()
+  console.log('hello world')
   console.log(v)
 
   // const a = Frame({

@@ -757,6 +757,7 @@ export class NElement {
   public inner: NElement
 
   public Inner (inner: NElement = this.inner) {
+    console.log('inner')
     console.log(inner.ref.GetName())
     this.inner = inner
     this.inner.ref.SetParent(this.ref)
@@ -880,7 +881,9 @@ export class NElement {
 
     const id = this.id + '-padding'
     const inner = (this.inner.id === id) ? this.inner : new NElement(id)
+    console.log('hello')
     console.log(id)
+    console.log(this.inner.id)
 
     this.Inner(inner)
 
