@@ -56,6 +56,10 @@ render($ => {
     .Run(thing => { console.log(thing.id) })
 
   a.Update()
+  b.Update()
+  a.Update()
+  a.Update()
+  b.Update()
 
   // const a = Frame({
   //   id: 'a',

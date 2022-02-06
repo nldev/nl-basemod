@@ -101,7 +101,6 @@ export interface ComponentOptions {
   id: string
   prefix?: string
   frame?: WoWAPI.Frame
-  inner?: WoWAPI.Frame
   parent?: Element<any, any>
 }
 
@@ -119,7 +118,6 @@ export abstract class Element<
 
   public ref: T
   public id: string
-  public inner: WoWAPI.Frame
   public children: Element<any, any>[] = []
 
   constructor (protected options: O, children: Element<any, any>[] = []) {
@@ -169,9 +167,6 @@ export abstract class Element<
 
     this.children.forEach(child => child.Show(true))
 
-    if (this.inner)
-      this.inner.Show()
-
     this.onShow()
 
     return this
@@ -189,9 +184,6 @@ export abstract class Element<
       frame.Hide()
 
     this.children.forEach(child => child.Hide(true))
-
-    if (this.inner)
-      this.inner.Show()
 
     this.onHide()
 
@@ -262,8 +254,6 @@ export interface FrameOptions extends ComponentOptions {
   size?: Size
   z?: number
   strata?: WoWAPI.FrameStrata
-  padding?: number
-  inner?: WoWAPI.Frame
 }
 
 export const DEFAULT_FRAME_OPTIONS = {
@@ -275,7 +265,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
   protected height: number
   protected width: number
   protected size: Size
-  protected padding: number
   protected bg: BackdropOptions
   protected color: ColorOptions
   protected point: Point
@@ -316,51 +305,10 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     if (options.onClick)
       this.OnClick(options.onClick.type, options.onClick.handler)
-
-    if (options.padding)
-      this.Padding(options.padding)
-
-    if (options.inner)
-      this.Inner(options.inner)
   }
 
   protected Parent (parent: Element<any, any>) {
-    if (this.inner) {
-      this.ref.SetParent(parent.inner)
-    } else {
-      this.ref.SetParent(parent.ref)
-    }
-  }
-
-  protected Padding (amount: number) {
-    if (amount === 0)
-      return this
-
-    const frame = Frame({ id: this.id  + '-padding', parent: this })
-
-    frame.ref.SetSize(this.ref.GetWidth() - amount, this.ref.GetHeight() - amount)
-
-    this.Inner(frame.ref)
-
-    this.inner.SetPoint('CENTER')
-
-    return this
-  }
-
-  protected Inner (frame: WoWAPI.Frame) {
-    this.inner = frame
-
-    this.inner.SetParent(this.ref)
-
-    const z = this.z || 0
-
-    this.inner.SetFrameLevel(z)
-    this.ref.SetFrameLevel(z - 1)
-
-    const strata = this.strata || 'BACKGROUND'
-
-    this.inner.SetFrameStrata(strata)
-    this.ref.SetFrameStrata(strata)
+    this.ref.SetParent(parent.ref)
   }
 
   public Backdrop (bgOptions: BackdropOptions = DEFAULT_BACKDROP, colorOptions: ColorOptions = DEFAULT_COLOR) {
@@ -412,7 +360,7 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
   protected AllPoints (relativeRegion?: RelativeRegion) {
     if (relativeRegion === 'parent')
-      relativeRegion = this.parent.inner || this.parent.ref
+      relativeRegion = this.parent.ref
 
     this.ref.SetAllPoints(relativeRegion)
 
@@ -430,18 +378,11 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
     this.size = { width: this.ref.GetWidth(), height: this.ref.GetHeight() }
 
-    if (this.inner)
-      this.Padding(this.padding)
-
     return this
   }
 
   protected Z (level: number) {
     this.ref.SetFrameLevel(level)
-
-    if (this.inner) {
-      this.inner.SetFrameLevel(level)
-    }
 
     this.z = level
 
@@ -450,9 +391,6 @@ export class FrameElement<O extends FrameOptions = FrameOptions> extends Element
 
   protected Strata (strata: WoWAPI.FrameStrata) {
     this.ref.SetFrameStrata(strata)
-
-    if (this.inner)
-      this.inner.SetFrameStrata(strata)
 
     this.strata = strata
 
@@ -567,11 +505,7 @@ export class ButtonElement<O extends ButtonOptions = ButtonOptions> extends Elem
   }
 
   protected Parent (parent: Element<any, any>) {
-    if (this.inner) {
-      this.ref.SetParent(parent.inner)
-    } else {
-      this.ref.SetParent(parent.ref)
-    }
+    this.ref.SetParent(parent.ref)
   }
 
   public OnClick (type: ClickType, handler: ButtonClickHandler) {
@@ -677,30 +611,25 @@ export interface NDragEventHandler extends NEventHandler {
 }
 export const UPDATE_FLAG_PARENT = 'UPDATE_FLAG_PARENT'
 export const UPDATE_FLAG_VISIBILITY = 'UPDATE_FLAG_VISIBILITY'
-export const UPDATE_FLAG_PADDING = 'UPDATE_FLAG_PADDING'
 export const UPDATE_FLAG_STYLE = 'UPDATE_FLAG_STYLE'
 export const UPDATE_FLAG_BOX = 'UPDATE_FLAG_BOX'
 export type UpdateParentFlag = typeof UPDATE_FLAG_PARENT
 export type UpdateVisibilityFlag = typeof UPDATE_FLAG_VISIBILITY
-export type UpdatePaddingFlag = typeof UPDATE_FLAG_PADDING
 export type UpdateStyleFlag = typeof UPDATE_FLAG_STYLE
 export type UpdateBoxFlag = typeof UPDATE_FLAG_BOX
 export type UpdateFlag =
   | UpdateParentFlag
   | UpdateVisibilityFlag
-  | UpdatePaddingFlag
   | UpdateStyleFlag
   | UpdateBoxFlag
 export interface UpdateFlagMap {
   [UPDATE_FLAG_PARENT]?: boolean
-  [UPDATE_FLAG_PADDING]?: boolean
   [UPDATE_FLAG_VISIBILITY]?: boolean
   [UPDATE_FLAG_STYLE]?: boolean
   [UPDATE_FLAG_BOX]?: boolean
 }
 export class NElement {
   constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
-    this.inner = this
     this.id = id
 
     if (!ref)
@@ -727,9 +656,6 @@ export class NElement {
     if (isUpdateAll || toUpdate[UPDATE_FLAG_BOX])
       this.Box()
 
-    if (isUpdateAll || toUpdate[UPDATE_FLAG_PADDING])
-      this.Padding()
-
     if (isUpdateAll || toUpdate[UPDATE_FLAG_STYLE])
       this.Style()
 
@@ -741,24 +667,13 @@ export class NElement {
   }
 
   protected attach (child: NElement) {
-    child.Parent(this.inner)
+    child.Parent(this)
   }
 
   protected get parentRef () {
     return this.parent
-      ? this.parent.inner.ref
+      ? this.parent.ref
       : UIParent
-  }
-
-  // inner
-  public inner: NElement
-
-  public Inner (inner: NElement = this.inner) {
-    inner.ref.SetParent(this.ref)
-
-    this.inner = inner
-
-    return this
   }
 
   // visibility
@@ -857,12 +772,10 @@ export class NElement {
 
     if (box.z) {
       this.ref.SetFrameLevel(box.z)
-      this.inner.ref.SetFrameLevel(box.z)
     }
 
     if (box.strata) {
       this.ref.SetFrameStrata(box.strata)
-      this.inner.ref.SetFrameStrata(box.strata)
     }
 
     this.box = box
@@ -874,36 +787,11 @@ export class NElement {
     return this
   }
 
-  // padding
-  protected padding: number = null
-
-  public Padding (amount: number = this.padding) {
-    if (isNil(amount))
-      return this
-
-    const id = this.id + '-padding'
-    const inner = (this.inner.id === id) ? this.inner : new NElement(id)
-
-    this.Inner(inner)
-
-    inner.Box({
-      type: 'BOX_CENTER',
-      width: this.ref.GetWidth() - amount,
-      height: this.ref.GetHeight() - amount,
-    })
-
-    this.padding = amount
-
-    this.Update({ [UPDATE_FLAG_BOX]: true })
-
-    return this
-  }
-
   // parent
   protected parent: NElement = null
 
   public Parent (parent: NElement = this.parent, ref?: WoWAPI.Frame) {
-    ref = ref ? ref : (parent ? parent.inner.ref : UIParent)
+    ref = ref ? ref : (parent ? parent.ref : UIParent)
 
     if (this.id === 'root') {
       parent = null
