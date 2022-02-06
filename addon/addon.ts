@@ -9,7 +9,6 @@ console.log('a')
 
 render($ => {
   const a = new NElement('root')
-    .Padding(200)
     .Style({
       bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
       edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
@@ -28,16 +27,13 @@ render($ => {
       width: 500,
       height: 500,
     })
-    .Run(() => { console.log('b') })
-
-  console.log('c')
 
   const b = new NElement('b')
     .Box({
       type: 'BOX_CENTER',
       isPercent: true,
-      width: 0.1,
-      height: 0.1,
+      width: 0.5,
+      height: 0.5,
     })
     .Style({
       bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -58,6 +54,8 @@ render($ => {
     })
     .Parent(a)
     .Run(thing => { console.log(thing.id) })
+
+  a.Update()
 
   // const a = Frame({
   //   id: 'a',
