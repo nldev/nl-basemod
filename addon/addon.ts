@@ -55,7 +55,19 @@ render($ => {
     .Parent(a)
     .Run(thing => { console.log(thing.id) })
 
-  b.Run(() => console.log('hehe'))
+  a.Update()
+  b.Update()
+  a.Update()
+  a.Update()
+  b.Update()
+  b.Parent(a)
+  a.Update()
+  b.Update()
+  b.Parent(a)
+  b.Update()
+  a.Update()
+
+  a.Run(() => console.log('hehe'))
 
   // const a = Frame({
   //   id: 'a',
