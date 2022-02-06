@@ -55,11 +55,7 @@ render($ => {
     .Parent(a)
     .Run(thing => { console.log(thing.id) })
 
-  a.Update()
-  b.Update()
-  a.Update()
-  a.Update()
-  b.Update()
+  b.Run(() => console.log('hehe'))
 
   // const a = Frame({
   //   id: 'a',
