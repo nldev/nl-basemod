@@ -944,6 +944,24 @@ export class NElement {
       insets,
     })
 
+    this.ref.SetBackdrop({
+      bgFile: '',
+      edgeFile: '',
+      edgeSize: 0,
+      tileSize: 0,
+      tile: false,
+      insets: { top: 0, right: 0, bottom: 0, left: 0 }
+    })
+
+    this.inner.ref.SetBackdrop({
+      bgFile: '',
+      edgeFile: '',
+      edgeSize: 0,
+      tileSize: 0,
+      tile: false,
+      insets: { top: 0, right: 0, bottom: 0, left: 0 }
+    })
+
     this.inner.ref.SetBackdrop(style as any)
     this.inner.ref.SetBackdropColor(style.red || this.style.red || 0, style.green || this.style.green || 0, style.blue || this.style.blue || 0, style.alpha || this.style.alpha || 1)
 
