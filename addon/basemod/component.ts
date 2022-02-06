@@ -944,8 +944,8 @@ export class NElement {
       insets,
     })
 
-    this.ref.SetBackdrop(style as any)
-    this.ref.SetBackdropColor(style.red || this.style.red || 0, style.green || this.style.green || 0, style.blue || this.style.blue || 0, style.alpha || this.style.alpha || 1)
+    this.inner.ref.SetBackdrop(style as any)
+    this.inner.ref.SetBackdropColor(style.red || this.style.red || 0, style.green || this.style.green || 0, style.blue || this.style.blue || 0, style.alpha || this.style.alpha || 1)
 
     this.style = style
 
