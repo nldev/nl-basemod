@@ -719,10 +719,7 @@ export class NElement {
 
   // internal
   public Update (toUpdate?: UpdateFlagMap, recurse?: boolean) {
-    let isUpdateAll = false
-
-    if (!toUpdate)
-      isUpdateAll = true
+    let isUpdateAll = !toUpdate
 
     if (isUpdateAll || toUpdate[UPDATE_FLAG_PARENT])
       this.Parent()
@@ -969,8 +966,11 @@ export class NElement {
     return this
   }
 
-  public Run (cb: (element: NElement) => {}) {
-    cb(this)
+  public Run (cb: (element: NElement) => void) {
+    if (cb)
+      cb(this)
+
+    return this
   }
 }
 

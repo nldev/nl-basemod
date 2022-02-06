@@ -5,6 +5,8 @@ import { NElement } from './basemod/component'
 // import { Grid } from './basemod/components/grid'
 // import { Mapping } from './basemod/types'
 
+console.log('a')
+
 render($ => {
   const a = new NElement('root')
     .Padding(200)
@@ -26,13 +28,16 @@ render($ => {
       width: 500,
       height: 500,
     })
+    .Run(() => { console.log('b') })
+
+  console.log('c')
 
   const b = new NElement('b')
     .Box({
       type: 'BOX_CENTER',
       isPercent: true,
-      width: 0.5,
-      height: 0.5,
+      width: 0.1,
+      height: 0.1,
     })
     .Style({
       bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -52,6 +57,7 @@ render($ => {
       red: 1,
     })
     .Parent(a)
+    .Run(thing => { console.log(thing.id) })
 
   // const a = Frame({
   //   id: 'a',
