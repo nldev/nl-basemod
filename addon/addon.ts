@@ -67,8 +67,6 @@ render($ => {
   b.Update()
   a.Update()
 
-  a.Run(() => console.log('hehe'))
-
   // const a = Frame({
   //   id: 'a',
   //   size: { width: 600, height: 600 },
