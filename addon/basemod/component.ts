@@ -137,7 +137,18 @@ export class NElement {
   }
 
   // internal
-  public Update (toUpdate?: UpdateFlagMap, recurse?: boolean) {
+  protected attach (child: NElement) {
+    child.Parent(this)
+  }
+
+  protected get parentRef () {
+    return this.parent
+      ? this.parent.ref
+      : UIParent
+  }
+
+  // update
+  protected _Update (toUpdate?: UpdateFlagMap, recurse?: boolean) {
     let isUpdateAll = !toUpdate
 
     if (isUpdateAll || toUpdate[UPDATE_FLAG_PARENT])
@@ -156,15 +167,12 @@ export class NElement {
       this.list.forEach(e => e.Update(toUpdate, true))
   }
 
-  protected attach (child: NElement) {
-    child.Parent(this)
+  public Update (toUpdate?: UpdateFlagMap, recurse?: boolean) {
+    this._Update(toUpdate, recurse)
+
+    return this
   }
 
-  protected get parentRef () {
-    return this.parent
-      ? this.parent.ref
-      : UIParent
-  }
 
   // visibility
   protected isVisible: boolean = true
@@ -192,7 +200,7 @@ export class NElement {
     return this
   }
 
-  public Show (force?: boolean, overrideLock?: boolean) {
+  protected _Show (force?: boolean, overrideLock?: boolean) {
     if (this.isVisibilityLocked && !overrideLock) {
       if (!force)
         this.isVisible = true
@@ -200,12 +208,16 @@ export class NElement {
       this.ref.Show()
 
       this.list.forEach(e => e.Show(true))
-
-      return this
     }
   }
 
-  public Hide (force?: boolean, overrideLock?: boolean) {
+  public Show (force?: boolean, overrideLock?: boolean) {
+    this._Show(force, overrideLock)
+
+    return this
+  }
+
+  protected _Hide (force?: boolean, overrideLock?: boolean) {
     if (this.isVisibilityLocked && !overrideLock) {
       if (!force)
         this.isVisible = false
@@ -213,9 +225,13 @@ export class NElement {
       this.ref.Hide()
 
       this.list.forEach(e => e.Hide(true))
-
-      return this
     }
+  }
+
+  public Hide (force?: boolean, overrideLock?: boolean) {
+    this._Hide(force, overrideLock)
+
+    return this
   }
 
   // box
@@ -225,7 +241,7 @@ export class NElement {
     height: 0,
   }
 
-  public Box (box: NBox = this.box) {
+  protected _Box (box: NBox = this.box) {
     this.ref.ClearAllPoints()
 
     if (box.type === BOX_CENTER) {
@@ -273,6 +289,10 @@ export class NElement {
     this.list.forEach(e => e.Box())
 
     this.Update({ [UPDATE_FLAG_STYLE]: true })
+  }
+
+  public Box (box = this.box) {
+    this.Box(box)
 
     return this
   }
@@ -280,7 +300,7 @@ export class NElement {
   // parent
   protected parent: NElement = null
 
-  public Parent (parent: NElement = this.parent, ref?: WoWAPI.Frame) {
+  protected _Parent (parent: NElement = this.parent, ref?: WoWAPI.Frame) {
     ref = ref ? ref : (parent ? parent.ref : UIParent)
 
     if (this.id === 'root') {
@@ -293,6 +313,10 @@ export class NElement {
     this.ref.SetParent(ref)
 
     this.Update({ [UPDATE_FLAG_BOX]: true })
+  }
+
+  public Parent (parent: NElement = this.parent, ref?: WoWAPI.Frame) {
+    this._Parent(parent, this.parent.ref)
 
     return this
   }
@@ -300,7 +324,7 @@ export class NElement {
   // background
   protected style: NStyle = { ...RESET_STYLE }
 
-  public Style (style: NStyle = this.style, reset?: boolean) {
+  protected _Style (style: NStyle = this.style, reset?: boolean) {
     if (reset)
       this.style = RESET_STYLE as any
 
@@ -322,21 +346,33 @@ export class NElement {
     this.ref.SetBackdropColor(style.red || this.style.red || 0, style.green || this.style.green || 0, style.blue || this.style.blue || 0, style.alpha || this.style.alpha || 1)
 
     this.style = style
+  }
+
+  public Style (style: NStyle = this.style, reset?: boolean) {
+    this._Style(style, reset)
 
     return this
   }
 
   // event handlers
-  // FIXME
   protected handlers: [] = []
 
+  // FIXME
+  protected _Script (handler: NEventHandler) {}
+
   public Script (handler: NEventHandler) {
+    this._Script(handler)
+
     return this
   }
 
-  public Run (cb: (element: NElement) => void) {
+  protected _Run (cb: (element: NElement) => void) {
     if (cb)
       cb(this)
+  }
+
+  public Run (cb: (element: NElement) => void) {
+    this._Run(cb)
 
     return this
   }
