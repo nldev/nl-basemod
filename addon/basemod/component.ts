@@ -122,6 +122,15 @@ export interface UpdateFlagMap {
   [UPDATE_FLAG_BOX]?: boolean
   [UPDATE_FLAG_CHILDREN]?: boolean
 }
+export interface NElementOptions {
+  ref?: WoWAPI.Frame,
+  parent?: NElement,
+  children?: NElement[],
+  box?: NBox,
+  style?: NStyle,
+  visibility?: boolean,
+  scripts?: NEventHandler[],
+}
 export class NElement {
   constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
     this.id = id
