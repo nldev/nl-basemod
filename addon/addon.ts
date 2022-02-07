@@ -41,6 +41,12 @@ const ROOT_OPTIONS: ElementOptions = {
     width: 500,
     height: 500,
   },
+  scripts: [
+    {
+      type: 'EVENT_DRAG',
+      button: 'RightButton',
+    },
+  ],
 }
 
 const B_OPTIONS: ElementOptions = {
