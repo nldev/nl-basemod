@@ -34,11 +34,7 @@ const B_OPTIONS: ScrollOptions = {
     width: 0.5,
     height: 0.5,
   },
-  style: {
-    preset: 'border-background',
-    blue: 1,
-    red: 1,
-  },
+  style: 'border',
   // scripts: [
   //   {
   //     type: 'EVENT_DRAG',

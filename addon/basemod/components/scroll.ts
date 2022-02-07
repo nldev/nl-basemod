@@ -68,11 +68,9 @@ export class ScrollElement extends Element<ScrollOptions> {
   }
 
   protected _Attach (element: Element) {
-    console.log('start attach')
     element.ref.SetParent(this.moduleoptions)
     element.ref.ClearAllPoints()
     element.ref.SetAllPoints(this.moduleoptions)
-    console.log('end attach')
   }
 }
 
