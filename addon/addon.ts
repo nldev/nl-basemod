@@ -5,7 +5,13 @@ import { ElementOptions, Frame } from './basemod/component'
 // import { Grid } from './basemod/components/grid'
 // import { Mapping } from './basemod/types'
 
-console.log('a')
+render($ =>
+  Frame('root', ROOT_OPTIONS, [
+    Frame('b', B_OPTIONS, [
+      Frame('c', C_OPTIONS)
+    ])
+  ])
+)
 
 const ROOT_OPTIONS: ElementOptions = {
   style: {
@@ -77,14 +83,6 @@ const C_OPTIONS: ElementOptions = {
     alpha: 1,
   }
 }
-
-render($ =>
-  Frame('root', ROOT_OPTIONS, [
-    Frame('b', B_OPTIONS, [
-      Frame('c', C_OPTIONS)
-    ])
-  ])
-)
 
   // const a = Frame({
   //   id: 'a',
