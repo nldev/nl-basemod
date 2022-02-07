@@ -345,7 +345,7 @@ export class NElement {
   }
 
   public Box (box = this.box) {
-    this.Box(box)
+    this._Box(box)
 
     return this
   }
@@ -364,6 +364,8 @@ export class NElement {
     this.parent = parent
 
     this.ref.SetParent(ref)
+
+    this.Update({ [UPDATE_FLAG_BOX]: true })
   }
 
   public Parent (parent: NElement = this.parent, ref?: WoWAPI.Frame) {
