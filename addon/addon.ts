@@ -20,20 +20,7 @@ render($ =>
 )
 
 const ROOT_OPTIONS: FrameOptions = {
-  style: {
-    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    edgeSize: 16,
-    tile: true,
-    tileSize: 16,
-    insets: {
-      left: 4,
-      right: 4,
-      top: 4,
-      bottom: 4,
-    },
-    alpha: 1,
-  },
+  style: 'background',
   box: {
     type: 'BOX_CENTER',
     width: 500,
