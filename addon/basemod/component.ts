@@ -125,7 +125,7 @@ export interface UpdateFlagMap {
   [UPDATE_FLAG_BOX]?: boolean
   [UPDATE_FLAG_CHILDREN]?: boolean
 }
-export interface ElementOptions {
+export interface FrameOptions {
   ref?: WoWAPI.Frame,
   parent?: Element,
   children?: Element[],
@@ -140,7 +140,7 @@ export class Element {
 
   constructor (
     public readonly id: string,
-    options: ElementOptions = DEFAULT_ELEMENT_OPTIONS,
+    options: FrameOptions = DEFAULT_ELEMENT_OPTIONS,
     children: Element[] = []
   ) {
     this.id = id
@@ -483,7 +483,7 @@ export class Element {
   }
 }
 export type Component<
-  O extends ElementOptions = ElementOptions,
+  O extends FrameOptions = FrameOptions,
   E extends Element = Element,
   C extends Element = Element,
 > = (id: string, options?: O, children?: C[]) => E
