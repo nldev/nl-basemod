@@ -396,7 +396,8 @@ export class Element<O extends FrameOptions = FrameOptions> {
 
     this.parent = parent
 
-    parent.attach(this)
+    if (parent)
+      parent.attach(this)
 
     this.Update({ [UPDATE_FLAG_BOX]: true })
   }
