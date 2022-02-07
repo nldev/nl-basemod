@@ -432,9 +432,10 @@ export class Element {
         console.log(this.ref.GetName())
         this.ref.EnableMouse(true)
         // this.ref.RegisterForClicks(options.button)
-        this.ref.SetScript('OnKeyDown', (_, button, isDown) =>
-          options.handler(this, button, isDown)
-        )
+        this.ref.SetScript('OnKeyDown', (_, button, isDown) => {
+          if (button === options.button)
+            options.handler(this, button, isDown)
+        })
       }
 
       if (options.type === 'EVENT_DRAG') {
