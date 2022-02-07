@@ -106,24 +106,20 @@ export const UPDATE_FLAG_PARENT = 'UPDATE_FLAG_PARENT'
 export const UPDATE_FLAG_VISIBILITY = 'UPDATE_FLAG_VISIBILITY'
 export const UPDATE_FLAG_STYLE = 'UPDATE_FLAG_STYLE'
 export const UPDATE_FLAG_BOX = 'UPDATE_FLAG_BOX'
-export const UPDATE_FLAG_CHILDREN = 'UPDATE_FLAG_CHILDREN'
 export type UpdateParentFlag = typeof UPDATE_FLAG_PARENT
 export type UpdateVisibilityFlag = typeof UPDATE_FLAG_VISIBILITY
 export type UpdateStyleFlag = typeof UPDATE_FLAG_STYLE
 export type UpdateBoxFlag = typeof UPDATE_FLAG_BOX
-export type UpdateChildrenFlag = typeof UPDATE_FLAG_CHILDREN
 export type UpdateFlag =
   | UpdateParentFlag
   | UpdateVisibilityFlag
   | UpdateStyleFlag
   | UpdateBoxFlag
-  | UpdateChildrenFlag
 export interface UpdateFlagMap {
   [UPDATE_FLAG_PARENT]?: boolean
   [UPDATE_FLAG_VISIBILITY]?: boolean
   [UPDATE_FLAG_STYLE]?: boolean
   [UPDATE_FLAG_BOX]?: boolean
-  [UPDATE_FLAG_CHILDREN]?: boolean
 }
 export interface FrameOptions {
   ref?: WoWAPI.Frame,
@@ -177,14 +173,7 @@ export class Element<O extends FrameOptions = FrameOptions> {
     if (options.scripts)
       this.Script(options.scripts)
 
-    if (options.children) {
-      this.Children([
-        ...options.children,
-        ...children,
-      ])
-    } else {
-      this.Children(children)
-    }
+    children.forEach(c => c.Parent(this))
 
     this.onInit()
   }
@@ -196,21 +185,8 @@ export class Element<O extends FrameOptions = FrameOptions> {
     return Object.keys(this.childMap).map(key => this.childMap[key])
   }
 
-  protected _Children (list: Element[] = this.children) {
-    list.forEach(e => {
-      this.childMap[e.id] = e
-      e.Parent(this)
-    })
-  }
-
-  public Children (list: Element[] = this.children) {
-    this._Children(list)
-
-    return this
-  }
-
   // internal
-  protected attach (child: Element) {
+  public Attach (child: Element) {
     this.ref.SetParent(child.ref)
   }
 
@@ -238,9 +214,6 @@ export class Element<O extends FrameOptions = FrameOptions> {
 
     if (isUpdateAll || toUpdate[UPDATE_FLAG_VISIBILITY])
       this.Visibility()
-
-    if (isUpdateAll || toUpdate[UPDATE_FLAG_CHILDREN])
-      this.Children()
 
     if (recurse)
       this.children.forEach(e => e.Update(toUpdate, recurse))
@@ -397,7 +370,7 @@ export class Element<O extends FrameOptions = FrameOptions> {
     this.parent = parent
 
     if (parent)
-      parent.attach(this)
+      parent.Attach(this)
 
     this.Update({ [UPDATE_FLAG_BOX]: true })
   }
