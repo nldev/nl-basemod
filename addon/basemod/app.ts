@@ -1,10 +1,12 @@
 import { Container } from './container'
 
-export const Get = () => _G['container'] as Container
+export const Get = () => _G['app'] as Container
 
 export const render = (onInit: ($: Container) => void) => {
-  _G['app'].container = new Container(onInit)
+  const app = new Container(onInit)
 
-  return _G['app'].container
+  _G['app'] = app
+
+  return app
 }
 

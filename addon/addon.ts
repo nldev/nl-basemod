@@ -5,13 +5,18 @@ import { ElementOptions, Frame } from './basemod/component'
 // import { Grid } from './basemod/components/grid'
 // import { Mapping } from './basemod/types'
 
-render($ =>
+render($ => {
+  console.log($.playerInfo.name)
+  console.log($.playerInfo.level)
+  console.log($.playerInfo.chrRace)
+  console.log($.playerInfo.chrClass)
+
   Frame('root', ROOT_OPTIONS, [
     Frame('b', B_OPTIONS, [
       Frame('c', C_OPTIONS)
     ])
   ])
-)
+})
 
 const ROOT_OPTIONS: ElementOptions = {
   style: {

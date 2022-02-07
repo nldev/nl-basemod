@@ -136,14 +136,26 @@ export const DEFAULT_ELEMENT_OPTIONS: any = {}
 export class Element {
   public ref: WoWAPI.Frame
 
-  constructor (public readonly id: string, options: ElementOptions = DEFAULT_ELEMENT_OPTIONS, children: Element[] = []) {
+  constructor (
+    public readonly id: string,
+    options: ElementOptions = DEFAULT_ELEMENT_OPTIONS,
+    children: Element[] = []
+  ) {
     this.id = id
+
+    const $ = Get()
+    const existing = $.elements[id]
 
     if (options.ref) {
       this.ref = options.ref
+    } else if (existing) {
+      this.ref = existing.ref
     } else {
-      this.ref = Get().elements[id] || CreateFrame('Frame', id)
+      this.ref = CreateFrame('Frame', id)
     }
+
+    if (!existing)
+      $.elements[id] = this
 
     if (this.id === 'root')
       this.Parent()
@@ -163,10 +175,14 @@ export class Element {
     if (options.scripts)
       options.scripts.forEach(s => this.Script(s))
 
-    if (options.children)
-      this.Children(options.children)
-
-    this.Children(children)
+    if (options.children) {
+      this.Children([
+        ...options.children,
+        ...children,
+      ])
+    } else {
+      this.Children(children)
+    }
   }
 
   // children
