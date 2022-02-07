@@ -364,8 +364,6 @@ export class NElement {
     this.parent = parent
 
     this.ref.SetParent(ref)
-
-    this.Update({ [UPDATE_FLAG_BOX]: true })
   }
 
   public Parent (parent: NElement = this.parent, ref?: WoWAPI.Frame) {
