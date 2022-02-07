@@ -1,13 +1,12 @@
 import { render } from './basemod/app'
 import { Frame, FrameOptions } from './basemod/component'
-// import { Frame } from './basemod/component'
-// import { Scroll } from './basemod/components/scroll'
+import { Scroll, ScrollOptions } from './basemod/components/scroll'
 // import { Grid } from './basemod/components/grid'
 // import { Mapping } from './basemod/types'
 
 render($ =>
   Frame('root', ROOT_OPTIONS, [
-    Frame('b', B_OPTIONS, [
+    Scroll('b', B_OPTIONS, [
       Frame('c', C_OPTIONS),
     ]),
   ])
@@ -34,7 +33,7 @@ const ROOT_OPTIONS: FrameOptions = {
   ],
 }
 
-const B_OPTIONS: FrameOptions = {
+const B_OPTIONS: ScrollOptions = {
   box: {
     type: 'BOX_CENTER',
     isPercent: true,
