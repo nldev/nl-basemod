@@ -177,7 +177,7 @@ export class NElement {
   protected _Children (list: NElement[] = this.children) {
     list.forEach(e => {
       this.childMap[e.id] = e
-      e.Parent(e)
+      e.Parent(this)
     })
   }
 
