@@ -1,3 +1,4 @@
+import { Get } from './app'
 import { Mapping } from './types'
 
 export type RelativeRegion = string | Element
@@ -141,7 +142,7 @@ export class Element {
     if (options.ref) {
       this.ref = options.ref
     } else {
-      this.ref = CreateFrame('Frame', id)
+      this.ref = Get().elements[id] || CreateFrame('Frame', id)
     }
 
     if (this.id === 'root')

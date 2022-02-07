@@ -1,18 +1,10 @@
 import { Container } from './container'
 
-interface App {
-  container: Container
-}
-
-const app: App = ({} as any)
-
-_G['app'] = app
-
-export const Get = () => app.container
+export const Get = () => _G['container'] as Container
 
 export const render = (onInit: ($: Container) => void) => {
-  app.container = new Container(onInit)
+  _G['app'].container = new Container(onInit)
 
-  return app.container
+  return _G['app'].container
 }
 
