@@ -1,5 +1,6 @@
 import { Get } from './app'
 import { Mapping } from './types'
+import { noop } from './utils'
 
 export type RelativeRegion = string | Element
 export interface FrameOnClick {
@@ -10,20 +11,20 @@ export type FrameDragStartHandler =
   (
     frame: Element,
     button: WoWAPI.MouseButton,
-    preventDefault: () => void
+    preventDefault: typeof noop,
   ) => void
 
 export type FrameDragStopHandler =
   (
     frame: Element,
     button: WoWAPI.MouseButton,
-    preventDefault: () => void
+    preventDefault: typeof noop,
   ) => void
 
 export type FrameClickHandler =
   (
     element: Element,
-    button: WoWAPI.MouseButton
+    button: WoWAPI.MouseButton,
   ) => void
 
 export interface FrameOnDrag {
@@ -423,7 +424,9 @@ export class Element {
   protected handlers: [] = []
 
   // FIXME
-  protected _Script (handler: EventHandler) {}
+  protected _Script (handler: EventHandler) {
+    console.log(handler)
+  }
 
   public Script (handler: EventHandler) {
     this._Script(handler)
@@ -442,13 +445,14 @@ export class Element {
     return this
   }
 }
-export type Component<O extends ElementOptions = ElementOptions, E extends Element = Element, C extends Element = Element>
-  = (id: string, options?: O, children?: C[]) => E
+export type Component<
+  O extends ElementOptions = ElementOptions,
+  E extends Element = Element,
+  C extends Element = Element,
+> = (id: string, options?: O, children?: C[]) => E
 
-export const Create: Component = (id, options, children) =>
+export const Frame: Component = (id, options, children) =>
   Get().elements[id] || new Element(id, options, children)
-
-export const Frame: Component = (id, options, children) => Create(id, options, children)
 
 // import { isNil, Unique } from './utils'
 // import { Get } from './app'
