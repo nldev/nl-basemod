@@ -158,7 +158,6 @@ export class NElement {
     if (options.visibility)
       this.Visibility(options.visibility)
 
-    // FIXME
     if (options.scripts)
       options.scripts.forEach(s => this.Script(s))
 

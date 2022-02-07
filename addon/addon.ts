@@ -62,6 +62,8 @@ render($ => {
   a.Update()
   a.Update()
 
+  console.log('line')
+
   // const a = Frame({
   //   id: 'a',
   //   size: { width: 600, height: 600 },
