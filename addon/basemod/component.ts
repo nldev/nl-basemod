@@ -185,6 +185,8 @@ export class Element {
     } else {
       this.Children(children)
     }
+
+    this.setup()
   }
 
   // children
@@ -217,6 +219,9 @@ export class Element {
       ? this.parent.ref
       : UIParent
   }
+
+  // setup
+  protected setup () {}
 
   // update
   protected _Update (toUpdate?: UpdateFlagMap, recurse?: boolean) {
