@@ -430,7 +430,7 @@ export class Element {
         console.log(options.button)
         console.log(this.ref.GetName())
         this.ref.EnableMouse(true)
-        this.ref.SetScript('OnKeyDown', (_, button) => {
+        this.ref.SetScript('OnMouseDown', (_, button) => {
           if (button === options.button)
             options.handler(this, options.button)
         })
