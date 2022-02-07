@@ -138,9 +138,9 @@ export class NElement {
     this.id = id
 
     if (options.ref) {
-      this.ref = CreateFrame('Frame', id)
-    } else {
       this.ref = options.ref
+    } else {
+      this.ref = CreateFrame('Frame', id)
     }
 
     if (this.id === 'root')
@@ -218,7 +218,7 @@ export class NElement {
       this.Children()
 
     if (recurse)
-      this.children.forEach(e => e.Update(toUpdate, true))
+      this.children.forEach(e => e.Update(toUpdate, recurse))
   }
 
   public Update (toUpdate?: UpdateFlagMap, recurse?: boolean) {
@@ -369,7 +369,7 @@ export class NElement {
   }
 
   public Parent (parent: NElement = this.parent, ref?: WoWAPI.Frame) {
-    this._Parent(parent, this.parent.ref)
+    this._Parent(parent, ref)
 
     return this
   }

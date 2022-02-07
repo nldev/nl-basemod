@@ -1,5 +1,5 @@
 import { CharacterRace, CharacterClass, Mapping } from './types'
-import { Element } from './component'
+// import { NElement } from './component'
 
 interface PlayerInfo {
   name: string
@@ -47,8 +47,8 @@ export class Container {
     }
   }
 
-  public register (element: Element<any, any>) {
-    this.elements[element.id] = element
-  }
+  // public register (element: Element<any, any>) {
+  //   this.elements[element.id] = element
+  // }
 }
 
