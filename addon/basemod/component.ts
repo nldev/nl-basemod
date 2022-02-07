@@ -130,17 +130,17 @@ export interface FrameOptions {
   parent?: Element,
   children?: Element[],
   box?: Box,
-  style?: Style,
+  style?: string | Style,
   visibility?: boolean,
   scripts?: EventHandlerOptions[],
 }
-export const DEFAULT_ELEMENT_OPTIONS: any = {}
+export const DEFAULT_FRAME_OPTIONS: any = {}
 export class Element {
   public ref: WoWAPI.Frame
 
   constructor (
     public readonly id: string,
-    options: FrameOptions = DEFAULT_ELEMENT_OPTIONS,
+    options: FrameOptions = DEFAULT_FRAME_OPTIONS,
     children: Element[] = []
   ) {
     this.id = id
@@ -403,15 +403,25 @@ export class Element {
   protected style: Style = { ...RESET_STYLE }
 
   protected _Style (style: string | Style = this.style) {
+    let table: Style = {}
+
     if (typeof style === 'string') {
-      style = {
+      table = {
         ...RESET_STYLE,
         ...Get().styles[style],
       }
-    } else {
-      style = {
+    }
+
+    if (typeof style !== 'string') {
+      let preset: any = {}
+
+      if (style.preset)
+        preset = Get().styles[style.preset]
+
+      table = {
         ...RESET_STYLE,
         ...this.style,
+        ...preset,
         ...style,
         insets: {
           ...RESET_STYLE.insets,
@@ -419,12 +429,12 @@ export class Element {
           ...style.insets,
         },
       }
-
-      this.ref.SetBackdrop(style as any)
-      this.ref.SetBackdropColor(style.red, style.green, style.blue, style.alpha)
     }
 
-    this.style = style
+    this.ref.SetBackdrop(table as any)
+    this.ref.SetBackdropColor(table.red, table.green, table.blue, table.alpha)
+
+    this.style = table
   }
 
   public Style (style: string | Style = this.style) {
