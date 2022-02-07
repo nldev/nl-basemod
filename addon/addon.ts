@@ -6,7 +6,7 @@ import { Scroll, ScrollOptions } from './basemod/components/scroll'
 
 render($ =>
   Frame('root', ROOT_OPTIONS, [
-    Frame('b', B_OPTIONS, [
+    Scroll('b', B_OPTIONS, [
       Frame('c', C_OPTIONS),
     ]),
   ])

@@ -354,17 +354,24 @@ export class Element<O extends FrameOptions = FrameOptions> {
     return this
   }
 
-  // parent
-  protected parent: Element = null
-
-  public Attach (child: Element) {
+  // attach
+  protected _Attach (child: Element) {
     child.ref.SetParent(this.ref)
   }
 
-  protected _Parent (parent: Element = this.parent, ref?: WoWAPI.Frame) {
+  public Attach (child: Element) {
+    this._Attach(child)
+
+    return this
+  }
+
+  // parent
+  protected parent: Element = null
+
+  protected _Parent (parent: Element = this.parent) {
     if (this.id === 'root') {
       this.ref.SetParent(UIParent)
-    } else {
+    } else if (parent) {
       this.parent = parent
       parent.Attach(this)
     }
@@ -374,8 +381,8 @@ export class Element<O extends FrameOptions = FrameOptions> {
     this.Update({ [UPDATE_FLAG_BOX]: true })
   }
 
-  public Parent (parent: Element = this.parent, ref?: WoWAPI.Frame) {
-    this._Parent(parent, ref)
+  public Parent (parent: Element = this.parent) {
+    this._Parent(parent)
 
     return this
   }
