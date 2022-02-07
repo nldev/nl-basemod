@@ -78,12 +78,13 @@ const C_OPTIONS: ElementOptions = {
   }
 }
 
-render($ => {
+render($ =>
   Frame('root', ROOT_OPTIONS, [
     Frame('b', B_OPTIONS, [
       Frame('c', C_OPTIONS)
     ])
   ])
+)
 
   // const a = Frame({
   //   id: 'a',
@@ -188,6 +189,5 @@ render($ => {
   //     }
   //   }
   // })
-})
 
 
