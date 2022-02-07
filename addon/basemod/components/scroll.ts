@@ -13,7 +13,7 @@ export class ScrollElement extends Element<ScrollOptions> {
   protected scrolldownbutton: WoWAPI.Frame
   protected moduleoptions: WoWAPI.Frame
 
-  protected onSetup () {
+  protected onInit () {
     this.scrollframe = CreateFrame('ScrollFrame', this.id + '-scrollframe', null, 'UIPanelScrollFrameTemplate')
     this.scrollchild = CreateFrame('Frame', this.id + '-scrollchild')
 
@@ -68,9 +68,11 @@ export class ScrollElement extends Element<ScrollOptions> {
   }
 
   protected _Attach (element: Element) {
+    console.log('start attach')
     element.ref.SetParent(this.moduleoptions)
     element.ref.ClearAllPoints()
     element.ref.SetAllPoints(this.moduleoptions)
+    console.log('end attach')
   }
 }
 
