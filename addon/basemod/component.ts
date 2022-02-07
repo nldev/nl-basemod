@@ -426,6 +426,7 @@ export class Element {
         insets: {
           ...RESET_STYLE.insets,
           ...this.style.insets,
+          ...preset.insets,
           ...style.insets,
         },
       }
