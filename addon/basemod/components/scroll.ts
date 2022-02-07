@@ -75,6 +75,6 @@ export class ScrollElement extends Element<ScrollOptions> {
   }
 }
 
-export const Frame: Component = (id, options, children) =>
-  Get().elements[id] || new Element(id, options, children)
+export const Scroll: Component = (id, options, children) =>
+  Get().elements[id] || new ScrollElement(id, options, children)
 
