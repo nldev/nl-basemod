@@ -132,14 +132,40 @@ export interface NElementOptions {
   scripts?: NEventHandler[],
 }
 export class NElement {
-  constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
+  public ref: WoWAPI.Frame
+
+  constructor (public readonly id: string, options: NElementOptions = {}, children: NElement[] = []) {
     this.id = id
 
-    if (!ref)
+    if (options.ref) {
       this.ref = CreateFrame('Frame', id)
+    } else {
+      this.ref = options.ref
+    }
 
     if (this.id === 'root')
       this.Parent()
+
+    if (options.parent)
+      this.Parent(options.parent)
+
+    if (options.box)
+      this.Box(options.box)
+
+    if (options.style)
+      this.Style(options.style)
+
+    if (options.visibility)
+      this.Visibility(options.visibility)
+
+    // FIXME
+    if (options.scripts)
+      options.scripts.forEach(s => this.Script(s))
+
+    if (options.children)
+      this.Children(options.children)
+
+    this.Children(children)
   }
 
   // children
@@ -150,7 +176,10 @@ export class NElement {
   }
 
   protected _Children (list: NElement[] = this.children) {
-    list.forEach(e => e.Parent(this))
+    list.forEach(e => {
+      this.childMap[e.id] = e
+      e.Parent(e)
+    })
   }
 
   public Children (list: NElement[] = this.children) {
