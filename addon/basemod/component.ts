@@ -135,12 +135,12 @@ export interface FrameOptions {
   scripts?: EventHandlerOptions[],
 }
 export const DEFAULT_FRAME_OPTIONS: any = {}
-export class Element {
+export class Element<O extends FrameOptions = FrameOptions> {
   public ref: WoWAPI.Frame
 
   constructor (
     public readonly id: string,
-    options: FrameOptions = DEFAULT_FRAME_OPTIONS,
+    protected readonly options: O = DEFAULT_FRAME_OPTIONS,
     children: Element[] = []
   ) {
     this.id = id
@@ -186,7 +186,7 @@ export class Element {
       this.Children(children)
     }
 
-    this.setup()
+    this.onInit()
   }
 
   // children
@@ -211,7 +211,7 @@ export class Element {
 
   // internal
   protected attach (child: Element) {
-    child.Parent(this)
+    this.ref.SetParent(child.ref)
   }
 
   protected get parentRef () {
@@ -220,8 +220,8 @@ export class Element {
       : UIParent
   }
 
-  // setup
-  protected setup () {}
+  // init
+  protected onInit () {}
 
   // update
   protected _Update (toUpdate?: UpdateFlagMap, recurse?: boolean) {
@@ -292,8 +292,12 @@ export class Element {
   public Show (force?: boolean, overrideLock?: boolean) {
     this._Show(force, overrideLock)
 
+    this.onShow()
+
     return this
   }
+
+  protected onShow () {}
 
   protected _Hide (force?: boolean, overrideLock?: boolean) {
     if (this.isVisibilityLocked && !overrideLock) {
@@ -309,8 +313,12 @@ export class Element {
   public Hide (force?: boolean, overrideLock?: boolean) {
     this._Hide(force, overrideLock)
 
+    this.onHide()
+
     return this
   }
+
+  protected onHide () {}
 
   // box
   protected box: Box = {
@@ -388,7 +396,7 @@ export class Element {
 
     this.parent = parent
 
-    this.ref.SetParent(ref)
+    parent.attach(this)
 
     this.Update({ [UPDATE_FLAG_BOX]: true })
   }
