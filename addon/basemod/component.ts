@@ -445,7 +445,10 @@ export class Element {
 export type Component<O extends ElementOptions = ElementOptions, E extends Element = Element, C extends Element = Element>
   = (id: string, options?: O, children?: C[]) => E
 
-export const Frame: Component = (id, options, children) => new Element(id, options, children)
+export const Create: Component = (id, options, children) =>
+  Get().elements[id] || new Element(id, options, children)
+
+export const Frame: Component = (id, options, children) => Create(id, options, children)
 
 // import { isNil, Unique } from './utils'
 // import { Get } from './app'
