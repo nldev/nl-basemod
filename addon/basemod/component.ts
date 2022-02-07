@@ -85,6 +85,7 @@ export type FrameClickHandler =
   (
     element: Element,
     button: WoWAPI.MouseButton,
+    isDown: boolean,
   ) => void
 export type FrameDragStartHandler =
   (
@@ -143,6 +144,22 @@ export class Element {
     options: ElementOptions = DEFAULT_ELEMENT_OPTIONS,
     children: Element[] = []
   ) {
+    this.Parent.bind(this)
+    this.Children.bind(this)
+    this.Box.bind(this)
+    this.Show.bind(this)
+    this.Hide.bind(this)
+    this.Run.bind(this)
+    this.Script.bind(this)
+
+    this._Parent.bind(this)
+    this._Children.bind(this)
+    this._Box.bind(this)
+    this._Show.bind(this)
+    this._Hide.bind(this)
+    this._Run.bind(this)
+    this._Script.bind(this)
+
     this.id = id
 
     const $ = Get()
@@ -175,7 +192,7 @@ export class Element {
       this.Visibility(options.visibility)
 
     if (options.scripts)
-      options.scripts.forEach(s => this.Script(s))
+      this.Script(options.scripts)
 
     if (options.children) {
       this.Children([
@@ -424,43 +441,45 @@ export class Element {
   // event handlers
   protected handlers: [] = []
 
-  protected _Script (options: EventHandlerOptions) {
-    if (options.type === 'EVENT_CLICK') {
-      this.ref.EnableMouse(true)
-      this.ref.RegisterForClicks(options.button)
-      this.ref.SetScript('OnClick', (frame, button, down) =>
-        options.handler(this, button)
-      )
-    }
+  protected _Script (list: EventHandlerOptions[]) {
+    for (const options of list) {
+      if (options.type === 'EVENT_CLICK') {
+        this.ref.EnableMouse(true)
+        this.ref.RegisterForClicks(options.button)
+        this.ref.SetScript('OnClick', (_, button, isDown) =>
+          options.handler(this, button, isDown)
+        )
+      }
 
-    if (options.type === 'EVENT_DRAG') {
-      this.ref.EnableMouse(true)
-      this.ref.RegisterForDrag(options.button)
+      if (options.type === 'EVENT_DRAG') {
+        this.ref.EnableMouse(true)
+        this.ref.RegisterForDrag(options.button)
 
-      this.ref.SetScript('OnDragStart', () => {
-        let isPreventDefault = false
+        this.ref.SetScript('OnDragStart', () => {
+          let isPreventDefault = false
 
-        options.startHandler(this, options.button, () => isPreventDefault = true)
+          options.startHandler(this, options.button, () => isPreventDefault = true)
 
-        if (!isPreventDefault) {
-          this.ref.StartMoving()
-        }
-      })
+          if (!isPreventDefault) {
+            this.ref.StartMoving()
+          }
+        })
 
-      this.ref.SetScript('OnDragStop', () => {
-        let isPreventDefault = false
+        this.ref.SetScript('OnDragStop', () => {
+          let isPreventDefault = false
 
-        options.stopHandler(this, options.button, () => isPreventDefault = true)
+          options.stopHandler(this, options.button, () => isPreventDefault = true)
 
-        if (!isPreventDefault) {
-          this.ref.StopMovingOrSizing()
-        }
-      })
+          if (!isPreventDefault) {
+            this.ref.StopMovingOrSizing()
+          }
+        })
+      }
     }
   }
 
-  public Script (handler: EventHandlerOptions) {
-    this._Script(handler)
+  public Script (list: EventHandlerOptions[]) {
+    this._Script(list)
 
     return this
   }

@@ -11,11 +11,20 @@ render($ => {
   console.log($.playerInfo.chrRace)
   console.log($.playerInfo.chrClass)
 
-  Frame('root', ROOT_OPTIONS, [
-    Frame('b', B_OPTIONS, [
-      Frame('c', C_OPTIONS)
+  const a = Frame('root', ROOT_OPTIONS)
+
+  const b = Frame('b', B_OPTIONS)
+    .Parent(a)
+
+  Frame('c', C_OPTIONS)
+    .Parent(b)
+    .Script([
+      {
+        type: 'EVENT_CLICK',
+        button: 'RightButtonDown',
+        handler: (_, b) => console.log('hello world'),
+      },
     ])
-  ])
 })
 
 const ROOT_OPTIONS: ElementOptions = {
@@ -86,7 +95,7 @@ const C_OPTIONS: ElementOptions = {
     },
     green: 1,
     alpha: 1,
-  }
+  },
 }
 
   // const a = Frame({
