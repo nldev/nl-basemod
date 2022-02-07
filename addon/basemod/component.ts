@@ -377,32 +377,26 @@ export class NElement {
   // background
   protected style: NStyle = { ...RESET_STYLE }
 
-  protected _Style (style: NStyle = this.style, reset?: boolean) {
-    if (reset)
-      this.style = RESET_STYLE as any
-
-    const insets = {
-      top: (style.insets && style.insets.top) || this.style.insets.top || 0,
-      right: (style.insets && style.insets.right) || this.style.insets.right || 0,
-      bottom: (style.insets && style.insets.bottom) || this.style.insets.bottom || 0,
-      left: (style.insets && style.insets.left) || this.style.insets.left || 0,
-    }
-
+  protected _Style (style: NStyle = this.style) {
     style = ({
       ...RESET_STYLE,
       ...this.style,
       ...style,
-      insets,
+      insets: {
+        ...RESET_STYLE.insets,
+        ...this.style.insets,
+        ...style.insets,
+      },
     })
 
     this.ref.SetBackdrop(style as any)
-    this.ref.SetBackdropColor(style.red || this.style.red || 0, style.green || this.style.green || 0, style.blue || this.style.blue || 0, style.alpha || this.style.alpha || 1)
+    this.ref.SetBackdropColor(style.red, style.green, style.blue, style.alpha)
 
     this.style = style
   }
 
-  public Style (style: NStyle = this.style, reset?: boolean) {
-    this._Style(style, reset)
+  public Style (style: NStyle = this.style) {
+    this._Style(style)
 
     return this
   }

@@ -21,39 +21,40 @@ render($ => {
         top: 4,
         bottom: 4,
       },
+      alpha: 1,
     })
     .Box({
       type: 'BOX_CENTER',
       width: 500,
       height: 500,
     })
-    // .Children([
-    //   new NElement('b')
-    //     .Box({
-    //       type: 'BOX_CENTER',
-    //       isPercent: true,
-    //       width: 0.5,
-    //       height: 0.5,
-    //     })
-    //     .Style({
-    //       bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-    //       edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    //       tile: true,
-    //       tileSize: 16,
-    //       edgeSize: 16,
-    //       insets: {
-    //         left: 4,
-    //         right: 4,
-    //         top: 4,
-    //         bottom: 4,
-    //       },
-    //       blue: 1,
-    //     })
-    //     .Style({
-    //       red: 1,
-    //     })
-    //     .Run(thing => { console.log(thing.id) })
-    // ])
+    .Children([
+      new NElement('b')
+        .Box({
+          type: 'BOX_CENTER',
+          isPercent: true,
+          width: 0.5,
+          height: 0.5,
+        })
+        .Style({
+          bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+          edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+          tile: true,
+          tileSize: 16,
+          edgeSize: 16,
+          insets: {
+            left: 4,
+            right: 4,
+            top: 4,
+            bottom: 4,
+          },
+          blue: 1,
+        })
+        .Style({
+          red: 1,
+        })
+        .Run(thing => { console.log(thing.id) })
+    ])
 
   console.log('line')
 
