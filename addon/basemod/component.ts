@@ -424,7 +424,6 @@ export class Element {
   // event handlers
   protected handlers: [] = []
 
-  // FIXME
   protected _Script (options: EventHandlerOptions) {
     if (options.type === 'EVENT_CLICK') {
       this.ref.EnableMouse(true)
@@ -432,6 +431,8 @@ export class Element {
       this.ref.SetScript('OnClick', (frame, button, down) =>
         options.handler(this, button)
       )
+
+      return
     }
 
     if (options.type === 'EVENT_DRAG') {
@@ -455,6 +456,8 @@ export class Element {
           this.ref.StopMovingOrSizing()
         }
       })
+
+      return
     }
   }
 
