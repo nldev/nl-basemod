@@ -54,15 +54,15 @@ const SCROLL_OPTIONS: ScrollOptions = {
     width: 380,
     height: 380,
   },
-  style: {
-    preset: 'border-background',
-    red: 1,
-  }
 }
 
 const GRID_OPTIONS: GridOptions = {
   itemsPerRow: 3,
   rowHeight: 100,
+  style: {
+    preset: 'border-background',
+    red: 1,
+  }
 }
 
   // const a = Frame({

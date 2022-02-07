@@ -24,8 +24,7 @@ class GridItemElement extends Element<GridItemOptions> {
     // if (this.z)
     //   this.item.ref.SetFrameLevel(this.z)
 
-    this.item.Parent(this)
-
+    this.item.ref.SetParent(this.ref)
     this.item.ref.SetPoint('CENTER')
   }
 }
@@ -50,12 +49,18 @@ export class GridElement extends Element<GridOptions> {
     if (!this.parent)
       return
 
-    console.log(child.id)
-
     const isEndOfRow = this.index === ((this.itemsPerRow || 3) - 1)
 
     const element = new GridItemElement(Unique(`${this.id}-griditem`), {
       item: child,
+      box: {
+        type: 'BOX_POINT',
+        point: 'TOPLEFT',
+        width: this.itemWidth,
+        height: this.rowHeight,
+        x: this.x,
+        y: this.y,
+      }
       // z: (this.z || 0) + 1,
       // strata: this.strata,
       // size: {
