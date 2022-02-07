@@ -103,20 +103,24 @@ export const UPDATE_FLAG_PARENT = 'UPDATE_FLAG_PARENT'
 export const UPDATE_FLAG_VISIBILITY = 'UPDATE_FLAG_VISIBILITY'
 export const UPDATE_FLAG_STYLE = 'UPDATE_FLAG_STYLE'
 export const UPDATE_FLAG_BOX = 'UPDATE_FLAG_BOX'
+export const UPDATE_FLAG_CHILDREN = 'UPDATE_FLAG_CHILDREN'
 export type UpdateParentFlag = typeof UPDATE_FLAG_PARENT
 export type UpdateVisibilityFlag = typeof UPDATE_FLAG_VISIBILITY
 export type UpdateStyleFlag = typeof UPDATE_FLAG_STYLE
 export type UpdateBoxFlag = typeof UPDATE_FLAG_BOX
+export type UpdateChildrenFlag = typeof UPDATE_FLAG_CHILDREN
 export type UpdateFlag =
   | UpdateParentFlag
   | UpdateVisibilityFlag
   | UpdateStyleFlag
   | UpdateBoxFlag
+  | UpdateChildrenFlag
 export interface UpdateFlagMap {
   [UPDATE_FLAG_PARENT]?: boolean
   [UPDATE_FLAG_VISIBILITY]?: boolean
   [UPDATE_FLAG_STYLE]?: boolean
   [UPDATE_FLAG_BOX]?: boolean
+  [UPDATE_FLAG_CHILDREN]?: boolean
 }
 export class NElement {
   constructor (public readonly id: string, public readonly ref?: WoWAPI.Frame) {
@@ -136,8 +140,12 @@ export class NElement {
     return Object.keys(this.childMap).map(key => this.childMap[key])
   }
 
-  protected _Children (list: NElement[]) {
+  protected _Children (list: NElement[] = this.children) {
     list.forEach(e => e.Parent(this))
+  }
+
+  public Children (list: NElement[] = this.children) {
+    this._Children(list)
   }
 
   // internal
@@ -167,6 +175,9 @@ export class NElement {
     if (isUpdateAll || toUpdate[UPDATE_FLAG_VISIBILITY])
       this.Visibility()
 
+    if (isUpdateAll || toUpdate[UPDATE_FLAG_CHILDREN])
+      this.Children()
+
     if (recurse)
       this.children.forEach(e => e.Update(toUpdate, true))
   }
@@ -176,7 +187,6 @@ export class NElement {
 
     return this
   }
-
 
   // visibility
   protected isVisible: boolean = true
