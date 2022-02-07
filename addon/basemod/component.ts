@@ -3,35 +3,6 @@ import { Mapping } from './types'
 import { noop } from './utils'
 
 export type RelativeRegion = string | Element
-export interface FrameOnClick {
-  type: WoWAPI.MouseButton
-  handler: FrameClickHandler
-}
-export type FrameDragStartHandler =
-  (
-    frame: Element,
-    button: WoWAPI.MouseButton,
-    preventDefault: typeof noop,
-  ) => void
-
-export type FrameDragStopHandler =
-  (
-    frame: Element,
-    button: WoWAPI.MouseButton,
-    preventDefault: typeof noop,
-  ) => void
-
-export type FrameClickHandler =
-  (
-    element: Element,
-    button: WoWAPI.MouseButton,
-  ) => void
-
-export interface FrameOnDrag {
-  type: WoWAPI.MouseButton
-  startHandler?: FrameDragStartHandler
-  stopHandler?: FrameDragStopHandler
-}
 export interface Style {
   preset?: string
   bgFile?: string
@@ -95,12 +66,37 @@ export type Box =
   | CenterBox
   | PointBox
   | FullBox
-export interface EventHandler {
+export interface ClickEventHandler {
+  type: WoWAPI.MouseButton
+  handler: FrameClickHandler
 }
-export interface ClickEventHandler extends EventHandler {
+export interface DragEventHandler {
+  type: WoWAPI.MouseButton
+  startHandler?: FrameDragStartHandler
+  stopHandler?: FrameDragStopHandler
 }
-export interface DragEventHandler extends EventHandler {
-}
+export type FrameDragStartHandler =
+  (
+    frame: Element,
+    button: WoWAPI.MouseButton,
+    preventDefault: typeof noop,
+  ) => void
+
+export type FrameDragStopHandler =
+  (
+    frame: Element,
+    button: WoWAPI.MouseButton,
+    preventDefault: typeof noop,
+  ) => void
+
+export type FrameClickHandler =
+  (
+    element: Element,
+    button: WoWAPI.MouseButton,
+  ) => void
+export type EventHandler =
+  | ClickEventHandler
+  | DragEventHandler
 export const UPDATE_FLAG_PARENT = 'UPDATE_FLAG_PARENT'
 export const UPDATE_FLAG_VISIBILITY = 'UPDATE_FLAG_VISIBILITY'
 export const UPDATE_FLAG_STYLE = 'UPDATE_FLAG_STYLE'
