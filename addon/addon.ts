@@ -1,5 +1,5 @@
 import { render } from './basemod/app'
-import { ElementOptions, Frame } from './basemod/component'
+import { Frame, FrameOptions } from './basemod/component'
 // import { Frame } from './basemod/component'
 // import { Scroll } from './basemod/components/scroll'
 // import { Grid } from './basemod/components/grid'
@@ -20,7 +20,7 @@ render($ =>
 )
 
 
-const ROOT_OPTIONS: ElementOptions = {
+const ROOT_OPTIONS: FrameOptions = {
   style: {
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
     edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
@@ -48,7 +48,7 @@ const ROOT_OPTIONS: ElementOptions = {
   ],
 }
 
-const B_OPTIONS: ElementOptions = {
+const B_OPTIONS: FrameOptions = {
   box: {
     type: 'BOX_CENTER',
     isPercent: true,
@@ -73,7 +73,7 @@ const B_OPTIONS: ElementOptions = {
   }
 }
 
-const C_OPTIONS: ElementOptions = {
+const C_OPTIONS: FrameOptions = {
   box: {
     type: 'BOX_CENTER',
     isPercent: true,
