@@ -1,36 +1,36 @@
 import { Mapping } from './types'
 
-export type NRelativeRegion = string | NElement
-export interface NFrameOnClick {
+export type RelativeRegion = string | Element
+export interface FrameOnClick {
   type: WoWAPI.MouseButton
-  handler: NFrameClickHandler
+  handler: FrameClickHandler
 }
-export type NFrameDragStartHandler =
+export type FrameDragStartHandler =
   (
-    frame: NElement,
+    frame: Element,
     button: WoWAPI.MouseButton,
     preventDefault: () => void
   ) => void
 
-export type NFrameDragStopHandler =
+export type FrameDragStopHandler =
   (
-    frame: NElement,
+    frame: Element,
     button: WoWAPI.MouseButton,
     preventDefault: () => void
   ) => void
 
-export type NFrameClickHandler =
+export type FrameClickHandler =
   (
-    element: NElement,
+    element: Element,
     button: WoWAPI.MouseButton
   ) => void
 
-export interface NFrameOnDrag {
+export interface FrameOnDrag {
   type: WoWAPI.MouseButton
-  startHandler?: NFrameDragStartHandler
-  stopHandler?: NFrameDragStopHandler
+  startHandler?: FrameDragStartHandler
+  stopHandler?: FrameDragStopHandler
 }
-export interface NStyle {
+export interface Style {
   preset?: string
   bgFile?: string
   edgeFile?: string
@@ -48,7 +48,7 @@ export interface NStyle {
   blue?: number
   alpha?: number
 }
-export const RESET_STYLE: NStyle = {
+export const RESET_STYLE: Style = {
   tile: true,
   bgFile: '',
   edgeFile: '',
@@ -63,41 +63,41 @@ export const RESET_STYLE: NStyle = {
 export const BOX_FULL = 'BOX_FULL'
 export const BOX_CENTER = 'BOX_CENTER'
 export const BOX_POINT = 'BOX_POINT'
-export type NFullBoxType = typeof BOX_FULL
-export type NCenterBoxType = typeof BOX_CENTER
-export type NPointBoxType = typeof BOX_POINT
-export type NBoxType = NFullBoxType | NCenterBoxType | NPointBoxType
-export interface NBaseBox {
-  type: NBoxType
+export type FullBoxType = typeof BOX_FULL
+export type CenterBoxType = typeof BOX_CENTER
+export type PointBoxType = typeof BOX_POINT
+export type BoxType = FullBoxType | CenterBoxType | PointBoxType
+export interface BaseBox {
+  type: BoxType
   z?: number
   strata?: WoWAPI.FrameStrata
 }
-export interface NSizableBox extends NBaseBox {
+export interface SizableBox extends BaseBox {
   width: number
   height: number
   isPercent?: boolean
 }
-export interface NFullBox extends NBaseBox {
-  type: NFullBoxType
+export interface FullBox extends BaseBox {
+  type: FullBoxType
 }
-export interface NCenterBox extends NSizableBox {
-  type: NCenterBoxType
+export interface CenterBox extends SizableBox {
+  type: CenterBoxType
 }
-export interface NPointBox extends NSizableBox {
-  type: NPointBoxType
+export interface PointBox extends SizableBox {
+  type: PointBoxType
   point: WoWAPI.Point
   x?: number
   y?: number
 }
-export type NBox =
-  | NCenterBox
-  | NPointBox
-  | NFullBox
-export interface NEventHandler {
+export type Box =
+  | CenterBox
+  | PointBox
+  | FullBox
+export interface EventHandler {
 }
-export interface NClickEventHandler extends NEventHandler {
+export interface ClickEventHandler extends EventHandler {
 }
-export interface NDragEventHandler extends NEventHandler {
+export interface DragEventHandler extends EventHandler {
 }
 export const UPDATE_FLAG_PARENT = 'UPDATE_FLAG_PARENT'
 export const UPDATE_FLAG_VISIBILITY = 'UPDATE_FLAG_VISIBILITY'
@@ -122,19 +122,19 @@ export interface UpdateFlagMap {
   [UPDATE_FLAG_BOX]?: boolean
   [UPDATE_FLAG_CHILDREN]?: boolean
 }
-export interface NElementOptions {
+export interface ElementOptions {
   ref?: WoWAPI.Frame,
-  parent?: NElement,
-  children?: NElement[],
-  box?: NBox,
-  style?: NStyle,
+  parent?: Element,
+  children?: Element[],
+  box?: Box,
+  style?: Style,
   visibility?: boolean,
-  scripts?: NEventHandler[],
+  scripts?: EventHandler[],
 }
-export class NElement {
+export class Element {
   public ref: WoWAPI.Frame
 
-  constructor (public readonly id: string, options: NElementOptions = {}, children: NElement[] = []) {
+  constructor (public readonly id: string, options: ElementOptions = {}, children: Element[] = []) {
     this.id = id
 
     if (options.ref) {
@@ -168,27 +168,27 @@ export class NElement {
   }
 
   // children
-  public childMap: Mapping<NElement> = {}
+  public childMap: Mapping<Element> = {}
 
   public get children () {
     return Object.keys(this.childMap).map(key => this.childMap[key])
   }
 
-  protected _Children (list: NElement[] = this.children) {
+  protected _Children (list: Element[] = this.children) {
     list.forEach(e => {
       this.childMap[e.id] = e
       e.Parent(this)
     })
   }
 
-  public Children (list: NElement[] = this.children) {
+  public Children (list: Element[] = this.children) {
     this._Children(list)
 
     return this
   }
 
   // internal
-  protected attach (child: NElement) {
+  protected attach (child: Element) {
     child.Parent(this)
   }
 
@@ -288,13 +288,13 @@ export class NElement {
   }
 
   // box
-  protected box: NBox = {
+  protected box: Box = {
     type: 'BOX_CENTER',
     width: 0,
     height: 0,
   }
 
-  protected _Box (box: NBox = this.box) {
+  protected _Box (box: Box = this.box) {
     this.ref.ClearAllPoints()
 
     if (box.type === BOX_CENTER) {
@@ -351,9 +351,9 @@ export class NElement {
   }
 
   // parent
-  protected parent: NElement = null
+  protected parent: Element = null
 
-  protected _Parent (parent: NElement = this.parent, ref?: WoWAPI.Frame) {
+  protected _Parent (parent: Element = this.parent, ref?: WoWAPI.Frame) {
     ref = ref ? ref : (parent ? parent.ref : UIParent)
 
     if (this.id === 'root') {
@@ -368,16 +368,16 @@ export class NElement {
     this.Update({ [UPDATE_FLAG_BOX]: true })
   }
 
-  public Parent (parent: NElement = this.parent, ref?: WoWAPI.Frame) {
+  public Parent (parent: Element = this.parent, ref?: WoWAPI.Frame) {
     this._Parent(parent, ref)
 
     return this
   }
 
   // background
-  protected style: NStyle = { ...RESET_STYLE }
+  protected style: Style = { ...RESET_STYLE }
 
-  protected _Style (style: NStyle = this.style) {
+  protected _Style (style: Style = this.style) {
     style = ({
       ...RESET_STYLE,
       ...this.style,
@@ -395,7 +395,7 @@ export class NElement {
     this.style = style
   }
 
-  public Style (style: NStyle = this.style) {
+  public Style (style: Style = this.style) {
     this._Style(style)
 
     return this
@@ -405,20 +405,20 @@ export class NElement {
   protected handlers: [] = []
 
   // FIXME
-  protected _Script (handler: NEventHandler) {}
+  protected _Script (handler: EventHandler) {}
 
-  public Script (handler: NEventHandler) {
+  public Script (handler: EventHandler) {
     this._Script(handler)
 
     return this
   }
 
-  protected _Run (cb: (element: NElement) => void) {
+  protected _Run (cb: (element: Element) => void) {
     if (cb)
       cb(this)
   }
 
-  public Run (cb: (element: NElement) => void) {
+  public Run (cb: (element: Element) => void) {
     this._Run(cb)
 
     return this

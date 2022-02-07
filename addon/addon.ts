@@ -1,5 +1,5 @@
 import { render } from './basemod/app'
-import { NElement } from './basemod/component'
+import { Element } from './basemod/component'
 // import { Frame } from './basemod/component'
 // import { Scroll } from './basemod/components/scroll'
 // import { Grid } from './basemod/components/grid'
@@ -8,13 +8,13 @@ import { NElement } from './basemod/component'
 console.log('a')
 
 render($ => {
-  const a = new NElement('root', {
+  const a = new Element('root', {
     style: {
       bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
       edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+      edgeSize: 16,
       tile: true,
       tileSize: 16,
-      edgeSize: 16,
       insets: {
         left: 4,
         right: 4,
@@ -29,7 +29,7 @@ render($ => {
       height: 500,
     },
   }, [
-    new NElement('b')
+    new Element('b')
       .Box({
         type: 'BOX_CENTER',
         isPercent: true,
