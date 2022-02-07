@@ -427,8 +427,6 @@ export class Element {
   protected _Script (list: EventHandlerOptions[]) {
     for (const options of list) {
       if (options.type === 'EVENT_CLICK') {
-        console.log(options.button)
-        console.log(this.ref.GetName())
         this.ref.EnableMouse(true)
         this.ref.SetScript('OnMouseDown', (_, button) => {
           if (button === options.button)
