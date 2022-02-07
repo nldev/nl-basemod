@@ -19,7 +19,6 @@ render($ =>
   })
 )
 
-
 const ROOT_OPTIONS: FrameOptions = {
   style: {
     bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
