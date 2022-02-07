@@ -438,19 +438,19 @@ export class Element {
     if (options.type === 'EVENT_DRAG') {
       this.ref.EnableMouse(true)
       this.ref.RegisterForDrag(options.button)
-      this.ref.SetScript('OnDragStart', (frame, button, down) => {
+      this.ref.SetScript('OnDragStart', () => {
         let isPreventDefault = false
 
-        options.startHandler(this, button, () => isPreventDefault = true)
+        options.startHandler(this, options.button, () => isPreventDefault = true)
 
         if (!isPreventDefault) {
           this.ref.StartMoving()
         }
       })
-      this.ref.SetScript('OnDragStop', (frame, button, down) => {
+      this.ref.SetScript('OnDragStop', () => {
         let isPreventDefault = false
 
-        options.stopHandler(this, button, () => isPreventDefault = true)
+        options.stopHandler(this, options.button, () => isPreventDefault = true)
 
         if (!isPreventDefault) {
           this.ref.StopMovingOrSizing()
