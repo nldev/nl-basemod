@@ -20,7 +20,7 @@ render($ =>
 )
 
 const ROOT_OPTIONS: FrameOptions = {
-  style: 'background',
+  style: 'border-background',
   box: {
     type: 'BOX_CENTER',
     width: 500,
@@ -42,7 +42,7 @@ const B_OPTIONS: FrameOptions = {
     height: 0.5,
   },
   style: {
-    preset: 'background',
+    preset: 'border-background',
     blue: 1,
     red: 1,
   }
@@ -56,7 +56,7 @@ const C_OPTIONS: FrameOptions = {
     height: 0.5,
   },
   style: {
-    preset: 'background',
+    preset: 'border-background',
     green: 1,
   },
   scripts: [

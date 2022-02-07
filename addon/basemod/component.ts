@@ -403,12 +403,14 @@ export class Element {
   protected style: Style = { ...RESET_STYLE }
 
   protected _Style (style: string | Style = this.style) {
+    const $ = Get()
+
     let table: Style = {}
 
     if (typeof style === 'string') {
       table = {
         ...RESET_STYLE,
-        ...Get().styles[style],
+        ...$.styles[style],
       }
     }
 
@@ -416,7 +418,7 @@ export class Element {
       let preset: any = {}
 
       if (style.preset)
-        preset = Get().styles[style.preset]
+        preset = $.styles[style.preset]
 
       table = {
         ...RESET_STYLE,

@@ -49,6 +49,21 @@ export class Container {
     },
     'background': {
       bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+      tile: true,
+      tileSize: 16,
+      insets: {
+        left: 4,
+        right: 4,
+        top: 4,
+        bottom: 4,
+      },
+      red: 0,
+      blue: 0,
+      green: 0,
+      alpha: 1,
+    },
+    'border-background': {
+      bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
       edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
       edgeSize: 16,
       tile: true,
