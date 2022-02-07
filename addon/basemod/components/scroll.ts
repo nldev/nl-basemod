@@ -67,7 +67,7 @@ export class ScrollElement extends Element<ScrollOptions> {
   //   this.moduleoptions.Hide()
   // }
 
-  // protected attach (element: Element) {
+  // protected onAttach (element: Element) {
   //   this.childMap[element.id] = element
   //   element.ref.SetParent(this.moduleoptions)
   //   element.ref.ClearAllPoints()
