@@ -42,20 +42,9 @@ const B_OPTIONS: FrameOptions = {
     height: 0.5,
   },
   style: {
-    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    tile: true,
-    tileSize: 16,
-    edgeSize: 16,
-    insets: {
-      left: 4,
-      right: 4,
-      top: 4,
-      bottom: 4,
-    },
+    preset: 'background',
     blue: 1,
     red: 1,
-    alpha: 1,
   }
 }
 
@@ -67,19 +56,8 @@ const C_OPTIONS: FrameOptions = {
     height: 0.5,
   },
   style: {
-    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    tile: true,
-    tileSize: 16,
-    edgeSize: 16,
-    insets: {
-      left: 4,
-      right: 4,
-      top: 4,
-      bottom: 4,
-    },
+    preset: 'background',
     green: 1,
-    alpha: 1,
   },
   scripts: [
     {
