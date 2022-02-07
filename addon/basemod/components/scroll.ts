@@ -13,7 +13,10 @@ export class ScrollElement extends Element<ScrollOptions> {
   protected scrolldownbutton: WoWAPI.Frame
   protected moduleoptions: WoWAPI.Frame
 
+  protected scrollHeight: number = this.options.scrollHeight
+
   protected onInit () {
+
     this.scrollframe = CreateFrame('ScrollFrame', this.id + '-scrollframe', null, 'UIPanelScrollFrameTemplate')
     this.scrollchild = CreateFrame('Frame', this.id + '-scrollchild')
 
@@ -43,7 +46,9 @@ export class ScrollElement extends Element<ScrollOptions> {
     this.scrollframe.SetScrollChild(this.scrollchild)
     this.scrollframe.SetAllPoints(this.ref)
 
-    this.scrollchild.SetSize(this.scrollframe.GetWidth() - 30, this.options.scrollHeight || (this.scrollframe.GetHeight() * 2))
+    this.scrollHeight = this.options.scrollHeight || (this.scrollframe.GetHeight() * 2)
+
+    this.scrollchild.SetSize(this.ref.GetWidth(), this.scrollHeight)
 
     this.moduleoptions = CreateFrame('Frame', this.id + '-moduleoptions', this.scrollchild)
 
@@ -67,10 +72,16 @@ export class ScrollElement extends Element<ScrollOptions> {
     this.moduleoptions.Hide()
   }
 
-  protected _Attach (element: Element) {
-    element.ref.SetParent(this.moduleoptions)
-    element.ref.ClearAllPoints()
-    element.ref.SetAllPoints(this.moduleoptions)
+  protected _Attach (child: Element) {
+    child.ref.SetParent(this.moduleoptions)
+
+    if (this.scrollchild)
+      child.Box({
+        type: 'BOX_POINT',
+        point: 'TOPLEFT',
+        width: this.scrollchild.GetWidth() - 18,
+        height: this.scrollchild.GetHeight(),
+      })
   }
 }
 

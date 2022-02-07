@@ -1,14 +1,26 @@
 import { render } from './basemod/app'
 import { Frame, FrameOptions } from './basemod/component'
 import { Scroll, ScrollOptions } from './basemod/components/scroll'
-// import { Grid } from './basemod/components/grid'
+import { Grid, GridOptions } from './basemod/components/grid'
 // import { Mapping } from './basemod/types'
 
 render($ =>
   Frame('root', ROOT_OPTIONS, [
-    Scroll('b', B_OPTIONS, [
-      Frame('c', C_OPTIONS),
-    ]),
+    Frame('pad', PAD_OPTIONS, [
+      Scroll('scroll', SCROLL_OPTIONS, [
+        Grid('grid', GRID_OPTIONS, [
+          Frame('a', { box: { type: 'BOX_CENTER', width: 30, height: 30 }, style: { preset: 'border-background', red: 1 } }),
+          // Frame('b', { box: { type: 'BOX_CENTER', width: 30, height: 30 }, style: { preset: 'border-background', green: 1 } }),
+          // Frame('c', { box: { type: 'BOX_CENTER', width: 30, height: 30 }, style: { preset: 'border-background', blue: 1 } }),
+          // Frame('d', { box: { type: 'BOX_CENTER', width: 30, height: 30 }, style: { preset: 'border-background', red: 1 } }),
+          // Frame('e', { box: { type: 'BOX_CENTER', width: 30, height: 30 }, style: { preset: 'border-background', green: 1 } }),
+          // Frame('f', { box: { type: 'BOX_CENTER', width: 30, height: 30 }, style: { preset: 'border-background', blue: 1 } }),
+          // Frame('g', { box: { type: 'BOX_CENTER', width: 30, height: 30 }, style: { preset: 'border-background', red: 1 } }),
+          // Frame('h', { box: { type: 'BOX_CENTER', width: 30, height: 30 }, style: { preset: 'border-background', green: 1 } }),
+          // Frame('i', { box: { type: 'BOX_CENTER', width: 30, height: 30 }, style: { preset: 'border-background', blue: 1 } }),
+        ]),
+      ]),
+    ])
   ])
 )
 
@@ -27,44 +39,30 @@ const ROOT_OPTIONS: FrameOptions = {
   ],
 }
 
-const B_OPTIONS: ScrollOptions = {
+const PAD_OPTIONS: ScrollOptions = {
   box: {
     type: 'BOX_CENTER',
-    isPercent: true,
-    width: 0.5,
-    height: 0.5,
+    width: 400,
+    height: 400,
   },
   style: 'border',
-  // scripts: [
-  //   {
-  //     type: 'EVENT_DRAG',
-  //     button: 'RightButton',
-  //   },
-  // ],
 }
 
-const C_OPTIONS: FrameOptions = {
+const SCROLL_OPTIONS: ScrollOptions = {
   box: {
     type: 'BOX_CENTER',
-    isPercent: true,
-    width: 0.5,
-    height: 0.5,
+    width: 380,
+    height: 380,
   },
   style: {
     preset: 'border-background',
-    green: 1,
-  },
-  // scripts: [
-  //   {
-  //     type: 'EVENT_DRAG',
-  //     button: 'RightButton',
-  //   },
-  //   {
-  //     type: 'EVENT_CLICK',
-  //     button: 'LeftButton',
-  //     handler: (_, b) => console.log(b),
-  //   },
-  // ],
+    red: 1,
+  }
+}
+
+const GRID_OPTIONS: GridOptions = {
+  itemsPerRow: 3,
+  rowHeight: 100,
 }
 
   // const a = Frame({

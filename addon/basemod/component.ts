@@ -48,7 +48,6 @@ export interface BaseBox {
 export interface SizableBox extends BaseBox {
   width: number
   height: number
-  isPercent?: boolean
 }
 export interface FullBox extends BaseBox {
   type: FullBoxType
@@ -201,7 +200,7 @@ export class Element<O extends FrameOptions = FrameOptions> {
   protected _Update (toUpdate?: UpdateFlagMap, recurse?: boolean) {
     let isUpdateAll = !toUpdate
 
-    if (isUpdateAll || toUpdate[UPDATE_FLAG_PARENT])
+    if (this.parent && (isUpdateAll || toUpdate[UPDATE_FLAG_PARENT]))
       this.Parent()
 
     if (isUpdateAll || toUpdate[UPDATE_FLAG_BOX])
@@ -307,11 +306,6 @@ export class Element<O extends FrameOptions = FrameOptions> {
       let width = box.width
       let height = box.height
 
-      if (box.isPercent) {
-        width = this.parentRef.GetWidth() * width
-        height = this.parentRef.GetHeight() * height
-      }
-
       this.ref.SetSize(width, height)
     }
 
@@ -323,11 +317,6 @@ export class Element<O extends FrameOptions = FrameOptions> {
     if (box.type === BOX_POINT) {
       let width = box.width
       let height = box.height
-
-      if (box.isPercent) {
-        width = this.parentRef.GetWidth() * width
-        height = this.parentRef.GetHeight() * height
-      }
 
       this.ref.SetSize(width, height)
       this.ref.SetPoint(box.point)
