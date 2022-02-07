@@ -21,7 +21,7 @@ render($ => {
     .Script([
       {
         type: 'EVENT_CLICK',
-        button: 'LeftButtonDown',
+        button: 'LeftButton',
         handler: (_, b) => console.log(b),
       },
     ])

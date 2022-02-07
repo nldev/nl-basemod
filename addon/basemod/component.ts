@@ -72,7 +72,7 @@ export type ClickEvent = typeof EVENT_CLICK
 export type DragEvent = typeof EVENT_DRAG
 export interface ClickEventHandlerOptions {
   type: ClickEvent
-  button: ClickType
+  button: WoWAPI.MouseButton
   handler: FrameClickHandler
 }
 export interface DragEventHandlerOptions {
@@ -85,7 +85,6 @@ export type FrameClickHandler =
   (
     element: Element,
     button: WoWAPI.MouseButton,
-    isDown: boolean,
   ) => void
 export type FrameDragStartHandler =
   (
@@ -431,10 +430,9 @@ export class Element {
         console.log(options.button)
         console.log(this.ref.GetName())
         this.ref.EnableMouse(true)
-        // this.ref.RegisterForClicks(options.button)
-        this.ref.SetScript('OnKeyDown', (_, button, isDown) => {
+        this.ref.SetScript('OnKeyDown', (_, button) => {
           if (button === options.button)
-            options.handler(this, button, isDown)
+            options.handler(this, options.button)
         })
       }
 
