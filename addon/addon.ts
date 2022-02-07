@@ -38,13 +38,6 @@ const ROOT_OPTIONS: ElementOptions = {
     width: 500,
     height: 500,
   },
-  scripts: [
-    {
-      type: 'EVENT_CLICK',
-      button: 'LeftButtonDown',
-      handler: () => console.log('hello'),
-    }
-  ],
 }
 
 const B_OPTIONS: ElementOptions = {
