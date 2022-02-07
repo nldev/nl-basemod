@@ -144,22 +144,6 @@ export class Element {
     options: ElementOptions = DEFAULT_ELEMENT_OPTIONS,
     children: Element[] = []
   ) {
-    this.Parent.bind(this)
-    this.Children.bind(this)
-    this.Box.bind(this)
-    this.Show.bind(this)
-    this.Hide.bind(this)
-    this.Run.bind(this)
-    this.Script.bind(this)
-
-    this._Parent.bind(this)
-    this._Children.bind(this)
-    this._Box.bind(this)
-    this._Show.bind(this)
-    this._Hide.bind(this)
-    this._Run.bind(this)
-    this._Script.bind(this)
-
     this.id = id
 
     const $ = Get()
@@ -444,9 +428,11 @@ export class Element {
   protected _Script (list: EventHandlerOptions[]) {
     for (const options of list) {
       if (options.type === 'EVENT_CLICK') {
+        console.log(options.button)
+        console.log(this.ref.GetName())
         this.ref.EnableMouse(true)
-        this.ref.RegisterForClicks(options.button)
-        this.ref.SetScript('OnClick', (_, button, isDown) =>
+        // this.ref.RegisterForClicks(options.button)
+        this.ref.SetScript('OnKeyDown', (_, button, isDown) =>
           options.handler(this, button, isDown)
         )
       }

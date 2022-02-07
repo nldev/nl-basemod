@@ -21,11 +21,14 @@ render($ => {
     .Script([
       {
         type: 'EVENT_CLICK',
-        button: 'RightButtonDown',
-        handler: (_, b) => console.log('hello world'),
+        button: 'LeftButtonDown',
+        handler: (_, b) => console.log(b),
       },
     ])
+
+  console.log('what')
 })
+
 
 const ROOT_OPTIONS: ElementOptions = {
   style: {
