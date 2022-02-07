@@ -136,6 +136,10 @@ export class NElement {
     return Object.keys(this.childMap).map(key => this.childMap[key])
   }
 
+  protected _Children (list: NElement[]) {
+    list.forEach(e => e.Parent(this))
+  }
+
   // internal
   protected attach (child: NElement) {
     child.Parent(this)
