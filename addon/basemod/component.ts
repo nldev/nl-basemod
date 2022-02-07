@@ -146,6 +146,8 @@ export class NElement {
 
   public Children (list: NElement[] = this.children) {
     this._Children(list)
+
+    return this
   }
 
   // internal
