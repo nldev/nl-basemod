@@ -130,10 +130,10 @@ export class NElement {
   }
 
   // children
-  public children: Mapping<NElement> = {}
+  public childMap: Mapping<NElement> = {}
 
-  public get list () {
-    return Object.keys(this.children).map(key => this.children[key])
+  public get children () {
+    return Object.keys(this.childMap).map(key => this.childMap[key])
   }
 
   // internal
@@ -164,7 +164,7 @@ export class NElement {
       this.Visibility()
 
     if (recurse)
-      this.list.forEach(e => e.Update(toUpdate, true))
+      this.children.forEach(e => e.Update(toUpdate, true))
   }
 
   public Update (toUpdate?: UpdateFlagMap, recurse?: boolean) {
@@ -207,7 +207,7 @@ export class NElement {
 
       this.ref.Show()
 
-      this.list.forEach(e => e.Show(true))
+      this.children.forEach(e => e.Show(true))
     }
   }
 
@@ -224,7 +224,7 @@ export class NElement {
 
       this.ref.Hide()
 
-      this.list.forEach(e => e.Hide(true))
+      this.children.forEach(e => e.Hide(true))
     }
   }
 
@@ -286,7 +286,7 @@ export class NElement {
 
     this.box = box
 
-    this.list.forEach(e => e.Box())
+    this.children.forEach(e => e.Box())
 
     this.Update({ [UPDATE_FLAG_STYLE]: true })
   }
