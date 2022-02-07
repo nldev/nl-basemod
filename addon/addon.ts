@@ -11,10 +11,12 @@ export const Frame: Component = options => {
 
 interface StyleOptions {}
 
-export function style (frame: WoWAPI.Frame, options: StyleOptions) {
+export const useStyle = (options: StyleOptions) => (frame: WoWAPI.Frame) => {
   // frame.SetBackdrop({})
   // frame.SetBackdropColor()
 
   return frame
 }
+
+export const use = () => {}
 
