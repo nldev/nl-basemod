@@ -38,7 +38,13 @@ const B_OPTIONS: ScrollOptions = {
     preset: 'border-background',
     blue: 1,
     red: 1,
-  }
+  },
+  // scripts: [
+  //   {
+  //     type: 'EVENT_DRAG',
+  //     button: 'RightButton',
+  //   },
+  // ],
 }
 
 const C_OPTIONS: FrameOptions = {
@@ -52,13 +58,17 @@ const C_OPTIONS: FrameOptions = {
     preset: 'border-background',
     green: 1,
   },
-  scripts: [
-    {
-      type: 'EVENT_CLICK',
-      button: 'LeftButton',
-      handler: (_, b) => console.log(b),
-    },
-  ],
+  // scripts: [
+  //   {
+  //     type: 'EVENT_DRAG',
+  //     button: 'RightButton',
+  //   },
+  //   {
+  //     type: 'EVENT_CLICK',
+  //     button: 'LeftButton',
+  //     handler: (_, b) => console.log(b),
+  //   },
+  // ],
 }
 
   // const a = Frame({

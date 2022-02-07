@@ -173,7 +173,10 @@ export class Element<O extends FrameOptions = FrameOptions> {
     if (options.scripts)
       this.Script(options.scripts)
 
-    children.forEach(c => c.Parent(this))
+    children.forEach(c => {
+      this.childMap[c.id] = c
+      c.Parent(this)
+    })
 
     this.onInit()
   }
@@ -183,12 +186,6 @@ export class Element<O extends FrameOptions = FrameOptions> {
 
   public get children () {
     return Object.keys(this.childMap).map(key => this.childMap[key])
-  }
-
-  // internal
-  protected onAttach (child: Element) {
-    console.log(child.id)
-    this.ref.SetParent(child.ref)
   }
 
   protected get parentRef () {
@@ -360,18 +357,17 @@ export class Element<O extends FrameOptions = FrameOptions> {
   // parent
   protected parent: Element = null
 
+  public Attach (child: Element) {
+    child.ref.SetParent(this.ref)
+  }
+
   protected _Parent (parent: Element = this.parent, ref?: WoWAPI.Frame) {
-    ref = ref ? ref : (parent ? parent.ref : UIParent)
-
     if (this.id === 'root') {
-      parent = null
-      ref = ref || UIParent
+      this.ref.SetParent(UIParent)
+    } else {
+      this.parent = parent
+      parent.Attach(this)
     }
-
-    this.parent = parent
-
-    if (parent)
-      parent.onAttach(this)
 
     this.children.forEach(c => c.Update())
 
