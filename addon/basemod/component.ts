@@ -186,7 +186,7 @@ export class Element<O extends FrameOptions = FrameOptions> {
   }
 
   // internal
-  public Attach (child: Element) {
+  protected Attach (child: Element) {
     this.ref.SetParent(child.ref)
   }
 
@@ -371,6 +371,9 @@ export class Element<O extends FrameOptions = FrameOptions> {
 
     if (parent)
       parent.Attach(this)
+
+    if (parent)
+      console.log(this.parent.ref.GetName())
 
     this.Update({ [UPDATE_FLAG_BOX]: true })
   }

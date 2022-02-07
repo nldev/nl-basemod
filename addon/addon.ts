@@ -10,12 +10,6 @@ render($ =>
       Frame('c', C_OPTIONS),
     ]),
   ])
-  .Run(() => {
-    console.log($.playerInfo.name)
-    console.log($.playerInfo.level)
-    console.log($.playerInfo.chrRace)
-    console.log($.playerInfo.chrClass)
-  })
 )
 
 const ROOT_OPTIONS: FrameOptions = {
