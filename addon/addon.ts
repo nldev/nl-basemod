@@ -1,5 +1,5 @@
 import { render } from './basemod/app'
-import { Element } from './basemod/component'
+import { ElementOptions, Frame } from './basemod/component'
 // import { Frame } from './basemod/component'
 // import { Scroll } from './basemod/components/scroll'
 // import { Grid } from './basemod/components/grid'
@@ -7,55 +7,83 @@ import { Element } from './basemod/component'
 
 console.log('a')
 
-render($ => {
-  const a = new Element('root', {
-    style: {
-      bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-      edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-      edgeSize: 16,
-      tile: true,
-      tileSize: 16,
-      insets: {
-        left: 4,
-        right: 4,
-        top: 4,
-        bottom: 4,
-      },
-      alpha: 1,
+const ROOT_OPTIONS: ElementOptions = {
+  style: {
+    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    edgeSize: 16,
+    tile: true,
+    tileSize: 16,
+    insets: {
+      left: 4,
+      right: 4,
+      top: 4,
+      bottom: 4,
     },
-    box: {
-      type: 'BOX_CENTER',
-      width: 500,
-      height: 500,
-    },
-  }, [
-    new Element('b')
-      .Box({
-        type: 'BOX_CENTER',
-        isPercent: true,
-        width: 0.5,
-        height: 0.5,
-      })
-      .Style({
-        bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-        edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-        tile: true,
-        tileSize: 16,
-        edgeSize: 16,
-        insets: {
-          left: 4,
-          right: 4,
-          top: 4,
-          bottom: 4,
-        },
-        blue: 1,
-        red: 1,
-        alpha: 1,
-      })
-      .Run(thing => { console.log(thing.id) })
-  ])
+    alpha: 1,
+  },
+  box: {
+    type: 'BOX_CENTER',
+    width: 500,
+    height: 500,
+  },
+}
 
-  console.log('line')
+const B_OPTIONS: ElementOptions = {
+  box: {
+    type: 'BOX_CENTER',
+    isPercent: true,
+    width: 0.5,
+    height: 0.5,
+  },
+  style: {
+    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    tile: true,
+    tileSize: 16,
+    edgeSize: 16,
+    insets: {
+      left: 4,
+      right: 4,
+      top: 4,
+      bottom: 4,
+    },
+    blue: 1,
+    red: 1,
+    alpha: 1,
+  }
+}
+
+const C_OPTIONS: ElementOptions = {
+  box: {
+    type: 'BOX_CENTER',
+    isPercent: true,
+    width: 0.5,
+    height: 0.5,
+  },
+  style: {
+    bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    tile: true,
+    tileSize: 16,
+    edgeSize: 16,
+    insets: {
+      left: 4,
+      right: 4,
+      top: 4,
+      bottom: 4,
+    },
+    green: 1,
+    alpha: 1,
+  }
+}
+
+render($ => {
+  Frame('root', ROOT_OPTIONS, [
+    Frame('b', B_OPTIONS, [
+      Frame('c', C_OPTIONS)
+    ])
+  ])
 
   // const a = Frame({
   //   id: 'a',

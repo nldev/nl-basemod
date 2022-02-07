@@ -132,10 +132,10 @@ export interface ElementOptions {
   scripts?: EventHandler[],
 }
 export const DEFAULT_ELEMENT_OPTIONS: any = {}
-export class Element<O extends ElementOptions = ElementOptions> {
+export class Element {
   public ref: WoWAPI.Frame
 
-  constructor (public readonly id: string, options: O = DEFAULT_ELEMENT_OPTIONS, children: Element[] = []) {
+  constructor (public readonly id: string, options: ElementOptions = DEFAULT_ELEMENT_OPTIONS, children: Element[] = []) {
     this.id = id
 
     if (options.ref) {
@@ -425,8 +425,10 @@ export class Element<O extends ElementOptions = ElementOptions> {
     return this
   }
 }
-export type Component<O extends ElementOptions = ElementOptions, E extends Element = Element>
-  = (id: string, options: O) => E
+export type Component<O extends ElementOptions = ElementOptions, E extends Element = Element, C extends Element = Element>
+  = (id: string, options?: O, children?: C[]) => E
+
+export const Frame: Component = (id, options, children) => new Element(id, options, children)
 
 // import { isNil, Unique } from './utils'
 // import { Get } from './app'
