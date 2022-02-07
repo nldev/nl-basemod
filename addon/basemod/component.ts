@@ -402,25 +402,32 @@ export class Element {
   // background
   protected style: Style = { ...RESET_STYLE }
 
-  protected _Style (style: Style = this.style) {
-    style = ({
-      ...RESET_STYLE,
-      ...this.style,
-      ...style,
-      insets: {
-        ...RESET_STYLE.insets,
-        ...this.style.insets,
-        ...style.insets,
-      },
-    })
+  protected _Style (style: string | Style = this.style) {
+    if (typeof style === 'string') {
+      style = {
+        ...RESET_STYLE,
+        ...Get().styles[style],
+      }
+    } else {
+      style = {
+        ...RESET_STYLE,
+        ...this.style,
+        ...style,
+        insets: {
+          ...RESET_STYLE.insets,
+          ...this.style.insets,
+          ...style.insets,
+        },
+      }
 
-    this.ref.SetBackdrop(style as any)
-    this.ref.SetBackdropColor(style.red, style.green, style.blue, style.alpha)
+      this.ref.SetBackdrop(style as any)
+      this.ref.SetBackdropColor(style.red, style.green, style.blue, style.alpha)
+    }
 
     this.style = style
   }
 
-  public Style (style: Style = this.style) {
+  public Style (style: string | Style = this.style) {
     this._Style(style)
 
     return this
