@@ -66,15 +66,26 @@ export type Box =
   | CenterBox
   | PointBox
   | FullBox
-export interface ClickEventHandler {
-  type: WoWAPI.MouseButton
+export const EVENT_CLICK = 'EVENT_CLICK'
+export const EVENT_DRAG = 'EVENT_DRAG'
+export type ClickEvent = typeof EVENT_CLICK
+export type DragEvent = typeof EVENT_DRAG
+export interface ClickEventHandlerOptions {
+  type: ClickEvent
+  button: ClickType
   handler: FrameClickHandler
 }
-export interface DragEventHandler {
-  type: WoWAPI.MouseButton
+export interface DragEventHandlerOptions {
+  type: DragEvent
+  button: WoWAPI.MouseButton
   startHandler?: FrameDragStartHandler
   stopHandler?: FrameDragStopHandler
 }
+export type FrameClickHandler =
+  (
+    element: Element,
+    button: WoWAPI.MouseButton,
+  ) => void
 export type FrameDragStartHandler =
   (
     frame: Element,
@@ -88,15 +99,9 @@ export type FrameDragStopHandler =
     button: WoWAPI.MouseButton,
     preventDefault: typeof noop,
   ) => void
-
-export type FrameClickHandler =
-  (
-    element: Element,
-    button: WoWAPI.MouseButton,
-  ) => void
-export type EventHandler =
-  | ClickEventHandler
-  | DragEventHandler
+export type EventHandlerOptions =
+  | ClickEventHandlerOptions
+  | DragEventHandlerOptions
 export const UPDATE_FLAG_PARENT = 'UPDATE_FLAG_PARENT'
 export const UPDATE_FLAG_VISIBILITY = 'UPDATE_FLAG_VISIBILITY'
 export const UPDATE_FLAG_STYLE = 'UPDATE_FLAG_STYLE'
@@ -127,7 +132,7 @@ export interface ElementOptions {
   box?: Box,
   style?: Style,
   visibility?: boolean,
-  scripts?: EventHandler[],
+  scripts?: EventHandlerOptions[],
 }
 export const DEFAULT_ELEMENT_OPTIONS: any = {}
 export class Element {
@@ -420,11 +425,40 @@ export class Element {
   protected handlers: [] = []
 
   // FIXME
-  protected _Script (handler: EventHandler) {
-    console.log(handler)
+  protected _Script (options: EventHandlerOptions) {
+    if (options.type === 'EVENT_CLICK') {
+      this.ref.EnableMouse(true)
+      this.ref.RegisterForClicks(options.button)
+      this.ref.SetScript('OnClick', (frame, button, down) =>
+        options.handler(this, button)
+      )
+    }
+
+    if (options.type === 'EVENT_DRAG') {
+      this.ref.EnableMouse(true)
+      this.ref.RegisterForDrag(options.button)
+      this.ref.SetScript('OnDragStart', (frame, button, down) => {
+        let isPreventDefault = false
+
+        options.startHandler(this, button, () => isPreventDefault = true)
+
+        if (!isPreventDefault) {
+          this.ref.StartMoving()
+        }
+      })
+      this.ref.SetScript('OnDragStop', (frame, button, down) => {
+        let isPreventDefault = false
+
+        options.stopHandler(this, button, () => isPreventDefault = true)
+
+        if (!isPreventDefault) {
+          this.ref.StopMovingOrSizing()
+        }
+      })
+    }
   }
 
-  public Script (handler: EventHandler) {
+  public Script (handler: EventHandlerOptions) {
     this._Script(handler)
 
     return this
