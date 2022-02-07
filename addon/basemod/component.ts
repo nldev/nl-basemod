@@ -131,10 +131,11 @@ export interface ElementOptions {
   visibility?: boolean,
   scripts?: EventHandler[],
 }
-export class Element {
+export const DEFAULT_ELEMENT_OPTIONS: any = {}
+export class Element<O extends ElementOptions = ElementOptions> {
   public ref: WoWAPI.Frame
 
-  constructor (public readonly id: string, options: ElementOptions = {}, children: Element[] = []) {
+  constructor (public readonly id: string, options: O = DEFAULT_ELEMENT_OPTIONS, children: Element[] = []) {
     this.id = id
 
     if (options.ref) {
@@ -424,6 +425,8 @@ export class Element {
     return this
   }
 }
+export type Component<O extends ElementOptions = ElementOptions, E extends Element = Element>
+  = (id: string, options: O) => E
 
 // import { isNil, Unique } from './utils'
 // import { Get } from './app'
