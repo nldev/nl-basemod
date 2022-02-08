@@ -28,7 +28,6 @@ interface StyleOptions {}
 export const useStyle = (options: StyleOptions) => (frame: WoWAPI.Frame) => {
   // frame.SetBackdrop({})
   // frame.SetBackdropColor()
-  console.log('used style')
 
   return frame
 }
