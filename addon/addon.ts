@@ -1,11 +1,40 @@
+// types
+export interface Mapping<T = any> {
+  [key: string]: T
+}
+
 // app
-export const app = {}
+const app: App = {
+  frames: {},
+}
+
+export interface App {
+  frames: Mapping<WoWAPI.Frame>
+}
+
+// mods
+export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
+
+export type Use<O = any> = (o: O) => Mod
+
+export interface StyleOptions {}
+
+export const useStyle = (options: StyleOptions) => (frame: WoWAPI.Frame) => {
+  // frame.SetBackdrop({})
+  // frame.SetBackdropColor()
+
+  return frame
+}
+
+export interface BoxOptions {}
+
+export const useBox = (options: BoxOptions) => (frame: WoWAPI.Frame) => {
+  return frame
+}
 
 export const App = () => app
 
 // component
-export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
-
 export type ComponentOptions = {
   id: string
   parent?: WoWAPI.Frame
@@ -16,7 +45,12 @@ export type Component<O extends ComponentOptions = ComponentOptions> = (options:
 
 // frame
 export const Frame: Component = options => {
-  const frame = CreateFrame('Frame', options.id, options.parent || UIParent)
+  const app = App()
+
+  const frame = app.frames[options.id]
+    || CreateFrame('Frame', options.id, options.parent || UIParent)
+
+  app.frames[options.id] = frame
 
   if (typeof options.mod === 'function') {
     options.mod(frame)
@@ -26,24 +60,6 @@ export const Frame: Component = options => {
     })
   }
 
-  return frame
-}
-
-// modifiers
-export type Use<O = any> = (o: O) => Mod
-
-interface StyleOptions {}
-
-export const useStyle = (options: StyleOptions) => (frame: WoWAPI.Frame) => {
-  // frame.SetBackdrop({})
-  // frame.SetBackdropColor()
-
-  return frame
-}
-
-interface BoxOptions {}
-
-export const useBox = (options: BoxOptions) => (frame: WoWAPI.Frame) => {
   return frame
 }
 
