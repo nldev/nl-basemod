@@ -1,5 +1,5 @@
-export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame 
-export type Use<O = any> = (o: O) => Mod
+// component
+export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
 
 export type ComponentOptions = {
   id: string
@@ -9,6 +9,7 @@ export type ComponentOptions = {
 
 export type Component<O extends ComponentOptions = ComponentOptions> = (options: O) => WoWAPI.Frame
 
+// frame
 export const Frame: Component = options => {
   const frame = CreateFrame('Frame', options.id, options.parent || UIParent)
 
@@ -22,6 +23,9 @@ export const Frame: Component = options => {
 
   return frame
 }
+
+// modifiers
+export type Use<O = any> = (o: O) => Mod
 
 interface StyleOptions {}
 
@@ -38,8 +42,12 @@ export const useBox = (options: BoxOptions) => (frame: WoWAPI.Frame) => {
   return frame
 }
 
+// scroll
+
+// grid
+
+// test
 const frame = Frame({
   id: 'frame',
   mod: useStyle({}),
 })
-
