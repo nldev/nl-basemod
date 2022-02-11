@@ -41,7 +41,8 @@ export type ComponentOptions = {
   mod?: Mod | Mod[]
 }
 
-export type Component<O extends ComponentOptions = ComponentOptions> = (options: O) => WoWAPI.Frame
+export type Component<O extends ComponentOptions = ComponentOptions> =
+  (options: O) => WoWAPI.Frame
 
 // frame
 export const Frame: Component = options => {
