@@ -1,3 +1,8 @@
+// app
+export const app = {}
+
+export const App = () => app
+
 // component
 export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
 
