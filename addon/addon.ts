@@ -53,6 +53,8 @@ export const Root = () => {
   const frame = app.frames['root']
     || CreateFrame('Frame', 'root', UIParent)
 
+  frame.SetScale(1)
+
   app.frames['root'] = frame
 
   return frame
