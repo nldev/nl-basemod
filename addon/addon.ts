@@ -167,8 +167,6 @@ export class Container {
       const info = GetPlayerInfoByGUID(player)
 
       if (info[0]) {
-        console.log('hello')
-
         this.playerInfo = {
           name: info[5].toLowerCase(),
           // chrRace: info[2].toUpperCase() as CharacterRace,
