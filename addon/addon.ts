@@ -71,7 +71,7 @@ export const Frame: Component = options => {
 
   if (typeof options.mod === 'function') {
     options.mod(frame)
-  } else {
+  } else if (Array.isArray(options.mod)) {
     options.mod.forEach(fn => {
       fn(frame)
     })
