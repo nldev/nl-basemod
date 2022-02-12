@@ -197,22 +197,30 @@ export class Container {
 const container = new Container(app => {
   const root = Root()
 
-  const frame = Frame({
+  const a = Frame({
     name: 'frame',
     parent: root,
   })
 
-  frame.SetPoint('CENTER')
-  frame.SetSize(800, 800)
-  frame.SetBackdrop(BASE_BACKDROP)
-  frame.SetBackdropColor(0, 0, 0, 1)
+  a.SetPoint('CENTER')
+  a.SetSize(500, 500)
+  a.SetBackdrop(BASE_BACKDROP)
+  a.SetBackdropColor(0, 0, 0, 1)
+
+  const b = Frame({
+    name: 'b',
+    parent: a,
+  })
+
+  b.SetSize(a.GetWidth() - 30, a.GetHeight() - 30)
 
   const scroll = Scroll({
     name: 'scroll',
-    parent: frame,
+    parent: b,
   })
 
-  scroll.SetAllPoints(frame)
-  console.log('hello world')
+  scroll.SetAllPoints(a)
+
+  console.log('loaded')
 })
 
