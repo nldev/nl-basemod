@@ -38,7 +38,7 @@ export type Use<O = any> = (o: O) => Mod
 // component
 export type ComponentOptions = {
   name: string
-  parent?: WoWAPI.Frame
+  parent: WoWAPI.Frame
   mod?: Mod | Mod[]
   inherits?: string
   type?: WoWAPI.FrameType
@@ -92,7 +92,8 @@ export interface ScrollOptions extends ComponentOptions {
 
 export const Scroll: Component<ScrollOptions> = options => {
   const frame = Frame(options)
-  frame.SetSize(500, 500)
+
+  frame.SetSize(options.parent.GetWidth(), options.parent.GetHeight()) // FIXME
 
   const app = App()
 
