@@ -190,6 +190,14 @@ export class Container {
   }
 }
 
+export interface Element<T = any> {
+  name: string
+  ref: WoWAPI.Frame
+  inner: WoWAPI.Frame
+  parent: WoWAPI.Frame
+  state: T
+}
+
 const container = new Container(app => {
   const root = Root()
 
