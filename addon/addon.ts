@@ -29,12 +29,6 @@ export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
 
 export type Use<O = any> = (o: O) => Mod
 
-// a.EnableMouse(true)
-// a.RegisterForDrag('RightButton')
-// a.SetMovable(true)
-// a.SetScript('OnDragStart', f => f.StartMoving())
-// a.SetScript('OnDragStop', f => f.StopMovingOrSizing())
-
 // component
 export type ComponentOptions = {
   name: string
@@ -202,6 +196,17 @@ const container = new Container(app => {
   const a = Frame({
     name: 'frame',
     parent: root,
+  })
+
+  a.EnableMouse(true)
+  a.SetMovable(true)
+  a.RegisterForDrag('RightButton')
+  a.SetScript('OnDragStart', f => f.StartMoving())
+  a.SetScript('OnDragStop', f => f.StopMovingOrSizing())
+
+  a.SetScript('OnMouseDown', (_, button) => {
+    if (button === 'LeftButton')
+      console.log('left click')
   })
 
   a.SetPoint('CENTER')
