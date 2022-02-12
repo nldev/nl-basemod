@@ -91,6 +91,7 @@ export interface ScrollOptions extends ComponentOptions {
 
 export const Scroll: Component<ScrollOptions> = options => {
   const frame = Frame(options)
+  frame.SetSize(500, 500)
 
   const app = App()
 
@@ -123,11 +124,10 @@ export const Scroll: Component<ScrollOptions> = options => {
   scrollbar.SetPoint('TOP', scrollupbutton, 'BOTTOM', 0, -2)
   scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
 
-  frame.SetSize(frame.GetWidth() * 0.667, frame.GetHeight() * 0.667)
-
+  // frame.SetSize(frame.GetWidth() * 0.667, frame.GetHeight() * 0.667)
+  frame.SetPoint('CENTER')
 
   scrollframe.SetScrollChild(scrollchild)
-
   scrollframe.SetAllPoints(frame)
 
   scrollchild.SetSize(scrollframe.GetWidth(), options.scrollHeight || (scrollframe.GetHeight() * 2))
