@@ -65,7 +65,7 @@ export const Frame: Component = options => {
   const app = App()
 
   const frame = app.frames[options.name]
-    || CreateFrame('Frame', options.name, options.parent || UIParent)
+    || CreateFrame('Frame', options.name, options.parent || UIParent, options.inherits)
 
   app.frames[options.name] = frame
 
@@ -140,22 +140,77 @@ export const Scroll: Component<ScrollOptions> = options => {
 // grid
 
 // test
-const root = Root()
 
+// import { CharacterClass, CharacterRace, Component, Mapping, PlayerInfo } from './types'
+export class Container {
+  protected isLoaded: boolean = false
+  protected isInit: boolean = false
 
-const frame = Frame({
-  name: 'frame',
-  parent: root,
+  public root: WoWAPI.Frame
+  // public playerInfo: PlayerInfo
+  public playerInfo: any
+  public components: Mapping<Component>
+
+  constructor (protected onInit: ($: Container) => void) {
+    console.log('hello')
+
+    this.root = CreateFrame('Frame')
+
+    this.root.SetScript('OnUpdate', () => this.start())
+  }
+
+  protected start () {
+    if (this.playerInfo)
+      return
+
+    const player = UnitGUID('player')
+
+    if (player) {
+      const info = GetPlayerInfoByGUID(player)
+
+      if (info[0]) {
+        console.log('hello')
+
+        this.playerInfo = {
+          name: info[5].toLowerCase(),
+          // chrRace: info[2].toUpperCase() as CharacterRace,
+          // chrClass: info[0].toUpperCase() as CharacterClass,
+          chrRace: info[2].toUpperCase(),
+          chrClass: info[0].toUpperCase(),
+          level: info[4],
+        }
+
+        this.isLoaded = true
+
+        return this.init()
+      }
+
+      this.start()
+    }
+  }
+
+  private init () {
+    this.onInit(this)
+  }
+}
+
+const container = new Container(app => {
+  const root = Root()
+
+  const frame = Frame({
+    name: 'frame',
+    parent: root,
+  })
+
+  frame.SetPoint('CENTER')
+  frame.SetSize(800, 800)
+
+  const scroll = Scroll({
+    name: 'scroll',
+    parent: frame,
+  })
+
+  scroll.SetAllPoints(frame)
+  console.log('hello world')
 })
-
-frame.SetPoint('CENTER')
-frame.SetSize(800, 800)
-
-const scroll = Scroll({
-  name: 'scroll',
-  parent: frame,
-})
-
-scroll.SetAllPoints(frame)
-console.log('hello world')
 
