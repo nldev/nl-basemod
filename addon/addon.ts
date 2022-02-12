@@ -152,8 +152,6 @@ export class Container {
   public components: Mapping<Component>
 
   constructor (protected onInit: ($: Container) => void) {
-    console.log('hello')
-
     this.root = CreateFrame('Frame')
 
     this.root.SetScript('OnUpdate', () => this.start())
@@ -184,8 +182,6 @@ export class Container {
 
         return this.init()
       }
-
-      this.start()
     }
   }
 
