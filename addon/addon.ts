@@ -1,9 +1,21 @@
+// constants
+export const BASE_BACKDROP = {
+  bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+  edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+  tile: true, tileSize: 16, edgeSize: 16,
+  insets: { left: 4, right: 4, top: 4, bottom: 4 },
+}
+
+export const BASE_COLORS = [0, 0, 0, 1]
+
 // types
 export interface Mapping<T = any> {
   [key: string]: T
 }
 
 // app
+export const App = () => app
+
 const app: App = {
   frames: {},
 }
@@ -17,28 +29,18 @@ export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
 
 export type Use<O = any> = (o: O) => Mod
 
-export interface StyleOptions {}
-
-export const useStyle = (options: StyleOptions) => (frame: WoWAPI.Frame) => {
-  // frame.SetBackdrop({})
-  // frame.SetBackdropColor()
-
-  return frame
-}
-
-export interface BoxOptions {}
-
-export const useBox = (options: BoxOptions) => (frame: WoWAPI.Frame) => {
-  return frame
-}
-
-export const App = () => app
+// a.EnableMouse(true)
+// a.RegisterForDrag('RightButton')
+// a.SetMovable(true)
+// a.SetScript('OnDragStart', f => f.StartMoving())
+// a.SetScript('OnDragStop', f => f.StopMovingOrSizing())
 
 // component
 export type ComponentOptions = {
   id: string
   parent?: WoWAPI.Frame
   mod?: Mod | Mod[]
+  inherits?: string
 }
 
 export type Component<O extends ComponentOptions = ComponentOptions> =
@@ -65,12 +67,71 @@ export const Frame: Component = options => {
 }
 
 // scroll
+export const Scroll: Component = options => {
+  const app = App()
+
+  const frame = Frame(options)
+
+  app.frames[options.id] = frame
+
+  if (typeof options.mod === 'function') {
+    options.mod(frame)
+  } else {
+    options.mod.forEach(fn => {
+      fn(frame)
+    })
+  }
+
+  const scrollframe = Frame({
+    id: `${options.id}-scrollframe`,
+    inherits: 'UIPanelScrollFrameTemplate',
+  }) as WoWAPI.ScrollFrame
+
+  const scrollchild = Frame({
+    id: `${options.id}-scrollchild`,
+  })
+
+  const scrollbarName = scrollframe.GetName()
+
+  const scrollbar = _G[scrollbarName + 'ScrollBar']
+  const scrollupbutton = _G[scrollbarName + 'ScrollBarScrollUpButton']
+  const scrolldownbutton = _G[scrollbarName + 'ScrollBarScrollDownButton']
+
+  scrollupbutton.ClearAllPoints()
+  scrollupbutton.SetPoint('TOPRIGHT', scrollframe, 'TOPRIGHT', -2, -2)
+
+  scrolldownbutton.ClearAllPoints()
+  scrolldownbutton.SetPoint('BOTTOMRIGHT', scrollframe, 'BOTTOMRIGHT', -2, 2)
+
+  scrollbar.ClearAllPoints()
+  scrollbar.SetPoint('TOP', scrollupbutton, 'BOTTOM', 0, -2)
+  scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
+
+  frame.SetSize(frame.GetWidth() * 0.667, frame.GetHeight() * 0.667)
+
+  scrollframe.SetScrollChild(scrollchild)
+
+  scrollframe.SetAllPoints(frame)
+
+  scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
+
+  const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
+  moduleoptions.SetAllPoints(scrollchild)
+
+  // scrollframe.SetScale(0.667)
+  // moduleoptions.SetFrameLevel(2)
+
+  return frame
+}
 
 // grid
 
 // test
+const scroll = Scroll({
+  id: 'scroll',
+})
+
 const frame = Frame({
   id: 'frame',
-  mod: useStyle({}),
 })
 
