@@ -37,7 +37,7 @@ export type Use<O = any> = (o: O) => Mod
 
 // component
 export type ComponentOptions = {
-  id: string
+  name: string
   parent?: WoWAPI.Frame
   mod?: Mod | Mod[]
   inherits?: string
@@ -64,14 +64,14 @@ export const Root = () => {
 export const Frame: Component = options => {
   const app = App()
 
-  const frame = app.frames[options.id]
-    || CreateFrame('Frame', options.id, options.parent || UIParent)
+  const frame = app.frames[options.name]
+    || CreateFrame('Frame', options.name, options.parent || UIParent)
 
-  app.frames[options.id] = frame
+  app.frames[options.name] = frame
 
   if (typeof options.mod === 'function') {
     options.mod(frame)
-  } else if (Array.isArray(options.mod)) {
+  } else if (options.mod) {
     options.mod.forEach(fn => {
       fn(frame)
     })
@@ -93,23 +93,15 @@ export const Scroll: Component<ScrollOptions> = options => {
 
   const app = App()
 
-  app.frames[options.id] = frame
-
-  if (typeof options.mod === 'function') {
-    options.mod(frame)
-  } else {
-    options.mod.forEach(fn => {
-      fn(frame)
-    })
-  }
+  app.frames[options.name] = frame
 
   const scrollframe = Frame({
-    id: `${options.id}-scrollframe`,
+    name: `${options.name}-scrollframe`,
     inherits: 'UIPanelScrollFrameTemplate',
   }) as WoWAPI.ScrollFrame
 
   const scrollchild = Frame({
-    id: `${options.id}-scrollchild`,
+    name: `${options.name}-scrollchild`,
   })
 
   const scrollbarName = scrollframe.GetName()
@@ -152,7 +144,7 @@ const root = Root()
 
 
 const frame = Frame({
-  id: 'frame',
+  name: 'frame',
   parent: root,
 })
 
@@ -160,7 +152,7 @@ frame.SetPoint('CENTER')
 frame.SetSize(800, 800)
 
 const scroll = Scroll({
-  id: 'scroll',
+  name: 'scroll',
   parent: frame,
 })
 
