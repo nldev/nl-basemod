@@ -1,3 +1,4 @@
+// import { CharacterClass, CharacterRace, Component, Mapping, PlayerInfo } from './types'
 // constants
 export const BASE_BACKDROP = {
   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -13,15 +14,65 @@ export interface Mapping<T = any> {
   [key: string]: T
 }
 
-// app
-export const App = () => app
-
-const app: App = {
-  frames: {},
+export interface Element<T = any> {
+  name: string
+  ref: WoWAPI.Frame
+  inner: WoWAPI.Frame
+  parent: WoWAPI.Frame
+  state: T
 }
 
-export interface App {
-  frames: Mapping<WoWAPI.Frame>
+// app
+export const Get: () => App = () => _G['app']
+
+export class App {
+  protected isLoaded: boolean = false
+  protected isInit: boolean = false
+
+  public root: WoWAPI.Frame
+  // public playerInfo: PlayerInfo
+  public playerInfo: any
+  public frames: Mapping<WoWAPI.Frame>
+
+  constructor (protected onInit: ($: App) => void) {
+    this.root = CreateFrame('Frame')
+
+    this.root.SetScript('OnUpdate', () => this.start())
+  }
+
+  protected start () {
+    if (this.playerInfo)
+      return
+
+    const player = UnitGUID('player')
+
+    if (player) {
+      const info = GetPlayerInfoByGUID(player)
+
+      if (info[0]) {
+        this.playerInfo = {
+          name: info[5].toLowerCase(),
+          // chrRace: info[2].toUpperCase() as CharacterRace,
+          // chrClass: info[0].toUpperCase() as CharacterClass,
+          chrRace: info[2].toUpperCase(),
+          chrClass: info[0].toUpperCase(),
+          level: info[4],
+        }
+
+        this.isLoaded = true
+
+        return this.init()
+      }
+    }
+  }
+
+  private init () {
+    console.log(this.playerInfo.name)
+    console.log(this.playerInfo.chrRace)
+    console.log(this.playerInfo.chrClass)
+    console.log(this.playerInfo.level)
+    this.onInit(this)
+  }
 }
 
 // mods
@@ -43,8 +94,7 @@ export type Component<O extends ComponentOptions = ComponentOptions> =
 
 // root
 export const Root = () => {
-  const app = App()
-
+  const app = _G['app']
   const frame = app.frames['root']
     || CreateFrame('Frame', 'root', UIParent)
 
@@ -58,7 +108,7 @@ export const Root = () => {
 
 // frame
 export const Frame: Component = options => {
-  const app = App()
+  const app = Get()
 
   const frame: WoWAPI.Frame = app.frames[options.name]
     || CreateFrame(options.type || 'Frame', options.name, options.parent || UIParent, options.inherits) as any
@@ -91,7 +141,7 @@ export const Scroll: Component<ScrollOptions> = options => {
 
   frame.SetSize(options.parent.GetWidth(), options.parent.GetHeight()) // FIXME
 
-  const app = App()
+  const app = Get()
 
   app.frames[options.name] = frame
 
@@ -140,65 +190,120 @@ export const Scroll: Component<ScrollOptions> = options => {
 }
 
 // grid
+// import { FrameOptions, Component, Element } from '../component'
+// import { Unique } from '../utils'
+
+// export interface GridOptions extends FrameOptions {
+//   itemsPerRow: number
+//   rowHeight: number
+// }
+//
+// export interface GridItemOptions extends FrameOptions {
+//   item: Element
+// }
+//
+// class GridItemElement extends Element<GridItemOptions> {
+//   public index: number
+//   public item: Element
+//
+//   protected onInit () {
+//     this.item = this.options.item
+//
+//     // if (this.strata)
+//     //   this.item.ref.SetFrameStrata(this.strata)
+//
+//     // if (this.z)
+//     //   this.item.ref.SetFrameLevel(this.z)
+//
+//     this.item.ref.SetParent(this.ref)
+//     this.item.ref.SetPoint('CENTER')
+//   }
+// }
+//
+// export class GridElement extends Element<GridOptions> {
+//   protected list: GridItemElement[] = []
+//   protected index: number = 0
+//   protected x: number = 0
+//   protected y: number = 0
+//   protected itemsPerRow: number = 3
+//
+//   protected itemWidth: number = 0
+//   protected rowHeight: number = 0
+//
+//   protected onInit () {
+//     this.itemsPerRow = this.options.itemsPerRow
+//     this.rowHeight = this.options.rowHeight || 100
+//     this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
+//   }
+//
+//   public _Attach (child: Element) {
+//     if (!this.itemWidth)
+//       return
+//
+//     const isEndOfRow = this.index === ((this.itemsPerRow || 3) - 1)
+//
+//     const element = new GridItemElement(Unique(`${this.id}-griditem`), {
+//       item: child,
+//       box: {
+//         type: 'BOX_POINT',
+//         point: 'TOPLEFT',
+//         width: this.itemWidth,
+//         height: this.rowHeight,
+//         x: this.x,
+//         y: this.y,
+//       }
+//       // z: (this.z || 0) + 1,
+//       // strata: this.strata,
+//       // size: {
+//       //   height: this.rowHeight,
+//       //   width: this.itemWidth,
+//       // },
+//     })
+//
+//     element.ref.SetParent(this.ref)
+//     element.Box()
+//
+//     // const ref = item.inner || item.ref
+//
+//     // item.ref.SetFrameStrata(this.strata)
+//     // item.ref.SetFrameLevel(this.z)
+//
+//     // if (item.inner) {
+//     //   item.ref.SetFrameStrata(this.strata)
+//     //   item.ref.SetFrameLevel(this.z)
+//     // }
+//
+//     // ref.SetFrameStrata(this.strata)
+//     // ref.SetFrameLevel(this.z)
+//
+//     if (isEndOfRow) {
+//       this.index = 0
+//       this.x = 0
+//       this.y -= (this.rowHeight * 2)
+//     } else {
+//       this.index++
+//       this.x += this.itemWidth
+//     }
+//
+//     this.list.push(element)
+//   }
+//
+//   onShow () {
+//     this.list.forEach(item => item.Show(true))
+//   }
+//
+//   onHide () {
+//     this.list.forEach(item => item.Hide(true))
+//   }
+// }
+//
+// export const Grid: Component<GridOptions> = (id, options, children) =>
+//   Get().elements[id] || new GridElement(id, options, children)
+
+
 
 // test
-
-// import { CharacterClass, CharacterRace, Component, Mapping, PlayerInfo } from './types'
-export class Container {
-  protected isLoaded: boolean = false
-  protected isInit: boolean = false
-
-  public root: WoWAPI.Frame
-  // public playerInfo: PlayerInfo
-  public playerInfo: any
-  public components: Mapping<Component>
-
-  constructor (protected onInit: ($: Container) => void) {
-    this.root = CreateFrame('Frame')
-
-    this.root.SetScript('OnUpdate', () => this.start())
-  }
-
-  protected start () {
-    if (this.playerInfo)
-      return
-
-    const player = UnitGUID('player')
-
-    if (player) {
-      const info = GetPlayerInfoByGUID(player)
-
-      if (info[0]) {
-        this.playerInfo = {
-          name: info[5].toLowerCase(),
-          // chrRace: info[2].toUpperCase() as CharacterRace,
-          // chrClass: info[0].toUpperCase() as CharacterClass,
-          chrRace: info[2].toUpperCase(),
-          chrClass: info[0].toUpperCase(),
-          level: info[4],
-        }
-
-        this.isLoaded = true
-
-        return this.init()
-      }
-    }
-  }
-
-  private init () {
-    this.onInit(this)
-  }
-}
-
-export interface Element<T = any> {
-  name: string
-  ref: WoWAPI.Frame
-  inner: WoWAPI.Frame
-  parent: WoWAPI.Frame
-  state: T
-}
-
-const container = new Container(app => {
+_G['app'] = new App(app => {
   const root = Root()
 
   const a = Frame({
