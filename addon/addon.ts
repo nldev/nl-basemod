@@ -46,6 +46,18 @@ export type ComponentOptions = {
 export type Component<O extends ComponentOptions = ComponentOptions> =
   (options: O) => WoWAPI.Frame
 
+// root
+export const Root = () => {
+  const app = App()
+
+  const frame = app.frames['root']
+    || CreateFrame('Frame', 'root', UIParent)
+
+  app.frames['root'] = frame
+
+  return frame
+}
+
 // frame
 export const Frame: Component = options => {
   const app = App()
@@ -67,7 +79,11 @@ export const Frame: Component = options => {
 }
 
 // scroll
-export const Scroll: Component = options => {
+export interface ScrollOptions extends ComponentOptions {
+  scrollHeight?: number
+}
+
+export const Scroll: Component<ScrollOptions> = options => {
   const app = App()
 
   const frame = Frame(options)
@@ -113,7 +129,7 @@ export const Scroll: Component = options => {
 
   scrollframe.SetAllPoints(frame)
 
-  scrollchild.SetSize(scrollframe.GetWidth(), (scrollframe.GetHeight() * 2))
+  scrollchild.SetSize(scrollframe.GetWidth(), options.scrollHeight || (scrollframe.GetHeight() * 2))
 
   const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
   moduleoptions.SetAllPoints(scrollchild)
@@ -127,11 +143,20 @@ export const Scroll: Component = options => {
 // grid
 
 // test
+const root = Root()
+
+
+const frame = Frame({
+  id: 'frame',
+  parent: root,
+})
+
+frame.SetPoint('CENTER')
+frame.SetSize(800, 800)
+
 const scroll = Scroll({
   id: 'scroll',
 })
 
-const frame = Frame({
-  id: 'frame',
-})
+scroll.SetAllPoints(frame)
 
