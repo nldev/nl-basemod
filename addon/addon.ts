@@ -75,6 +75,9 @@ export const Frame: Component = options => {
     })
   }
 
+  if (options.parent)
+    frame.SetParent(options.parent)
+
   return frame
 }
 
@@ -84,9 +87,9 @@ export interface ScrollOptions extends ComponentOptions {
 }
 
 export const Scroll: Component<ScrollOptions> = options => {
-  const app = App()
-
   const frame = Frame(options)
+
+  const app = App()
 
   app.frames[options.id] = frame
 
@@ -156,7 +159,9 @@ frame.SetSize(800, 800)
 
 const scroll = Scroll({
   id: 'scroll',
+  parent: frame,
 })
 
 scroll.SetAllPoints(frame)
+console.log('hello world')
 
