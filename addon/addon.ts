@@ -41,6 +41,7 @@ export type ComponentOptions = {
   parent?: WoWAPI.Frame
   mod?: Mod | Mod[]
   inherits?: string
+  type?: WoWAPI.FrameType
 }
 
 export type Component<O extends ComponentOptions = ComponentOptions> =
@@ -64,8 +65,8 @@ export const Root = () => {
 export const Frame: Component = options => {
   const app = App()
 
-  const frame = app.frames[options.name]
-    || CreateFrame('Frame', options.name, options.parent || UIParent, options.inherits)
+  const frame: WoWAPI.Frame = app.frames[options.name]
+    || CreateFrame(options.type || 'Frame', options.name, options.parent || UIParent, options.inherits) as any
 
   app.frames[options.name] = frame
 
@@ -98,6 +99,8 @@ export const Scroll: Component<ScrollOptions> = options => {
   const scrollframe = Frame({
     name: `${options.name}-scrollframe`,
     inherits: 'UIPanelScrollFrameTemplate',
+    type: 'ScrollFrame',
+    parent: frame,
   }) as WoWAPI.ScrollFrame
 
   const scrollchild = Frame({
@@ -121,6 +124,7 @@ export const Scroll: Component<ScrollOptions> = options => {
   scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
 
   frame.SetSize(frame.GetWidth() * 0.667, frame.GetHeight() * 0.667)
+
 
   scrollframe.SetScrollChild(scrollchild)
 
@@ -191,6 +195,11 @@ export class Container {
 const container = new Container(app => {
   const root = Root()
 
+  root.SetPoint('CENTER')
+  root.SetSize(800, 800)
+  root.SetBackdrop(BASE_BACKDROP)
+  root.SetBackdropColor(0, 0, 0, 1)
+
   const frame = Frame({
     name: 'frame',
     parent: root,
@@ -198,6 +207,8 @@ const container = new Container(app => {
 
   frame.SetPoint('CENTER')
   frame.SetSize(800, 800)
+  frame.SetBackdrop(BASE_BACKDROP)
+  frame.SetBackdropColor(0, 0, 0, 1)
 
   const scroll = Scroll({
     name: 'scroll',
