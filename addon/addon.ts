@@ -55,6 +55,7 @@ export const Root = () => {
     || CreateFrame('Frame', 'root', UIParent)
 
   frame.SetScale(1)
+  frame.SetAllPoints(UIParent)
 
   app.frames['root'] = frame
 
@@ -194,11 +195,6 @@ export class Container {
 
 const container = new Container(app => {
   const root = Root()
-
-  root.SetPoint('CENTER')
-  root.SetSize(800, 800)
-  root.SetBackdrop(BASE_BACKDROP)
-  root.SetBackdropColor(0, 0, 0, 1)
 
   const frame = Frame({
     name: 'frame',
