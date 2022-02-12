@@ -93,6 +93,8 @@ export interface ScrollOptions extends ComponentOptions {
 export const Scroll: Component<ScrollOptions> = options => {
   const frame = Frame(options)
 
+  frame.SetAllPoints(frame.GetParent() as WoWAPI.Frame)
+
   frame.SetSize(options.parent.GetWidth(), options.parent.GetHeight()) // FIXME
 
   const app = App()
@@ -212,15 +214,12 @@ const container = new Container(app => {
     parent: a,
   })
 
-  b.SetSize(a.GetWidth() - 30, a.GetHeight() - 30)
+  b.SetSize(a.GetWidth() - 60, a.GetHeight() - 60)
+  b.SetPoint('CENTER')
 
   const scroll = Scroll({
     name: 'scroll',
     parent: b,
   })
-
-  scroll.SetAllPoints(a)
-
-  console.log('loaded')
 })
 
