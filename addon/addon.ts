@@ -14,14 +14,6 @@ export interface Mapping<T = any> {
   [key: string]: T
 }
 
-export interface Element<T = any> {
-  name: string
-  ref: WoWAPI.Frame
-  inner: WoWAPI.Frame
-  parent: WoWAPI.Frame
-  state: T
-}
-
 // app
 export const Get: () => App = () => _G['app']
 
@@ -75,16 +67,24 @@ export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
 export type Use<O = any> = (o: O) => Mod
 
 // component
+export interface Element<T = any> {
+  name: string
+  ref: WoWAPI.Frame
+  inner: WoWAPI.Frame
+  parent: Element
+  state: T
+}
+
 export type ComponentOptions = {
   name: string
-  parent?: WoWAPI.Frame
+  parent?: Element
   mod?: Mod | Mod[]
   inherits?: string
   type?: WoWAPI.FrameType
 }
 
-export type Component<O extends ComponentOptions = ComponentOptions> =
-  (options: O) => WoWAPI.Frame
+export type Component<O extends ComponentOptions = ComponentOptions, T = any> =
+  (options: O) => Element<T>
 
 // root
 export const Root = () => {
@@ -104,8 +104,9 @@ export const Root = () => {
 export const Frame: Component = options => {
   const app = Get()
 
+  const parent = options.parent
   const frame: WoWAPI.Frame = app.frames[options.name]
-    || CreateFrame(options.type || 'Frame', options.name, options.parent || UIParent, options.inherits) as any
+    || CreateFrame(options.type || 'Frame', options.name, parent.inner || UIParent, options.inherits) as any
 
   app.frames[options.name] = frame
 
@@ -118,9 +119,15 @@ export const Frame: Component = options => {
   }
 
   if (options.parent)
-    frame.SetParent(options.parent)
+    frame.SetParent(options.parent.inner)
 
-  return frame
+  return {
+    parent,
+    name: options.name,
+    ref: frame,
+    inner: frame,
+    state: {},
+  }
 }
 
 // scroll
@@ -129,11 +136,12 @@ export interface ScrollOptions extends ComponentOptions {
 }
 
 export const Scroll: Component<ScrollOptions> = options => {
-  const frame = Frame(options)
+  const state = { ...Frame(options) }
+  const frame = state.inner
 
   frame.SetAllPoints(frame.GetParent() as WoWAPI.Frame)
 
-  frame.SetSize(options.parent.GetWidth(), options.parent.GetHeight()) // FIXME
+  frame.SetSize(options.parent.inner.GetWidth(), options.parent.inner.GetHeight()) // FIXME
 
   const app = Get()
 
@@ -143,12 +151,12 @@ export const Scroll: Component<ScrollOptions> = options => {
     name: `${options.name}-scrollframe`,
     inherits: 'UIPanelScrollFrameTemplate',
     type: 'ScrollFrame',
-    parent: frame,
-  }) as WoWAPI.ScrollFrame
+    parent: state,
+  }).ref as WoWAPI.ScrollFrame
 
   const scrollchild = Frame({
     name: `${options.name}-scrollchild`,
-  })
+  }).ref
 
   const scrollbarName = scrollframe.GetName()
 
@@ -180,7 +188,7 @@ export const Scroll: Component<ScrollOptions> = options => {
   // scrollframe.SetScale(0.667)
   // moduleoptions.SetFrameLevel(2)
 
-  return frame
+  return state
 }
 
 // grid
@@ -288,29 +296,29 @@ const app = new App(app => {
     parent: root,
   })
 
-  a.EnableMouse(true)
-  a.SetMovable(true)
-  a.RegisterForDrag('RightButton')
-  a.SetScript('OnDragStart', f => f.StartMoving())
-  a.SetScript('OnDragStop', f => f.StopMovingOrSizing())
+  a.inner.EnableMouse(true)
+  a.inner.SetMovable(true)
+  a.inner.RegisterForDrag('RightButton')
+  a.inner.SetScript('OnDragStart', f => f.StartMoving())
+  a.inner.SetScript('OnDragStop', f => f.StopMovingOrSizing())
 
-  a.SetScript('OnMouseDown', (_, button) => {
+  a.inner.SetScript('OnMouseDown', (_, button) => {
     if (button === 'LeftButton')
       console.log('left click')
   })
 
-  a.SetPoint('CENTER')
-  a.SetSize(500, 500)
-  a.SetBackdrop(BASE_BACKDROP)
-  a.SetBackdropColor(0, 0, 0, 1)
+  a.inner.SetPoint('CENTER')
+  a.inner.SetSize(500, 500)
+  a.inner.SetBackdrop(BASE_BACKDROP)
+  a.inner.SetBackdropColor(0, 0, 0, 1)
 
   const b = Frame({
     name: 'b',
     parent: a,
   })
 
-  b.SetSize(a.GetWidth() - 60, a.GetHeight() - 60)
-  b.SetPoint('CENTER')
+  b.inner.SetSize(a.inner.GetWidth() - 60, a.inner.GetHeight() - 60)
+  b.inner.SetPoint('CENTER')
 
   const scroll = Scroll({
     name: 'scroll',
