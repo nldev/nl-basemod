@@ -24,7 +24,7 @@ export class App {
   public root: WoWAPI.Frame
   // public playerInfo: PlayerInfo
   public playerInfo: any
-  public frames: Mapping<WoWAPI.Frame>
+  public frames: Mapping<WoWAPI.Frame> = {}
 
   constructor (protected onInit: ($: App) => void) {
     this.root = CreateFrame('Frame')
