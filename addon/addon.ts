@@ -61,17 +61,11 @@ export class App {
 
         this.isLoaded = true
 
-        return this.init()
+        _G['app'] = this
+
+        return this.onInit(this)
       }
     }
-  }
-
-  private init () {
-    console.log(this.playerInfo.name)
-    console.log(this.playerInfo.chrRace)
-    console.log(this.playerInfo.chrClass)
-    console.log(this.playerInfo.level)
-    this.onInit(this)
   }
 }
 
@@ -190,120 +184,103 @@ export const Scroll: Component<ScrollOptions> = options => {
 }
 
 // grid
-// import { FrameOptions, Component, Element } from '../component'
-// import { Unique } from '../utils'
+export interface GridOptions extends ComponentOptions {
+  itemsPerRow: number
+  rowHeight: number
+}
 
-// export interface GridOptions extends FrameOptions {
-//   itemsPerRow: number
-//   rowHeight: number
-// }
-//
-// export interface GridItemOptions extends FrameOptions {
-//   item: Element
-// }
-//
-// class GridItemElement extends Element<GridItemOptions> {
-//   public index: number
-//   public item: Element
-//
-//   protected onInit () {
-//     this.item = this.options.item
-//
-//     // if (this.strata)
-//     //   this.item.ref.SetFrameStrata(this.strata)
-//
-//     // if (this.z)
-//     //   this.item.ref.SetFrameLevel(this.z)
-//
-//     this.item.ref.SetParent(this.ref)
-//     this.item.ref.SetPoint('CENTER')
-//   }
-// }
-//
-// export class GridElement extends Element<GridOptions> {
-//   protected list: GridItemElement[] = []
-//   protected index: number = 0
-//   protected x: number = 0
-//   protected y: number = 0
-//   protected itemsPerRow: number = 3
-//
-//   protected itemWidth: number = 0
-//   protected rowHeight: number = 0
-//
-//   protected onInit () {
-//     this.itemsPerRow = this.options.itemsPerRow
-//     this.rowHeight = this.options.rowHeight || 100
-//     this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
-//   }
-//
-//   public _Attach (child: Element) {
-//     if (!this.itemWidth)
-//       return
-//
-//     const isEndOfRow = this.index === ((this.itemsPerRow || 3) - 1)
-//
-//     const element = new GridItemElement(Unique(`${this.id}-griditem`), {
-//       item: child,
-//       box: {
-//         type: 'BOX_POINT',
-//         point: 'TOPLEFT',
-//         width: this.itemWidth,
-//         height: this.rowHeight,
-//         x: this.x,
-//         y: this.y,
-//       }
-//       // z: (this.z || 0) + 1,
-//       // strata: this.strata,
-//       // size: {
-//       //   height: this.rowHeight,
-//       //   width: this.itemWidth,
-//       // },
-//     })
-//
-//     element.ref.SetParent(this.ref)
-//     element.Box()
-//
-//     // const ref = item.inner || item.ref
-//
-//     // item.ref.SetFrameStrata(this.strata)
-//     // item.ref.SetFrameLevel(this.z)
-//
-//     // if (item.inner) {
-//     //   item.ref.SetFrameStrata(this.strata)
-//     //   item.ref.SetFrameLevel(this.z)
-//     // }
-//
-//     // ref.SetFrameStrata(this.strata)
-//     // ref.SetFrameLevel(this.z)
-//
-//     if (isEndOfRow) {
-//       this.index = 0
-//       this.x = 0
-//       this.y -= (this.rowHeight * 2)
-//     } else {
-//       this.index++
-//       this.x += this.itemWidth
-//     }
-//
-//     this.list.push(element)
-//   }
-//
-//   onShow () {
-//     this.list.forEach(item => item.Show(true))
-//   }
-//
-//   onHide () {
-//     this.list.forEach(item => item.Hide(true))
-//   }
-// }
-//
-// export const Grid: Component<GridOptions> = (id, options, children) =>
-//   Get().elements[id] || new GridElement(id, options, children)
+export interface GridItemOptions extends ComponentOptions {
+  item: Element
+}
 
+export const GridItemElement: Component<GridItemOptions> = options => {
+  const frame = Frame({ name: options.name })
 
+  return frame
+}
+
+export const GridElement: Component<GridOptions> = options => {
+  const frame = Frame({ name: options.name })
+
+  return frame
+  // protected list: GridItemElement[] = []
+  // protected index: number = 0
+  // protected x: number = 0
+  // protected y: number = 0
+  // protected itemsPerRow: number = 3
+
+  // protected itemWidth: number = 0
+  // protected rowHeight: number = 0
+
+  // protected onInit () {
+  //   this.itemsPerRow = this.options.itemsPerRow
+  //   this.rowHeight = this.options.rowHeight || 100
+  //   this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
+  // }
+
+  // public _Attach (child: Element) {
+  //   if (!this.itemWidth)
+  //     return
+
+  //   const isEndOfRow = this.index === ((this.itemsPerRow || 3) - 1)
+
+  //   const element = new GridItemElement(Unique(`${this.id}-griditem`), {
+  //     item: child,
+  //     box: {
+  //       type: 'BOX_POINT',
+  //       point: 'TOPLEFT',
+  //       width: this.itemWidth,
+  //       height: this.rowHeight,
+  //       x: this.x,
+  //       y: this.y,
+  //     }
+  //     // z: (this.z || 0) + 1,
+  //     // strata: this.strata,
+  //     // size: {
+  //     //   height: this.rowHeight,
+  //     //   width: this.itemWidth,
+  //     // },
+  //   })
+
+  //   element.ref.SetParent(this.ref)
+  //   element.Box()
+
+  //   // const ref = item.inner || item.ref
+
+  //   // item.ref.SetFrameStrata(this.strata)
+  //   // item.ref.SetFrameLevel(this.z)
+
+  //   // if (item.inner) {
+  //   //   item.ref.SetFrameStrata(this.strata)
+  //   //   item.ref.SetFrameLevel(this.z)
+  //   // }
+
+  //   // ref.SetFrameStrata(this.strata)
+  //   // ref.SetFrameLevel(this.z)
+
+  //   if (isEndOfRow) {
+  //     this.index = 0
+  //     this.x = 0
+  //     this.y -= (this.rowHeight * 2)
+  //   } else {
+  //     this.index++
+  //     this.x += this.itemWidth
+  //   }
+
+  //   this.list.push(element)
+  // }
+
+  // onShow () {
+  //   this.list.forEach(item => item.Show(true))
+  // }
+
+  // onHide () {
+  //   this.list.forEach(item => item.Hide(true))
+  // }
+}
 
 // test
-_G['app'] = new App(app => {
+const app = new App(app => {
   const root = Root()
 
   const a = Frame({
