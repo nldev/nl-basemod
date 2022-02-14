@@ -380,5 +380,12 @@ const app = new App(app => {
     name: 'scroll',
     parent: b,
   })
+
+  scroll.inner.SetScript('OnLoad', () => {
+    const { name, level, chrRace, chrClass } = app.playerInfo
+
+    console.log(`${name} ${level} ${chrRace} ${chrClass}`)
+  })
 })
+
 
