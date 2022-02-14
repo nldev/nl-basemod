@@ -120,12 +120,13 @@ export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
 export type Use<O = any> = (o: O) => Mod
 
 // component
-export interface Element<T = any> {
+export interface Element<S = any, M = any> {
   name: string
   ref: WoWAPI.Frame
   inner: WoWAPI.Frame
   parent: Element
-  state: T
+  state: S
+  methods: M
 }
 
 export type ComponentOptions = {
@@ -134,6 +135,8 @@ export type ComponentOptions = {
   mod?: Mod | Mod[]
   inherits?: string
   type?: WoWAPI.FrameType
+  state?: Mapping
+  methods?: Mapping
 }
 
 export type Component<O extends ComponentOptions = ComponentOptions, T = any> =
@@ -155,6 +158,7 @@ export const Root = (ref?: WoWAPI.Frame) => {
     inner: frame,
     parent: null as Element,
     state: {},
+    methods: {},
   }
 }
 
@@ -184,7 +188,8 @@ export const Frame: Component = options => {
     name: options.name,
     ref: frame,
     inner: frame,
-    state: {},
+    state: options.state,
+    methods: options.methods,
   }
 }
 
@@ -257,14 +262,34 @@ export interface GridItemOptions extends ComponentOptions {
   item: Element
 }
 
+export interface GridState {
+  itemsPerRow: number
+  rowHeight: number
+  itemWidth: number
+  list: Element[]
+  index: number
+  x: number
+  y: number
+}
+
 export const GridItemElement: Component<GridItemOptions> = options => {
   const frame = Frame({ name: options.name })
 
   return frame
 }
 
-export const GridElement: Component<GridOptions> = options => {
-  const frame = Frame({ name: options.name })
+export const GridElement: Component<GridOptions, GridState> = options => {
+  const frame = Frame(options)
+
+  frame.state = {
+    itemsPerRow: options.itemsPerRow,
+    rowHeight: options.rowHeight,
+    itemWidth: frame.ref.GetWidth() / options.itemsPerRow,
+    list: [],
+    index: 0,
+    x: 0,
+    y: 0,
+  }
 
   return frame
   // protected list: GridItemElement[] = []
