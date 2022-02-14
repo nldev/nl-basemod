@@ -381,10 +381,8 @@ const app = new App(app => {
     parent: b,
   })
 
-  scroll.inner.SetScript('OnLoad', () => {
-    const { name, level, chrRace, chrClass } = app.playerInfo
+  const { name, level, chrRace, chrClass } = app.playerInfo
 
-    console.log(`${name} ${level} ${chrRace} ${chrClass}`)
-  })
+  console.log(`${name} ${level} ${chrRace} ${chrClass}`)
 })
 
