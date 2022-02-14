@@ -191,9 +191,6 @@ export const Scroll: Component<ScrollOptions> = options => {
   const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
   moduleoptions.SetAllPoints(scrollchild)
 
-  // scrollframe.SetScale(0.667)
-  // moduleoptions.SetFrameLevel(2)
-
   return a
 }
 
