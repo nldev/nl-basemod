@@ -92,7 +92,6 @@ export const Root = () => {
   const frame = app.frames['root']
     || CreateFrame('Frame', 'root', UIParent)
 
-  UIParent.SetScale(1)
   frame.SetScale(1)
   frame.SetAllPoints(UIParent)
 
@@ -137,8 +136,8 @@ export interface ScrollOptions extends ComponentOptions {
 }
 
 export const Scroll: Component<ScrollOptions> = options => {
-  const state = { ...Frame(options) }
-  const frame = state.inner
+  const a = Frame(options)
+  const frame = a.inner
 
   frame.SetAllPoints(frame.GetParent() as WoWAPI.Frame)
 
@@ -152,24 +151,27 @@ export const Scroll: Component<ScrollOptions> = options => {
     name: `${options.name}-scrollframe`,
     inherits: 'UIPanelScrollFrameTemplate',
     type: 'ScrollFrame',
-    parent: state,
-  }).ref as WoWAPI.ScrollFrame
+    parent: a,
+  })
+
+  const ref = scrollframe.ref as WoWAPI.ScrollFrame
 
   const scrollchild = Frame({
     name: `${options.name}-scrollchild`,
+    parent: scrollframe,
   }).ref
 
-  const scrollbarName = scrollframe.GetName()
+  const scrollbarName = ref.GetName()
 
   const scrollbar = _G[scrollbarName + 'ScrollBar']
   const scrollupbutton = _G[scrollbarName + 'ScrollBarScrollUpButton']
   const scrolldownbutton = _G[scrollbarName + 'ScrollBarScrollDownButton']
 
   scrollupbutton.ClearAllPoints()
-  scrollupbutton.SetPoint('TOPRIGHT', scrollframe, 'TOPRIGHT', -2, -2)
+  scrollupbutton.SetPoint('TOPRIGHT', scrollframe.ref, 'TOPRIGHT', -2, -2)
 
   scrolldownbutton.ClearAllPoints()
-  scrolldownbutton.SetPoint('BOTTOMRIGHT', scrollframe, 'BOTTOMRIGHT', -2, 2)
+  scrolldownbutton.SetPoint('BOTTOMRIGHT', scrollframe.ref, 'BOTTOMRIGHT', -2, 2)
 
   scrollbar.ClearAllPoints()
   scrollbar.SetPoint('TOP', scrollupbutton, 'BOTTOM', 0, -2)
@@ -178,10 +180,10 @@ export const Scroll: Component<ScrollOptions> = options => {
   // frame.SetSize(frame.GetWidth() * 0.667, frame.GetHeight() * 0.667)
   frame.SetPoint('CENTER')
 
-  scrollframe.SetScrollChild(scrollchild)
-  scrollframe.SetAllPoints(frame)
+  ref.SetScrollChild(scrollchild)
+  ref.SetAllPoints(frame)
 
-  scrollchild.SetSize(scrollframe.GetWidth(), options.scrollHeight || (scrollframe.GetHeight() * 2))
+  scrollchild.SetSize(ref.GetWidth(), options.scrollHeight || ref.GetHeight() * 2)
 
   const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
   moduleoptions.SetAllPoints(scrollchild)
@@ -189,7 +191,7 @@ export const Scroll: Component<ScrollOptions> = options => {
   // scrollframe.SetScale(0.667)
   // moduleoptions.SetFrameLevel(2)
 
-  return state
+  return a
 }
 
 // grid
