@@ -28,6 +28,7 @@ export class App {
 
   constructor (protected onInit: ($: App) => void) {
     const root = CreateFrame('Frame', 'root', UIParent)
+
     root.SetScript('OnUpdate', () => this.start(root))
   }
 
