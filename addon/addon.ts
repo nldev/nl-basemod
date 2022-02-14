@@ -120,13 +120,15 @@ export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
 export type Use<O = any> = (o: O) => Mod
 
 // component
-export interface Element<S = any, M = any> {
+export type ElementFn<S = Mapping> = (element: Element<S>) => void
+
+export interface Element<S = Mapping, F = Mapping<ElementFn>> {
   name: string
   ref: WoWAPI.Frame
   inner: WoWAPI.Frame
   parent: Element
   state: S
-  methods: M
+  fns: F
 }
 
 export type ComponentOptions = {
@@ -136,11 +138,14 @@ export type ComponentOptions = {
   inherits?: string
   type?: WoWAPI.FrameType
   state?: Mapping
-  methods?: Mapping
+  fns?: Mapping<ElementFn>
 }
 
-export type Component<O extends ComponentOptions = ComponentOptions, T = any> =
-  (options: O) => Element<T>
+export type Component<
+  O extends ComponentOptions = ComponentOptions,
+  S = Mapping,
+  F = Mapping<ElementFn>,
+> = (options: O) => Element<S, F>
 
 // root
 export const Root = (ref?: WoWAPI.Frame) => {
@@ -158,7 +163,7 @@ export const Root = (ref?: WoWAPI.Frame) => {
     inner: frame,
     parent: null as Element,
     state: {},
-    methods: {},
+    fns: {},
   }
 }
 
@@ -189,7 +194,7 @@ export const Frame: Component = options => {
     ref: frame,
     inner: frame,
     state: options.state,
-    methods: options.methods,
+    fns: options.fns,
   }
 }
 
@@ -272,14 +277,18 @@ export interface GridState {
   y: number
 }
 
+export interface GridFns {
+
+}
+
 export const GridItemElement: Component<GridItemOptions> = options => {
   const frame = Frame({ name: options.name })
 
   return frame
 }
 
-export const GridElement: Component<GridOptions, GridState> = options => {
-  const frame = Frame(options)
+export const GridElement: Component<GridOptions, GridState, GridFns> = options => {
+  const frame: Element<GridState, GridFns>  = Frame(options) as any
 
   frame.state = {
     itemsPerRow: options.itemsPerRow,
@@ -290,6 +299,8 @@ export const GridElement: Component<GridOptions, GridState> = options => {
     x: 0,
     y: 0,
   }
+
+  frame.fns = {}
 
   return frame
   // protected list: GridItemElement[] = []
