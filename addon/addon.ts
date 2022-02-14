@@ -21,15 +21,15 @@ export class App {
   protected isLoaded: boolean = false
   protected isInit: boolean = false
 
-  public root: WoWAPI.Frame
+  public root: Element
   // public playerInfo: PlayerInfo
   public playerInfo: any
   public frames: Mapping<WoWAPI.Frame> = {}
 
   constructor (protected onInit: ($: App) => void) {
-    this.root = CreateFrame('Frame')
+    this.root = Root()
 
-    this.root.SetScript('OnUpdate', () => this.start())
+    this.root.ref.SetScript('OnUpdate', () => this.start())
   }
 
   protected start () {
@@ -111,7 +111,7 @@ export const Frame: Component = options => {
 
   const parent = options.parent
   const frame: WoWAPI.Frame = app.frames[options.name]
-    || CreateFrame(options.type || 'Frame', options.name, parent ? parent.inner : UIParent, options.inherits) as any
+    || CreateFrame(options.type || 'Frame', options.name, parent ? parent.inner : app.root.ref, (options.inherits)) as WoWAPI.Frame
 
   app.frames[options.name] = frame
 
