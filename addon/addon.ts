@@ -92,12 +92,17 @@ export const Root = () => {
   const frame = app.frames['root']
     || CreateFrame('Frame', 'root', UIParent)
 
-  frame.SetScale(1)
   frame.SetAllPoints(UIParent)
 
   app.frames['root'] = frame
 
-  return frame
+  return {
+    name: 'root',
+    ref: frame,
+    inner: frame,
+    parent: null as Element,
+    state: {},
+  }
 }
 
 // frame
@@ -140,7 +145,6 @@ export const Scroll: Component<ScrollOptions> = options => {
   const frame = a.inner
 
   frame.SetAllPoints(frame.GetParent() as WoWAPI.Frame)
-  frame.SetScale(1)
 
   const app = Get()
 
