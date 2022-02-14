@@ -140,8 +140,7 @@ export const Scroll: Component<ScrollOptions> = options => {
   const frame = a.inner
 
   frame.SetAllPoints(frame.GetParent() as WoWAPI.Frame)
-
-  frame.SetSize(options.parent.inner.GetWidth(), options.parent.inner.GetHeight()) // FIXME
+  frame.SetScale(1)
 
   const app = Get()
 
