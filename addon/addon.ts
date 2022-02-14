@@ -14,6 +14,59 @@ export interface Mapping<T = any> {
   [key: string]: T
 }
 
+export const ROOT = 'ROOT'
+
+export const HUMAN = 'HUMAN'
+export const ORC = 'ORC'
+export const DWARF = 'DWARF'
+export const NIGHT_ELF = 'NIGHT_ELF'
+export const UNDEAD = 'UNDEAD'
+export const TAUREN = 'TAUREN'
+export const GNOME = 'GNOME'
+export const TROLL = 'TROLL'
+export const BLOOD_ELF = 'BLOOD_ELF'
+export const DRAENEI = 'DRAENEI'
+
+export const WARRIOR = 'WARRIOR'
+export const ROGUE = 'ROGUE'
+export const DRUID = 'DRUID'
+export const MAGE = 'MAGE'
+export const WARLOCK = 'WARLOCK'
+export const SHAMAN = 'SHAMAN'
+export const PRIEST = 'PRIEST'
+export const PALADIN = 'PALADIN'
+export const HUNTER = 'HUNTER'
+
+export type CharacterClass =
+  | typeof WARRIOR
+  | typeof ROGUE
+  | typeof DRUID
+  | typeof MAGE
+  | typeof WARLOCK
+  | typeof SHAMAN
+  | typeof PRIEST
+  | typeof PALADIN
+  | typeof HUNTER
+
+export type CharacterRace =
+  | typeof HUMAN
+  | typeof ORC
+  | typeof DWARF
+  | typeof NIGHT_ELF
+  | typeof UNDEAD
+  | typeof TAUREN
+  | typeof GNOME
+  | typeof TROLL
+  | typeof BLOOD_ELF
+  | typeof DRAENEI
+
+export interface PlayerInfo {
+  name: string
+  chrRace: string
+  chrClass: string
+  level: number
+}
+
 // app
 export const Get: () => App = () => _G['app']
 
@@ -27,7 +80,7 @@ export class App {
   public frames: Mapping<WoWAPI.Frame> = {}
 
   constructor (protected onInit: ($: App) => void) {
-    const root = CreateFrame('Frame', 'root', UIParent)
+    const root = CreateFrame('Frame', ROOT, UIParent)
 
     root.SetScript('OnUpdate', () => {
       if (!this.isLoaded)
@@ -93,15 +146,15 @@ export type Component<O extends ComponentOptions = ComponentOptions, T = any> =
 // root
 export const Root = (ref?: WoWAPI.Frame) => {
   const app = _G['app']
-  const frame = app.frames['root']
+  const frame = app.frames[ROOT]
     || ref
 
   frame.SetAllPoints(UIParent)
 
-  app.frames['root'] = frame
+  app.frames[ROOT] = frame
 
   return {
-    name: 'root',
+    name: ROOT,
     ref: frame,
     inner: frame,
     parent: null as Element,
