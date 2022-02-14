@@ -106,7 +106,7 @@ export const Frame: Component = options => {
 
   const parent = options.parent
   const frame: WoWAPI.Frame = app.frames[options.name]
-    || CreateFrame(options.type || 'Frame', options.name, parent.inner || UIParent, options.inherits) as any
+    || CreateFrame(options.type || 'Frame', options.name, parent ? parent.inner : UIParent, options.inherits) as any
 
   app.frames[options.name] = frame
 
