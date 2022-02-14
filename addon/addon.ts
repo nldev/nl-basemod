@@ -76,7 +76,7 @@ export class App {
 
   public root: Element
   // public playerInfo: PlayerInfo
-  public playerInfo: any
+  public playerInfo: PlayerInfo
   public frames: Mapping<WoWAPI.Frame> = {}
 
   constructor (protected onInit: ($: App) => void) {
@@ -100,10 +100,8 @@ export class App {
       if (info[0]) {
         this.playerInfo = {
           name: info[5].toLowerCase(),
-          // chrRace: info[2].toUpperCase() as CharacterRace,
-          // chrClass: info[0].toUpperCase() as CharacterClass,
-          chrRace: info[2].toUpperCase(),
-          chrClass: info[0].toUpperCase(),
+          chrRace: info[2].toUpperCase() as CharacterRace,
+          chrClass: info[0].toUpperCase() as CharacterClass,
           level: info[4],
         }
 
