@@ -50,11 +50,10 @@ export class App {
           level: info[4],
         }
 
-        this.isLoaded = true
-
         _G['app'] = this
 
         this.root = Root()
+        this.isLoaded = true
 
         return this.onInit(this)
       }
