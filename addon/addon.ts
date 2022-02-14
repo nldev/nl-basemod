@@ -27,7 +27,6 @@ export class App {
   public frames: Mapping<WoWAPI.Frame> = {}
 
   constructor (protected onInit: ($: App) => void) {
-    this.root = Root()
 
     this.root.ref.SetScript('OnUpdate', () => this.start())
   }
@@ -54,6 +53,8 @@ export class App {
         this.isLoaded = true
 
         _G['app'] = this
+
+        this.root = Root()
 
         return this.onInit(this)
       }
