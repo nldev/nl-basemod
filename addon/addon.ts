@@ -1,4 +1,3 @@
-// import { CharacterClass, CharacterRace, Component, Mapping, PlayerInfo } from './types'
 // constants
 export const BASE_BACKDROP = {
   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
