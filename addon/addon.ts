@@ -75,7 +75,6 @@ export class App {
   protected isInit: boolean = false
 
   public root: Element
-  // public playerInfo: PlayerInfo
   public playerInfo: PlayerInfo
   public frames: Mapping<WoWAPI.Frame> = {}
 
