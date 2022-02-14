@@ -92,6 +92,7 @@ export const Root = () => {
   const frame = app.frames['root']
     || CreateFrame('Frame', 'root', UIParent)
 
+  UIParent.SetScale(1)
   frame.SetScale(1)
   frame.SetAllPoints(UIParent)
 
