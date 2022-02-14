@@ -144,3 +144,4 @@ export class SpellState extends BaseState<NWSpell> implements Writable<NWSpell, 
     return spell
   }
 }
+
