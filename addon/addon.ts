@@ -27,11 +27,11 @@ export class App {
   public frames: Mapping<WoWAPI.Frame> = {}
 
   constructor (protected onInit: ($: App) => void) {
-
-    this.root.ref.SetScript('OnUpdate', () => this.start())
+    const root = CreateFrame('Frame', 'root', UIParent)
+    root.SetScript('OnUpdate', () => this.start(root))
   }
 
-  protected start () {
+  protected start (root: WoWAPI.Frame) {
     if (this.playerInfo)
       return
 
@@ -52,7 +52,7 @@ export class App {
 
         _G['app'] = this
 
-        this.root = Root()
+        this.root = Root(root)
         this.isLoaded = true
 
         return this.onInit(this)
@@ -87,10 +87,10 @@ export type Component<O extends ComponentOptions = ComponentOptions, T = any> =
   (options: O) => Element<T>
 
 // root
-export const Root = () => {
+export const Root = (ref?: WoWAPI.Frame) => {
   const app = _G['app']
   const frame = app.frames['root']
-    || CreateFrame('Frame', 'root', UIParent)
+    || ref
 
   frame.SetAllPoints(UIParent)
 
