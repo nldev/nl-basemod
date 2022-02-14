@@ -140,7 +140,6 @@ export const Scroll: Component<ScrollOptions> = options => {
   const frame = a.inner
 
   frame.SetAllPoints(frame.GetParent() as WoWAPI.Frame)
-
   frame.SetScale(1)
 
   const app = Get()
