@@ -400,14 +400,36 @@ const app = new App(app => {
   grid.ref.SetBackdrop(BASE_BACKDROP)
   grid.ref.SetBackdropColor(0.5, 0.5, 0, 1)
 
-  const c = Frame({
-    name: 'c',
-  })
-
+  const c = Frame({ name: 'c' })
   c.ref.SetBackdrop(BASE_BACKDROP)
   c.ref.SetBackdropColor(0, 1, 0, 1)
+  c.ref.SetSize(50, 50)
+
+  const d = Frame({ name: 'c' })
+  d.ref.SetBackdrop(BASE_BACKDROP)
+  d.ref.SetBackdropColor(0, 1, 0, 1)
+  d.ref.SetSize(50, 50)
+
+  const e = Frame({ name: 'c' })
+  e.ref.SetBackdrop(BASE_BACKDROP)
+  e.ref.SetBackdropColor(0, 1, 0, 1)
+  e.ref.SetSize(50, 50)
+
+  const f = Frame({ name: 'c' })
+  f.ref.SetBackdrop(BASE_BACKDROP)
+  f.ref.SetBackdropColor(0, 1, 0, 1)
+  f.ref.SetSize(50, 50)
+
+  const g = Frame({ name: 'c' })
+  g.ref.SetBackdrop(BASE_BACKDROP)
+  g.ref.SetBackdropColor(0, 1, 0, 1)
+  g.ref.SetSize(50, 50)
 
   grid.fns.Attach(c)
+  grid.fns.Attach(d)
+  grid.fns.Attach(e)
+  grid.fns.Attach(f)
+  grid.fns.Attach(g)
 
   const { name, level, chrRace, chrClass } = app.playerInfo
 
