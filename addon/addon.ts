@@ -388,7 +388,7 @@ const app = new App(app => {
   })
 
   a.inner.SetPoint('CENTER')
-  a.inner.SetSize(500, 500)
+  a.inner.SetSize(400, 400)
   a.inner.SetBackdrop(BASE_BACKDROP)
   a.inner.SetBackdropColor(0, 0, 0, 1)
 
@@ -408,7 +408,7 @@ const app = new App(app => {
   const grid = Grid({
     name: 'grid',
     itemsPerRow: 4,
-    rowHeight: 100,
+    rowHeight: 80,
     parent: scroll,
   })
 
@@ -417,27 +417,27 @@ const app = new App(app => {
   const c = Frame({ name: 'c' })
   c.ref.SetBackdrop(BASE_BACKDROP)
   c.ref.SetBackdropColor(0, 1, 0, 1)
-  c.ref.SetSize(80, 80)
+  c.ref.SetSize(50, 50)
 
   const d = Frame({ name: 'd' })
   d.ref.SetBackdrop(BASE_BACKDROP)
   d.ref.SetBackdropColor(0, 1, 0, 1)
-  d.ref.SetSize(80, 80)
+  d.ref.SetSize(50, 50)
 
   const e = Frame({ name: 'e' })
   e.ref.SetBackdrop(BASE_BACKDROP)
   e.ref.SetBackdropColor(0, 1, 0, 1)
-  e.ref.SetSize(80, 80)
+  e.ref.SetSize(50, 50)
 
   const f = Frame({ name: 'f' })
   f.ref.SetBackdrop(BASE_BACKDROP)
   f.ref.SetBackdropColor(0, 1, 0, 1)
-  f.ref.SetSize(80, 80)
+  f.ref.SetSize(50, 50)
 
   const g = Frame({ name: 'g' })
   g.ref.SetBackdrop(BASE_BACKDROP)
   g.ref.SetBackdropColor(0, 1, 0, 1)
-  g.ref.SetSize(80, 80)
+  g.ref.SetSize(50, 50)
 
   grid.fns.Attach(c)
   grid.fns.Attach(d)
