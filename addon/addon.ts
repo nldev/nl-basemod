@@ -337,8 +337,6 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
       y: frame.state.y,
     })
 
-    element.ref.SetParent(frame.inner)
-
     if (isEndOfRow) {
       frame.state.index = 0
       frame.state.x = 0
