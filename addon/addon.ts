@@ -17,8 +17,15 @@ export function Unique (id: string) {
 export const BASE_BACKDROP = {
   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-  tile: true, tileSize: 16, edgeSize: 16,
-  insets: { left: 4, right: 4, top: 4, bottom: 4 },
+  tile: true,
+  tileSize: 16,
+  edgeSize: 16,
+  insets: {
+    left: 4,
+    right: 4,
+    top: 4,
+    bottom: 4,
+  },
 }
 
 export const BASE_COLORS = [0, 0, 0, 1]
@@ -421,12 +428,21 @@ const app = new App(app => {
   grid.ref.SetAllPoints(scroll.inner)
 
   const c = Frame({ name: 'c' })
-  c.ref.SetBackdrop({
-    ...BASE_BACKDROP,
-    bgFile: SAMPLE_DATA.icon,
-  })
-  c.ref.SetBackdropColor(0, 1, 0, 1)
   c.ref.SetSize(50, 50)
+  c.ref.SetBackdrop({
+    bgFile: SAMPLE_DATA.icon,
+    // edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    tile: true,
+    tileSize: 50,
+    // tileSize: 32,
+    // edgeSize: 16,
+    insets: {
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+    },
+  })
 
   const d = Frame({ name: 'd' })
   d.ref.SetBackdrop(BASE_BACKDROP)
