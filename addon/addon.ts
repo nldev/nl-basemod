@@ -120,7 +120,7 @@ export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
 export type Use<O = any> = (o: O) => Mod
 
 // component
-export type ElementFn<S = Mapping> = (element: Element<S>) => void
+export type ElementFn = (element: Element<any, any>) => void
 
 export interface Element<S = Mapping, F = Mapping<ElementFn>> {
   name: string
@@ -203,6 +203,12 @@ export interface ScrollOptions extends ComponentOptions {
   scrollHeight?: number
 }
 
+export interface ScrollFns {
+  Attach: ElementFn
+  // Show
+  // Hide
+}
+
 export const Scroll: Component<ScrollOptions> = options => {
   const a = Frame(options)
   const frame = a.inner
@@ -253,6 +259,12 @@ export const Scroll: Component<ScrollOptions> = options => {
 
   const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
   moduleoptions.SetAllPoints(scrollchild)
+
+  a.fns = {
+    attach: child => {
+      child.ref.SetParent(moduleoptions)
+    }
+  }
 
   return a
 }
@@ -319,7 +331,7 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
   }
 
   frame.fns = {
-    Attach (child: Element) {
+    Attach: (child: Element) => {
       const isEndOfRow = frame.state.index === ((frame.state.itemsPerRow || 3) - 1)
 
       const element = GridItem({
@@ -332,7 +344,7 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
         y: frame.state.y,
       })
 
-      element.ref.SetParent(this.ref)
+      element.ref.SetParent(frame.inner)
 
       // const ref = item.inner || item.ref
 
@@ -410,14 +422,14 @@ const app = new App(app => {
 
   const grid = Grid({
     name: 'grid',
-    parent: scroll,
     itemsPerRow: 3,
     rowHeight: 5,
   })
 
+  scroll.fns.Attach(grid)
+
   const c = Frame({
     name: 'c',
-    parent: null,
   })
 
   c.ref.SetBackdrop(BASE_BACKDROP)
