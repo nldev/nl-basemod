@@ -65,6 +65,8 @@ function main () {
   map.Name.enGB.set('Dev')
   map.TimeofDayOverride.set(0)
 
+  console.log($.std.Spells.load(36554).Icon.getPath())
+
   $.std.Maps.forEach(m => {
     if (m.Name.enGB.get() !== 'Outland')
       return

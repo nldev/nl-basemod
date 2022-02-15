@@ -368,6 +368,12 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
 }
 
 // test
+const SAMPLE_DATA = {
+  name: 'Shadowstep',
+  id: 36554,
+  icon: 'Interface/Icons/Ability_Rogue_Shadowstep',
+}
+
 const app = new App(app => {
   const root = Root()
 
@@ -415,7 +421,10 @@ const app = new App(app => {
   grid.ref.SetAllPoints(scroll.inner)
 
   const c = Frame({ name: 'c' })
-  c.ref.SetBackdrop(BASE_BACKDROP)
+  c.ref.SetBackdrop({
+    ...BASE_BACKDROP,
+    bgFile: SAMPLE_DATA.icon,
+  })
   c.ref.SetBackdropColor(0, 1, 0, 1)
   c.ref.SetSize(50, 50)
 
