@@ -282,12 +282,12 @@ export interface GridState {
 }
 
 export interface GridFns {
-  attach: ElementFn
-  // onShow
-  // onHide
+  Attach: ElementFn
+  // Show
+  // Hide
 }
 
-export const GridItemElement: Component<GridItemOptions> = options => {
+export const GridItem: Component<GridItemOptions> = options => {
   const frame = Frame(options)
 
   frame.ref.SetSize(options.width, options.height)
@@ -296,10 +296,16 @@ export const GridItemElement: Component<GridItemOptions> = options => {
   frame.ref.SetBackdrop(BASE_BACKDROP)
   frame.ref.SetBackdropColor(0, 0, 1, 1)
 
+  options.item.ref.SetParent(frame.ref)
+  options.item.ref.SetPoint('CENTER')
+
+  frame.ref.SetBackdrop(BASE_BACKDROP)
+  frame.ref.SetBackdropColor(0, 0, 1, 1)
+
   return frame
 }
 
-export const GridElement: Component<GridOptions, GridState, GridFns> = options => {
+export const Grid: Component<GridOptions, GridState, GridFns> = options => {
   const frame: Element<GridState, GridFns>  = Frame(options) as any
 
   frame.state = {
@@ -313,10 +319,10 @@ export const GridElement: Component<GridOptions, GridState, GridFns> = options =
   }
 
   frame.fns = {
-    attach (child: Element) {
+    Attach (child: Element) {
       const isEndOfRow = frame.state.index === ((frame.state.itemsPerRow || 3) - 1)
 
-      const element = GridItemElement({
+      const element = GridItem({
         parent: frame,
         name: `${options.name}-griditem`,
         item: child,
@@ -401,6 +407,23 @@ const app = new App(app => {
     name: 'scroll',
     parent: b,
   })
+
+  const grid = Grid({
+    name: 'grid',
+    parent: scroll,
+    itemsPerRow: 3,
+    rowHeight: 5,
+  })
+
+  const c = Frame({
+    name: 'c',
+    parent: null,
+  })
+
+  c.ref.SetBackdrop(BASE_BACKDROP)
+  c.ref.SetBackdropColor(0, 1, 0, 1)
+
+  grid.fns.Attach(c)
 
   const { name, level, chrRace, chrClass } = app.playerInfo
 
