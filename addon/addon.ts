@@ -317,9 +317,6 @@ export const GridItem: Component<GridItemOptions> = options => {
   options.item.ref.SetParent(frame.ref)
   options.item.ref.SetPoint('CENTER')
 
-  frame.ref.SetBackdrop(BASE_BACKDROP)
-  frame.ref.SetBackdropColor(0, 0, 1, 1)
-
   return frame
 }
 
@@ -417,7 +414,6 @@ const app = new App(app => {
 
   grid.ref.SetAllPoints(scroll.inner)
   grid.ref.SetBackdrop(BASE_BACKDROP)
-  grid.ref.SetBackdropColor(0.5, 0.5, 0, 1)
 
   const c = Frame({ name: 'c' })
   c.ref.SetBackdrop(BASE_BACKDROP)
