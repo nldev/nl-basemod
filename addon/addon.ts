@@ -173,7 +173,7 @@ export const Frame: Component = options => {
 
   const parent = options.parent
   const frame: WoWAPI.Frame = app.frames[options.name]
-    || CreateFrame(options.type || 'Frame', options.name, parent ? parent.inner : app.root.ref, (options.inherits)) as WoWAPI.Frame
+    || CreateFrame(options.type || 'Frame', options.name, parent ? parent.inner : app.root.ref, options.inherits) as WoWAPI.Frame
 
   app.frames[options.name] = frame
 
@@ -425,6 +425,9 @@ const app = new App(app => {
     itemsPerRow: 3,
     rowHeight: 5,
   })
+
+  grid.ref.SetBackdrop(BASE_BACKDROP)
+  grid.ref.SetBackdropColor(0.5, 0.5, 0, 1)
 
   scroll.fns.Attach(grid)
 
