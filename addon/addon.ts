@@ -269,7 +269,9 @@ export const Scroll: Component<ScrollOptions> = options => {
   scrollchild.SetSize(ref.GetWidth(), options.scrollHeight || ref.GetHeight() * 2)
 
   const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
-  moduleoptions.SetAllPoints(scrollchild)
+  moduleoptions.SetPoint('TOPLEFT')
+  moduleoptions.SetWidth(scrollchild.GetWidth() - SCROLL_WIDTH)
+  moduleoptions.SetHeight(scrollchild.GetHeight())
 
   a.inner = moduleoptions
 
@@ -326,7 +328,7 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
 
   frame.state.itemsPerRow = options.itemsPerRow
   frame.state.rowHeight = options.rowHeight
-  frame.state.itemWidth = (frame.parent.inner.GetWidth() - SCROLL_WIDTH) / options.itemsPerRow
+  frame.state.itemWidth = frame.parent.inner.GetWidth() / options.itemsPerRow
   frame.state.list = []
   frame.state.index = 0
   frame.state.x = 0
