@@ -265,6 +265,10 @@ export interface GridOptions extends ComponentOptions {
 
 export interface GridItemOptions extends ComponentOptions {
   item: Element
+  width: number
+  height: number
+  x: number
+  y: number
 }
 
 export interface GridState {
@@ -278,7 +282,9 @@ export interface GridState {
 }
 
 export interface GridFns {
-
+  attach: ElementFn
+  // onShow
+  // onHide
 }
 
 export const GridItemElement: Component<GridItemOptions> = options => {
@@ -300,83 +306,55 @@ export const GridElement: Component<GridOptions, GridState, GridFns> = options =
     y: 0,
   }
 
-  frame.fns = {}
+  frame.fns = {
+    attach (child: Element) {
+      const isEndOfRow = frame.state.index === ((frame.state.itemsPerRow || 3) - 1)
+
+      const element = GridItemElement({
+        name: `${options.name}-griditem`,
+        item: child,
+        width: frame.state.itemWidth,
+        height: frame.state.rowHeight,
+        x: frame.state.x,
+        y: frame.state.y,
+      })
+
+      element.ref.SetParent(this.ref)
+
+      // const ref = item.inner || item.ref
+
+      // item.ref.SetFrameStrata(this.strata)
+      // item.ref.SetFrameLevel(this.z)
+
+      // if (item.inner) {
+      //   item.ref.SetFrameStrata(this.strata)
+      //   item.ref.SetFrameLevel(this.z)
+      // }
+
+      // ref.SetFrameStrata(this.strata)
+      // ref.SetFrameLevel(this.z)
+
+      if (isEndOfRow) {
+        frame.state.index = 0
+        frame.state.x = 0
+        frame.state.y -= (frame.state.rowHeight * 2)
+      } else {
+        frame.state.index++
+        frame.state.x += frame.state.itemWidth
+      }
+
+      frame.state.list.push(element)
+    }
+    // onShow () {
+    //   this.list.forEach(item => item.Show(true))
+    // }
+
+    // onHide () {
+    //   this.list.forEach(item => item.Hide(true))
+    // }
+  }
 
   return frame
-  // protected list: GridItemElement[] = []
-  // protected index: number = 0
-  // protected x: number = 0
-  // protected y: number = 0
-  // protected itemsPerRow: number = 3
-
-  // protected itemWidth: number = 0
-  // protected rowHeight: number = 0
-
-  // protected onInit () {
-  //   this.itemsPerRow = this.options.itemsPerRow
-  //   this.rowHeight = this.options.rowHeight || 100
-  //   this.itemWidth = this.ref.GetWidth() / this.itemsPerRow
-  // }
-
-  // public _Attach (child: Element) {
-  //   if (!this.itemWidth)
-  //     return
-
-  //   const isEndOfRow = this.index === ((this.itemsPerRow || 3) - 1)
-
-  //   const element = new GridItemElement(Unique(`${this.id}-griditem`), {
-  //     item: child,
-  //     box: {
-  //       type: 'BOX_POINT',
-  //       point: 'TOPLEFT',
-  //       width: this.itemWidth,
-  //       height: this.rowHeight,
-  //       x: this.x,
-  //       y: this.y,
-  //     }
-  //     // z: (this.z || 0) + 1,
-  //     // strata: this.strata,
-  //     // size: {
-  //     //   height: this.rowHeight,
-  //     //   width: this.itemWidth,
-  //     // },
-  //   })
-
-  //   element.ref.SetParent(this.ref)
-  //   element.Box()
-
-  //   // const ref = item.inner || item.ref
-
-  //   // item.ref.SetFrameStrata(this.strata)
-  //   // item.ref.SetFrameLevel(this.z)
-
-  //   // if (item.inner) {
-  //   //   item.ref.SetFrameStrata(this.strata)
-  //   //   item.ref.SetFrameLevel(this.z)
-  //   // }
-
-  //   // ref.SetFrameStrata(this.strata)
-  //   // ref.SetFrameLevel(this.z)
-
-  //   if (isEndOfRow) {
-  //     this.index = 0
-  //     this.x = 0
-  //     this.y -= (this.rowHeight * 2)
-  //   } else {
-  //     this.index++
-  //     this.x += this.itemWidth
-  //   }
-
-  //   this.list.push(element)
-  // }
-
-  // onShow () {
-  //   this.list.forEach(item => item.Show(true))
-  // }
-
-  // onHide () {
-  //   this.list.forEach(item => item.Hide(true))
-  // }
 }
 
 // test
