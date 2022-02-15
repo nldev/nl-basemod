@@ -379,6 +379,7 @@ const SAMPLE_DATA = {
   name: 'Shadowstep',
   id: 36554,
   icon: 'Interface/Icons/Ability_Rogue_Shadowstep',
+  cost: 20,
 }
 
 const app = new App(app => {
@@ -427,13 +428,16 @@ const app = new App(app => {
 
   grid.ref.SetAllPoints(scroll.inner)
 
+
   const c = Frame({ name: 'c' })
   c.ref.SetSize(50, 50)
+  const texture = c.ref.CreateTexture()
+  texture.SetTexture(SAMPLE_DATA.icon)
+  texture.SetAllPoints()
+  // SetDesaturation(texture, true)
   c.ref.SetBackdrop({
-    bgFile: SAMPLE_DATA.icon,
-    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    // edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
     tile: true,
-    tileSize: 32,
     edgeSize: 16,
     insets: {
       left: 0,
@@ -443,11 +447,14 @@ const app = new App(app => {
     },
   })
 
+
+
   c.ref.EnableMouse(true)
   c.ref.SetScript('OnEnter', () => {
     GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`spell:${SAMPLE_DATA.id}`)
+    GameTooltip.AddLine(`Cost: ${SAMPLE_DATA.cost}`)
     GameTooltip.Show()
   })
   c.ref.SetScript('OnLeave', () => {
