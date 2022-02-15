@@ -263,6 +263,7 @@ export const Scroll: Component<ScrollOptions> = options => {
   a.fns = {
     Attach: child => {
       child.ref.SetParent(moduleoptions)
+      child.ref.SetAllPoints(moduleoptions)
     }
   }
 
@@ -304,9 +305,6 @@ export const GridItem: Component<GridItemOptions> = options => {
 
   frame.ref.SetSize(options.width, options.height)
   frame.ref.SetPoint('TOPLEFT', options.x, options.y)
-
-  frame.ref.SetBackdrop(BASE_BACKDROP)
-  frame.ref.SetBackdropColor(0, 0, 1, 1)
 
   options.item.ref.SetParent(frame.ref)
   options.item.ref.SetPoint('CENTER')
