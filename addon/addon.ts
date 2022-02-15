@@ -301,8 +301,8 @@ export interface GridFns {
 export const GridItem: Component<GridItemOptions> = options => {
   const frame = Frame(options)
 
-  frame.ref.SetSize(options.width, options.height)
   frame.ref.SetPoint('TOPLEFT', options.x, options.y)
+  frame.ref.SetSize(options.width, options.height)
 
   options.item.ref.SetParent(frame.ref)
   options.item.ref.SetPoint('CENTER')
@@ -314,7 +314,7 @@ export const GridItem: Component<GridItemOptions> = options => {
 }
 
 export const Grid: Component<GridOptions, GridState, GridFns> = options => {
-  const frame: Element<GridState, GridFns>  = Frame(options) as any
+  const frame = Frame(options) as any
 
   frame.state.itemsPerRow = options.itemsPerRow
   frame.state.rowHeight = options.rowHeight
