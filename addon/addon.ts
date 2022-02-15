@@ -23,6 +23,8 @@ export const BASE_BACKDROP = {
 
 export const BASE_COLORS = [0, 0, 0, 1]
 
+export const SCROLL_WIDTH = 20
+
 // types
 export interface Mapping<T = any> {
   [key: string]: T
@@ -324,7 +326,7 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
 
   frame.state.itemsPerRow = options.itemsPerRow
   frame.state.rowHeight = options.rowHeight
-  frame.state.itemWidth = frame.parent.inner.GetWidth() / options.itemsPerRow
+  frame.state.itemWidth = (frame.parent.inner.GetWidth() - SCROLL_WIDTH) / options.itemsPerRow
   frame.state.list = []
   frame.state.index = 0
   frame.state.x = 0
