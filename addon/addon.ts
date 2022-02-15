@@ -126,14 +126,14 @@ export interface Element<S = Mapping, F = Mapping<ElementFn>> {
   name: string
   ref: WoWAPI.Frame
   inner: WoWAPI.Frame
-  parent: Element
+  parent: Element<any, any>
   state: S
   fns: F
 }
 
 export type ComponentOptions = {
   name: string
-  parent?: Element
+  parent?: Element<any, any>
   mod?: Mod | Mod[]
   inherits?: string
   type?: WoWAPI.FrameType
@@ -288,7 +288,13 @@ export interface GridFns {
 }
 
 export const GridItemElement: Component<GridItemOptions> = options => {
-  const frame = Frame({ name: options.name })
+  const frame = Frame(options)
+
+  frame.ref.SetSize(options.width, options.height)
+  frame.ref.SetPoint('TOPLEFT', options.x, options.y)
+
+  frame.ref.SetBackdrop(BASE_BACKDROP)
+  frame.ref.SetBackdropColor(0, 0, 1, 1)
 
   return frame
 }
@@ -311,6 +317,7 @@ export const GridElement: Component<GridOptions, GridState, GridFns> = options =
       const isEndOfRow = frame.state.index === ((frame.state.itemsPerRow || 3) - 1)
 
       const element = GridItemElement({
+        parent: frame,
         name: `${options.name}-griditem`,
         item: child,
         width: frame.state.itemWidth,
