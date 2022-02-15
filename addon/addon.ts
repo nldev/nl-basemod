@@ -1,3 +1,18 @@
+// utils
+const names = {}
+
+export function Unique (id: string) {
+  const _id = names[id] ? names[id] : 0
+
+  if (_id === 0) {
+    names[id] = 0
+  }
+
+  names[id]++
+
+  return `${id}-${_id}`
+}
+
 // constants
 export const BASE_BACKDROP = {
   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -320,7 +335,7 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
 
     const element = GridItem({
       parent: frame,
-      name: `${options.name}-griditem`, // FIXME make unique
+      name: Unique(`${options.name}-griditem`),
       item: child,
       width: frame.state.itemWidth,
       height: frame.state.rowHeight,
@@ -331,7 +346,7 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
     if (isEndOfRow) {
       frame.state.index = 0
       frame.state.x = 0
-      frame.state.y -= (frame.state.rowHeight * 2)
+      frame.state.y -= frame.state.rowHeight
     } else {
       frame.state.index++
       frame.state.x += frame.state.itemWidth
@@ -405,22 +420,22 @@ const app = new App(app => {
   c.ref.SetBackdropColor(0, 1, 0, 1)
   c.ref.SetSize(50, 50)
 
-  const d = Frame({ name: 'c' })
+  const d = Frame({ name: 'd' })
   d.ref.SetBackdrop(BASE_BACKDROP)
   d.ref.SetBackdropColor(0, 1, 0, 1)
   d.ref.SetSize(50, 50)
 
-  const e = Frame({ name: 'c' })
+  const e = Frame({ name: 'e' })
   e.ref.SetBackdrop(BASE_BACKDROP)
   e.ref.SetBackdropColor(0, 1, 0, 1)
   e.ref.SetSize(50, 50)
 
-  const f = Frame({ name: 'c' })
+  const f = Frame({ name: 'f' })
   f.ref.SetBackdrop(BASE_BACKDROP)
   f.ref.SetBackdropColor(0, 1, 0, 1)
   f.ref.SetSize(50, 50)
 
-  const g = Frame({ name: 'c' })
+  const g = Frame({ name: 'g' })
   g.ref.SetBackdrop(BASE_BACKDROP)
   g.ref.SetBackdropColor(0, 1, 0, 1)
   g.ref.SetSize(50, 50)
