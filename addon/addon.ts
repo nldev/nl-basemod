@@ -203,12 +203,6 @@ export interface ScrollOptions extends ComponentOptions {
   scrollHeight?: number
 }
 
-export interface ScrollFns {
-  Attach: ElementFn
-  // Show
-  // Hide
-}
-
 export const Scroll: Component<ScrollOptions> = options => {
   const a = Frame(options)
   const frame = a.inner
@@ -260,10 +254,7 @@ export const Scroll: Component<ScrollOptions> = options => {
   const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
   moduleoptions.SetAllPoints(scrollchild)
 
-  a.fns.Attach = child => {
-    child.ref.SetParent(moduleoptions)
-    child.ref.SetAllPoints(moduleoptions)
-  }
+  a.inner = moduleoptions
 
   return a
 }
@@ -301,8 +292,13 @@ export interface GridFns {
 export const GridItem: Component<GridItemOptions> = options => {
   const frame = Frame(options)
 
-  frame.ref.SetPoint('TOPLEFT', options.x, options.y)
+  frame.ref.SetPoint('CENTER')
   frame.ref.SetSize(options.width, options.height)
+
+  console.log(options.width)
+  console.log(options.height)
+  console.log(options.x)
+  console.log(options.y)
 
   options.item.ref.SetParent(frame.ref)
   options.item.ref.SetPoint('CENTER')
@@ -314,11 +310,11 @@ export const GridItem: Component<GridItemOptions> = options => {
 }
 
 export const Grid: Component<GridOptions, GridState, GridFns> = options => {
-  const frame = Frame(options) as any
+  const frame: Element<GridState, GridFns>  = Frame(options) as any
 
   frame.state.itemsPerRow = options.itemsPerRow
   frame.state.rowHeight = options.rowHeight
-  frame.state.itemWidth = frame.ref.GetWidth() / options.itemsPerRow
+  frame.state.itemWidth = frame.parent.inner.GetWidth() / options.itemsPerRow
   frame.state.list = []
   frame.state.index = 0
   frame.state.x = 0
@@ -401,13 +397,13 @@ const app = new App(app => {
   const grid = Grid({
     name: 'grid',
     itemsPerRow: 3,
-    rowHeight: 5,
+    rowHeight: 100,
+    parent: scroll,
   })
 
+  grid.ref.SetAllPoints(scroll.inner)
   grid.ref.SetBackdrop(BASE_BACKDROP)
   grid.ref.SetBackdropColor(0.5, 0.5, 0, 1)
-
-  scroll.fns.Attach(grid)
 
   const c = Frame({
     name: 'c',
