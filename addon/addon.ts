@@ -193,8 +193,8 @@ export const Frame: Component = options => {
     name: options.name,
     ref: frame,
     inner: frame,
-    state: options.state,
-    fns: options.fns,
+    state: options.state || {},
+    fns: options.fns || {},
   }
 }
 
@@ -260,11 +260,9 @@ export const Scroll: Component<ScrollOptions> = options => {
   const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
   moduleoptions.SetAllPoints(scrollchild)
 
-  a.fns = {
-    Attach: child => {
-      child.ref.SetParent(moduleoptions)
-      child.ref.SetAllPoints(moduleoptions)
-    }
+  a.fns.Attach = child => {
+    child.ref.SetParent(moduleoptions)
+    child.ref.SetAllPoints(moduleoptions)
   }
 
   return a
@@ -318,64 +316,48 @@ export const GridItem: Component<GridItemOptions> = options => {
 export const Grid: Component<GridOptions, GridState, GridFns> = options => {
   const frame: Element<GridState, GridFns>  = Frame(options) as any
 
-  frame.state = {
-    itemsPerRow: options.itemsPerRow,
-    rowHeight: options.rowHeight,
-    itemWidth: frame.ref.GetWidth() / options.itemsPerRow,
-    list: [],
-    index: 0,
-    x: 0,
-    y: 0,
-  }
+  frame.state.itemsPerRow = options.itemsPerRow
+  frame.state.rowHeight = options.rowHeight
+  frame.state.itemWidth = frame.ref.GetWidth() / options.itemsPerRow
+  frame.state.list = []
+  frame.state.index = 0
+  frame.state.x = 0
+  frame.state.y = 0
 
-  frame.fns = {
-    Attach: child => {
-      const isEndOfRow = frame.state.index === ((frame.state.itemsPerRow || 3) - 1)
+  frame.fns.Attach = child => {
+    const isEndOfRow = frame.state.index === ((frame.state.itemsPerRow || 3) - 1)
 
-      const element = GridItem({
-        parent: frame,
-        name: `${options.name}-griditem`,
-        item: child,
-        width: frame.state.itemWidth,
-        height: frame.state.rowHeight,
-        x: frame.state.x,
-        y: frame.state.y,
-      })
+    const element = GridItem({
+      parent: frame,
+      name: `${options.name}-griditem`, // FIXME make unique
+      item: child,
+      width: frame.state.itemWidth,
+      height: frame.state.rowHeight,
+      x: frame.state.x,
+      y: frame.state.y,
+    })
 
-      element.ref.SetParent(frame.inner)
+    element.ref.SetParent(frame.inner)
 
-      // const ref = item.inner || item.ref
-
-      // item.ref.SetFrameStrata(this.strata)
-      // item.ref.SetFrameLevel(this.z)
-
-      // if (item.inner) {
-      //   item.ref.SetFrameStrata(this.strata)
-      //   item.ref.SetFrameLevel(this.z)
-      // }
-
-      // ref.SetFrameStrata(this.strata)
-      // ref.SetFrameLevel(this.z)
-
-      if (isEndOfRow) {
-        frame.state.index = 0
-        frame.state.x = 0
-        frame.state.y -= (frame.state.rowHeight * 2)
-      } else {
-        frame.state.index++
-        frame.state.x += frame.state.itemWidth
-      }
-
-      frame.state.list.push(element)
+    if (isEndOfRow) {
+      frame.state.index = 0
+      frame.state.x = 0
+      frame.state.y -= (frame.state.rowHeight * 2)
+    } else {
+      frame.state.index++
+      frame.state.x += frame.state.itemWidth
     }
-    // onShow () {
-    //   this.list.forEach(item => item.Show(true))
-    // }
 
-    // onHide () {
-    //   this.list.forEach(item => item.Hide(true))
-    // }
+    frame.state.list.push(element)
   }
+
+  // onShow () {
+  //   this.list.forEach(item => item.Show(true))
+  // }
+
+  // onHide () {
+  //   this.list.forEach(item => item.Hide(true))
+  // }
 
   return frame
 }
