@@ -261,7 +261,7 @@ export const Scroll: Component<ScrollOptions> = options => {
   moduleoptions.SetAllPoints(scrollchild)
 
   a.fns = {
-    attach: child => {
+    Attach: child => {
       child.ref.SetParent(moduleoptions)
     }
   }
@@ -331,7 +331,7 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
   }
 
   frame.fns = {
-    Attach: (child: Element) => {
+    Attach: child => {
       const isEndOfRow = frame.state.index === ((frame.state.itemsPerRow || 3) - 1)
 
       const element = GridItem({
