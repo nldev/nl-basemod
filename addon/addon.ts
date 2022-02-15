@@ -413,7 +413,6 @@ const app = new App(app => {
   })
 
   grid.ref.SetAllPoints(scroll.inner)
-  grid.ref.SetBackdrop(BASE_BACKDROP)
 
   const c = Frame({ name: 'c' })
   c.ref.SetBackdrop(BASE_BACKDROP)
