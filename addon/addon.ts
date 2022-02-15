@@ -431,11 +431,10 @@ const app = new App(app => {
   c.ref.SetSize(50, 50)
   c.ref.SetBackdrop({
     bgFile: SAMPLE_DATA.icon,
-    // edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
     tile: true,
-    tileSize: 50,
-    // tileSize: 32,
-    // edgeSize: 16,
+    tileSize: 32,
+    edgeSize: 16,
     insets: {
       left: 0,
       right: 0,
