@@ -443,6 +443,19 @@ const app = new App(app => {
     },
   })
 
+  c.ref.EnableMouse(true)
+  c.ref.SetScript('OnEnter', () => {
+    GameTooltip.ClearLines()
+    GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
+    GameTooltip.SetHyperlink(`spell:${SAMPLE_DATA.id}`)
+    GameTooltip.Show()
+  })
+  c.ref.SetScript('OnLeave', () => {
+    GameTooltip.ClearLines()
+    GameTooltip.Hide()
+  })
+
+
   const d = Frame({ name: 'd' })
   d.ref.SetBackdrop(BASE_BACKDROP)
   d.ref.SetBackdropColor(0, 1, 0, 1)
