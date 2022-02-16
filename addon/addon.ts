@@ -663,6 +663,6 @@ const app = new App(app => {
 
   const { name, level, chrRace, chrClass } = app.playerInfo
 
-  SendAddonMessage('[test]', 'test', 'WHISPER', name)
+  SendAddonMessage('[test]', 'hello world', 'WHISPER', name)
 })
 

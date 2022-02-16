@@ -198,12 +198,17 @@ function EquipSystem (events: TSEvents) {
   // })
 }
 
+function Opcode (prefix: string): string {
+  return `[${prefix}]\t`
+}
+
 export function Main (events: TSEvents) {
-  events.Player.OnWhisper((sender, receiver, message, type, lang) => {
-    const text = message.get()
-    const isTest = text.includes('[test]\t')
-    if (isTest) {
-      const msg = text.substr(7)
+  events.Player.OnWhisper((sender, _, message) => {
+    const opcode = Opcode('test')
+    const string = message.get()
+    const isTestOpcode = string.includes(opcode)
+    if (isTestOpcode) {
+      const msg = string.substr(opcode.length)
       sender.SendBroadcastMessage(msg)
     }
   })
