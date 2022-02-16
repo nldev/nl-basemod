@@ -411,7 +411,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   const cost = Frame({ name: `talent-${options.spell.id}-cost`, parent: frame })
 
   cost.ref.SetSize(30, 20)
-  cost.ref.SetPoint('BOTTOM', 0, -5)
+  cost.ref.SetPoint('BOTTOM', 0, -6)
   cost.ref.SetBackdrop(BASE_BACKDROP)
   cost.ref.SetBackdropColor(0, 0, 0, 1)
 
