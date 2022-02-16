@@ -199,6 +199,16 @@ function EquipSystem (events: TSEvents) {
 }
 
 export function Main (events: TSEvents) {
+  events.Player.OnWhisper((sender, receiver, message, type, lang) => {
+    const text = message.get()
+    const isTest = text.includes('[test]\t')
+    if (isTest) {
+      const msg = text.substr(7)
+      sender.SendBroadcastMessage(msg)
+    }
+  })
+  // events.CustomPacketID.OnReceive('test' (opcode, packet, player))
+  // packet.SendToPlayer()
   // TestCmdGetRandomPropertyOfFirstItemInBag(events)
   // TestCmdAddItemWithPlaceholderEnchant(events)
   // TestCmdChangeFactionAlliance(events)
