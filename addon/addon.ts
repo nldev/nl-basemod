@@ -90,6 +90,31 @@ export type CharacterRace =
   | typeof BLOOD_ELF
   | typeof DRAENEI
 
+export interface ClassSelection {
+  WARRIOR: boolean,
+  ROGUE: boolean,
+  DRUID: boolean,
+  MAGE: boolean,
+  WARLOCK: boolean,
+  SHAMAN: boolean,
+  PRIEST: boolean,
+  PALADIN: boolean,
+  HUNTER: boolean,
+}
+
+export interface RaceSelection {
+  HUMAN: boolean,
+  ORC: boolean,
+  DWARF: boolean,
+  NIGHT_ELF: boolean,
+  UNDEAD: boolean,
+  TAUREN: boolean,
+  GNOME: boolean,
+  TROLL: boolean,
+  BLOOD_ELF: boolean,
+  DRAENEI: boolean,
+}
+
 export interface PlayerInfo {
   name: string
   chrRace: string
@@ -407,6 +432,8 @@ export interface TalentSpell {
   spellId: number
   icon: string
   cost: number
+  class: ClassSelection
+  classmask: number
 }
 
 export interface TalentOptions extends ComponentOptions {
@@ -427,6 +454,7 @@ export interface TalentFns {
   // Show
   // Hide
 }
+
 export const Talent: Component<TalentOptions, TalentState, TalentFns> = options => {
   // frame
   const frame: Element<TalentState, TalentFns> =
@@ -565,14 +593,6 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 }
 
 // test
-const SHADOWSTEP: TalentSpell = {
-  name: 'Shadowstep',
-  id: 'shadowstep',
-  spellId: 36554,
-  icon: 'Interface/Icons/Ability_Rogue_Shadowstep',
-  cost: 20,
-}
-
 const app = new App(app => {
   const root = Root()
 

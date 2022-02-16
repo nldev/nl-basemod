@@ -5,7 +5,7 @@ import { createClassMask } from '../utils'
 
 export interface Talent {
   id: string
-  spell: AssetId
+  spellId: AssetId
   cost: number
   class: ClassMap | CharacterClass
 }
@@ -72,9 +72,9 @@ export class CreateTalent extends NWTask {
   }
 
   process (template: TalentTemplate) {
-    const asset = typeof template.options.spell === 'string'
-       ? this.builder.Spell.get(template.options.spell).asset
-       : this.builder.std.Spells.load(template.options.spell)
+    const asset = typeof template.options.spellId === 'string'
+       ? this.builder.Spell.get(template.options.id).asset
+       : this.builder.std.Spells.load(template.options.spellId)
 
     const classMask = typeof template.options.class === 'string'
       ? createClassMask(template.options.class)
@@ -92,6 +92,7 @@ export class CreateTalent extends NWTask {
       [template.options.id]: {
         classMask,
         id: template.options.id,
+        name: asset.Name.enGB.get(),
         spellId: asset.ID,
         cost: template.options.cost,
         icon: asset.Icon.getPath().replace(/\\/g, '/'),
