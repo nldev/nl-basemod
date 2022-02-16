@@ -530,12 +530,16 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 }
 
 // test
-const TEST_TALENT: TalentSpell = {
+const SHADOWSTEP: TalentSpell = {
   name: 'Shadowstep',
   id: 36554,
   icon: 'Interface/Icons/Ability_Rogue_Shadowstep',
   cost: 20,
 }
+
+const TALENTS = [
+  SHADOWSTEP,
+]
 
 const app = new App(app => {
   const root = Root()
@@ -583,17 +587,20 @@ const app = new App(app => {
 
   grid.ref.SetAllPoints(scroll.inner)
 
-  const talent = Talent({
-    spell: TEST_TALENT,
-    onActivate: () => {
-      console.log('activated')
-    },
-    onDeactivate: () => {
-      console.log('deactivated')
-    },
+  TALENTS.forEach(spell => {
+    const talent = Talent({
+      spell,
+      onActivate: () => {
+        console.log(`${spell.name} activated`)
+      },
+      onDeactivate: () => {
+        console.log(`${spell.name} deactivated`)
+      },
+    })
+
+    grid.fns.Attach(talent)
   })
 
-  grid.fns.Attach(talent)
 
   const { name, level, chrRace, chrClass } = app.playerInfo
 
