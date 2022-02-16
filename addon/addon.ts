@@ -156,7 +156,7 @@ export interface Element<S = Mapping, F = Mapping<ElementFn>> {
 }
 
 export type ComponentOptions = {
-  name: string
+  name?: string
   parent?: Element<any, any>
   mod?: Mod | Mod[]
   inherits?: string
@@ -193,6 +193,9 @@ export const Root = (ref?: WoWAPI.Frame) => {
 
 // frame
 export const Frame: Component = options => {
+  if (!options.name)
+    throw new Error('Frame requires a name')
+
   const app = Get()
 
   const parent = options.parent
@@ -395,6 +398,7 @@ export interface TalentState {
 export interface TalentFns {
   activate: () => void
   deactivate: () => void
+  toggle: () => void
   // Show
   // Hide
 }
@@ -445,6 +449,13 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   frame.ref.EnableMouse(true)
 
   // onClick
+  frame.inner.SetScript('OnMouseDown', (_, button) => {
+    if (button === 'LeftButton' && !frame.state.isActive)
+      frame.fns.activate()
+
+    if (button === 'RightButton' && frame.state.isActive)
+      frame.fns.deactivate()
+  })
 
   // tooltip
   frame.ref.SetScript('OnEnter', () => {
@@ -461,19 +472,26 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   })
 
   // export
+  frame.state = {
+    isActive: false,
+  }
+
   frame.fns = {
     activate: () => {
+      frame.state.isActive = true
       disableCostText()
       SetDesaturation(texture, false)
     },
     deactivate: () => {
+      frame.state.isActive = false
       enableCostText()
       SetDesaturation(texture, true)
     },
-  }
-
-  frame.state = {
-    isActive: false,
+    toggle: () => {
+      frame.state.isActive
+        ? frame.fns.deactivate()
+        : frame.fns.activate()
+    },
   }
 
   frame.fns.deactivate()
@@ -482,7 +500,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 }
 
 // test
-const SAMPLE_DATA: TalentSpell = {
+const TEST_TALENT: TalentSpell = {
   name: 'Shadowstep',
   id: 36554,
   icon: 'Interface/Icons/Ability_Rogue_Shadowstep',
@@ -535,35 +553,11 @@ const app = new App(app => {
 
   grid.ref.SetAllPoints(scroll.inner)
 
-  const c = Frame({ name: 'c' })
-  c.ref.SetSize(50, 50)
-  const texture = c.ref.CreateTexture()
-  texture.SetTexture(SAMPLE_DATA.icon)
-  texture.SetAllPoints()
-  // SetDesaturation(texture, true)
-  c.ref.SetBackdrop({
-    // edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    tile: true,
-    edgeSize: 16,
-    insets: {
-      left: 0,
-      right: 0,
-      top: 0,
-      bottom: 0,
-    },
-  })
-
-  c.ref.EnableMouse(true)
-  c.ref.SetScript('OnEnter', () => {
-    GameTooltip.ClearLines()
-    GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
-    GameTooltip.SetHyperlink(`spell:${SAMPLE_DATA.id}`)
-    GameTooltip.AddDoubleLine('|cff66D9EFCost: ', `${SAMPLE_DATA.cost}`, 0.4, 0.85, 0.93, 1, 1, 1)
-    GameTooltip.Show()
-  })
-  c.ref.SetScript('OnLeave', () => {
-    GameTooltip.ClearLines()
-    GameTooltip.Hide()
+  const talent = Talent({
+    name: 'c',
+    spell: TEST_TALENT,
+    onActivate: () => {},
+    onDeactivate: () => {},
   })
 
   const d = Frame({ name: 'd' })
@@ -586,7 +580,7 @@ const app = new App(app => {
   g.ref.SetBackdropColor(0, 1, 0, 1)
   g.ref.SetSize(50, 50)
 
-  grid.fns.Attach(c)
+  grid.fns.Attach(talent)
   grid.fns.Attach(d)
   grid.fns.Attach(e)
   grid.fns.Attach(f)
