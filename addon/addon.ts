@@ -399,6 +399,7 @@ export interface TalentOptions extends ComponentOptions {
 
 export interface TalentState {
   isActive: boolean
+  isHover: boolean
 }
 
 export interface TalentFns {
@@ -477,16 +478,18 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
   // tooltip
   const drawTooltip = () => {
-    GameTooltip.ClearLines()
-    GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
-    GameTooltip.SetHyperlink(`spell:${options.spell.id}`)
-    if (!frame.state.isActive) {
-      const [red, green, blue] = rgb(102, 217, 239)
-      GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, red, green, blue, 1, 1, 1)
-    } else {
-      GameTooltip.AddLine('Learned', ...rgb(166, 226, 46))
+    if (frame.state.isHover) {
+      GameTooltip.ClearLines()
+      GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
+      GameTooltip.SetHyperlink(`spell:${options.spell.id}`)
+      if (!frame.state.isActive) {
+        const [red, green, blue] = rgb(102, 217, 239)
+        GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, red, green, blue, 1, 1, 1)
+      } else {
+        GameTooltip.AddLine('Learned', ...rgb(166, 226, 46))
+      }
+      GameTooltip.Show()
     }
-    GameTooltip.Show()
   }
 
   const clearTooltip = () => {
@@ -495,15 +498,21 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   }
 
   frame.ref.SetScript('OnEnter', () => {
+    SetDesaturation(texture, false)
+    frame.state.isHover = true
     drawTooltip()
   })
 
   frame.ref.SetScript('OnLeave', () => {
+    if (!frame.state.isActive)
+      SetDesaturation(texture, true)
+    frame.state.isHover = true
     clearTooltip()
   })
 
   // export
   frame.state = {
+    isHover: false,
     isActive: false,
   }
 
@@ -531,9 +540,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     },
   }
 
-  frame.state.isActive = false
-  setCostTextColor()
-  SetDesaturation(texture, true)
+  frame.fns.deactivate()
 
   return frame
 }
