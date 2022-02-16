@@ -393,8 +393,8 @@ export interface TalentSpell {
 
 export interface TalentOptions extends ComponentOptions {
   spell: TalentSpell
-  onActivate: () => void
-  onDeactivate: () => void
+  onActivate?: () => void
+  onDeactivate?: () => void
 }
 
 export interface TalentState {
@@ -432,8 +432,8 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
   const setCostTextColor = () => {
     const [red, green, blue] = frame.state.isActive
-      ? rgb(102, 217, 239)
-      : [1, 1, 1]
+      ? [1, 1, 1]
+      : [0.75, 0.75, 0.75]
 
     costText.SetTextColor(red, green, blue)
   }
@@ -467,7 +467,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   })
 
   // tooltip
-  const drawTooltip = (hide?: boolean) => {
+  const drawTooltip = () => {
     GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`spell:${options.spell.id}`)
@@ -504,12 +504,16 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
       drawTooltip()
       setCostTextColor()
       SetDesaturation(texture, false)
+      if (options.onActivate)
+        options.onActivate()
     },
     deactivate: () => {
       frame.state.isActive = false
       drawTooltip()
       setCostTextColor()
       SetDesaturation(texture, true)
+      if (options.onDeactivate)
+        options.onDeactivate()
     },
     toggle: () => {
       frame.state.isActive
@@ -589,31 +593,7 @@ const app = new App(app => {
     },
   })
 
-  const d = Frame({ name: 'd' })
-  d.ref.SetBackdrop(BASE_BACKDROP)
-  d.ref.SetBackdropColor(0, 1, 0, 1)
-  d.ref.SetSize(50, 50)
-
-  const e = Frame({ name: 'e' })
-  e.ref.SetBackdrop(BASE_BACKDROP)
-  e.ref.SetBackdropColor(0, 1, 0, 1)
-  e.ref.SetSize(50, 50)
-
-  const f = Frame({ name: 'f' })
-  f.ref.SetBackdrop(BASE_BACKDROP)
-  f.ref.SetBackdropColor(0, 1, 0, 1)
-  f.ref.SetSize(50, 50)
-
-  const g = Frame({ name: 'g' })
-  g.ref.SetBackdrop(BASE_BACKDROP)
-  g.ref.SetBackdropColor(0, 1, 0, 1)
-  g.ref.SetSize(50, 50)
-
   grid.fns.Attach(talent)
-  grid.fns.Attach(d)
-  grid.fns.Attach(e)
-  grid.fns.Attach(f)
-  grid.fns.Attach(g)
 
   const { name, level, chrRace, chrClass } = app.playerInfo
 
