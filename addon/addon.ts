@@ -436,7 +436,14 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     costText.Hide()
   }
 
-  const setCostTextColor = (override: [number, number, number]) => {
+  const setCostTextColor = (override?: Rgb) => {
+    const [red, green, blue] = override
+      ? override
+      : frame.state.isActive
+      ? rgb(102, 217, 239)
+      : [1, 1, 1]
+
+    costText.SetTextColor(red, green, blue)
   }
 
   // texture
@@ -460,11 +467,14 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
   // onClick
   frame.inner.SetScript('OnMouseDown', (_, button) => {
-    if (button === 'LeftButton' && !frame.state.isActive)
+    if (button === 'LeftButton' && !frame.state.isActive) {
       frame.fns.activate()
+      setCostTextColor()
+    }
 
     if (button === 'RightButton' && frame.state.isActive)
       frame.fns.deactivate()
+      setCostTextColor(rgb(166, 226, 46))
   })
 
   // tooltip
@@ -473,10 +483,10 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`spell:${options.spell.id}`)
     if (!frame.state.isActive) {
-      const [red, green, blue] = rgb(102, 217, 239)
+      const [red, green, blue] = rgb(166, 226, 46)
       GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, red, green, blue, 1, 1, 1)
     } else {
-      GameTooltip.AddLine('Learned', ...rgb(166, 226, 46))
+      GameTooltip.AddLine('Learned', ...rgb(102, 217, 239))
     }
     GameTooltip.Show()
   }
@@ -487,10 +497,14 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   }
 
   frame.ref.SetScript('OnEnter', () => {
+    if (!frame.state.isActive)
+      setCostTextColor(rgb(166, 226, 46))
+
     drawTooltip()
   })
 
   frame.ref.SetScript('OnLeave', () => {
+    setCostTextColor()
     clearTooltip()
   })
 
@@ -503,13 +517,11 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     activate: () => {
       frame.state.isActive = true
       drawTooltip()
-      disableCostText()
       SetDesaturation(texture, false)
     },
     deactivate: () => {
       frame.state.isActive = false
       drawTooltip()
-      enableCostText()
       SetDesaturation(texture, true)
     },
     toggle: () => {
