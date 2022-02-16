@@ -415,9 +415,9 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   cost.ref.SetBackdrop(BASE_BACKDROP)
   cost.ref.SetBackdropColor(0, 0, 0, 1)
 
-  const costText = frame.ref.CreateFontString()
-  costText.SetText(`${options.spell.cost}`)
+  const costText = frame.ref.CreateFontString(`talent-${options.spell.id}-costtext`, 'OVERLAY', 'GameTooltipText')
   costText.SetPoint('CENTER')
+  costText.SetText(`${options.spell.cost}`)
 
   const enableCostText = () => {
     cost.ref.Show()
