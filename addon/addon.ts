@@ -374,8 +374,115 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
   return frame
 }
 
+// talents
+export interface TalentSpell {
+  name: string
+  id: number
+  icon: string
+  cost: number
+}
+
+export interface TalentOptions extends ComponentOptions {
+  spell: TalentSpell
+  onActivate: () => void
+  onDeactivate: () => void
+}
+
+export interface TalentState {
+  isActive: boolean
+}
+
+export interface TalentFns {
+  activate: () => void
+  deactivate: () => void
+  // Show
+  // Hide
+}
+export const Talent: Component<TalentOptions, TalentState, TalentFns> = options => {
+  // frame
+  const frame: Element<TalentState, TalentFns> = Frame({ name: `talent-${options.spell.id}` }) as any
+  frame.ref.SetSize(50, 50)
+
+  // cost
+  const cost = Frame({ name: `talent-${options.spell.id}-cost` })
+
+  cost.ref.SetSize(30, 20)
+  cost.ref.SetPoint('BOTTOM')
+  cost.ref.SetBackdrop(BASE_BACKDROP)
+  cost.ref.SetBackdropColor(0, 0, 0, 1)
+
+  const costText = frame.ref.CreateFontString()
+  costText.SetText(`${options.spell.cost}`)
+  costText.SetPoint('CENTER')
+
+  const enableCostText = () => {
+    cost.ref.Show()
+    costText.Show()
+  }
+
+  const disableCostText = () => {
+    cost.ref.Hide()
+    costText.Hide()
+  }
+
+  // texture
+  const texture = frame.ref.CreateTexture()
+
+  texture.SetTexture(options.spell.icon)
+  texture.SetAllPoints()
+  frame.ref.SetBackdrop({
+    tile: true,
+    edgeSize: 16,
+    insets: {
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+    },
+  })
+
+  // mouse
+  frame.ref.EnableMouse(true)
+
+  // onClick
+
+  // tooltip
+  frame.ref.SetScript('OnEnter', () => {
+    GameTooltip.ClearLines()
+    GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
+    GameTooltip.SetHyperlink(`spell:${options.spell.id}`)
+    GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, 0.4, 0.85, 0.93, 1, 1, 1)
+    GameTooltip.Show()
+  })
+
+  frame.ref.SetScript('OnLeave', () => {
+    GameTooltip.ClearLines()
+    GameTooltip.Hide()
+  })
+
+  // export
+  frame.fns = {
+    activate: () => {
+      disableCostText()
+      SetDesaturation(texture, false)
+    },
+    deactivate: () => {
+      enableCostText()
+      SetDesaturation(texture, true)
+    },
+  }
+
+  frame.state = {
+    isActive: false,
+  }
+
+  frame.fns.deactivate()
+
+  return frame
+}
+
 // test
-const SAMPLE_DATA = {
+const SAMPLE_DATA: TalentSpell = {
   name: 'Shadowstep',
   id: 36554,
   icon: 'Interface/Icons/Ability_Rogue_Shadowstep',
