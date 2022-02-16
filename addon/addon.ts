@@ -459,7 +459,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   })
 
   // tooltip
-  const showTooltip = () => {
+  const drawTooltip = () => {
     GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`spell:${options.spell.id}`)
@@ -468,17 +468,17 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     GameTooltip.Show()
   }
 
-  const hideTooltip = () => {
+  const clearTooltip = () => {
     GameTooltip.ClearLines()
     GameTooltip.Hide()
   }
 
   frame.ref.SetScript('OnEnter', () => {
-    showTooltip()
+    drawTooltip()
   })
 
   frame.ref.SetScript('OnLeave', () => {
-    hideTooltip()
+    clearTooltip()
   })
 
   // export
@@ -488,11 +488,13 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
   frame.fns = {
     activate: () => {
+      drawTooltip()
       frame.state.isActive = true
       disableCostText()
       SetDesaturation(texture, false)
     },
     deactivate: () => {
+      drawTooltip()
       frame.state.isActive = false
       enableCostText()
       SetDesaturation(texture, true)
