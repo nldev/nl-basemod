@@ -554,10 +554,13 @@ const app = new App(app => {
   grid.ref.SetAllPoints(scroll.inner)
 
   const talent = Talent({
-    name: 'c',
     spell: TEST_TALENT,
-    onActivate: () => {},
-    onDeactivate: () => {},
+    onActivate: () => {
+      console.log('activated')
+    },
+    onDeactivate: () => {
+      console.log('deactivated')
+    },
   })
 
   const d = Frame({ name: 'd' })
