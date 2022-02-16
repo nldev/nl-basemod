@@ -414,19 +414,6 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     Frame({ name: `talent-${options.spell.id}` }) as any
 
   frame.ref.SetSize(40, 40)
-  frame.ref.SetBackdrop({
-    // bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
-    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    // tile: true,
-    // tileSize: 16,
-    edgeSize: 16,
-    insets: {
-      left: 0,
-      right: 0,
-      top: 0,
-      bottom: 0,
-    },
-  })
 
   // cost
   const cost = Frame({ name: `talent-${options.spell.id}-cost`, parent: frame })
@@ -464,7 +451,8 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   texture.SetTexture(options.spell.icon)
   texture.SetAllPoints()
   frame.ref.SetBackdrop({
-    tile: true,
+    // tile: true,
+    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
     edgeSize: 16,
     insets: {
       left: 0,
