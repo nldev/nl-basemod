@@ -459,17 +459,26 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   })
 
   // tooltip
-  frame.ref.SetScript('OnEnter', () => {
+  const showTooltip = () => {
     GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`spell:${options.spell.id}`)
-    GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, 0.4, 0.85, 0.93, 1, 1, 1)
+    if (!frame.state.isActive)
+      GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, 0.4, 0.85, 0.93, 1, 1, 1)
     GameTooltip.Show()
+  }
+
+  const hideTooltip = () => {
+    GameTooltip.ClearLines()
+    GameTooltip.Hide()
+  }
+
+  frame.ref.SetScript('OnEnter', () => {
+    showTooltip()
   })
 
   frame.ref.SetScript('OnLeave', () => {
-    GameTooltip.ClearLines()
-    GameTooltip.Hide()
+    hideTooltip()
   })
 
   // export
