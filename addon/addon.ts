@@ -145,7 +145,7 @@ export class App {
     this.talentInfo = {
       isEnabled: false,
       total: 50,
-      remaining: 30,
+      remaining: 50,
       active: {},
     }
 
@@ -642,22 +642,23 @@ const app = new App(app => {
   for (const key of Object.keys(TALENTS)) {
     const spell: TalentSpell = TALENTS[key]
 
-    const talent = Talent({
-      spell,
-      onActivate: () => {
-        // FIXME fire server event
-        app.talentInfo.active[spell.id] = true
-        console.log(`${spell.name} activated`)
-      },
-      onDeactivate: () => {
-        // FIXME fire server event
-        app.talentInfo.active[spell.id] = false
-        console.log(`${spell.name} deactivated`)
-      },
-    })
+    if (spell.class[app.playerInfo.chrClass]) {
+      const talent = Talent({
+        spell,
+        onActivate: () => {
+          // FIXME fire server event
+          app.talentInfo.active[spell.id] = true
+          console.log(`${spell.name} activated`)
+        },
+        onDeactivate: () => {
+          // FIXME fire server event
+          app.talentInfo.active[spell.id] = false
+          console.log(`${spell.name} deactivated`)
+        },
+      })
 
-    grid.fns.Attach(talent)
-
+      grid.fns.Attach(talent)
+    }
   }
 
   const { name, level, chrRace, chrClass } = app.playerInfo
