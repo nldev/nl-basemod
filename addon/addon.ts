@@ -445,15 +445,12 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     costText.SetTextColor(red, green, blue)
   }
 
-  // texture
-  const texture = frame.ref.CreateTexture()
-
-  texture.SetTexture(options.spell.icon)
-  texture.SetAllPoints()
+  // style
   frame.ref.SetBackdrop({
-    // tile: true,
+    // bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
     edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    edgeSize: 16,
+    tile: true,
+    tileSize: 16,
     insets: {
       left: 0,
       right: 0,
@@ -461,6 +458,10 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
       bottom: 0,
     },
   })
+  frame.ref.SetBackdropColor(0, 0, 0, 1)
+  const texture = frame.ref.CreateTexture()
+  texture.SetTexture(options.spell.icon)
+  texture.SetAllPoints()
 
   // mouse
   frame.ref.EnableMouse(true)
