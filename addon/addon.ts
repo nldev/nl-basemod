@@ -410,21 +410,28 @@ export interface TalentFns {
 }
 export const Talent: Component<TalentOptions, TalentState, TalentFns> = options => {
   // frame
-  const frame: Element<TalentState, TalentFns> = Frame({ name: `talent-${options.spell.id}` }) as any
-  frame.ref.SetSize(50, 50)
+  const frame: Element<TalentState, TalentFns> =
+    Frame({ name: `talent-${options.spell.id}` }) as any
+
+  frame.ref.SetSize(40, 40)
 
   // cost
   const cost = Frame({ name: `talent-${options.spell.id}-cost`, parent: frame })
 
-  cost.ref.SetSize(30, 20)
-  cost.ref.SetPoint('BOTTOM', 0, -6)
+  cost.ref.SetSize(43, 20)
+  cost.ref.SetPoint('BOTTOM', 0, -20)
   cost.ref.SetBackdrop(BASE_BACKDROP)
   cost.ref.SetBackdropColor(0, 0, 0, 1)
 
-  const costText = frame.ref.CreateFontString(`talent-${options.spell.id}-costtext`, 'OVERLAY', 'GameTooltipText')
+  const costText = frame.ref.CreateFontString(
+    `talent-${options.spell.id}-costtext`,
+    'OVERLAY',
+    'GameTooltipText',
+  )
   costText.SetParent(cost.ref)
   costText.SetPoint('CENTER')
   costText.SetText(`${options.spell.cost}`)
+  costText.SetFont('Fonts/FRIZQT__.TTF', 10)
 
   // active: blue
   // unactive - nohover: white
