@@ -463,8 +463,11 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`spell:${options.spell.id}`)
-    if (!frame.state.isActive)
+    if (!frame.state.isActive) {
       GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, 0.4, 0.85, 0.93, 1, 1, 1)
+    } else {
+      GameTooltip.AddLine('Learned', 0.65, 0.88, 0.18)
+    }
     GameTooltip.Show()
   }
 
@@ -488,14 +491,14 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
   frame.fns = {
     activate: () => {
-      drawTooltip()
       frame.state.isActive = true
+      drawTooltip()
       disableCostText()
       SetDesaturation(texture, false)
     },
     deactivate: () => {
-      drawTooltip()
       frame.state.isActive = false
+      drawTooltip()
       enableCostText()
       SetDesaturation(texture, true)
     },
