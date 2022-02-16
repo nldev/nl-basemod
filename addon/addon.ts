@@ -513,12 +513,14 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
       frame.state.isActive = true
       drawTooltip()
       disableCostText()
+      setCostTextColor()
       SetDesaturation(texture, false)
     },
     deactivate: () => {
       frame.state.isActive = false
       drawTooltip()
       enableCostText()
+      setCostTextColor()
       SetDesaturation(texture, true)
     },
     toggle: () => {
