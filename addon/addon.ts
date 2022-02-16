@@ -459,7 +459,6 @@ const app = new App(app => {
     GameTooltip.Hide()
   })
 
-
   const d = Frame({ name: 'd' })
   d.ref.SetBackdrop(BASE_BACKDROP)
   d.ref.SetBackdropColor(0, 1, 0, 1)
