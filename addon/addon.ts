@@ -13,6 +13,10 @@ export function Unique (id: string) {
   return `${id}-${_id}`
 }
 
+export function rgb (red: number, green: number, blue: number) {
+  return [red / 255, green / 255, blue / 255]
+}
+
 // constants
 export const BASE_BACKDROP = {
   bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
@@ -430,6 +434,9 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     costText.Hide()
   }
 
+  const setCostTextColor = (override: [number, number, number]) => {
+  }
+
   // texture
   const texture = frame.ref.CreateTexture()
 
@@ -466,7 +473,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     if (!frame.state.isActive) {
       GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, 0.4, 0.85, 0.93, 1, 1, 1)
     } else {
-      GameTooltip.AddLine('Learned', 0.65, 0.88, 0.18)
+      GameTooltip.AddLine('Learned', ...rgb(166, 226, 46))
     }
     GameTooltip.Show()
   }
