@@ -428,7 +428,6 @@ const app = new App(app => {
 
   grid.ref.SetAllPoints(scroll.inner)
 
-
   const c = Frame({ name: 'c' })
   c.ref.SetSize(50, 50)
   const texture = c.ref.CreateTexture()
@@ -447,14 +446,12 @@ const app = new App(app => {
     },
   })
 
-
-
   c.ref.EnableMouse(true)
   c.ref.SetScript('OnEnter', () => {
     GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`spell:${SAMPLE_DATA.id}`)
-    GameTooltip.AddLine(`Cost: ${SAMPLE_DATA.cost}`)
+    GameTooltip.AddDoubleLine('|cff66D9EFCost: ', `${SAMPLE_DATA.cost}`, 0.4, 0.85, 0.93, 1, 1, 1)
     GameTooltip.Show()
   })
   c.ref.SetScript('OnLeave', () => {
