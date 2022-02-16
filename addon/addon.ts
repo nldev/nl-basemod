@@ -464,12 +464,10 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
     if (button === 'RightButton' && frame.state.isActive)
       frame.fns.deactivate()
-
-    drawTooltip()
   })
 
   // tooltip
-  const drawTooltip = () => {
+  const drawTooltip = (hide?: boolean) => {
     GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`spell:${options.spell.id}`)
@@ -503,11 +501,13 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   frame.fns = {
     activate: () => {
       frame.state.isActive = true
+      drawTooltip()
       setCostTextColor()
       SetDesaturation(texture, false)
     },
     deactivate: () => {
       frame.state.isActive = false
+      drawTooltip()
       setCostTextColor()
       SetDesaturation(texture, true)
     },
@@ -518,7 +518,9 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     },
   }
 
-  frame.fns.deactivate()
+  frame.state.isActive = false
+  setCostTextColor()
+  SetDesaturation(texture, true)
 
   return frame
 }
