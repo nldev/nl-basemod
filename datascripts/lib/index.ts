@@ -601,7 +601,7 @@ export class Builder {
     const list: string[] = []
 
     for (const key of Object.keys(data))
-      list.push(`export const ${dashCaseToConstantCase(key)} = ${JSON.stringify(data[key])}`)
+      list.push(`export const ${dashCaseToConstantCase(key)} = ${JSON.stringify(data[key])};`)
 
     const filePath = `${ADDON_DATA_PATH}\\${file}.ts`
 
