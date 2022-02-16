@@ -1,3 +1,4 @@
+import * as TALENTS from './data/talents'
 // utils
 const names = {}
 
@@ -96,6 +97,13 @@ export interface PlayerInfo {
   level: number
 }
 
+export interface TalentInfo {
+  isEnabled: boolean
+  total: number
+  remaining: number
+  active: Mapping<boolean>
+}
+
 // app
 export const Get: () => App = () => _G['app']
 
@@ -105,9 +113,17 @@ export class App {
 
   public root: Element
   public playerInfo: PlayerInfo
+  public talentInfo: TalentInfo
   public frames: Mapping<WoWAPI.Frame> = {}
 
   constructor (protected onInit: ($: App) => void) {
+    this.talentInfo = {
+      isEnabled: false,
+      total: 50,
+      remaining: 30,
+      active: {},
+    }
+
     const root = CreateFrame('Frame', ROOT, UIParent)
 
     root.SetScript('OnUpdate', () => {
@@ -285,6 +301,7 @@ export const Scroll: Component<ScrollOptions> = options => {
   scrollchild.SetSize(ref.GetWidth(), options.scrollHeight || ref.GetHeight() * 2)
 
   const moduleoptions = CreateFrame('Frame', 'moduleoptions', scrollchild)
+
   moduleoptions.SetPoint('TOPLEFT')
   moduleoptions.SetWidth(scrollchild.GetWidth() - SCROLL_WIDTH)
   moduleoptions.SetHeight(scrollchild.GetHeight())
@@ -386,7 +403,8 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
 // talents
 export interface TalentSpell {
   name: string
-  id: number
+  id: string
+  spellId: number
   icon: string
   cost: number
 }
@@ -481,7 +499,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     if (frame.state.isHover) {
       GameTooltip.ClearLines()
       GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
-      GameTooltip.SetHyperlink(`spell:${options.spell.id}`)
+      GameTooltip.SetHyperlink(`spell:${options.spell.spellId}`)
       if (!frame.state.isActive) {
         const [red, green, blue] = rgb(102, 217, 239)
         GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, red, green, blue, 1, 1, 1)
@@ -498,7 +516,8 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   }
 
   frame.ref.SetScript('OnEnter', () => {
-    SetDesaturation(texture, false)
+    if (options.spell.cost <= app.talentInfo.remaining)
+      SetDesaturation(texture, false)
     frame.state.isHover = true
     drawTooltip()
   })
@@ -548,14 +567,11 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 // test
 const SHADOWSTEP: TalentSpell = {
   name: 'Shadowstep',
-  id: 36554,
+  id: 'shadowstep',
+  spellId: 36554,
   icon: 'Interface/Icons/Ability_Rogue_Shadowstep',
   cost: 20,
 }
-
-const TALENTS = [
-  SHADOWSTEP,
-]
 
 const app = new App(app => {
   const root = Root()
@@ -603,20 +619,26 @@ const app = new App(app => {
 
   grid.ref.SetAllPoints(scroll.inner)
 
-  TALENTS.forEach(spell => {
+  for (const key of Object.keys(TALENTS)) {
+    const spell: TalentSpell = TALENTS[key]
+
     const talent = Talent({
       spell,
       onActivate: () => {
+        // FIXME fire server event
+        app.talentInfo.active[spell.id] = true
         console.log(`${spell.name} activated`)
       },
       onDeactivate: () => {
+        // FIXME fire server event
+        app.talentInfo.active[spell.id] = false
         console.log(`${spell.name} deactivated`)
       },
     })
 
     grid.fns.Attach(talent)
-  })
 
+  }
 
   const { name, level, chrRace, chrClass } = app.playerInfo
 
