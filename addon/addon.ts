@@ -13,7 +13,7 @@ export function Unique (id: string) {
   return `${id}-${_id}`
 }
 
-export function rgb (red: number, green: number, blue: number) {
+export function rgb (red: number, green: number, blue: number): Rgb {
   return [red / 255, green / 255, blue / 255]
 }
 
@@ -40,6 +40,8 @@ export const SCROLL_WIDTH = 20
 export interface Mapping<T = any> {
   [key: string]: T
 }
+
+export type Rgb = [number, number, number]
 
 export const ROOT = 'ROOT'
 
@@ -471,7 +473,8 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`spell:${options.spell.id}`)
     if (!frame.state.isActive) {
-      GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, 0.4, 0.85, 0.93, 1, 1, 1)
+      const [red, green, blue] = rgb(102, 217, 239)
+      GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, red, green, blue, 1, 1, 1)
     } else {
       GameTooltip.AddLine('Learned', ...rgb(166, 226, 46))
     }
