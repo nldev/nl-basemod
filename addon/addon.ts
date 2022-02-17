@@ -38,6 +38,25 @@ export const BASE_COLORS = [0, 0, 0, 1]
 
 export const SCROLL_WIDTH = 20
 
+const REQUESTS = {
+  GM: {
+    SET_TALENT_POINTS: 'set-talent-points',
+  },
+  GET_TALENT_INFO: 'get-talent-info',
+  LEARN_TALENT: 'learn-talent',
+  UNLEARN_TALENT: 'unlearn-talent',
+}
+
+const RESPONSES = {
+  GM: {
+    SET_TALENT_POINTS_SUCCESS: 'set-talent-points-success',
+  },
+  GET_TALENT_INFO_SUCCESS: 'get-talent-info-success',
+  LEARN_TALENT_SUCCESS: 'learn-talent-success',
+  LEARN_TALENT_FAIL: 'learn-talent-fail',
+  UNLEARN_TALENT_SUCCESS: 'unlearn-talent-success',
+}
+
 // types
 export interface Mapping<T = any> {
   [key: string]: T
@@ -140,7 +159,7 @@ export class App {
   public root: Element
   public playerInfo: PlayerInfo
   public talentInfo: TalentInfo
-  public frames: Mapping<WoWAPI.Frame> = {}
+  public elements: Mapping<Element<any, any>> = {}
 
   constructor (protected onInit: ($: App) => void) {
     this.talentInfo = {
@@ -247,10 +266,8 @@ export const Frame: Component = options => {
   const app = Get()
 
   const parent = options.parent
-  const frame: WoWAPI.Frame = app.frames[options.name]
+  const frame: WoWAPI.Frame = app.elements[options.name].ref
     || CreateFrame(options.type || 'Frame', options.name, parent ? parent.inner : app.root.ref, options.inherits) as WoWAPI.Frame
-
-  app.frames[options.name] = frame
 
   if (typeof options.mod === 'function') {
     options.mod(frame)
@@ -263,7 +280,7 @@ export const Frame: Component = options => {
   if (options.parent)
     frame.SetParent(options.parent.inner)
 
-  return {
+  const element = {
     parent,
     name: options.name,
     ref: frame,
@@ -271,6 +288,10 @@ export const Frame: Component = options => {
     state: options.state || {},
     fns: options.fns || {},
   }
+
+  app.elements[options.name] = element
+
+  return element
 }
 
 // scroll
@@ -283,10 +304,6 @@ export const Scroll: Component<ScrollOptions> = options => {
   const frame = a.inner
 
   frame.SetAllPoints(frame.GetParent() as WoWAPI.Frame)
-
-  const app = Get()
-
-  app.frames[options.name] = frame
 
   const scrollframe = Frame({
     name: `${options.name}-scrollframe`,
@@ -449,6 +466,8 @@ export interface TalentState {
 }
 
 export interface TalentFns {
+  requestActivate: () => void
+  requestDeactivate: () => void
   activate: () => void
   deactivate: () => void
   toggle: () => void
@@ -566,6 +585,12 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   }
 
   frame.fns = {
+    requestActivate: () => {
+       SendAddonMessage(REQUESTS.LEARN_TALENT, options.spell.id, 'WHISPER', app.playerInfo.name)
+    },
+    requestDeactivate: () => {
+       SendAddonMessage(REQUESTS.UNLEARN_TALENT, options.spell.id, 'WHISPER', app.playerInfo.name)
+    },
     activate: () => {
       frame.state.isActive = true
       drawTooltip()
@@ -589,7 +614,10 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     },
   }
 
-  frame.fns.deactivate()
+  frame.state.isActive = false
+  drawTooltip()
+  setCostTextColor()
+  SetDesaturation(texture, true)
 
   return frame
 }
@@ -641,25 +669,6 @@ const app = new App(app => {
 
   grid.ref.SetAllPoints(scroll.inner)
 
-  const REQUESTS = {
-    GM: {
-      SET_TALENT_POINTS: 'set-talent-points',
-    },
-    GET_TALENT_INFO: 'get-talent-info',
-    LEARN_TALENT: 'learn-talent',
-    UNLEARN_TALENT: 'unlearn-talent',
-  }
-
-  const RESPONSES = {
-    GM: {
-      SET_TALENT_POINTS_SUCCESS: 'set-talent-points-success',
-    },
-    GET_TALENT_INFO_SUCCESS: 'get-talent-info-success',
-    LEARN_TALENT_SUCCESS: 'learn-talent-success',
-    LEARN_TALENT_FAIL: 'learn-talent-fail',
-    UNLEARN_TALENT_SUCCESS: 'unlearn-talent-success',
-  }
-
   for (const key of Object.keys(TALENTS)) {
     const spell: TalentSpell = TALENTS[key]
 
@@ -667,14 +676,10 @@ const app = new App(app => {
       const talent = Talent({
         spell,
         onActivate: () => {
-          // FIXME fire server event
-          app.talentInfo.active[spell.id] = true
-          // SendAddonMessage(REQUESTS.LEARN_TALENT, spell.id, 'WHISPER', name)
+          console.log(`${spell.id} activated`)
         },
         onDeactivate: () => {
-          // FIXME fire server event
-          app.talentInfo.active[spell.id] = false
-          // SendAddonMessage(REQUESTS.UNLEARN_TALENT, spell.id, 'WHISPER', name)
+          console.log(`${spell.id} deactivated`)
         },
       })
 
@@ -688,15 +693,42 @@ const app = new App(app => {
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
     if (prefix !== RESPONSES.GET_TALENT_INFO_SUCCESS)
       return
-    const [used, max] = text.split(' ')
+    if (!text)
+      return
+    const [a, b] = text.split(' ')
+    const used = Number(a)
+    const max = Number(b)
     if (used && max) {
-      console.log(`used: ${used}`)
-      console.log(`max: ${max}`)
+      app.talentInfo.isEnabled = true
+      app.talentInfo.used = used
+      app.talentInfo.max = max
     }
+  })
+
+  Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, talentId) => {
+    if (prefix !== RESPONSES.LEARN_TALENT_SUCCESS)
+      return
+    if (!talentId)
+      return
+    const ele = app.elements[`talent-${talentId}`] as Element<TalentState, TalentFns>
+    if (ele)
+      ele.fns.activate()
+  })
+
+  Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, talentId) => {
+    if (prefix !== RESPONSES.UNLEARN_TALENT_SUCCESS)
+      return
+    if (!talentId)
+      return
+    const ele = app.elements[`talent-${talentId}`] as Element<TalentState, TalentFns>
+    if (ele)
+      ele.fns.deactivate()
   })
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
     if (prefix !== RESPONSES.GM.SET_TALENT_POINTS_SUCCESS)
+      return
+    if (!text)
       return
     console.log('set talents successful')
   })

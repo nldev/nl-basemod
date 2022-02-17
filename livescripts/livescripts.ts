@@ -215,18 +215,86 @@ function HandleGetTalentInfo (events: TSEvents) {
     const sql = QueryWorld(`
       select * from __player_talents where playerGuid = ${playerGuid};
     `)
-    let amount: number = 0
+    let used: string = '0'
+    let max: string = '0'
     while (sql.GetRow())
-      amount = sql.GetInt16(1)
-    sender.SendAddonMessage('get-talent-info-success', `${amount}`, 0, sender)
+      used = sql.GetString(1)
+      max = sql.GetString(2)
+    sender.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, sender)
   })
 }
 
 function HandleLearnTalent (events: TSEvents) {
-    // const talentId = str.substr(opcode.length)
+  events.Player.OnWhisper((sender, _, message) => {
+    const opcode = Opcode('learn-talent')
+    const str = message.get()
+    if (!str.includes(opcode))
+     return
+    const playerGuid = sender.GetGUID()
+    const talentId = str.substr(opcode.length)
+    if (!talentId)
+      return
+    // check if is valid talent
+    const a = QueryWorld(`
+      select * from __talents where talentId = ${talentId};
+    `)
+    let spellId = 0
+    let cost = 0
+    let classMask = 0
+    while (a.GetRow()) {
+      spellId = a.GetInt16(2)
+      cost = a.GetInt16(3)
+      classMask = a.GetInt16(5)
+    }
+    if (!spellId || !cost || !classMask)
+      return
+    // check if player has enough points
+    const b = QueryWorld(`
+      select * from __player_talents where playerGuid = ${playerGuid};
+    `)
+    let used = 0
+    let max = 0
+    while (b.GetRow()) {
+      used = b.GetInt16(1)
+      max = b.GetInt16(2)
+    }
+    if (!max)
+      return
+    const existingRemaining = max - used
+    const remaining = existingRemaining - cost
+    if (remaining < 0)
+      return
+    // check if player already has talent
+    const c = QueryWorld(`
+      select * from __talent_instances where playerGuid = ${playerGuid}, talentId = ${talentId};
+    `)
+    let isAlreadyActive = false
+    while (c.GetRow())
+      if (c.GetInt16(3))
+        isAlreadyActive = true
+    if (isAlreadyActive)
+      return
+    // FIXME: check if player is correct class
+    // learn spell
+    sender.LearnSpell(spellId)
+    // add to __talent_instances
+    QueryWorld(`
+      insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, ${talentId}, true) on duplicate key update
+        playerGuid=${playerGuid}, talentId=${talentId}, isActive=1
+    `)
+    // adjust __player_talents
+    QueryWorld(`
+      insert into __player_talents (used) values(${max - remaining}) on duplicate key update
+        used=${max - remaining}
+    `)
+    sender.SendAddonMessage('learn-talent-success', talentId, 0, sender)
+  })
 }
 
 function HandleUnlearnTalent (events: TSEvents) {
+  events.Player.OnWhisper((sender, _, message) => {
+    const opcode = Opcode('unlearn-talent')
+  })
 }
 
 function HandleSetTalentPoints (events: TSEvents) {
@@ -242,8 +310,8 @@ function HandleSetTalentPoints (events: TSEvents) {
         insert into __player_talents (playerGuid, used, max) values(${playerGuid}, 0, ${max}) on duplicate key update
           used=0, max=${max}
       `)
-      sender.SendAddonMessage('set-talent-points-success', `0,${max}`, 0, sender)
-      sender.SendAddonMessage('get-talent-info-success', `0,${max}`, 0, sender)
+      sender.SendAddonMessage('set-talent-points-success', `0 ${max}`, 0, sender)
+      sender.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, sender)
     }
   })
 }

@@ -25,6 +25,7 @@ export class CreateTalent extends NWTask {
     this.builder.Table({
       name: 'player_talents',
       database: 'world',
+      isPersist: true,
       columns: [
         {
           name: 'playerGuid',
