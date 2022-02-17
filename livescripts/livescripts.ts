@@ -227,7 +227,7 @@ function HandleGetTalentInfo (events: TSEvents) {
     `)
     while (b.GetRow()) {
       const id = b.GetString(2)
-      const isActive = b.GetInt32(3)
+      const isActive = b.GetUInt16(3)
       if (id && isActive)
         sender.SendAddonMessage('learn-talent-success', id, 0, sender)
     }
@@ -252,9 +252,9 @@ function HandleLearnTalent (events: TSEvents) {
     let cost = 0
     let classMask = 0
     while (a.GetRow()) {
-      spellId = a.GetInt32(2)
-      cost = a.GetInt32(3)
-      classMask = a.GetInt32(5)
+      spellId = a.GetUInt16(2)
+      cost = a.GetUInt16(3)
+      classMask = a.GetUInt16(5)
     }
     console.log(spellId)
     if (!spellId || !cost || !classMask)
@@ -266,8 +266,8 @@ function HandleLearnTalent (events: TSEvents) {
     let used = 0
     let max = 0
     while (b.GetRow()) {
-      used = b.GetInt32(1)
-      max = b.GetInt32(2)
+      used = b.GetUInt16(1)
+      max = b.GetUInt16(2)
     }
     if (!max)
       return
@@ -314,9 +314,9 @@ function HandleUnlearnTalent (events: TSEvents) {
     let cost = 0
     let classMask = 0
     while (a.GetRow()) {
-      spellId = a.GetInt32(2)
-      cost = a.GetInt32(3)
-      classMask = a.GetInt32(5)
+      spellId = a.GetUInt16(2)
+      cost = a.GetUInt16(3)
+      classMask = a.GetUInt16(5)
     }
     if (!spellId || !cost || !classMask)
       return
@@ -328,8 +328,8 @@ function HandleUnlearnTalent (events: TSEvents) {
     let used = 0
     let max = 0
     while (b.GetRow()) {
-      used = b.GetInt32(1)
-      max = b.GetInt32(2)
+      used = b.GetUInt16(1)
+      max = b.GetUInt16(2)
     }
     const existingRemaining = max - used
     const remaining = existingRemaining + cost
