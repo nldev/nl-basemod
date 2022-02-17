@@ -274,7 +274,7 @@ function HandleLearnTalent (events: TSEvents) {
     const remaining = existingRemaining - cost
     if (remaining < 0)
       return
-    if ((sender.GetClassMask() & classMask) === classMask)
+    if ((sender.GetClassMask() & classMask) === sender.GetClassMask())
     // learn spell
     sender.LearnSpell(spellId)
     // update __talent_instances
