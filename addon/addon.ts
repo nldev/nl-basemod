@@ -675,15 +675,18 @@ const app = new App(app => {
   grid.ref.SetAllPoints(scroll.inner)
 
   // counterText
-  const counter = Frame({ name: 'talent-counter' })
+  const counter = Frame({ name: 'talent-counter', parent: a })
   counter.ref.SetSize(60, 30)
+  counter.ref.SetBackdrop(BASE_BACKDROP)
+  counter.ref.SetBackdropColor(0, 0, 0, 1)
+  counter.ref.SetPoint('BOTTOMLEFT', 0, -30)
   const counterText = b.ref.CreateFontString(
     'talent-countertext',
     'OVERLAY',
     'GameTooltipText',
   )
+  counterText.SetPoint('CENTER')
   counterText.SetParent(counter.ref)
-  counterText.SetPoint('BOTTOM', 0, -30)
   counterText.SetText(`${app.talentInfo.used} / ${app.talentInfo.max}`)
   counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
   // costText.SetTextColor(red, green, blue)
