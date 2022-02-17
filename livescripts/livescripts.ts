@@ -287,8 +287,8 @@ function HandleLearnTalent (events: TSEvents) {
     `)
     // update __player_talents
     QueryWorld(`
-      insert into __player_talents (used) values(${max - remaining}) on duplicate key update
-        used=${max - remaining}
+      insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${max - remaining}) on duplicate key update
+        max=${max}, used=${max - remaining}
     `)
     sender.SendAddonMessage('learn-talent-success', talentId, 0, sender)
   })
@@ -341,9 +341,12 @@ function HandleUnlearnTalent (events: TSEvents) {
         playerGuid=${playerGuid}, talentId="${talentId}", isActive=0
     `)
     // update __player_talents
+    console.log(`max: ${max}`)
+    console.log(`used: ${used}`)
+    console.log(`remaining: ${remaining}`)
     QueryWorld(`
-      insert into __player_talents (used) values(${max - remaining}) on duplicate key update
-        used=${max - remaining}
+      insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${max - remaining}) on duplicate key update
+        max=${max}, used=${max - remaining}
     `)
     sender.SendAddonMessage('unlearn-talent-success', talentId, 0, sender)
   })
