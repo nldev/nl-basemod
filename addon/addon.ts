@@ -685,8 +685,8 @@ const app = new App(app => {
     'OVERLAY',
     'GameTooltipText',
   )
-  counterText.SetPoint('CENTER')
   counterText.SetParent(counter.ref)
+  counterText.SetPoint('CENTER')
   counterText.SetText(`${app.talentInfo.used} / ${app.talentInfo.max}`)
   counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
   // costText.SetTextColor(red, green, blue)
