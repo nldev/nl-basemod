@@ -20,6 +20,24 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
     spellId: 14983,
     cost: 15,
     class: { ROGUE: true },
-  }
+  },
+  {
+    id: 'shadowstep',
+    spellId: 36554,
+    cost: 30,
+    class: { ROGUE: true },
+  },
+  {
+    id: 'mutilate',
+    spellId: 34412,
+    cost: 20,
+    class: { ROGUE: true },
+  },
+  {
+    id: 'hemorrage',
+    spellId: 17348,
+    cost: 20,
+    class: { ROGUE: true },
+  },
 ])
 
