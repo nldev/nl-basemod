@@ -227,7 +227,7 @@ function HandleGetTalentInfo (events: TSEvents) {
     `)
     while (b.GetRow()) {
       const id = b.GetString(2)
-      const isActive = b.GetInt16(3)
+      const isActive = b.GetInt32(3)
       if (id && isActive)
         sender.SendAddonMessage('learn-talent-success', id, 0, sender)
     }
@@ -252,9 +252,9 @@ function HandleLearnTalent (events: TSEvents) {
     let cost = 0
     let classMask = 0
     while (a.GetRow()) {
-      spellId = a.GetInt16(2)
-      cost = a.GetInt16(3)
-      classMask = a.GetInt16(5)
+      spellId = a.GetInt32(2)
+      cost = a.GetInt32(3)
+      classMask = a.GetInt32(5)
     }
     if (!spellId || !cost || !classMask)
       return
@@ -265,8 +265,8 @@ function HandleLearnTalent (events: TSEvents) {
     let used = 0
     let max = 0
     while (b.GetRow()) {
-      used = b.GetInt16(1)
-      max = b.GetInt16(2)
+      used = b.GetInt32(1)
+      max = b.GetInt32(2)
     }
     if (!max)
       return
@@ -312,9 +312,9 @@ function HandleUnlearnTalent (events: TSEvents) {
     let cost = 0
     let classMask = 0
     while (a.GetRow()) {
-      spellId = a.GetInt16(2)
-      cost = a.GetInt16(3)
-      classMask = a.GetInt16(5)
+      spellId = a.GetInt32(2)
+      cost = a.GetInt32(3)
+      classMask = a.GetInt32(5)
     }
     if (!spellId || !cost || !classMask)
       return
@@ -325,8 +325,8 @@ function HandleUnlearnTalent (events: TSEvents) {
     let used = 0
     let max = 0
     while (b.GetRow()) {
-      used = b.GetInt16(1)
-      max = b.GetInt16(2)
+      used = b.GetInt32(1)
+      max = b.GetInt32(2)
     }
     const existingRemaining = max - used
     const remaining = existingRemaining + cost
@@ -341,9 +341,6 @@ function HandleUnlearnTalent (events: TSEvents) {
         playerGuid=${playerGuid}, talentId="${talentId}", isActive=0
     `)
     // update __player_talents
-    console.log(`max: ${max}`)
-    console.log(`used: ${used}`)
-    console.log(`remaining: ${remaining}`)
     QueryWorld(`
       insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${max - remaining}) on duplicate key update
         max=${max}, used=${max - remaining}
