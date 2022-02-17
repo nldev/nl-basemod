@@ -687,7 +687,7 @@ const app = new App(app => {
   )
   counterText.SetParent(counter.ref)
   counterText.SetPoint('CENTER')
-  counterText.SetText(`${app.talentInfo.used} / ${app.talentInfo.max}`)
+  counterText.SetText(`${app.talentInfo.max - app.talentInfo.used} / ${app.talentInfo.max}`)
   counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
   // costText.SetTextColor(red, green, blue)
 
