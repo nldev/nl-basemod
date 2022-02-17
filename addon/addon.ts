@@ -588,9 +588,11 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
   frame.fns = {
     requestActivate: () => {
-       SendAddonMessage(REQUESTS.LEARN_TALENT, options.spell.id, 'WHISPER', app.playerInfo.name)
+      if (!frame.state.isActive)
+        SendAddonMessage(REQUESTS.LEARN_TALENT, options.spell.id, 'WHISPER', app.playerInfo.name)
     },
     requestDeactivate: () => {
+      if (frame.state.isActive)
        SendAddonMessage(REQUESTS.UNLEARN_TALENT, options.spell.id, 'WHISPER', app.playerInfo.name)
     },
     activate: () => {
