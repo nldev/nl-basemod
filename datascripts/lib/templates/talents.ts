@@ -34,7 +34,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
     class: { ROGUE: true },
   },
   {
-    id: 'hemorrage',
+    id: 'hemorrhage',
     spellId: 17348,
     cost: 20,
     class: { ROGUE: true },
