@@ -661,14 +661,13 @@ const app = new App(app => {
         spell,
         onActivate: () => {
           // FIXME fire server event
-          // app.talentInfo.active[spell.id] = true
-
-          SendAddonMessage(REQUESTS.LEARN_TALENT, spell.id, 'WHISPER', name)
+          app.talentInfo.active[spell.id] = true
+          // SendAddonMessage(REQUESTS.LEARN_TALENT, spell.id, 'WHISPER', name)
         },
         onDeactivate: () => {
           // FIXME fire server event
-          // app.talentInfo.active[spell.id] = false
-          SendAddonMessage(REQUESTS.UNLEARN_TALENT, spell.id, 'WHISPER', name)
+          app.talentInfo.active[spell.id] = false
+          // SendAddonMessage(REQUESTS.UNLEARN_TALENT, spell.id, 'WHISPER', name)
         },
       })
 
@@ -679,10 +678,13 @@ const app = new App(app => {
   const { name, level, chrRace, chrClass } = app.playerInfo
 
   // test
-  Events.ChatInfo.OnChatMsgAddon(app.root.ref, (text, name, lang, channel, nameB, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid) => {
-    console.log(text)
+  Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
+    if (prefix === RESPONSES.GET_TALENT_INFO_SUCCESS) {
+      const amount = Number(text)
+      console.log(`amount: ${amount}`)
+    }
   })
-  SendAddonMessage(REQUESTS.GET_TALENT_INFO, '', 'WHISPER', name)
+  SendAddonMessage(REQUESTS.GET_TALENT_INFO, 'empty', 'WHISPER', name)
 })
 
 

@@ -207,19 +207,18 @@ function Setup (events: TSEvents) {
 
 function HandleGetTalentInfo (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
-    const opcode = Opcode('get-info')
+    const opcode = Opcode('get-talent-info')
     const str = message.get()
     if (!str.includes(opcode))
      return
-    // const playerGuid = sender.GetGUID()
-    // const sql = QueryWorld(`
-    //   select * from __player_talents where playerGuid = ${playerGuid};
-    // `)
-    // let amount: number
-    // while (sql.GetRow())
-    //   amount = sql.GetInt16(1)
-    // sender.SendAddonMessage('get-talent-info-success', `${amount}`, )
-    sender.SendAddonMessage('get-talent-info-success', 'hi', 0, sender)
+    const playerGuid = sender.GetGUID()
+    const sql = QueryWorld(`
+      select * from __player_talents where playerGuid = ${playerGuid};
+    `)
+    let amount: number = 0
+    while (sql.GetRow())
+      amount = sql.GetInt16(1)
+    sender.SendAddonMessage('get-talent-info-success', `${amount}`, 0, sender)
   })
 }
 
