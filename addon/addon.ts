@@ -679,7 +679,7 @@ const app = new App(app => {
   counter.ref.SetSize(60, 30)
   counter.ref.SetBackdrop(BASE_BACKDROP)
   counter.ref.SetBackdropColor(0, 0, 0, 1)
-  counter.ref.SetPoint('BOTTOMLEFT', 0, -30)
+  counter.ref.SetPoint('BOTTOMLEFT', 0, -40)
   const counterText = b.ref.CreateFontString(
     'talent-countertext',
     'OVERLAY',
