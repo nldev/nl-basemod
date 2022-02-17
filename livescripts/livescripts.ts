@@ -221,16 +221,27 @@ function HandleGetTalentInfo (events: TSEvents) {
       used = a.GetString(1)
       max = a.GetString(2)
     }
-    sender.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, sender)
     const b = QueryWorld(`
       select * from __talent_instances where playerGuid = ${playerGuid};
     `)
+    let id = ''
+    let isActive = false
     while (b.GetRow()) {
-      const id = b.GetString(2)
-      const isActive = b.GetUInt16(3)
-      if (id && isActive)
-        sender.SendAddonMessage('learn-talent-success', id, 0, sender)
+      id = b.GetString(2)
+      isActive = !!b.GetUInt16(3)
+      if (!id && !isActive) {
+        // FIXME: create a row if doesnt exist
+        const c = QueryWorld(`
+          select * from __talents where id = ${id};
+        `)
+        let spellId = 0
+        while (c.GetRow())
+          spellId = c.GetUInt16(2)
+        if (spellId)
+          sender.LearnSpell(spellId)
+      }
     }
+    sender.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, sender)
   })
 }
 
