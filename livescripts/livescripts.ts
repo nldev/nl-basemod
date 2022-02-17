@@ -227,7 +227,7 @@ function HandleGetTalentInfo (events: TSEvents) {
     `)
     while (b.GetRow()) {
       const id = b.GetString(2)
-      const isActive = b.GetString(3)
+      const isActive = b.GetInt16(3)
       if (id && isActive)
         sender.SendAddonMessage('learn-talent-success', id, 0, sender)
     }
