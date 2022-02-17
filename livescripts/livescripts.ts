@@ -290,9 +290,9 @@ function HandleLearnTalent (events: TSEvents) {
       insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${max - remaining}) on duplicate key update
         max=${max}, used=${max - remaining}
     `)
+    sender.SaveToDB()
     sender.SendAddonMessage('learn-talent-success', talentId, 0, sender)
     sender.SendAddonMessage('get-talent-info-success', `${max - remaining} ${max}`, 0, sender)
-    sender.SaveToDB()
   })
 }
 
@@ -348,9 +348,9 @@ function HandleUnlearnTalent (events: TSEvents) {
       insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${max - remaining}) on duplicate key update
         max=${max}, used=${max - remaining}
     `)
+    sender.SaveToDB()
     sender.SendAddonMessage('unlearn-talent-success', talentId, 0, sender)
     sender.SendAddonMessage('get-talent-info-success', `${max - remaining} ${max}`, 0, sender)
-    sender.SaveToDB()
   })
 }
 
