@@ -241,7 +241,7 @@ export type Component<
 // root
 export const Root = (ref?: WoWAPI.Frame) => {
   const app = _G['app']
-  const frame = app.elements[ROOT].ref
+  const frame = (app.elements[ROOT] && app.elements[ROOT].ref)
     || ref
 
   frame.SetAllPoints(UIParent)
@@ -268,7 +268,7 @@ export const Frame: Component = options => {
   const app = Get()
 
   const parent = options.parent
-  const frame: WoWAPI.Frame = app.elements[options.name].ref
+  const frame: WoWAPI.Frame = (app.elements[options.name] && app.elements[options.name].ref)
     || CreateFrame(options.type || 'Frame', options.name, parent ? parent.inner : app.root.ref, options.inherits) as WoWAPI.Frame
 
   if (typeof options.mod === 'function') {
