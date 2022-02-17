@@ -206,9 +206,25 @@ function Setup (events: TSEvents) {
 }
 
 function HandleGetTalentInfo (events: TSEvents) {
+  events.Player.OnWhisper((sender, _, message) => {
+    const opcode = Opcode('get-info')
+    const str = message.get()
+    if (!str.includes(opcode))
+     return
+    // const playerGuid = sender.GetGUID()
+    // const sql = QueryWorld(`
+    //   select * from __player_talents where playerGuid = ${playerGuid};
+    // `)
+    // let amount: number
+    // while (sql.GetRow())
+    //   amount = sql.GetInt16(1)
+    // sender.SendAddonMessage('get-talent-info-success', `${amount}`, )
+    sender.SendAddonMessage('get-talent-info-success', 'hi', 0, sender)
+  })
 }
 
 function HandleLearnTalent (events: TSEvents) {
+    // const talentId = str.substr(opcode.length)
 }
 
 function HandleUnlearnTalent (events: TSEvents) {

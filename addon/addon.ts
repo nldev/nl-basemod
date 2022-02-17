@@ -641,11 +641,13 @@ const app = new App(app => {
   grid.ref.SetAllPoints(scroll.inner)
 
   const REQUESTS = {
+    GET_TALENT_INFO: 'get-talent-info',
     LEARN_TALENT: 'learn-talent',
     UNLEARN_TALENT: 'unlearn-talent',
   }
 
   const RESPONSES = {
+    GET_TALENT_INFO_SUCCESS: 'get-talent-info-success',
     LEARN_TALENT_SUCCESS: 'learn-talent-success',
     UNLEARN_TALENT_SUCCESS: 'unlearn-talent-success',
     LEARN_TALENT_FAIL: 'learn-talent-fail',
@@ -675,5 +677,12 @@ const app = new App(app => {
   }
 
   const { name, level, chrRace, chrClass } = app.playerInfo
+
+  // test
+  Events.ChatInfo.OnChatMsgAddon(app.root.ref, (text, name, lang, channel, nameB, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid) => {
+    console.log(text)
+  })
+  SendAddonMessage(REQUESTS.GET_TALENT_INFO, '', 'WHISPER', name)
 })
+
 
