@@ -674,6 +674,20 @@ const app = new App(app => {
 
   grid.ref.SetAllPoints(scroll.inner)
 
+  // counterText
+  const counter = Frame({ name: 'talent-counter' })
+  counter.ref.SetSize(60, 30)
+  const counterText = b.ref.CreateFontString(
+    'talent-countertext',
+    'OVERLAY',
+    'GameTooltipText',
+  )
+  counterText.SetParent(counter.ref)
+  counterText.SetPoint('BOTTOM', 0, -30)
+  counterText.SetText(`${app.talentInfo.used} / ${app.talentInfo.max}`)
+  counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
+  // costText.SetTextColor(red, green, blue)
+
   for (const key of Object.keys(TALENTS)) {
     const spell: TalentSpell = TALENTS[key]
 
