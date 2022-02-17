@@ -198,20 +198,41 @@ function EquipSystem (events: TSEvents) {
   // })
 }
 
+function Setup (events: TSEvents) {
+}
+
+function HandleLogin (events: TSEvents) {
+}
+
+function HandleLearnTalent (events: TSEvents) {
+}
+
+function HandleUnlearnTalent (events: TSEvents) {
+}
+
+function TalentSystem (events: TSEvents) {
+  Setup(events)
+  HandleLogin(events)
+  HandleLearnTalent(events)
+  HandleUnlearnTalent(events)
+}
+
 function Opcode (prefix: string): string {
-  return `[${prefix}]\t`
+  return `${prefix}\t`
 }
 
 export function Main (events: TSEvents) {
-  events.Player.OnWhisper((sender, _, message) => {
-    const opcode = Opcode('test')
-    const string = message.get()
-    const isTestOpcode = string.includes(opcode)
-    if (isTestOpcode) {
-      const msg = string.substr(opcode.length)
-      sender.SendBroadcastMessage(msg)
-    }
-  })
+  TalentSystem(events)
+  // events.Player.OnWhisper((sender, _, message) => {
+  //   const opcode = Opcode('learn-talent')
+  //   const string = message.get()
+  //   const isTestOpcode = string.includes(opcode)
+  //   if (isTestOpcode) {
+  //     const msg = string.substr(opcode.length)
+  //     sender.SendBroadcastMessage(msg)
+  //   }
+  // })
+  //
   // events.CustomPacketID.OnReceive('test' (opcode, packet, player))
   // packet.SendToPlayer()
   // TestCmdGetRandomPropertyOfFirstItemInBag(events)

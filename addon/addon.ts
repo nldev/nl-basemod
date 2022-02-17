@@ -1,4 +1,5 @@
 import * as TALENTS from './data/talents'
+
 // utils
 const names = {}
 
@@ -639,6 +640,17 @@ const app = new App(app => {
 
   grid.ref.SetAllPoints(scroll.inner)
 
+  const REQUESTS = {
+    LEARN_TALENT: 'learn-talent',
+    UNLEARN_TALENT: 'unlearn-talent',
+  }
+
+  const RESPONSES = {
+    LEARN_TALENT_SUCCESS: 'learn-talent-success',
+    UNLEARN_TALENT_SUCCESS: 'unlearn-talent-success',
+    LEARN_TALENT_FAIL: 'learn-talent-fail',
+  }
+
   for (const key of Object.keys(TALENTS)) {
     const spell: TalentSpell = TALENTS[key]
 
@@ -647,13 +659,14 @@ const app = new App(app => {
         spell,
         onActivate: () => {
           // FIXME fire server event
-          app.talentInfo.active[spell.id] = true
-          console.log(`${spell.name} activated`)
+          // app.talentInfo.active[spell.id] = true
+
+          SendAddonMessage(REQUESTS.LEARN_TALENT, spell.id, 'WHISPER', name)
         },
         onDeactivate: () => {
           // FIXME fire server event
-          app.talentInfo.active[spell.id] = false
-          console.log(`${spell.name} deactivated`)
+          // app.talentInfo.active[spell.id] = false
+          SendAddonMessage(REQUESTS.UNLEARN_TALENT, spell.id, 'WHISPER', name)
         },
       })
 
@@ -662,7 +675,5 @@ const app = new App(app => {
   }
 
   const { name, level, chrRace, chrClass } = app.playerInfo
-
-  SendAddonMessage('[test]', 'hello world', 'WHISPER', name)
 })
 
