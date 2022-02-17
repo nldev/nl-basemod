@@ -235,7 +235,7 @@ function HandleGetTalentInfo (events: TSEvents) {
         let spellId = 0
         while (c.GetRow())
           spellId = c.GetUInt16(2)
-        if (spellId)
+        if (spellId && !sender.HasSpell(spellId))
           sender.LearnSpell(spellId)
       }
     }
