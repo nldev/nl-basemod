@@ -279,6 +279,9 @@ function HandleLearnTalent (events: TSEvents) {
     sender.LearnSpell(spellId)
     // update __talent_instances
     QueryWorld(`
+      delete from __talent_instances where playerGuid=${playerGuid} and talentId="${talentId}"
+    `)
+    QueryWorld(`
       insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", 1) on duplicate key update
         playerGuid=${playerGuid}, talentId="${talentId}", isActive=1
     `)

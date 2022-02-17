@@ -715,7 +715,7 @@ const app = new App(app => {
     if (!talentId)
       return
     const ele = app.elements[`talent-${talentId}`] as Element<TalentState, TalentFns>
-    if (ele)
+    if (ele && !ele.state.isActive)
       ele.fns.activate()
   })
 
@@ -725,7 +725,7 @@ const app = new App(app => {
     if (!talentId)
       return
     const ele = app.elements[`talent-${talentId}`] as Element<TalentState, TalentFns>
-    if (ele)
+    if (ele && ele.state.isActive)
       ele.fns.deactivate()
   })
 
