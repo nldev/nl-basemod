@@ -256,7 +256,6 @@ function HandleLearnTalent (events: TSEvents) {
       cost = a.GetUInt16(3)
       classMask = a.GetUInt16(5)
     }
-    console.log(spellId)
     if (!spellId || !cost || !classMask)
       return
     // check if player has enough points
@@ -275,7 +274,7 @@ function HandleLearnTalent (events: TSEvents) {
     const remaining = existingRemaining - cost
     if (remaining < 0)
       return
-    // FIXME: check if player is correct class
+    if ((sender.GetClassMask() & classMask) === classMask)
     // learn spell
     sender.LearnSpell(spellId)
     // update __talent_instances
