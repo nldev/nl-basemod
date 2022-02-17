@@ -232,7 +232,7 @@ function HandleUnlearnTalent (events: TSEvents) {
 function HandleSetTalentPoints (events: TSEvents) {
 }
 
-function Debug (events: TSEvents) {
+function GM (events: TSEvents) {
   HandleSetTalentPoints(events)
 }
 
@@ -241,8 +241,7 @@ function TalentSystem (events: TSEvents) {
   HandleGetTalentInfo(events)
   HandleLearnTalent(events)
   HandleUnlearnTalent(events)
-  // FIXME toggle this somehow
-  Debug(events)
+  GM(events)
 }
 
 function Opcode (prefix: string): string {

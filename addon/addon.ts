@@ -641,6 +641,9 @@ const app = new App(app => {
   grid.ref.SetAllPoints(scroll.inner)
 
   const REQUESTS = {
+    GM: {
+      SET_TALENT_POINTS: 'set-talent-points',
+    },
     GET_TALENT_INFO: 'get-talent-info',
     LEARN_TALENT: 'learn-talent',
     UNLEARN_TALENT: 'unlearn-talent',
@@ -679,12 +682,23 @@ const app = new App(app => {
 
   // test
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
-    if (prefix === RESPONSES.GET_TALENT_INFO_SUCCESS) {
-      const amount = Number(text)
-      console.log(`amount: ${amount}`)
+    if (prefix !== RESPONSES.GET_TALENT_INFO_SUCCESS)
+      return
+    const amount = Number(text)
+    console.log(`amount: ${amount}`)
+  })
+
+  SendAddonMessage(REQUESTS.GET_TALENT_INFO, '', 'WHISPER', name)
+
+  Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
+    if (player !== name.toLowerCase())
+      return
+    console.log(text.indexOf('@set-talents '))
+    if (text.indexOf('@set-talents ') === 0) {
+      const amount = text.replace('@set-talents ', '')
+      console.log(`${amount}`)
     }
   })
-  SendAddonMessage(REQUESTS.GET_TALENT_INFO, 'empty', 'WHISPER', name)
 })
 
 
