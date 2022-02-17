@@ -241,14 +241,12 @@ export type Component<
 // root
 export const Root = (ref?: WoWAPI.Frame) => {
   const app = _G['app']
-  const frame = app.frames[ROOT]
+  const frame = app.elements[ROOT].ref
     || ref
 
   frame.SetAllPoints(UIParent)
 
-  app.frames[ROOT] = frame
-
-  return {
+  const element = {
     name: ROOT,
     ref: frame,
     inner: frame,
@@ -256,6 +254,10 @@ export const Root = (ref?: WoWAPI.Frame) => {
     state: {},
     fns: {},
   }
+
+  app.elements[ROOT] = element
+
+  return element
 }
 
 // frame
