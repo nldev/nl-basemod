@@ -567,8 +567,8 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   }
 
   frame.ref.SetScript('OnEnter', () => {
-    const remaining = app.talentInfo.max - app.talentInfo.used
-    if (options.spell.cost < remaining)
+    const remainder = app.talentInfo.max - app.talentInfo.used
+    if (options.spell.cost <= remainder)
       SetDesaturation(texture, false)
     frame.state.isHover = true
     drawTooltip()
