@@ -292,6 +292,7 @@ function HandleLearnTalent (events: TSEvents) {
         max=${max}, used=${max - remaining}
     `)
     sender.SendAddonMessage('learn-talent-success', talentId, 0, sender)
+    sender.SendAddonMessage('get-talent-info-success', `${max} ${max - remaining}`, 0, sender)
   })
 }
 
@@ -348,6 +349,7 @@ function HandleUnlearnTalent (events: TSEvents) {
         max=${max}, used=${max - remaining}
     `)
     sender.SendAddonMessage('unlearn-talent-success', talentId, 0, sender)
+    sender.SendAddonMessage('get-talent-info-success', `${max} ${max - remaining}`, 0, sender)
   })
 }
 

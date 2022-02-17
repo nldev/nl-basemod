@@ -703,6 +703,8 @@ const app = new App(app => {
     const [a, b] = text.split(' ')
     const used = Number(a)
     const max = Number(b)
+    console.log(used)
+    console.log(max)
     if (used && max) {
       app.talentInfo.isEnabled = true
       app.talentInfo.used = used
