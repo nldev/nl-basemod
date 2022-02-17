@@ -538,10 +538,10 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   // onClick
   frame.inner.SetScript('OnMouseDown', (_, button) => {
     if (button === 'LeftButton' && !frame.state.isActive)
-      frame.fns.activate()
+      frame.fns.requestActivate()
 
     if (button === 'RightButton' && frame.state.isActive)
-      frame.fns.deactivate()
+      frame.fns.requestDeactivate()
   })
 
   // tooltip
