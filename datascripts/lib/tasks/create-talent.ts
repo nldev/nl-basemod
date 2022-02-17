@@ -145,6 +145,9 @@ export class CreateTalent extends NWTask {
        ? this.builder.Spell.get(template.options.id).asset
        : this.builder.std.Spells.load(template.options.spellId)
 
+    // FIXME move this to Spell
+    asset.Subtext.enGB.set('')
+
     const classMask = typeof template.options.class === 'string'
       ? createClassMask(template.options.class)
       : createClassMask(...(Object.keys(template.options.class) as any))
