@@ -227,7 +227,7 @@ function HandleGetTalentInfo (events: TSEvents) {
     while (b.GetRow()) {
       const id = b.GetString(2)
       const isActive = !!b.GetUInt16(3)
-      if (!id && !isActive) {
+      if (id && isActive) {
         // FIXME: create a row if doesnt exist
         const c = QueryWorld(`
           select * from __talents where id = ${id};
