@@ -230,7 +230,7 @@ function HandleGetTalentInfo (events: TSEvents) {
       if (id && isActive) {
         // FIXME: create a row if doesnt exist
         const c = QueryWorld(`
-          select * from __talents where id = ${id};
+          select * from __talents where id = "${id}";
         `)
         let spellId = 0
         while (c.GetRow())
