@@ -537,7 +537,8 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
   // onClick
   frame.inner.SetScript('OnMouseDown', (_, button) => {
-    if (button === 'LeftButton' && !frame.state.isActive)
+    const remainder = app.talentInfo.max - app.talentInfo.used
+    if (button === 'LeftButton' && !frame.state.isActive && (options.spell.cost > remainder))
       frame.fns.requestActivate()
 
     if (button === 'RightButton' && frame.state.isActive)
@@ -567,7 +568,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
   frame.ref.SetScript('OnEnter', () => {
     const remaining = app.talentInfo.max - app.talentInfo.used
-    if (options.spell.cost < remaining)
+    if (options.spell.cost > remaining)
       SetDesaturation(texture, false)
     frame.state.isHover = true
     drawTooltip()

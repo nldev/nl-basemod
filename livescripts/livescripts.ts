@@ -256,6 +256,7 @@ function HandleLearnTalent (events: TSEvents) {
       cost = a.GetInt32(3)
       classMask = a.GetInt32(5)
     }
+    console.log(spellId)
     if (!spellId || !cost || !classMask)
       return
     // check if player has enough points
@@ -318,6 +319,7 @@ function HandleUnlearnTalent (events: TSEvents) {
     }
     if (!spellId || !cost || !classMask)
       return
+    console.log(spellId)
     // get current talent points
     const b = QueryWorld(`
       select * from __player_talents where playerGuid = ${playerGuid};
