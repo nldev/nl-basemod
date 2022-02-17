@@ -724,7 +724,7 @@ const app = new App(app => {
       app.talentInfo.isEnabled = true
       app.talentInfo.used = used
       app.talentInfo.max = max
-      counterText.SetText(`${app.talentInfo.used} / ${app.talentInfo.max}`)
+      counterText.SetText(`${app.talentInfo.max - app.talentInfo.used} / ${app.talentInfo.max}`)
     }
   })
 
