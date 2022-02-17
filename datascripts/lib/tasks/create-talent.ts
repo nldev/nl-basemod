@@ -23,6 +23,29 @@ export class CreateTalent extends NWTask {
   // isActive
   setup () {
     this.builder.Table({
+      name: 'player_talents',
+      database: 'world',
+      columns: [
+        {
+          name: 'playerGuid',
+          type: 'mediumint',
+          typeParams: {
+            size: 16,
+          },
+          isPrimaryKey: true,
+          isNotNullable: true,
+        },
+        {
+          name: 'amount',
+          type: 'mediumint',
+          typeParams: {
+            size: 16,
+          },
+          isNotNullable: true,
+        },
+      ],
+    })
+    this.builder.Table({
       name: 'talent_instances',
       database: 'world',
       columns: [

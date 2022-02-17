@@ -205,7 +205,7 @@ function EquipSystem (events: TSEvents) {
 function Setup (events: TSEvents) {
 }
 
-function HandleLogin (events: TSEvents) {
+function HandleGetTalentInfo (events: TSEvents) {
 }
 
 function HandleLearnTalent (events: TSEvents) {
@@ -214,12 +214,16 @@ function HandleLearnTalent (events: TSEvents) {
 function HandleUnlearnTalent (events: TSEvents) {
 }
 
+function HandleSetTalentPoints (events: TSEvents) {
+}
+
 function Debug (events: TSEvents) {
+  HandleSetTalentPoints(events)
 }
 
 function TalentSystem (events: TSEvents) {
   Setup(events)
-  HandleLogin(events)
+  HandleGetTalentInfo(events)
   HandleLearnTalent(events)
   HandleUnlearnTalent(events)
   // FIXME toggle this somehow
