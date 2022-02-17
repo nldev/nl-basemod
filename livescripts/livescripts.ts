@@ -226,7 +226,7 @@ function HandleGetTalentInfo (events: TSEvents) {
     `)
     while (b.GetRow()) {
       const id = b.GetString(2)
-      const isActive = !!b.GetUInt16(3)
+      const isActive = b.GetUInt16(3)
       if (id && isActive) {
         // FIXME: create a row if doesnt exist
         const c = QueryWorld(`
@@ -237,6 +237,7 @@ function HandleGetTalentInfo (events: TSEvents) {
           spellId = c.GetUInt16(2)
         if (spellId && !sender.HasSpell(spellId))
           sender.LearnSpell(spellId)
+        sender.SendAddonMessage('learn-talent-success', id, 0, sender)
       }
     }
     sender.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, sender)
