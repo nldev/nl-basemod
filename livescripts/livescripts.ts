@@ -334,6 +334,9 @@ function HandleUnlearnTalent (events: TSEvents) {
     sender.RemoveSpell(spellId, true, false)
     // update __talent_instances
     QueryWorld(`
+      delete from __talent_instances where playerGuid=${playerGuid} and talentId="${talentId}"
+    `)
+    QueryWorld(`
       insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", 0) on duplicate key update
         playerGuid=${playerGuid}, talentId="${talentId}", isActive=0
     `)
@@ -362,6 +365,7 @@ function HandleSetTalentPoints (events: TSEvents) {
       sender.SendAddonMessage('set-talent-points-success', `0 ${max}`, 0, sender)
       sender.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, sender)
     }
+    // FIXME: remove all existing talents
   })
 }
 
