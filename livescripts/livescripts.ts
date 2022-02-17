@@ -266,7 +266,7 @@ function HandleLearnTalent (events: TSEvents) {
       return
     // check if player already has talent
     const c = QueryWorld(`
-      select * from __talent_instances where playerGuid = ${playerGuid}, talentId = "${talentId}";
+      select * from __talent_instances where playerGuid = ${playerGuid} and talentId = "${talentId}";
     `)
     let isAlreadyActive = false
     while (c.GetRow())
