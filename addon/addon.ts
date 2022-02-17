@@ -680,10 +680,10 @@ const app = new App(app => {
       const talent = Talent({
         spell,
         onActivate: () => {
-          console.log(`${spell.id} activated`)
+          // console.log(`${spell.id} activated`)
         },
         onDeactivate: () => {
-          console.log(`${spell.id} deactivated`)
+          // console.log(`${spell.id} deactivated`)
         },
       })
 
