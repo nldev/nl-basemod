@@ -236,7 +236,7 @@ function HandleLearnTalent (events: TSEvents) {
       return
     // check if is valid talent
     const a = QueryWorld(`
-      select * from __talents where talentId = "${talentId}";
+      select * from __talents where id = "${talentId}";
     `)
     let spellId = 0
     let cost = 0
