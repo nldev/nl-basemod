@@ -198,6 +198,10 @@ function EquipSystem (events: TSEvents) {
   // })
 }
 
+
+
+
+// talents
 function Setup (events: TSEvents) {
 }
 
@@ -210,11 +214,16 @@ function HandleLearnTalent (events: TSEvents) {
 function HandleUnlearnTalent (events: TSEvents) {
 }
 
+function Debug (events: TSEvents) {
+}
+
 function TalentSystem (events: TSEvents) {
   Setup(events)
   HandleLogin(events)
   HandleLearnTalent(events)
   HandleUnlearnTalent(events)
+  // FIXME toggle this somehow
+  Debug(events)
 }
 
 function Opcode (prefix: string): string {

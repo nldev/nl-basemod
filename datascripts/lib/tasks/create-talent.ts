@@ -18,7 +18,44 @@ export interface TalentTemplate extends Template {
 export class CreateTalent extends NWTask {
   static readonly id = CREATE_TALENT_TASK
 
+  // playerId
+  // talentId
+  // isActive
   setup () {
+    this.builder.Table({
+      name: 'talent_instances',
+      database: 'world',
+      columns: [
+        {
+          name: 'entry',
+          type: 'mediumint',
+          typeParams: {
+            size: 16,
+          },
+          isPrimaryKey: true,
+          isNotNullable: true,
+          isAutoIncrement: true,
+        },
+        {
+          name: 'playerGuid',
+          type: 'mediumint',
+          typeParams: {
+            size: 16,
+          },
+          isNotNullable: true,
+        },
+        {
+          name: 'talentId',
+          type: 'mediumtext',
+          isNotNullable: true,
+        },
+        {
+          name: 'isActive',
+          type: 'bool',
+          isNotNullable: true,
+        },
+      ],
+    })
     this.builder.Table({
       name: 'talents',
       database: 'world',
