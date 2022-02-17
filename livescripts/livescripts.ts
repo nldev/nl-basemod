@@ -264,25 +264,15 @@ function HandleLearnTalent (events: TSEvents) {
     const remaining = existingRemaining - cost
     if (remaining < 0)
       return
-    // check if player already has talent
-    const c = QueryWorld(`
-      select * from __talent_instances where playerGuid = ${playerGuid} and talentId = "${talentId}";
-    `)
-    let isAlreadyActive = false
-    while (c.GetRow())
-      if (c.GetInt16(3))
-        isAlreadyActive = true
-    if (isAlreadyActive)
-      return
     // FIXME: check if player is correct class
     // learn spell
     sender.LearnSpell(spellId)
-    // add to __talent_instances
+    // update __talent_instances
     QueryWorld(`
-      insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", true) on duplicate key update
+      insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", 1) on duplicate key update
         playerGuid=${playerGuid}, talentId="${talentId}", isActive=1
     `)
-    // adjust __player_talents
+    // update __player_talents
     QueryWorld(`
       insert into __player_talents (used) values(${max - remaining}) on duplicate key update
         used=${max - remaining}
@@ -294,6 +284,52 @@ function HandleLearnTalent (events: TSEvents) {
 function HandleUnlearnTalent (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
     const opcode = Opcode('unlearn-talent')
+    const str = message.get()
+    if (!str.includes(opcode))
+     return
+    const playerGuid = sender.GetGUID()
+    const talentId = str.substr(opcode.length)
+    if (!talentId)
+      return
+    // check if is valid talent
+    const a = QueryWorld(`
+      select * from __talents where id = "${talentId}";
+    `)
+    let spellId = 0
+    let cost = 0
+    let classMask = 0
+    while (a.GetRow()) {
+      spellId = a.GetInt16(2)
+      cost = a.GetInt16(3)
+      classMask = a.GetInt16(5)
+    }
+    if (!spellId || !cost || !classMask)
+      return
+    // get current talent points
+    const b = QueryWorld(`
+      select * from __player_talents where playerGuid = ${playerGuid};
+    `)
+    let used = 0
+    let max = 0
+    while (b.GetRow()) {
+      used = b.GetInt16(1)
+      max = b.GetInt16(2)
+    }
+    const existingRemaining = max - used
+    const remaining = existingRemaining + cost
+    // unlearn spell
+    sender.RemoveSpell(spellId, true, false)
+    // update __talent_instances
+    QueryWorld(`
+      insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", 0) on duplicate key update
+        playerGuid=${playerGuid}, talentId="${talentId}", isActive=0
+    `)
+    // update __player_talents
+    QueryWorld(`
+      insert into __player_talents (used) values(${max - remaining}) on duplicate key update
+        used=${max - remaining}
+    `)
+    sender.SendAddonMessage('unlearn-talent-success', talentId, 0, sender)
   })
 }
 
