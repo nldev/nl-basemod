@@ -21,8 +21,10 @@ export function rgb (red: number, green: number, blue: number): Rgb {
 
 // constants
 export const BASE_BACKDROP = {
-  bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+  // bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+  bgFile: 'Interface/TutorialFrame/TutorialFrameBackground',
+  // edgeFile: "Interface/DialogFrame/UI-DialogBox-Border",
   tile: true,
   tileSize: 16,
   edgeSize: 16,
