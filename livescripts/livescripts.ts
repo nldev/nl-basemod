@@ -236,7 +236,7 @@ function HandleLearnTalent (events: TSEvents) {
       return
     // check if is valid talent
     const a = QueryWorld(`
-      select * from __talents where talentId = ${talentId};
+      select * from __talents where talentId = "${talentId}";
     `)
     let spellId = 0
     let cost = 0
@@ -266,7 +266,7 @@ function HandleLearnTalent (events: TSEvents) {
       return
     // check if player already has talent
     const c = QueryWorld(`
-      select * from __talent_instances where playerGuid = ${playerGuid}, talentId = ${talentId};
+      select * from __talent_instances where playerGuid = ${playerGuid}, talentId = "${talentId}";
     `)
     let isAlreadyActive = false
     while (c.GetRow())
@@ -279,8 +279,8 @@ function HandleLearnTalent (events: TSEvents) {
     sender.LearnSpell(spellId)
     // add to __talent_instances
     QueryWorld(`
-      insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, ${talentId}, true) on duplicate key update
-        playerGuid=${playerGuid}, talentId=${talentId}, isActive=1
+      insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", true) on duplicate key update
+        playerGuid=${playerGuid}, talentId="${talentId}", isActive=1
     `)
     // adjust __player_talents
     QueryWorld(`
