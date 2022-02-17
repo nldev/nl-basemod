@@ -212,15 +212,24 @@ function HandleGetTalentInfo (events: TSEvents) {
     if (!str.includes(opcode))
      return
     const playerGuid = sender.GetGUID()
-    const sql = QueryWorld(`
+    const a = QueryWorld(`
       select * from __player_talents where playerGuid = ${playerGuid};
     `)
     let used: string = '0'
     let max: string = '0'
-    while (sql.GetRow())
-      used = sql.GetString(1)
-      max = sql.GetString(2)
+    while (a.GetRow()) {
+      used = a.GetString(1)
+      max = a.GetString(2)
+    }
     sender.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, sender)
+    const b = QueryWorld(`
+      select * from __talent_instances where playerGuid = ${playerGuid};
+    `)
+    while (b.GetRow()) {
+      const id = b.GetString(2)
+      if (id)
+        sender.SendAddonMessage('learn-talent-success', id, 0, sender)
+    }
   })
 }
 
