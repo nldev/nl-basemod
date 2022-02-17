@@ -25,7 +25,6 @@ export class CreateTalent extends NWTask {
     this.builder.Table({
       name: 'player_talents',
       database: 'world',
-      isPersist: true,
       columns: [
         {
           name: 'playerGuid',
@@ -37,7 +36,15 @@ export class CreateTalent extends NWTask {
           isNotNullable: true,
         },
         {
-          name: 'amount',
+          name: 'used',
+          type: 'mediumint',
+          typeParams: {
+            size: 16,
+          },
+          isNotNullable: true,
+        },
+        {
+          name: 'max',
           type: 'mediumint',
           typeParams: {
             size: 16,

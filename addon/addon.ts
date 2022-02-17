@@ -125,8 +125,8 @@ export interface PlayerInfo {
 
 export interface TalentInfo {
   isEnabled: boolean
-  total: number
-  remaining: number
+  used: number
+  max: number
   active: Mapping<boolean>
 }
 
@@ -145,8 +145,8 @@ export class App {
   constructor (protected onInit: ($: App) => void) {
     this.talentInfo = {
       isEnabled: false,
-      total: 50,
-      remaining: 50,
+      used: 0,
+      max: 0,
       active: {},
     }
 
@@ -545,7 +545,8 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   }
 
   frame.ref.SetScript('OnEnter', () => {
-    if (options.spell.cost <= app.talentInfo.remaining)
+    const remaining = app.talentInfo.max - app.talentInfo.used
+    if (options.spell.cost < remaining)
       SetDesaturation(texture, false)
     frame.state.isHover = true
     drawTooltip()
@@ -650,10 +651,13 @@ const app = new App(app => {
   }
 
   const RESPONSES = {
+    GM: {
+      SET_TALENT_POINTS_SUCCESS: 'set-talent-points-success',
+    },
     GET_TALENT_INFO_SUCCESS: 'get-talent-info-success',
     LEARN_TALENT_SUCCESS: 'learn-talent-success',
-    UNLEARN_TALENT_SUCCESS: 'unlearn-talent-success',
     LEARN_TALENT_FAIL: 'learn-talent-fail',
+    UNLEARN_TALENT_SUCCESS: 'unlearn-talent-success',
   }
 
   for (const key of Object.keys(TALENTS)) {
@@ -684,19 +688,27 @@ const app = new App(app => {
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
     if (prefix !== RESPONSES.GET_TALENT_INFO_SUCCESS)
       return
-    const amount = Number(text)
-    console.log(`amount: ${amount}`)
+    const [used, max] = text.split(' ')
+    if (used && max) {
+      console.log(`used: ${used}`)
+      console.log(`max: ${max}`)
+    }
+  })
+
+  Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
+    if (prefix !== RESPONSES.GM.SET_TALENT_POINTS_SUCCESS)
+      return
+    console.log('set talents successful')
   })
 
   SendAddonMessage(REQUESTS.GET_TALENT_INFO, '', 'WHISPER', name)
 
   Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
-    if (player !== name.toLowerCase())
+    if (player.toLowerCase() !== name)
       return
-    console.log(text.indexOf('@set-talents '))
-    if (text.indexOf('@set-talents ') === 0) {
-      const amount = text.replace('@set-talents ', '')
-      console.log(`${amount}`)
+    if (text.indexOf('@talents ') === 0) {
+      const amount = text.replace('@talents ', '')
+      SendAddonMessage(REQUESTS.GM.SET_TALENT_POINTS, amount, 'WHISPER', name)
     }
   })
 })

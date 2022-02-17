@@ -230,6 +230,22 @@ function HandleUnlearnTalent (events: TSEvents) {
 }
 
 function HandleSetTalentPoints (events: TSEvents) {
+  events.Player.OnWhisper((sender, _, message) => {
+    const opcode = Opcode('set-talent-points')
+    const str = message.get()
+    if (!str.includes(opcode))
+     return
+    const playerGuid = sender.GetGUID()
+    const max = str.substr(opcode.length)
+    if (max) {
+      QueryWorld(`
+        insert into __player_talents (playerGuid, used, max) values(${playerGuid}, 0, ${max}) on duplicate key update
+          used=0, max=${max}
+      `)
+      sender.SendAddonMessage('set-talent-points-success', `0,${max}`, 0, sender)
+      sender.SendAddonMessage('get-talent-info-success', `0,${max}`, 0, sender)
+    }
+  })
 }
 
 function GM (events: TSEvents) {
