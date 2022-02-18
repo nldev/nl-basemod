@@ -210,7 +210,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'puncturing-wounds',
     spellId: 13866,
-    cost: 8,
+    cost: 6,
     class: { ROGUE: true },
   },
   {
