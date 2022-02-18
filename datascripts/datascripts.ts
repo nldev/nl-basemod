@@ -24,13 +24,35 @@ function CreatePlaceholderEnchants () {
 
 CreatePlaceholderEnchants()
 
+// ability
+// passive
+// utility
+
 // FIXME: move this
 function StarterSpells ($: Builder) {
-  console.log('skill line abilities')
-  $.std.DBC.SkillLineAbility.queryAll({}).forEach(v => console.log($.std.Spells.load(v.Spell.get()).Name.enGB.get()))
+  const ability = $.std.DBC.SkillLine.add(9000)
+  const passive = $.std.DBC.SkillLine.add(9001)
+  const utility = $.std.DBC.SkillLine.add(9002)
+  ability.DisplayName.enGB.set('Ability')
+  passive.DisplayName.enGB.set('Passive')
+  utility.DisplayName.enGB.set('Utility')
+  $.std.DBC.SkillLineAbility.add(90000, {
+    Spell: 5938,
+    RaceMask: 1791,
+    ClassMask: 8,
+    AcquireMethod: 2,
+    SkillLine: 9000,
+  })
+  $.std.DBC.SkillLineAbility.queryAll({}).forEach(v => v.CharacterPoints)
+  // console.log('skill line abilities')
+  // $.std.DBC.SkillLineAbility.queryAll({}).forEach(v => {
+  //   const spell = $.std.Spells.load(v.Spell.get())
+  //   if (spell && spell.Name && spell.Name.enGB)
+  //     console.log(spell.Name.enGB.get())
+  // })
 
-  console.log('skill lines')
-  $.std.DBC.SkillLine.queryAll({}).forEach(v => console.log(v.DisplayName.enGB.get()))
+  // console.log('skill lines')
+  // $.std.DBC.SkillLine.queryAll({}).forEach(v => console.log(v.DisplayName.enGB.get()))
 }
 
 // ---
