@@ -438,7 +438,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'cold-blood',
     spellId: 14177,
-    cost: 20,
+    cost: 18,
     class: { ROGUE: true },
   },
   {
