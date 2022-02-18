@@ -24,7 +24,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'shadowstep',
     spellId: 36554,
-    cost: 24,
+    cost: 18,
     class: { ROGUE: true },
   },
   {
@@ -228,7 +228,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'premeditation',
     spellId: 14183,
-    cost: 6,
+    cost: 5,
     class: { ROGUE: true },
   },
   {
