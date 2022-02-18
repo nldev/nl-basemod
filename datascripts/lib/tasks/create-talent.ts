@@ -19,7 +19,14 @@ export class CreateTalent extends NWTask {
   static readonly id = CREATE_TALENT_TASK
 
   setup () {
-    // this.builder.std.DBC.Talent.queryAll({}).forEach(talent => talent.delete())
+    this.builder.std.DBC.Talent.queryAll({}).forEach(talent => {
+      talent.PrereqRank.set([0, 0, 0, 0, 0, 0, 0, 0])
+      talent.Flags.set(0)
+      talent.RequiredSpellID.set(0)
+      talent.TierID.set(0)
+      talent.ColumnIndex.set(0)
+      talent.PrereqTalent.set([0, 0, 0, 0, 0, 0, 0, 0, 0])
+    })
 
     this.builder.Table({
       name: 'player_talents',
