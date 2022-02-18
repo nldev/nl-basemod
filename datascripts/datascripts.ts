@@ -26,8 +26,11 @@ CreatePlaceholderEnchants()
 
 // FIXME: move this
 function StarterSpells ($: Builder) {
-  $.std.DBC.SkillLineAbility.query({})
-  console.log($.std.DBC.SkillLine.queryAll({}).forEach(v => v.DisplayName.enGB.get()))
+  console.log('skill line abilities')
+  $.std.DBC.SkillLineAbility.queryAll({}).forEach(v => console.log($.std.Spells.load(v.Spell.get()).Name.enGB.get()))
+
+  console.log('skill lines')
+  $.std.DBC.SkillLine.queryAll({}).forEach(v => console.log(v.DisplayName.enGB.get()))
 }
 
 // ---
