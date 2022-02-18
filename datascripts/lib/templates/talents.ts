@@ -137,7 +137,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   },
   {
     id: 'sinister-calling',
-    spellId: 51713,
+    spellId: 31220,
     cost: 10,
     class: { ROGUE: true },
   },
@@ -192,7 +192,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'remorseless-attacks',
     spellId: 14148,
-    cost: 10,
+    cost: 5,
     class: { ROGUE: true },
   },
   {
