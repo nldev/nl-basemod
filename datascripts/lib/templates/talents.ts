@@ -60,7 +60,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'close-quarters-combat',
     spellId: 13807,
-    cost: 1,
+    cost: 2,
     class: { ROGUE: true },
   },
   {
@@ -114,7 +114,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'throwing-specialization',
     spellId: 51679,
-    cost: 1,
+    cost: 3,
     class: { ROGUE: true },
   },
   {
