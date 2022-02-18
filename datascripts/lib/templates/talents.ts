@@ -294,7 +294,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'killing-spree',
     spellId: 51690,
-    cost: 30,
+    cost: 22,
     class: { ROGUE: true },
   },
   {
