@@ -42,13 +42,13 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'adrenaline-rush',
     spellId: 13750,
-    cost: 24,
+    cost: 22,
     class: { ROGUE: true },
   },
   {
     id: 'blade-flurry',
     spellId: 13877,
-    cost: 14,
+    cost: 10,
     class: { ROGUE: true },
   },
   {
