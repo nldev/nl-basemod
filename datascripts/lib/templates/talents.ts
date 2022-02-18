@@ -6,13 +6,13 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'improved-eviscerate',
     spellId: 14164,
-    cost: 4,
+    cost: 2,
     class: { ROGUE: true },
   },
   {
     id: 'improved-gouge',
     spellId: 13792,
-    cost: 4,
+    cost: 3,
     class: { ROGUE: true },
   },
   {
@@ -36,7 +36,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'hemorrhage',
     spellId: 17348,
-    cost: 16,
+    cost: 14,
     class: { ROGUE: true },
   },
   {
