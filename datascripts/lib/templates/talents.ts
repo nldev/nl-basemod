@@ -144,7 +144,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'shadow-dance',
     spellId: 51713,
-    cost: 26,
+    cost: 24,
     class: { ROGUE: true },
   },
   {
