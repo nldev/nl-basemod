@@ -168,7 +168,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'seal-fate',
     spellId: 14195,
-    cost: 14,
+    cost: 12,
     class: { ROGUE: true },
   },
   {
