@@ -467,7 +467,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   },
   {
     id: 'tricks-of-the-trade',
-    spellId: 31224,
+    spellId: 57934,
     cost: 3,
     class: { ROGUE: true },
   },
