@@ -228,7 +228,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'premeditation',
     spellId: 14183,
-    cost: 8,
+    cost: 6,
     class: { ROGUE: true },
   },
   {
