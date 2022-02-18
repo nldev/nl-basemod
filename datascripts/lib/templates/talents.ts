@@ -18,7 +18,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'vigor',
     spellId: 14983,
-    cost: 12,
+    cost: 10,
     class: { ROGUE: true },
   },
   {
@@ -294,7 +294,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'killing-spree',
     spellId: 51690,
-    cost: 22,
+    cost: 20,
     class: { ROGUE: true },
   },
   {
@@ -462,7 +462,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'cloak-of-shadows',
     spellId: 31224,
-    cost: 18,
+    cost: 20,
     class: { ROGUE: true },
   },
   {

@@ -36,6 +36,9 @@ function StarterSpells ($: Builder) {
   ability.DisplayName.enGB.set('Ability')
   passive.DisplayName.enGB.set('Passive')
   utility.DisplayName.enGB.set('Utility')
+  $.std.Spells.load(5938).SkillLines.clearClass('ROGUE')
+  $.std.Spells.load(5938).SkillLines.enable('ROGUE', 'GNOME')
+  $.std.Spells.load(5938).SkillLines.add(9000)
   $.std.DBC.SkillLineAbility.add(90000, {
     Spell: 5938,
     RaceMask: 1791,
