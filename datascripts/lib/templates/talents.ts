@@ -30,19 +30,19 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'mutilate',
     spellId: 34412,
-    cost: 20,
+    cost: 16,
     class: { ROGUE: true },
   },
   {
     id: 'hemorrhage',
     spellId: 17348,
-    cost: 18,
+    cost: 16,
     class: { ROGUE: true },
   },
   {
     id: 'adrenaline-rush',
     spellId: 13750,
-    cost: 28,
+    cost: 24,
     class: { ROGUE: true },
   },
   {
@@ -222,7 +222,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'preparation',
     spellId: 14185,
-    cost: 30,
+    cost: 24,
     class: { ROGUE: true },
   },
   {
