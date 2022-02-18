@@ -72,7 +72,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'ghostly-strike',
     spellId: 14278,
-    cost: 12,
+    cost: 4,
     class: { ROGUE: true },
   },
   {
@@ -108,7 +108,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'turn-the-tables',
     spellId: 51629,
-    cost: 2,
+    cost: 1,
     class: { ROGUE: true },
   },
   {
@@ -120,7 +120,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'surprise-attacks',
     spellId: 32601,
-    cost: 3,
+    cost: 2,
     class: { ROGUE: true },
   },
   {
@@ -138,7 +138,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'sinister-calling',
     spellId: 31220,
-    cost: 8,
+    cost: 6,
     class: { ROGUE: true },
   },
   {
@@ -162,31 +162,31 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'serrated-blades',
     spellId: 14173,
-    cost: 4,
+    cost: 3,
     class: { ROGUE: true },
   },
   {
     id: 'seal-fate',
     spellId: 14195,
-    cost: 12,
+    cost: 10,
     class: { ROGUE: true },
   },
   {
     id: 'savage-combat',
     spellId: 58413,
-    cost: 2,
+    cost: 1,
     class: { ROGUE: true },
   },
   {
     id: 'ruthlessness',
     spellId: 14161,
-    cost: 5,
+    cost: 3,
     class: { ROGUE: true },
   },
   {
     id: 'riposte',
     spellId: 14251,
-    cost: 8,
+    cost: 5,
     class: { ROGUE: true },
   },
   {
@@ -204,7 +204,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'quick-recovery',
     spellId: 31245,
-    cost: 8,
+    cost: 4,
     class: { ROGUE: true },
   },
   {
@@ -228,13 +228,13 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'premeditation',
     spellId: 14183,
-    cost: 4,
+    cost: 5,
     class: { ROGUE: true },
   },
   {
     id: 'overkill',
     spellId: 58426,
-    cost: 2,
+    cost: 1,
     class: { ROGUE: true },
   },
   {
@@ -246,13 +246,13 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'nerves-of-steel',
     spellId: 31131,
-    cost: 2,
+    cost: 1,
     class: { ROGUE: true },
   },
   {
     id: 'murder',
     spellId: 14159,
-    cost: 2,
+    cost: 1,
     class: { ROGUE: true },
   },
   {
@@ -264,13 +264,13 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'master-of-subtlety',
     spellId: 31223,
-    cost: 3,
+    cost: 1,
     class: { ROGUE: true },
   },
   {
     id: 'malice',
     spellId: 14142,
-    cost: 4,
+    cost: 2,
     class: { ROGUE: true },
   },
   {
@@ -342,31 +342,31 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'hunger-for-blood',
     spellId: 51662,
-    cost: 12,
+    cost: 8,
     class: { ROGUE: true },
   },
   {
     id: 'honor-among-thieves',
     spellId: 51701,
-    cost: 3,
+    cost: 2,
     class: { ROGUE: true },
   },
   {
     id: 'hack-and-slash',
     spellId: 13964,
-    cost: 3,
+    cost: 2,
     class: { ROGUE: true },
   },
   {
     id: 'focused-attacks',
     spellId: 51636,
-    cost: 2,
+    cost: 1,
     class: { ROGUE: true },
   },
   {
     id: 'find-weakness',
     spellId: 31236,
-    cost: 2,
+    cost: 1,
     class: { ROGUE: true },
   },
   {
@@ -414,25 +414,25 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'deadliness',
     spellId: 30906,
-    cost: 3,
+    cost: 1,
     class: { ROGUE: true },
   },
   {
     id: 'deadened-nerves',
     spellId: 31383,
-    cost: 2,
+    cost: 1,
     class: { ROGUE: true },
   },
   {
     id: 'cut-to-the-chase',
     spellId: 51669,
-    cost: 3,
+    cost: 2,
     class: { ROGUE: true },
   },
   {
     id: 'combat-potency',
     spellId: 35553,
-    cost: 3,
+    cost: 2,
     class: { ROGUE: true },
   },
   {
@@ -444,7 +444,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'cheat-death',
     spellId: 31230,
-    cost: 12,
+    cost: 6,
     class: { ROGUE: true },
   },
   {
@@ -456,7 +456,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'blade-twisting',
     spellId: 31126,
-    cost: 3,
+    cost: 2,
     class: { ROGUE: true },
   },
   {
