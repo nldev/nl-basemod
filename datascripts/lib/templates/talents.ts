@@ -186,7 +186,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'riposte',
     spellId: 14251,
-    cost: 5,
+    cost: 3,
     class: { ROGUE: true },
   },
   {
@@ -464,6 +464,36 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
     spellId: 31224,
     cost: 18,
     class: { ROGUE: true },
-  }
+  },
+  {
+    id: 'tricks-of-the-trade',
+    spellId: 31224,
+    cost: 3,
+    class: { ROGUE: true },
+  },
+  {
+    id: 'fan-of-knives',
+    spellId: 51723,
+    cost: 5,
+    class: { ROGUE: true },
+  },
+  {
+    id: 'envenom',
+    spellId: 57993,
+    cost: 3,
+    class: { ROGUE: true },
+  },
+  {
+    id: 'deadly-throw',
+    spellId: 48674,
+    cost: 4,
+    class: { ROGUE: true },
+  },
+  {
+    id: 'dismantle',
+    spellId: 51722,
+    cost: 5,
+    class: { ROGUE: true },
+  },
 ])
 
