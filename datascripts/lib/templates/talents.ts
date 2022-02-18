@@ -132,7 +132,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'slaughter-from-the-shadows',
     spellId: 51712,
-    cost: 12,
+    cost: 8,
     class: { ROGUE: true },
   },
   {
