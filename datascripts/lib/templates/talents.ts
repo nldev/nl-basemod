@@ -148,6 +148,12 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
     class: { ROGUE: true },
   },
   {
+    id: 'improved-sprint',
+    spellId: 13875,
+    cost: 15,
+    class: { ROGUE: true },
+  },
+  {
     id: 'setup',
     spellId: 14071,
     cost: 5,
