@@ -629,7 +629,13 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   return frame
 }
 
-// test
+
+
+
+
+
+
+// FIXME organize this this
 const app = new App(app => {
   const root = Root()
 
@@ -713,7 +719,6 @@ const app = new App(app => {
 
   const { name, level, chrRace, chrClass } = app.playerInfo
 
-  // test
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
     if (prefix !== RESPONSES.GET_TALENT_INFO_SUCCESS)
       return
