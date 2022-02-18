@@ -282,7 +282,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'lightning-reflexes',
     spellId: 13789,
-    cost: 2,
+    cost: 1,
     class: { ROGUE: true },
   },
   {
