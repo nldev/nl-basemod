@@ -660,6 +660,25 @@ const app = new App(app => {
   a.inner.SetBackdrop(BASE_BACKDROP)
   a.inner.SetBackdropColor(0, 0, 0, 1)
 
+  const title = Frame({
+    name: 'title',
+    parent: a,
+  })
+
+  title.ref.SetSize(140, 30)
+  title.ref.SetBackdrop(BASE_BACKDROP)
+  title.ref.SetBackdropColor(0, 0, 0, 1)
+  title.ref.SetPoint('BOTTOMRIGHT', 0, 35)
+  const titleText = a.ref.CreateFontString(
+    'talent-countertext',
+    'OVERLAY',
+    'GameTooltipText',
+  )
+  titleText.SetParent(title.ref)
+  titleText.SetPoint('CENTER')
+  titleText.SetText('basemod v0.1.0')
+  titleText.SetFont('Fonts/FRIZQT__.TTF', 10)
+
   const b = Frame({
     name: 'b',
     parent: a,
