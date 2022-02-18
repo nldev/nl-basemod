@@ -24,12 +24,19 @@ function CreatePlaceholderEnchants () {
 
 CreatePlaceholderEnchants()
 
+// FIXME: move this
+function StarterSpells ($: Builder) {
+  $.std.DBC.SkillLineAbility.query({})
+  console.log($.std.DBC.SkillLine.query({}).DisplayName.enGB.get())
+}
+
 // ---
 
 function main () {
   const $ = new Builder()
 
   $.init()
+  StarterSpells($)
 
   const zeal = $.Spell.add({
     id: 'zeal',

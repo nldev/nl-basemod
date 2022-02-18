@@ -668,7 +668,7 @@ const app = new App(app => {
   title.ref.SetSize(140, 30)
   title.ref.SetBackdrop(BASE_BACKDROP)
   title.ref.SetBackdropColor(0, 0, 0, 1)
-  title.ref.SetPoint('BOTTOMRIGHT', 0, 35)
+  title.ref.SetPoint('TOPRIGHT', 0, 35)
   const titleText = a.ref.CreateFontString(
     'talent-countertext',
     'OVERLAY',
