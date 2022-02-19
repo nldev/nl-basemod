@@ -463,11 +463,11 @@ export const ListItem: Component<ListItemOptions, any, ListItemFns> = options =>
   const frame: Element<any, ListItemFns> = Frame({ name: `${options.name}-list-item`, parent: options.parent }) as any
   let y = options.y || 0
   frame.ref.SetSize(options.width, options.height)
+  options.child.ref.SetAllPoints(frame.ref)
   frame.fns = {
     Reflow: (newY?: number) => {
       y = y
       frame.ref.SetPoint('TOPLEFT', 0, newY || y)
-      options.child.ref.SetAllPoints(frame.ref)
     }
   }
   frame.fns.Reflow()
@@ -526,7 +526,7 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
         parent: list,
       })
 
-      list.state.y = list.state.y + options.itemHeight
+      list.state.y = list.state.y - options.itemHeight
       list.state.items.push(item)
       list.state.map[name] = list.state.items.length - 1
       item.ref.Show()
@@ -742,7 +742,7 @@ const app = new App(app => {
   loot.ref.SetPoint('CENTER')
   loot.ref.SetSize(500, 500)
 
-  const list = List({ name: 'list', itemHeight: 20, parent: loot })
+  const list = List({ name: 'list', itemHeight: 100, parent: loot })
 
   const itemA = Frame({ name: 'itemA' })
   itemA.ref.SetBackdrop(BASE_BACKDROP)
@@ -757,8 +757,8 @@ const app = new App(app => {
   itemC.ref.SetBackdropColor(0, 0, 0, 1)
 
   list.fns.Attach('itemA', itemA)
-  // list.fns.Attach('itemB', itemB)
-  // list.fns.Attach('itemC', itemC)
+  list.fns.Attach('itemB', itemB)
+  list.fns.Attach('itemC', itemC)
 
   const a = Frame({
     name: 'a',
