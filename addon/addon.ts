@@ -510,9 +510,9 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
       list.state.map = {}
 
       list.state.items.forEach((item, index) => {
-        list.state.y = index * options.itemHeight
         list.state.map[item.name] = index
         item.fns.Reflow(list.state.y)
+        list.state.y = list.state.y - options.itemHeight
       })
     },
 
