@@ -460,14 +460,14 @@ export interface ListItemFns {
   Reflow: (newY?: number) => void
 }
 export const ListItem: Component<ListItemOptions, any, ListItemFns> = options => {
-  const frame: Element<any, ListItemFns> = Frame({ name: options.name, parent: options.parent }) as any
+  const frame: Element<any, ListItemFns> = Frame({ name: `${options.name}-list-item`, parent: options.parent }) as any
   let y = options.y || 0
   frame.ref.SetSize(options.width, options.height)
-  options.child.ref.SetAllPoints(frame.ref)
   frame.fns = {
     Reflow: (newY?: number) => {
       y = y
       frame.ref.SetPoint('TOPLEFT', 0, newY || y)
+      options.child.ref.SetAllPoints(frame.ref)
     }
   }
   frame.fns.Reflow()
