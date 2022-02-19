@@ -523,7 +523,6 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
     list.state.y = list.state.y + options.itemHeight
     list.state.items.push(item)
     list.state.map[name] = list.state.items.length
-
     // Reflow()
   }
 
