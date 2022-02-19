@@ -495,7 +495,6 @@ export interface ListFns {
 
 export const List: Component<ListOptions, ListState, ListFns> = options => {
   const list: Element<ListState, ListFns> = Frame({ ...options }) as any
-  list.ref.SetPoint('TOPLEFT')
 
   const Reflow = () => {
     list.state.y = 0
@@ -522,7 +521,6 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
     list.state.items.push(item)
     list.state.map[name] = list.state.items.length - 1
     item.ref.Show()
-    // Reflow()
   }
 
   const Detach = (name: string) => {
@@ -739,6 +737,29 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 // FIXME organize this this
 const app = new App(app => {
   const root = Root()
+
+  const loot = Frame({ name: 'loot', parent: root })
+
+  loot.ref.SetPoint('CENTER')
+  loot.ref.SetSize(500, 500)
+
+  const list = List({ itemHeight: 20, parent: loot })
+
+  const itemA = Frame({ name: 'itemA' })
+  itemA.ref.SetBackdrop(BASE_BACKDROP)
+  itemA.ref.SetBackdropColor(0, 0, 0, 1)
+
+  const itemB = Frame({ name: 'itemB' })
+  itemB.ref.SetBackdrop(BASE_BACKDROP)
+  itemB.ref.SetBackdropColor(0, 0, 0, 1)
+
+  const itemC = Frame({ name: 'itemC' })
+  itemC.ref.SetBackdrop(BASE_BACKDROP)
+  itemC.ref.SetBackdropColor(0, 0, 0, 1)
+
+  list.fns.Attach('itemA', itemA)
+  list.fns.Attach('itemB', itemB)
+  list.fns.Attach('itemC', itemC)
 
   const a = Frame({
     name: 'frame',
