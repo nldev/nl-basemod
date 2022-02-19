@@ -456,19 +456,21 @@ export interface ListItemOptions extends ComponentOptions {
 }
 
 export interface ListItemFns {
-  Reflow: () => void
+  Reflow: (newY?: number) => void
 }
-
 export const ListItem: Component<ListItemOptions, any, ListItemFns> = options => {
-  const frame: Element<any,ListItemFns> = Frame({ name: `${options.name}`, parent: options.parent }) as any
+  const frame: Element<any, ListItemFns> = Frame({ name: options.name, parent: options.parent }) as any
+  let y = options.y || 0
   frame.ref.SetSize(options.width, options.height)
   options.child.ref.SetAllPoints(frame.ref)
-  const Reflow = () => {
-    frame.ref.SetPoint('TOPLEFT', 0, options.y)
+  const Reflow = (newY?: number) => {
+    y = y
+    frame.ref.SetPoint('TOPLEFT', 0, newY || y)
   }
   frame.fns = {
     Reflow,
   }
+  Reflow()
   options.child.ref.SetParent(frame.ref)
   return frame
 }
@@ -484,11 +486,13 @@ export interface ListOptions extends ComponentOptions {
 export interface ListState {
   size: number
   items: Element<any, ListItemFns>[]
+  map: Mapping<number>
   y: number
 }
 
 export interface ListFns {
   Attach: (name: string, element: Element<any, any>) => void
+  Reflow: () => void
 }
 
 export const List: Component<ListOptions, ListState, ListFns> = options => {
@@ -496,12 +500,17 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
   list.ref.SetPoint('TOPLEFT')
 
   const Reflow = () => {
-    list.state.items.forEach(item => item.fns.Reflow())
+    list.state.y = 0
+    list.state.map = {}
+
+    list.state.items.forEach((item, index) => {
+      list.state.y = index * options.itemHeight
+      list.state.map[item.name] = index
+      item.fns.Reflow(list.state.y)
+    })
   }
 
   const Attach = (name: string, child: Element<any, any>) => {
-    list.state.y = list.state.y + options.itemHeight
-
     const item = ListItem({
       name: name,
       child,
@@ -510,17 +519,23 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
       y: list.state.y,
       parent: list,
     })
+
+    list.state.y = list.state.y + options.itemHeight
     list.state.items.push(item)
-    Reflow()
+    list.state.map[name] = list.state.items.length
+
+    // Reflow()
   }
 
   list.state = {
     size: 0,
     items: [],
+    map: {},
     y: 0,
   }
 
   list.fns = {
+    Reflow,
     Attach,
   }
 
