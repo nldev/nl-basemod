@@ -755,12 +755,12 @@ const app = new App(app => {
   itemC.ref.SetBackdrop(BASE_BACKDROP)
   itemC.ref.SetBackdropColor(0, 0, 0, 1)
 
-  // list.fns.Attach('itemA', itemA)
+  list.fns.Attach('itemA', itemA)
   // list.fns.Attach('itemB', itemB)
   // list.fns.Attach('itemC', itemC)
 
   const a = Frame({
-    name: 'frame',
+    name: 'a',
     parent: root,
   })
 
