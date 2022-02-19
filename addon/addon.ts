@@ -495,6 +495,7 @@ export interface ListFns {
 export const List: Component<ListOptions, ListState, ListFns> = options => {
   const list: Element<ListState, ListFns> = Frame({ ...options }) as any
 
+  list.ref.SetAllPoints(options.parent.inner)
 
   list.state = {
     size: 0,
