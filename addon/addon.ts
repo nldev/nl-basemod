@@ -500,6 +500,21 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
     // - 1 index on child
     // loop through right side until child
   }
+  const Attach = (name: string, child: Element<any, any>) => {
+    list.state.size++
+    const item = ListItem({
+      name: name,
+      child,
+      width: list.ref.GetWidth(),
+      height: options.itemHeight,
+      y: list.state.y,
+      index: list.state.size,
+      parent: list,
+      suffix: options.itemSuffix,
+    })
+    list.state.items[name] = item
+    Reflow()
+  }
 
   list.state = {
     size: 0,
@@ -508,21 +523,9 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
   }
 
   list.fns = {
-    Attach: (name: string, child: Element<any, any>) => {
-      list.state.size++
-      const item = ListItem({
-        name: name,
-        child,
-        width: list.ref.GetWidth(),
-        height: options.itemHeight,
-        y: list.state.y,
-        index: list.state.size,
-        parent: list,
-        suffix: options.itemSuffix,
-      })
-      list.state.items[name] = item
-    },
+    Attach,
   }
+
   return list
 }
 
