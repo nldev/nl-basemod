@@ -459,11 +459,11 @@ export interface ListItemFns {
   Reflow: () => void
 }
 
-export const ListItem: Component<ListItemOptions, ListItemFns> = options => {
-  const frame: Element<ListItemFns> = Frame({ name: `${options.name}`, parent: options.parent }) as any
+export const ListItem: Component<ListItemOptions, any, ListItemFns> = options => {
+  const frame: Element<any,ListItemFns> = Frame({ name: `${options.name}`, parent: options.parent }) as any
+  frame.ref.SetSize(options.width, options.height)
+  options.child.ref.SetAllPoints(frame.ref)
   const Reflow = () => {
-    options.child.ref.SetAllPoints(frame.ref)
-    frame.ref.SetSize(options.width, options.height)
     frame.ref.SetPoint('TOPLEFT', 0, options.y)
   }
   frame.fns = {
@@ -483,7 +483,7 @@ export interface ListOptions extends ComponentOptions {
 
 export interface ListState {
   size: number
-  items: Element<any, any>[]
+  items: Element<any, ListItemFns>[]
   y: number
 }
 
@@ -496,8 +496,7 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
   list.ref.SetPoint('TOPLEFT')
 
   const Reflow = () => {
-    // - 1 index on child
-    // loop through right side until child
+    list.state.items.forEach(item => item.fns.Reflow())
   }
 
   const Attach = (name: string, child: Element<any, any>) => {
