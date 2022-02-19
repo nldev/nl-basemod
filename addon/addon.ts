@@ -501,6 +501,7 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
 
   const Attach = (name: string, child: Element<any, any>) => {
     list.state.y = list.state.y + options.itemHeight
+
     const item = ListItem({
       name: name,
       child,
