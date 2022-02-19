@@ -504,32 +504,32 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
   }
 
   list.fns = {
-Reflow: () => {
-    list.state.y = 0
-    list.state.map = {}
+    Reflow: () => {
+      list.state.y = 0
+      list.state.map = {}
 
-    list.state.items.forEach((item, index) => {
-      list.state.y = index * options.itemHeight
-      list.state.map[item.name] = index
-      item.fns.Reflow(list.state.y)
-    })
-  },
+      list.state.items.forEach((item, index) => {
+        list.state.y = index * options.itemHeight
+        list.state.map[item.name] = index
+        item.fns.Reflow(list.state.y)
+      })
+    },
 
-  Attach: (name: string, child: Element<any, any>) => {
-    const item = ListItem({
-      name: name,
-      child,
-      width: list.ref.GetWidth(),
-      height: options.itemHeight,
-      y: list.state.y,
-      parent: list,
-    })
+    Attach: (name: string, child: Element<any, any>) => {
+      const item = ListItem({
+        name: name,
+        child,
+        width: list.ref.GetWidth(),
+        height: options.itemHeight,
+        y: list.state.y,
+        parent: list,
+      })
 
-    list.state.y = list.state.y + options.itemHeight
-    list.state.items.push(item)
-    list.state.map[name] = list.state.items.length - 1
-    item.ref.Show()
-  },
+      list.state.y = list.state.y + options.itemHeight
+      list.state.items.push(item)
+      list.state.map[name] = list.state.items.length - 1
+      item.ref.Show()
+    },
 
     Detach: (name: string) => {
       const index = list.state.map[name]
