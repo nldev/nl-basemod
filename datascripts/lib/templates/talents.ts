@@ -18,7 +18,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'vigor',
     spellId: 14983,
-    cost: 10,
+    cost: 8,
     class: { ROGUE: true },
   },
   {
@@ -150,7 +150,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'improved-sprint',
     spellId: 13875,
-    cost: 12,
+    cost: 8,
     class: { ROGUE: true },
   },
   {
@@ -198,13 +198,13 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'relentless-strikes',
     spellId: 58425,
-    cost: 8,
+    cost: 6,
     class: { ROGUE: true },
   },
   {
     id: 'quick-recovery',
     spellId: 31245,
-    cost: 4,
+    cost: 3,
     class: { ROGUE: true },
   },
   {
@@ -324,7 +324,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'improved-kick',
     spellId: 13867,
-    cost: 8,
+    cost: 6,
     class: { ROGUE: true },
   },
   {
@@ -372,7 +372,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'filthy-tricks',
     spellId: 58415,
-    cost: 3,
+    cost: 2,
     class: { ROGUE: true },
   },
   {
