@@ -739,6 +739,8 @@ const app = new App(app => {
   const root = Root()
 
   const loot = Frame({ name: 'loot', parent: root })
+  loot.ref.SetBackdrop(BASE_BACKDROP)
+  loot.ref.SetBackdropColor(0, 0, 0, 1)
 
   loot.ref.SetPoint('CENTER')
   loot.ref.SetSize(500, 500)
