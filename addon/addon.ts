@@ -456,12 +456,24 @@ export interface ListItemOptions extends ComponentOptions {
   index: number
 }
 
-export const ListItem: Component<ListItemOptions> = options => {
-  const frame = Frame({ name: `${options.name}-list-item`, parent: options.parent })
+export interface ListItemState {
+  index: number
+}
+
+export const ListItem: Component<ListItemOptions, ListItemState> = options => {
+  const frame: Element<ListItemState> = Frame({ name: `${options.name}-list-item`, parent: options.parent }) as any
+  frame.state = {
+    index: options.index,
+  }
+  options.child.ref.SetParent(frame.ref)
+  options.child.ref.SetAllPoints(frame.ref)
+  frame.ref.SetSize(options.width, options.height)
+  frame.ref.SetPoint('TOPLEFT', 0, options.y)
   return frame
 }
 
 export interface ListOptions extends ComponentOptions {
+  name: string,
   itemHeight: number
   width: number
   height: number
@@ -475,7 +487,7 @@ export interface ListState {
 }
 
 export interface ListFns {
-  Attach: (element: Element<any, any>) => void
+  Attach: (name: string, element: Element<any, any>) => void
 }
 
 export const List: Component<ListOptions, ListState, ListFns> = options => {
@@ -487,14 +499,16 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
     y: 0,
   }
   list.fns = {
-    Attach: (child: Element<any, any>) => {
+    Attach: (name: string, child: Element<any, any>) => {
       list.state.size++
       const item = ListItem({
+        name: name,
         child,
         width: list.ref.GetWidth(),
         height: options.itemHeight,
         y: list.state.y,
         index: list.state.size,
+        parent: list,
       })
     },
   }
