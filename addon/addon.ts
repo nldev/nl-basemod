@@ -453,19 +453,10 @@ export interface ListItemOptions extends ComponentOptions {
   width: number
   height: number
   y: number
-  index: number
-  suffix: string
 }
 
-export interface ListItemState {
-  index: number
-}
-
-export const ListItem: Component<ListItemOptions, ListItemState> = options => {
-  const frame: Element<ListItemState> = Frame({ name: `${options.name}-${options.suffix}`, parent: options.parent }) as any
-  frame.state = {
-    index: options.index,
-  }
+export const ListItem: Component<ListItemOptions> = options => {
+  const frame = Frame({ name: `${options.name}`, parent: options.parent })
   options.child.ref.SetParent(frame.ref)
   options.child.ref.SetAllPoints(frame.ref)
   frame.ref.SetSize(options.width, options.height)
@@ -475,7 +466,6 @@ export const ListItem: Component<ListItemOptions, ListItemState> = options => {
 
 export interface ListOptions extends ComponentOptions {
   name: string,
-  itemSuffix: string
   itemHeight: number
   width: number
   height: number
@@ -484,7 +474,7 @@ export interface ListOptions extends ComponentOptions {
 
 export interface ListState {
   size: number
-  items: Mapping<Element<any, any>>
+  items: Element<any, any>[]
   y: number
 }
 
@@ -500,25 +490,24 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
     // - 1 index on child
     // loop through right side until child
   }
+
   const Attach = (name: string, child: Element<any, any>) => {
-    list.state.size++
     const item = ListItem({
       name: name,
       child,
       width: list.ref.GetWidth(),
       height: options.itemHeight,
       y: list.state.y,
-      index: list.state.size,
       parent: list,
-      suffix: options.itemSuffix,
     })
-    list.state.items[name] = item
+    list.state.y = list.state.y + options.itemHeight
+    list.state.items.push(item)
     Reflow()
   }
 
   list.state = {
     size: 0,
-    items: {},
+    items: [],
     y: 0,
   }
 
