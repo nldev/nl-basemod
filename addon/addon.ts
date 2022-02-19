@@ -464,14 +464,13 @@ export const ListItem: Component<ListItemOptions, any, ListItemFns> = options =>
   let y = options.y || 0
   frame.ref.SetSize(options.width, options.height)
   options.child.ref.SetAllPoints(frame.ref)
-  const Reflow = (newY?: number) => {
-    y = y
-    frame.ref.SetPoint('TOPLEFT', 0, newY || y)
-  }
   frame.fns = {
-    Reflow,
+    Reflow: (newY?: number) => {
+      y = y
+      frame.ref.SetPoint('TOPLEFT', 0, newY || y)
+    }
   }
-  Reflow()
+  frame.fns.Reflow()
   options.child.ref.SetParent(frame.ref)
   return frame
 }
@@ -496,7 +495,16 @@ export interface ListFns {
 export const List: Component<ListOptions, ListState, ListFns> = options => {
   const list: Element<ListState, ListFns> = Frame({ ...options }) as any
 
-  const Reflow = () => {
+
+  list.state = {
+    size: 0,
+    items: [],
+    map: {},
+    y: 0,
+  }
+
+  list.fns = {
+Reflow: () => {
     list.state.y = 0
     list.state.map = {}
 
@@ -505,9 +513,9 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
       list.state.map[item.name] = index
       item.fns.Reflow(list.state.y)
     })
-  }
+  },
 
-  const Attach = (name: string, child: Element<any, any>) => {
+  Attach: (name: string, child: Element<any, any>) => {
     const item = ListItem({
       name: name,
       child,
@@ -521,26 +529,14 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
     list.state.items.push(item)
     list.state.map[name] = list.state.items.length - 1
     item.ref.Show()
-  }
+  },
 
-  const Detach = (name: string) => {
-    const index = list.state.map[name]
-    const item = list.state.items.splice(index, 1)[0]
-    item.ref.Hide()
-    Reflow()
-  }
-
-  list.state = {
-    size: 0,
-    items: [],
-    map: {},
-    y: 0,
-  }
-
-  list.fns = {
-    Reflow,
-    Attach,
-    Detach,
+    Detach: (name: string) => {
+      const index = list.state.map[name]
+      const item = list.state.items.splice(index, 1)[0]
+      item.ref.Hide()
+      list.fns.Reflow()
+    }
   }
 
   return list
