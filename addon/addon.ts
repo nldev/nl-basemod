@@ -734,14 +734,14 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 const app = new App(app => {
   const root = Root()
 
-  const loot = Frame({ name: 'loot', parent: root })
-  loot.ref.SetBackdrop(BASE_BACKDROP)
-  loot.ref.SetBackdropColor(0, 0, 0, 1)
+  // const loot = Frame({ name: 'loot', parent: root })
+  // loot.ref.SetBackdrop(BASE_BACKDROP)
+  // loot.ref.SetBackdropColor(0, 0, 0, 1)
 
-  loot.ref.SetPoint('CENTER')
-  loot.ref.SetSize(500, 500)
+  // loot.ref.SetPoint('CENTER')
+  // loot.ref.SetSize(500, 500)
 
-  const list = List({ itemHeight: 20, parent: loot })
+  // const list = List({ itemHeight: 20, parent: loot })
 
   const itemA = Frame({ name: 'itemA' })
   itemA.ref.SetBackdrop(BASE_BACKDROP)
@@ -755,9 +755,9 @@ const app = new App(app => {
   itemC.ref.SetBackdrop(BASE_BACKDROP)
   itemC.ref.SetBackdropColor(0, 0, 0, 1)
 
-  list.fns.Attach('itemA', itemA)
-  list.fns.Attach('itemB', itemB)
-  list.fns.Attach('itemC', itemC)
+  // list.fns.Attach('itemA', itemA)
+  // list.fns.Attach('itemB', itemB)
+  // list.fns.Attach('itemC', itemC)
 
   const a = Frame({
     name: 'frame',
