@@ -447,6 +447,64 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
   return frame
 }
 
+// lists
+export interface ListItemOptions extends ComponentOptions {
+  child: Element<any, any>
+  width: number
+  height: number
+  y: number
+  index: number
+}
+
+export const ListItem: Component<ListItemOptions> = options => {
+  const frame = Frame({ name: `${options.name}-list-item`, parent: options.parent })
+  return frame
+}
+
+export interface ListOptions extends ComponentOptions {
+  itemHeight: number
+  width: number
+  height: number
+  y: number
+}
+
+export interface ListState {
+  size: number
+  items: Mapping<Element<any, any>>
+  y: number
+}
+
+export interface ListFns {
+  Attach: (element: Element<any, any>) => void
+}
+
+export const List: Component<ListOptions, ListState, ListFns> = options => {
+  const list: Element<ListState, ListFns> = Frame({ ...options }) as any
+  list.ref.SetPoint('TOPLEFT')
+  list.state = {
+    size: 0,
+    items: {},
+    y: 0,
+  }
+  list.fns = {
+    Attach: (child: Element<any, any>) => {
+      list.state.size++
+      const item = ListItem({
+        child,
+        width: list.ref.GetWidth(),
+        height: options.itemHeight,
+        y: list.state.y,
+        index: list.state.size,
+      })
+    },
+  }
+  const Reflow = () => {
+    // - 1 index on child
+    // loop through right side until child
+  }
+  return list
+}
+
 // talents
 export interface TalentSpell {
   name: string
