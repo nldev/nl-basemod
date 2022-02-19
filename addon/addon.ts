@@ -478,9 +478,6 @@ export const ListItem: Component<ListItemOptions, any, ListItemFns> = options =>
 export interface ListOptions extends ComponentOptions {
   name: string,
   itemHeight: number
-  width: number
-  height: number
-  y: number
 }
 
 export interface ListState {
@@ -492,6 +489,7 @@ export interface ListState {
 
 export interface ListFns {
   Attach: (name: string, element: Element<any, any>) => void
+  Detach: (name: string) => void
   Reflow: () => void
 }
 
@@ -522,8 +520,16 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
 
     list.state.y = list.state.y + options.itemHeight
     list.state.items.push(item)
-    list.state.map[name] = list.state.items.length
+    list.state.map[name] = list.state.items.length - 1
+    item.ref.Show()
     // Reflow()
+  }
+
+  const Detach = (name: string) => {
+    const index = list.state.map[name]
+    const item = list.state.items.splice(index, 1)[0]
+    item.ref.Hide()
+    Reflow()
   }
 
   list.state = {
@@ -536,6 +542,7 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
   list.fns = {
     Reflow,
     Attach,
+    Detach,
   }
 
   return list
