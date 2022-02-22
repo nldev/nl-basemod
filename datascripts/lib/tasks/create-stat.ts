@@ -1,7 +1,7 @@
-import { noop } from 'nextgen-events'
-import { Spell as TSSpell } from 'tswow-stdlib/Spell/Spell'
-import { SpellEffect } from 'tswow-stdlib/Spell/SpellEffect'
+import { Spell as TSSpell } from 'wow/wotlk/std/Spell/Spell'
+import { SpellEffect } from 'wow/wotlk/std/Spell/SpellEffect'
 import { Asset, AssetOptions } from '../asset'
+import { noop } from '../utils'
 
 import { CREATE_STAT_TASK } from '../constants'
 import { Builder } from '../index'

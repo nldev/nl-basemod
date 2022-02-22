@@ -1,5 +1,4 @@
-import { Spell as TSSpell } from 'tswow-stdlib/Spell/Spell'
-import { loc_constructor } from 'wotlkdata/wotlkdata/primitives'
+import { Spell as TSSpell } from 'wow/wotlk/std/Spell/Spell'
 
 import { Builder } from './'
 import { Asset, AssetOptions, NWAsset } from './asset'
@@ -9,7 +8,7 @@ import {
     QUERY_ICON, DEFAULT_ICON_QUERY
 } from './constants'
 import { BaseState, Writable } from './state'
-import { AssetId, ItemSpell, ItemSpellOptions, Map, Queryable, TSText } from './types'
+import { AssetId, ItemSpell, ItemSpellOptions, Localization, Map, Queryable, TSText } from './types'
 import { localeify } from './utils'
 
 export interface Spell extends Asset<TSSpell> {
@@ -25,9 +24,9 @@ export type SpellOptions = AssetOptions<Spell> & {
 
 export class NWSpell extends NWAsset<TSSpell> implements Spell {
   public readonly icon: string
-  public readonly description: loc_constructor
-  public readonly auraDescription: loc_constructor
-  public readonly subtext: loc_constructor
+  public readonly description: Localization
+  public readonly auraDescription: Localization
+  public readonly subtext: Localization
 
   protected readonly itemSpells: Map<ItemSpellOptions>
 

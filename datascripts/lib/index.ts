@@ -1,6 +1,5 @@
 import fs from 'fs'
-import { std } from 'tswow-stdlib'
-import { DBC, SQL } from 'wotlkdata'
+import { std, DBC, SQL } from 'wow/wotlk'
 
 import { TSAsset } from './asset'
 import {
@@ -591,7 +590,6 @@ export class Builder {
     const db = (database === 'auth')
       ? this.sql.Databases.auth
       : this.sql.Databases.world_dest
-
     const query = lines.join('\n')
 
     db.write(query)

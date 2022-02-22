@@ -1,5 +1,4 @@
-import { ItemTemplate as TSItem } from 'tswow-stdlib/Item/ItemTemplate'
-import { loc_constructor } from 'wotlkdata/wotlkdata/primitives'
+import { ItemTemplate as TSItem } from 'wow/wotlk/std/Item/ItemTemplate'
 
 import { Builder } from './'
 import { Asset, AssetOptions, NWAsset } from './asset'
@@ -8,7 +7,7 @@ import {
     DEFAULT_SPELL_NAME, MAX_ITEM_SPELL_COUNT, QUERY_ICON,
 } from './constants'
 import { BaseState, Writable } from './state'
-import { Queryable, TSText } from './types'
+import { Localization, Queryable, TSText } from './types'
 import { ItemSpellCount, ItemSpellTrigger, localeify } from './utils'
 
 export type ItemSpellSelection = {
@@ -45,7 +44,7 @@ export type ItemOptions = AssetOptions<Item>
 
 export class NWItem extends NWAsset<TSItem> implements Item {
   public readonly icon: string
-  public readonly description: loc_constructor
+  public readonly description: Localization
   public readonly itemSpells: ItemSpellSelector
 
   protected readonly loader = {

@@ -1,12 +1,11 @@
-import { std } from 'tswow-stdlib'
-import { Achievement as TSAchievement } from 'tswow-stdlib/Achievement/Achievement'
-import { ItemTemplate as TSItem } from 'tswow-stdlib/Item/ItemTemplate'
-import { Spell as TSSpell } from 'tswow-stdlib/Spell/Spell'
-import { loc_constructor } from 'wotlkdata/wotlkdata/primitives'
+import { std } from 'wow/wotlk'
+import { Achievement as TSAchievement } from 'wow/wotlk/std/Achievement/Achievement'
+import { ItemTemplate as TSItem } from 'wow/wotlk/std/Item/ItemTemplate'
+import { Spell as TSSpell } from 'wow/wotlk/std/Spell/Spell'
 
 import { AssetType, TSAsset } from './asset'
 import { ASSET_TYPE, CLASS_MASKS, DEFAULT_ICON_SPELL_BASE, ITEM_SPELL_TRIGGERS, UNNAMED } from './constants'
-import { CharacterClass, CharacterRace, Duration, ItemSpellTrigger, Map, TSText } from './types'
+import { CharacterClass, CharacterRace, Duration, ItemSpellTrigger as IST, Map, TSText, Localization } from './types'
 
 export const noop = () => {}
 
@@ -47,11 +46,11 @@ export function dashCaseToTitleCase (string: string) {
   return capitalize(string.replace('-', ' '))
 }
 
-export function localeify (text: TSText): loc_constructor {
+export function localeify (text: TSText): Localization {
   if (typeof text === 'string')
     return { enGB: text }
 
-  // FIXME: build out a mapper from LocSystem to loc_constructor
+  // FIXME: build out a mapper from LocSystem to Localization
   // if (text instanceof LocSystem)
   if (text.enGB)
     return { enGB: text.enGB.get() }
@@ -168,7 +167,7 @@ export function resolveSpeed (base: number, speed: number) {
   return Math.abs(speed * multiplier)
 }
 
-export function ItemSpellTrigger (trigger?: ItemSpellTrigger) {
+export function ItemSpellTrigger (trigger?: IST) {
   switch (trigger) {
     case ITEM_SPELL_TRIGGERS.ON_USE:
       return 0

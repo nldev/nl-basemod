@@ -1,4 +1,4 @@
-import { CreatureTemplate as TSNpc } from 'tswow-stdlib/Creature/CreatureTemplate'
+import { CreatureTemplate as TSNpc } from 'wow/wotlk/std/Creature/CreatureTemplate'
 
 import { Builder } from './'
 import { Asset, AssetOptions, NWAsset } from './asset'

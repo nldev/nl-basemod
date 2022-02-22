@@ -1,16 +1,15 @@
-import { std } from 'tswow-stdlib'
-import { Achievement as TSAchievement } from 'tswow-stdlib/Achievement/Achievement'
-import { CreatureTemplate as TSNpc } from 'tswow-stdlib/Creature/CreatureTemplate'
-import { ItemTemplate as TSItem } from 'tswow-stdlib/Item/ItemTemplate'
-import { Spell as TSSpell } from 'tswow-stdlib/Spell/Spell'
-import { loc_constructor } from 'wotlkdata/wotlkdata/primitives'
+import { std } from 'wow/wotlk'
+import { Achievement as TSAchievement } from 'wow/wotlk/std/Achievement/Achievement'
+import { CreatureTemplate as TSNpc } from 'wow/wotlk/std/Creature/CreatureTemplate'
+import { ItemTemplate as TSItem } from 'wow/wotlk/std/Item/ItemTemplate'
+import { Spell as TSSpell } from 'wow/wotlk/std/Spell/Spell'
 
 import { Builder } from './'
 import {
     ACHIEVEMENT, ASSET_TYPE, DEFAULT_SPELL_BASE, DEFAULT_SPELL_NAME, ITEM, NPC, SPELL,
 } from './constants'
 import { Entity, NWEntity } from './entity'
-import { Optional, TSText } from './types'
+import { Localization, Optional, TSText } from './types'
 import { dashCaseToTitleCase, englishify, localeify, NextId, titleCaseToDashCase } from './utils'
 
 export type AssetType = typeof SPELL | typeof ITEM | typeof NPC | typeof ACHIEVEMENT
@@ -53,7 +52,7 @@ export abstract class NWAsset<T extends TSAsset> extends NWEntity implements Ass
   public readonly id: string
   public readonly asset: T
   public readonly base: number
-  public readonly name: loc_constructor
+  public readonly name: Localization
   public readonly isModify: boolean
   public readonly isClear: boolean
 

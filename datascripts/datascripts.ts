@@ -1,6 +1,6 @@
-import { std } from 'tswow-stdlib'
+import { std } from 'wow/wotlk'
 import { Builder } from './lib'
-import { resolveDuration, times } from './lib/utils'
+import { resolveDuration } from './lib/utils'
 
 // FIXME: move this
 function CreatePlaceholderEnchants () {
@@ -128,6 +128,10 @@ function main () {
         }
       })
     }
+  })
+
+  for (let i = 0; i <= 30000000; i++)
+  $.dbc.Item.add(90000 + i, {
   })
 }
 

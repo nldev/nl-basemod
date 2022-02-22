@@ -1,6 +1,5 @@
 // import { EnumCellWrapper } from 'wotlkdata/cell/cells/EnumCell'
 // import { LocSystem } from 'wotlkdata/cell/systems/CellSystem'
-import { loc_constructor } from 'wotlkdata/wotlkdata/primitives'
 
 import {
    ACHIEVEMENT, ENV, ITEM, ITEM_SPELL_TRIGGER_CHANCE_ON_HIT, ITEM_SPELL_TRIGGER_LEARN_SPELL,
@@ -9,6 +8,10 @@ import {
    QUERY_ID, QUERY_MOUNT_NPC, SCHOOLS, SPELL, ROGUE, WARRIOR, DRUID, MAGE, WARLOCK, SHAMAN, PRIEST, PALADIN, HUNTER, HUMAN, ORC, DWARF, NIGHT_ELF, UNDEAD, TAUREN, GNOME, TROLL, BLOOD_ELF, DRAENEI
 } from './constants'
 import { NWSpell } from './spell'
+
+export interface Localization {
+  enGB: string
+}
 
 export type Env = typeof ENV.DEV | typeof ENV.TEST | typeof ENV.PROD
 
@@ -51,8 +54,8 @@ export type Optional<T> = Mutable<Partial<T>>
 export type Nullable<T> = T | null | undefined
 
 // FIXME
-// export type TSText<T = any> = string | loc_constructor | LocSystem<T>
-export type TSText = string | loc_constructor | any
+// export type TSText<T = any> = string | Localization | LocSystem<T>
+export type TSText = string | Localization | any
 
 export type TSKeysExcludable = 'objectify' | 'set' | 'get' | 'end'
 

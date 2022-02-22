@@ -857,6 +857,33 @@ const app = new App(app => {
     }
   }
 
+  // function onSetHyperlink(tooltip: WoWAPI.GameTooltip) {
+  //   const [_, link] = tooltip.GetItem()
+  //   const a = link.split(':')
+  //   const id = a[1]
+  //   SendAddonMessage('refresh-item', id, 'WHISPER', app.playerInfo.name)
+  // }
+  // GameTooltip.HookScript('OnTooltipSetItem', onSetHyperlink)
+
+  // hooksecurefunc(GameTooltip, "SetHyperlink", onSetHyperlink)
+  // hooksecurefunc(ItemRefTooltip, "SetHyperlink", onSetHyperlink)
+  // hooksecurefunc(ItemRefShoppingTooltip1, "SetHyperlink", onSetHyperlink)
+  // hooksecurefunc(ItemRefShoppingTooltip2, "SetHyperlink", onSetHyperlink)
+  // hooksecurefunc(ShoppingTooltip1, "SetHyperlink", onSetHyperlink)
+  // hooksecurefunc(ShoppingTooltip2, "SetHyperlink", onSetHyperlink)
+
+  // ItemRefTooltip.HookScript('OnTooltipSetItem', onSetHyperlink)
+  // ItemRefShoppingTooltip1.HookScript('OnTooltipSetItem', onSetHyperlink)
+  // ItemRefShoppingTooltip2.HookScript('OnTooltipSetItem', onSetHyperlink)
+  // ShoppingTooltip1.HookScript('OnTooltipSetItem', onSetHyperlink)
+  // ShoppingTooltip2.HookScript('OnTooltipSetItem', onSetHyperlink)
+  // hooksecurefunc(ItemRefTooltip, "SetItemRef", onSetHyperlink)
+  // hooksecurefunc(ItemRefTooltip, "SetItemRef", onSetHyperlink)
+  // hooksecurefunc(ItemRefShoppingTooltip1, "SetItemRef", onSetHyperlink)
+  // hooksecurefunc(ItemRefShoppingTooltip2, "SetItemRef", onSetHyperlink)
+  // hooksecurefunc(ShoppingTooltip1, "SetItemRef", onSetHyperlink)
+  // hooksecurefunc(ShoppingTooltip2, "SetItemRef", onSetHyperlink)
+
   const { name, level, chrRace, chrClass } = app.playerInfo
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
