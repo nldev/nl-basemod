@@ -130,7 +130,7 @@ function main () {
     }
   })
 
-  for (let i = 0; i <= 30000000; i++)
+  for (let i = 0; i <= 3000; i++)
   $.dbc.Item.add(90000 + i, {
   })
 }

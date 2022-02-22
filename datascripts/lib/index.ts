@@ -54,8 +54,8 @@ import { dashCaseToConstantCase, noop, resolveIcon } from './utils'
 // FIXME: move to constants
 export const PROJECT = 'basemod'
 export const VERSION = '0.0.0'
-export const ADDON_PATH = __dirname + '\\..\\..\\..\\addon'
-export const ADDON_DATA_PATH = ADDON_PATH + '\\data'
+export const ADDON_PATH = __dirname + '/../../../addon'
+export const ADDON_DATA_PATH = ADDON_PATH + '/data'
 // FIXME
 // export const DEFAULT_SPEED = 0.7
 export const DEFAULT_SPEED = 1
@@ -601,7 +601,7 @@ export class Builder {
     for (const key of Object.keys(data))
       list.push(`export const ${dashCaseToConstantCase(key)} = ${JSON.stringify(data[key])};`)
 
-    const filePath = `${ADDON_DATA_PATH}\\${file}.ts`
+    const filePath = `${ADDON_DATA_PATH}/${file}.ts`
 
     if (!fs.existsSync(ADDON_DATA_PATH))
       fs.mkdirSync(ADDON_DATA_PATH)
