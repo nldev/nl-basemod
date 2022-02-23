@@ -516,7 +516,6 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
 
       list.state.items.forEach((item, index) => {
         list.state.map[item.name] = index
-        console.log(item.state.id)
         // item.fns.Reflow(list.state.y)
         // list.state.y = list.state.y - options.itemHeight
       })
@@ -540,6 +539,7 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
 
     Detach: (id: string) => {
       const index = list.state.map[id]
+      console.log(index)
       // const item = list.state.items.splice(index, 1)[0]
 
       // item.ref.Hide()
