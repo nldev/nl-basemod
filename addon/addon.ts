@@ -516,8 +516,8 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
 
       list.state.items.forEach((item, index) => {
         list.state.map[item.name] = index
-        // item.fns.Reflow(list.state.y)
-        // list.state.y = list.state.y - options.itemHeight
+        item.fns.Reflow(list.state.y)
+        list.state.y = list.state.y - options.itemHeight
       })
     },
 
@@ -541,9 +541,10 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
       const index = list.state.map[id]
       const item = list.state.items.splice(index, 1)[0]
 
-      list.state.items.forEach(i => console.log(i.state.id))
-      // item.ref.Hide()
-      // list.fns.Reflow()
+      if (item) {
+        item.ref.Hide()
+        list.fns.Reflow()
+      }
     }
   }
 
