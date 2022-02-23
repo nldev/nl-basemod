@@ -449,21 +449,28 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
 
 // lists
 export interface ListItemOptions extends ComponentOptions {
-  name: string,
+  id: string,
   child: Element<any, any>
   width: number
   height: number
   y: number
 }
 
+export interface ListItemState {
+  id: string
+}
+
 export interface ListItemFns {
   Reflow: (newY?: number) => void
 }
-export const ListItem: Component<ListItemOptions, any, ListItemFns> = options => {
-  const frame: Element<any, ListItemFns> = Frame({ name: `${options.name}-list-item`, parent: options.parent }) as any
+export const ListItem: Component<ListItemOptions, ListItemState, ListItemFns> = options => {
+  const frame: Element<ListItemState, ListItemFns> = Frame({ name: `${options.id}-list-item`, parent: options.parent }) as any
   let y = options.y || 0
   frame.ref.SetSize(options.width, options.height)
   options.child.ref.SetAllPoints(frame.ref)
+  frame.state = {
+    id: options.id,
+  }
   frame.fns = {
     Reflow: (newY?: number) => {
       y = y
@@ -480,15 +487,14 @@ export interface ListOptions extends ComponentOptions {
 }
 
 export interface ListState {
-  size: number
-  items: Element<any, ListItemFns>[]
+  items: Element<ListItemState, ListItemFns>[]
   map: Mapping<number>
   y: number
 }
 
 export interface ListFns {
-  Attach: (name: string, element: Element<any, any>) => void
-  Detach: (name: string) => void
+  Attach: (id: string, element: Element<any, any>) => void
+  Detach: (id: string) => void
   Reflow: () => void
 }
 
@@ -498,7 +504,6 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
   list.ref.SetAllPoints(options.parent.inner)
 
   list.state = {
-    size: 0,
     items: [],
     map: {},
     y: 0,
@@ -507,18 +512,16 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
   list.fns = {
     Reflow: () => {
       list.state.y = 0
-      list.state.map = {}
 
       list.state.items.forEach((item, index) => {
-        list.state.map[item.name] = index
         item.fns.Reflow(list.state.y)
         list.state.y = list.state.y - options.itemHeight
       })
     },
 
-    Attach: (name: string, child: Element<any, any>) => {
+    Attach: (id: string, child: Element<any, any>) => {
       const item = ListItem({
-        name: name,
+        id,
         child,
         width: list.ref.GetWidth(),
         height: options.itemHeight,
@@ -528,12 +531,20 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
 
       list.state.y = list.state.y - options.itemHeight
       list.state.items.push(item)
-      list.state.map[name] = list.state.items.length - 1
       item.ref.Show()
     },
 
-    Detach: (name: string) => {
-      const index = list.state.map[name]
+    Detach: (id: string) => {
+      let index: number = 0
+      let isFound: boolean = false
+      for (const item of list.state.items) {
+        if (!isFound) {
+          index++
+          if (item.state.id === id)
+            isFound = true
+        }
+      }
+      // const index = list.state.items.(item => item.name === 'name')
       const item = list.state.items.splice(index, 1)[0]
       item.ref.Hide()
       list.fns.Reflow()
