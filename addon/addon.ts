@@ -746,13 +746,13 @@ const app = new App(app => {
   const loot = Frame({ name: 'loot', parent: root })
   loot.ref.SetBackdrop(BASE_BACKDROP)
   loot.ref.SetBackdropColor(0, 0, 0, 1)
-  loot.inner.SetMovable(true)
-  loot.inner.RegisterForDrag('RightButton')
 
   loot.ref.SetPoint('CENTER')
   loot.ref.SetSize(250, 250)
-  loot.inner.SetScript('OnDragStart', f => f.StartMoving())
-  loot.inner.SetScript('OnDragStop', f => f.StopMovingOrSizing())
+  loot.ref.SetMovable(true)
+  loot.ref.RegisterForDrag('RightButton')
+  loot.ref.SetScript('OnDragStart', f => f.StartMoving())
+  loot.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
 
   const list = List({ name: 'list', itemHeight: 65, parent: loot })
 
