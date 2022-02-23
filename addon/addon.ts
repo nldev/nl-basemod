@@ -540,7 +540,7 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
       for (const item of list.state.items) {
         if (!isFound) {
           index++
-          if (item.state.id === id)
+          if (item && item.state.id === id)
             isFound = true
         }
       }
@@ -763,8 +763,10 @@ const app = new App(app => {
   itemA.ref.SetBackdropColor(0, 0, 0, 1)
   itemA.inner.EnableMouse(true)
   itemA.inner.SetScript('OnMouseDown', (_, button) => {
-    if (button === 'LeftButton')
+    if (button === 'LeftButton') {
+      console.log('itemA')
       list.fns.Detach('itemA')
+    }
   })
 
   const itemB = Frame({ name: 'itemB' })
@@ -772,8 +774,10 @@ const app = new App(app => {
   itemB.ref.SetBackdropColor(0, 0, 0, 1)
   itemB.inner.EnableMouse(true)
   itemB.inner.SetScript('OnMouseDown', (_, button) => {
-    if (button === 'LeftButton')
-      list.fns.Detach('itemA')
+    if (button === 'LeftButton') {
+      console.log('itemB')
+      list.fns.Detach('itemB')
+    }
   })
 
   const itemC = Frame({ name: 'itemC' })
@@ -781,8 +785,10 @@ const app = new App(app => {
   itemC.ref.SetBackdropColor(0, 0, 0, 1)
   itemC.inner.EnableMouse(true)
   itemC.inner.SetScript('OnMouseDown', (_, button) => {
-    if (button === 'LeftButton')
-      list.fns.Detach('itemA')
+    if (button === 'LeftButton') {
+      console.log('itemC')
+      list.fns.Detach('itemC')
+    }
   })
 
   list.fns.Attach('itemA', itemA)
