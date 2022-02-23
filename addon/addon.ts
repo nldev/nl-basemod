@@ -544,7 +544,6 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
             isFound = true
         }
       }
-      // const index = list.state.items.(item => item.name === 'name')
       const item = list.state.items.splice(index, 1)[0]
       item.ref.Hide()
       list.fns.Reflow()
