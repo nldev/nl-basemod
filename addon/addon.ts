@@ -535,18 +535,18 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
     },
 
     Detach: (id: string) => {
-      let index: number = 0
-      let isFound: boolean = false
-      for (const item of list.state.items) {
-        if (!isFound) {
-          index++
-          if (item && item.state.id === id)
-            isFound = true
-        }
-      }
-      const item = list.state.items.splice(index, 1)[0]
-      item.ref.Hide()
-      list.fns.Reflow()
+      // let index: number = 0
+      // let isFound: boolean = false
+      // for (const item of list.state.items) {
+      //   if (!isFound) {
+      //     index++
+      //     if (item && item.state.id === id)
+      //       isFound = true
+      //   }
+      // }
+      // const item = list.state.items.splice(index, 1)[0]
+      // item.ref.Hide()
+      // list.fns.Reflow()
     }
   }
 
