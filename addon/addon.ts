@@ -749,6 +749,7 @@ const app = new App(app => {
 
   loot.ref.SetPoint('CENTER')
   loot.ref.SetSize(250, 250)
+  loot.ref.EnableMouse(true)
   loot.ref.SetMovable(true)
   loot.ref.RegisterForDrag('RightButton')
   loot.ref.SetScript('OnDragStart', f => f.StartMoving())
