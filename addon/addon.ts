@@ -738,15 +738,25 @@ const app = new App(app => {
   const loot = Frame({ name: 'loot', parent: root })
   loot.ref.SetBackdrop(BASE_BACKDROP)
   loot.ref.SetBackdropColor(0, 0, 0, 1)
+  loot.inner.SetMovable(true)
+  loot.inner.RegisterForDrag('RightButton')
 
   loot.ref.SetPoint('CENTER')
-  loot.ref.SetSize(500, 500)
+  loot.ref.SetSize(250, 250)
+  loot.inner.SetScript('OnDragStart', f => f.StartMoving())
+  loot.inner.SetScript('OnDragStop', f => f.StopMovingOrSizing())
 
-  const list = List({ name: 'list', itemHeight: 100, parent: loot })
+  const list = List({ name: 'list', itemHeight: 65, parent: loot })
 
   const itemA = Frame({ name: 'itemA' })
   itemA.ref.SetBackdrop(BASE_BACKDROP)
   itemA.ref.SetBackdropColor(0, 0, 0, 1)
+  itemA.inner.EnableMouse(true)
+
+  itemA.inner.SetScript('OnMouseDown', (_, button) => {
+    if (button === 'LeftButton')
+      console.log('left click')
+  })
 
   const itemB = Frame({ name: 'itemB' })
   itemB.ref.SetBackdrop(BASE_BACKDROP)
@@ -759,6 +769,8 @@ const app = new App(app => {
   list.fns.Attach('itemA', itemA)
   list.fns.Attach('itemB', itemB)
   list.fns.Attach('itemC', itemC)
+
+  list.fns.Detach('itemB')
 
   const a = Frame({
     name: 'a',
