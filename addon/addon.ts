@@ -543,7 +543,7 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
       // const item = list.state.items.splice(index, 1)[0]
 
       // item.ref.Hide()
-      list.fns.Reflow()
+      // list.fns.Reflow()
     }
   }
 
