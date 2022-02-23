@@ -752,25 +752,32 @@ const app = new App(app => {
   itemA.ref.SetBackdrop(BASE_BACKDROP)
   itemA.ref.SetBackdropColor(0, 0, 0, 1)
   itemA.inner.EnableMouse(true)
-
   itemA.inner.SetScript('OnMouseDown', (_, button) => {
     if (button === 'LeftButton')
-      console.log('left click')
+      list.fns.Detach('itemA')
   })
 
   const itemB = Frame({ name: 'itemB' })
   itemB.ref.SetBackdrop(BASE_BACKDROP)
   itemB.ref.SetBackdropColor(0, 0, 0, 1)
+  itemB.inner.EnableMouse(true)
+  itemB.inner.SetScript('OnMouseDown', (_, button) => {
+    if (button === 'LeftButton')
+      list.fns.Detach('itemA')
+  })
 
   const itemC = Frame({ name: 'itemC' })
   itemC.ref.SetBackdrop(BASE_BACKDROP)
   itemC.ref.SetBackdropColor(0, 0, 0, 1)
+  itemC.inner.EnableMouse(true)
+  itemC.inner.SetScript('OnMouseDown', (_, button) => {
+    if (button === 'LeftButton')
+      list.fns.Detach('itemA')
+  })
 
   list.fns.Attach('itemA', itemA)
   list.fns.Attach('itemB', itemB)
   list.fns.Attach('itemC', itemC)
-
-  list.fns.Detach('itemB')
 
   const a = Frame({
     name: 'a',
