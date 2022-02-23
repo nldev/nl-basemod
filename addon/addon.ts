@@ -761,7 +761,7 @@ const app = new App(app => {
   itemA.inner.EnableMouse(true)
   itemA.inner.SetScript('OnMouseDown', (_, button) => {
     if (button === 'LeftButton') {
-      console.log('itemA')
+      // console.log('itemA')
       list.fns.Detach('itemA')
     }
   })
@@ -772,7 +772,7 @@ const app = new App(app => {
   itemB.inner.EnableMouse(true)
   itemB.inner.SetScript('OnMouseDown', (_, button) => {
     if (button === 'LeftButton') {
-      console.log('itemB')
+      // console.log('itemB')
       list.fns.Detach('itemB')
     }
   })
@@ -783,7 +783,7 @@ const app = new App(app => {
   itemC.inner.EnableMouse(true)
   itemC.inner.SetScript('OnMouseDown', (_, button) => {
     if (button === 'LeftButton') {
-      console.log('itemC')
+      // console.log('itemC')
       list.fns.Detach('itemC')
     }
   })
