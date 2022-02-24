@@ -783,7 +783,7 @@ export const LootItem: Component<
 
 const map: any = {}
 
-export const GetLootFrame = () => {
+const GetLootFrame = () => {
   let i = 0
   let isSearching = true
   let f: Element<LootItemState, LootItemFns>
