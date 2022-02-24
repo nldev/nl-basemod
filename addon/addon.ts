@@ -733,6 +733,95 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   return frame
 }
 
+// Loot
+export interface LootMechanic {}
+
+export interface LootItemFns {
+  Unlock: () => void
+}
+
+export interface LootItemState {
+  itemId: number
+  amount: number
+  mechanic: LootMechanic
+  index: number
+  isLocked: boolean
+}
+
+export interface LootItemOptions extends ComponentOptions {
+  itemId: number
+  amount: number
+  parent: Element<any, any>
+  index: number
+  // FIXME
+  mechanic?: LootMechanic
+}
+
+export const LootItem: Component<
+  LootItemOptions,
+  LootItemState,
+  LootItemFns
+> = options => {
+  const frame = GetLootFrame()
+
+  frame.state = {
+    itemId: options.itemId,
+    amount: options.amount,
+    mechanic: options.mechanic || {},
+    index: options.index,
+    isLocked: true,
+  }
+
+  frame.fns = {
+    Unlock: () => {
+      frame.ref.Hide()
+      frame.state.isLocked = false
+    }
+  }
+
+  frame.ref.Show()
+
+  return frame
+}
+
+const map: any = {}
+
+export const GetLootFrame = () => {
+  let i = 0
+  let isSearching = true
+  let f: Element<LootItemState, LootItemFns>
+
+  while (isSearching) {
+    let f = map[i]
+
+    if (!f.state.isLocked) {
+      isSearching = false
+    }
+
+    if (!f) {
+      f = Frame({ name: `loot-frame-${i}` })
+      isSearching = false
+    }
+
+    i++
+  }
+
+  return f
+}
+
+export interface LootFns {}
+
+export interface LootState {}
+
+export interface LootOptions {}
+
+export const Loot: Component<LootOptions, LootState, LootFns> = options => {
+  // frame
+  const frame: Element<TalentState, TalentFns> =
+    Frame({ name: 'loot' }) as any
+
+  return frame
+}
 
 
 // FIXME organize this this
