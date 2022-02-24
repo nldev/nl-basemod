@@ -760,7 +760,8 @@ export const LootItem: Component<
   LootItemState,
   LootItemFns
 > = options => {
-  const frame = GetLootFrame()
+  const [frame, index] = GetLootFrame()
+  // FIXME: (List)parent.Attach('loot-list-item-${index}', frame)
 
   frame.state = {
     itemId: options.itemId,
@@ -783,12 +784,14 @@ export const LootItem: Component<
 
 const map: any = {}
 
-const GetLootFrame = () => {
-  let i = 0
+const GetLootFrame = (): [Element<LootItemState, LootItemFns>, number] => {
+  let i = -1
   let isSearching = true
   let f: Element<LootItemState, LootItemFns>
 
   while (isSearching) {
+    i++
+
     let f = map[i]
 
     if (!f.state.isLocked) {
@@ -799,11 +802,9 @@ const GetLootFrame = () => {
       f = Frame({ name: `loot-frame-${i}` })
       isSearching = false
     }
-
-    i++
   }
 
-  return f
+  return [f, i]
 }
 
 export interface LootFns {}
