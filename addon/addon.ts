@@ -450,10 +450,10 @@ export const Grid: Component<GridOptions, GridState, GridFns> = options => {
 // lists
 export interface ListItemOptions extends ComponentOptions {
   id: string,
-  child: Element<any, any>
   width: number
   height: number
   y: number
+  child: Element<any, any>
 }
 
 export interface ListItemState {
@@ -749,6 +749,9 @@ export interface LootItemState {
 }
 
 export interface LootItemOptions extends ComponentOptions {
+  width: number
+  height: number
+  y: number
   itemId: number
   amount: number
   parent: Element<any, any>
