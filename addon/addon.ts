@@ -735,10 +735,6 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
 
 
-
-
-
-
 // FIXME organize this this
 const app = new App(app => {
   const root = Root()
