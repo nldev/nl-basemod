@@ -744,18 +744,13 @@ export interface LootItemState {
   itemId: number
   amount: number
   mechanic: LootMechanic
-  index: number
   isLocked: boolean
 }
 
 export interface LootItemOptions extends ComponentOptions {
-  width: number
-  height: number
-  y: number
   itemId: number
   amount: number
   parent: Element<any, any>
-  index: number
   // FIXME
   mechanic?: LootMechanic
 }
@@ -771,7 +766,6 @@ export const LootItem: Component<
     itemId: options.itemId,
     amount: options.amount,
     mechanic: options.mechanic || {},
-    index: options.index,
     isLocked: true,
   }
 
