@@ -633,6 +633,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
       bottom: 0,
     },
   })
+
   frame.ref.SetBackdropColor(0, 0, 0, 1)
 
   const texture = frame.ref.CreateTexture()
