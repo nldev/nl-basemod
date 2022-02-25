@@ -867,7 +867,33 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
 const app = new App(app => {
   const root = Root()
 
-  const loot = Frame()
+  const loot = Loot()
+
+  loot.fns.Add({
+    itemId: 2092,
+    amount: 1,
+  })
+
+  loot.fns.Add({
+    itemId: 2092,
+    amount: 1,
+  })
+
+  loot.fns.Add({
+    itemId: 2092,
+    amount: 1,
+  })
+
+  loot.fns.Add({
+    itemId: 2092,
+    amount: 1,
+  })
+
+  loot.fns.Add({
+    itemId: 2092,
+    amount: 1,
+  })
+
 
   const a = Frame({
     name: 'a',
