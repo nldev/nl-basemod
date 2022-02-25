@@ -396,35 +396,6 @@ function TalentSystem (events: TSEvents) {
   GM(events)
 }
 
-function Opcode (prefix: string): string {
-  return `${prefix}\t`
-}
-
-export function Main (events: TSEvents) {
-  TalentSystem(events)
-  ItemReloading(events)
-  // events.Player.OnWhisper((sender, _, message) => {
-  //   const opcode = Opcode('learn-talent')
-  //   const string = message.get()
-  //   const isTestOpcode = string.includes(opcode)
-  //   if (isTestOpcode) {
-  //     const msg = string.substr(opcode.length)
-  //     sender.SendBroadcastMessage(msg)
-  //   }
-  // })
-  //
-  // events.CustomPacketID.OnReceive('test' (opcode, packet, player))
-  // packet.SendToPlayer()
-  // TestCmdGetRandomPropertyOfFirstItemInBag(events)
-  // TestCmdAddItemWithPlaceholderEnchant(events)
-  // TestCmdChangeFactionAlliance(events)
-  // TestCmdChangeFactionHorde(events)
-  // EquipSystem(events)
-  // LevelUp(events)
-  // ResetLevel(events)
-  // TestCmdSetFFA(events)
-  // TestCmdUnsetFFA(events)
-}
 export function ItemReloading(events: TSEvents) {
   events.Player.OnSay((player, message) => {
     console.log(message.get())
@@ -543,5 +514,36 @@ export function ItemReloading(events: TSEvents) {
             ReloadItemTemplate()
         }
     })
+}
+
+function Opcode (prefix: string): string {
+  return `${prefix}\t`
+}
+
+export function Main (events: TSEvents) {
+  TalentSystem(events)
+  ItemReloading(events)
+
+  // events.Player.OnWhisper((sender, _, message) => {
+  //   const opcode = Opcode('learn-talent')
+  //   const string = message.get()
+  //   const isTestOpcode = string.includes(opcode)
+  //   if (isTestOpcode) {
+  //     const msg = string.substr(opcode.length)
+  //     sender.SendBroadcastMessage(msg)
+  //   }
+  // })
+  //
+  // events.CustomPacketID.OnReceive('test' (opcode, packet, player))
+  // packet.SendToPlayer()
+  // TestCmdGetRandomPropertyOfFirstItemInBag(events)
+  // TestCmdAddItemWithPlaceholderEnchant(events)
+  // TestCmdChangeFactionAlliance(events)
+  // TestCmdChangeFactionHorde(events)
+  // EquipSystem(events)
+  // LevelUp(events)
+  // ResetLevel(events)
+  // TestCmdSetFFA(events)
+  // TestCmdUnsetFFA(events)
 }
 

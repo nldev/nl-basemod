@@ -66,6 +66,9 @@ function main () {
   $.init()
   StarterSpells($)
 
+  $.std.Spells.load(0).Effects.get(0).Type.APPLY_AURA.set().Aura.DUMMY.set()
+
+
   const zeal = $.Spell.add({
     id: 'zeal',
     name: 'Zeal',
