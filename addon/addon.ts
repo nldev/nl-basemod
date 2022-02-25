@@ -238,7 +238,7 @@ export type Component<
   O extends ComponentOptions = ComponentOptions,
   S = Mapping,
   F = Mapping<ElementFn>,
-> = (options: O) => Element<S, F>
+> = (options?: O) => Element<S, F>
 
 // root
 export const Root = (ref?: WoWAPI.Frame) => {
@@ -812,16 +812,42 @@ const GetLootFrame = (): [Element<LootItemState, LootItemFns>, number] => {
   return [f, i]
 }
 
-export interface LootFns {}
+export interface Loot {
+  itemId: number
+  amount: number
+  timer?: number
+  mechanic?: LootMechanic
+}
+
+export interface LootFns {
+  Add: (options: Loot) => void
+}
 
 export interface LootState {}
 
 export interface LootOptions {}
 
-export const Loot: Component<LootOptions, LootState, LootFns> = options => {
+export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   // frame
-  const frame: Element<TalentState, TalentFns> =
+  const frame: Element<LootState, LootFns> =
     Frame({ name: 'loot' }) as any
+
+  frame.ref.SetBackdrop(BASE_BACKDROP)
+  frame.ref.SetBackdropColor(0, 0, 0, 1)
+  frame.ref.SetPoint('CENTER')
+  frame.ref.SetSize(250, 250)
+  frame.ref.EnableMouse(true)
+  frame.ref.SetMovable(true)
+  frame.ref.RegisterForDrag('RightButton')
+  frame.ref.SetScript('OnDragStart', f => f.StartMoving())
+  frame.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
+
+  const list = List({ name: 'loot-list', itemHeight: 100, parent: frame })
+
+  frame.fns = {
+    Add: options => {
+    }
+  }
 
   return frame
 }
@@ -831,17 +857,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = options => {
 const app = new App(app => {
   const root = Root()
 
-  const loot = Frame({ name: 'loot', parent: root })
-  loot.ref.SetBackdrop(BASE_BACKDROP)
-  loot.ref.SetBackdropColor(0, 0, 0, 1)
-
-  loot.ref.SetPoint('CENTER')
-  loot.ref.SetSize(250, 250)
-  loot.ref.EnableMouse(true)
-  loot.ref.SetMovable(true)
-  loot.ref.RegisterForDrag('RightButton')
-  loot.ref.SetScript('OnDragStart', f => f.StartMoving())
-  loot.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
+  const loot = Frame()
 
   const list = List({ name: 'list', itemHeight: 65, parent: loot })
 
