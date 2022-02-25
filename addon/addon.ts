@@ -848,7 +848,7 @@ export interface LootOptions {}
 export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   const padding: Element<LootState, LootFns> = Frame({ name: 'loot-padding' }) as any
 
-  padding.ref.SetSize(300, 300)
+  padding.ref.SetSize(310, 310)
   padding.ref.SetBackdrop(BASE_BACKDROP)
   padding.ref.SetBackdropColor(0, 0, 0, 1)
   padding.ref.SetPoint('CENTER')
