@@ -765,6 +765,7 @@ export const LootItem: Component<
 > = options => {
   const [frame, index] = GetLootFrame()
   console.log(index)
+  console.log(frame.ref.GetName())
 
   frame.ref.SetBackdrop(BASE_BACKDROP)
   frame.ref.SetBackdropColor(0, 0, 0, 1)
