@@ -877,9 +877,12 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
         parent: padding,
       })
       scroll.fns.Height(list.state.items.length * 50)
+      padding.ref.Show()
     },
     Reflow: () => {
       scroll.fns.Height(list.state.items.length * 50)
+      if (list.state.items.length === 0)
+        padding.ref.Hide()
     },
   }
 
