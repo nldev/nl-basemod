@@ -813,6 +813,8 @@ const GetLootFrame = (): [Element<LootItemState, LootItemFns>, number] => {
     }
   }
 
+  map[i] = f
+
   return [f, i]
 }
 
