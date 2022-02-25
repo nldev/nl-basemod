@@ -869,12 +869,6 @@ const app = new App(app => {
 
   const loot = Frame()
 
-  const list = List({ name: 'list', itemHeight: 65, parent: loot })
-
-  const itemA = Frame({ name: 'itemA' })
-  const itemB = Frame({ name: 'itemB' })
-  const itemC = Frame({ name: 'itemC' })
-
   const a = Frame({
     name: 'a',
     parent: root,
