@@ -766,6 +766,13 @@ export const LootItem: Component<
 > = options => {
   const [frame, index] = GetLootFrame()
 
+  frame.ref.SetBackdrop(BASE_BACKDROP)
+  frame.ref.SetBackdropColor(0, 0, 0, 1)
+  frame.ref.EnableMouse(true)
+  // frame.ref.SetScript('OnMouseDown', (_, button) => {
+  //   frame.fns.Unlock()
+  // })
+
   frame.state = {
     itemId: options.itemId,
     amount: options.amount,
