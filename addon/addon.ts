@@ -848,7 +848,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   frame.ref.SetScript('OnDragStart', f => f.StartMoving())
   frame.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
 
-  const list = List({ name: 'loot-list', itemHeight: 100, parent: frame })
+  const list = List({ name: 'loot-list', itemHeight: 50, parent: frame })
 
   frame.fns = {
     Add: options => {
