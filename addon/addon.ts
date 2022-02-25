@@ -303,8 +303,12 @@ export interface ScrollOptions extends ComponentOptions {
   scrollHeight?: number
 }
 
-export const Scroll: Component<ScrollOptions> = options => {
-  const a = Frame(options)
+export interface ScrollFns {
+  Height: (amount: number) => void
+}
+
+export const Scroll: Component<ScrollOptions, any, ScrollFns> = options => {
+  const a: Element<any, ScrollFns> = Frame(options) as any
   const frame = a.inner
 
   frame.SetAllPoints(frame.GetParent() as WoWAPI.Frame)
@@ -352,6 +356,12 @@ export const Scroll: Component<ScrollOptions> = options => {
   moduleoptions.SetPoint('TOPLEFT')
   moduleoptions.SetWidth(scrollchild.GetWidth() - SCROLL_WIDTH)
   moduleoptions.SetHeight(scrollchild.GetHeight())
+
+  a.fns = {
+    Height: (amount: number) => {
+      moduleoptions.SetHeight(amount)
+    }
+  }
 
   a.inner = moduleoptions
 
