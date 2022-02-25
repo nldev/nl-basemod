@@ -750,7 +750,7 @@ export interface LootItemState {
 export interface LootItemOptions extends ComponentOptions {
   itemId: number
   amount: number
-  parent: Element<any, any>
+  list: Element<ListState, ListFns>
   // FIXME
   mechanic?: LootMechanic
 }
