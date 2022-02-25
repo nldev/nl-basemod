@@ -761,7 +761,6 @@ export const LootItem: Component<
   LootItemFns
 > = options => {
   const [frame, index] = GetLootFrame()
-  // FIXME: (List)parent.Attach('loot-list-item-${index}', frame)
 
   frame.state = {
     itemId: options.itemId,
@@ -776,6 +775,8 @@ export const LootItem: Component<
       frame.state.isLocked = false
     }
   }
+
+  options.list.fns.Attach(`loot-list-item-${index}`, frame)
 
   frame.ref.Show()
 
