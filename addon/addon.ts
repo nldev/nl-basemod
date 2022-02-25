@@ -814,7 +814,7 @@ const GetLootFrame = (): [Element<LootItemState, LootItemFns>, number] => {
 
 export interface Loot {
   itemId: number
-  amount: number
+  amount?: number
   timer?: number
   mechanic?: LootMechanic
 }
@@ -849,7 +849,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
       const item = LootItem({
         list,
         itemId: options.itemId,
-        amount: options.amount,
+        amount: options.amount || 1,
         timer: options.timer,
         mechanic: options.mechanic,
       })
