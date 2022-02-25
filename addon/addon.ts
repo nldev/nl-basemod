@@ -802,12 +802,12 @@ const GetLootFrame = (): [Element<LootItemState, LootItemFns>, number] => {
 
     let f = map[i]
 
-    if (!f.state.isLocked) {
+    if (!f) {
+      f = Frame({ name: `loot-frame-${i}` })
       isSearching = false
     }
 
-    if (!f) {
-      f = Frame({ name: `loot-frame-${i}` })
+    if (!isSearching && !f.state.isLocked) {
       isSearching = false
     }
   }
