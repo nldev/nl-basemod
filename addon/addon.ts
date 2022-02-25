@@ -846,24 +846,27 @@ export interface LootState {}
 export interface LootOptions {}
 
 export const Loot: Component<LootOptions, LootState, LootFns> = () => {
-  // frame
-  const frame: Element<LootState, LootFns> =
-    Frame({ name: 'loot' }) as any
+  const padding: Element<LootState, LootFns> = Frame({ name: 'loot-padding' }) as any
 
-  frame.ref.SetBackdrop(BASE_BACKDROP)
-  frame.ref.SetBackdropColor(0, 0, 0, 1)
-  frame.ref.SetPoint('CENTER')
+  padding.ref.SetSize(300, 300)
+  padding.ref.SetBackdrop(BASE_BACKDROP)
+  padding.ref.SetBackdropColor(0, 0, 0, 1)
+  padding.ref.SetPoint('CENTER')
+  padding.ref.EnableMouse(true)
+  padding.ref.SetMovable(true)
+  padding.ref.RegisterForDrag('RightButton')
+  padding.ref.SetScript('OnDragStart', f => f.StartMoving())
+  padding.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
+
+  const frame = Frame({ name: 'loot', parent: padding })
+
   frame.ref.SetSize(250, 250)
-  frame.ref.EnableMouse(true)
-  frame.ref.SetMovable(true)
-  frame.ref.RegisterForDrag('RightButton')
-  frame.ref.SetScript('OnDragStart', f => f.StartMoving())
-  frame.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
+  frame.ref.SetPoint('CENTER')
 
   const scroll = Scroll({ name: 'loot-scroll', scrollHeight: 250, parent: frame })
   const list = List({ name: 'loot-list', itemHeight: 50, parent: scroll })
 
-  frame.fns = {
+  padding.fns = {
     Add: options => {
       LootItem({
         list,
@@ -871,7 +874,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
         amount: options.amount || 1,
         timer: options.timer,
         mechanic: options.mechanic,
-        parent: frame,
+        parent: padding,
       })
       scroll.fns.Height(list.state.items.length * 50)
     },
@@ -880,7 +883,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
     },
   }
 
-  return frame
+  return padding
 }
 
 
