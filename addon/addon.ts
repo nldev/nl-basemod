@@ -634,7 +634,9 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     },
   })
   frame.ref.SetBackdropColor(0, 0, 0, 1)
+
   const texture = frame.ref.CreateTexture()
+
   texture.SetTexture(options.spell.icon)
   texture.SetAllPoints()
 
