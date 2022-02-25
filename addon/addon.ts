@@ -752,6 +752,7 @@ export interface LootItemOptions extends ComponentOptions {
   amount: number
   list: Element<ListState, ListFns>
   // FIXME
+  timer?: number
   mechanic?: LootMechanic
 }
 
