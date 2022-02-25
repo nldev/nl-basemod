@@ -929,6 +929,17 @@ const app = new App(app => {
     amount: 1,
   })
 
+  Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
+    if (player.toLowerCase() !== name)
+      return
+    if (text.indexOf('@@') === 0) {
+      loot.fns.Add({
+        itemId: 2092,
+        amount: 1,
+      })
+    }
+  })
+
 
   const a = Frame({
     name: 'a',
