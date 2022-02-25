@@ -838,6 +838,7 @@ export interface Loot {
 
 export interface LootFns {
   Add: (options: Loot) => void
+  Reflow: () => void
 }
 
 export interface LootState {}
@@ -872,7 +873,10 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
         mechanic: options.mechanic,
       })
       scroll.fns.Height(list.state.items.length * 50)
-    }
+    },
+    Reflow: () => {
+      scroll.fns.Height(list.state.items.length * 50)
+    },
   }
 
   return frame
