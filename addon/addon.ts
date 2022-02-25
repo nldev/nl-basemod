@@ -359,6 +359,7 @@ export const Scroll: Component<ScrollOptions, any, ScrollFns> = options => {
 
   a.fns = {
     Height: (amount: number) => {
+      scrollchild.SetHeight(amount)
       moduleoptions.SetHeight(amount)
     }
   }
