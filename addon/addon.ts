@@ -846,6 +846,13 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
 
   frame.fns = {
     Add: options => {
+      const item = LootItem({
+        list,
+        itemId: options.itemId,
+        amount: options.amount,
+        timer: options.timer,
+        mechanic: options.mechanic,
+      })
     }
   }
 
