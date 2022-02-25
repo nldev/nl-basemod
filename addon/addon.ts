@@ -764,6 +764,7 @@ export interface LootItemOptions extends ComponentOptions {
   itemId: number
   amount: number
   list: Element<ListState, ListFns>
+  parent: Element<LootState, LootFns>
   // FIXME
   timer?: number
   mechanic?: LootMechanic
@@ -785,6 +786,7 @@ export const LootItem: Component<
     options.list.fns.Detach(listId)
     frame.ref.Hide()
     frame.state.isLocked = false
+    options.parent.fns.Reflow()
   })
 
   frame.state = {
