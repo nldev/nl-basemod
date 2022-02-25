@@ -740,7 +740,6 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 export interface LootMechanic {}
 
 export interface LootItemFns {
-  Unlock: () => void
 }
 
 export interface LootItemState {
@@ -769,9 +768,11 @@ export const LootItem: Component<
   frame.ref.SetBackdrop(BASE_BACKDROP)
   frame.ref.SetBackdropColor(0, 0, 0, 1)
   frame.ref.EnableMouse(true)
-  // frame.ref.SetScript('OnMouseDown', (_, button) => {
-  //   frame.fns.Unlock()
-  // })
+  frame.ref.SetScript('OnMouseDown', (_, button) => {
+    options.list.fns.Detach(listId)
+    frame.ref.Hide()
+    frame.state.isLocked = false
+  })
 
   frame.state = {
     itemId: options.itemId,
@@ -780,14 +781,9 @@ export const LootItem: Component<
     isLocked: true,
   }
 
-  frame.fns = {
-    Unlock: () => {
-      frame.ref.Hide()
-      frame.state.isLocked = false
-    }
-  }
+  const listId = `loot-list-item-${index}`
 
-  options.list.fns.Attach(`loot-list-item-${index}`, frame)
+  options.list.fns.Attach(listId, frame)
 
   frame.ref.Show()
 
@@ -853,7 +849,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
 
   frame.fns = {
     Add: options => {
-      const item = LootItem({
+      LootItem({
         list,
         itemId: options.itemId,
         amount: options.amount || 1,
@@ -876,41 +872,8 @@ const app = new App(app => {
   const list = List({ name: 'list', itemHeight: 65, parent: loot })
 
   const itemA = Frame({ name: 'itemA' })
-  itemA.ref.SetBackdrop(BASE_BACKDROP)
-  itemA.ref.SetBackdropColor(0, 0, 0, 1)
-  itemA.inner.EnableMouse(true)
-  itemA.inner.SetScript('OnMouseDown', (_, button) => {
-    if (button === 'LeftButton') {
-      // console.log('itemA')
-      list.fns.Detach('itemA')
-    }
-  })
-
   const itemB = Frame({ name: 'itemB' })
-  itemB.ref.SetBackdrop(BASE_BACKDROP)
-  itemB.ref.SetBackdropColor(0, 0, 0, 1)
-  itemB.inner.EnableMouse(true)
-  itemB.inner.SetScript('OnMouseDown', (_, button) => {
-    if (button === 'LeftButton') {
-      // console.log('itemB')
-      list.fns.Detach('itemB')
-    }
-  })
-
   const itemC = Frame({ name: 'itemC' })
-  itemC.ref.SetBackdrop(BASE_BACKDROP)
-  itemC.ref.SetBackdropColor(0, 0, 0, 1)
-  itemC.inner.EnableMouse(true)
-  itemC.inner.SetScript('OnMouseDown', (_, button) => {
-    if (button === 'LeftButton') {
-      // console.log('itemC')
-      list.fns.Detach('itemC')
-    }
-  })
-
-  list.fns.Attach('itemA', itemA)
-  list.fns.Attach('itemB', itemB)
-  list.fns.Attach('itemC', itemC)
 
   const a = Frame({
     name: 'a',
