@@ -884,6 +884,20 @@ const app = new App(app => {
   const root = Root()
 
   const loot = Loot()
+  loot.fns.Add({
+    itemId: 2092,
+    amount: 1,
+  })
+
+  loot.fns.Add({
+    itemId: 2092,
+    amount: 1,
+  })
+
+  loot.fns.Add({
+    itemId: 2092,
+    amount: 1,
+  })
 
   loot.fns.Add({
     itemId: 2092,
