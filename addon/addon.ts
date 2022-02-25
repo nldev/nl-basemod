@@ -863,6 +863,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
 
   frame.fns = {
     Add: options => {
+      scroll.fns.Height(list.state.items.length * 50)
       LootItem({
         list,
         itemId: options.itemId,
