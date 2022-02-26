@@ -818,6 +818,7 @@ export const LootItem: Component<
   const texture = icon.ref.CreateTexture(`${frame.ref.GetName()}-texture`)
 
   texture.SetTexture(GetItemIcon(options.itemId))
+  texture.SetTexture(GetItemIcon(2092))
   texture.SetAllPoints()
 
   icon.ref.EnableMouse(true)
@@ -836,7 +837,7 @@ export const LootItem: Component<
 
   const info = GetItemInfo(options.itemId)
   titleText.SetParent(icon.ref)
-  titleText.SetPoint('RIGHT', 80, 0)
+  titleText.SetPoint('TOPRIGHT', 8, 8)
   titleText.SetFont('Fonts/FRIZQT__.TTF', 10)
   titleText.SetText(info[0])
 
