@@ -23,11 +23,11 @@ export const TABLES = createTemplates<SQLTable>(CREATE_TABLE_TASK, [
         type: 'mediumtext',
         isNotNullable: true,
       },
-      // {
-      //   name: 't',
-      //   type: 'mediumtext',
-      //   isNotNullable: true,
-      // },
+      {
+        name: 'primitive',
+        type: 'mediumtext',
+        isNotNullable: true,
+      },
       // {
       //   name: 'type',
       //   type: 'mediumtext',
