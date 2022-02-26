@@ -530,15 +530,12 @@ function EasyLoot (events: TSEvents) {
   events.Player.OnCreatureKill((player, creature) => {
     const loot = creature.GetLoot()
     const number = loot.GetItemCount() - 1
-
     if (number === -1)
       return
-
     const id = 0
     const amount = 1
     const timer = 300
     const mechanic = 0
-
     for (let i = 0; i <= number; i++) {
       const itemId = loot.GetItem(i).GetItemID()
       player.SendItemQueryPacket(itemId)
