@@ -986,25 +986,25 @@ const app = new App(app => {
   loot.fns.Add({
     itemId: 19019,
     amount: 1,
-    timer: 200,
+    timer: 300,
   })
 
   loot.fns.Add({
     itemId: 19019,
     amount: 1,
-    timer: 200,
+    timer: 300,
   })
 
   loot.fns.Add({
     itemId: 19019,
     amount: 1,
-    timer: 200,
+    timer: 300,
   })
 
   loot.fns.Add({
     itemId: 19019,
     amount: 1,
-    timer: 200,
+    timer: 300,
   })
 
   loot.fns.Add({
@@ -1020,13 +1020,13 @@ const app = new App(app => {
   loot.fns.Add({
     itemId: 19019,
     amount: 1,
-    timer: 200,
+    timer: 300,
   })
 
   loot.fns.Add({
     itemId: 19019,
     amount: 1,
-    timer: 200,
+    timer: 300,
   })
 
   Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
@@ -1036,7 +1036,7 @@ const app = new App(app => {
       loot.fns.Add({
         itemId: 19138,
         amount: 1,
-        timer: 200,
+        timer: 300,
       })
     }
   })
