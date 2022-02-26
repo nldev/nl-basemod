@@ -825,7 +825,7 @@ export const LootItem: Component<
     Detach()
   })
 
-  icon.ref.SetPoint('LEFT', 5, 0)
+  icon.ref.SetPoint('LEFT', 10, 0)
 
   // title
   const titleText = icon.ref.CreateFontString(
