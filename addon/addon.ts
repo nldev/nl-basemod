@@ -857,7 +857,7 @@ export const LootItem: Component<
   }
 
   let amountText = ''
-  if (options.amount)
+  if (options.amount > 1)
     amountText = ` (${options.amount})`
   titleText.SetText(info[0] + amountText)
   titleText.SetSize(frame.ref.GetWidth() - 120, frame.ref.GetHeight())
@@ -891,6 +891,8 @@ export const LootItem: Component<
     GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`item:${options.itemId}`)
+    if (options.amount > 1)
+    GameTooltip.AddLine(`Quantity: ${options.amount}`)
     GameTooltip.Show()
   })
 
