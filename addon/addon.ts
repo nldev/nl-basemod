@@ -200,7 +200,7 @@ export class Store {
 
     this.state[type][key] = value
 
-    SendAddonMessage('store-set', `${t} ${value}`, 'WHISPER', app.playerInfo.name)
+    SendAddonMessage('store-set', `${t} ${type} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
   }
 
   Get (type: StoreType, key: string) {
