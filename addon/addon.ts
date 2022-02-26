@@ -748,8 +748,6 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 }
 
 // Loot
-export interface LootMechanic {}
-
 export interface LootItemFns {
 }
 
@@ -757,7 +755,7 @@ export interface LootItemState {
   id: number
   itemId: number
   amount: number
-  mechanic: LootMechanic
+  mechanic: number
   isLocked: boolean
 }
 
@@ -769,7 +767,7 @@ export interface LootItemOptions extends ComponentOptions {
   parent: Element<LootState, LootFns>
   timer: number
   // FIXME
-  mechanic?: LootMechanic
+  mechanic?: number
 }
 
 export const LootItem: Component<
@@ -908,7 +906,7 @@ export const LootItem: Component<
     id: options.id,
     itemId: options.itemId,
     amount: options.amount,
-    mechanic: options.mechanic || {},
+    mechanic: options.mechanic || 0,
     isLocked: true,
   }
 
@@ -947,7 +945,7 @@ export interface Loot {
   id: number
   itemId: number
   amount?: number
-  mechanic?: LootMechanic
+  mechanic?: number
   timer?: number
 }
 
@@ -985,6 +983,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
     Add: options => {
       LootItem({
         list,
+        id: options.id,
         itemId: options.itemId,
         amount: options.amount || 1,
         timer: options.timer,
@@ -1006,15 +1005,21 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
       return
     if (!text)
       return
-    const [a, b] = text.split(' ')
-    const used = Number(a)
-    const max = Number(b)
-    if (used && max) {
-      app.talentInfo.isEnabled = true
-      app.talentInfo.used = used
-      app.talentInfo.max = max
-      counterText.SetText(`${app.talentInfo.max - app.talentInfo.used} / ${app.talentInfo.max}`)
-    }
+    const [a, b, c, d, e] = text.split(' ')
+
+    const id = Number(a)
+    const itemId = Number(b)
+    const amount = Number(c)
+    const timer = Number(d)
+    const mechanic = Number(e)
+
+    padding.fns.Add({
+      id,
+      itemId,
+      amount,
+      timer,
+      mechanic,
+    })
   })
 
   return padding
@@ -1026,46 +1031,54 @@ const app = new App(app => {
   const loot = Loot()
 
   loot.fns.Add({
+    id: 0,
     itemId: 19019,
     amount: 1,
     timer: 300,
   })
 
   loot.fns.Add({
+    id: 0,
     itemId: 19019,
     amount: 1,
     timer: 300,
   })
 
   loot.fns.Add({
+    id: 0,
     itemId: 19019,
     amount: 1,
     timer: 300,
   })
 
   loot.fns.Add({
+    id: 0,
     itemId: 19019,
     amount: 1,
     timer: 300,
   })
 
   loot.fns.Add({
+    id: 0,
     itemId: 19019,
     amount: 1,
   })
 
   loot.fns.Add({
+    id: 0,
     itemId: 19019,
     amount: 1,
   })
 
   loot.fns.Add({
+    id: 0,
     itemId: 19019,
     amount: 1,
     timer: 300,
   })
 
   loot.fns.Add({
+    id: 0,
     itemId: 19019,
     amount: 1,
     timer: 300,
@@ -1076,6 +1089,7 @@ const app = new App(app => {
       return
     if (text.indexOf('@@') === 0) {
       loot.fns.Add({
+        id: 0,
         itemId: 19138,
         amount: 1,
         timer: 300,
