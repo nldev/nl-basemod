@@ -330,7 +330,6 @@ function HandleUnlearnTalent (events: TSEvents) {
     }
     if (!spellId || !cost || !classMask)
       return
-    console.log(spellId)
     // get current talent points
     const b = QueryWorld(`
       select * from __player_talents where playerGuid = ${playerGuid};
@@ -398,7 +397,6 @@ function TalentSystem (events: TSEvents) {
 
 export function ItemReloading(events: TSEvents) {
   events.Player.OnSay((player, message) => {
-    console.log(message.get())
     player.SendBroadcastMessage(message.get())
   })
   events.Player.OnCommand((player, command, isFound) => {
@@ -408,112 +406,112 @@ export function ItemReloading(events: TSEvents) {
       player.SendBroadcastMessage('|cffffffff|Hitem:2092:0:0:0:0:0:0:8:2|h[Worn Dagger]|h')
     }
   })
-    events.Player.OnWhisper((player, _, message) => {
-      const prefix = 'refresh-item\t'
-      const str = message.get()
-      if (!str.includes(prefix))
-       return
-      const id = str.substr(prefix.length)
-      const hp = player.GetHealth()
-      const mp = player.GetPower(Powers.MANA)
-      player.ApplyItemMods(ToUInt32(id))
-      //should really send this packet to all players online
-      player.SendItemQueryPacket(ToUInt32(id))
-      //rectifies the player stats
-      if (hp)
-        player.SetHealth(hp)
-      if (mp)
-        player.SetPower(Powers.MANA, mp)
-    })
-    events.World.OnStartup(()=>{
-        LoadCustomItems()
-    })
-    //possibly replace with sending a cache packet of specific itemID whenever hover an item?
-    //perhaps have an addon that checks when finally ingame, then send this only once?
-    events.Player.OnLogin((player,first)=>{
-        player.AddTimer(3000,3,0,(owner,timer)=>{
-            owner.ToPlayer().UpdateCache()
-        })
-    })
-    events.Player.OnCommand((player,command,found)=>{
-        let cmd = command.get().split(' ')
-        if(cmd[0] == 'del'){
-            found.set(true)
-            if(cmd[1])
-              player.RemoveItem(player.GetItemByEntry(ToUInt32(cmd[1])))
-        }
-        if(cmd[0] == 'cacheme'){
-            found.set(true)
-            player.UpdateCache()
-        }
-        if(cmd[0] == 'itemreload'){
-            found.set(true)
-            const hp = player.GetHealth()
-            const mp = player.GetPower(Powers.MANA)
-            player.ApplyItemMods(ToUInt32(cmd[1]))
-            //should really send this packet to all players online
-            player.SendItemQueryPacket(ToUInt32(cmd[1]))
-            //rectifies the player stats
-            if (hp)
-              player.SetHealth(hp)
-            if (mp)
-              player.SetPower(Powers.MANA, mp)
-        }
-        if(cmd[0] == 'customitemreload'){
-            const hp = player.GetHealth()
-            const mp = player.GetPower(Powers.MANA)
-            found.set(true)
-            //get a prettier way? idk. you need GetTemplateCopy off a item instance. DO NOT use GetTemplate()
-            let newItem = player.GetItemByEntry(ToUInt32(cmd[1])).GetTemplateCopy()
-            newItem.SetStatCount(2)
-            //do your manipulations here
-            newItem.SetStatType(0,7)
-            newItem.SetStatValue(0,5)
-            newItem.SetStatType(1,5)
-            newItem.SetStatValue(1,5)
-            //do the heavy lifting
-            player.ApplyCustomItemMods(newItem)
-            //save to custom table
-            newItem.SaveItemTemplate()
-            //should really send this packet to all players online
-            player.SendItemQueryPacketWithTemplate(newItem)
-            //rectifies the player bars
-            if (hp)
-              player.SetHealth(hp)
-            if (mp)
-              player.SetPower(Powers.MANA, mp)
-        }
-        if(cmd[0] == 'customitemreload2'){
-            const hp = player.GetHealth()
-            const mp = player.GetPower(Powers.MANA)
-            found.set(true)
-            //get a prettier way? idk. you need GetTemplateCopy off a item instance. DO NOT use GetTemplate()
-            let newItem = player.GetItemByEntry(ToUInt32(cmd[1])).GetTemplateCopy()
-            //do your manipulations here
-            newItem.SetStatCount(1)
-            newItem.SetStatValue(0,1)
-            //do the heavy lifting
-            player.ApplyCustomItemMods(newItem)
-            //save to custom table
-            newItem.SaveItemTemplate()
-            //should really send this packet to all players online
-            player.SendItemQueryPacketWithTemplate(newItem)
-            //rectifies the player bars
-            if (hp)
-              player.SetHealth(hp)
-            if (mp)
-              player.SetPower(Powers.MANA, mp)
-        }
-        if(cmd[0] == 'newitem'){
-            found.set(true)
-            //for when nobody has an item
-            ReloadSingleItemTemplate(cmd[1])
-        }
-        if(cmd[0] == 'totalreload'){
-            found.set(true)
-            ReloadItemTemplate()
-        }
-    })
+  events.Player.OnWhisper((player, _, message) => {
+    const prefix = 'refresh-item\t'
+    const str = message.get()
+    if (!str.includes(prefix))
+     return
+    const id = str.substr(prefix.length)
+    const hp = player.GetHealth()
+    const mp = player.GetPower(Powers.MANA)
+    player.ApplyItemMods(ToUInt32(id))
+    //should really send this packet to all players online
+    player.SendItemQueryPacket(ToUInt32(id))
+    //rectifies the player stats
+    if (hp)
+      player.SetHealth(hp)
+    if (mp)
+      player.SetPower(Powers.MANA, mp)
+  })
+  events.World.OnStartup(()=>{
+      LoadCustomItems()
+  })
+  //possibly replace with sending a cache packet of specific itemID whenever hover an item?
+  //perhaps have an addon that checks when finally ingame, then send this only once?
+  events.Player.OnLogin((player,first)=>{
+      player.AddTimer(3000,3,0,(owner,timer)=>{
+          owner.ToPlayer().UpdateCache()
+      })
+  })
+  events.Player.OnCommand((player,command,found)=>{
+      let cmd = command.get().split(' ')
+      if(cmd[0] == 'del'){
+          found.set(true)
+          if(cmd[1])
+            player.RemoveItem(player.GetItemByEntry(ToUInt32(cmd[1])))
+      }
+      if(cmd[0] == 'cacheme'){
+          found.set(true)
+          player.UpdateCache()
+      }
+      if(cmd[0] == 'itemreload'){
+          found.set(true)
+          const hp = player.GetHealth()
+          const mp = player.GetPower(Powers.MANA)
+          player.ApplyItemMods(ToUInt32(cmd[1]))
+          //should really send this packet to all players online
+          player.SendItemQueryPacket(ToUInt32(cmd[1]))
+          //rectifies the player stats
+          if (hp)
+            player.SetHealth(hp)
+          if (mp)
+            player.SetPower(Powers.MANA, mp)
+      }
+      if(cmd[0] == 'customitemreload'){
+          const hp = player.GetHealth()
+          const mp = player.GetPower(Powers.MANA)
+          found.set(true)
+          //get a prettier way? idk. you need GetTemplateCopy off a item instance. DO NOT use GetTemplate()
+          let newItem = player.GetItemByEntry(ToUInt32(cmd[1])).GetTemplateCopy()
+          newItem.SetStatCount(2)
+          //do your manipulations here
+          newItem.SetStatType(0,7)
+          newItem.SetStatValue(0,5)
+          newItem.SetStatType(1,5)
+          newItem.SetStatValue(1,5)
+          //do the heavy lifting
+          player.ApplyCustomItemMods(newItem)
+          //save to custom table
+          newItem.SaveItemTemplate()
+          //should really send this packet to all players online
+          player.SendItemQueryPacketWithTemplate(newItem)
+          //rectifies the player bars
+          if (hp)
+            player.SetHealth(hp)
+          if (mp)
+            player.SetPower(Powers.MANA, mp)
+      }
+      if(cmd[0] == 'customitemreload2'){
+          const hp = player.GetHealth()
+          const mp = player.GetPower(Powers.MANA)
+          found.set(true)
+          //get a prettier way? idk. you need GetTemplateCopy off a item instance. DO NOT use GetTemplate()
+          let newItem = player.GetItemByEntry(ToUInt32(cmd[1])).GetTemplateCopy()
+          //do your manipulations here
+          newItem.SetStatCount(1)
+          newItem.SetStatValue(0,1)
+          //do the heavy lifting
+          player.ApplyCustomItemMods(newItem)
+          //save to custom table
+          newItem.SaveItemTemplate()
+          //should really send this packet to all players online
+          player.SendItemQueryPacketWithTemplate(newItem)
+          //rectifies the player bars
+          if (hp)
+            player.SetHealth(hp)
+          if (mp)
+            player.SetPower(Powers.MANA, mp)
+      }
+      if(cmd[0] == 'newitem'){
+          found.set(true)
+          //for when nobody has an item
+          ReloadSingleItemTemplate(cmd[1])
+      }
+      if(cmd[0] == 'totalreload'){
+          found.set(true)
+          ReloadItemTemplate()
+      }
+  })
 }
 
 function EasyLoot (events: TSEvents) {
@@ -547,8 +545,9 @@ function EasyLoot (events: TSEvents) {
         player,
       )
     }
-
     player.TryAddMoney(money)
+    if (money)
+      player.SendBroadcastMessage(`You loot ${money} Copper`)
     loot.Clear()
   })
 }
