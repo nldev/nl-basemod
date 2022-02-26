@@ -522,7 +522,6 @@ function EasyLoot (events: TSEvents) {
     const str = message.get()
     if (!str.includes(opcode))
      return
-    const playerGuid = sender.GetGUID()
     const itemId = str.substr(opcode.length)
     if (!itemId)
       return
