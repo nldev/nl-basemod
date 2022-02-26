@@ -557,6 +557,7 @@ function EasyLoot (events: TSEvents) {
       player.SendBroadcastMessage(`You loot ${money} Copper`)
     loot.Clear()
     loot.SetMoney(0)
+
     // TODO this too
     loot.SetGeneratesNormally(false)
     loot.RemoveLooter(0)
