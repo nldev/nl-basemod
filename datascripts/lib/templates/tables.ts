@@ -5,6 +5,8 @@ import { SQLTable } from '../types'
 export const TABLES = createTemplates<SQLTable>(CREATE_TABLE_TASK, [
   {
     name: 'addon_data',
+    database: 'world',
+    isPersist: true,
     columns: [
       {
         name: 'entry',
@@ -42,8 +44,6 @@ export const TABLES = createTemplates<SQLTable>(CREATE_TABLE_TASK, [
         isNotNullable: true,
       },
     ],
-    database: 'world',
-    isPersist: true,
   },
 ])
 
