@@ -782,12 +782,12 @@ export const LootItem: Component<
     'OVERLAY',
     'GameTooltipText',
   )
+
+  counterText.Hide()
   counterText.SetParent(frame.ref)
   counterText.SetPoint('RIGHT', -20, 0)
   counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
   counterText.SetText('')
-
-  const limit = GetTime() + options.timer
 
   const Detach = () => {
     options.list.fns.Detach(listId)
@@ -797,14 +797,20 @@ export const LootItem: Component<
     options.parent.fns.Reflow()
   }
 
-  frame.ref.SetScript('OnUpdate', () => {
-    const current = GetTime()
-    const time = limit - current
-    counterText.SetText(`${Math.floor(time)}`)
-    // FIXME: update clock
-    if (time < 0)
-      Detach()
-  })
+  if (options.timer) {
+    counterText.Show()
+
+    const limit = GetTime() + options.timer
+
+    frame.ref.SetScript('OnUpdate', () => {
+      const current = GetTime()
+      const time = limit - current
+      counterText.SetText(`${Math.floor(time)}`)
+      // FIXME: update clock
+      if (time < 0)
+        Detach()
+    })
+  }
 
   frame.ref.SetBackdrop(BASE_BACKDROP)
   frame.ref.SetBackdropColor(0, 0, 0, 1)
@@ -860,8 +866,8 @@ const GetLootFrame = (): [Element<LootItemState, LootItemFns>, number] => {
 export interface Loot {
   itemId: number
   amount?: number
-  timer?: number
   mechanic?: LootMechanic
+  timer: number
 }
 
 export interface LootFns {
