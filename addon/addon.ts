@@ -938,7 +938,10 @@ const app = new App(app => {
   })
 
   root.ref.SetScript('OnUpdate', () => {
-    console.log(d - GetTime())
+    const amount = d - GetTime()
+    if (amount > 0) {
+      console.log(amount)
+    }
   })
 
   Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
