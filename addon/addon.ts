@@ -824,7 +824,6 @@ export const LootItem: Component<
   _G[textureName] = texture
 
   texture.SetTexture(GetItemIcon(options.itemId))
-  texture.SetTexture(GetItemIcon(2092))
   texture.SetAllPoints()
 
   icon.ref.EnableMouse(true)
