@@ -811,18 +811,7 @@ export const LootItem: Component<
   // icon
   const icon = Frame({ name: frame.ref.GetName() + '-icon', parent: frame })
 
-  icon.ref.SetSize(40, 40)
-  icon.ref.SetBackdrop({
-    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-    tile: true,
-    tileSize: 16,
-    insets: {
-      left: 0,
-      right: 0,
-      top: 0,
-      bottom: 0,
-    },
-  })
+  icon.ref.SetSize(35, 35)
 
   icon.ref.SetBackdropColor(0, 0, 0, 1)
 
@@ -847,7 +836,7 @@ export const LootItem: Component<
 
   const info = GetItemInfo(options.itemId)
   titleText.SetParent(icon.ref)
-  titleText.SetPoint('RIGHT', -40, 0)
+  titleText.SetPoint('RIGHT', 80, 0)
   titleText.SetFont('Fonts/FRIZQT__.TTF', 10)
   titleText.SetText(info[0])
 
