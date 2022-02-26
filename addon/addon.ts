@@ -812,7 +812,6 @@ export const LootItem: Component<
   const icon = Frame({ name: frame.ref.GetName() + '-icon', parent: frame })
 
   icon.ref.SetSize(40, 40)
-
   icon.ref.SetBackdrop({
     edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
     tile: true,
