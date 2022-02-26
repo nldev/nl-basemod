@@ -900,41 +900,49 @@ const app = new App(app => {
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
+    timer: 30,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
+    timer: 30,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
+    timer: 30,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
+    timer: 30,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
+    timer: 30,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
+    timer: 30,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
+    timer: 30,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
+    timer: 30,
   })
 
   root.ref.SetScript('OnUpdate', () => {
@@ -951,6 +959,7 @@ const app = new App(app => {
       loot.fns.Add({
         itemId: 2092,
         amount: 1,
+        timer: 30,
       })
     }
   })
