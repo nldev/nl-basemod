@@ -879,7 +879,7 @@ export const LootItem: Component<
 
   options.list.fns.Attach(listId, frame)
 
-  titleText.SetSize(frame.ref.GetWidth() - 80, frame.ref.GetHeight())
+  titleText.SetSize(frame.ref.GetWidth() - 120, frame.ref.GetHeight())
   titleText.SetPoint('LEFT', 40, 0)
 
   frame.ref.Show()
