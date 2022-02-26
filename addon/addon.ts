@@ -754,6 +754,7 @@ export interface LootItemFns {
 }
 
 export interface LootItemState {
+  id: number
   itemId: number
   amount: number
   mechanic: LootMechanic
@@ -761,6 +762,7 @@ export interface LootItemState {
 }
 
 export interface LootItemOptions extends ComponentOptions {
+  id: number
   itemId: number
   amount: number
   list: Element<ListState, ListFns>
@@ -814,7 +816,7 @@ export const LootItem: Component<
 
   // icon
   const iconName = `${frame.ref.GetName()}-icon`
-  const icon = _G[iconName] || Frame({ name: iconName, parent: frame })
+  const icon: Element<any, any> = _G[iconName] || Frame({ name: iconName, parent: frame })
   _G[iconName] = icon
 
   icon.ref.SetSize(35, 35)
@@ -868,17 +870,16 @@ export const LootItem: Component<
   close.SetText('X')
   close.SetParent(frame.ref)
   close.SetPoint('BOTTOMRIGHT', -8, 8)
-  close.EnableMouse()
-  close.ref.SetScript('OnMouseDown', (_, button) => {
-    // FIXME: send dismiss event
-    Detach()
-  })
-  close.SetScript('OnEnter', () => {
-    close.SetTextColor(1, 0, 0, 1)
-  })
-  close.SetScript('OnLeave', () => {
-    close.SetTextColor(1, 0, 0, 0.5)
-  })
+  // close.SetScript('OnMouseDown', (_, button) => {
+  //   // FIXME: send dismiss event
+  //   Detach()
+  // })
+  // close.SetScript('OnEnter', () => {
+  //   close.SetTextColor(1, 0, 0, 1)
+  // })
+  // close.SetScript('OnLeave', () => {
+  //   close.SetTextColor(1, 0, 0, 0.5)
+  // })
 
   // tooltip
   icon.ref.SetScript('OnEnter', () => {
@@ -904,6 +905,7 @@ export const LootItem: Component<
   }
 
   frame.state = {
+    id: options.id,
     itemId: options.itemId,
     amount: options.amount,
     mechanic: options.mechanic || {},
@@ -942,6 +944,7 @@ const GetLootFrame = (): [Element<LootItemState, LootItemFns>, number] => {
 }
 
 export interface Loot {
+  id: number
   itemId: number
   amount?: number
   mechanic?: LootMechanic
@@ -997,6 +1000,22 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
         padding.ref.Hide()
     },
   }
+
+  Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
+    if (prefix !== 'LOOT-ITEM')
+      return
+    if (!text)
+      return
+    const [a, b] = text.split(' ')
+    const used = Number(a)
+    const max = Number(b)
+    if (used && max) {
+      app.talentInfo.isEnabled = true
+      app.talentInfo.used = used
+      app.talentInfo.max = max
+      counterText.SetText(`${app.talentInfo.max - app.talentInfo.used} / ${app.talentInfo.max}`)
+    }
+  })
 
   return padding
 }
