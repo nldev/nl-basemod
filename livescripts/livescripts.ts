@@ -527,15 +527,16 @@ function EasyLoot (events: TSEvents) {
   })
   events.Creatures.OnGenerateLoot((creature, player) => {
     const loot = creature.GetLoot()
+    const money = loot.GetMoney()
     loot.SetGeneratesNormally(false)
     loot.RemoveLooter(0)
+    loot.SetMoney(0)
     const number = loot.GetItemCount() - 1
     if (number === -1)
       return
     const id = 0
     const timer = 60
     const mechanic = 0
-    const money = loot.GetMoney()
     for (let i = 0; i <= number; i++) {
       const itemId = loot.GetItem(i).GetItemID()
       const amount = loot.GetItem(i).GetCount()
@@ -551,6 +552,9 @@ function EasyLoot (events: TSEvents) {
     if (money)
       player.SendBroadcastMessage(`You loot ${money} Copper`)
     loot.Clear()
+    loot.SetGeneratesNormally(false)
+    loot.SetMoney(0)
+    loot.RemoveLooter(0)
   })
 }
 
