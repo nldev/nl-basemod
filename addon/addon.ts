@@ -855,7 +855,11 @@ export const LootItem: Component<
     const color = GetItemQualityColor(info[2])
     titleText.SetTextColor(color[0], color[1], color[2], Number(color[3]))
   }
-  titleText.SetText(info[0])
+
+  let amountText = ''
+  if (options.amount)
+    amountText = ` (${options.amount})`
+  titleText.SetText(info[0] + amountText)
   titleText.SetSize(frame.ref.GetWidth() - 120, frame.ref.GetHeight())
   titleText.SetPoint('LEFT', 40, 0)
 
