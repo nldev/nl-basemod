@@ -534,6 +534,7 @@ function Opcode (prefix: string): string {
 }
 
 export function Main (events: TSEvents) {
+  EasyLoot(events)
   TalentSystem(events)
   ItemReloading(events)
 
