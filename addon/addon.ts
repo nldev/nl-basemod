@@ -783,7 +783,7 @@ export const LootItem: Component<
 
   // counter
   const counterText = frame.ref.CreateFontString(
-    `loot-counter-${options.itemId}`,
+    `${frame.ref.GetName()}-counter`,
     'OVERLAY',
     'GameTooltipText',
   )
@@ -809,13 +809,13 @@ export const LootItem: Component<
   }
 
   // icon
-  const icon = Frame({ name: `loot-icon-${options.itemId}`, parent: frame })
+  const icon = Frame({ name: `${frame.ref.GetName()}-icon`, parent: frame })
 
   icon.ref.SetSize(35, 35)
 
   icon.ref.SetBackdropColor(0, 0, 0, 1)
 
-  const texture = icon.ref.CreateTexture(`loot-texture-${options.itemId}`)
+  const texture = icon.ref.CreateTexture(`${frame.ref.GetName()}-texture`)
 
   texture.SetTexture(GetItemIcon(options.itemId))
   texture.SetAllPoints()
@@ -829,7 +829,7 @@ export const LootItem: Component<
 
   // title
   const titleText = icon.ref.CreateFontString(
-    `loot-title-${options.itemId}`,
+    `${frame.ref.GetName()}-title`,
     'OVERLAY',
     'GameTooltipText',
   )
