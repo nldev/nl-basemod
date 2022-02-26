@@ -971,41 +971,41 @@ const app = new App(app => {
   const loot = Loot()
 
   loot.fns.Add({
-    itemId: 2092,
+    itemId: 19019,
     amount: 1,
     timer: 200,
   })
 
   loot.fns.Add({
-    itemId: 2092,
+    itemId: 19019,
     amount: 1,
     timer: 200,
   })
 
   loot.fns.Add({
-    itemId: 2092,
+    itemId: 19019,
     amount: 1,
     timer: 200,
   })
 
   loot.fns.Add({
-    itemId: 2092,
+    itemId: 19019,
     amount: 1,
     timer: 200,
   })
 
   loot.fns.Add({
-    itemId: 2092,
+    itemId: 19019,
     amount: 1,
   })
 
   loot.fns.Add({
-    itemId: 2092,
+    itemId: 19019,
     amount: 1,
   })
 
   loot.fns.Add({
-    itemId: 2092,
+    itemId: 19019,
     amount: 1,
     timer: 200,
   })
