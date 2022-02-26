@@ -917,9 +917,6 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   return padding
 }
 
-
-const d = GetTime() + 30
-
 // FIXME organize this this
 const app = new App(app => {
   const root = Root()
@@ -972,13 +969,6 @@ const app = new App(app => {
     itemId: 2092,
     amount: 1,
     timer: 30,
-  })
-
-  root.ref.SetScript('OnUpdate', () => {
-    const amount = d - GetTime()
-    if (amount > 0) {
-      console.log(amount)
-    }
   })
 
   Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
