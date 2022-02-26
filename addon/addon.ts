@@ -847,7 +847,7 @@ export const LootItem: Component<
 
   const info = GetItemInfo(options.itemId)
   titleText.SetParent(icon.ref)
-  titleText.SetPoint('RIGHT', 20, 0)
+  titleText.SetPoint('RIGHT', -20, 0)
   titleText.SetFont('Fonts/FRIZQT__.TTF', 10)
   titleText.SetText(info[0])
 
