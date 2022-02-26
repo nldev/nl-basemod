@@ -833,7 +833,7 @@ export const LootItem: Component<
 
   icon.ref.EnableMouse(true)
   icon.ref.SetScript('OnMouseDown', (_, button) => {
-    SendAddonMessage('loot-item', `${options.itemId}`, 'WHISPER', app.playerInfo.name)
+    SendAddonMessage('loot-item', `${options.itemId} ${options.amount}`, 'WHISPER', app.playerInfo.name)
     Detach()
   })
 
