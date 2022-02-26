@@ -859,18 +859,18 @@ export const LootItem: Component<
   titleText.SetSize(frame.ref.GetWidth() - 120, frame.ref.GetHeight())
   titleText.SetPoint('LEFT', 40, 0)
 
-  // title
-  const closeName = `${frame.ref.GetName()}-close`
-  const close = icon.ref.CreateFontString(
-    closeName,
-    'OVERLAY',
-    'GameTooltipText',
-  )
+  // close
+  // const closeName = `${frame.ref.GetName()}-close`
+  // const close = icon.ref.CreateFontString(
+  //   closeName,
+  //   'OVERLAY',
+  //   'GameTooltipText',
+  // )
 
-  close.SetTextColor(1, 0, 0, 0.5)
-  close.SetText('X')
-  close.SetParent(frame.ref)
-  close.SetPoint('BOTTOMRIGHT', -8, 8)
+  // close.SetTextColor(1, 0, 0, 0.5)
+  // close.SetText('X')
+  // close.SetParent(frame.ref)
+  // close.SetPoint('BOTTOMRIGHT', -8, 8)
   // close.SetScript('OnMouseDown', (_, button) => {
   //   // FIXME: send dismiss event
   //   Detach()
@@ -900,7 +900,9 @@ export const LootItem: Component<
     options.list.fns.Detach(listId)
     frame.ref.Hide()
     counterText.Hide()
+    counterText.ClearAllPoints()
     titleText.Hide()
+    titleText.ClearAllPoints()
     frame.state.isLocked = false
     options.parent.fns.Reflow()
   }
@@ -913,7 +915,7 @@ export const LootItem: Component<
     isLocked: true,
   }
 
-  frame.ref.Hide()
+  frame.ref.Show()
 
   return frame
 }
@@ -964,7 +966,7 @@ export interface LootOptions {}
 export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   const padding: Element<LootState, LootFns> = Frame({ name: 'loot-padding' }) as any
 
-  padding.ref.SetSize(310, 310)
+  padding.ref.SetSize(290, 290)
   padding.ref.SetBackdrop(BASE_BACKDROP)
   padding.ref.SetBackdropColor(0, 0, 0, 1)
   padding.ref.SetPoint('CENTER')
@@ -1026,6 +1028,8 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
       mechanic,
     })
   })
+
+  padding.ref.Hide()
 
   return padding
 }
