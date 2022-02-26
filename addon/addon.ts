@@ -165,6 +165,29 @@ export class Store {
   }
 
   Init () {
+    Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
+      if (prefix !== 'store-get')
+        return
+      if (!text)
+        return
+
+      const [t, type, key, value] = text.split(' ')
+
+      this.state[type][key] = t === 'number'
+        ? Number(value)
+        : t === 'null'
+        ? null
+        : t
+    })
+
+    Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
+      if (prefix !== 'store-init-success')
+        return
+      if (!text)
+        return
+    })
+
+    SendAddonMessage('store-init', '', 'WHISPER', app.playerInfo.name)
     // FIXME
     // listen for 'store-set' events from server
     // send 'store-init' to server
@@ -176,7 +199,7 @@ export class Store {
   }
 
   Set (type: StoreType, key: string, value: StoreValue) {
-    const prefix = typeof value === 'number'
+    const t = typeof value === 'number'
       ? 'number'
       : typeof value === 'string'
       ? 'string'
@@ -184,7 +207,7 @@ export class Store {
 
     this.state[type][key] = value
 
-    SendAddonMessage('set', `${prefix} ${value}`, 'WHISPER', app.playerInfo.name)
+    SendAddonMessage('store-set', `${t} ${value}`, 'WHISPER', app.playerInfo.name)
   }
 
   Get (type: StoreType, key: string) {
