@@ -523,7 +523,7 @@ function EasyLoot (events: TSEvents) {
     const a = str.substr(opcode.length).split(' ')
     if (!a[0])
       return
-    sender.AddItem(ToUInt32(a[0]), Number(a[1]))
+    sender.AddItem(ToUInt32(a[0]), ToUInt32(a[1]))
   })
   events.Creatures.OnGenerateLoot((creature, player) => {
     const loot = creature.GetLoot()
