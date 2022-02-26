@@ -765,8 +765,8 @@ export interface LootItemOptions extends ComponentOptions {
   amount: number
   list: Element<ListState, ListFns>
   parent: Element<LootState, LootFns>
+  timer: number
   // FIXME
-  timer?: number
   mechanic?: LootMechanic
 }
 
@@ -777,14 +777,41 @@ export const LootItem: Component<
 > = options => {
   const [frame, index] = GetLootFrame()
 
-  frame.ref.SetBackdrop(BASE_BACKDROP)
-  frame.ref.SetBackdropColor(0, 0, 0, 1)
-  frame.ref.EnableMouse(true)
-  frame.ref.SetScript('OnMouseDown', (_, button) => {
+  const counterText = frame.ref.CreateFontString(
+    'talent-countertext',
+    'OVERLAY',
+    'GameTooltipText',
+  )
+  counterText.SetParent(frame.ref)
+  counterText.SetPoint('RIGHT')
+  counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
+  counterText.SetText('')
+
+  const limit = GetTime() + options.timer
+
+  const Detach = () => {
     options.list.fns.Detach(listId)
     frame.ref.Hide()
     frame.state.isLocked = false
     options.parent.fns.Reflow()
+  }
+
+  frame.ref.SetScript('OnUpdate', () => {
+    const current = GetTime()
+    const time = limit - current
+    counterText.SetText(`${Math.ceil(time)}`)
+    // FIXME: update clock
+    if (time < 0)
+      Detach()
+  })
+
+  frame.ref.SetBackdrop(BASE_BACKDROP)
+  frame.ref.SetBackdropColor(0, 0, 0, 1)
+  frame.ref.EnableMouse(true)
+
+  frame.ref.SetScript('OnMouseDown', (_, button) => {
+    // FIXME: loot item
+    Detach()
   })
 
   frame.state = {
