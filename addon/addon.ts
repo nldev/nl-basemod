@@ -781,6 +781,9 @@ export const LootItem: Component<
   frame.ref.SetBackdrop(BASE_BACKDROP)
   frame.ref.SetBackdropColor(0, 0, 0, 1)
 
+  const listId = `loot-list-item-${index}`
+  options.list.fns.Attach(listId, frame)
+
   // counter
   const counterTextName = `${frame.ref.GetName()}-counter`
   const counterText = frame.ref.CreateFontString(
@@ -827,6 +830,7 @@ export const LootItem: Component<
 
   icon.ref.EnableMouse(true)
   icon.ref.SetScript('OnMouseDown', (_, button) => {
+    // FIXME: send loot event
     Detach()
   })
 
@@ -849,6 +853,32 @@ export const LootItem: Component<
     titleText.SetTextColor(color[0], color[1], color[2], Number(color[3]))
   }
   titleText.SetText(info[0])
+  titleText.SetSize(frame.ref.GetWidth() - 120, frame.ref.GetHeight())
+  titleText.SetPoint('LEFT', 40, 0)
+
+  // title
+  const closeName = `${frame.ref.GetName()}-close`
+  const close = icon.ref.CreateFontString(
+    closeName,
+    'OVERLAY',
+    'GameTooltipText',
+  )
+
+  close.SetTextColor(1, 0, 0, 0.5)
+  close.SetText('X')
+  close.SetParent(frame.ref)
+  close.SetPoint('BOTTOMRIGHT', -8, 8)
+  close.EnableMouse()
+  close.ref.SetScript('OnMouseDown', (_, button) => {
+    // FIXME: send dismiss event
+    Detach()
+  })
+  close.SetScript('OnEnter', () => {
+    close.SetTextColor(1, 0, 0, 1)
+  })
+  close.SetScript('OnLeave', () => {
+    close.SetTextColor(1, 0, 0, 0.5)
+  })
 
   // tooltip
   icon.ref.SetScript('OnEnter', () => {
@@ -879,13 +909,6 @@ export const LootItem: Component<
     mechanic: options.mechanic || {},
     isLocked: true,
   }
-
-  const listId = `loot-list-item-${index}`
-
-  options.list.fns.Attach(listId, frame)
-
-  titleText.SetSize(frame.ref.GetWidth() - 120, frame.ref.GetHeight())
-  titleText.SetPoint('LEFT', 40, 0)
 
   frame.ref.Show()
 
