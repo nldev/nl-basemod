@@ -533,11 +533,12 @@ function EasyLoot (events: TSEvents) {
     if (number === -1)
       return
     const id = 0
-    const amount = 1
     const timer = 300
     const mechanic = 0
+    const money = loot.GetMoney()
     for (let i = 0; i <= number; i++) {
       const itemId = loot.GetItem(i).GetItemID()
+      const amount = loot.GetItem(i).GetCount()
       player.SendItemQueryPacket(itemId)
       player.SendAddonMessage(
         'get-loot-item',
@@ -547,6 +548,7 @@ function EasyLoot (events: TSEvents) {
       )
     }
 
+    player.TryAddMoney(money)
     loot.Clear()
   })
 }
