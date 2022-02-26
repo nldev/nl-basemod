@@ -783,7 +783,7 @@ export const LootItem: Component<
     'GameTooltipText',
   )
   counterText.SetParent(frame.ref)
-  counterText.SetPoint('RIGHT')
+  counterText.SetPoint('RIGHT', -20, 0)
   counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
   counterText.SetText('')
 
