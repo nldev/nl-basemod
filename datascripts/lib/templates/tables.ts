@@ -60,4 +60,3 @@ export const TABLES = createTemplates<SQLTable>(CREATE_TABLE_TASK, [
   },
 ])
 
-
