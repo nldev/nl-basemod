@@ -541,6 +541,7 @@ function EasyLoot (events: TSEvents) {
 
     for (let i = 0; i <= number; i++) {
       const itemId = loot.GetItem(i).GetItemID()
+      player.SendItemQueryPacket(itemId)
       player.SendAddonMessage(
         'get-loot-item',
         `${id} ${itemId} ${amount} ${timer} ${mechanic}`,
