@@ -1006,8 +1006,6 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   }
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
-    console.log(prefix)
-    console.log(text)
     if (prefix !== 'get-loot-item')
       return
     if (!text)
