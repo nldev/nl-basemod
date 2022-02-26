@@ -913,8 +913,6 @@ export const LootItem: Component<
     isLocked: true,
   }
 
-  frame.ref.Show()
-
   return frame
 }
 
