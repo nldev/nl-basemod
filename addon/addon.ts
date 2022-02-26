@@ -815,8 +815,8 @@ export const LootItem: Component<
   frame.ref.SetBackdropColor(0, 0, 0, 1)
   frame.ref.EnableMouse(true)
 
+  // FIXME change to icon click
   frame.ref.SetScript('OnMouseDown', (_, button) => {
-    // FIXME: loot item
     Detach()
   })
 
@@ -925,7 +925,6 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
 // FIXME organize this this
 const app = new App(app => {
   const root = Root()
-
   const loot = Loot()
 
   loot.fns.Add({
@@ -1155,7 +1154,7 @@ const app = new App(app => {
       return
     if (!text)
       return
-    console.log('set talents successful')
+    console.log('success')
   })
 
   SendAddonMessage(REQUESTS.GET_TALENT_INFO, '', 'WHISPER', name)
