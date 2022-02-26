@@ -241,7 +241,7 @@ export type Component<
 > = (options?: O) => Element<S, F>
 
 // root
-export const Root = (ref?: WoWAPI.Frame) => {
+export const Root = (ref?: WoWAPI.Frame): Element<any, any> => {
   const app = _G['app']
   const frame = (app.elements[ROOT] && app.elements[ROOT].ref)
     || ref
@@ -933,6 +933,10 @@ const app = new App(app => {
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
+  })
+
+  root.ref.SetScript('OnUpdate', () => {
+    console.log(GetTime())
   })
 
   Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
