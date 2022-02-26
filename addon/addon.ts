@@ -189,14 +189,6 @@ export class Store {
     })
 
     SendAddonMessage('store-init', '', 'WHISPER', app.playerInfo.name)
-    // FIXME
-    // listen for 'store-set' events from server
-    // send 'store-init' to server
-    // wait for 'store-init-complete' from server
-    // send 'store-init' event to root
-    // wait for 'store-init' event on root
-    // replace root script
-    //
   }
 
   Set (type: StoreType, key: string, value: StoreValue) {
