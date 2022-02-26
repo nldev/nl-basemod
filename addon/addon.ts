@@ -838,8 +838,8 @@ export const LootItem: Component<
   const info = GetItemInfo(options.itemId)
   titleText.SetParent(icon.ref)
   titleText.SetFont('Fonts/FRIZQT__.TTF', 10)
-  const color = GetItemQualityColor(info[1] as any)
-  titleText.SetTextColor(color[0], color[1], color[2])
+  const color = GetItemQualityColor(info[2])
+  titleText.SetTextColor(color[0], color[1], color[2], Number(color[3]))
   titleText.SetText(info[0])
 
   // tooltip
