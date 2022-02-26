@@ -531,7 +531,7 @@ function EasyLoot (events: TSEvents) {
     if (number === -1)
       return
     const id = 0
-    const timer = 300
+    const timer = 60
     const mechanic = 0
     const money = loot.GetMoney()
     for (let i = 0; i <= number; i++) {
