@@ -529,13 +529,27 @@ function EasyLoot (events: TSEvents) {
   })
   events.Player.OnCreatureKill((player, creature) => {
     const loot = creature.GetLoot()
-    loot.Clear()
+    const number = loot.GetItemCount() - 1
+
+    if (number === -1)
+      return
+
     const id = 0
-    const itemId = 2092
     const amount = 1
     const timer = 300
     const mechanic = 0
-    player.SendAddonMessage('get-loot-item', `${id} ${itemId} ${amount} ${timer} ${mechanic}`, 0, player)
+
+    for (let i = 0; i <= number; i++) {
+      const itemId = loot.GetItem(i).GetItemID()
+      player.SendAddonMessage(
+        'get-loot-item',
+        `${id} ${itemId} ${amount} ${timer} ${mechanic}`,
+        0,
+        player,
+      )
+    }
+
+    loot.Clear()
   })
 }
 
