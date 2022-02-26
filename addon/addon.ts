@@ -799,10 +799,10 @@ export const LootItem: Component<
 
   frame.ref.SetScript('OnUpdate', () => {
     const current = GetTime()
-    const time = Math.abs(limit - current)
-    counterText.SetText(`${Math.ceil(time)}`)
+    const time = limit - current
+    counterText.SetText(`${Math.floor(time)}`)
     // FIXME: update clock
-    if (time < -1)
+    if (time < 0)
       Detach()
   })
 
