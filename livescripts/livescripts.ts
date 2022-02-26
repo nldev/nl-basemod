@@ -548,6 +548,7 @@ function EasyLoot (events: TSEvents) {
     player.TryAddMoney(money)
     if (money)
       player.SendBroadcastMessage(`You loot ${money} Copper`)
+    loot.SetMoney(0)
     loot.Clear()
   })
 }
