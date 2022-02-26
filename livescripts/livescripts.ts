@@ -525,7 +525,7 @@ function EasyLoot (events: TSEvents) {
       return
     sender.AddItem(ToUInt32(itemId), 1)
   })
-  events.Player.OnCreatureKill((player, creature) => {
+  events.Creatures.OnGenerateLoot((creature, player) => {
     const loot = creature.GetLoot()
     const number = loot.GetItemCount() - 1
     if (number === -1)
