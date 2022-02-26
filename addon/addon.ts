@@ -938,7 +938,7 @@ const app = new App(app => {
   })
 
   root.ref.SetScript('OnUpdate', () => {
-    console.log(GetTime() - d)
+    console.log(GetTime() - d * -1)
   })
 
   Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
