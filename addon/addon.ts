@@ -783,7 +783,7 @@ export const LootItem: Component<
 
   // counter
   const counterText = frame.ref.CreateFontString(
-    'talent-countertext',
+    `${frame.ref.GetName()}-counter`,
     'OVERLAY',
     'GameTooltipText',
   )
@@ -809,7 +809,7 @@ export const LootItem: Component<
   }
 
   // icon
-  const icon = Frame({ name: frame.ref.GetName() + '-icon', parent: frame })
+  const icon = Frame({ name: `${frame.ref.GetName()}-icon`, parent: frame })
 
   icon.ref.SetSize(35, 35)
 
@@ -829,7 +829,7 @@ export const LootItem: Component<
 
   // title
   const titleText = icon.ref.CreateFontString(
-    'talent-countertext',
+    `${frame.ref.GetName()}-title`,
     'OVERLAY',
     'GameTooltipText',
   )
@@ -858,6 +858,7 @@ export const LootItem: Component<
     options.list.fns.Detach(listId)
     frame.ref.Hide()
     counterText.Hide()
+    titleText.Hide()
     frame.state.isLocked = false
     options.parent.fns.Reflow()
   }
