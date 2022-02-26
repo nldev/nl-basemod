@@ -156,23 +156,39 @@ const STORE_TYPE_ACCOUNT = 'STORE_TYPE_ACCOUNT'
 const STORE_TYPE_CHARACTER = 'STORE_TYPE_CHARACTER'
 
 export type StoreType = typeof STORE_TYPE_ACCOUNT | typeof STORE_TYPE_CHARACTER
+export type StoreValue = string | number | null
 
 export class Store {
-  state: any = {}
+  state: any = {
+    account: {},
+    character: {},
+  }
 
   Init () {
     // FIXME
+    // listen for 'store-set' events from server
     // send 'store-init' to server
     // wait for 'store-init-complete' from server
     // send 'store-init' event to root
     // wait for 'store-init' event on root
     // replace root script
+    //
   }
 
-  Set (type: StoreType, key: string, value: string) {
+  Set (type: StoreType, key: string, value: StoreValue) {
+    const prefix = typeof value === 'number'
+      ? 'number'
+      : typeof value === 'string'
+      ? 'string'
+      : null
+
+    this.state[type][key] = value
+
+    SendAddonMessage('set', `${prefix} ${value}`, 'WHISPER', app.playerInfo.name)
   }
 
   Get (type: StoreType, key: string) {
+    return this.state[type][key]
   }
 }
 
