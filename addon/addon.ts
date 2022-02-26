@@ -825,7 +825,7 @@ export const LootItem: Component<
     Detach()
   })
 
-  icon.ref.SetPoint('LEFT', 6, 0)
+  icon.ref.SetPoint('LEFT', 8, 0)
 
   // title
   const titleText = icon.ref.CreateFontString(
@@ -908,7 +908,7 @@ export interface Loot {
   itemId: number
   amount?: number
   mechanic?: LootMechanic
-  timer: number
+  timer?: number
 }
 
 export interface LootFns {
@@ -972,49 +972,47 @@ const app = new App(app => {
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
-    timer: 30,
+    timer: 200,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
-    timer: 30,
+    timer: 200,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
-    timer: 30,
+    timer: 200,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
-    timer: 30,
+    timer: 200,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
-    timer: 30,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
-    timer: 30,
   })
 
   loot.fns.Add({
     itemId: 2092,
     amount: 1,
-    timer: 30,
+    timer: 200,
   })
 
   loot.fns.Add({
-    itemId: 2092,
+    itemId: 19019,
     amount: 1,
-    timer: 30,
+    timer: 200,
   })
 
   Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
@@ -1022,9 +1020,9 @@ const app = new App(app => {
       return
     if (text.indexOf('@@') === 0) {
       loot.fns.Add({
-        itemId: 2092,
+        itemId: 19138,
         amount: 1,
-        timer: 30,
+        timer: 200,
       })
     }
   })
