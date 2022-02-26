@@ -527,6 +527,7 @@ function EasyLoot (events: TSEvents) {
   })
   events.Creatures.OnGenerateLoot((creature, player) => {
     const loot = creature.GetLoot()
+    loot.SetLootOwner(0)
     const number = loot.GetItemCount() - 1
     if (number === -1)
       return
