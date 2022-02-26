@@ -782,11 +782,13 @@ export const LootItem: Component<
   frame.ref.SetBackdropColor(0, 0, 0, 1)
 
   // counter
-  const counterText = frame.ref.CreateFontString(
-    `${frame.ref.GetName()}-counter`,
+  const counterTextName = `${frame.ref.GetName()}-counter`
+  const counterText = _G[counterTextName] || frame.ref.CreateFontString(
+    counterTextName,
     'OVERLAY',
     'GameTooltipText',
   )
+  _G[counterTextName] = counterText
 
   counterText.Hide()
   counterText.SetParent(frame.ref)
@@ -809,13 +811,17 @@ export const LootItem: Component<
   }
 
   // icon
-  const icon = Frame({ name: `${frame.ref.GetName()}-icon`, parent: frame })
+  const iconName = `${frame.ref.GetName()}-icon`
+  const icon = _G[iconName] || Frame({ name: iconName, parent: frame })
+  _G[iconName] = icon
 
   icon.ref.SetSize(35, 35)
 
   icon.ref.SetBackdropColor(0, 0, 0, 1)
 
-  const texture = icon.ref.CreateTexture(`${frame.ref.GetName()}-texture`)
+  const textureName = `${frame.ref.GetName()}-texture`
+  const texture = _G[textureName] || icon.ref.CreateTexture(textureName)
+  _G[textureName] = texture
 
   texture.SetTexture(GetItemIcon(options.itemId))
   texture.SetTexture(GetItemIcon(2092))
@@ -829,11 +835,13 @@ export const LootItem: Component<
   icon.ref.SetPoint('LEFT', 8, 0)
 
   // title
-  const titleText = icon.ref.CreateFontString(
-    `${frame.ref.GetName()}-title`,
+  const titleTextName = `${frame.ref.GetName()}-title`
+  const titleText = _G[titleTextName] || icon.ref.CreateFontString(
+    titleTextName,
     'OVERLAY',
     'GameTooltipText',
   )
+  _G[titleTextName] = titleText
 
   const info = GetItemInfo(options.itemId)
   titleText.SetParent(icon.ref)
