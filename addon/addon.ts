@@ -826,7 +826,7 @@ export const LootItem: Component<
 
   icon.ref.SetBackdropColor(0, 0, 0, 1)
 
-  const texture = frame.ref.CreateTexture()
+  const texture = icon.ref.CreateTexture()
 
   texture.SetTexture(GetItemIcon(options.itemId))
   texture.SetAllPoints()
