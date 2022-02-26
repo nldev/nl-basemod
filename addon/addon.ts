@@ -837,8 +837,9 @@ export const LootItem: Component<
 
   const info = GetItemInfo(options.itemId)
   titleText.SetParent(icon.ref)
-  titleText.SetPoint('LEFT', -80, 0)
   titleText.SetFont('Fonts/FRIZQT__.TTF', 10)
+  const color = GetItemQualityColor(info[1] as any)
+  titleText.SetTextColor(color[0], color[1], color[2])
   titleText.SetText(info[0])
 
   // tooltip
@@ -875,7 +876,9 @@ export const LootItem: Component<
 
   options.list.fns.Attach(listId, frame)
 
-  titleText.SetSize(frame.ref.GetWidth() - 40, frame.ref.GetHeight() - 40)
+  titleText.SetSize(frame.ref.GetWidth() - 80, frame.ref.GetHeight())
+  titleText.SetPoint('LEFT', 40, 0)
+
   frame.ref.Show()
 
   return frame
