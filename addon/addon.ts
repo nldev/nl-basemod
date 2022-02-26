@@ -792,6 +792,7 @@ export const LootItem: Component<
   const Detach = () => {
     options.list.fns.Detach(listId)
     frame.ref.Hide()
+    counterText.Hide()
     frame.state.isLocked = false
     options.parent.fns.Reflow()
   }
