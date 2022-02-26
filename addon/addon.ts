@@ -183,6 +183,7 @@ export class Store {
     Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
       if (prefix !== 'store-init-success')
         return
+
       if (!text)
         return
     })
