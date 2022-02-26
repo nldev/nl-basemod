@@ -525,6 +525,13 @@ function EasyLoot (events: TSEvents) {
       return
     sender.AddItem(ToUInt32(a[0]), ToUInt32(a[1]))
   })
+  events.GameObjects.OnLootStateChanged((go, state, player) => {
+    if (player.IsPlayer()) {
+      const p = go.GetLootRecipient()
+      if (p.IsNull())
+        player.ToPlayer().SendBroadcastMessage(`${state}`)
+    }
+  })
   events.Creatures.OnGenerateLoot((creature, player) => {
     const loot = creature.GetLoot()
     const money = loot.GetMoney()
