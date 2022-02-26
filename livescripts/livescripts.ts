@@ -534,6 +534,7 @@ function EasyLoot (events: TSEvents) {
     const timer = 60
     const mechanic = 0
     const money = loot.GetMoney()
+    loot.SetMoney(0)
     for (let i = 0; i <= number; i++) {
       const itemId = loot.GetItem(i).GetItemID()
       const amount = loot.GetItem(i).GetCount()
@@ -548,7 +549,6 @@ function EasyLoot (events: TSEvents) {
     player.TryAddMoney(money)
     if (money)
       player.SendBroadcastMessage(`You loot ${money} Copper`)
-    loot.SetMoney(0)
     loot.Clear()
   })
 }
