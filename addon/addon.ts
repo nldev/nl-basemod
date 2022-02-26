@@ -783,12 +783,11 @@ export const LootItem: Component<
 
   // counter
   const counterTextName = `${frame.ref.GetName()}-counter`
-  const counterText = _G[counterTextName] || frame.ref.CreateFontString(
+  const counterText = frame.ref.CreateFontString(
     counterTextName,
     'OVERLAY',
     'GameTooltipText',
   )
-  _G[counterTextName] = counterText
 
   counterText.Hide()
   counterText.SetParent(frame.ref)
@@ -835,12 +834,11 @@ export const LootItem: Component<
 
   // title
   const titleTextName = `${frame.ref.GetName()}-title`
-  const titleText = _G[titleTextName] || icon.ref.CreateFontString(
+  const titleText = icon.ref.CreateFontString(
     titleTextName,
     'OVERLAY',
     'GameTooltipText',
   )
-  _G[titleTextName] = titleText
 
   const info = GetItemInfo(options.itemId)
   titleText.SetParent(icon.ref)
