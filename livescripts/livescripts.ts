@@ -580,6 +580,9 @@ export function Main (events: TSEvents) {
   TalentSystem(events)
   ItemReloading(events)
 
+  EEquipSystem(events)
+  Spin_Fear(events)
+  REAP_DREAMS_SCRIPT(events)
   // events.Player.OnWhisper((sender, _, message) => {
   //   const opcode = Opcode('learn-talent')
   //   const string = message.get()
@@ -601,5 +604,73 @@ export function Main (events: TSEvents) {
   // ResetLevel(events)
   // TestCmdSetFFA(events)
   // TestCmdUnsetFFA(events)
+}
+
+export function EEquipSystem(events: TSEvents) {
+
+//dreamreaper
+    events.Items.OnCanEquip((item,player)=>{
+        if(item.GetEntry() == 60003) {
+            player.LearnSpell(80901);
+        }
+    })
+
+    events.Items.OnUnequip((item,player)=>{
+        if(item.GetEntry() == 60003) {
+            player.RemoveSpell(80901,true,false)
+        }
+    })
+
+
+
+
+    events.Spells.OnApply(aura => {
+        const id = aura.GetID()
+        if(id == 80911){
+            const caster = aura.GetCaster()
+            if(caster.IsPlayer()){
+                const player = caster.ToPlayer()
+                caster.ToPlayer().LearnSpell(80908)
+            }
+
+        }
+    })
+    events.Spells.OnRemove(aura => {
+        const id = aura.GetID()
+        if(id == 80911){
+            const caster = aura.GetCaster()
+            if(caster.IsPlayer()){
+                const player = caster.ToPlayer()
+                caster.ToPlayer().RemoveSpell(80908,true,false)
+            }
+
+        }
+    })
+}
+
+export function REAP_DREAMS_SCRIPT(events: TSEvents){
+    events.Creatures.OnGenerateLoot((creature)=>{
+        if(!creature.HasAura(80901)) return;
+        let aura = creature.GetAura(80901)
+        if(aura.IsNull()) return;
+        let caster = aura.GetCaster()
+        if(!caster.IsUnit()) return;
+        else(caster.ToUnit().CastSpell(caster.ToUnit(),80903,true))
+    })
+}
+
+const CHANNELED_SPELLS: TSArray<uint32> = [552];
+export function Spin_Fear(events: TSEvents) {
+    console.log("test1")
+    CHANNELED_SPELLS.forEach(x=>{
+        console.log("test2")
+        events.SpellID.OnPeriodicDamage(x,(aura)=>{
+            console.log("test3")
+            let caster = aura.GetCaster();
+            console.log("test4")
+            if(!caster.HasAura(80912)) return;
+            else caster.ToUnit().CastSpell(caster.ToUnit(),2048,true);
+        })
+    })
 }
 
