@@ -1004,6 +1004,8 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   }
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
+    console.log(prefix)
+    console.log(text)
     if (prefix !== 'get-loot-item')
       return
     if (!text)
@@ -1032,60 +1034,6 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
 const app = new App(app => {
   const root = Root()
   const loot = Loot()
-
-  loot.fns.Add({
-    id: 0,
-    itemId: 19019,
-    amount: 1,
-    timer: 300,
-  })
-
-  loot.fns.Add({
-    id: 0,
-    itemId: 19019,
-    amount: 1,
-    timer: 300,
-  })
-
-  loot.fns.Add({
-    id: 0,
-    itemId: 19019,
-    amount: 1,
-    timer: 300,
-  })
-
-  loot.fns.Add({
-    id: 0,
-    itemId: 19019,
-    amount: 1,
-    timer: 300,
-  })
-
-  loot.fns.Add({
-    id: 0,
-    itemId: 19019,
-    amount: 1,
-  })
-
-  loot.fns.Add({
-    id: 0,
-    itemId: 19019,
-    amount: 1,
-  })
-
-  loot.fns.Add({
-    id: 0,
-    itemId: 19019,
-    amount: 1,
-    timer: 300,
-  })
-
-  loot.fns.Add({
-    id: 0,
-    itemId: 19019,
-    amount: 1,
-    timer: 300,
-  })
 
   Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
     if (player.toLowerCase() !== name)
