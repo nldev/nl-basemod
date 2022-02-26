@@ -517,6 +517,17 @@ export function ItemReloading(events: TSEvents) {
 }
 
 function EasyLoot (events: TSEvents) {
+  events.Player.OnWhisper((sender, _, message) => {
+    const opcode = Opcode('loot-item')
+    const str = message.get()
+    if (!str.includes(opcode))
+     return
+    const playerGuid = sender.GetGUID()
+    const itemId = str.substr(opcode.length)
+    if (!itemId)
+      return
+    sender.AddItem(ToUInt32(itemId), 1)
+  })
   events.Player.OnCreatureKill((player, creature) => {
     const loot = creature.GetLoot()
     loot.Clear()
