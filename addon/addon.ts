@@ -151,6 +151,31 @@ export interface TalentInfo {
   active: Mapping<boolean>
 }
 
+// store
+const STORE_TYPE_ACCOUNT = 'STORE_TYPE_ACCOUNT'
+const STORE_TYPE_CHARACTER = 'STORE_TYPE_CHARACTER'
+
+export type StoreType = typeof STORE_TYPE_ACCOUNT | typeof STORE_TYPE_CHARACTER
+
+export class Store {
+  state: any = {}
+
+  Init () {
+    // FIXME
+    // send 'store-init' to server
+    // wait for 'store-init-complete' from server
+    // send 'store-init' event to root
+    // wait for 'store-init' event on root
+    // replace root script
+  }
+
+  Set (type: StoreType, key: string, value: string) {
+  }
+
+  Get (type: StoreType, key: string) {
+  }
+}
+
 // app
 export const Get: () => App = () => _G['app']
 
