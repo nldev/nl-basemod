@@ -790,7 +790,7 @@ export const LootItem: Component<
 
   counterText.Hide()
   counterText.SetParent(frame.ref)
-  counterText.SetPoint('RIGHT', -20, 0)
+  counterText.SetPoint('TOPRIGHT', -8, -8)
   counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
   counterText.SetText('')
 
@@ -837,7 +837,7 @@ export const LootItem: Component<
 
   const info = GetItemInfo(options.itemId)
   titleText.SetParent(icon.ref)
-  titleText.SetPoint('TOPRIGHT', 8, 8)
+  titleText.SetPoint('LEFT', -80, 0)
   titleText.SetFont('Fonts/FRIZQT__.TTF', 10)
   titleText.SetText(info[0])
 
@@ -875,6 +875,7 @@ export const LootItem: Component<
 
   options.list.fns.Attach(listId, frame)
 
+  titleText.SetSize(frame.ref.GetWidth() - 40, frame.ref.GetHeight() - 40)
   frame.ref.Show()
 
   return frame
