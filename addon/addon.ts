@@ -775,8 +775,13 @@ export const LootItem: Component<
   LootItemState,
   LootItemFns
 > = options => {
+  // frame
   const [frame, index] = GetLootFrame()
 
+  frame.ref.SetBackdrop(BASE_BACKDROP)
+  frame.ref.SetBackdropColor(0, 0, 0, 1)
+
+  // counter
   const counterText = frame.ref.CreateFontString(
     'talent-countertext',
     'OVERLAY',
@@ -788,14 +793,6 @@ export const LootItem: Component<
   counterText.SetPoint('RIGHT', -20, 0)
   counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
   counterText.SetText('')
-
-  const Detach = () => {
-    options.list.fns.Detach(listId)
-    frame.ref.Hide()
-    counterText.Hide()
-    frame.state.isLocked = false
-    options.parent.fns.Reflow()
-  }
 
   if (options.timer) {
     counterText.Show()
@@ -811,14 +808,55 @@ export const LootItem: Component<
     })
   }
 
-  frame.ref.SetBackdrop(BASE_BACKDROP)
-  frame.ref.SetBackdropColor(0, 0, 0, 1)
-  frame.ref.EnableMouse(true)
+  // icon
+  const icon = Frame({ name: frame.ref.GetName() + '-icon', parent: frame })
+  icon.ref.SetBackdrop({
+    edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
+    tile: true,
+    tileSize: 16,
+    insets: {
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+    },
+  })
 
-  // FIXME change to icon click
-  frame.ref.SetScript('OnMouseDown', (_, button) => {
+  icon.ref.SetBackdropColor(0, 0, 0, 1)
+
+  const texture = frame.ref.CreateTexture()
+
+  texture.SetTexture(GetItemIcon(options.itemId))
+  texture.SetAllPoints()
+
+  icon.ref.EnableMouse(true)
+  icon.ref.SetScript('OnMouseDown', (_, button) => {
     Detach()
   })
+
+  icon.ref.SetPoint('LEFT', 20, 0)
+
+  // tooltip
+  icon.ref.SetScript('OnEnter', () => {
+    GameTooltip.ClearLines()
+    GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
+    GameTooltip.SetHyperlink(`item:${options.itemId}`)
+    GameTooltip.Show()
+  })
+
+  icon.ref.SetScript('OnLeave', () => {
+    GameTooltip.ClearLines()
+    GameTooltip.Hide()
+  })
+
+  // detach
+  const Detach = () => {
+    options.list.fns.Detach(listId)
+    frame.ref.Hide()
+    counterText.Hide()
+    frame.state.isLocked = false
+    options.parent.fns.Reflow()
+  }
 
   frame.state = {
     itemId: options.itemId,
