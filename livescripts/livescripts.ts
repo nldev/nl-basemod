@@ -536,7 +536,7 @@ function EasyLoot (events: TSEvents) {
     const loot = creature.GetLoot()
     const money = loot.GetMoney()
 
-    // TODO this shouldnt be necessary
+    // FIXME this shouldnt be necessary
     loot.SetGeneratesNormally(false)
     loot.RemoveLooter(0)
     loot.RemoveLooter(player.GetGUID())
@@ -560,12 +560,10 @@ function EasyLoot (events: TSEvents) {
       )
     }
     player.TryAddMoney(money)
-    if (money)
-      player.SendBroadcastMessage(`You loot ${money} Copper`)
     loot.Clear()
     loot.SetMoney(0)
 
-    // TODO this too
+    // FIXME this too
     loot.SetGeneratesNormally(false)
     loot.RemoveLooter(0)
   })
