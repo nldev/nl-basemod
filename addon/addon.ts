@@ -964,7 +964,6 @@ const app = new App(app => {
     }
   })
 
-
   const a = Frame({
     name: 'a',
     parent: root,
