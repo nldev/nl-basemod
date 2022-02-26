@@ -159,6 +159,7 @@ export type StoreType = typeof STORE_TYPE_ACCOUNT | typeof STORE_TYPE_CHARACTER
 export type StoreValue = string | number | null
 
 export class Store {
+  isLoaded = false
   state: any = {
     account: {},
     character: {},
@@ -180,12 +181,11 @@ export class Store {
         : t
     })
 
-    Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
+    Events.ChatInfo.OnChatMsgAddon(app.root.ref, prefix => {
       if (prefix !== 'store-init-success')
         return
 
-      if (!text)
-        return
+      this.isLoaded = true
     })
 
     SendAddonMessage('store-init', '', 'WHISPER', app.playerInfo.name)

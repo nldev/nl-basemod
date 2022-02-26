@@ -569,6 +569,30 @@ function EasyLoot (events: TSEvents) {
   })
 }
 
+function Store (events: TSEvents) {
+  events.Player.OnWhisper((sender, _, message) => {
+    const opcode = Opcode('loot-item')
+    const str = message.get()
+    if (!str.includes(opcode))
+     return
+    const a = str.substr(opcode.length).split(' ')
+    if (!a[0])
+      return
+    sender.AddItem(ToUInt32(a[0]), ToUInt32(a[1]))
+  })
+
+  events.Player.OnWhisper((sender, _, message) => {
+    const opcode = Opcode('loot-item')
+    const str = message.get()
+    if (!str.includes(opcode))
+     return
+    const a = str.substr(opcode.length).split(' ')
+    if (!a[0])
+      return
+    sender.AddItem(ToUInt32(a[0]), ToUInt32(a[1]))
+  })
+}
+
 function Opcode (prefix: string): string {
   return `${prefix}\t`
 }
