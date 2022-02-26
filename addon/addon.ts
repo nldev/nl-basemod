@@ -802,7 +802,7 @@ export const LootItem: Component<
     const time = limit - current
     counterText.SetText(`${Math.ceil(time)}`)
     // FIXME: update clock
-    if (time < 0)
+    if (time < -1)
       Detach()
   })
 
