@@ -516,6 +516,19 @@ export function ItemReloading(events: TSEvents) {
     })
 }
 
+function EasyLoot (events: TSEvents) {
+  events.Player.OnCreatureKill((player, creature) => {
+    const loot = creature.GetLoot()
+    loot.Clear()
+    const id = 0
+    const itemId = 2092
+    const amount = 1
+    const timer = 300
+    const mechanic = 0
+    player.SendAddonMessage('get-loot-item', `${id} ${itemId} ${amount} ${timer} ${mechanic}`, 0, player)
+  })
+}
+
 function Opcode (prefix: string): string {
   return `${prefix}\t`
 }

@@ -775,6 +775,9 @@ export const LootItem: Component<
   LootItemState,
   LootItemFns
 > = options => {
+  // app
+  const app = Get()
+
   // frame
   const [frame, index] = GetLootFrame()
 
@@ -830,7 +833,7 @@ export const LootItem: Component<
 
   icon.ref.EnableMouse(true)
   icon.ref.SetScript('OnMouseDown', (_, button) => {
-    // FIXME: send loot event
+    // SendAddonMessage('loot-item', `${options.itemId}`, 'WHISPER', app.playerInfo.name)
     Detach()
   })
 
@@ -1001,7 +1004,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   }
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
-    if (prefix !== 'LOOT-ITEM')
+    if (prefix !== 'get-loot-item')
       return
     if (!text)
       return
