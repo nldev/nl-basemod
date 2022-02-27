@@ -165,7 +165,7 @@ export class Store {
     [STORE_TYPE_CHARACTER]: {},
   }
 
-  Init () {
+  public Init () {
     Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
       if (prefix !== 'store-get')
         return
@@ -174,6 +174,7 @@ export class Store {
 
       const [t, type, key, value] = text.split(' ')
 
+      console.log(text)
       console.log(t)
       console.log(type)
       console.log(key)
@@ -193,10 +194,10 @@ export class Store {
       this.isLoaded = true
     })
 
-    SendAddonMessage('store-init', '', 'WHISPER', app.playerInfo.name)
+    SendAddonMessage('store-init', ' ', 'WHISPER', app.playerInfo.name)
   }
 
-  Set (type: StoreType, key: string, value: StoreValue) {
+  public Set (type: StoreType, key: string, value: StoreValue) {
     const t = typeof value === 'number'
       ? 'number'
       : typeof value === 'string'
@@ -208,7 +209,7 @@ export class Store {
     SendAddonMessage('store-set', `${t} ${type} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
   }
 
-  Get (type: StoreType, key: string) {
+  public Get (type: StoreType, key: string) {
     return this.state[type][key]
   }
 }
@@ -226,6 +227,7 @@ export class App {
   public store: Store = new Store()
 
   constructor (protected onInit: ($: App) => void) {
+    this.store.Init()
     this.talentInfo = {
       isEnabled: false,
       used: 0,
