@@ -270,7 +270,7 @@ export class App {
   }
 
   protected load () {
-    if (!this.store.isLoaded) {
+    if (this.store.isLoaded) {
       this.onInit(this)
     }
   }
