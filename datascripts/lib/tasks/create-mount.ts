@@ -237,11 +237,12 @@ export class CreateMount extends NWTask {
       )
     }
 
-    asset.Duration.setSimple(
-      resolveDuration(template.options.duration),
-      0,
-      resolveDuration(template.options.duration),
-    )
+    if (template.options.duration)
+      asset.Duration.setSimple(
+        resolveDuration(template.options.duration),
+        0,
+        resolveDuration(template.options.duration),
+      )
   }
 }
 
