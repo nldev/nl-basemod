@@ -1037,7 +1037,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   let a4 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f4')
   let a5 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f5')
 
-  if (!a1) {
+  if ((a1 !== 0) && !a1) {
     padding.ref.SetPoint('CENTER')
     let [
       b1,
@@ -1062,7 +1062,8 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   padding.ref.SetBackdrop(BASE_BACKDROP)
   padding.ref.SetBackdropColor(0, 0, 0, 1)
 
-  padding.ref.SetPoint(a1, app.root.ref, a3, a4, a5)
+  padding.ref.SetPoint(a1, a4, a5)
+  // padding.ref.SetPoint(a1, app.root.ref, a3, a4, a5)
   padding.ref.EnableMouse(true)
   padding.ref.SetMovable(true)
   padding.ref.RegisterForDrag('RightButton')
