@@ -1154,9 +1154,9 @@ const app = new App(app => {
   const loot = Loot()
 
   root.ref.SetScript('OnUpdate', () => {
-    const id = GetMouseFocus()
-    if (id)
-      console.log(id)
+    const frame = GetMouseFocus()
+    if (frame)
+      console.log(frame.GetName())
   })
 
   Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
