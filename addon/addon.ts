@@ -1038,7 +1038,7 @@ export function Movable (element: Element<any, any>, defaultPoint: WoWAPI.Point 
   let y = app.store.Get('STORE_TYPE_CHARACTER', `${name}-y`) || defaultY
 
   if ((a !== '') && !a) {
-    element.ref.SetPoint('CENTER')
+    element.ref.SetPoint(defaultPoint, defaultX, defaultY)
 
     let [a1, _, a3, a4, a5] = element.ref.GetPoint()
 
