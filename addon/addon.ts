@@ -1082,6 +1082,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   frame.ref.SetSize(250, 250)
   frame.ref.SetBackdrop(BASE_BACKDROP)
   frame.ref.SetBackdropColor(0, 0, 0, 1)
+  frame.ref.SetPoint('CENTER')
 
   const scroll = Scroll({ name: 'loot-scroll', scrollHeight: 250, parent: frame })
   const list = List({ name: 'loot-list', itemHeight: 50, parent: scroll })
