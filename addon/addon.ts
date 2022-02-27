@@ -165,7 +165,7 @@ export class Store {
     [STORE_TYPE_CHARACTER]: {},
   }
 
-  public Init () {
+  public Init (onInit: () => void) {
     Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
       if (prefix !== 'store-get')
         return
@@ -190,6 +190,8 @@ export class Store {
         return
 
       this.isLoaded = true
+
+      onInit()
     })
 
     SendAddonMessage('store-init', ' ', 'WHISPER', app.playerInfo.name)
@@ -224,7 +226,7 @@ export class App {
   public elements: Mapping<Element<any, any>> = {}
   public store: Store = new Store()
 
-  constructor (protected onInit: ($: App) => void) {
+  constructor (public onInit: ($: App) => void) {
     this.talentInfo = {
       isEnabled: false,
       used: 0,
@@ -262,16 +264,8 @@ export class App {
         this.root = Root(root)
         this.isStarted = true
 
-        this.store.Init()
-
-        return this.load()
+        this.store.Init(() => this.onInit(this))
       }
-    }
-  }
-
-  protected load () {
-    if (this.store.isLoaded) {
-      this.onInit(this)
     }
   }
 }
