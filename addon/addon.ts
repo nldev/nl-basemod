@@ -1030,7 +1030,7 @@ export interface LootOptions {}
 
 export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   const padding: Element<LootState, LootFns> = Frame({ name: 'loot-padding' }) as any
-    const app = Get()
+  const app = Get()
 
   let a1 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f1')
   let a3 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f3')
