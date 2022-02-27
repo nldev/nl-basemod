@@ -1052,6 +1052,11 @@ export function PersistPosition (element: Element<any, any>, defaultPoint: WoWAP
     app.store.Set('STORE_TYPE_CHARACTER', `${name}-y`, y)
   }
 
+  console.log(a)
+  console.log(b)
+  console.log(x)
+  console.log(y)
+
   element.ref.SetPoint(a, app.root.ref, b, x, y)
 }
 
