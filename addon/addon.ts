@@ -1063,10 +1063,10 @@ export function Movable (element: Element<any, any>, defaultPoint: WoWAPI.Point 
 
     let [a1, _, a3, a4, a5] = element.ref.GetPoint()
 
-    a = a1
-    b = a3
-    x = a4
-    y = a5
+    let a = a1
+    let b = a3
+    let x = a4
+    let y = a5
 
     app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-a`, a)
     app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-b`, b)
@@ -1167,12 +1167,6 @@ const app = new App(app => {
   })
 
   Movable(a)
-
-  a.inner.EnableMouse(true)
-  a.inner.SetMovable(true)
-  a.inner.RegisterForDrag('RightButton')
-  a.inner.SetScript('OnDragStart', f => f.StartMoving())
-  a.inner.SetScript('OnDragStop', f => f.StopMovingOrSizing())
 
   a.inner.SetScript('OnMouseDown', (_, button) => {
     if (button === 'LeftButton')
