@@ -1130,7 +1130,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
     })
   })
 
-  // padding.ref.Hide()
+  padding.ref.Hide()
 
   return padding
 }
