@@ -224,9 +224,10 @@ export class App {
   public playerInfo: PlayerInfo
   public talentInfo: TalentInfo
   public elements: Mapping<Element<any, any>> = {}
-  public store: Store = new Store()
+  public store: Store
 
   constructor (protected onInit: ($: App) => void) {
+    this.store = new Store()
     this.store.Init()
     this.talentInfo = {
       isEnabled: false,
