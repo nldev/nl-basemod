@@ -233,8 +233,11 @@ export class App {
     const root = CreateFrame('Frame', ROOT, UIParent)
 
     root.SetScript('OnUpdate', () => {
-      if (!this.isStarted)
+      if (!this.isStarted) {
         this.start(root)
+      } else {
+        root.SetScript('OnUpdate', () => {})
+      }
     })
   }
 
@@ -869,8 +872,10 @@ export const LootItem: Component<
       const current = GetTime()
       const time = limit - current
       counterText.SetText(`${Math.floor(time)}`)
-      if (time < 0)
+      if (time < 0) {
         Detach()
+        frame.ref.SetScript('OnUpdate', () => {})
+      }
     })
   }
 
