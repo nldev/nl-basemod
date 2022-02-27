@@ -174,12 +174,6 @@ export class Store {
 
       const [t, type, key, value] = text.split(' ')
 
-      console.log(text)
-      console.log(t)
-      console.log(type)
-      console.log(key)
-      console.log(value)
-
       this.state[type][key] = t === 'number'
         ? Number(value)
         : t === 'null'
@@ -1083,10 +1077,6 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   padding.ref.SetScript('OnDragStop', f => {
     f.StopMovingOrSizing()
     let [f1, _, f3, f4, f5] = padding.ref.GetPoint()
-    console.log(f1)
-    console.log(f3)
-    console.log(f4)
-    console.log(f5)
     app.store.Set('STORE_TYPE_CHARACTER', 'loot-f1', f1)
     app.store.Set('STORE_TYPE_CHARACTER', 'loot-f3', f3)
     app.store.Set('STORE_TYPE_CHARACTER', 'loot-f4', f4)
