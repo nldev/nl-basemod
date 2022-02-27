@@ -645,7 +645,6 @@ function Store (events: TSEvents) {
         update __addon_data set primitive = "${primitive}", type = "${type}", _key = "${key}", value = "${value}" where entry = ${entry};
       `)
     }
-    sender.SendBroadcastMessage(`${primitive} ${type} ${key} ${value}`)
   })
 }
 
