@@ -1178,7 +1178,7 @@ const app = new App(app => {
       console.log('left click')
   })
 
-  talents.inner.SetSize(400, 600)
+  talents.inner.SetSize(500, 600)
   talents.inner.SetBackdrop(BASE_BACKDROP)
   talents.inner.SetBackdropColor(0, 0, 0, 1)
 
@@ -1216,7 +1216,7 @@ const app = new App(app => {
 
   const grid = Grid({
     name: 'grid',
-    itemsPerRow: 4,
+    itemsPerRow: 5,
     rowHeight: 80,
     parent: scroll,
   })
