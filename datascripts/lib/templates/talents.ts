@@ -18,7 +18,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'vigor',
     spellId: 14983,
-    cost: 8,
+    cost: 5,
     class: { ROGUE: true },
   },
   {

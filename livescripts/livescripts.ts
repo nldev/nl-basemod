@@ -664,9 +664,13 @@ export function Main (events: TSEvents) {
     const count = loot.GetItemCount()
     for (let i = 0; i <= count; i++) {
       const id = loot.GetItem(i).GetItemID()
-      const info = GetItemTemplate(id)
-      const name = info.GetName()
-      console.log(name)
+      if (id) {
+        const info = GetItemTemplate(id)
+        if (!info.IsNull()) {
+          const name = info.GetName()
+          player.SendBroadcastMessage(name)
+        }
+      }
     }
   })
 

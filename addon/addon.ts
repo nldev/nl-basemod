@@ -1159,9 +1159,19 @@ const AllChildren = (frame: WoWAPI.Frame, list: WoWAPI.Frame[] = []) => {
   return list
 }
 
+const Chest: Component = () => {
+  const padding = Frame({ name: 'chest' })
+  padding.ref.SetBackdrop(BASE_BACKDROP)
+  padding.ref.SetBackdropColor(0, 0, 0, 1)
+  padding.ref.SetSize(600, 500)
+  padding.ref.SetPoint('CENTER')
+  return padding
+}
+
 // FIXME organize this this
 const app = new App(app => {
   const root = Root()
+  const chest = Chest()
   const loot = Loot()
   const list = AllChildren(UIParent)
   list.forEach(e => {
