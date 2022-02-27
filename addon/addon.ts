@@ -1166,32 +1166,32 @@ const app = new App(app => {
     }
   })
 
-  const a = Frame({
+  const talents = Frame({
     name: 'talents',
     parent: root,
   })
 
-  Movable(a)
+  Movable(talents)
 
-  a.inner.SetScript('OnMouseDown', (_, button) => {
+  talents.inner.SetScript('OnMouseDown', (_, button) => {
     if (button === 'LeftButton')
       console.log('left click')
   })
 
-  a.inner.SetSize(400, 400)
-  a.inner.SetBackdrop(BASE_BACKDROP)
-  a.inner.SetBackdropColor(0, 0, 0, 1)
+  talents.inner.SetSize(400, 800)
+  talents.inner.SetBackdrop(BASE_BACKDROP)
+  talents.inner.SetBackdropColor(0, 0, 0, 1)
 
   const title = Frame({
     name: 'title',
-    parent: a,
+    parent: talents,
   })
 
   title.ref.SetSize(140, 30)
   title.ref.SetBackdrop(BASE_BACKDROP)
   title.ref.SetBackdropColor(0, 0, 0, 1)
   title.ref.SetPoint('TOPRIGHT', 0, 35)
-  const titleText = a.ref.CreateFontString(
+  const titleText = talents.ref.CreateFontString(
     'talent-countertext',
     'OVERLAY',
     'GameTooltipText',
@@ -1203,10 +1203,10 @@ const app = new App(app => {
 
   const b = Frame({
     name: 'b',
-    parent: a,
+    parent: talents,
   })
 
-  b.inner.SetSize(a.inner.GetWidth() - 60, a.inner.GetHeight() - 60)
+  b.inner.SetSize(talents.inner.GetWidth() - 60, talents.inner.GetHeight() - 60)
   b.inner.SetPoint('CENTER')
 
   const scroll = Scroll({
@@ -1224,7 +1224,7 @@ const app = new App(app => {
   grid.ref.SetAllPoints(scroll.inner)
 
   // counterText
-  const counter = Frame({ name: 'talent-counter', parent: a })
+  const counter = Frame({ name: 'talent-counter', parent: talents })
   counter.ref.SetSize(80, 30)
   counter.ref.SetBackdrop(BASE_BACKDROP)
   counter.ref.SetBackdropColor(0, 0, 0, 1)
@@ -1292,8 +1292,8 @@ const app = new App(app => {
       return
     if (!text)
       return
-    const [a, b] = text.split(' ')
-    const used = Number(a)
+    const [talents, b] = text.split(' ')
+    const used = Number(talents)
     const max = Number(b)
     if (used && max) {
       app.talentInfo.isEnabled = true
