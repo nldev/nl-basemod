@@ -438,7 +438,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'cold-blood',
     spellId: 14177,
-    cost: 16,
+    cost: 14,
     class: { ROGUE: true },
   },
   {
@@ -474,19 +474,19 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'fan-of-knives',
     spellId: 51723,
-    cost: 5,
+    cost: 8,
     class: { ROGUE: true },
   },
   {
     id: 'envenom',
     spellId: 57993,
-    cost: 3,
+    cost: 5,
     class: { ROGUE: true },
   },
   {
     id: 'deadly-throw',
     spellId: 48674,
-    cost: 4,
+    cost: 6,
     class: { ROGUE: true },
   },
   {
