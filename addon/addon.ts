@@ -161,8 +161,8 @@ export type StoreValue = string | number | null
 export class Store {
   isLoaded = false
   state: any = {
-    account: {},
-    character: {},
+    [STORE_TYPE_ACCOUNT]: {},
+    [STORE_TYPE_CHARACTER]: {},
   }
 
   Init () {
@@ -198,6 +198,10 @@ export class Store {
       ? 'string'
       : null
 
+    console.log(t)
+    console.log(type)
+    console.log(key)
+    console.log(`${value}`)
     this.state[type][key] = value
 
     SendAddonMessage('store-set', `${t} ${type} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
