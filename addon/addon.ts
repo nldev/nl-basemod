@@ -1028,40 +1028,38 @@ export interface LootState {}
 
 export interface LootOptions {}
 
-export function GetSavedSize (element: Element<any, any>) {
+// FIXME pass in default
+export function SetPosition (element: Element<any, any>) {
+  const name = element.ref.GetName()
+
+  let a = app.store.Get('STORE_TYPE_CHARACTER', `${name}-point-a`)
+  let b = app.store.Get('STORE_TYPE_CHARACTER', `${name}-point-b`)
+  let x = app.store.Get('STORE_TYPE_CHARACTER', `${name}-x`)
+  let y = app.store.Get('STORE_TYPE_CHARACTER', `${name}-y`)
+
+  if ((a !== '') && !a) {
+    element.ref.SetPoint('CENTER')
+    let [b1, _, b3, b4, b5] = element.ref.GetPoint()
+
+    a = b1
+    b = b3
+    x = b4
+    y = b5
+
+    app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-a`, a)
+    app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-b`, b)
+    app.store.Set('STORE_TYPE_CHARACTER', `${name}-x`, x)
+    app.store.Set('STORE_TYPE_CHARACTER', `${name}-y`, y)
+  }
+
+  element.ref.SetPoint(a, app.root.ref, b, x, y)
 }
 
 export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   const padding: Element<LootState, LootFns> = Frame({ name: 'loot' }) as any
   const app = Get()
 
-  let a1 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f1')
-  let a3 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f3')
-  let a4 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f4')
-  let a5 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f5')
-
-  if ((a1 !== 0) && !a1) {
-    padding.ref.SetPoint('CENTER')
-    let [
-      b1,
-      _,
-      b3,
-      b4,
-      b5,
-    ] = padding.ref.GetPoint()
-
-    a1 = b1
-    a3 = b3
-    a4 = b4
-    a5 = b5
-
-    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f1', a1)
-    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f3', a3)
-    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f4', a4)
-    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f5', a5)
-  }
-
-  padding.ref.SetPoint(a1, app.root.ref, a3, a4, a5)
+  SetPosition(padding)
   padding.ref.SetSize(290, 290)
   padding.ref.SetBackdrop(BASE_BACKDROP)
   padding.ref.SetBackdropColor(0, 0, 0, 1)
