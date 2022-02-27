@@ -49,7 +49,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
     name: 'Battlestrider',
     icon: { query: QUERY_ICON, subquery: 'SPELL', id: 23223 },
     npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 63638 },
-    duration: [30],
+    duration: [5],
     speed: 1000,
   },
 
@@ -57,7 +57,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
     name: 'Superstrider',
     icon: { query: QUERY_ICON, subquery: 'SPELL', id: 23223 },
     npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 23223 },
-    duration: [30],
+    duration: [5],
     speed: 2000,
   },
 
@@ -65,7 +65,7 @@ export const MOUNTS = createTemplates<MountOptions>(CREATE_MOUNT_TASK, [
     name: 'Ultrastrider',
     icon: { query: QUERY_ICON, subquery: 'SPELL', id: 23223 },
     npc: { query: QUERY_MOUNT_NPC, subquery: 'SPELL', id: 22719 },
-    duration: [30],
+    duration: [5],
     speed: 3000,
   },
 
