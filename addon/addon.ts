@@ -178,7 +178,7 @@ export class Store {
         ? Number(value)
         : t === 'null'
         ? null
-        : t
+        : value
     })
 
     Events.ChatInfo.OnChatMsgAddon(app.root.ref, prefix => {
