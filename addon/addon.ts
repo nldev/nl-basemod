@@ -1029,13 +1029,13 @@ export interface LootState {}
 export interface LootOptions {}
 
 // FIXME pass in default
-export function PersistPosition (element: Element<any, any>) {
+export function PersistPosition (element: Element<any, any>, defaultPoint: WoWAPI.Point = 'CENTER', defaultX: number = 0, defaultY:number = 0) {
   const name = element.ref.GetName()
 
-  let a = app.store.Get('STORE_TYPE_CHARACTER', `${name}-point-a`)
-  let b = app.store.Get('STORE_TYPE_CHARACTER', `${name}-point-b`)
-  let x = app.store.Get('STORE_TYPE_CHARACTER', `${name}-x`)
-  let y = app.store.Get('STORE_TYPE_CHARACTER', `${name}-y`)
+  let a = app.store.Get('STORE_TYPE_CHARACTER', `${name}-point-a`) || defaultPoint
+  let b = app.store.Get('STORE_TYPE_CHARACTER', `${name}-point-b`) || defaultPoint
+  let x = app.store.Get('STORE_TYPE_CHARACTER', `${name}-x`) || defaultX
+  let y = app.store.Get('STORE_TYPE_CHARACTER', `${name}-y`) || defaultY
 
   if ((a !== '') && !a) {
     element.ref.SetPoint('CENTER')
@@ -1153,9 +1153,11 @@ const app = new App(app => {
   })
 
   const a = Frame({
-    name: 'a',
+    name: 'talents',
     parent: root,
   })
+
+  PersistPosition(a)
 
   a.inner.EnableMouse(true)
   a.inner.SetMovable(true)
@@ -1168,7 +1170,6 @@ const app = new App(app => {
       console.log('left click')
   })
 
-  a.inner.SetPoint('CENTER')
   a.inner.SetSize(400, 400)
   a.inner.SetBackdrop(BASE_BACKDROP)
   a.inner.SetBackdropColor(0, 0, 0, 1)
