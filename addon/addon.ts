@@ -1148,10 +1148,29 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   return padding
 }
 
+const AllChildren = (frame: WoWAPI.Frame, list: WoWAPI.Frame[] = []) => {
+  if (frame && frame.GetChildren) {
+    frame.GetChildren().forEach(f => {
+      list.push(f as any)
+      AllChildren(f as any, list)
+    })
+  }
+
+  return list
+}
+
 // FIXME organize this this
 const app = new App(app => {
   const root = Root()
   const loot = Loot()
+  const list = AllChildren(UIParent)
+  list.forEach(e => e && e.GetName && console.log(e.GetName()))
+
+  const aa: any = CreateFrame('Frame', 'a')
+  aa.foo = 'hello'
+  const bb: any = CreateFrame('Frame', 'a')
+  console.log(aa.foo)
+  console.log(bb.foo)
 
   let current = ''
   root.ref.SetScript('OnUpdate', () => {
