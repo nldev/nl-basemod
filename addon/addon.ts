@@ -1067,7 +1067,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   padding.ref.SetBackdrop(BASE_BACKDROP)
   padding.ref.SetBackdropColor(0, 0, 0, 1)
 
-  padding.ref.SetPoint(a1, UIParent, a3, a4, a5)
+  padding.ref.SetPoint(a1, app.root.ref, a3, a4, a5)
   padding.ref.EnableMouse(true)
   padding.ref.SetMovable(true)
   padding.ref.RegisterForDrag('RightButton')
