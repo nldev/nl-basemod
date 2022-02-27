@@ -1028,8 +1028,11 @@ export interface LootState {}
 
 export interface LootOptions {}
 
+export function GetSavedSize (element: Element<any, any>) {
+}
+
 export const Loot: Component<LootOptions, LootState, LootFns> = () => {
-  const padding: Element<LootState, LootFns> = Frame({ name: 'loot-padding' }) as any
+  const padding: Element<LootState, LootFns> = Frame({ name: 'loot' }) as any
   const app = Get()
 
   let a1 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f1')
@@ -1058,11 +1061,10 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
     app.store.Set('STORE_TYPE_CHARACTER', 'loot-f5', a5)
   }
 
+  padding.ref.SetPoint(a1, app.root.ref, a3, a4, a5)
   padding.ref.SetSize(290, 290)
   padding.ref.SetBackdrop(BASE_BACKDROP)
   padding.ref.SetBackdropColor(0, 0, 0, 1)
-
-  padding.ref.SetPoint(a1, app.root.ref, a3, a4, a5)
   padding.ref.EnableMouse(true)
   padding.ref.SetMovable(true)
   padding.ref.RegisterForDrag('RightButton')
@@ -1077,7 +1079,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
     app.store.Set('STORE_TYPE_CHARACTER', 'loot-f5', f5)
   })
 
-  const frame = Frame({ name: 'loot', parent: padding })
+  const frame = Frame({ name: 'loot-inner', parent: padding })
 
   frame.ref.SetSize(250, 250)
   frame.ref.SetPoint('CENTER')
