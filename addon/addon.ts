@@ -1061,12 +1061,12 @@ export function Movable (element: Element<any, any>, defaultPoint: WoWAPI.Point 
   element.ref.SetScript('OnDragStop', f => {
     f.StopMovingOrSizing()
 
-    let [a1, _, a3, a4, a5] = element.ref.GetPoint()
+    const point = f.GetPoint()
 
-    let a = a1
-    let b = a3
-    let x = a4
-    let y = a5
+    let a = point[0]
+    let b = point[2]
+    let x = point[3]
+    let y = point[4]
 
     app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-a`, a)
     app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-b`, b)
