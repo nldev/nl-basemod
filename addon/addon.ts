@@ -212,13 +212,13 @@ export class Store {
 export const Get: () => App = () => _G['app']
 
 export class App {
-  protected isLoaded: boolean = false
-  protected isInit: boolean = false
+  protected isStarted: boolean = false
 
   public root: Element
   public playerInfo: PlayerInfo
   public talentInfo: TalentInfo
   public elements: Mapping<Element<any, any>> = {}
+  public store: Store = new Store()
 
   constructor (protected onInit: ($: App) => void) {
     this.talentInfo = {
@@ -231,7 +231,7 @@ export class App {
     const root = CreateFrame('Frame', ROOT, UIParent)
 
     root.SetScript('OnUpdate', () => {
-      if (!this.isLoaded)
+      if (!this.isStarted)
         this.start(root)
     })
   }
@@ -256,10 +256,16 @@ export class App {
         _G['app'] = this
 
         this.root = Root(root)
-        this.isLoaded = true
+        this.isStarted = true
 
-        return this.onInit(this)
+        return this.load()
       }
+    }
+  }
+
+  protected load () {
+    if (!this.store.isLoaded) {
+      this.onInit(this)
     }
   }
 }
