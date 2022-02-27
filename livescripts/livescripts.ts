@@ -630,7 +630,7 @@ function Store (events: TSEvents) {
     const value = w[3]
     const playerGuid = sender.GetGUID()
     const a = QueryWorld(`
-      select * from __addon_data where playerGuid = ${playerGuid} and type = "${type}" and key = "${key}";
+      select * from __addon_data where playerGuid = ${playerGuid} and type = "${type}" and _key = "${key}";
     `)
     let id = -1
     while (a.GetRow()) {
@@ -638,11 +638,11 @@ function Store (events: TSEvents) {
     }
     if (id === -1) {
       QueryWorld(`
-        insert into __addon_data (playerGuid, primitive, type, key, value) value ("${playerGuid}", "${primitive}", "${type}", "${key}", "${value}");
+        insert into __addon_data (playerGuid, primitive, type, _key, value) value ("${playerGuid}", "${primitive}", "${type}", "${key}", "${value}");
       `)
     } else {
       QueryWorld(`
-        update __addon_data set primitive = "${primitive}", type = "${type}", key = "${key}", value = "${value}" where id = ${id};
+        update __addon_data set primitive = "${primitive}", type = "${type}", _key = "${key}", value = "${value}" where id = ${id};
       `)
     }
     sender.SendBroadcastMessage(`${primitive} ${type} ${key} ${value}`)

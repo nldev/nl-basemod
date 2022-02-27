@@ -34,7 +34,7 @@ export const TABLES = createTemplates<SQLTable>(CREATE_TABLE_TASK, [
         isNotNullable: true,
       },
       {
-        name: 'key',
+        name: '_key',
         type: 'mediumtext',
         isNotNullable: true,
       },
