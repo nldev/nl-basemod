@@ -174,6 +174,11 @@ export class Store {
 
       const [t, type, key, value] = text.split(' ')
 
+      console.log(t)
+      console.log(type)
+      console.log(key)
+      console.log(value)
+
       this.state[type][key] = t === 'number'
         ? Number(value)
         : t === 'null'
