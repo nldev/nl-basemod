@@ -1029,7 +1029,7 @@ export interface LootState {}
 export interface LootOptions {}
 
 // FIXME pass in default
-export function PersistPosition (element: Element<any, any>, defaultPoint: WoWAPI.Point = 'CENTER', defaultX: number = 0, defaultY:number = 0) {
+export function Movable (element: Element<any, any>, defaultPoint: WoWAPI.Point = 'CENTER', defaultX: number = 0, defaultY:number = 0) {
   const name = element.ref.GetName()
 
   let a = app.store.Get('STORE_TYPE_CHARACTER', `${name}-point-a`) || defaultPoint
@@ -1039,12 +1039,13 @@ export function PersistPosition (element: Element<any, any>, defaultPoint: WoWAP
 
   if ((a !== '') && !a) {
     element.ref.SetPoint('CENTER')
-    let [b1, _, b3, b4, b5] = element.ref.GetPoint()
 
-    a = b1
-    b = b3
-    x = b4
-    y = b5
+    let [a1, _, a3, a4, a5] = element.ref.GetPoint()
+
+    a = a1
+    b = a3
+    x = a4
+    y = a5
 
     app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-a`, a)
     app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-b`, b)
@@ -1052,11 +1053,26 @@ export function PersistPosition (element: Element<any, any>, defaultPoint: WoWAP
     app.store.Set('STORE_TYPE_CHARACTER', `${name}-y`, y)
   }
 
-  console.log(name)
-  console.log(a)
-  console.log(b)
-  console.log(x)
-  console.log(y)
+  element.ref.EnableMouse(true)
+  element.ref.SetMovable(true)
+  element.ref.RegisterForDrag('RightButton')
+
+  element.ref.SetScript('OnDragStart', f => f.StartMoving())
+  element.ref.SetScript('OnDragStop', f => {
+    f.StopMovingOrSizing()
+
+    let [a1, _, a3, a4, a5] = element.ref.GetPoint()
+
+    a = a1
+    b = a3
+    x = a4
+    y = a5
+
+    app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-a`, a)
+    app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-b`, b)
+    app.store.Set('STORE_TYPE_CHARACTER', `${name}-x`, x)
+    app.store.Set('STORE_TYPE_CHARACTER', `${name}-y`, y)
+  })
 
   element.ref.SetPoint(a, app.root.ref, b, x, y)
 }
@@ -1065,24 +1081,11 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   const padding: Element<LootState, LootFns> = Frame({ name: 'loot' }) as any
   const app = Get()
 
-  PersistPosition(padding)
+  Movable(padding)
 
   padding.ref.SetSize(290, 290)
   padding.ref.SetBackdrop(BASE_BACKDROP)
   padding.ref.SetBackdropColor(0, 0, 0, 1)
-  padding.ref.EnableMouse(true)
-  padding.ref.SetMovable(true)
-  padding.ref.RegisterForDrag('RightButton')
-
-  padding.ref.SetScript('OnDragStart', f => f.StartMoving())
-  padding.ref.SetScript('OnDragStop', f => {
-    f.StopMovingOrSizing()
-    let [f1, _, f3, f4, f5] = padding.ref.GetPoint()
-    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f1', f1)
-    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f3', f3)
-    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f4', f4)
-    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f5', f5)
-  })
 
   const frame = Frame({ name: 'loot-inner', parent: padding })
 
@@ -1163,7 +1166,7 @@ const app = new App(app => {
     parent: root,
   })
 
-  PersistPosition(a)
+  Movable(a)
 
   a.inner.EnableMouse(true)
   a.inner.SetMovable(true)
