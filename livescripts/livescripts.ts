@@ -657,6 +657,7 @@ export function Main (events: TSEvents) {
   EasyLoot(events)
   TalentSystem(events)
   ItemReloading(events)
+  Store(events)
 
   // events.Player.OnWhisper((sender, _, message) => {
   //   const opcode = Opcode('learn-talent')

@@ -173,6 +173,10 @@ export class Store {
         return
 
       const [t, type, key, value] = text.split(' ')
+      console.log(t)
+      console.log(type)
+      console.log(key)
+      console.log(value)
 
       this.state[type][key] = t === 'number'
         ? Number(value)
@@ -198,10 +202,6 @@ export class Store {
       ? 'string'
       : null
 
-    console.log(t)
-    console.log(type)
-    console.log(key)
-    console.log(`${value}`)
     this.state[type][key] = value
 
     SendAddonMessage('store-set', `${t} ${type} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
@@ -1107,7 +1107,6 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
 
 // FIXME organize this this
 const app = new App(app => {
-  app.store.Set(STORE_TYPE_CHARACTER, 'hello', 'world')
   const root = Root()
   const loot = Loot()
 
