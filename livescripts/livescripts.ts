@@ -632,17 +632,17 @@ function Store (events: TSEvents) {
     const a = QueryWorld(`
       select * from __addon_data where playerGuid = ${playerGuid} and type = "${type}" and _key = "${key}";
     `)
-    let id = -1
+    let entry = -1
     while (a.GetRow()) {
-      id = a.GetUInt32(0)
+      entry = a.GetUInt32(0)
     }
-    if (id === -1) {
+    if (entry === -1) {
       QueryWorld(`
         insert into __addon_data (playerGuid, primitive, type, _key, value) value ("${playerGuid}", "${primitive}", "${type}", "${key}", "${value}");
       `)
     } else {
       QueryWorld(`
-        update __addon_data set primitive = "${primitive}", type = "${type}", _key = "${key}", value = "${value}" where id = ${id};
+        update __addon_data set primitive = "${primitive}", type = "${type}", _key = "${key}", value = "${value}" where entry = ${entry};
       `)
     }
     sender.SendBroadcastMessage(`${primitive} ${type} ${key} ${value}`)
