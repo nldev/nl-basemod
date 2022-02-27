@@ -90,7 +90,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'vitality',
     spellId: 61329,
-    cost: 2,
+    cost: 3,
     class: { ROGUE: true },
   },
   {
@@ -408,7 +408,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'deadly-brew',
     spellId: 51626,
-    cost: 4,
+    cost: 8,
     class: { ROGUE: true },
   },
   {
