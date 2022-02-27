@@ -224,11 +224,9 @@ export class App {
   public playerInfo: PlayerInfo
   public talentInfo: TalentInfo
   public elements: Mapping<Element<any, any>> = {}
-  public store: Store
+  public store: Store = new Store()
 
   constructor (protected onInit: ($: App) => void) {
-    this.store = new Store()
-    this.store.Init()
     this.talentInfo = {
       isEnabled: false,
       used: 0,
@@ -265,6 +263,8 @@ export class App {
 
         this.root = Root(root)
         this.isStarted = true
+
+        this.store.Init()
 
         return this.load()
       }
