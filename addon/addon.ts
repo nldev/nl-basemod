@@ -1036,12 +1036,12 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   const padding: Element<LootState, LootFns> = Frame({ name: 'loot-padding' }) as any
     const app = Get()
 
-  let a1: WoWAPI.Point = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f1')
-  let a3: WoWAPI.Point = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f3')
-  let a4: number = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f4')
-  let a5: number = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f5')
+  let a1 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f1')
+  let a3 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f3')
+  let a4 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f4')
+  let a5 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f5')
 
-  if (!a1) {
+  if (a1 !== '' && !a1) {
     padding.ref.SetPoint('CENTER')
     let [
       b1,
@@ -1075,6 +1075,10 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   padding.ref.SetScript('OnDragStop', f => {
     f.StopMovingOrSizing()
     let [f1, _, f3, f4, f5] = padding.ref.GetPoint()
+    console.log(f1)
+    console.log(f3)
+    console.log(f4)
+    console.log(f5)
     app.store.Set('STORE_TYPE_CHARACTER', 'loot-f1', f1)
     app.store.Set('STORE_TYPE_CHARACTER', 'loot-f3', f3)
     app.store.Set('STORE_TYPE_CHARACTER', 'loot-f4', f4)
