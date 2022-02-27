@@ -1175,6 +1175,8 @@ const app = new App(app => {
   let current = ''
   root.ref.SetScript('OnUpdate', () => {
     const frame = GetMouseFocus()
+    if (!frame)
+      return
     const name = frame.GetName()
     if (name !== current) {
       console.log(name)
