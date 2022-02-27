@@ -1034,21 +1034,55 @@ export interface LootOptions {}
 
 export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   const padding: Element<LootState, LootFns> = Frame({ name: 'loot-padding' }) as any
+    const app = Get()
+
+  let a1: WoWAPI.Point = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f1')
+  let a3: WoWAPI.Point = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f3')
+  let a4: number = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f4')
+  let a5: number = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f5')
+
+  if (typeof a1 === undefined) {
+    padding.ref.SetPoint('CENTER')
+    let [
+      b1,
+      _,
+      b3,
+      b4,
+      b5,
+    ] = padding.ref.GetPoint()
+
+    a1 = b1
+    a3 = b3
+    a4 = b4
+    a5 = b5
+
+    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f1', a1)
+    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f3', a3)
+    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f4', a4)
+    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f5', a5)
+  }
 
   padding.ref.SetSize(290, 290)
   padding.ref.SetBackdrop(BASE_BACKDROP)
   padding.ref.SetBackdropColor(0, 0, 0, 1)
-  padding.ref.SetPoint('CENTER')
+  padding.ref.SetPoint(a1, UIParent, a3, a4, a5)
   padding.ref.EnableMouse(true)
   padding.ref.SetMovable(true)
   padding.ref.RegisterForDrag('RightButton')
+
   padding.ref.SetScript('OnDragStart', f => f.StartMoving())
-  padding.ref.SetScript('OnDragStop', f => f.StopMovingOrSizing())
+  padding.ref.SetScript('OnDragStop', f => {
+    f.StopMovingOrSizing()
+    let [f1, _, f3, f4, f5] = padding.ref.GetPoint()
+    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f1', f1)
+    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f3', f3)
+    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f4', f4)
+    app.store.Set('STORE_TYPE_CHARACTER', 'loot-f5', f5)
+  })
 
   const frame = Frame({ name: 'loot', parent: padding })
 
   frame.ref.SetSize(250, 250)
-  frame.ref.SetPoint('CENTER')
 
   const scroll = Scroll({ name: 'loot-scroll', scrollHeight: 250, parent: frame })
   const list = List({ name: 'loot-list', itemHeight: 50, parent: scroll })
