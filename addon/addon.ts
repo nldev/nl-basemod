@@ -1143,7 +1143,6 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
 
 // FIXME organize this this
 const app = new App(app => {
-  app.store.Set(STORE_TYPE_CHARACTER, 'hello', 'world')
   const root = Root()
   const loot = Loot()
 
