@@ -659,6 +659,17 @@ export function Main (events: TSEvents) {
   ItemReloading(events)
   Store(events)
 
+  events.GameObjects.OnGenerateLoot((obj, player) => {
+    const loot = obj.GetLoot()
+    const count = loot.GetItemCount()
+    for (let i = 0; i <= count; i++) {
+      const id = loot.GetItem(i).GetItemID()
+      const info = GetItemTemplate(id)
+      const name = info.GetName()
+      console.log(name)
+    }
+  })
+
   // events.Player.OnWhisper((sender, _, message) => {
   //   const opcode = Opcode('learn-talent')
   //   const string = message.get()

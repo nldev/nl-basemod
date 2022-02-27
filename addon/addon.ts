@@ -1165,8 +1165,11 @@ const app = new App(app => {
   const loot = Loot()
   const list = AllChildren(UIParent)
   list.forEach(e => {
-    if (e && e.GetName && (e.GetName() === 'CharacterAmmoSlot'))
-      e.Hide()
+    if (e && e.GetName && (e.GetName() === 'CharacterAmmoSlot')) {
+      e.SetScript('OnUpdate', () => {
+        e.Hide()
+      })
+    }
   })
 
   const aa: any = CreateFrame('Frame', 'a')
