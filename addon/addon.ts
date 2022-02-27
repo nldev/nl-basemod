@@ -1153,6 +1153,12 @@ const app = new App(app => {
   const root = Root()
   const loot = Loot()
 
+  root.ref.SetScript('OnUpdate', () => {
+    const id = GetMouseFocus()
+    if (id)
+      console.log(id)
+  })
+
   Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
     if (player.toLowerCase() !== name)
       return
