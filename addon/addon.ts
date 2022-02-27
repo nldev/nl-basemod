@@ -1036,13 +1036,8 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   let a3 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f3')
   let a4 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f4')
   let a5 = app.store.Get('STORE_TYPE_CHARACTER', 'loot-f5')
-  console.log(a1)
-  console.log(a3)
-  console.log(a4)
-  console.log(a5)
 
   if (!a1) {
-    console.log('here')
     padding.ref.SetPoint('CENTER')
     let [
       b1,
@@ -1132,7 +1127,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
     })
   })
 
-  padding.ref.Hide()
+  // padding.ref.Hide()
 
   return padding
 }
