@@ -1062,8 +1062,7 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   padding.ref.SetBackdrop(BASE_BACKDROP)
   padding.ref.SetBackdropColor(0, 0, 0, 1)
 
-  padding.ref.SetPoint(a1, a4, a5)
-  // padding.ref.SetPoint(a1, app.root.ref, a3, a4, a5)
+  padding.ref.SetPoint(a1, app.root.ref, a3, a4, a5)
   padding.ref.EnableMouse(true)
   padding.ref.SetMovable(true)
   padding.ref.RegisterForDrag('RightButton')
@@ -1081,6 +1080,8 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   const frame = Frame({ name: 'loot', parent: padding })
 
   frame.ref.SetSize(250, 250)
+  frame.ref.SetBackdrop(BASE_BACKDROP)
+  frame.ref.SetBackdropColor(0, 0, 0, 1)
 
   const scroll = Scroll({ name: 'loot-scroll', scrollHeight: 250, parent: frame })
   const list = List({ name: 'loot-list', itemHeight: 50, parent: scroll })
