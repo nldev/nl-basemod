@@ -1029,7 +1029,7 @@ export interface LootState {}
 export interface LootOptions {}
 
 // FIXME pass in default
-export function SetPosition (element: Element<any, any>) {
+export function PersistPosition (element: Element<any, any>) {
   const name = element.ref.GetName()
 
   let a = app.store.Get('STORE_TYPE_CHARACTER', `${name}-point-a`)
@@ -1059,7 +1059,8 @@ export const Loot: Component<LootOptions, LootState, LootFns> = () => {
   const padding: Element<LootState, LootFns> = Frame({ name: 'loot' }) as any
   const app = Get()
 
-  SetPosition(padding)
+  PersistPosition(padding)
+
   padding.ref.SetSize(290, 290)
   padding.ref.SetBackdrop(BASE_BACKDROP)
   padding.ref.SetBackdropColor(0, 0, 0, 1)
