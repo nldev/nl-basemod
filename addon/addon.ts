@@ -1172,13 +1172,15 @@ export const ChestItem: Component<ChestItemOptions> = options => {
   ref.EnableMouse(true)
   let texture
   let id = null
+  const DrawTooltip = () => {
+    GameTooltip.ClearLines()
+    GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
+    GameTooltip.SetHyperlink(`item:${id}`)
+    GameTooltip.Show()
+  }
   ref.SetScript('OnEnter', frame => {
-    if (id) {
-      GameTooltip.ClearLines()
-      GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
-      GameTooltip.SetHyperlink(`item:${id}`)
-      GameTooltip.Show()
-    }
+    if (id)
+      DrawTooltip()
   })
   ref.SetScript('OnLeave', frame => {
     GameTooltip.ClearLines()
@@ -1193,6 +1195,7 @@ export const ChestItem: Component<ChestItemOptions> = options => {
       id = SelectedItem.id
       SelectedItem = null
       SelectedItemInventoryId = 0
+      DrawTooltip()
       ClearCursor()
     } else {
       id = null
