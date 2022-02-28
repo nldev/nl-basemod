@@ -1174,6 +1174,16 @@ export const ChestItem: Component<ChestItemOptions> = options => {
 
 const Chest: Component = () => {
   const padding = Frame({ name: 'chest' })
+  padding.ref.RegisterEvent('LOOT_OPENED')
+  padding.ref.RegisterEvent('LOOT_CLOSED')
+  padding.ref.SetScript('OnEvent', (f, e) => {
+    if (e === 'LOOT_OPENED') {
+      padding.ref.Show()
+    }
+    if (e === 'LOOT_CLOSED') {
+      padding.ref.Hide()
+    }
+  })
 
   Movable(padding)
 
@@ -1197,6 +1207,8 @@ const Chest: Component = () => {
     grid.fns.Attach(item)
   }
 
+  padding.ref.Hide()
+
   return padding
 }
 
@@ -1207,6 +1219,12 @@ const app = new App(app => {
   const loot = Loot()
   const list = AllChildren(UIParent)
   list.forEach(e => {
+    if (e && e.GetName && (e.GetName() === 'LootFrame')) {
+      e.SetScript('OnUpdate', () => {
+        e.SetAlpha(0)
+        e.SetPoint('LEFT', -9999, -9999)
+      })
+    }
     if (e && e.GetName && (e.GetName() === 'CharacterAmmoSlot')) {
       e.SetScript('OnUpdate', () => {
         e.Hide()
