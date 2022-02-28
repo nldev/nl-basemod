@@ -659,7 +659,23 @@ export function Main (events: TSEvents) {
   ItemReloading(events)
   Store(events)
 
+  events.GameObjects.OnCreate((go) => {
+    // TODO find/request way to check if player is currently interacting with chest
+    // FIXME
+    // use events.GameObjects.OnUse (or whatever fires when a chest is opened)
+    // on use, check for state on object
+    // if no state exists, check db
+    // check if update delta has expired, if so generate more items (if threshold is met)
+    // write generated item guids to db
+    // send item data to player
+    const id = go.GetDBTableGUIDLow()
+    console.log(id)
+
+  })
+
+
   events.GameObjects.OnGenerateLoot((obj, player) => {
+    player.SendBroadcastMessage(`${obj.GetDBTableGUIDLow()}`)
     const loot = obj.GetLoot()
     const count = loot.GetItemCount()
     for (let i = 0; i <= count; i++) {

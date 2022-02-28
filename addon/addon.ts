@@ -1334,12 +1334,12 @@ const app = new App(app => {
         }
       })
     }
-    if (e && e.GetName && (e.GetName() === 'CharacterAmmoSlot')) {
-      e.SetScript('OnUpdate', () => {
-        if (e.IsShown())
-          e.Hide()
-      })
-    }
+    // if (e && e.GetName && (e.GetName() === 'CharacterAmmoSlot')) {
+    //   e.SetScript('OnUpdate', () => {
+    //     if (e.IsShown())
+    //       e.Hide()
+    //   })
+    // }
   })
 
   const aa: any = CreateFrame('Frame', 'a')
