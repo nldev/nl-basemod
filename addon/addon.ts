@@ -1232,6 +1232,26 @@ export interface ItemInfo {
   isCraftingReagent: boolean
 }
 
+export const MapItemInfo = (list: any[]) => ({
+  name: list[0],
+  link: list[0],
+  quality: list[0],
+  level: list[0],
+  minLevel: list[0],
+  type: list[0],
+  subType: list[0],
+  stackCount: list[0],
+  equipLoc: list[0],
+  texture: list[0],
+  sellPrice: list[0],
+  classId: list[0],
+  subclassId: list[0],
+  bindType: list[0],
+  expacId: list[0],
+  setId: list[0],
+  isCraftingReagent: list[0],
+})
+
 let SelectedItem: ItemInfo
 
 // FIXME organize this this
