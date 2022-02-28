@@ -1176,17 +1176,17 @@ const Chest: Component = () => {
   const padding = Frame({ name: 'chest' })
   padding.ref.SetSize(510, 350)
   padding.ref.SetPoint('CENTER')
+  padding.ref.SetBackdrop(BASE_BACKDROP)
+  padding.ref.SetBackdropColor(0, 0, 0, 1)
 
   const inner = Frame({ name: 'chest-inner', parent: padding })
-  padding.inner = inner as any
-  inner.ref.SetBackdrop(BASE_BACKDROP)
-  inner.ref.SetBackdropColor(0, 0, 0, 1)
+  // padding.inner = inner as any
   inner.ref.SetSize(480, 320)
   inner.ref.SetPoint('CENTER')
 
-  const grid = Grid({ name: 'chest-grid', itemsPerRow: 6, rowHeight: 80, parent: padding })
+  const grid = Grid({ name: 'chest-grid', itemsPerRow: 6, rowHeight: 80, parent: inner })
 
-  grid.ref.SetAllPoints(padding.ref)
+  grid.ref.SetAllPoints(inner.ref)
 
   for (let i = 0; i < 24; i++) {
     const item = ChestItem({ index: i })
