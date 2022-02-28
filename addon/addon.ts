@@ -1223,6 +1223,11 @@ const app = new App(app => {
       e.SetScript('OnUpdate', () => {
         e.SetAlpha(0)
         e.SetPoint('LEFT', -9999, -9999)
+        const l = AllChildren(e)
+        l.forEach(c => {
+          c.Hide && c.Hide()
+          c.EnableMouse && c.EnableMouse(false)
+        })
       })
     }
     if (e && e.GetName && (e.GetName() === 'CharacterAmmoSlot')) {
