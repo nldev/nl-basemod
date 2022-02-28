@@ -1303,23 +1303,23 @@ const app = new App(app => {
   const chest = Chest()
   const loot = Loot()
   const list = AllChildren(UIParent)
-  const bag1: WoWAPI.Button = _G['ContainerFrame1Item1']
-
-  bag1.HookScript('OnClick', (frame, button) => {
-    if (CursorHasItem()) {
-      const cursor = GetCursorInfo()
-      SelectedItem = ItemInfo(cursor[1])
-      SelectedItemInventoryId = 0
-    }
-  })
-  bag1.HookScript('OnDragStart', (frame, button) => {
-    if (CursorHasItem()) {
-      const cursor = GetCursorInfo()
-      SelectedItem = ItemInfo(cursor[1])
-      SelectedItemInventoryId = 0
-    }
-  })
-
+  for (let i = 1; i <= 16; i++) {
+    const slot: WoWAPI.Button = _G[`ContainerFrame${i}Item${i}`]
+    slot.HookScript('OnClick', (frame, button) => {
+      if (CursorHasItem()) {
+        const cursor = GetCursorInfo()
+        SelectedItem = ItemInfo(cursor[1])
+        SelectedItemInventoryId = 0
+      }
+    })
+    slot.HookScript('OnDragStart', (frame, button) => {
+      if (CursorHasItem()) {
+        const cursor = GetCursorInfo()
+        SelectedItem = ItemInfo(cursor[1])
+        SelectedItemInventoryId = 0
+      }
+    })
+  }
   list.forEach(e => {
     if (e && e.GetName && (e.GetName() === 'LootFrame')) {
       e.SetScript('OnUpdate', () => {
