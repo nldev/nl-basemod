@@ -1306,9 +1306,8 @@ const app = new App(app => {
 
   bag1.HookScript('OnClick', (frame, button) => {
     const cursor = GetCursorInfo()
-    cursor.forEach(i => console.log(i))
-    // SelectedItem = ItemInfo(cursor[1])
-    // SelectedItemInventoryId = 0
+    SelectedItem = ItemInfo(cursor[1])
+    SelectedItemInventoryId = 0
   })
   bag1.HookScript('OnDragStart', (frame, button) => {
     const cursor = GetCursorInfo()
