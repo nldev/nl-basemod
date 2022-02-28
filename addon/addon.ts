@@ -1176,7 +1176,7 @@ export const ChestItem: Component<ChestItemOptions> = options => {
     if (id) {
       GameTooltip.ClearLines()
       GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
-      GameTooltip.SetHyperlink(`item:${SelectedItem.id}`)
+      GameTooltip.SetHyperlink(`item:${id}`)
       GameTooltip.Show()
     }
   })
