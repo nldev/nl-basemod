@@ -1305,15 +1305,15 @@ const app = new App(app => {
   const bag1: WoWAPI.Button = _G['ContainerFrame1Item1']
 
   bag1.HookScript('OnClick', (frame, button) => {
-    const cursor = GetCursorInfo()
-    if (cursor) {
+    if (CursorHasItem()) {
+      const cursor = GetCursorInfo()
       SelectedItem = ItemInfo(cursor[1])
       SelectedItemInventoryId = 0
     }
   })
   bag1.HookScript('OnDragStart', (frame, button) => {
-    const cursor = GetCursorInfo()
-    if (cursor) {
+    if (CursorHasItem()) {
+      const cursor = GetCursorInfo()
       SelectedItem = ItemInfo(cursor[1])
       SelectedItemInventoryId = 0
     }
