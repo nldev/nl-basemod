@@ -1159,12 +1159,34 @@ const AllChildren = (frame: WoWAPI.Frame, list: WoWAPI.Frame[] = []) => {
   return list
 }
 
+export interface ChestItemOptions extends ComponentOptions {
+  index: number
+}
+
+export const ChestItem: Component<ChestItemOptions> = options => {
+  const frame = Frame({ name: `chest-item-${options.index}` })
+  const { ref } = frame
+  ref.SetBackdropColor(0, 0, 0, 1)
+  ref.SetBackdrop(BASE_BACKDROP)
+  ref.SetSize(40, 40)
+  return frame
+}
+
 const Chest: Component = () => {
   const padding = Frame({ name: 'chest' })
   padding.ref.SetBackdrop(BASE_BACKDROP)
   padding.ref.SetBackdropColor(0, 0, 0, 1)
-  padding.ref.SetSize(600, 500)
+  padding.ref.SetSize(500, 400)
   padding.ref.SetPoint('CENTER')
+
+  const grid = Grid({ name: 'chest-grid', itemsPerRow: 6, rowHeight: 40, parent: padding })
+
+  for (let i = 0; i <= 24; i++) {
+    const item = ChestItem({ index: i })
+
+    grid.fns.Attach(item)
+  }
+
   return padding
 }
 
