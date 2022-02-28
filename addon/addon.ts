@@ -1169,7 +1169,7 @@ export const ChestItem: Component<ChestItemOptions> = options => {
   ref.SetBackdropColor(0, 0, 0, 1)
   ref.SetBackdrop(BASE_BACKDROP)
   ref.SetSize(50, 50)
-  ref.SetScript('OnMouseUp', frame => {
+  ref.SetScript('OnMouseDown', frame => {
     frame.SetBackdrop({
       ...BASE_BACKDROP,
       bgFile: GetItemIcon(SelectedItem.id) as string,
