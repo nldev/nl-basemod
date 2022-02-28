@@ -1232,25 +1232,29 @@ export interface ItemInfo {
   isCraftingReagent: boolean
 }
 
-export const MapItemInfo = (list: any[]) => ({
-  name: list[0],
-  link: list[0],
-  quality: list[0],
-  level: list[0],
-  minLevel: list[0],
-  type: list[0],
-  subType: list[0],
-  stackCount: list[0],
-  equipLoc: list[0],
-  texture: list[0],
-  sellPrice: list[0],
-  classId: list[0],
-  subclassId: list[0],
-  bindType: list[0],
-  expacId: list[0],
-  setId: list[0],
-  isCraftingReagent: list[0],
-})
+export const ItemInfo = (id: number): ItemInfo => {
+  const list = GetItemInfo(id) as any
+
+  return {
+    name: list[0],
+    link: list[1],
+    quality: list[2],
+    level: list[3],
+    minLevel: list[4],
+    type: list[5],
+    subType: list[6],
+    stackCount: list[7],
+    equipLoc: list[8],
+    texture: list[9],
+    sellPrice: list[10],
+    classId: list[11],
+    subclassId: list[12],
+    bindType: list[13],
+    expacId: list[14],
+    setId: list[15],
+    isCraftingReagent: list[16],
+  }
+}
 
 let SelectedItem: ItemInfo
 
