@@ -1171,9 +1171,9 @@ export const ChestItem: Component<ChestItemOptions> = options => {
   ref.SetSize(50, 50)
   ref.EnableMouse(true)
   let texture
-  let current = null
+  let id = null
   ref.SetScript('OnEnter', frame => {
-    if (current) {
+    if (id) {
       GameTooltip.ClearLines()
       GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
       GameTooltip.SetHyperlink(`item:${SelectedItem.id}`)
@@ -1190,12 +1190,12 @@ export const ChestItem: Component<ChestItemOptions> = options => {
       texture.SetTexture(GetItemIcon(SelectedItem.id))
       texture.SetAllPoints()
       texture.Show()
-      current = SelectedItem.id
+      id = SelectedItem.id
       SelectedItem = null
       SelectedItemInventoryId = 0
       ClearCursor()
     } else {
-      current = null
+      id = null
       if (texture)
         texture.Hide()
       ClearCursor()
