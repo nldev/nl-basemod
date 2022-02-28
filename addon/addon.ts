@@ -1170,8 +1170,8 @@ export const ChestItem: Component<ChestItemOptions> = options => {
   ref.SetBackdrop(BASE_BACKDROP)
   ref.SetSize(50, 50)
   ref.EnableMouse(true)
-  let current = null
   let texture
+  let current = null
   ref.SetScript('OnEnter', frame => {
     if (current) {
       GameTooltip.ClearLines()
