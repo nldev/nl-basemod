@@ -1212,6 +1212,28 @@ const Chest: Component = () => {
   return padding
 }
 
+export interface ItemInfo {
+  name: string
+  link: string
+  quality: number
+  level: number
+  minLevel: number
+  type: string
+  subType: string
+  stackCount: number
+  equipLoc: string
+  texture: number
+  sellPrice: number
+  classId: number
+  subclassId: number
+  bindType: number
+  expacId: number
+  setId: number
+  isCraftingReagent: boolean
+}
+
+let SelectedItem: ItemInfo
+
 // FIXME organize this this
 const app = new App(app => {
   const root = Root()
@@ -1221,8 +1243,11 @@ const app = new App(app => {
   const bag1: WoWAPI.Button = _G['ContainerFrame1Item1']
 
   bag1.HookScript('OnDragStart', (frame, button) => {
-    const info = GetCursorInfo()
-    info.forEach(x => console.log(x))
+    const cursor = GetCursorInfo()
+    const id = cursor[1]
+    const info = GetItemInfo(id)
+
+
   })
 
   list.forEach(e => {
