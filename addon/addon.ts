@@ -1174,10 +1174,6 @@ export const ChestItem: Component<ChestItemOptions> = options => {
   let texture
   ref.SetScript('OnMouseDown', frame => {
     if (SelectedItem) {
-      frame.SetBackdrop({
-        ...BASE_BACKDROP,
-        bgFile: GetItemIcon(SelectedItem.id) as string,
-      })
       texture = texture || frame.CreateTexture()
       texture.SetTexture(GetItemIcon(SelectedItem.id))
       texture.SetAllPoints()
@@ -1188,7 +1184,8 @@ export const ChestItem: Component<ChestItemOptions> = options => {
       ClearCursor()
     } else {
       current = null
-      texture.Hide()
+      if (texture)
+        texture.Hide()
       ClearCursor()
     }
   })
