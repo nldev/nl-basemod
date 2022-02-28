@@ -1202,6 +1202,7 @@ export const ChestItem: Component<ChestItemOptions> = options => {
       if (texture)
         texture.Hide()
       ClearCursor()
+      GameTooltip.Hide()
     }
   })
   return frame
