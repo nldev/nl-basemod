@@ -1170,16 +1170,27 @@ export const ChestItem: Component<ChestItemOptions> = options => {
   ref.SetBackdrop(BASE_BACKDROP)
   ref.SetSize(50, 50)
   ref.EnableMouse(true)
+  let current = null
+  let texture
   ref.SetScript('OnMouseDown', frame => {
-    frame.SetBackdrop({
-      ...BASE_BACKDROP,
-      bgFile: GetItemIcon(SelectedItem.id) as string,
-    })
-
-    const texture = frame.CreateTexture()
-    texture.SetTexture(GetItemIcon(SelectedItem.id))
-    texture.SetAllPoints()
-    ClearCursor()
+    if (SelectedItem) {
+      frame.SetBackdrop({
+        ...BASE_BACKDROP,
+        bgFile: GetItemIcon(SelectedItem.id) as string,
+      })
+      texture = texture || frame.CreateTexture()
+      texture.SetTexture(GetItemIcon(SelectedItem.id))
+      texture.SetAllPoints()
+      texture.Show()
+      current = SelectedItem.id
+      SelectedItem = null
+      SelectedItemInventoryId = 0
+      ClearCursor()
+    } else {
+      current = null
+      texture.Hide()
+      ClearCursor()
+    }
   })
   return frame
 }
