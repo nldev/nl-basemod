@@ -1218,7 +1218,14 @@ const app = new App(app => {
   const chest = Chest()
   const loot = Loot()
   const list = AllChildren(UIParent)
+  console.log(_G['ContainerFrame1Item1'])
+  console.log(_G['BagnonFrameinventory'])
+  console.log(_G['BagnonFrame'])
+  console.log(_G['BagnonFrameinventory'])
   list.forEach(e => {
+    if (e && e.GetName && (e.GetName() === 'ContainerFrame1Item1')) {
+      e.Hide()
+    }
     if (e && e.GetName && (e.GetName() === 'LootFrame')) {
       e.SetScript('OnUpdate', () => {
         if (e.IsShown()) {
@@ -1243,8 +1250,6 @@ const app = new App(app => {
   const aa: any = CreateFrame('Frame', 'a')
   aa.foo = 'hello'
   const bb: any = CreateFrame('Frame', 'a')
-  console.log(aa.foo)
-  console.log(bb.foo)
 
   let current = ''
   root.ref.SetScript('OnUpdate', () => {
@@ -1253,7 +1258,6 @@ const app = new App(app => {
       return
     const name = frame.GetName()
     if (name !== current) {
-      console.log(name)
       current = name
     }
   })
