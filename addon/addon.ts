@@ -1234,7 +1234,8 @@ const app = new App(app => {
     }
     if (e && e.GetName && (e.GetName() === 'CharacterAmmoSlot')) {
       e.SetScript('OnUpdate', () => {
-        e.Hide()
+        if (e.IsShown())
+          e.Hide()
       })
     }
   })
