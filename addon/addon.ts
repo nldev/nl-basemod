@@ -1181,6 +1181,8 @@ const Chest: Component = () => {
 
   const grid = Grid({ name: 'chest-grid', itemsPerRow: 6, rowHeight: 40, parent: padding })
 
+  grid.ref.SetAllPoints(padding.ref)
+
   for (let i = 0; i <= 24; i++) {
     const item = ChestItem({ index: i })
 
