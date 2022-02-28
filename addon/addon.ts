@@ -1306,13 +1306,17 @@ const app = new App(app => {
 
   bag1.HookScript('OnClick', (frame, button) => {
     const cursor = GetCursorInfo()
-    SelectedItem = ItemInfo(cursor[1])
-    SelectedItemInventoryId = 0
+    if (cursor) {
+      SelectedItem = ItemInfo(cursor[1])
+      SelectedItemInventoryId = 0
+    }
   })
   bag1.HookScript('OnDragStart', (frame, button) => {
     const cursor = GetCursorInfo()
-    SelectedItem = ItemInfo(cursor[1])
-    SelectedItemInventoryId = 0
+    if (cursor) {
+      SelectedItem = ItemInfo(cursor[1])
+      SelectedItemInventoryId = 0
+    }
   })
 
   list.forEach(e => {
