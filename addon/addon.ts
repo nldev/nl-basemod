@@ -1218,11 +1218,13 @@ const app = new App(app => {
   const chest = Chest()
   const loot = Loot()
   const list = AllChildren(UIParent)
-  const bag1: WoWAPI.Frame = _G['ContainerFrame1Item1']
+  const bag1: WoWAPI.Button = _G['ContainerFrame1Item1']
 
-  console.log(
-    bag1.GetObjectType()
-  )
+  bag1.HookScript('OnDragStart', (frame, button) => {
+    const info = GetCursorInfo()
+    info.forEach(x => console.log(x))
+  })
+
   list.forEach(e => {
     if (e && e.GetName && (e.GetName() === 'LootFrame')) {
       e.SetScript('OnUpdate', () => {
