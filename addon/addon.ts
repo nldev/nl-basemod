@@ -1268,10 +1268,11 @@ const app = new App(app => {
 
   bag1.HookScript('OnDragStart', (frame, button) => {
     const cursor = GetCursorInfo()
-    const id = cursor[1]
-    const info = GetItemInfo(id)
-
-
+    const info = ItemInfo(cursor[1])
+    console.log(info.name)
+    console.log(info.link)
+    console.log(info.quality)
+    console.log(info.level)
   })
 
   list.forEach(e => {
