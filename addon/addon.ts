@@ -1218,14 +1218,12 @@ const app = new App(app => {
   const chest = Chest()
   const loot = Loot()
   const list = AllChildren(UIParent)
-  console.log(_G['ContainerFrame1Item1'])
-  console.log(_G['BagnonFrameinventory'])
-  console.log(_G['BagnonFrame'])
-  console.log(_G['BagnonFrameinventory'])
+  const bag1: WoWAPI.Frame = _G['ContainerFrame1Item1']
+
+  console.log(
+    bag1.GetObjectType()
+  )
   list.forEach(e => {
-    if (e && e.GetName && (e.GetName() === 'ContainerFrame1Item1')) {
-      e.Hide()
-    }
     if (e && e.GetName && (e.GetName() === 'LootFrame')) {
       e.SetScript('OnUpdate', () => {
         if (e.IsShown()) {
