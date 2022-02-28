@@ -1305,20 +1305,22 @@ const app = new App(app => {
   const list = AllChildren(UIParent)
   for (let i = 1; i <= 16; i++) {
     const slot: WoWAPI.Button = _G[`ContainerFrame${i}Item${i}`]
-    slot.HookScript('OnClick', (frame, button) => {
-      if (CursorHasItem()) {
-        const cursor = GetCursorInfo()
-        SelectedItem = ItemInfo(cursor[1])
-        SelectedItemInventoryId = 0
-      }
-    })
-    slot.HookScript('OnDragStart', (frame, button) => {
-      if (CursorHasItem()) {
-        const cursor = GetCursorInfo()
-        SelectedItem = ItemInfo(cursor[1])
-        SelectedItemInventoryId = 0
-      }
-    })
+    if (slot) {
+      slot.HookScript('OnClick', (frame, button) => {
+        if (CursorHasItem()) {
+          const cursor = GetCursorInfo()
+          SelectedItem = ItemInfo(cursor[1])
+          SelectedItemInventoryId = 0
+        }
+      })
+      slot.HookScript('OnDragStart', (frame, button) => {
+        if (CursorHasItem()) {
+          const cursor = GetCursorInfo()
+          SelectedItem = ItemInfo(cursor[1])
+          SelectedItemInventoryId = 0
+        }
+      })
+    }
   }
   list.forEach(e => {
     if (e && e.GetName && (e.GetName() === 'LootFrame')) {
