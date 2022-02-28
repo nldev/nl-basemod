@@ -1172,6 +1172,18 @@ export const ChestItem: Component<ChestItemOptions> = options => {
   ref.EnableMouse(true)
   let current = null
   let texture
+  ref.SetScript('OnEnter', frame => {
+    if (current) {
+      GameTooltip.ClearLines()
+      GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
+      GameTooltip.SetHyperlink(`spell:${SelectedItem.id}`)
+      GameTooltip.Show()
+    }
+  })
+  ref.SetScript('OnLeave', frame => {
+    GameTooltip.ClearLines()
+    GameTooltip.Hide()
+  })
   ref.SetScript('OnMouseDown', frame => {
     if (SelectedItem) {
       texture = texture || frame.CreateTexture()
