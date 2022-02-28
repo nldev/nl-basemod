@@ -1304,7 +1304,7 @@ const app = new App(app => {
   const loot = Loot()
   const list = AllChildren(UIParent)
   for (let i = 1; i <= 16; i++) {
-    const slot: WoWAPI.Button = _G[`ContainerFrame${i}Item${i}`]
+    const slot: WoWAPI.Button = _G[`ContainerFrame1Item${i}`]
     console.log(slot)
     console.log(i)
     if (slot) {
