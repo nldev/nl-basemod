@@ -1305,6 +1305,7 @@ const app = new App(app => {
   const list = AllChildren(UIParent)
   for (let i = 1; i <= 16; i++) {
     const slot: WoWAPI.Button = _G[`ContainerFrame${i}Item${i}`]
+    console.log(slot)
     if (slot) {
       slot.HookScript('OnClick', (frame, button) => {
         if (CursorHasItem()) {
