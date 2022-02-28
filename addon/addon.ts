@@ -1171,8 +1171,10 @@ export const ChestItem: Component<ChestItemOptions> = options => {
   ref.SetSize(50, 50)
   ref.SetScript('OnMouseUp', frame => {
     frame.SetBackdrop({
-
+      ...BASE_BACKDROP,
+      bgFile: GetItemIcon(SelectedItem.id) as string,
     })
+    console.log(`dropped ${SelectedItem.name}`)
   })
   return frame
 }
