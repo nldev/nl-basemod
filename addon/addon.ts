@@ -1168,7 +1168,7 @@ export const ChestItem: Component<ChestItemOptions> = options => {
   const { ref } = frame
   ref.SetBackdropColor(0, 0, 0, 1)
   ref.SetBackdrop(BASE_BACKDROP)
-  ref.SetSize(40, 40)
+  ref.SetSize(60, 60)
   return frame
 }
 
