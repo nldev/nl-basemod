@@ -1174,6 +1174,9 @@ export const ChestItem: Component<ChestItemOptions> = options => {
 
 const Chest: Component = () => {
   const padding = Frame({ name: 'chest' })
+
+  Movable(padding)
+
   padding.ref.SetSize(510, 350)
   padding.ref.SetPoint('CENTER')
   padding.ref.SetBackdrop(BASE_BACKDROP)
