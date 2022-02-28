@@ -1358,6 +1358,7 @@ const app = new App(app => {
     const name = frame.GetName()
     if (name !== current) {
       current = name
+      console.log(name)
     }
   })
 

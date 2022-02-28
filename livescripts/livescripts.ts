@@ -666,13 +666,13 @@ export function Main (events: TSEvents) {
     // on use, check for state on object
     // if no state exists, check db
     // check if update delta has expired, if so generate more items (if threshold is met)
+    // randomize timer when item is generated
     // write generated item guids to db
     // send item data to player
     const id = go.GetDBTableGUIDLow()
     console.log(id)
 
   })
-
 
   events.GameObjects.OnGenerateLoot((obj, player) => {
     player.SendBroadcastMessage(`${obj.GetDBTableGUIDLow()}`)
