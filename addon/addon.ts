@@ -1306,19 +1306,20 @@ const app = new App(app => {
   for (let i = 1; i <= 16; i++) {
     const slot: WoWAPI.Button = _G[`ContainerFrame${i}Item${i}`]
     console.log(slot)
+    console.log(i)
     if (slot) {
       slot.HookScript('OnClick', (frame, button) => {
         if (CursorHasItem()) {
           const cursor = GetCursorInfo()
           SelectedItem = ItemInfo(cursor[1])
-          SelectedItemInventoryId = 0
+          SelectedItemInventoryId = i
         }
       })
       slot.HookScript('OnDragStart', (frame, button) => {
         if (CursorHasItem()) {
           const cursor = GetCursorInfo()
           SelectedItem = ItemInfo(cursor[1])
-          SelectedItemInventoryId = 0
+          SelectedItemInventoryId = i
         }
       })
     }
