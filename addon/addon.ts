@@ -1169,6 +1169,11 @@ export const ChestItem: Component<ChestItemOptions> = options => {
   ref.SetBackdropColor(0, 0, 0, 1)
   ref.SetBackdrop(BASE_BACKDROP)
   ref.SetSize(50, 50)
+  ref.SetScript('OnMouseUp', frame => {
+    frame.SetBackdrop({
+
+    })
+  })
   return frame
 }
 
@@ -1213,6 +1218,7 @@ const Chest: Component = () => {
 }
 
 export interface ItemInfo {
+  id: number
   name: string
   link: string
   quality: number
@@ -1236,6 +1242,7 @@ export const ItemInfo = (id: number): ItemInfo => {
   const list = GetItemInfo(id) as any
 
   return {
+    id,
     name: list[1],
     link: list[2],
     quality: list[3],
@@ -1256,6 +1263,7 @@ export const ItemInfo = (id: number): ItemInfo => {
   }
 }
 
+let SelectedItemInventoryId: number = 0
 let SelectedItem: ItemInfo
 
 // FIXME organize this this
@@ -1268,11 +1276,8 @@ const app = new App(app => {
 
   bag1.HookScript('OnDragStart', (frame, button) => {
     const cursor = GetCursorInfo()
-    const info = ItemInfo(cursor[1])
-    console.log(info.name)
-    console.log(info.link)
-    console.log(info.quality)
-    console.log(info.level)
+    SelectedItem = ItemInfo(cursor[1])
+    SelectedItemInventoryId = 0
   })
 
   list.forEach(e => {
