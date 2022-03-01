@@ -86,7 +86,7 @@ function main () {
   g.Name.enGB.set('Gun')
   g.Damage.clearAll()
   g.Damage.addPhysical(25, 42)
-  g.Delay.set($.std.Items.load(13305).Delay.get())
+  b.Delay.set(200)
   g.ItemLevel.set(5)
   g.AmmoType.NONE.set()
   g.Spells.addMod(i => {
