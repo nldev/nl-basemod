@@ -82,6 +82,7 @@ function main () {
   n.Quality.WHITE.set()
   n.Bonding.NO_BOUNDS.set()
   n.Flags.UNIQUE_EQUIPPED.set(0)
+  n.FlagsCustom.clearAll()
   n.FlagsExtra.clearAll()
   n.Flags.clearAll()
   n.Description.clear()
