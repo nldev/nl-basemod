@@ -68,6 +68,7 @@ function main () {
 
   const b = $.std.Items.load(2504)
   b.Name.enGB.set('Bow')
+  b.Damage.clearAll()
   b.Damage.addPhysical(300, 500)
   b.AmmoType.NONE.set()
   b.Spells.addMod(i => {
@@ -77,6 +78,7 @@ function main () {
   })
   const g = $.std.Items.load(2508)
   g.Name.enGB.set('Gun')
+  g.Damage.clearAll()
   g.Damage.addPhysical(300, 500)
   g.AmmoType.NONE.set()
   g.Spells.addMod(i => {
