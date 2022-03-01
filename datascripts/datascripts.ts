@@ -67,7 +67,8 @@ function main () {
   StarterSpells($)
 
   $.std.Items.load(2508).Spells.addMod(i => i.Spell.set(46699).Trigger.ON_EQUIP.set())
-  const i = $.std.Items.create('noworld', 'test-bow', 34334)
+  const n = $.std.Items.create('noworld', 'test-bow', 34334)
+  const i = $.std.Items.load(34334)
   i.Damage.clearAll()
   i.Damage.addPhysical(1, 5)
   i.Stats.clearAll()
