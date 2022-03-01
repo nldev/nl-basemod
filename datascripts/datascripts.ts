@@ -66,7 +66,6 @@ function main () {
   $.init()
   StarterSpells($)
 
-  $.std.Items.load(2508).Spells.addMod(i => i.Spell.set(46699).Trigger.ON_EQUIP.set())
   const n = $.std.Items.create('noworld', 'test-bow', 34334)
   const i = $.std.Items.load(34334)
   n.Class.GUN.set()
