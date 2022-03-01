@@ -659,7 +659,11 @@ export function Main (events: TSEvents) {
   // ItemReloading(events)
   Store(events)
 
-  events.GameObjects.OnCreate((go) => {
+  events.GameObjects.OnUse((o, u) => {
+    if (!u.IsPlayer())
+      return
+    const p = u.ToPlayer()
+    p.EquipItem(2092, 24)
     // TODO find/request way to check if player is currently interacting with chest
     // FIXME
     // use events.GameObjects.OnUse (or whatever fires when a chest is opened)
@@ -669,9 +673,6 @@ export function Main (events: TSEvents) {
     // randomize timer when item is generated
     // write generated item guids to db
     // send item data to player
-    const id = go.GetDBTableGUIDLow()
-    console.log(id)
-
   })
 
   events.GameObjects.OnGenerateLoot((obj, player) => {
