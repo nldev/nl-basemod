@@ -66,6 +66,8 @@ function main () {
   $.init()
   StarterSpells($)
 
+  $.std.Items.load(2508).Spells.addMod(i => i.Spell.set(46699).Trigger.ON_EQUIP.set())
+
   const zeal = $.Spell.add({
     id: 'zeal',
     name: 'Zeal',
