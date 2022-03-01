@@ -72,7 +72,7 @@ function main () {
   b.Name.enGB.set('Bow')
   b.Damage.clearAll()
   b.Damage.addPhysical(25, 42)
-  b.Delay.set($.std.Items.load(13305).Delay.get())
+  b.Delay.set(1.6)
   b.ItemLevel.set(5)
   b.AmmoType.NONE.set()
   b.Durability.set(0)
