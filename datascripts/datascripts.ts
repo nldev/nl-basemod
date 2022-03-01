@@ -67,7 +67,7 @@ function main () {
   StarterSpells($)
 
   const n = $.std.Items.create('noworld', 'test-bow', 34334)
-  const b = $.std.Items.create('noworld', 'blunderbuss', 2508)
+  const b = $.std.Items.load(2508)
   b.AmmoType.NONE.set()
   b.Spells.addMod(i => {
     i.Spell.set(46699)
