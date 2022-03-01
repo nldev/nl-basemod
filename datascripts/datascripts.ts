@@ -66,11 +66,20 @@ function main () {
   $.init()
   StarterSpells($)
 
-  const b = $.std.Items.load(2508)
+  const b = $.std.Items.load(2504)
   b.Name.enGB.set('Gun')
   b.Damage.addPhysical(300, 500)
   b.AmmoType.NONE.set()
   b.Spells.addMod(i => {
+    i.Spell.set(46699)
+    i.Trigger.ON_EQUIP.set()
+    i.Charges.set('UNLIMITED')
+  })
+  const g = $.std.Items.load(2508)
+  g.Name.enGB.set('Gun')
+  g.Damage.addPhysical(300, 500)
+  g.AmmoType.NONE.set()
+  g.Spells.addMod(i => {
     i.Spell.set(46699)
     i.Trigger.ON_EQUIP.set()
     i.Charges.set('UNLIMITED')
