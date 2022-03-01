@@ -67,6 +67,20 @@ function main () {
   StarterSpells($)
 
   $.std.Items.load(2508).Spells.addMod(i => i.Spell.set(46699).Trigger.ON_EQUIP.set())
+  const i = $.std.Items.create('noworld', 'test-bow', 34334)
+  i.Damage.clearAll()
+  i.Damage.addPhysical(1, 5)
+  i.Stats.clearAll()
+  i.Durability.set(0)
+  i.RequiredLevel.set(0)
+  i.ItemLevel.set(1)
+  i.Spells.clear(0)
+  i.Spells.clear(1)
+  i.Spells.clear(2)
+  i.Quality.WHITE.set()
+  i.Flags.UNIQUE_EQUIPPED.set(0)
+  i.Description.clear()
+  i.Name.enGB.set('Bow')
 
   const zeal = $.Spell.add({
     id: 'zeal',
