@@ -70,7 +70,7 @@ function main () {
   const n = $.std.Items.create('noworld', 'test-bow', 34334)
   const i = $.std.Items.load(34334)
   n.Class.GUN.set()
-  n.AmmoType.BULLET.set()
+  // n.AmmoType.BULLET.set()
   n.Damage.clearAll()
   n.Damage.addPhysical(1, 5)
   n.Stats.clearAll()
