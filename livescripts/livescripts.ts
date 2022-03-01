@@ -664,7 +664,7 @@ export function Main (events: TSEvents) {
       return
     const p = player.ToPlayer()
     p.SendBroadcastMessage('hehe')
-    p.EquipItem(2092, 1)
+    p.EquipItem(2092, 15)
   })
   // TODO find/request way to check if player is currently interacting with chest
   // FIXME
