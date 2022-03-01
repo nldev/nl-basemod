@@ -85,6 +85,7 @@ function main () {
   n.Flags.UNIQUE_EQUIPPED.set(0)
   n.Description.clear()
   n.Name.enGB.set('Bow')
+  n.DisplayInfo.set($.std.Items.load(2508).DisplayInfo.get())
 
   const zeal = $.Spell.add({
     id: 'zeal',
