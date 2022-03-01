@@ -67,7 +67,7 @@ function main () {
   StarterSpells($)
 
   const b = $.std.Items.load(2504)
-  b.Name.enGB.set('Gun')
+  b.Name.enGB.set('Bow')
   b.Damage.addPhysical(300, 500)
   b.AmmoType.NONE.set()
   b.Spells.addMod(i => {
