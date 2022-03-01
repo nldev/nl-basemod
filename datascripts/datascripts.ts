@@ -69,11 +69,11 @@ function main () {
   const n = $.std.Items.create('noworld', 'test-bow', 34334)
   const b = $.std.Items.load(2508)
   b.AmmoType.NONE.set()
-  // b.Spells.addMod(i => {
-  //   i.Spell.set(46699)
-  //   i.Trigger.ON_EQUIP.set()
-  //   i.Charges.set('UNLIMITED')
-  // })
+  b.Spells.addMod(i => {
+    i.Spell.set(46699)
+    i.Trigger.ON_EQUIP.set()
+    i.Charges.set('UNLIMITED')
+  })
   const i = $.std.Items.load(34334)
   n.Class.GUN.set()
   // n.AmmoType.BULLET.set()
