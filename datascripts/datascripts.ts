@@ -62,6 +62,8 @@ function StarterSpells ($: Builder) {
 
 function main () {
   const $ = new Builder()
+  // FIXME: give weapon skills
+  // FIXME: set config to max weapon skills
 
   $.init()
   StarterSpells($)
