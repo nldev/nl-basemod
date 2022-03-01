@@ -84,6 +84,9 @@ function main () {
     i.Trigger.ON_EQUIP.set()
     i.Charges.set('UNLIMITED')
   })
+  $.std.Spells.load(46699)
+    .Description.enGB.set('')
+    .Name.enGB.set('')
 
   const zeal = $.Spell.add({
     id: 'zeal',
