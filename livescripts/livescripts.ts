@@ -659,21 +659,22 @@ export function Main (events: TSEvents) {
   // ItemReloading(events)
   Store(events)
 
-  events.GameObjects.OnUse((o, u) => {
-    if (!u.IsPlayer())
+  events.Player.OnLogin(player => {
+    if (!player.IsPlayer())
       return
-    const p = u.ToPlayer()
+    const p = player.ToPlayer()
+    p.SendBroadcastMessage('hehe')
     p.EquipItem(2092, 24)
-    // TODO find/request way to check if player is currently interacting with chest
-    // FIXME
-    // use events.GameObjects.OnUse (or whatever fires when a chest is opened)
-    // on use, check for state on object
-    // if no state exists, check db
-    // check if update delta has expired, if so generate more items (if threshold is met)
-    // randomize timer when item is generated
-    // write generated item guids to db
-    // send item data to player
   })
+  // TODO find/request way to check if player is currently interacting with chest
+  // FIXME
+  // use events.GameObjects.OnUse (or whatever fires when a chest is opened)
+  // on use, check for state on object
+  // if no state exists, check db
+  // check if update delta has expired, if so generate more items (if threshold is met)
+  // randomize timer when item is generated
+  // write generated item guids to db
+  // send item data to player
 
   events.GameObjects.OnGenerateLoot((obj, player) => {
     player.SendBroadcastMessage(`${obj.GetDBTableGUIDLow()}`)
