@@ -83,7 +83,6 @@ function main () {
   n.Bonding.NO_BOUNDS.set()
   n.Requirements.clearAll()
   n.ClassMask.clearAll()
-  console.log(n.objectify())
   n.FlagsCustom.clearAll()
   n.FlagsExtra.clearAll()
   n.Flags.clearAll()
@@ -94,6 +93,7 @@ function main () {
   $.std.Spells.load(46699)
     .Description.enGB.set('')
     .Name.enGB.set('')
+  console.log(n.objectify())
 
   const zeal = $.Spell.add({
     id: 'zeal',
