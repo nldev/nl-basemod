@@ -85,6 +85,7 @@ function main () {
   n.Description.clear()
   n.Name.enGB.set('Bow')
   n.DisplayInfo.set($.std.Items.load(2508).DisplayInfo.get())
+  n.InventoryType.set(26)
 
   const zeal = $.Spell.add({
     id: 'zeal',
