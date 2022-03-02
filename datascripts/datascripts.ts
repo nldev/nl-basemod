@@ -288,7 +288,6 @@ function main () {
   map.Name.enGB.set('Dev')
   map.TimeofDayOverride.set(0)
 
-  $.sql.player_levelstats.queryAll({}).forEach(c => c.delete())
   $.sql.Databases.world_source.writeEarly(`
     delete from player_levelstats;
   `)
