@@ -293,11 +293,13 @@ function main () {
   for (const raceId of Object.keys(RACE_IDS))
     for (const classId of Object.keys(CLASS_IDS))
       for (let i = 0; i < 99; i++) {
+        console.log(classId)
+        console.log(raceId)
         $.sql.player_levelstats.add(Number(raceId), Number(classId), i, {
-          agi: STATS[classId].agiMin + (i * STATS[classId].agiInc),
-          spi: STATS[classId].spiMin + (i * STATS[classId].spiInc),
-          sta: STATS[classId].staMin + (i * STATS[classId].staInc),
-          str: STATS[classId].strMin + (i * STATS[classId].strInc),
+          agi: STATS[CLASS_IDS[classId]].agiMin + (i * STATS[CLASS_IDS[classId]].agiInc),
+          spi: STATS[CLASS_IDS[classId]].spiMin + (i * STATS[CLASS_IDS[classId]].spiInc),
+          sta: STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc),
+          str: STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc),
           inte: STATS[classId].intMin + (i * STATS[classId].intInc),
           class: Number(classId),
           race: Number(raceId),

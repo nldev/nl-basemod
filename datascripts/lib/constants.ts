@@ -78,29 +78,29 @@ export const BLOOD_ELF = 'BLOOD_ELF'
 export const DRAENEI = 'DRAENEI'
 
 export const RACE_MASKS: Map<number> = {
-  [HUMAN]: 1,
-  [ORC]: 2,
-  [DWARF]: 4,
-  [NIGHT_ELF]: 8,
-  [UNDEAD]: 16,
-  [TAUREN]: 32,
-  [GNOME]: 64,
-  [TROLL]: 128,
-  [BLOOD_ELF]: 512,
-  [DRAENEI]: 1024,
+  HUMAN: 1,
+  ORC: 2,
+  DWARF: 4,
+  NIGHT_ELF: 8,
+  UNDEAD: 16,
+  TAUREN: 32,
+  GNOME: 64,
+  TROLL: 128,
+  BLOOD_ELF: 512,
+  DRAENEI: 1024,
 }
 
 export const RACE_IDS: Map<number> = {
-  [HUMAN]: 1,
-  [ORC]: 2,
-  [DWARF]: 3,
-  [NIGHT_ELF]: 4,
-  [UNDEAD]: 5,
-  [TAUREN]: 6,
-  [GNOME]: 7,
-  [TROLL]: 8,
-  [BLOOD_ELF]: 10,
-  [DRAENEI]: 11,
+  HUMAN: 1,
+  ORC: 2,
+  DWARF: 3,
+  NIGHT_ELF: 4,
+  UNDEAD: 5,
+  TAUREN: 6,
+  GNOME: 7,
+  TROLL: 8,
+  BLOOD_ELF: 10,
+  DRAENEI: 11,
 }
 
 export const ASSET_TYPE: Map<AssetType> = {
