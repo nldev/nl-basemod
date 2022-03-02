@@ -288,7 +288,7 @@ function main () {
   map.Name.enGB.set('Dev')
   map.TimeofDayOverride.set(0)
 
-  $.sql.player_levelstats.queryAll({}).forEach(c => console.log(c.delete()))
+  $.sql.player_levelstats.queryAll({}).forEach(c => c.delete())
 
   for (const raceId of Object.keys(RACE_IDS))
     for (const classId of Object.keys(CLASS_IDS))
