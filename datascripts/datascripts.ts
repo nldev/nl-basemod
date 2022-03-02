@@ -303,7 +303,9 @@ function main () {
         const sta = Math.floor(STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc))
         const str = Math.floor(STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc))
         const int = Math.floor(STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc))
-        console.log(`insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi});`)
+        $.sql.Databases.world_source.writeLate(`
+          insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi});
+        `)
       }
 
   $.std.Maps.forEach(m => {
