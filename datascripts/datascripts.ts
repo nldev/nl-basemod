@@ -300,7 +300,7 @@ function main () {
           spi: STATS[CLASS_IDS[classId]].spiMin + (i * STATS[CLASS_IDS[classId]].spiInc),
           sta: STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc),
           str: STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc),
-          inte: STATS[classId].intMin + (i * STATS[classId].intInc),
+          inte: STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc),
           class: Number(classId),
           race: Number(raceId),
         })
