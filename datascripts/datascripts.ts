@@ -297,7 +297,7 @@ function main () {
 
   for (const raceId of Object.keys(RACE_IDS))
     for (const classId of Object.keys(CLASS_IDS))
-      for (let i = 0; i < 60; i++) {
+      for (let i = 0; i < 99; i++) {
         const race = RACE_IDS[raceId]
         const cls = CLASS_IDS[classId]
         const level = i + 1
