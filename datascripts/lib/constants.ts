@@ -43,27 +43,27 @@ export const PALADIN = 'PALADIN'
 export const HUNTER = 'HUNTER'
 
 export const CLASS_MASKS: Map<number> = {
-  [WARRIOR]: 1,
-  [PALADIN]: 2,
-  [HUNTER]: 4,
-  [ROGUE]: 8,
-  [PRIEST]: 16,
-  [SHAMAN]: 64,
-  [MAGE]: 128,
-  [WARLOCK]: 256,
-  [DRUID]: 1024,
+  WARRIOR: 1,
+  PALADIN: 2,
+  HUNTER: 4,
+  ROGUE: 8,
+  PRIEST: 16,
+  SHAMAN: 64,
+  MAGE: 128,
+  WARLOCK: 256,
+  DRUID: 1024,
 }
 
 export const CLASS_IDS: Map<number> = {
-  [WARRIOR]: 1,
-  [PALADIN]: 2,
-  [HUNTER]: 3,
-  [ROGUE]: 4,
-  [PRIEST]: 5,
-  [SHAMAN]: 7,
-  [MAGE]: 8,
-  [WARLOCK]: 9,
-  [DRUID]: 11,
+  WARRIOR: 1,
+  PALADIN: 2,
+  HUNTER: 3,
+  ROGUE: 4,
+  PRIEST: 5,
+  SHAMAN: 7,
+  MAGE: 8,
+  WARLOCK: 9,
+  DRUID: 11,
 }
 
 export const HUMAN = 'HUMAN'
