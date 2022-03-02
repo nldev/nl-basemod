@@ -290,23 +290,34 @@ function main () {
 
   $.sql.Databases.world_source.writeEarly(`
     delete from player_levelstats;
+    insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (1, 1, 1, 1, 1, 1, 1, 1);
   `)
+  $.sql.player_levelstats.add(1, 1, 1, {
+    agi: 1,
+    spi: 1,
+    sta: 1,
+    str: 1,
+    inte: 1,
+    class: 1,
+    race: 1,
+  })
 
-  for (const raceId of Object.keys(RACE_IDS))
-    for (const classId of Object.keys(CLASS_IDS))
-      for (let i = 0; i < 99; i++) {
-        const race = RACE_IDS[raceId]
-        const cls = CLASS_IDS[classId]
-        const level = i + 1
-        const agi = Math.floor(STATS[CLASS_IDS[classId]].agiMin + (i * STATS[CLASS_IDS[classId]].agiInc))
-        const spi = Math.floor(STATS[CLASS_IDS[classId]].spiMin + (i * STATS[CLASS_IDS[classId]].spiInc))
-        const sta = Math.floor(STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc))
-        const str = Math.floor(STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc))
-        const int = Math.floor(STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc))
-        $.sql.Databases.world_source.writeLate(`
-          insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi});
-        `)
-      }
+
+  // for (const raceId of Object.keys(RACE_IDS))
+  //   for (const classId of Object.keys(CLASS_IDS))
+  //     for (let i = 0; i < 99; i++) {
+  //       const race = RACE_IDS[raceId]
+  //       const cls = CLASS_IDS[classId]
+  //       const level = i + 1
+  //       const agi = Math.floor(STATS[CLASS_IDS[classId]].agiMin + (i * STATS[CLASS_IDS[classId]].agiInc))
+  //       const spi = Math.floor(STATS[CLASS_IDS[classId]].spiMin + (i * STATS[CLASS_IDS[classId]].spiInc))
+  //       const sta = Math.floor(STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc))
+  //       const str = Math.floor(STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc))
+  //       const int = Math.floor(STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc))
+  //       $.sql.Databases.world_source.writeLate(`
+  //         insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi});
+  //       `)
+  //     }
 
   $.std.Maps.forEach(m => {
     if (m.Name.enGB.get() !== 'Outland')
