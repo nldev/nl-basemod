@@ -291,13 +291,21 @@ function main () {
   for (const raceId of Object.keys(RACE_IDS))
     for (const classId of Object.keys(CLASS_IDS))
       for (let i = 0; i < 99; i++) {
-        const result = $.sql.player_levelstats.query({ race: RACE_IDS[raceId], class: CLASS_IDS[classId], level: i + 1 })
-        result
-          .agi.set(Math.floor(STATS[CLASS_IDS[classId]].agiMin + (i * STATS[CLASS_IDS[classId]].agiInc)))
-          .spi.set(Math.floor(STATS[CLASS_IDS[classId]].spiMin + (i * STATS[CLASS_IDS[classId]].spiInc)))
-          .sta.set(Math.floor(STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc)))
-          .str.set(Math.floor(STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc)))
-          .inte.set(Math.floor(STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc)))
+        const result = $.sql.player_levelstats.add(RACE_IDS[raceId], CLASS_IDS[classId], i + i, {
+          agi: Math.floor(STATS[CLASS_IDS[classId]].agiMin + (i * STATS[CLASS_IDS[classId]].agiInc)),
+          spi: Math.floor(STATS[CLASS_IDS[classId]].spiMin + (i * STATS[CLASS_IDS[classId]].spiInc)),
+          sta: Math.floor(STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc)),
+          str: Math.floor(STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc)),
+          inte: Math.floor(STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc)),
+          // race: RACE_IDS[raceId],
+          // class: CLASS_IDS[classId],
+          // level: i + 1,
+        })
+
+
+
+
+
       }
 
   $.std.Maps.forEach(m => {
