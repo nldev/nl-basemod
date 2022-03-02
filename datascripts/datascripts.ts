@@ -2,6 +2,7 @@ import { std } from 'wow/wotlk'
 import { Builder } from './lib'
 import { CLASS_IDS, RACE_IDS } from './lib/constants'
 import { resolveDuration } from './lib/utils'
+import * as fs from 'fs'
 // warrior:
 const STATS: any = {
   1: {
@@ -307,6 +308,7 @@ function main () {
 
   sql = sql.slice(0, -2) + ';'
   $.sql.Databases.world_dest.write(sql)
+  fs.writeFileSync('C:\\Users\\Administrator\\levelstats.sql', sql, { encoding: 'utf-8' })
   console.log(sql)
   //  insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (2, 1, 1, 1, 1, 1, 1, 1);
 
