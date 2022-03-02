@@ -291,8 +291,8 @@ function main () {
   for (const raceId of Object.keys(RACE_IDS))
     for (const classId of Object.keys(CLASS_IDS))
       for (let i = 0; i < 99; i++) {
-      console.log(STATS[RACE_IDS[raceId]])
-      console.log(STATS[CLASS_IDS[classId]])
+        console.log(STATS[RACE_IDS[raceId]])
+        console.log(STATS[CLASS_IDS[classId]])
         const result = $.sql.player_levelstats.query({ race: STATS[RACE_IDS[raceId]], class: STATS[CLASS_IDS[classId]], level: i + 1 })
         result
           .agi.set(Math.floor(STATS[CLASS_IDS[classId]].agiMin + (i * STATS[CLASS_IDS[classId]].agiInc)))
