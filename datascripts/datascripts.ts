@@ -294,11 +294,11 @@ function main () {
     for (const classId of Object.keys(CLASS_IDS))
       for (let i = 0; i < 99; i++) {
         $.sql.player_levelstats.add(RACE_IDS[raceId], CLASS_IDS[classId], i, {
-          agi: STATS[CLASS_IDS[classId]].agiMin + (i * STATS[CLASS_IDS[classId]].agiInc),
-          spi: STATS[CLASS_IDS[classId]].spiMin + (i * STATS[CLASS_IDS[classId]].spiInc),
-          sta: STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc),
-          str: STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc),
-          inte: STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc),
+          agi: Math.floor(STATS[CLASS_IDS[classId]].agiMin + (i * STATS[CLASS_IDS[classId]].agiInc)),
+          spi: Math.floor(STATS[CLASS_IDS[classId]].spiMin + (i * STATS[CLASS_IDS[classId]].spiInc)),
+          sta: Math.floor(STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc)),
+          str: Math.floor(STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc)),
+          inte: Math.floor(STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc)),
           class: CLASS_IDS[raceId],
           race: RACE_IDS[raceId],
         })
