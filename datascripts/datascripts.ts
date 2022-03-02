@@ -299,8 +299,8 @@ function main () {
           sta: STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc),
           str: STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc),
           inte: STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc),
-          class: Number(classId),
-          race: Number(raceId),
+          class: CLASS_IDS[raceId],
+          race: CLASS_IDS[raceId],
         })
       }
 
