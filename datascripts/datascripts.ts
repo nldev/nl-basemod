@@ -288,9 +288,8 @@ function main () {
   map.Name.enGB.set('Dev')
   map.TimeofDayOverride.set(0)
 
-  $.sql.Databases.world_dest.writeEarly(`
-    delete from player_levelstats;
-  `)
+
+  let sql = 'delete from player_levelstats;'
 
   for (const raceId of Object.keys(RACE_IDS))
     for (const classId of Object.keys(CLASS_IDS))
@@ -303,10 +302,9 @@ function main () {
         const sta = Math.floor(STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc))
         const str = Math.floor(STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc))
         const int = Math.floor(STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc))
-        $.sql.Databases.world_dest.writeLate(`
-          insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi});
-        `)
+        sql = sql + `insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi});\n`
       }
+  $.sql.Databases.world_dest.writeLate(sql)
   //  insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (2, 1, 1, 1, 1, 1, 1, 1);
 
   $.std.Maps.forEach(m => {
