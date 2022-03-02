@@ -290,11 +290,14 @@ function main () {
   map.TimeofDayOverride.set(0)
 
 
-  let sql = 'delete from player_levelstats;\n'
+  let sql = `
+    delete from player_levelstats;
+    insert into \`default.dataset.world.dest\` values
+  `
 
   for (const raceId of Object.keys(RACE_IDS))
     for (const classId of Object.keys(CLASS_IDS))
-      for (let i = 0; i < 99; i++) {
+      for (let i = 0; i < 60; i++) {
         const race = RACE_IDS[raceId]
         const cls = CLASS_IDS[classId]
         const level = i + 1
@@ -303,11 +306,11 @@ function main () {
         const sta = Math.floor(STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc))
         const str = Math.floor(STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc))
         const int = Math.floor(STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc))
-        sql = sql + `(\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi}),\n`
+        sql = sql + `(${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi}),\n`
       }
 
   sql = sql.slice(0, -2) + ';'
-  $.sql.Databases.world_dest.write(sql)
+  // $.sql.Databases.world_dest.write(sql)
   fs.writeFileSync('C:\\Users\\Administrator\\levelstats.sql', sql, { encoding: 'utf-8' })
   console.log(sql)
   //  insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (2, 1, 1, 1, 1, 1, 1, 1);
