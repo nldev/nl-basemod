@@ -60,6 +60,7 @@ export const CLASS_IDS: Map<number> = {
   HUNTER: 3,
   ROGUE: 4,
   PRIEST: 5,
+  DK: 6,
   SHAMAN: 7,
   MAGE: 8,
   WARLOCK: 9,
