@@ -289,20 +289,24 @@ function main () {
   map.TimeofDayOverride.set(0)
 
   $.sql.player_levelstats.queryAll({}).forEach(c => c.delete())
+  $.sql.Databases.world_source.writeEarly(`
+    delete from player_levelstats;
+  `)
 
   for (const raceId of Object.keys(RACE_IDS))
     for (const classId of Object.keys(CLASS_IDS))
       for (let i = 0; i < 99; i++) {
-        $.sql.player_levelstats.add(RACE_IDS[raceId], CLASS_IDS[classId], i + i, {
-          agi: Math.floor(STATS[CLASS_IDS[classId]].agiMin + (i * STATS[CLASS_IDS[classId]].agiInc)),
-          spi: Math.floor(STATS[CLASS_IDS[classId]].spiMin + (i * STATS[CLASS_IDS[classId]].spiInc)),
-          sta: Math.floor(STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc)),
-          str: Math.floor(STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc)),
-          inte: Math.floor(STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc)),
-          // race: RACE_IDS[raceId],
-          // class: CLASS_IDS[classId],
-          // level: i + 1,
-        })
+        const race = RACE_IDS[raceId]
+        const cls = CLASS_IDS[classId]
+        const level = i + 1
+        const agi = Math.floor(STATS[CLASS_IDS[classId]].agiMin + (i * STATS[CLASS_IDS[classId]].agiInc))
+        const spi = Math.floor(STATS[CLASS_IDS[classId]].spiMin + (i * STATS[CLASS_IDS[classId]].spiInc))
+        const sta = Math.floor(STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc))
+        const str = Math.floor(STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc))
+        const int = Math.floor(STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc))
+        $.sql.Databases.world_source.write(`
+          'race', 'class', 'level', 'str', 'agi', 'sta', 'inte', 'spi') VALUES (${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi});
+        `)
       }
 
   $.std.Maps.forEach(m => {
