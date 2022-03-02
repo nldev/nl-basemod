@@ -289,7 +289,7 @@ function main () {
   map.TimeofDayOverride.set(0)
 
 
-  let sql = 'delete from player_levelstats;'
+  let sql = 'delete from player_levelstats;\n'
 
   for (const raceId of Object.keys(RACE_IDS))
     for (const classId of Object.keys(CLASS_IDS))
