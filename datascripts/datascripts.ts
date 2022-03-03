@@ -353,8 +353,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 118 }).CategoryID.set(4)
-  $.std.SkillLines.load(118).enableAutolearn(createClassMask('ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'), ALL_RACE_MASK)
+  $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // dagger
   $.dbc.SkillRaceClassInfo.add(9002, {
     RaceMask: ALL_RACE_MASK,
@@ -363,8 +362,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.std.SkillLines.load(173).enableAutolearn(createClassMask('ROGUE', 'DRUID', 'HUNTER', 'MAGE', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR'), ALL_RACE_MASK)
-  $.dbc.SkillLine.query({ ID: 173 }).CategoryID.set(4)
+  $.std.SkillLines.load(173).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // fist weapon
   $.dbc.SkillRaceClassInfo.add(9003, {
     RaceMask: ALL_RACE_MASK,
@@ -373,8 +371,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 473 }).CategoryID.set(4)
-  $.std.SkillLines.load(473).enableAutolearn(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'), ALL_RACE_MASK)
+  $.std.SkillLines.load(473).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // 1h sword
   $.dbc.SkillRaceClassInfo.add(9004, {
     RaceMask: ALL_RACE_MASK,
@@ -383,8 +380,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 43 }).CategoryID.set(4)
-  $.std.SkillLines.load(43).enableAutolearn(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'WARLOCK', 'MAGE', 'PALADIN'), ALL_RACE_MASK)
+  $.std.SkillLines.load(43).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // 1h axe
   $.dbc.SkillRaceClassInfo.add(9005, {
     RaceMask: ALL_RACE_MASK,
@@ -393,8 +389,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 44 }).CategoryID.set(4)
-  $.std.SkillLines.load(44).enableAutolearn(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN'), ALL_RACE_MASK)
+  $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // thrown
   $.dbc.SkillRaceClassInfo.add(9006, {
     RaceMask: ALL_RACE_MASK,
@@ -403,8 +398,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 176 }).CategoryID.set(4)
-  $.std.SkillLines.load(176).enableAutolearn(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'), ALL_RACE_MASK)
+  $.std.SkillLines.load(176).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // wand
   $.dbc.SkillRaceClassInfo.add(9007, {
     RaceMask: ALL_RACE_MASK,
@@ -413,8 +407,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 228 }).CategoryID.set(4)
-  $.std.SkillLines.load(228).enableAutolearn(createClassMask('MAGE', 'WARLOCK', 'PRIEST'), ALL_RACE_MASK)
+  $.std.SkillLines.load(228).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // staff
   $.dbc.SkillRaceClassInfo.add(9008, {
     RaceMask: ALL_RACE_MASK,
@@ -423,8 +416,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 136 }).CategoryID.set(4)
-  $.std.SkillLines.load(136).enableAutolearn(createClassMask('MAGE', 'WARLOCK', 'WARRIOR', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN'), ALL_RACE_MASK)
+  $.std.SkillLines.load(136).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // polearm
   $.dbc.SkillRaceClassInfo.add(9009, {
     RaceMask: ALL_RACE_MASK,
@@ -433,8 +425,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 229 }).CategoryID.set(4)
-  $.std.SkillLines.load(229).enableAutolearn(createClassMask('PALADIN', 'HUNTER', 'WARRIOR'), ALL_RACE_MASK)
+  $.std.SkillLines.load(229).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // 2h sword
   $.dbc.SkillRaceClassInfo.add(9010, {
     RaceMask: ALL_RACE_MASK,
@@ -443,8 +434,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 55 }).CategoryID.set(4)
-  $.std.SkillLines.load(55).enableAutolearn(createClassMask('PALADIN', 'HUNTER', 'WARRIOR'), ALL_RACE_MASK)
+  $.std.SkillLines.load(55).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // 2h axe
   $.dbc.SkillRaceClassInfo.add(9011, {
     RaceMask: ALL_RACE_MASK,
@@ -453,8 +443,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 172 }).CategoryID.set(4)
-  $.std.SkillLines.load(172).enableAutolearn(createClassMask('HUNTER', 'SHAMAN', 'WARRIOR', 'PALADIN'), ALL_RACE_MASK)
+  $.std.SkillLines.load(172).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // 2h mace
   $.dbc.SkillRaceClassInfo.add(9012, {
     RaceMask: ALL_RACE_MASK,
@@ -463,8 +452,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 160 }).CategoryID.set(4)
-  $.std.SkillLines.load(160).enableAutolearn(createClassMask('PALADIN', 'SHAMAN', 'WARRIOR', 'DRUID'), ALL_RACE_MASK)
+  $.std.SkillLines.load(160).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // shield
   $.dbc.SkillRaceClassInfo.add(9013, {
     RaceMask: ALL_RACE_MASK,
@@ -473,8 +461,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 433 }).CategoryID.set(4)
-  $.std.SkillLines.load(433).enableAutolearn(createClassMask('PALADIN', 'SHAMAN', 'WARRIOR'), ALL_RACE_MASK)
+  $.std.SkillLines.load(433).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // crossbow
   $.dbc.SkillRaceClassInfo.add(9014, {
     RaceMask: ALL_RACE_MASK,
@@ -483,8 +470,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 226 }).CategoryID.set(4)
-  $.std.SkillLines.load(226).enableAutolearn(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'), ALL_RACE_MASK)
+  $.std.SkillLines.load(226).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // gun
   $.dbc.SkillRaceClassInfo.add(9015, {
     RaceMask: ALL_RACE_MASK,
@@ -493,8 +479,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 46 }).CategoryID.set(4)
-  $.std.SkillLines.load(46).enableAutolearn(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'), ALL_RACE_MASK)
+  $.std.SkillLines.load(46).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // bow
   $.dbc.SkillRaceClassInfo.add(9016, {
     RaceMask: ALL_RACE_MASK,
@@ -503,8 +488,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 44 }).CategoryID.set(4)
-  $.std.SkillLines.load(44).enableAutolearn(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'), ALL_RACE_MASK)
+  $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // plate
   $.dbc.SkillRaceClassInfo.add(9017, {
     RaceMask: ALL_RACE_MASK,
@@ -513,8 +497,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 293 }).CategoryID.set(4)
-  $.std.SkillLines.load(293).enableAutolearn(createClassMask('PALADIN', 'WARRIOR'), ALL_RACE_MASK)
+  $.std.SkillLines.load(293).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // mail
   $.dbc.SkillRaceClassInfo.add(9018, {
     RaceMask: ALL_RACE_MASK,
@@ -523,8 +506,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 413 }).CategoryID.set(4)
-  $.std.SkillLines.load(413).enableAutolearn(createClassMask('PALADIN', 'WARRIOR', 'HUNTER', 'SHAMAN'), ALL_RACE_MASK)
+  $.std.SkillLines.load(413).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // leather
   $.dbc.SkillRaceClassInfo.add(9019, {
     RaceMask: ALL_RACE_MASK,
@@ -533,8 +515,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 414 }).CategoryID.set(4)
-  $.std.SkillLines.load(414).enableAutolearn(createClassMask('DRUID', 'HUNTER', 'PALADIN', 'ROGUE', 'SHAMAN', 'WARRIOR'), ALL_RACE_MASK)
+  $.std.SkillLines.load(414).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
   // cloth
   $.dbc.SkillRaceClassInfo.add(9020, {
     RaceMask: ALL_RACE_MASK,
@@ -543,8 +524,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.dbc.SkillLine.query({ ID: 415 }).CategoryID.set(4)
-  $.std.SkillLines.load(415).enableAutolearn(ALL_CLASS_MASK, ALL_RACE_MASK)
+  $.std.SkillLines.load(415).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
 
   $.std.Maps.forEach(m => {
     if (m.Name.enGB.get() !== 'Outland')
