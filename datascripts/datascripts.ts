@@ -353,7 +353,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
+  $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).Category.CLASS.set()
   // dagger
   $.dbc.SkillRaceClassInfo.add(9002, {
     RaceMask: ALL_RACE_MASK,
