@@ -344,6 +344,7 @@ insert into player_classlevelstats values `
 
   const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
   const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
+  $.std.SkillTiers.forEach(t => t.delete())
 
   // dual wield
   $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).Category.set(6).RaceClassInfos.forEach(r => {
