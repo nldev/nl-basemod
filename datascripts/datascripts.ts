@@ -354,9 +354,7 @@ insert into player_classlevelstats values `
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 118 }).forEach(a => {
     a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
     a.ClassMaskForbidden.markAll([0])
   })
@@ -368,8 +366,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 173 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -383,8 +379,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 473 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -398,8 +392,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 43 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -413,8 +405,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 44 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -428,8 +418,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 176 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -443,8 +431,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 228 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -458,8 +444,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 136 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -473,8 +457,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 229 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -488,8 +470,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 55 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -503,8 +483,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 172 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -518,8 +496,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 160 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -533,8 +509,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 433 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -548,8 +522,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 226 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -563,8 +535,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 46 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -578,8 +548,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 44 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -593,8 +561,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 293 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -608,8 +574,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 413 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.MinSkillLineRank.set(0)
     a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
@@ -623,8 +587,6 @@ insert into player_classlevelstats values `
     r.row.MinLevel.set(1)
   })
   $.dbc.SkillLineAbility.queryAll({ SkillLine: 415 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.SupercededBySpell.set(0)
     a.MinSkillLineRank.set(0)
     a.RaceMaskForbidden.markAll([0])
     a.ClassMaskForbidden.markAll([0])
