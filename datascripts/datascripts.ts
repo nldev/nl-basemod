@@ -1,7 +1,7 @@
 import { std } from 'wow/wotlk'
 import { Builder } from './lib'
 import { CLASS_IDS, RACE_IDS, ROGUE } from './lib/constants'
-import { createClassMask, resolveDuration } from './lib/utils'
+import { createClassMask, createRaceMask, resolveDuration } from './lib/utils'
 import * as fs from 'fs'
 const STATS: any = {
   1: {
@@ -340,16 +340,139 @@ insert into player_classlevelstats values `
   console.log(sql)
   //  insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (2, 1, 1, 1, 1, 1, 1, 1);
   //
-  $.dbc.SkillRaceClassInfo.queryAll({}).forEach(v => v.delete())
-  createClassMask(['ROGUE'])
-  $.dbc.SkillRaceClassInfo.add(0, {
-    RaceMask: 0,
-    ClassMask: 0,
-    SkillID: 0,
+//   $.dbc.SkillRaceClassInfo.queryAll({}).forEach(v => v.delete())
+
+  const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
+  const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
+
+  // dual wield
+  $.dbc.SkillRaceClassInfo.add(9001, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'),
+    SkillID: 118,
     MinLevel: 0,
     Flags: 0,
   })
-  $.std.SkillLines.load(44)
+  // dagger
+  $.dbc.SkillRaceClassInfo.add(9002, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('ROGUE', 'DRUID', 'HUNTER', 'MAGE', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR'),
+    SkillID: 173,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // fist weapon
+  $.dbc.SkillRaceClassInfo.add(9003, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'),
+    SkillID: 473,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // 1h sword
+  $.dbc.SkillRaceClassInfo.add(9003, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'WARLOCK', 'MAGE', 'PALADIN'),
+    SkillID: 473,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // 1h axe
+  $.dbc.SkillRaceClassInfo.add(9003, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN'),
+    SkillID: 44,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // thrown
+  $.dbc.SkillRaceClassInfo.add(9004, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('ROGUE', 'HUNTER', 'WARRIOR'),
+    SkillID: 176,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // wand
+  $.dbc.SkillRaceClassInfo.add(0, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('MAGE', 'WARLOCK', 'PRIEST'),
+    SkillID: 136,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // staff
+  $.dbc.SkillRaceClassInfo.add(0, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('MAGE', 'WARLOCK', 'WARRIOR', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN'),
+    SkillID: 136,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // polearm
+  $.dbc.SkillRaceClassInfo.add(0, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('PALADIN', 'HUNTER', 'WARRIOR'),
+    SkillID: 55,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // 2h sword
+  $.dbc.SkillRaceClassInfo.add(0, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('PALADIN', 'HUNTER', 'WARRIOR'),
+    SkillID: 55,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // 2h axe
+  $.dbc.SkillRaceClassInfo.add(0, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('HUNTER', 'SHAMAN', 'WARRIOR', 'PALADIN'),
+    SkillID: 172,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // 2h mace
+  $.dbc.SkillRaceClassInfo.add(0, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('PALADIN', 'SHAMAN', 'WARRIOR', 'DRUID'),
+    SkillID: 160,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // shield
+  $.dbc.SkillRaceClassInfo.add(0, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('PALADIN', 'SHAMAN', 'WARRIOR'),
+    SkillID: 433,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // crossbow
+  $.dbc.SkillRaceClassInfo.add(0, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('ROGUE', 'HUNTER', 'WARRIOR'),
+    SkillID: 46,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // gun
+  $.dbc.SkillRaceClassInfo.add(0, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('ROGUE', 'HUNTER', 'WARRIOR'),
+    SkillID: 46,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  // bow
+  $.dbc.SkillRaceClassInfo.add(0, {
+    RaceMask: ALL_RACE_MASK,
+    ClassMask: createClassMask('ROGUE', 'HUNTER', 'WARRIOR'),
+    SkillID: 44,
+    MinLevel: 0,
+    Flags: 0,
+  })
 
   $.std.Maps.forEach(m => {
     if (m.Name.enGB.get() !== 'Outland')
