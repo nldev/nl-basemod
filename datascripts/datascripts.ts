@@ -544,7 +544,7 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   $.dbc.SkillLine.query({ ID: 415 }).CategoryID.set(4)
-  $.std.SkillLines.load(0).enableAutolearn(createClassMask(), ALL_RACE_MASK)
+  $.std.SkillLines.load(415).enableAutolearn(ALL_CLASS_MASK, ALL_RACE_MASK)
 
   $.std.Maps.forEach(m => {
     if (m.Name.enGB.get() !== 'Outland')
