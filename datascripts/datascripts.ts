@@ -296,8 +296,7 @@ function main () {
   map.TimeofDayOverride.set(0)
 
 
-  let sql = `
-delete from player_levelstats;
+  let sql = `delete from player_levelstats;
 insert into player_levelstats values `
 
   // const hp = Math.floor(STATS[CLASS_IDS[classId]].hpMin + (((i * STATS[CLASS_IDS[classId]].hpMax) - STATS[CLASS_IDS[classId]].hpMin)) / 99)
@@ -320,8 +319,7 @@ insert into player_levelstats values `
   // $.sql.Databases.world_dest.write(sql)
   fs.writeFileSync('C:\\Users\\Administrator\\levelstats.sql', sql, { encoding: 'utf-8' })
 
-  sql = `
-delete from player_classlevelstats;
+  sql = `delete from player_classlevelstats;
 insert into player_classlevelstats values `
 
   for (const raceId of Object.keys(RACE_IDS))
