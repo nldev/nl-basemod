@@ -309,11 +309,11 @@ function main () {
         const race = RACE_IDS[raceId]
         const cls = CLASS_IDS[classId]
         const level = i + 1
-        const agi = Math.floor(STATS[CLASS_IDS[classId]].agiMin + (((i * STATS[CLASS_IDS[classId]].agiMax) - STATS[CLASS_IDS[classId]].agiMin)) / 99)
-        const spi = Math.floor(STATS[CLASS_IDS[classId]].spiMin + (((i * STATS[CLASS_IDS[classId]].spiMax) - STATS[CLASS_IDS[classId]].spiMin)) / 99)
-        const sta = Math.floor(STATS[CLASS_IDS[classId]].staMin + (((i * STATS[CLASS_IDS[classId]].staMax) - STATS[CLASS_IDS[classId]].staMin)) / 99)
-        const str = Math.floor(STATS[CLASS_IDS[classId]].strMin + (((i * STATS[CLASS_IDS[classId]].strMax) - STATS[CLASS_IDS[classId]].strMin)) / 99)
-        const int = Math.floor(STATS[CLASS_IDS[classId]].intMin + (((i * STATS[CLASS_IDS[classId]].intMax) - STATS[CLASS_IDS[classId]].intMin)) / 99)
+        const agi = Math.floor(STATS[CLASS_IDS[classId]].agiMin + (((i * STATS[CLASS_IDS[classId]].agiMax) - STATS[CLASS_IDS[classId]].agiMin)) / 99) || 0
+        const spi = Math.floor(STATS[CLASS_IDS[classId]].spiMin + (((i * STATS[CLASS_IDS[classId]].spiMax) - STATS[CLASS_IDS[classId]].spiMin)) / 99) || 0
+        const sta = Math.floor(STATS[CLASS_IDS[classId]].staMin + (((i * STATS[CLASS_IDS[classId]].staMax) - STATS[CLASS_IDS[classId]].staMin)) / 99) || 0
+        const str = Math.floor(STATS[CLASS_IDS[classId]].strMin + (((i * STATS[CLASS_IDS[classId]].strMax) - STATS[CLASS_IDS[classId]].strMin)) / 99) || 0
+        const int = Math.floor(STATS[CLASS_IDS[classId]].intMin + (((i * STATS[CLASS_IDS[classId]].intMax) - STATS[CLASS_IDS[classId]].intMin)) / 99) || 0
         sql = sql + `(${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi}),\n`
       }
 
@@ -332,8 +332,8 @@ function main () {
         const race = RACE_IDS[raceId]
         const cls = CLASS_IDS[classId]
         const level = i + 1
-        const hp = Math.floor(STATS[CLASS_IDS[classId]].hpMin + (((i * STATS[CLASS_IDS[classId]].hpMax) - STATS[CLASS_IDS[classId]].hpMin)) / 99)
-        const mp = Math.floor(STATS[CLASS_IDS[classId]].mpMin + (((i * STATS[CLASS_IDS[classId]].mpMax) - STATS[CLASS_IDS[classId]].mpMin)) / 99)
+        const hp = Math.floor(STATS[CLASS_IDS[classId]].hpMin + (((i * STATS[CLASS_IDS[classId]].hpMax) - STATS[CLASS_IDS[classId]].hpMin)) / 99) || 1
+        const mp = Math.floor(STATS[CLASS_IDS[classId]].mpMin + (((i * STATS[CLASS_IDS[classId]].mpMax) - STATS[CLASS_IDS[classId]].mpMin)) / 99) || 0
         sql = sql + `(${cls}, ${level}, ${hp}, ${mp}),\n`
       }
 
