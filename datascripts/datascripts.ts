@@ -297,9 +297,8 @@ function main () {
 
 
   let sql = `
-    delete from player_levelstats;
-    insert into \`player_levelstats\` values
-  `
+delete from player_levelstats;
+insert into player_levelstats values `
 
   // const hp = Math.floor(STATS[CLASS_IDS[classId]].hpMin + (((i * STATS[CLASS_IDS[classId]].hpMax) - STATS[CLASS_IDS[classId]].hpMin)) / 99)
   // const mp = Math.floor(STATS[CLASS_IDS[classId]].mpMin + (((i * STATS[CLASS_IDS[classId]].mpMax) - STATS[CLASS_IDS[classId]].mpMin)) / 99)
@@ -322,9 +321,8 @@ function main () {
   fs.writeFileSync('C:\\Users\\Administrator\\levelstats.sql', sql, { encoding: 'utf-8' })
 
   sql = `
-    delete from player_classlevelstats;
-    insert into \`player_classlevelstats\` values
-  `
+delete from player_classlevelstats;
+insert into player_classlevelstats values `
 
   for (const raceId of Object.keys(RACE_IDS))
     for (const classId of Object.keys(CLASS_IDS))
