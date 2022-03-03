@@ -344,10 +344,9 @@ insert into player_classlevelstats values `
 
   const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
   const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
-  $.std.SkillTiers.forEach(t => t.delete())
 
   // dual wield
-  $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).Category.set(6).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.set(1)).Category.set(6).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -360,7 +359,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // dagger
-  $.std.SkillLines.load(173).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(173).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'DRUID', 'HUNTER', 'MAGE', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -373,7 +372,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // fist weapon
-  $.std.SkillLines.load(473).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(473).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -386,7 +385,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // 1h sword
-  $.std.SkillLines.load(43).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(43).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'WARLOCK', 'MAGE', 'PALADIN'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -399,7 +398,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // 1h axe
-  $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -412,7 +411,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // thrown
-  $.std.SkillLines.load(176).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(176).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -425,7 +424,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // wand
-  $.std.SkillLines.load(228).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(228).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('MAGE', 'WARLOCK', 'PRIEST'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -438,7 +437,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // staff
-  $.std.SkillLines.load(136).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(136).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('MAGE', 'WARLOCK', 'WARRIOR', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -451,7 +450,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // polearm
-  $.std.SkillLines.load(229).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(229).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('PALADIN', 'HUNTER', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -464,7 +463,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // 2h sword
-  $.std.SkillLines.load(55).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(55).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('PALADIN', 'HUNTER', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -477,7 +476,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // 2h axe
-  $.std.SkillLines.load(172).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(172).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('HUNTER', 'SHAMAN', 'WARRIOR', 'PALADIN'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -490,7 +489,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // 2h mace
-  $.std.SkillLines.load(160).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(160).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('PALADIN', 'SHAMAN', 'WARRIOR', 'DRUID'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -503,7 +502,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // shield
-  $.std.SkillLines.load(433).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(433).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('PALADIN', 'SHAMAN', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -516,7 +515,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // crossbow
-  $.std.SkillLines.load(226).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(226).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -529,7 +528,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // gun
-  $.std.SkillLines.load(46).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(46).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -542,7 +541,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // bow
-  $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -555,7 +554,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // plate
-  $.std.SkillLines.load(293).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(293).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('PALADIN', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -568,7 +567,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // mail
-  $.std.SkillLines.load(413).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(413).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('PALADIN', 'WARRIOR', 'HUNTER', 'SHAMAN'))
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
@@ -581,7 +580,7 @@ insert into player_classlevelstats values `
     a.ClassMaskForbidden.markAll([0])
   })
   // cloth
-  $.std.SkillLines.load(415).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
+  $.std.SkillLines.load(415).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
     r.ClassMask.set(ALL_CLASS_MASK)
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.clearAll()
