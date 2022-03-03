@@ -353,7 +353,7 @@ insert into player_classlevelstats values `
     MinLevel: 1,
     Flags: 0,
   })
-  $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).Category.CLASS.set()
+  $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).Category.set(6)
   // dagger
   $.dbc.SkillRaceClassInfo.add(9002, {
     RaceMask: ALL_RACE_MASK,
@@ -498,6 +498,9 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   $.std.SkillLines.load(293).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set())
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 293 }).forEach(a => {
+    a.MinSkillLineRank.set(0)
+  })
   // mail
   $.dbc.SkillRaceClassInfo.add(9018, {
     RaceMask: ALL_RACE_MASK,
