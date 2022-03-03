@@ -328,8 +328,9 @@ insert into player_classlevelstats values `
         const race = RACE_IDS[raceId]
         const cls = CLASS_IDS[classId]
         const level = i + 1
-        const hp = (Math.floor(STATS[CLASS_IDS[classId]].hpMin + (((i * STATS[CLASS_IDS[classId]].hpMax) - STATS[CLASS_IDS[classId]].hpMin)) / 99)) || 1
-        const mp = (Math.floor(STATS[CLASS_IDS[classId]].mpMin + (((i * STATS[CLASS_IDS[classId]].mpMax) - STATS[CLASS_IDS[classId]].mpMin)) / 99)) || 0
+        const c = i <= 80 ? i : 80
+        const hp = (Math.floor(STATS[CLASS_IDS[classId]].hpMin + (((c * STATS[CLASS_IDS[classId]].hpMax) - STATS[CLASS_IDS[classId]].hpMin)) / 99)) || 1
+        const mp = (Math.floor(STATS[CLASS_IDS[classId]].mpMin + (((c * STATS[CLASS_IDS[classId]].mpMax) - STATS[CLASS_IDS[classId]].mpMin)) / 99)) || 0
         sql = sql + `(${cls}, ${level}, ${hp}, ${mp}),\n`
       }
 
