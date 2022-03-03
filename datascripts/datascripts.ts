@@ -5,6 +5,10 @@ import { resolveDuration } from './lib/utils'
 import * as fs from 'fs'
 const STATS: any = {
   1: {
+    mpMax: 0,
+    mpMin: 0,
+    hpMax: 1689,
+    hpMin: 839,
     strMax: 128,
     strMin: 98,
     agiMax: 87,
