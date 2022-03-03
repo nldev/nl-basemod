@@ -476,7 +476,7 @@ insert into player_classlevelstats values `
   })
   // cloth
   $.std.SkillLines.load(415).Spells.forEach(s => s.AcquireMethod.LEARN_ON_CREATE.set()).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('PALADIN', 'WARRIOR', 'HUNTER', 'SHAMAN'))
+    r.ClassMask.set(ALL_CLASS_MASK)
     r.RaceMask.set(ALL_RACE_MASK)
     r.Flags.IS_CLASS_LINE.set(true)
     r.row.MinLevel.set(1)
