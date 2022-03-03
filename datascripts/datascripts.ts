@@ -394,7 +394,7 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   // wand
-  $.dbc.SkillRaceClassInfo.add(0, {
+  $.dbc.SkillRaceClassInfo.add(9005, {
     RaceMask: ALL_RACE_MASK,
     ClassMask: createClassMask('MAGE', 'WARLOCK', 'PRIEST'),
     SkillID: 136,
@@ -402,7 +402,7 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   // staff
-  $.dbc.SkillRaceClassInfo.add(0, {
+  $.dbc.SkillRaceClassInfo.add(9006, {
     RaceMask: ALL_RACE_MASK,
     ClassMask: createClassMask('MAGE', 'WARLOCK', 'WARRIOR', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN'),
     SkillID: 136,
@@ -410,7 +410,7 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   // polearm
-  $.dbc.SkillRaceClassInfo.add(0, {
+  $.dbc.SkillRaceClassInfo.add(9007, {
     RaceMask: ALL_RACE_MASK,
     ClassMask: createClassMask('PALADIN', 'HUNTER', 'WARRIOR'),
     SkillID: 55,
@@ -418,7 +418,7 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   // 2h sword
-  $.dbc.SkillRaceClassInfo.add(0, {
+  $.dbc.SkillRaceClassInfo.add(9008, {
     RaceMask: ALL_RACE_MASK,
     ClassMask: createClassMask('PALADIN', 'HUNTER', 'WARRIOR'),
     SkillID: 55,
@@ -426,7 +426,7 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   // 2h axe
-  $.dbc.SkillRaceClassInfo.add(0, {
+  $.dbc.SkillRaceClassInfo.add(9009, {
     RaceMask: ALL_RACE_MASK,
     ClassMask: createClassMask('HUNTER', 'SHAMAN', 'WARRIOR', 'PALADIN'),
     SkillID: 172,
@@ -434,7 +434,7 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   // 2h mace
-  $.dbc.SkillRaceClassInfo.add(0, {
+  $.dbc.SkillRaceClassInfo.add(9010, {
     RaceMask: ALL_RACE_MASK,
     ClassMask: createClassMask('PALADIN', 'SHAMAN', 'WARRIOR', 'DRUID'),
     SkillID: 160,
@@ -442,7 +442,7 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   // shield
-  $.dbc.SkillRaceClassInfo.add(0, {
+  $.dbc.SkillRaceClassInfo.add(9011, {
     RaceMask: ALL_RACE_MASK,
     ClassMask: createClassMask('PALADIN', 'SHAMAN', 'WARRIOR'),
     SkillID: 433,
@@ -450,7 +450,7 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   // crossbow
-  $.dbc.SkillRaceClassInfo.add(0, {
+  $.dbc.SkillRaceClassInfo.add(9012, {
     RaceMask: ALL_RACE_MASK,
     ClassMask: createClassMask('ROGUE', 'HUNTER', 'WARRIOR'),
     SkillID: 46,
@@ -458,7 +458,7 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   // gun
-  $.dbc.SkillRaceClassInfo.add(0, {
+  $.dbc.SkillRaceClassInfo.add(9013, {
     RaceMask: ALL_RACE_MASK,
     ClassMask: createClassMask('ROGUE', 'HUNTER', 'WARRIOR'),
     SkillID: 46,
@@ -466,7 +466,7 @@ insert into player_classlevelstats values `
     Flags: 0,
   })
   // bow
-  $.dbc.SkillRaceClassInfo.add(0, {
+  $.dbc.SkillRaceClassInfo.add(9014, {
     RaceMask: ALL_RACE_MASK,
     ClassMask: createClassMask('ROGUE', 'HUNTER', 'WARRIOR'),
     SkillID: 44,
