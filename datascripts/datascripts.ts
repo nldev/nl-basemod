@@ -298,7 +298,32 @@ function main () {
 
   let sql = `
     delete from player_levelstats;
-    insert into \`default.dataset.world.dest\` values
+    insert into \`player_levelstats\` values
+  `
+
+  // const hp = Math.floor(STATS[CLASS_IDS[classId]].hpMin + (((i * STATS[CLASS_IDS[classId]].hpMax) - STATS[CLASS_IDS[classId]].hpMin)) / 99)
+  // const mp = Math.floor(STATS[CLASS_IDS[classId]].mpMin + (((i * STATS[CLASS_IDS[classId]].mpMax) - STATS[CLASS_IDS[classId]].mpMin)) / 99)
+  for (const raceId of Object.keys(RACE_IDS))
+    for (const classId of Object.keys(CLASS_IDS))
+      for (let i = 0; i < 99; i++) {
+        const race = RACE_IDS[raceId]
+        const cls = CLASS_IDS[classId]
+        const level = i + 1
+        const agi = Math.floor(STATS[CLASS_IDS[classId]].agiMin + (((i * STATS[CLASS_IDS[classId]].agiMax) - STATS[CLASS_IDS[classId]].agiMin)) / 99)
+        const spi = Math.floor(STATS[CLASS_IDS[classId]].spiMin + (((i * STATS[CLASS_IDS[classId]].spiMax) - STATS[CLASS_IDS[classId]].spiMin)) / 99)
+        const sta = Math.floor(STATS[CLASS_IDS[classId]].staMin + (((i * STATS[CLASS_IDS[classId]].staMax) - STATS[CLASS_IDS[classId]].staMin)) / 99)
+        const str = Math.floor(STATS[CLASS_IDS[classId]].strMin + (((i * STATS[CLASS_IDS[classId]].strMax) - STATS[CLASS_IDS[classId]].strMin)) / 99)
+        const int = Math.floor(STATS[CLASS_IDS[classId]].intMin + (((i * STATS[CLASS_IDS[classId]].intMax) - STATS[CLASS_IDS[classId]].intMin)) / 99)
+        sql = sql + `(${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi}),\n`
+      }
+
+  sql = sql.slice(0, -2) + ';'
+  // $.sql.Databases.world_dest.write(sql)
+  fs.writeFileSync('C:\\Users\\Administrator\\levelstats.sql', sql, { encoding: 'utf-8' })
+
+  sql = `
+    delete from player_classlevelstats;
+    insert into \`player_classlevelstats\` values
   `
 
   for (const raceId of Object.keys(RACE_IDS))
@@ -307,17 +332,14 @@ function main () {
         const race = RACE_IDS[raceId]
         const cls = CLASS_IDS[classId]
         const level = i + 1
-        const agi = Math.floor(STATS[CLASS_IDS[classId]].agiMin + (i * STATS[CLASS_IDS[classId]].agiInc))
-        const spi = Math.floor(STATS[CLASS_IDS[classId]].spiMin + (i * STATS[CLASS_IDS[classId]].spiInc))
-        const sta = Math.floor(STATS[CLASS_IDS[classId]].staMin + (i * STATS[CLASS_IDS[classId]].staInc))
-        const str = Math.floor(STATS[CLASS_IDS[classId]].strMin + (i * STATS[CLASS_IDS[classId]].strInc))
-        const int = Math.floor(STATS[CLASS_IDS[classId]].intMin + (i * STATS[CLASS_IDS[classId]].intInc))
-        sql = sql + `(${race}, ${cls}, ${level}, ${str}, ${agi}, ${sta}, ${int}, ${spi}),\n`
+        const hp = Math.floor(STATS[CLASS_IDS[classId]].hpMin + (((i * STATS[CLASS_IDS[classId]].hpMax) - STATS[CLASS_IDS[classId]].hpMin)) / 99)
+        const mp = Math.floor(STATS[CLASS_IDS[classId]].mpMin + (((i * STATS[CLASS_IDS[classId]].mpMax) - STATS[CLASS_IDS[classId]].mpMin)) / 99)
+        sql = sql + `(${cls}, ${level}, ${hp}, ${mp}),\n`
       }
 
   sql = sql.slice(0, -2) + ';'
   // $.sql.Databases.world_dest.write(sql)
-  fs.writeFileSync('C:\\Users\\Administrator\\levelstats.sql', sql, { encoding: 'utf-8' })
+  fs.writeFileSync('C:\\Users\\Administrator\\classlevelstats.sql', sql, { encoding: 'utf-8' })
   console.log(sql)
   //  insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (2, 1, 1, 1, 1, 1, 1, 1);
 
