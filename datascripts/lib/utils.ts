@@ -4,7 +4,7 @@ import { ItemTemplate as TSItem } from 'wow/wotlk/std/Item/ItemTemplate'
 import { Spell as TSSpell } from 'wow/wotlk/std/Spell/Spell'
 
 import { AssetType, TSAsset } from './asset'
-import { ASSET_TYPE, CLASS_MASKS, DEFAULT_ICON_SPELL_BASE, ITEM_SPELL_TRIGGERS, UNNAMED } from './constants'
+import { ASSET_TYPE, CLASS_MASKS, DEFAULT_ICON_SPELL_BASE, ITEM_SPELL_TRIGGERS, RACE_MASKS, UNNAMED } from './constants'
 import { CharacterClass, CharacterRace, Duration, ItemSpellTrigger as IST, Map, TSText, Localization } from './types'
 
 export const noop = () => {}
@@ -211,10 +211,10 @@ export function createRaceMask (...chrRaces: CharacterRace[]) {
 
   let mask = 0
 
-  for (let chrClass of chrRaces) {
-    if (!used[chrClass]) {
-      mask += CLASS_MASKS[chrClass]
-      used[chrClass] = true
+  for (let chrRace of chrRaces) {
+    if (!used[chrRace]) {
+      mask += RACE_MASKS[chrRace]
+      used[chrRace] = true
     }
   }
 
