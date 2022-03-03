@@ -412,15 +412,15 @@ export interface ClassMap<T = boolean> {
 }
 
 export type CharacterClass =
-  | typeof WARRIOR
-  | typeof ROGUE
-  | typeof DRUID
-  | typeof MAGE
-  | typeof WARLOCK
-  | typeof SHAMAN
-  | typeof PRIEST
-  | typeof PALADIN
-  | typeof HUNTER
+  | 'WARRIOR'
+  | 'ROGUE'
+  | 'DRUID'
+  | 'MAGE'
+  | 'WARLOCK'
+  | 'SHAMAN'
+  | 'PRIEST'
+  | 'PALADIN'
+  | 'HUNTER'
 
 export interface ExportData {
   data: any

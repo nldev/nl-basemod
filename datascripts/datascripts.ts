@@ -1,7 +1,7 @@
 import { std } from 'wow/wotlk'
 import { Builder } from './lib'
-import { CLASS_IDS, RACE_IDS } from './lib/constants'
-import { resolveDuration } from './lib/utils'
+import { CLASS_IDS, RACE_IDS, ROGUE } from './lib/constants'
+import { createClassMask, resolveDuration } from './lib/utils'
 import * as fs from 'fs'
 const STATS: any = {
   1: {
@@ -339,6 +339,17 @@ insert into player_classlevelstats values `
   fs.writeFileSync('C:\\Users\\Administrator\\classlevelstats.sql', sql, { encoding: 'utf-8' })
   console.log(sql)
   //  insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (2, 1, 1, 1, 1, 1, 1, 1);
+  //
+  $.dbc.SkillRaceClassInfo.queryAll({}).forEach(v => v.delete())
+  createClassMask(['ROGUE'])
+  $.dbc.SkillRaceClassInfo.add(0, {
+    RaceMask: 0,
+    ClassMask: 0,
+    SkillID: 0,
+    MinLevel: 0,
+    Flags: 0,
+  })
+  $.std.SkillLines.load(44)
 
   $.std.Maps.forEach(m => {
     if (m.Name.enGB.get() !== 'Outland')
