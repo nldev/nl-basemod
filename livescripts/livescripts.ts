@@ -806,6 +806,7 @@ export function Main (events: TSEvents) {
   EasyLoot(events)
   TalentSystem(events)
   // ItemReloading(events)
+  LevelingSystem(events)
   Store(events)
 
   events.Player.OnLogin(player => {
