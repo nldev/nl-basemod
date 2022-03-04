@@ -685,7 +685,6 @@ function main () {
     })
 
   $.std.CreatureTemplates.load(299).Stats.HealthMod.set(10000)
-
 }
 
 main()
