@@ -363,33 +363,43 @@ function main () {
       const amount = min + (inc * i)
       return amount
     })
+    console.log('RegenHP')
     cls.Stats.RegenHP.set(() => {
       return $.dbc.GtOCTRegenHP.getRow(560).Data.get()
     })
+    console.log('RegenHP')
     cls.Stats.RegenMP.set(() => {
       return $.dbc.GtOCTRegenMP.getRow(560).Data.get()
     })
+    console.log('BaseSpellCrit')
     cls.Stats.BaseSpellCrit.set(() => {
       return $.dbc.GtChanceToSpellCritBase.getRow(560).Data.get()
     })
+    console.log('BaseMeleeCrit')
     cls.Stats.BaseMeleeCrit.set(() => {
       return $.dbc.GtChanceToMeleeCritBase.getRow(560).Data.get()
     })
+    console.log('SpellCrit')
     cls.Stats.SpellCrit.set(() => {
       return $.dbc.GtChanceToSpellCrit.getRow(560).Data.get()
     })
+    console.log('MeleeCrit')
     cls.Stats.MeleeCrit.set(() => {
       return $.dbc.GtChanceToMeleeCrit.getRow(560).Data.get()
     })
+    console.log('CombatRatings')
     cls.Stats.CombatRatings.set(() => {
       return $.dbc.GtCombatRatings.getRow(560).Data.get()
     })
+    console.log('CombatRatingsScalar')
     cls.Stats.CombatRatingsScalar.set(() => {
       return $.dbc.GtOCTClassCombatRatingScalar.getRow(560).Data.get()
     })
+    console.log('RegenMPPerSpt')
     cls.Stats.RegenMPPerSpt.set(() => {
       return $.dbc.GtRegenMPPerSpt.getRow(560).Data.get()
     })
+    console.log('RegenHPPerSpt')
     cls.Stats.RegenHPPerSpt.set(() => {
       return $.dbc.GtRegenHPPerSpt.getRow(560).Data.get()
     })
