@@ -337,7 +337,6 @@ insert into player_classlevelstats values `
   sql = sql.slice(0, -2) + ';'
   // $.sql.Databases.world_dest.write(sql)
   fs.writeFileSync('C:\\Users\\Administrator\\classlevelstats.sql', sql, { encoding: 'utf-8' })
-  console.log(sql)
   //  insert into player_levelstats (\`race\`, \`class\`, \`level\`, \`str\`, \`agi\`, \`sta\`, \`inte\`, \`spi\`) values (2, 1, 1, 1, 1, 1, 1, 1);
   //
 //   $.dbc.SkillRaceClassInfo.queryAll({}).forEach(v => v.delete())
@@ -345,7 +344,15 @@ insert into player_classlevelstats values `
   const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
   const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
 
+  $.std.Classes.queryAll({}).forEach(cls => {
+    cls.Stats.CombatRatingsScalar.set(o => {
+      console.log(o)
+      return 1
+    })
+  })
+
   // dual wield
+  $.dbc.GtOCTClassCombatRatingScalar.query({})
   $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.set(1)).Category.set(6).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
