@@ -737,7 +737,9 @@ function main () {
   $.std.CreatureTemplates.load(299).Level.Min.set(99)
   $.std.CreatureTemplates.load(299).Level.Max.set(99)
   $.std.CreatureTemplates.load(299).Level.set(99)
-  console.log($.std.CreatureTemplates.load(257).Stats.DamageMod.get())
+  console.log($.std.CreatureTemplates.load(257).Stats.DamageMod.set(2))
+  console.log($.std.CreatureTemplates.load(257).Stats.HealthMod.set(0.75))
+  console.log($.std.CreatureTemplates.load(257).Stats.ArmorMod.set(0.75))
 }
 
 main()
