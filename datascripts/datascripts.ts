@@ -373,11 +373,11 @@ function main () {
     })
     console.log('BaseSpellCrit')
     cls.Stats.BaseSpellCrit.set(() => {
-      return $.dbc.GtChanceToSpellCritBase.getRow(560).Data.get()
+      return 0
     })
     console.log('BaseMeleeCrit')
     cls.Stats.BaseMeleeCrit.set(() => {
-      return $.dbc.GtChanceToMeleeCritBase.getRow(560).Data.get()
+      return 0
     })
     console.log('SpellCrit')
     cls.Stats.SpellCrit.set(() => {
@@ -393,7 +393,7 @@ function main () {
     })
     console.log('CombatRatingsScalar')
     cls.Stats.CombatRatingsScalar.set(() => {
-      return $.dbc.GtOCTClassCombatRatingScalar.getRow(560).Data.get()
+      return 0
     })
     console.log('RegenMPPerSpt')
     cls.Stats.RegenMPPerSpt.set(() => {
