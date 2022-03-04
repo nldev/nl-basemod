@@ -345,9 +345,99 @@ insert into player_classlevelstats values `
   const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
 
   $.std.Classes.queryAll({}).forEach(cls => {
-    cls.Stats.CombatRatingsScalar.set(o => {
-      console.log(o)
-      return 1
+    if (cls.ID === 6)
+      return
+    cls.Stats.ParryCap.set(0)
+    cls.Stats.DodgeCap.set(0)
+    cls.Stats.MissCap.set(0)
+    cls.Stats.CritToDodge.set(0)
+    cls.Stats.DodgeBase.set(0)
+    // cls.Stats.DiminishingK.set(0)
+    cls.Stats.RegenMPPerSpt.set((o, i) => {
+      return cls.Stats.RegenMPPerSpt.get().get(60).get()
+    })
+    cls.Stats.RegenHPPerSpt.set((o, i) => {
+      return cls.Stats.RegenHPPerSpt.get().get(60).get()
+    })
+    cls.Stats.Intellect.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].intMin
+      const max = STATS[id].intMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.Strength.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].strMin
+      const max = STATS[id].strMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.Stamina.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].staMin
+      const max = STATS[id].staMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.Agility.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].agiMin
+      const max = STATS[id].agiMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.Spirit.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].spiMin
+      const max = STATS[id].spiMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.BaseHP.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].hpMin
+      const max = STATS[id].hpMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.BaseMana.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].mpMin
+      const max = STATS[id].mpMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.RegenHP.set((o, i) => {
+      return cls.Stats.RegenHP.get().get(60).get()
+    })
+    cls.Stats.RegenMP.set((o, i) => {
+      return cls.Stats.RegenMP.get().get(60).get()
+    })
+    cls.Stats.BaseSpellCrit.set((o, i) => {
+      return cls.Stats.BaseSpellCrit.get().get(60).get()
+    })
+    cls.Stats.BaseMeleeCrit.set((o, i) => {
+      return cls.Stats.BaseMeleeCrit.get().get(60).get()
+    })
+    cls.Stats.SpellCrit.set((o, i) => {
+      return cls.Stats.SpellCrit.get().get(60).get()
+    })
+    cls.Stats.MeleeCrit.set((o, i) => {
+      return cls.Stats.MeleeCrit.get().get(60).get()
+    })
+    cls.Stats.CombatRatings.set((o, i) => {
+      return cls.Stats.CombatRatings.get().get(60).get()
+    })
+    cls.Stats.CombatRatingsScalar.set((o, i) => {
+      return cls.Stats.CombatRatingsScalar.get().get(60).get()
     })
   })
 
