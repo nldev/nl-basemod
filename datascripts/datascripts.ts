@@ -300,13 +300,13 @@ function main () {
 
   $.sql.creature_classlevelstats.queryAll({}).forEach(v => v.delete())
   const npcWarriorMin = $.sql.creature_classlevelstats.query({ level: 35, class: 1 })
-  const npcWarriorMax = $.sql.creature_classlevelstats.query({ level: 80, class: 1 })
+  const npcWarriorMax = $.sql.creature_classlevelstats.query({ level: 70, class: 1 })
   const npcPaladinMin = $.sql.creature_classlevelstats.query({ level: 35, class: 2 })
-  const npcPaladinMax = $.sql.creature_classlevelstats.query({ level: 80, class: 2 })
+  const npcPaladinMax = $.sql.creature_classlevelstats.query({ level: 70, class: 2 })
   const npcRogueMin = $.sql.creature_classlevelstats.query({ level: 35, class: 4 })
   const npcRogueMax = $.sql.creature_classlevelstats.query({ level: 80, class: 4 })
   const npcMageMin = $.sql.creature_classlevelstats.query({ level: 35, class: 8 })
-  const npcMageMax = $.sql.creature_classlevelstats.query({ level: 80, class: 8 })
+  const npcMageMax = $.sql.creature_classlevelstats.query({ level: 70, class: 8 })
 
   for (let i = 0; i < 99; i++) {
     const level = i + 1
