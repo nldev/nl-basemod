@@ -745,7 +745,125 @@ function main () {
     c.ArmorModifier.set(0.8)
     c.DamageModifier.set(2)
   })
-}
+
+  $.std.Items.load(4540).Spells.get(0).Spell.getRef().Effects.get(0).PointsBase.set(1000)
+
+
+  const STEALTH = 1784
+  const AMBUSH = 11269
+  const SINISTER_STRIKE = 11294
+  const GOUGE = 1776
+  const CHEAP_SHOT = 1833
+  const SAFE_FALL = 1860
+  const EVISCERATE = 31016
+  const VANISH = 1857
+  const PICK_POCKET = 921
+  const MASTER_OF_DECEPTION = 13971
+  const CAMOUFLAGE = 14063
+  const DIRTY_TRICKS = 14094
+
+  const KIDNEY_SHOT = 8643
+  const SHIV = 5938
+
+  const SPRINT = 11305
+  const EVASION = 26669
+
+  const SAP = 11297
+  const BACKSTAB = 25300
+
+  const GARROTE = 11290
+  const RUPTURE = 11274
+
+  const BLIND = 2094
+  const KICK = 1766
+
+  const DISARM_TRAP = 1842
+  const DETECT_TRAP = 2836
+
+  const EXPOSE_ARMOR = 8647
+  const FEINT = 25302
+
+  const CRIPPLING_POISON = 0
+  const WOUND_POISON = 0
+  const MIND_NUMBING_POISON = 0
+  const DEADLY_POISON = 0
+  const INSTANT_POISON = 0
+  const ANESTHETIC_POISON = 0
+
+  const ROGUE ={
+    1: [
+      STEALTH,
+      AMBUSH,
+      SINISTER_STRIKE,
+      BACKSTAB,
+      EVISCERATE,
+      PICK_POCKET,
+      CRIPPLING_POISON,
+      SAFE_FALL,
+      DISARM_TRAP,
+      DETECT_TRAP,
+      MASTER_OF_DECEPTION,
+      CAMOUFLAGE,
+      DIRTY_TRICKS,
+    ],
+    2: [
+      GOUGE,
+    ],
+    3: [
+      CHEAP_SHOT,
+    ],
+    4: [
+      KIDNEY_SHOT,
+    ],
+    5: [
+      SHIV,
+    ],
+    6: [
+      VANISH,
+    ],
+    7: [
+      SAP,
+    ],
+    8: [
+      SPRINT,
+    ],
+    9: [
+      INSTANT_POISON,
+    ],
+    10: [
+      EVASION,
+    ],
+    11: [
+      KICK,
+    ],
+    12: [
+      GARROTE,
+    ],
+    13: [
+      RUPTURE,
+    ],
+    14: [
+      BLIND,
+    ],
+    15: [
+      DEADLY_POISON,
+    ],
+    16: [
+      EXPOSE_ARMOR,
+    ],
+    17: [
+      FEINT,
+    ],
+    18: [
+      WOUND_POISON,
+    ],
+    19: [
+      MIND_NUMBING_POISON,
+    ],
+    20: [
+      ANESTHETIC_POISON,
+    ],
+  }}
 
 main()
 
