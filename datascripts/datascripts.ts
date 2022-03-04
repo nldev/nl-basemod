@@ -370,33 +370,32 @@ function main () {
       return amount
     })
     cls.Stats.RegenHP.set((o, i) => {
-      return cls.Stats.RegenHP.get().get(60).get()
+      return cls.Stats.RegenHP.get() as any
     })
     cls.Stats.RegenMP.set((o, i) => {
-      return cls.Stats.RegenMP.get().get(60).get()
+      return cls.Stats.RegenMP.get() as any
     })
     cls.Stats.BaseSpellCrit.set((o, i) => {
-      return cls.Stats.BaseSpellCrit.get().get(60).get()
+      return cls.Stats.BaseSpellCrit.get() as any
     })
     cls.Stats.BaseMeleeCrit.set((o, i) => {
-      return cls.Stats.BaseMeleeCrit.get().get(60).get()
+      return cls.Stats.BaseMeleeCrit.get() as any
     })
     cls.Stats.SpellCrit.set((o, i) => {
-      return cls.Stats.SpellCrit.get().get(60).get()
+      return cls.Stats.SpellCrit.get() as any
     })
     cls.Stats.MeleeCrit.set((o, i) => {
-      return cls.Stats.MeleeCrit.get().get(60).get()
+      return cls.Stats.MeleeCrit.get() as any
     })
     cls.Stats.CombatRatings.set((o, i) => {
-      return cls.Stats.CombatRatings.get().get(60).get()
+      return cls.Stats.CombatRatings.get() as any
     })
     cls.Stats.CombatRatingsScalar.set((o, i) => {
-      return cls.Stats.CombatRatingsScalar.get().get(60).get()
+      return cls.Stats.CombatRatingsScalar.get() as any
     })
   })
 
   // dual wield
-  $.dbc.GtOCTClassCombatRatingScalar.query({})
   $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.set(1)).Category.set(6).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'))
     r.RaceMask.set(ALL_RACE_MASK)
