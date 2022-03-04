@@ -741,8 +741,8 @@ function main () {
   // $.std.CreatureTemplates.load(257).Stats.HealthMod.set(0.9)
   // $.std.CreatureTemplates.load(257).Stats.ArmorMod.set(0.9)
   $.sql.creature_template.queryAll({}).forEach(c => {
-    c.HealthModifier.set(0.9)
-    c.ArmorModifier.set(0.9)
+    c.HealthModifier.set(0.8)
+    c.ArmorModifier.set(0.8)
     c.DamageModifier.set(2)
   })
 }
