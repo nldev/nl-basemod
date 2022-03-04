@@ -683,6 +683,9 @@ function main () {
   for (let i = 0; i <= 3000; i++)
     $.dbc.Item.add(90000 + i, {
     })
+
+  $.std.CreatureTemplates.load(299).Stats.HealthMod.set(10000)
+
 }
 
 main()
