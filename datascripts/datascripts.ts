@@ -307,12 +307,6 @@ function main () {
     cls.Stats.CritToDodge.set(0)
     cls.Stats.DodgeBase.set(0)
     // cls.Stats.DiminishingK.set(0)
-    cls.Stats.RegenMPPerSpt.set((o, i) => {
-      return 1
-    })
-    cls.Stats.RegenHPPerSpt.set((o, i) => {
-      return 1
-    })
     cls.Stats.Intellect.set((o, i) => {
       const id = cls.ID
       const min = STATS[id].intMin
@@ -369,29 +363,35 @@ function main () {
       const amount = min + (inc * i)
       return amount
     })
-    cls.Stats.RegenHP.set((o, i) => {
-      return 1
+    cls.Stats.RegenHP.set(() => {
+      return $.dbc.GtOCTRegenHP.getRow(560).Data.get()
     })
-    cls.Stats.RegenMP.set((o, i) => {
-      return 1
+    cls.Stats.RegenMP.set(() => {
+      return $.dbc.GtOCTRegenMP.getRow(560).Data.get()
     })
-    cls.Stats.BaseSpellCrit.set((o, i) => {
-      return 0
+    cls.Stats.BaseSpellCrit.set(() => {
+      return $.dbc.GtChanceToSpellCritBase.getRow(560).Data.get()
     })
-    cls.Stats.BaseMeleeCrit.set((o, i) => {
-      return 0
+    cls.Stats.BaseMeleeCrit.set(() => {
+      return $.dbc.GtChanceToMeleeCritBase.getRow(560).Data.get()
     })
-    cls.Stats.SpellCrit.set((o, i) => {
-      return 0
+    cls.Stats.SpellCrit.set(() => {
+      return $.dbc.GtChanceToSpellCrit.getRow(560).Data.get()
     })
-    cls.Stats.MeleeCrit.set((o, i) => {
-      return 0
+    cls.Stats.MeleeCrit.set(() => {
+      return $.dbc.GtChanceToMeleeCrit.getRow(560).Data.get()
     })
-    cls.Stats.CombatRatings.set((o, i) => {
-      return 14
+    cls.Stats.CombatRatings.set(() => {
+      return $.dbc.GtCombatRatings.getRow(560).Data.get()
     })
-    cls.Stats.CombatRatingsScalar.set((o, i) => {
-      return 0
+    cls.Stats.CombatRatingsScalar.set(() => {
+      return $.dbc.GtOCTClassCombatRatingScalar.getRow(560).Data.get()
+    })
+    cls.Stats.RegenMPPerSpt.set(() => {
+      return $.dbc.GtRegenMPPerSpt.getRow(560).Data.get()
+    })
+    cls.Stats.RegenHPPerSpt.set(() => {
+      return $.dbc.GtRegenHPPerSpt.getRow(560).Data.get()
     })
   })
 
