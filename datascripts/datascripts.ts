@@ -734,12 +734,17 @@ function main () {
     $.dbc.Item.add(90000 + i, {
     })
 
-  $.std.CreatureTemplates.load(299).Level.Min.set(99)
-  $.std.CreatureTemplates.load(299).Level.Max.set(99)
-  $.std.CreatureTemplates.load(299).Level.set(99)
-  console.log($.std.CreatureTemplates.load(257).Stats.DamageMod.set(2))
-  console.log($.std.CreatureTemplates.load(257).Stats.HealthMod.set(0.75))
-  console.log($.std.CreatureTemplates.load(257).Stats.ArmorMod.set(0.75))
+  // $.std.CreatureTemplates.load(299).Level.Min.set(99)
+  // $.std.CreatureTemplates.load(299).Level.Max.set(99)
+  // $.std.CreatureTemplates.load(299).Level.set(99)
+  // $.std.CreatureTemplates.load(257).Stats.DamageMod.set(2)
+  // $.std.CreatureTemplates.load(257).Stats.HealthMod.set(0.9)
+  // $.std.CreatureTemplates.load(257).Stats.ArmorMod.set(0.9)
+  $.sql.creature_template.queryAll({}).forEach(c => {
+    c.HealthModifier.set(0.9)
+    c.ArmorModifier.set(0.9)
+    c.DamageModifier.set(0.9)
+  })
 }
 
 main()
