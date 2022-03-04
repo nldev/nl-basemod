@@ -761,28 +761,20 @@ function main () {
   const MASTER_OF_DECEPTION = 13971
   const CAMOUFLAGE = 14063
   const DIRTY_TRICKS = 14094
-
   const KIDNEY_SHOT = 8643
   const SHIV = 5938
-
   const SPRINT = 11305
   const EVASION = 26669
-
   const SAP = 11297
   const BACKSTAB = 25300
-
   const GARROTE = 11290
   const RUPTURE = 11274
-
   const BLIND = 2094
   const KICK = 1766
-
   const DISARM_TRAP = 1842
   const DETECT_TRAP = 2836
-
   const EXPOSE_ARMOR = 8647
   const FEINT = 25302
-
   const CRIPPLING_POISON = 3408
   const WOUND_POISON = 13227
   const MIND_NUMBING_POISON = 5761

@@ -652,6 +652,124 @@ function Store (events: TSEvents) {
 function Opcode (prefix: string): string {
   return `${prefix}\t`
 }
+function LevelingSystem (events: TSEvents) {
+  const STEALTH = 1784
+  const AMBUSH = 11269
+  const SINISTER_STRIKE = 11294
+  const GOUGE = 1776
+  const CHEAP_SHOT = 1833
+  const SAFE_FALL = 1860
+  const EVISCERATE = 31016
+  const VANISH = 1857
+  const PICK_POCKET = 921
+  const MASTER_OF_DECEPTION = 13971
+  const CAMOUFLAGE = 14063
+  const DIRTY_TRICKS = 14094
+  const KIDNEY_SHOT = 8643
+  const SHIV = 5938
+  const SPRINT = 11305
+  const EVASION = 26669
+  const SAP = 11297
+  const BACKSTAB = 25300
+  const GARROTE = 11290
+  const RUPTURE = 11274
+  const BLIND = 2094
+  const KICK = 1766
+  const DISARM_TRAP = 1842
+  const DETECT_TRAP = 2836
+  const EXPOSE_ARMOR = 8647
+  const FEINT = 25302
+  const CRIPPLING_POISON = 3408
+  const WOUND_POISON = 13227
+  const MIND_NUMBING_POISON = 5761
+  const DEADLY_POISON = 25351
+  const INSTANT_POISON = 11339
+  const ANESTHETIC_POISON = 26785
+
+  events.Player.OnLogin((player, isFirstLogin) => {
+    if (!isFirstLogin)
+      return
+    if (player.GetClass() !== 4)
+      return
+    player.LearnSpell(STEALTH)
+    player.LearnSpell(AMBUSH)
+    player.LearnSpell(SINISTER_STRIKE)
+    player.LearnSpell(BACKSTAB)
+    player.LearnSpell(EVISCERATE)
+    player.LearnSpell(PICK_POCKET)
+    player.LearnSpell(CRIPPLING_POISON)
+    player.LearnSpell(SAFE_FALL)
+    player.LearnSpell(DISARM_TRAP)
+    player.LearnSpell(DETECT_TRAP)
+    player.LearnSpell(MASTER_OF_DECEPTION)
+    player.LearnSpell(CAMOUFLAGE)
+    player.LearnSpell(DIRTY_TRICKS)
+  })
+  events.Player.OnLevelChanged((player, oldLevel) => {
+    const newLevel = player.GetLevel()
+    const diff = newLevel - oldLevel
+
+    if (player.GetClass() !== 4)
+      return
+
+    if ((newLevel >= 2) && !player.HasSpell(GOUGE))
+      player.LearnSpell(GOUGE)
+
+    if ((newLevel >= 3) && !player.HasSpell(CHEAP_SHOT))
+      player.LearnSpell(CHEAP_SHOT)
+
+    if ((newLevel >= 4) && !player.HasSpell(KIDNEY_SHOT))
+      player.LearnSpell(KIDNEY_SHOT)
+
+    if ((newLevel >= 5) && !player.HasSpell(SHIV))
+      player.LearnSpell(SHIV)
+
+    if ((newLevel >= 6) && !player.HasSpell(VANISH))
+      player.LearnSpell(VANISH)
+
+    if ((newLevel >= 7) && !player.HasSpell(SAP))
+      player.LearnSpell(SAP)
+
+    if ((newLevel >= 8) && !player.HasSpell(SPRINT))
+      player.LearnSpell(SPRINT)
+
+    if ((newLevel >= 9) && !player.HasSpell(INSTANT_POISON))
+      player.LearnSpell(INSTANT_POISON)
+
+    if ((newLevel >= 10) && !player.HasSpell(EVASION))
+      player.LearnSpell(EVASION)
+
+    if ((newLevel >= 11) && !player.HasSpell(KICK))
+      player.LearnSpell(KICK)
+
+    if ((newLevel >= 12) && !player.HasSpell(GARROTE))
+      player.LearnSpell(GARROTE)
+
+    if ((newLevel >= 13) && !player.HasSpell(RUPTURE))
+      player.LearnSpell(RUPTURE)
+
+    if ((newLevel >= 14) && !player.HasSpell(BLIND))
+      player.LearnSpell(BLIND)
+
+    if ((newLevel >= 15) && !player.HasSpell(DEADLY_POISON))
+      player.LearnSpell(DEADLY_POISON)
+
+    if ((newLevel >= 16) && !player.HasSpell(EXPOSE_ARMOR))
+      player.LearnSpell(EXPOSE_ARMOR)
+
+    if ((newLevel >= 17) && !player.HasSpell(FEINT))
+      player.LearnSpell(FEINT)
+
+    if ((newLevel >= 18) && !player.HasSpell(WOUND_POISON))
+      player.LearnSpell(WOUND_POISON)
+
+    if ((newLevel >= 19) && !player.HasSpell(MIND_NUMBING_POISON))
+      player.LearnSpell(MIND_NUMBING_POISON)
+
+    if ((newLevel >= 20) && !player.HasSpell(ANESTHETIC_POISON))
+      player.LearnSpell(ANESTHETIC_POISON)
+  })
+}
 
 export function Main (events: TSEvents) {
   EasyLoot(events)
