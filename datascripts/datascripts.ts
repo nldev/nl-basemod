@@ -747,7 +747,7 @@ function main () {
   })
 
   $.std.Items.load(4540).Spells.get(0).Spell.getRef().Effects.get(0).PointsBase.set(1000)
-
+  $.std.Items.load(2092).Damage.clearAll().Damage.addPhysical(10, 20)
 
   const STEALTH = 1784
   const AMBUSH = 11269
