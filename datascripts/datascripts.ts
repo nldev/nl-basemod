@@ -783,14 +783,14 @@ function main () {
   const EXPOSE_ARMOR = 8647
   const FEINT = 25302
 
-  const CRIPPLING_POISON = 0
-  const WOUND_POISON = 0
-  const MIND_NUMBING_POISON = 0
-  const DEADLY_POISON = 0
-  const INSTANT_POISON = 0
-  const ANESTHETIC_POISON = 0
+  const CRIPPLING_POISON = 3408
+  const WOUND_POISON = 13227
+  const MIND_NUMBING_POISON = 5761
+  const DEADLY_POISON = 25351
+  const INSTANT_POISON = 11339
+  const ANESTHETIC_POISON = 26785
 
-  const ROGUE ={
+  const ROGUE = {
     1: [
       STEALTH,
       AMBUSH,
