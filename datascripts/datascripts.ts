@@ -308,10 +308,10 @@ function main () {
     cls.Stats.DodgeBase.set(0)
     // cls.Stats.DiminishingK.set(0)
     cls.Stats.RegenMPPerSpt.set((o, i) => {
-      return cls.Stats.RegenMPPerSpt.get().get(60).get()
+      return 1
     })
     cls.Stats.RegenHPPerSpt.set((o, i) => {
-      return cls.Stats.RegenHPPerSpt.get().get(60).get()
+      return 1
     })
     cls.Stats.Intellect.set((o, i) => {
       const id = cls.ID
@@ -370,28 +370,28 @@ function main () {
       return amount
     })
     cls.Stats.RegenHP.set((o, i) => {
-      return cls.Stats.RegenHP.get() as any
+      return 1
     })
     cls.Stats.RegenMP.set((o, i) => {
-      return cls.Stats.RegenMP.get() as any
+      return 1
     })
     cls.Stats.BaseSpellCrit.set((o, i) => {
-      return cls.Stats.BaseSpellCrit.get() as any
+      return 0
     })
     cls.Stats.BaseMeleeCrit.set((o, i) => {
-      return cls.Stats.BaseMeleeCrit.get() as any
+      return 0
     })
     cls.Stats.SpellCrit.set((o, i) => {
-      return cls.Stats.SpellCrit.get() as any
+      return 0
     })
     cls.Stats.MeleeCrit.set((o, i) => {
-      return cls.Stats.MeleeCrit.get() as any
+      return 0
     })
     cls.Stats.CombatRatings.set((o, i) => {
-      return cls.Stats.CombatRatings.get() as any
+      return 14
     })
     cls.Stats.CombatRatingsScalar.set((o, i) => {
-      return cls.Stats.CombatRatingsScalar.get() as any
+      return 0
     })
   })
 
