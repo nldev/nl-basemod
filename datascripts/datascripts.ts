@@ -443,15 +443,11 @@ function main () {
       const amount = min + (inc * i)
       return amount
     })
-    cls.Stats.RegenHP.set(() => {
-      return $.dbc.GtOCTRegenHP.getRow(560).Data.get()
-    })
-    cls.Stats.RegenMP.set(() => {
-      return $.dbc.GtOCTRegenMP.getRow(560).Data.get()
-    })
     cls.Stats.BaseSpellCrit.set(() => 0)
     cls.Stats.BaseMeleeCrit.set(() => 0)
     cls.Stats.CombatRatingsScalar.set(() => 0)
+    cls.Stats.RegenHP.set(() => $.dbc.GtOCTRegenHP.getRow(560).Data.get())
+    cls.Stats.RegenMP.set(() => $.dbc.GtOCTRegenMP.getRow(560).Data.get())
     cls.Stats.SpellCrit.set(() => $.dbc.GtChanceToSpellCrit.getRow(560).Data.get())
     cls.Stats.MeleeCrit.set(() => $.dbc.GtChanceToMeleeCrit.getRow(560).Data.get())
     cls.Stats.CombatRatings.set(() => $.dbc.GtCombatRatings.getRow(560).Data.get())
