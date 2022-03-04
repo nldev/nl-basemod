@@ -743,7 +743,7 @@ function main () {
   $.sql.creature_template.queryAll({}).forEach(c => {
     c.HealthModifier.set(0.9)
     c.ArmorModifier.set(0.9)
-    c.DamageModifier.set(0.9)
+    c.DamageModifier.set(2)
   })
 }
 
