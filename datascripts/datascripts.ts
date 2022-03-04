@@ -298,6 +298,80 @@ function main () {
   const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
   const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
 
+  $.sql.creature_classlevelstats.queryAll({}).forEach(v => v.delete())
+  const npcWarriorMin = $.sql.creature_classlevelstats.query({ level: 35, class: 1 })
+  const npcWarriorMax = $.sql.creature_classlevelstats.query({ level: 60, class: 1 })
+  const npcPaladinMin = $.sql.creature_classlevelstats.query({ level: 35, class: 2 })
+  const npcPaladinMax = $.sql.creature_classlevelstats.query({ level: 60, class: 2 })
+  const npcRogueMin = $.sql.creature_classlevelstats.query({ level: 35, class: 4 })
+  const npcRogueMax = $.sql.creature_classlevelstats.query({ level: 60, class: 4 })
+  const npcMageMin = $.sql.creature_classlevelstats.query({ level: 35, class: 8 })
+  const npcMageMax = $.sql.creature_classlevelstats.query({ level: 60, class: 8 })
+
+  for (let i = 0; i < 99; i++) {
+    const level = i + 1
+    $.sql.creature_classlevelstats.add(level, 1, {
+      level,
+      class: 1,
+      basehp0: Math.ceil(npcWarriorMin.basehp0.get() + (level * (npcWarriorMax.basehp0.get() - npcWarriorMin.basehp0.get()))),
+      basehp1: Math.ceil(npcWarriorMin.basehp1.get() + (level * (npcWarriorMax.basehp1.get() - npcWarriorMin.basehp1.get()))),
+      basehp2: Math.ceil(npcWarriorMin.basehp2.get() + (level * (npcWarriorMax.basehp2.get() - npcWarriorMin.basehp2.get()))),
+      basemana: Math.ceil(npcWarriorMin.basemana.get() + (level * (npcWarriorMax.basemana.get() - npcWarriorMin.basemana.get()))),
+      basearmor: Math.ceil(npcWarriorMin.basearmor.get() + (level * (npcWarriorMax.basearmor.get() - npcWarriorMin.basearmor.get()))),
+      attackpower: Math.ceil(npcWarriorMin.attackpower.get() + (level * (npcWarriorMax.attackpower.get() - npcWarriorMin.attackpower.get()))),
+      rangedattackpower: Math.ceil(npcWarriorMin.rangedattackpower.get() + (level * (npcWarriorMax.rangedattackpower.get() - npcWarriorMin.rangedattackpower.get()))),
+      damage_base: Math.ceil(npcWarriorMin.damage_base.get() + (level * (npcWarriorMax.damage_base.get() - npcWarriorMin.damage_base.get()))),
+      damage_exp1: Math.ceil(npcWarriorMin.damage_exp1.get() + (level * (npcWarriorMax.damage_exp1.get() - npcWarriorMin.damage_exp1.get()))),
+      damage_exp2: Math.ceil(npcWarriorMin.damage_exp2.get() + (level * (npcWarriorMax.damage_exp2.get() - npcWarriorMin.damage_exp2.get()))),
+      comment: '',
+    })
+    $.sql.creature_classlevelstats.add(level, 2, {
+      level,
+      class: 1,
+      basehp0: Math.ceil(npcPaladinMin.basehp0.get() + (level * (npcPaladinMax.basehp0.get() - npcPaladinMin.basehp0.get()))),
+      basehp1: Math.ceil(npcPaladinMin.basehp1.get() + (level * (npcPaladinMax.basehp1.get() - npcPaladinMin.basehp1.get()))),
+      basehp2: Math.ceil(npcPaladinMin.basehp2.get() + (level * (npcPaladinMax.basehp2.get() - npcPaladinMin.basehp2.get()))),
+      basemana: Math.ceil(npcPaladinMin.basemana.get() + (level * (npcPaladinMax.basemana.get() - npcPaladinMin.basemana.get()))),
+      basearmor: Math.ceil(npcPaladinMin.basearmor.get() + (level * (npcPaladinMax.basearmor.get() - npcPaladinMin.basearmor.get()))),
+      attackpower: Math.ceil(npcPaladinMin.attackpower.get() + (level * (npcPaladinMax.attackpower.get() - npcPaladinMin.attackpower.get()))),
+      rangedattackpower: Math.ceil(npcPaladinMin.rangedattackpower.get() + (level * (npcPaladinMax.rangedattackpower.get() - npcPaladinMin.rangedattackpower.get()))),
+      damage_base: Math.ceil(npcPaladinMin.damage_base.get() + (level * (npcPaladinMax.damage_base.get() - npcPaladinMin.damage_base.get()))),
+      damage_exp1: Math.ceil(npcPaladinMin.damage_exp1.get() + (level * (npcPaladinMax.damage_exp1.get() - npcPaladinMin.damage_exp1.get()))),
+      damage_exp2: Math.ceil(npcPaladinMin.damage_exp2.get() + (level * (npcPaladinMax.damage_exp2.get() - npcPaladinMin.damage_exp2.get()))),
+      comment: '',
+    })
+    $.sql.creature_classlevelstats.add(level, 4, {
+      level,
+      class: 1,
+      basehp0: Math.ceil(npcRogueMin.basehp0.get() + (level * (npcRogueMax.basehp0.get() - npcRogueMin.basehp0.get()))),
+      basehp1: Math.ceil(npcRogueMin.basehp1.get() + (level * (npcRogueMax.basehp1.get() - npcRogueMin.basehp1.get()))),
+      basehp2: Math.ceil(npcRogueMin.basehp2.get() + (level * (npcRogueMax.basehp2.get() - npcRogueMin.basehp2.get()))),
+      basemana: Math.ceil(npcRogueMin.basemana.get() + (level * (npcRogueMax.basemana.get() - npcRogueMin.basemana.get()))),
+      basearmor: Math.ceil(npcRogueMin.basearmor.get() + (level * (npcRogueMax.basearmor.get() - npcRogueMin.basearmor.get()))),
+      attackpower: Math.ceil(npcRogueMin.attackpower.get() + (level * (npcRogueMax.attackpower.get() - npcRogueMin.attackpower.get()))),
+      rangedattackpower: Math.ceil(npcRogueMin.rangedattackpower.get() + (level * (npcRogueMax.rangedattackpower.get() - npcRogueMin.rangedattackpower.get()))),
+      damage_base: Math.ceil(npcRogueMin.damage_base.get() + (level * (npcRogueMax.damage_base.get() - npcRogueMin.damage_base.get()))),
+      damage_exp1: Math.ceil(npcRogueMin.damage_exp1.get() + (level * (npcRogueMax.damage_exp1.get() - npcRogueMin.damage_exp1.get()))),
+      damage_exp2: Math.ceil(npcRogueMin.damage_exp2.get() + (level * (npcRogueMax.damage_exp2.get() - npcRogueMin.damage_exp2.get()))),
+      comment: '',
+    })
+    $.sql.creature_classlevelstats.add(level, 8, {
+      level,
+      class: 1,
+      basehp0: Math.ceil(npcMageMin.basehp0.get() + (level * (npcMageMax.basehp0.get() - npcMageMin.basehp0.get()))),
+      basehp1: Math.ceil(npcMageMin.basehp1.get() + (level * (npcMageMax.basehp1.get() - npcMageMin.basehp1.get()))),
+      basehp2: Math.ceil(npcMageMin.basehp2.get() + (level * (npcMageMax.basehp2.get() - npcMageMin.basehp2.get()))),
+      basemana: Math.ceil(npcMageMin.basemana.get() + (level * (npcMageMax.basemana.get() - npcMageMin.basemana.get()))),
+      basearmor: Math.ceil(npcMageMin.basearmor.get() + (level * (npcMageMax.basearmor.get() - npcMageMin.basearmor.get()))),
+      attackpower: Math.ceil(npcMageMin.attackpower.get() + (level * (npcMageMax.attackpower.get() - npcMageMin.attackpower.get()))),
+      rangedattackpower: Math.ceil(npcMageMin.rangedattackpower.get() + (level * (npcMageMax.rangedattackpower.get() - npcMageMin.rangedattackpower.get()))),
+      damage_base: Math.ceil(npcMageMin.damage_base.get() + (level * (npcMageMax.damage_base.get() - npcMageMin.damage_base.get()))),
+      damage_exp1: Math.ceil(npcMageMin.damage_exp1.get() + (level * (npcMageMax.damage_exp1.get() - npcMageMin.damage_exp1.get()))),
+      damage_exp2: Math.ceil(npcMageMin.damage_exp2.get() + (level * (npcMageMax.damage_exp2.get() - npcMageMin.damage_exp2.get()))),
+      comment: '',
+    })
+  }
+
   $.std.Classes.queryAll({}).forEach(cls => {
     if (cls.ID === 6)
       return
