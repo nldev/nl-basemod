@@ -308,6 +308,11 @@ function main () {
   const npcMageMin = $.sql.creature_classlevelstats.query({ level: 35, class: 8 })
   const npcMageMax = $.sql.creature_classlevelstats.query({ level: 70, class: 8 })
 
+  // FIXME
+  // iterate through all creature templates
+  // increase stat inc size every 10 levels
+  // increase damage for everything
+  // do not give mana to anything that has 0 mana
   for (let i = 0; i < 99; i++) {
     const level = i + 1
     $.sql.creature_classlevelstats.add(level, 1, {
