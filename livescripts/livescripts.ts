@@ -660,7 +660,7 @@ function LevelingSystem (events: TSEvents) {
     const GOUGE = 1776
     const CHEAP_SHOT = 1833
     const SAFE_FALL = 1860
-    const EVISCERATE = 31016
+    const EVISCERATE = 11299
     const VANISH = 1857
     const PICK_POCKET = 921
     const MASTER_OF_DECEPTION = 13971
@@ -711,7 +711,7 @@ function LevelingSystem (events: TSEvents) {
     const GOUGE = 1776
     const CHEAP_SHOT = 1833
     const SAFE_FALL = 1860
-    const EVISCERATE = 31016
+    const EVISCERATE = 11299
     const VANISH = 1857
     const PICK_POCKET = 921
     const MASTER_OF_DECEPTION = 13971
@@ -739,6 +739,21 @@ function LevelingSystem (events: TSEvents) {
     const ANESTHETIC_POISON = 26785
     const newLevel = player.GetLevel()
     const diff = newLevel - oldLevel
+
+    // FIXME delete
+    player.LearnSpell(STEALTH)
+    player.LearnSpell(AMBUSH)
+    player.LearnSpell(SINISTER_STRIKE)
+    player.LearnSpell(BACKSTAB)
+    player.LearnSpell(EVISCERATE)
+    player.LearnSpell(PICK_POCKET)
+    player.LearnSpell(CRIPPLING_POISON)
+    player.LearnSpell(SAFE_FALL)
+    player.LearnSpell(DISARM_TRAP)
+    player.LearnSpell(DETECT_TRAP)
+    player.LearnSpell(MASTER_OF_DECEPTION)
+    player.LearnSpell(CAMOUFLAGE)
+    player.LearnSpell(DIRTY_TRICKS)
 
     if (player.GetClass() !== 4)
       return
