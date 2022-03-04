@@ -443,46 +443,20 @@ function main () {
       const amount = min + (inc * i)
       return amount
     })
-    console.log('RegenHP')
     cls.Stats.RegenHP.set(() => {
       return $.dbc.GtOCTRegenHP.getRow(560).Data.get()
     })
-    console.log('RegenHP')
     cls.Stats.RegenMP.set(() => {
       return $.dbc.GtOCTRegenMP.getRow(560).Data.get()
     })
-    console.log('BaseSpellCrit')
-    cls.Stats.BaseSpellCrit.set(() => {
-      return 0
-    })
-    console.log('BaseMeleeCrit')
-    cls.Stats.BaseMeleeCrit.set(() => {
-      return 0
-    })
-    console.log('SpellCrit')
-    cls.Stats.SpellCrit.set(() => {
-      return $.dbc.GtChanceToSpellCrit.getRow(560).Data.get()
-    })
-    console.log('MeleeCrit')
-    cls.Stats.MeleeCrit.set(() => {
-      return $.dbc.GtChanceToMeleeCrit.getRow(560).Data.get()
-    })
-    console.log('CombatRatings')
-    cls.Stats.CombatRatings.set(() => {
-      return $.dbc.GtCombatRatings.getRow(560).Data.get()
-    })
-    console.log('CombatRatingsScalar')
-    cls.Stats.CombatRatingsScalar.set(() => {
-      return 0
-    })
-    console.log('RegenMPPerSpt')
-    cls.Stats.RegenMPPerSpt.set(() => {
-      return $.dbc.GtRegenMPPerSpt.getRow(560).Data.get()
-    })
-    console.log('RegenHPPerSpt')
-    cls.Stats.RegenHPPerSpt.set(() => {
-      return $.dbc.GtRegenHPPerSpt.getRow(560).Data.get()
-    })
+    cls.Stats.BaseSpellCrit.set(() => 0)
+    cls.Stats.BaseMeleeCrit.set(() => 0)
+    cls.Stats.CombatRatingsScalar.set(() => 0)
+    cls.Stats.SpellCrit.set(() => $.dbc.GtChanceToSpellCrit.getRow(560).Data.get())
+    cls.Stats.MeleeCrit.set(() => $.dbc.GtChanceToMeleeCrit.getRow(560).Data.get())
+    cls.Stats.CombatRatings.set(() => $.dbc.GtCombatRatings.getRow(560).Data.get())
+    cls.Stats.RegenMPPerSpt.set(() => $.dbc.GtRegenMPPerSpt.getRow(560).Data.get())
+    cls.Stats.RegenHPPerSpt.set(() => $.dbc.GtRegenHPPerSpt.getRow(560).Data.get())
   })
 
   // dual wield
@@ -767,6 +741,7 @@ function main () {
   $.std.CreatureTemplates.load(299).Level.Min.set(99)
   $.std.CreatureTemplates.load(299).Level.Max.set(99)
   $.std.CreatureTemplates.load(299).Level.set(99)
+  console.log($.std.CreatureTemplates.load(257).Stats.DamageMod.get())
 }
 
 main()
