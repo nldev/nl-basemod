@@ -311,7 +311,8 @@ function main () {
   // FIXME
   // iterate through all creature templates
   // increase stat inc size every 10 levels
-  // increase damage for everything
+  // increase base damage
+  // decrease base hp (and probably mp)
   // do not give mana to anything that has 0 mana
   for (let i = 0; i < 99; i++) {
     const level = i + 1
