@@ -755,7 +755,7 @@ function main () {
   const GOUGE = 1776
   const CHEAP_SHOT = 1833
   const SAFE_FALL = 1860
-  const EVISCERATE = 31016
+  const EVISCERATE = 11299
   const VANISH = 1857
   const PICK_POCKET = 921
   const MASTER_OF_DECEPTION = 13971
