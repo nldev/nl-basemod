@@ -172,6 +172,12 @@ export const AUTOLEARN = createTemplates<Autolearn>(CREATE_AUTOLEARN_TASK, [
     class: ['ROGUE'],
   },
   {
+    id: 'slice-and-dice',
+    spellId: 6774,
+    level: 14,
+    class: ['ROGUE'],
+  },
+  {
     id: 'expose-armor',
     spellId: 8647,
     level: 15,
