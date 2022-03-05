@@ -798,22 +798,9 @@ function main () {
 
 main()
 
-const AI_EXAMPLE = {
-  id: 'melee',
-  rules: {
-    events: ['on-idle'],
-    conditions: [],
-    actions: [],
-    data: {
-      isCanInterrupt: true,
-    },
-  },
-}
 
 const NPC_EXAMPLE = {
-  ai: [
-    'normal',
-  ],
+  props: ['lunge-attack', '25-cold-resist'],
 }
 
 //   paladin:
