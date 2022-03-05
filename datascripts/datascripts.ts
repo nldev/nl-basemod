@@ -798,6 +798,21 @@ function main () {
 
 main()
 
+const NPC_EXAMPLE = {
+  ai: [
+    {
+      events: ['on-idle'],
+      conditions: [],
+      actions: [],
+      data: {
+        isCanInterrupt: true,
+      },
+    },
+    {
+    },
+  ],
+}
+
 //   paladin:
 //   hunter:
 //   rogue:
