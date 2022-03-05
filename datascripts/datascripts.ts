@@ -792,7 +792,7 @@ function main () {
   $.std.Spells.load(RUPTURE).Power.setEnergy(20)
   $.std.Spells.load(KIDNEY_SHOT).Power.setEnergy(10)
   $.std.Spells.load(EXPOSE_ARMOR).Power.setEnergy(20)
-  $.std.Spells.load(GOUGE).Power.setEnergy(35)
+  $.std.Spells.load(GOUGE).Power.setEnergy(30)
 
   const ROGUE = {
     1: [
