@@ -649,14 +649,29 @@ function Store (events: TSEvents) {
   })
 }
 
-function Opcode (prefix: string): string {
-  return `${prefix}\t`
+function SetAbilities (player: TSPlayer) {
+  const playerGuid = player.GetGUID()
+  const a = QueryWorld(`
+    select * from __player_talents where playerGuid = ${playerGuid};
+  `)
+  let used: string = '0'
+  let max: string = '0'
+  while (a.GetRow()) {
+    used = a.GetString(1)
+    max = a.GetString(2)
+  }
 }
+
 function LevelingSystem (events: TSEvents) {
   events.Player.OnLogin(player => {
   })
+
   events.Player.OnLevelChanged((player, oldLevel) => {
   })
+}
+
+function Opcode (prefix: string): string {
+  return `${prefix}\t`
 }
 
 export function Main (events: TSEvents) {
