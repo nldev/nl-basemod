@@ -776,6 +776,7 @@ function main () {
   const DETECT_TRAP = 2836
   const EXPOSE_ARMOR = 8647
   const FEINT = 25302
+  const INITIATIVE = 13980
   const CRIPPLING_POISON = 3408
   const WOUND_POISON = 13227
   const MIND_NUMBING_POISON = 5761
@@ -785,8 +786,12 @@ function main () {
 
   $.std.Spells.load(SAP).Power.setEnergy(40)
   $.std.Spells.load(GARROTE).Power.setEnergy(30)
-  $.std.Spells.load(CHEAP_SHOT).Power.setEnergy(40)
+  $.std.Spells.load(CHEAP_SHOT).Power.setEnergy(40).Effects.get(0)
   $.std.Spells.load(AMBUSH).Power.setEnergy(40)
+  $.std.Spells.load(EVISCERATE).Power.setEnergy(15)
+  $.std.Spells.load(RUPTURE).Power.setEnergy(10)
+  $.std.Spells.load(KIDNEY_SHOT).Power.setEnergy(10)
+  $.std.Spells.load(EXPOSE_ARMOR).Power.setEnergy(10)
 
   const ROGUE = {
     1: [
@@ -803,6 +808,7 @@ function main () {
       MASTER_OF_DECEPTION,
       CAMOUFLAGE,
       DIRTY_TRICKS,
+      INITIATIVE,
     ],
     2: [
       GOUGE,

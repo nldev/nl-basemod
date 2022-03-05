@@ -655,7 +655,7 @@ function Opcode (prefix: string): string {
 function LevelingSystem (events: TSEvents) {
   events.Player.OnLogin((player, isFirstLogin) => {
     const STEALTH = 1784
-    const AMBUSH = 11269
+    const AMBUSH = 11267
     const SINISTER_STRIKE = 11294
     const GOUGE = 1776
     const CHEAP_SHOT = 1833
@@ -680,6 +680,7 @@ function LevelingSystem (events: TSEvents) {
     const DETECT_TRAP = 2836
     const EXPOSE_ARMOR = 8647
     const FEINT = 25302
+    const INITIATIVE = 13980
     const CRIPPLING_POISON = 3408
     const WOUND_POISON = 13227
     const MIND_NUMBING_POISON = 5761
@@ -706,7 +707,7 @@ function LevelingSystem (events: TSEvents) {
   })
   events.Player.OnLevelChanged((player, oldLevel) => {
     const STEALTH = 1784
-    const AMBUSH = 11269
+    const AMBUSH = 11267
     const SINISTER_STRIKE = 11294
     const GOUGE = 1776
     const CHEAP_SHOT = 1833
@@ -731,6 +732,7 @@ function LevelingSystem (events: TSEvents) {
     const DETECT_TRAP = 2836
     const EXPOSE_ARMOR = 8647
     const FEINT = 25302
+    const INITIATIVE = 13980
     const CRIPPLING_POISON = 3408
     const WOUND_POISON = 13227
     const MIND_NUMBING_POISON = 5761
