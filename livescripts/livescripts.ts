@@ -651,22 +651,33 @@ function Store (events: TSEvents) {
 
 function SetAbilities (player: TSPlayer) {
   const playerGuid = player.GetGUID()
+  const level = player.GetLevel()
+  const playerMask = player.GetClassMask()
   const a = QueryWorld(`
-    select * from __player_talents where playerGuid = ${playerGuid};
+    select * from __autolearn;
   `)
-  let used: string = '0'
-  let max: string = '0'
   while (a.GetRow()) {
-    used = a.GetString(1)
-    max = a.GetString(2)
+    const spellId = a.GetInt32(2)
+    const classMask = a.GetInt32(3)
+    const requiredLevel = a.GetInt32(4)
+    const isCorrectClass = (playerMask & classMask) === playerMask
+    const isCorrectLevel = level >= requiredLevel
+    const isAlreadyHasSpell =  player.HasSpell(spellId)
+    const isShouldLearnSpell = isCorrectClass && isCorrectLevel
+    if (isShouldLearnSpell)
+      player.LearnSpell(spellId)
+    if (!isShouldLearnSpell && isAlreadyHasSpell)
+      player.RemoveSpell(spellId, false, false)
   }
 }
 
 function LevelingSystem (events: TSEvents) {
   events.Player.OnLogin(player => {
+    SetAbilities(player)
   })
 
   events.Player.OnLevelChanged((player, oldLevel) => {
+    SetAbilities(player)
   })
 }
 
