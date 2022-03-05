@@ -684,14 +684,15 @@ function CombatSystem (events: TSEvents) {
   // TODO: call combat db
   // TODO: map npc combat to map dictionary
   events.Maps.OnCreate(map => {
-    const json = new TSJsonObject()
-    json.SetString('foo', 'hello_world')
-    map.SetObject('hello', json)
+    // const json = new TSJsonObject()
+    // json.SetString('test', 'hello world')
+    // map.SetObject('foo', json)
   })
   events.Player.OnLogin(player => {
-    const map = player.GetMap()
-    const o = map.GetJsonObject('hello')
-    player.SendBroadcastMessage(o.GetString('foo'))
+    // const json = new TSJsonObject()
+    // const map = player.GetMap()
+    // const o = map.GetObject('foo', json)
+    // player.SendBroadcastMessage(o.GetString('test'))
   })
 }
 
