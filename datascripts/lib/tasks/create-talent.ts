@@ -178,8 +178,6 @@ export class CreateTalent extends NWTask {
         class: template.options.class
       }
     })
-
-    console.log(template)
   }
 }
 

@@ -22,7 +22,7 @@ export class CreateAutolearn extends NWTask {
     this.builder.Table({
       name: 'autolearn',
       database: 'world',
-      isPersist: true,
+      isPersist: false,
       columns: [
         {
           name: 'entry',
