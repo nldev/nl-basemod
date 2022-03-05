@@ -798,7 +798,6 @@ function main () {
 
 main()
 
-
 const NPC_EXAMPLE = {
   props: ['lunge-attack', '25-cold-resist'],
 }

@@ -680,6 +680,21 @@ function LevelingSystem (events: TSEvents) {
   })
 }
 
+function CombatSystem (events: TSEvents) {
+  // TODO: call combat db
+  // TODO: map npc combat to map dictionary
+  events.Maps.OnCreate(map => {
+    const json = new TSJsonObject()
+    json.SetString('foo', 'hello_world')
+    map.SetObject('hello', json)
+  })
+  events.Player.OnLogin(player => {
+    const map = player.GetMap()
+    const o = map.GetJsonObject('hello')
+    player.SendBroadcastMessage(o.GetString('foo'))
+  })
+}
+
 function Opcode (prefix: string): string {
   return `${prefix}\t`
 }
