@@ -704,6 +704,7 @@ function LevelingSystem (events: TSEvents) {
     player.LearnSpell(MASTER_OF_DECEPTION)
     player.LearnSpell(CAMOUFLAGE)
     player.LearnSpell(DIRTY_TRICKS)
+    player.LearnSpell(INITIATIVE)
   })
   events.Player.OnLevelChanged((player, oldLevel) => {
     const STEALTH = 1784
@@ -755,6 +756,7 @@ function LevelingSystem (events: TSEvents) {
     player.LearnSpell(MASTER_OF_DECEPTION)
     player.LearnSpell(CAMOUFLAGE)
     player.LearnSpell(DIRTY_TRICKS)
+    player.LearnSpell(INITIATIVE)
 
     if (player.GetClass() !== 4)
       return
