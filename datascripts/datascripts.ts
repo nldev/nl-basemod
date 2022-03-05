@@ -775,6 +775,7 @@ function main () {
   const DISARM_TRAP = 1842
   const DETECT_TRAP = 2836
   const EXPOSE_ARMOR = 8647
+  const DISTRACT = 1725
   const FEINT = 25302
   const INITIATIVE = 13980
   const CRIPPLING_POISON = 3408
@@ -794,82 +795,8 @@ function main () {
   $.std.Spells.load(EXPOSE_ARMOR).Power.setEnergy(25)
   $.std.Spells.load(GOUGE).Power.setEnergy(25)
   $.std.Spells.load(SINISTER_STRIKE).Power.setEnergy(40)
-
-  const ROGUE = {
-    1: [
-      STEALTH,
-      AMBUSH,
-      SINISTER_STRIKE,
-      BACKSTAB,
-      EVISCERATE,
-      PICK_POCKET,
-      CRIPPLING_POISON,
-      SAFE_FALL,
-      DISARM_TRAP,
-      DETECT_TRAP,
-      MASTER_OF_DECEPTION,
-      CAMOUFLAGE,
-      DIRTY_TRICKS,
-      INITIATIVE,
-    ],
-    2: [
-      GOUGE,
-    ],
-    3: [
-      CHEAP_SHOT,
-    ],
-    4: [
-      KIDNEY_SHOT,
-    ],
-    5: [
-      SHIV,
-    ],
-    6: [
-      VANISH,
-    ],
-    7: [
-      SAP,
-    ],
-    8: [
-      SPRINT,
-    ],
-    9: [
-      INSTANT_POISON,
-    ],
-    10: [
-      EVASION,
-    ],
-    11: [
-      KICK,
-    ],
-    12: [
-      GARROTE,
-    ],
-    13: [
-      RUPTURE,
-    ],
-    14: [
-      BLIND,
-    ],
-    15: [
-      DEADLY_POISON,
-    ],
-    16: [
-      EXPOSE_ARMOR,
-    ],
-    17: [
-      FEINT,
-    ],
-    18: [
-      WOUND_POISON,
-    ],
-    19: [
-      MIND_NUMBING_POISON,
-    ],
-    20: [
-      ANESTHETIC_POISON,
-    ],
-  }}
+  $.std.Spells.load(SPRINT).Effects.get(0).PointsBase.set(130)
+}
 
 main()
 
