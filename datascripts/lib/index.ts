@@ -116,6 +116,7 @@ export const defaultConfig: Required<Config> = {
     // CreateNpc,
     // CreateModifier,
     CreateMount,
+    CreateAutolearn,
     // CreateAchievement,
     // CreateEnchant,
     // CreateGem,
