@@ -787,9 +787,8 @@ function main () {
 
   $.std.Spells.load(SAP).Power.setEnergy(40)
   $.std.Spells.load(GARROTE).Power.setEnergy(30)
-  $.std.Spells.load(CHEAP_SHOT).Power.setEnergy(40).Effects.get(0)
+  $.std.Spells.load(CHEAP_SHOT).Power.setEnergy(40)
   $.std.Spells.load(AMBUSH).Power.setEnergy(40)
-  $.std.Spells.load(EVISCERATE).Power.setEnergy(35)
   $.std.Spells.load(RUPTURE).Power.setEnergy(25)
   $.std.Spells.load(KIDNEY_SHOT).Power.setEnergy(10)
   $.std.Spells.load(EXPOSE_ARMOR).Power.setEnergy(25)
