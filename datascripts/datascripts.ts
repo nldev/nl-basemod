@@ -741,7 +741,7 @@ function main () {
   // $.std.CreatureTemplates.load(257).Stats.HealthMod.set(0.9)
   // $.std.CreatureTemplates.load(257).Stats.ArmorMod.set(0.9)
   $.sql.creature_template.queryAll({}).forEach(c => {
-    c.HealthModifier.set(0.6)
+    c.HealthModifier.set(0.75)
     c.ArmorModifier.set(0.8)
     c.DamageModifier.set(1.5)
   })
@@ -751,7 +751,7 @@ function main () {
 
 
   const STEALTH = 1784
-  const AMBUSH = 11269
+  const AMBUSH = 11267
   const SINISTER_STRIKE = 11294
   const GOUGE = 1776
   const CHEAP_SHOT = 1833

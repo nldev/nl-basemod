@@ -738,7 +738,6 @@ function LevelingSystem (events: TSEvents) {
     const INSTANT_POISON = 11339
     const ANESTHETIC_POISON = 26785
     const newLevel = player.GetLevel()
-    const diff = newLevel - oldLevel
 
     // FIXME delete
     player.LearnSpell(STEALTH)
