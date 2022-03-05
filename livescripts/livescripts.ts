@@ -650,7 +650,6 @@ function Store (events: TSEvents) {
 }
 
 function SetAbilities (player: TSPlayer) {
-  const playerGuid = player.GetGUID()
   const level = player.GetLevel()
   const playerMask = player.GetClassMask()
   const a = QueryWorld(`
