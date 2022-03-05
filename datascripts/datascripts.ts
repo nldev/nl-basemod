@@ -783,6 +783,11 @@ function main () {
   const INSTANT_POISON = 11339
   const ANESTHETIC_POISON = 26785
 
+  $.std.Spells.load(SAP).Power.setEnergy(40)
+  $.std.Spells.load(GARROTE).Power.setEnergy(30)
+  $.std.Spells.load(CHEAP_SHOT).Power.setEnergy(40)
+  $.std.Spells.load(AMBUSH).Power.setEnergy(40)
+
   const ROGUE = {
     1: [
       STEALTH,
