@@ -653,7 +653,7 @@ function Opcode (prefix: string): string {
   return `${prefix}\t`
 }
 function LevelingSystem (events: TSEvents) {
-  events.Player.OnLogin((player, isFirstLogin) => {
+  events.Player.OnLogin(player => {
   })
   events.Player.OnLevelChanged((player, oldLevel) => {
   })
