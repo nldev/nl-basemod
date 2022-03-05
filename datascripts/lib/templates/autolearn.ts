@@ -17,7 +17,7 @@ export const AUTOLEARN = createTemplates<Autolearn>(CREATE_AUTOLEARN_TASK, [
   },
   {
     id: 'sinister-strike',
-    spellId: 11267,
+    spellId: 11294,
     level: 1,
     class: ['ROGUE'],
   },
