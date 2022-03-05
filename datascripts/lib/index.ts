@@ -26,6 +26,7 @@ import { CreateSpell } from './tasks/create-spell'
 import { CreateStat } from './tasks/create-stat'
 import { CreateTalent } from './tasks/create-talent'
 import { CreateTable } from './tasks/create-table'
+import { CreateAutolearn } from './tasks/create-autolearn'
 import { GenerateEquipment } from './tasks/generate-equipment'
 import { SetupCharacterCreation } from './tasks/setup-character-creation'
 import { SetupClassDruid } from './tasks/setup-class-druid'
@@ -48,6 +49,7 @@ import { SPELLS } from './templates/spells'
 import { STATS } from './templates/stats'
 import { TALENTS } from './templates/talents'
 import { TABLES } from './templates/tables'
+import { AUTOLEARN } from './templates/autolearn'
 import { Data, Database, Env, LogData, Logger, LogType, Map, Queryable, QueryType, SQLTable, Value } from './types'
 import { dashCaseToConstantCase, noop, resolveIcon } from './utils'
 
@@ -76,6 +78,7 @@ export const DEFAULT_OPTIONS: Required<Options> = {
     'CREATE_STAT': true,
     'CREATE_TALENT': true,
     'CREATE_TABLE': true,
+    'CREATE_AUTOLEARN': true,
     'INSERT_SERVER_DATA': true,
     'INSERT_CLIENT_DATA': true,
   },
@@ -85,6 +88,7 @@ export const DEFAULT_OPTIONS: Required<Options> = {
     ...SPELLS,
     ...ITEMS,
     ...TALENTS,
+    ...AUTOLEARN,
     // ...NPCS,
     // ...MODIFIERS,
     ...MOUNTS,
