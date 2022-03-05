@@ -793,8 +793,7 @@ function main () {
   $.std.Spells.load(RUPTURE).Power.setEnergy(25)
   $.std.Spells.load(KIDNEY_SHOT).Power.setEnergy(10)
   $.std.Spells.load(EXPOSE_ARMOR).Power.setEnergy(25)
-  $.std.Spells.load(GOUGE).Power.setEnergy(25)
-  $.std.Spells.load(SINISTER_STRIKE).Power.setEnergy(40)
+  $.std.Spells.load(GOUGE).Power.setEnergy(35)
   $.std.Spells.load(SPRINT).Effects.get(0).PointsBase.set(130)
 }
 
