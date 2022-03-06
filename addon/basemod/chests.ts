@@ -1,5 +1,5 @@
 import { Mapping } from './types'
-import { Frame, Component, ComponentOptions, Element } from './frame'
+import { Frame, Component, ComponentOptions, Element } from './app'
 import { BASE_BACKDROP } from './constants'
 import { Movable } from './utils'
 import { Grid } from './components/grid'

@@ -1,4 +1,4 @@
-import { Opcode } from '../utils'
+import { Opcode } from './utils'
 
 function Setup (events: TSEvents) {
 }

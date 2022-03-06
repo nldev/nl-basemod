@@ -1,4 +1,4 @@
-import { Frame, Component, ComponentOptions, Element } from '../frame'
+import { Frame, Component, ComponentOptions, Element } from '../app'
 
 export const SCROLL_WIDTH = 20
 

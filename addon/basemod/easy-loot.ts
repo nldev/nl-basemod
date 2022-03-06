@@ -1,9 +1,8 @@
 import { BASE_BACKDROP } from './constants'
-import { Frame, Component, ComponentOptions, Element } from './frame'
+import { Frame, Component, ComponentOptions, Element, Get } from './app'
 import { Scroll } from './components/scroll'
 import { List, ListState, ListFns } from './components/list'
 import { Movable } from './utils'
-import { Get } from './app'
 
 export interface LootItemFns {
 }

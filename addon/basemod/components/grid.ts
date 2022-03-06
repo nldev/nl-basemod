@@ -1,5 +1,5 @@
 import { Unique } from '../utils'
-import { Frame, Component, ComponentOptions, Element, ElementFn } from '../frame'
+import { Frame, Component, ComponentOptions, Element, ElementFn } from '../app'
 
 export interface GridOptions extends ComponentOptions {
   itemsPerRow: number

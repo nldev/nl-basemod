@@ -1,6 +1,6 @@
 import * as TALENTS from '../data/talents'
 import { Movable, rgb } from './utils'
-import { Frame, Component, ComponentOptions, Element } from './frame'
+import { Frame, Component, ComponentOptions, Element } from './app'
 import { BASE_BACKDROP, RESPONSES, REQUESTS } from './constants'
 import { Get } from './app'
 import { Grid } from './components/grid'

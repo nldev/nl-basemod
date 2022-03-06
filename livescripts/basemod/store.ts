@@ -1,4 +1,4 @@
-import { Opcode } from '../utils'
+import { Opcode } from './utils'
 
 export function Store (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {

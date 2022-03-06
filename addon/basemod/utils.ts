@@ -1,4 +1,4 @@
-import { Element } from './frame'
+import { Element } from './app'
 import { Get } from './app'
 import { Rgb } from './types'
 
