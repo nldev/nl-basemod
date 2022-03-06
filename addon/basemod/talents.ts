@@ -6,7 +6,6 @@ import { Get } from './app'
 import { Grid } from './components/grid'
 import { Scroll } from './components/scroll'
 
-
 export interface ClassSelection {
   WARRIOR: boolean,
   ROGUE: boolean,
