@@ -1,10 +1,10 @@
-import { Store } from './basemod/modules/store'
-import { EasyLoot } from './basemod/modules/easy-loot'
-import { Talents } from './basemod/modules/talents'
-import { Rest } from './basemod/modules/rest'
-import { Chests } from './basemod/modules/chests'
-import { Autolearn } from './basemod/modules/autolearn'
-import { Combat } from './basemod/modules/combat/combat'
+import { Store } from './basemod/store'
+import { EasyLoot } from './basemod/easy-loot'
+import { Talents } from './basemod/talents'
+import { Rest } from './basemod/rest'
+import { Chests } from './basemod/chests'
+import { Autolearn } from './basemod/autolearn'
+import { Combat } from './basemod/combat/combat'
 
 export function Main (events: TSEvents) {
   Store(events)
