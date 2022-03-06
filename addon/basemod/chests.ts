@@ -144,8 +144,8 @@ let SelectedItem: ItemInfo
 
 for (let i = 1; i <= 16; i++) {
   const slot: WoWAPI.Button = _G[`ContainerFrame1Item${i}`]
-  console.log(slot)
-  console.log(i)
+  // console.log(slot)
+  // console.log(i)
   if (slot) {
     slot.HookScript('OnClick', (frame, button) => {
       if (CursorHasItem()) {
