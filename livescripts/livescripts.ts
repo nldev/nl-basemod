@@ -738,16 +738,16 @@ function LevelingSystem (events: TSEvents) {
     SetAbilities(player)
   })
 
-  events.Player.OnLevelChanged((player,oldLevel)=>{
-    for(let i = 0; i <= 6; i++){
-      player.SetPower(player.GetMaxPower(i),i)
-    }
-  })
-  events.Player.OnLevelChanged(player => {
-    player.SetPower(player.GetMaxPower(0), 0)
+  // events.Player.OnLevelChanged((player,oldLevel)=>{
+  //   for(let i = 0; i <= 6; i++){
+  //     player.SetPower(player.GetMaxPower(i),i)
+  //   }
+  // })
+  // events.Player.OnLevelChanged(player => {
+  //   player.SetPower(player.GetMaxPower(0), 0)
 
-    SetAbilities(player)
-  })
+  //   SetAbilities(player)
+  // })
 }
 
 function Stampede () {
