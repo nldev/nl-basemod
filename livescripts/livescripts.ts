@@ -15,11 +15,17 @@ export function Main (events: TSEvents) {
   Autolearn(events)
   Combat(events)
 
+  events.Spells.OnApply((effect, application) => {
+    if (effect.GetID() === 8326) {
+      const player = application.GetTarget().ToPlayer()
+      const corpse = player.GetCorpse()
+      player.Teleport(corpse.GetMapID(), corpse.GetX(), corpse.GetY(), corpse.GetZ(), corpse.GetO())
+    }
+  })
   events.Player.OnChat((player, _, msg) => {
     console.log(msg.get())
     if (msg.get() === 'dead') {
-      player.ResurrectPlayer(1, false)
-      player.AddAura(8326, player)
+      // player.AddAura(8326, player)
     }
     if (msg.get() === 'alive') {
       player.ResurrectPlayer(1, false)
