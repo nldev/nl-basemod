@@ -192,3 +192,4 @@ export function Talents (events: TSEvents) {
   HandleUnlearnTalent(events)
   GM(events)
 }
+

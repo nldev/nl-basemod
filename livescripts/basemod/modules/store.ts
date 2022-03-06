@@ -1,6 +1,6 @@
 import { Opcode } from '../utils'
 
-function Store (events: TSEvents) {
+export function Store (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
     const opcode = Opcode('store-set')
     const str = message.get()

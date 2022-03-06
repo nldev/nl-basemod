@@ -1,6 +1,6 @@
 import { Opcode } from '../utils'
 
-function EasyLoot (events: TSEvents) {
+export function EasyLoot (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
     const opcode = Opcode('loot-item')
     const str = message.get()

@@ -37,7 +37,7 @@ function CastFromDistance () {
   // cleave aoe: one interrupt + school lockout (cleave animation)
 }
 
-function CombatSystem (events: TSEvents) {
+export function Combat (events: TSEvents) {
   events.Creatures.OnJustEnteredCombat((creature, target) => {
     creature.AddTimer(30, -1, (owner, timer) => {
       const c = owner.ToCreature()
