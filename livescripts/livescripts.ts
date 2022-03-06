@@ -771,20 +771,39 @@ function LeapStrike () {
   // cleave aoe: one interrupt + school lockout (cleave animation)
 }
 
+function AttackFromDistance () {
+  // triggered when player is casting
+  // 0.75 second cast -> leap towards caster location
+  // cleave aoe: one interrupt + school lockout (cleave animation)
+}
+
+function CastFromDistance () {
+  // triggered when player is casting
+  // 0.75 second cast -> leap towards caster location
+  // cleave aoe: one interrupt + school lockout (cleave animation)
+}
+
 function CombatSystem (events: TSEvents) {
+  events.Creatures.OnJustEnteredCombat((creature, target) => {
+    creature.AddTimer(30, -1, (owner, timer) => {
+      const c = owner.ToCreature()
+      if (c.IsNull())
+        timer.Stop()
+      // TODO: get
+    })
+  })
   // TODO: call combat db
   // TODO: map npc combat to map dictionary
-  events.Maps.OnCreate(map => {
-    // const json = new TSJsonObject()
-    // json.SetString('test', 'hello world')
-    // map.SetObject('foo', json)
-  })
-  events.Player.OnLogin(player => {
-    // const json = new TSJsonObject()
-    // const map = player.GetMap()
-    // const o = map.GetObject('foo', json)
-    // player.SendBroadcastMessage(o.GetString('test'))
-  })
+  // events.Maps.OnCreate(map => {
+  //   const list = new TSJsonArray()
+  //   map.SetJsonArray('', list)
+  // })
+  // events.Player.OnLogin(player => {
+  //   const json = new TSJsonObject()
+  //   const map = player.GetMap()
+  //   const o = map.GetObject('foo', json)
+  //   player.SendBroadcastMessage(o.GetString('test'))
+  // })
 }
 
 function Opcode (prefix: string): string {
