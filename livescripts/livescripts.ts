@@ -13,5 +13,6 @@ export function Main (events: TSEvents) {
   Rest(events)
   Chests(events)
   Autolearn(events)
+  Combat(events)
 }
 

@@ -43,7 +43,6 @@ export function Combat (events: TSEvents) {
       const c = owner.ToCreature()
       if (c.IsNull())
         timer.Stop()
-      // TODO: get
     })
   })
   // TODO: call combat db
