@@ -741,13 +741,7 @@ function LevelingSystem (events: TSEvents) {
   events.Player.OnLevelChanged(player => {
     const power = player.GetPowerType()
 
-    // rage
-    if (power === 1)
-      player.SetPower(player.GetMaxPower(1), 1)
-
-    // energy
-    if (power === 3)
-      player.SetPower(player.GetMaxPower(3), 3)
+    player.SetPower(player.GetMaxPower(power), power)
 
     SetAbilities(player)
   })
