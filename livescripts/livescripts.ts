@@ -21,9 +21,10 @@ export function Main (events: TSEvents) {
       player.ResurrectPlayer(1, false)
       player.AddAura(8326, player)
     }
-    if (msg.get() === 'alive')
+    if (msg.get() === 'alive') {
       player.ResurrectPlayer(1, false)
       player.RemoveAura(8326)
+    }
   })
 }
 
