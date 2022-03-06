@@ -1,4 +1,11 @@
 import * as TALENTS from '../data/talents'
+import { Movable, rgb } from './utils'
+import { Frame, Component, ComponentOptions, Element } from './frame'
+import { BASE_BACKDROP, RESPONSES, REQUESTS } from './constants'
+import { Get } from './app'
+import { Grid } from './components/grid'
+import { Scroll } from './components/scroll'
+
 
 export interface ClassSelection {
   WARRIOR: boolean,
@@ -209,9 +216,11 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
   return frame
 }
+export const Talents: Component = options => {
+  const app = Get()
   const talents = Frame({
     name: 'talents',
-    parent: root,
+    parent: app.root,
   })
 
   Movable(talents)
@@ -357,3 +366,6 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
       SendAddonMessage(REQUESTS.GM.SET_TALENT_POINTS, amount, 'WHISPER', name)
     }
   })
+
+  return talents
+}
