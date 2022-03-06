@@ -37,7 +37,7 @@ export function Autolearn (events: TSEvents) {
 
   events.Player.OnLevelChanged(player => {
     SetAbilities(player)
-    // TODO: max rage and energy
+    // TODO: max rage and energy (in another file)
     // player.SetPower(player.GetMaxPower(-1), -1)
   })
 }
