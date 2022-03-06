@@ -27,7 +27,7 @@ function EnableRest (player: TSPlayer) {
         p.SetFloat('rest-timer', c)
       } else {
         const diff = c - d
-        if (!isMaxHealth && (diff > 5000) && !p.HasAura(25221))
+        if (!isMaxHealth && (diff > 6000) && !p.HasAura(25221))
           p.AddAura(25221, p)
       }
     } else {
