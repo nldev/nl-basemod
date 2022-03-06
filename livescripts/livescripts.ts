@@ -18,16 +18,16 @@ export function Main (events: TSEvents) {
   events.Spells.OnApply((effect, application) => {
     if (effect.GetID() === 8326) {
       const player = application.GetTarget().ToPlayer()
-      const corpse = player.GetCorpse()
-      player.AddTimer(20, -1, (o, t) => {
+      player.AddNamedTimer('death', 20, -1, (o, t) => {
         const p = o.ToPlayer()
         if (p.IsNull())
           t.Stop()
-        if (!corpse.IsNull()) {
+        // const corpse = player.GetCorpse()
+        // if (!corpse.IsNull()) {
           player.SendBroadcastMessage('hello')
           // player.Teleport(corpse.GetMapID(), corpse.GetX(), corpse.GetY(), corpse.GetZ(), corpse.GetO())
           t.Stop()
-        }
+        // }
       })
     }
   })
