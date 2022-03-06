@@ -1,12 +1,7 @@
 import { PlayerInfo, TalentInfo, Mapping, CharacterClass, CharacterRace } from './types'
 import { ROOT } from './constants'
 
-const STORE_TYPE_ACCOUNT = 'STORE_TYPE_ACCOUNT'
-const STORE_TYPE_CHARACTER = 'STORE_TYPE_CHARACTER'
-
-export type StoreType = typeof STORE_TYPE_ACCOUNT | typeof STORE_TYPE_CHARACTER
-export type StoreValue = string | number | null
-
+// component
 export type ElementFn = (element: Element<any, any>) => void
 
 export interface Element<S = Mapping, F = Mapping<ElementFn>> {
@@ -56,7 +51,6 @@ export const Root = (ref?: WoWAPI.Frame): Element<any, any> => {
   return element
 }
 
-// frame
 export const Frame: Component = options => {
   if (!options.name)
     throw new Error('Frame requires a name')
@@ -90,6 +84,69 @@ export const Frame: Component = options => {
   app.elements[options.name] = element
 
   return element
+}
+
+// store
+const STORE_TYPE_ACCOUNT = 'STORE_TYPE_ACCOUNT'
+const STORE_TYPE_CHARACTER = 'STORE_TYPE_CHARACTER'
+
+export type StoreType = typeof STORE_TYPE_ACCOUNT | typeof STORE_TYPE_CHARACTER
+export type StoreValue = string | number | null
+
+export class Store {
+  isLoaded = false
+  state: any = {
+    [STORE_TYPE_ACCOUNT]: {},
+    [STORE_TYPE_CHARACTER]: {},
+  }
+
+  public Init (onInit: () => void) {
+    const app = Get()
+
+    Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
+      if (prefix !== 'store-get')
+        return
+      if (!text)
+        return
+
+      const [t, type, key, value] = text.split(' ')
+
+      this.state[type][key] = t === 'number'
+        ? Number(value)
+        : t === 'null'
+        ? null
+        : value
+    })
+
+    Events.ChatInfo.OnChatMsgAddon(app.root.ref, prefix => {
+      if (prefix !== 'store-init-success')
+        return
+
+      this.isLoaded = true
+
+      onInit()
+    })
+
+    SendAddonMessage('store-init', ' ', 'WHISPER', app.playerInfo.name)
+  }
+
+  public Set (type: StoreType, key: string, value: StoreValue) {
+    const app = Get()
+
+    const t = typeof value === 'number'
+      ? 'number'
+      : typeof value === 'string'
+      ? 'string'
+      : null
+
+    this.state[type][key] = value
+
+    SendAddonMessage('store-set', `${t} ${type} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
+  }
+
+  public Get (type: StoreType, key: string) {
+    return this.state[type][key]
+  }
 }
 
 
@@ -151,60 +208,3 @@ export class App {
     }
   }
 }
-
-export class Store {
-  isLoaded = false
-  state: any = {
-    [STORE_TYPE_ACCOUNT]: {},
-    [STORE_TYPE_CHARACTER]: {},
-  }
-
-  public Init (onInit: () => void) {
-    const app = Get()
-
-    Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
-      if (prefix !== 'store-get')
-        return
-      if (!text)
-        return
-
-      const [t, type, key, value] = text.split(' ')
-
-      this.state[type][key] = t === 'number'
-        ? Number(value)
-        : t === 'null'
-        ? null
-        : value
-    })
-
-    Events.ChatInfo.OnChatMsgAddon(app.root.ref, prefix => {
-      if (prefix !== 'store-init-success')
-        return
-
-      this.isLoaded = true
-
-      onInit()
-    })
-
-    SendAddonMessage('store-init', ' ', 'WHISPER', app.playerInfo.name)
-  }
-
-  public Set (type: StoreType, key: string, value: StoreValue) {
-    const app = Get()
-
-    const t = typeof value === 'number'
-      ? 'number'
-      : typeof value === 'string'
-      ? 'string'
-      : null
-
-    this.state[type][key] = value
-
-    SendAddonMessage('store-set', `${t} ${type} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
-  }
-
-  public Get (type: StoreType, key: string) {
-    return this.state[type][key]
-  }
-}
-
