@@ -753,6 +753,9 @@ function main () {
   rest.Name.enGB.set('Resting')
   rest.Description.enGB.set('Restoring 2% health and mana every 3 seconds.')
   rest.Duration.set(-1)
+  const kit = rest.Visual.getRef().ChannelKit.getRefCopy()
+  kit.RightHandEffect.set(0)
+  kit.Animation.set(0)
   const regenHp = rest.Effects.get(0).Aura.MOD_HEALTH_REGEN_PERCENT.set()
   regenHp
   regenHp.PercentBase.set(2)
@@ -765,7 +768,6 @@ function main () {
   regenMp.PowerPctDieSides.set(0)
   regenMp.PowerPerLevelPct.set(0)
   regenMp.PowerPerComboPct.set(0)
-
 
   const STEALTH = 1784
   const AMBUSH = 11267
