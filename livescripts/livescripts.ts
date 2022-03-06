@@ -14,5 +14,16 @@ export function Main (events: TSEvents) {
   Chests(events)
   Autolearn(events)
   Combat(events)
+
+  events.Player.OnChat((player, _, msg) => {
+    console.log(msg.get())
+    if (msg.get() === 'dead') {
+      player.ResurrectPlayer(1, false)
+      player.AddAura(8326, player)
+    }
+    if (msg.get() === 'alive')
+      player.ResurrectPlayer(1, false)
+      player.RemoveAura(8326)
+  })
 }
 
