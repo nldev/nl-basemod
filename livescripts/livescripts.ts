@@ -670,6 +670,40 @@ function SetAbilities (player: TSPlayer) {
   }
 }
 
+function RestSystem (events: TSEvents) {
+  events.Player.OnLogin(player => {
+    player.AddTimer(5, -1, (owner, timer) => {
+      const p = owner.ToPlayer()
+      if (p.IsNull() || p.IsDead() || p.IsMounted())
+        timer.Stop()
+      const state = p.GetStandState()
+      if (state) {
+        p.SendBroadcastMessage('stand')
+      } else {
+        p.SendBroadcastMessage('sit')
+      }
+    })
+    // switch (emote) {
+    //   // STATE_SIT
+    //   case 13:
+    //   // STATE_SIT_CHAIR_LOW
+    //   case 461:
+    //   // STATE_SIT_CHAIR_MED
+    //   case 415:
+    //   // STATE_SIT_CHAIR_HIGH
+    //   case 426:
+    //   // STATE_KNEEL
+    //   case 68:
+    //   // STATE_SLEEP
+    //   case 12:
+    //     if (!player.HasAura(1127)) {
+    //       player.SendBroadcastMessage('resting')
+    //       player.AddAura(1127, player)
+    //     }
+    // }
+  })
+}
+
 function LevelingSystem (events: TSEvents) {
   events.Player.OnLogin(player => {
     SetAbilities(player)
@@ -678,6 +712,33 @@ function LevelingSystem (events: TSEvents) {
   events.Player.OnLevelChanged((player, oldLevel) => {
     SetAbilities(player)
   })
+}
+
+function Stampede () {
+  // triggered from player distance
+  // 0.75 second cast -> charge towards target location
+  // normal aoe: knockdown on location
+}
+
+function Echo () {
+  // triggered when attackers are within melee
+  // 1 second cast -> intididating shout
+}
+
+function BreatheFire () {
+  // triggered when attackers are within melee
+  // 0.75 second cast -> fire damage in cone
+}
+
+function Volley () {
+  // triggered when idle
+  // 0.75 second cast -> magic school homing missile
+}
+
+function LeapStrike () {
+  // triggered when player is casting
+  // 0.75 second cast -> leap towards caster location
+  // cleave aoe: one interrupt + school lockout (cleave animation)
 }
 
 function CombatSystem (events: TSEvents) {
@@ -701,11 +762,12 @@ function Opcode (prefix: string): string {
 }
 
 export function Main (events: TSEvents) {
+  Store(events)
   EasyLoot(events)
   TalentSystem(events)
   // ItemReloading(events)
   LevelingSystem(events)
-  Store(events)
+  RestSystem(events)
 
   events.Player.OnLogin(player => {
     if (!player.IsPlayer())

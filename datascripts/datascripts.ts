@@ -741,9 +741,9 @@ function main () {
   // $.std.CreatureTemplates.load(257).Stats.HealthMod.set(0.9)
   // $.std.CreatureTemplates.load(257).Stats.ArmorMod.set(0.9)
   $.sql.creature_template.queryAll({}).forEach(c => {
-    c.HealthModifier.set(1)
+    c.HealthModifier.set(1.3)
     c.ArmorModifier.set(1)
-    c.DamageModifier.set(1.5)
+    c.DamageModifier.set(1.6)
   })
 
   $.std.Items.load(4540).Spells.get(0).Spell.getRef().Effects.get(0).PointsBase.set(1000)
@@ -799,7 +799,7 @@ function main () {
 main()
 
 const NPC_EXAMPLE = {
-  props: ['lunge-attack', '25-cold-resist'],
+  combat: ['lunge-attack', '25-cold-resist'],
 }
 
 //   paladin:
