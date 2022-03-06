@@ -672,7 +672,7 @@ function SetAbilities (player: TSPlayer) {
 
 function IsAbleToRest (player: TSPlayer): boolean {
   const p = player
-  if (p.IsDead() || p.IsMounted() || p.IsFlying() || p.IsInWater() || p.IsFlying()) {
+  if (p.IsDead() || p.IsMounted() || p.IsFlying() || p.IsInWater() || p.IsFlying() || p.IsInCombat()) {
     return false
   } else {
     return true
