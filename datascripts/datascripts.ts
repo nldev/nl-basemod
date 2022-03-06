@@ -1,7 +1,7 @@
 import { std } from 'wow/wotlk'
-import { Builder } from './lib'
-import { CLASS_IDS, RACE_IDS, ROGUE } from './lib/constants'
-import { createClassMask, createRaceMask, resolveDuration } from './lib/utils'
+import { Builder } from './basemod'
+import { CLASS_IDS, RACE_IDS, ROGUE } from './basemod/constants'
+import { createClassMask, createRaceMask, resolveDuration } from './basemod/utils'
 import * as fs from 'fs'
 const STATS: any = {
   1: {
