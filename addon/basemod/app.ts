@@ -149,7 +149,6 @@ export class Store {
   }
 }
 
-
 // app
 export const Get: () => App = () => _G['app']
 
