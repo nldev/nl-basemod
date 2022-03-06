@@ -689,7 +689,7 @@ function EnableRest (player: TSPlayer) {
     const isSitting = p.GetStandState()
     if (isSitting) {
       const isMaxHealth = p.GetHealth() >= p.GetMaxHealth()
-      if (isMaxHealth && p.HasAura(1127)) {
+      if (isMaxHealth && p.HasAura(25221)) {
         p.RemoveAura(1127)
         return
       }
@@ -699,12 +699,12 @@ function EnableRest (player: TSPlayer) {
         p.SetFloat('rest-timer', c)
       } else {
         const diff = c - d
-        if (!isMaxHealth && (diff > 5000) && !p.HasAura(1127))
-          p.AddAura(1127, p)
+        if (!isMaxHealth && (diff > 5000) && !p.HasAura(25221))
+          p.AddAura(25221, p)
       }
     } else {
       p.SetFloat('rest-timer', 0)
-      p.RemoveAura(1127)
+      p.RemoveAura(25221)
     }
   })
 }
