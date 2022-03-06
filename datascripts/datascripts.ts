@@ -752,7 +752,7 @@ function main () {
   const rest = $.std.Spells.load(1127)
   rest.Name.enGB.set('Resting')
   rest.Description.enGB.set('Restoring 2% health and mana every 3 seconds.')
-  rest.Duration.set(-1)
+  rest.Duration.set(0)
   const kit = rest.Visual.getRef().ChannelKit.getRefCopy()
   kit.RightHandEffect.set(0)
   kit.Animation.set(0)
