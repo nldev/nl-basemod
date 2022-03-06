@@ -739,9 +739,8 @@ function LevelingSystem (events: TSEvents) {
   })
 
   events.Player.OnLevelChanged(player => {
+    SetAbilities(player)
     // player.SetPower(player.GetMaxPower(-1), -1)
-
-    // SetAbilities(player)
   })
 }
 
