@@ -1,4 +1,13 @@
-import * as TALENTS from './data/talents'
+import { App } from './basemod/app'
+import { Talents } from './basemod/talents'
+import { EasyLoot } from './basemod/easy-loot'
+import { Chests } from './basemod/chests'
+
+export const app = new App(app => {
+  Talents()
+  EasyLoot()
+  Chests()
+})
 
 // utils
 //
@@ -8,10 +17,6 @@ import * as TALENTS from './data/talents'
 
 // store
 
-// mods
-// export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
-//
-// export type Use<O = any> = (o: O) => Mod
 
 
 // scroll
@@ -25,7 +30,10 @@ import * as TALENTS from './data/talents'
 // FIXME pass in default
 
 // FIXME organize this this
-const app = new App(app => {
+// mods
+// export type Mod = (frame: WoWAPI.Frame) => WoWAPI.Frame
+//
+// export type Use<O = any> = (o: O) => Mod
   // const root = Root()
   // const chest = Chest()
   // const loot = Loot()
@@ -85,9 +93,6 @@ const app = new App(app => {
   //     })
   //   }
   // })
-
-})
-
 
   // function onSetHyperlink(tooltip: WoWAPI.GameTooltip) {
   //   const [_, link] = tooltip.GetItem()

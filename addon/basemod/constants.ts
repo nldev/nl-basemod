@@ -39,7 +39,7 @@ export const BASE_BACKDROP = {
 
 export const BASE_COLORS = [0, 0, 0, 1]
 
-const REQUESTS = {
+export const REQUESTS = {
   GM: {
     SET_TALENT_POINTS: 'set-talent-points',
   },
@@ -48,7 +48,7 @@ const REQUESTS = {
   UNLEARN_TALENT: 'unlearn-talent',
 }
 
-const RESPONSES = {
+export const RESPONSES = {
   GM: {
     SET_TALENT_POINTS_SUCCESS: 'set-talent-points-success',
   },

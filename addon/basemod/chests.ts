@@ -53,7 +53,7 @@ export const ChestItem: Component<ChestItemOptions> = options => {
   return frame
 }
 
-const Chest: Component = () => {
+export const Chests: Component = () => {
   const padding = Frame({ name: 'chest' })
   padding.ref.RegisterEvent('LOOT_OPENED')
   padding.ref.RegisterEvent('LOOT_CLOSED')
