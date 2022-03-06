@@ -378,329 +378,329 @@ function main () {
     })
   }
 
-  // $.std.Classes.queryAll({}).forEach(cls => {
-  //   if (cls.ID === 6)
-  //     return
-  //   cls.Stats.ParryCap.set(0)
-  //   cls.Stats.DodgeCap.set(0)
-  //   cls.Stats.MissCap.set(0)
-  //   cls.Stats.CritToDodge.set(0)
-  //   cls.Stats.DodgeBase.set(0)
-  //   // cls.Stats.DiminishingK.set(0)
-  //   cls.Stats.Intellect.set((o, i) => {
-  //     const id = cls.ID
-  //     const min = STATS[id].intMin
-  //     const max = STATS[id].intMax
-  //     const inc = (max - min) / 99
-  //     const amount = min + (inc * i)
-  //     return amount
-  //   })
-  //   cls.Stats.Strength.set((o, i) => {
-  //     const id = cls.ID
-  //     const min = STATS[id].strMin
-  //     const max = STATS[id].strMax
-  //     const inc = (max - min) / 99
-  //     const amount = min + (inc * i)
-  //     return amount
-  //   })
-  //   cls.Stats.Stamina.set((o, i) => {
-  //     const id = cls.ID
-  //     const min = STATS[id].staMin
-  //     const max = STATS[id].staMax
-  //     const inc = (max - min) / 99
-  //     const amount = min + (inc * i)
-  //     return amount
-  //   })
-  //   cls.Stats.Agility.set((o, i) => {
-  //     const id = cls.ID
-  //     const min = STATS[id].agiMin
-  //     const max = STATS[id].agiMax
-  //     const inc = (max - min) / 99
-  //     const amount = min + (inc * i)
-  //     return amount
-  //   })
-  //   cls.Stats.Spirit.set((o, i) => {
-  //     const id = cls.ID
-  //     const min = STATS[id].spiMin
-  //     const max = STATS[id].spiMax
-  //     const inc = (max - min) / 99
-  //     const amount = min + (inc * i)
-  //     return amount
-  //   })
-  //   cls.Stats.BaseHP.set((o, i) => {
-  //     const id = cls.ID
-  //     const min = STATS[id].hpMin
-  //     const max = STATS[id].hpMax
-  //     const inc = (max - min) / 99
-  //     const amount = min + (inc * i)
-  //     return amount
-  //   })
-  //   cls.Stats.BaseMana.set((o, i) => {
-  //     const id = cls.ID
-  //     const min = STATS[id].mpMin
-  //     const max = STATS[id].mpMax
-  //     const inc = (max - min) / 99
-  //     const amount = min + (inc * i)
-  //     return amount
-  //   })
-  //   cls.Stats.BaseSpellCrit.set(() => 0)
-  //   cls.Stats.BaseMeleeCrit.set(() => 0)
-  //   cls.Stats.CombatRatingsScalar.set(() => 0)
-  //   cls.Stats.RegenHP.set(() => $.dbc.GtOCTRegenHP.getRow(560).Data.get())
-  //   cls.Stats.RegenMP.set(() => $.dbc.GtOCTRegenMP.getRow(560).Data.get())
-  //   cls.Stats.SpellCrit.set(() => $.dbc.GtChanceToSpellCrit.getRow(560).Data.get())
-  //   cls.Stats.MeleeCrit.set(() => $.dbc.GtChanceToMeleeCrit.getRow(560).Data.get())
-  //   cls.Stats.CombatRatings.set(() => $.dbc.GtCombatRatings.getRow(560).Data.get())
-  //   cls.Stats.RegenMPPerSpt.set(() => $.dbc.GtRegenMPPerSpt.getRow(560).Data.get())
-  //   cls.Stats.RegenHPPerSpt.set(() => $.dbc.GtRegenHPPerSpt.getRow(560).Data.get())
-  // })
+  $.std.Classes.queryAll({}).forEach(cls => {
+    if (cls.ID === 6)
+      return
+    cls.Stats.ParryCap.set(0)
+    cls.Stats.DodgeCap.set(0)
+    cls.Stats.MissCap.set(0)
+    cls.Stats.CritToDodge.set(0)
+    cls.Stats.DodgeBase.set(0)
+    // cls.Stats.DiminishingK.set(0)
+    cls.Stats.Intellect.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].intMin
+      const max = STATS[id].intMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.Strength.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].strMin
+      const max = STATS[id].strMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.Stamina.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].staMin
+      const max = STATS[id].staMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.Agility.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].agiMin
+      const max = STATS[id].agiMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.Spirit.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].spiMin
+      const max = STATS[id].spiMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.BaseHP.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].hpMin
+      const max = STATS[id].hpMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.BaseMana.set((o, i) => {
+      const id = cls.ID
+      const min = STATS[id].mpMin
+      const max = STATS[id].mpMax
+      const inc = (max - min) / 99
+      const amount = min + (inc * i)
+      return amount
+    })
+    cls.Stats.BaseSpellCrit.set(() => 0)
+    cls.Stats.BaseMeleeCrit.set(() => 0)
+    cls.Stats.CombatRatingsScalar.set(() => 0)
+    cls.Stats.RegenHP.set(() => $.dbc.GtOCTRegenHP.getRow(560).Data.get())
+    cls.Stats.RegenMP.set(() => $.dbc.GtOCTRegenMP.getRow(560).Data.get())
+    cls.Stats.SpellCrit.set(() => $.dbc.GtChanceToSpellCrit.getRow(560).Data.get())
+    cls.Stats.MeleeCrit.set(() => $.dbc.GtChanceToMeleeCrit.getRow(560).Data.get())
+    cls.Stats.CombatRatings.set(() => $.dbc.GtCombatRatings.getRow(560).Data.get())
+    cls.Stats.RegenMPPerSpt.set(() => $.dbc.GtRegenMPPerSpt.getRow(560).Data.get())
+    cls.Stats.RegenHPPerSpt.set(() => $.dbc.GtRegenHPPerSpt.getRow(560).Data.get())
+  })
 
-  // // dual wield
-  // $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.set(1)).Category.set(6).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 118 }).forEach(a => {
-  //   a.MinSkillLineRank.set(0)
-  //   a.SupercededBySpell.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // dagger
-  // $.std.SkillLines.load(173).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('ROGUE', 'DRUID', 'HUNTER', 'MAGE', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 173 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // fist weapon
-  // $.std.SkillLines.load(473).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 473 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // 1h sword
-  // $.std.SkillLines.load(43).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'WARLOCK', 'MAGE', 'PALADIN'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 43 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // 1h axe
-  // $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 44 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // thrown
-  // $.std.SkillLines.load(176).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 176 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // wand
-  // $.std.SkillLines.load(228).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('MAGE', 'WARLOCK', 'PRIEST'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 228 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // staff
-  // $.std.SkillLines.load(136).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('MAGE', 'WARLOCK', 'WARRIOR', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 136 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // polearm
-  // $.std.SkillLines.load(229).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('PALADIN', 'HUNTER', 'WARRIOR'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 229 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // 2h sword
-  // $.std.SkillLines.load(55).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('PALADIN', 'HUNTER', 'WARRIOR'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 55 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // 2h axe
-  // $.std.SkillLines.load(172).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('HUNTER', 'SHAMAN', 'WARRIOR', 'PALADIN'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 172 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // 2h mace
-  // $.std.SkillLines.load(160).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('PALADIN', 'SHAMAN', 'WARRIOR', 'DRUID'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 160 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // shield
-  // $.std.SkillLines.load(433).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('PALADIN', 'SHAMAN', 'WARRIOR'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 433 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // crossbow
-  // $.std.SkillLines.load(226).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 226 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // gun
-  // $.std.SkillLines.load(46).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 46 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // bow
-  // $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 44 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // plate
-  // $.std.SkillLines.load(293).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('PALADIN', 'WARRIOR'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 293 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // mail
-  // $.std.SkillLines.load(413).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(createClassMask('PALADIN', 'WARRIOR', 'HUNTER', 'SHAMAN'))
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 413 }).forEach(a => {
-  //   a.SupercededBySpell.set(0)
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
-  // // cloth
-  // $.std.SkillLines.load(415).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-  //   r.ClassMask.set(ALL_CLASS_MASK)
-  //   r.RaceMask.set(ALL_RACE_MASK)
-  //   r.Flags.clearAll()
-  //   r.row.MinLevel.set(1)
-  // })
-  // $.dbc.SkillLineAbility.queryAll({ SkillLine: 415 }).forEach(a => {
-  //   a.MinSkillLineRank.set(0)
-  //   a.RaceMaskForbidden.markAll([0])
-  //   a.ClassMaskForbidden.markAll([0])
-  // })
+  // dual wield
+  $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.set(1)).Category.set(6).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 118 }).forEach(a => {
+    a.MinSkillLineRank.set(0)
+    a.SupercededBySpell.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // dagger
+  $.std.SkillLines.load(173).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('ROGUE', 'DRUID', 'HUNTER', 'MAGE', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 173 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // fist weapon
+  $.std.SkillLines.load(473).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 473 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // 1h sword
+  $.std.SkillLines.load(43).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'WARLOCK', 'MAGE', 'PALADIN'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 43 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // 1h axe
+  $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 44 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // thrown
+  $.std.SkillLines.load(176).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 176 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // wand
+  $.std.SkillLines.load(228).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('MAGE', 'WARLOCK', 'PRIEST'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 228 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // staff
+  $.std.SkillLines.load(136).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('MAGE', 'WARLOCK', 'WARRIOR', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 136 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // polearm
+  $.std.SkillLines.load(229).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('PALADIN', 'HUNTER', 'WARRIOR'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 229 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // 2h sword
+  $.std.SkillLines.load(55).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('PALADIN', 'HUNTER', 'WARRIOR'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 55 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // 2h axe
+  $.std.SkillLines.load(172).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('HUNTER', 'SHAMAN', 'WARRIOR', 'PALADIN'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 172 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // 2h mace
+  $.std.SkillLines.load(160).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('PALADIN', 'SHAMAN', 'WARRIOR', 'DRUID'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 160 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // shield
+  $.std.SkillLines.load(433).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('PALADIN', 'SHAMAN', 'WARRIOR'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 433 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // crossbow
+  $.std.SkillLines.load(226).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 226 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // gun
+  $.std.SkillLines.load(46).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 46 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // bow
+  $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 44 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // plate
+  $.std.SkillLines.load(293).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('PALADIN', 'WARRIOR'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 293 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // mail
+  $.std.SkillLines.load(413).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(createClassMask('PALADIN', 'WARRIOR', 'HUNTER', 'SHAMAN'))
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 413 }).forEach(a => {
+    a.SupercededBySpell.set(0)
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
+  // cloth
+  $.std.SkillLines.load(415).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
+    r.ClassMask.set(ALL_CLASS_MASK)
+    r.RaceMask.set(ALL_RACE_MASK)
+    r.Flags.clearAll()
+    r.row.MinLevel.set(1)
+  })
+  $.dbc.SkillLineAbility.queryAll({ SkillLine: 415 }).forEach(a => {
+    a.MinSkillLineRank.set(0)
+    a.RaceMaskForbidden.markAll([0])
+    a.ClassMaskForbidden.markAll([0])
+  })
 
   $.std.Maps.forEach(m => {
     if (m.Name.enGB.get() !== 'Outland')
