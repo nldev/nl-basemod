@@ -65,6 +65,8 @@ export interface TalentFns {
 }
 
 export const Talent: Component<TalentOptions, TalentState, TalentFns> = options => {
+  const app = Get()
+
   // frame
   const frame: Element<TalentState, TalentFns> =
     Frame({ name: `talent-${options.spell.id}` }) as any
