@@ -688,7 +688,7 @@ function EnableRest (player: TSPlayer) {
       return
     const isSitting = p.GetStandState()
     if (isSitting) {
-      const isMaxHealth = p.GetHealth() === p.GetMaxHealth()
+      const isMaxHealth = p.GetHealth() >= p.GetMaxHealth()
       if (isMaxHealth && p.HasAura(1127)) {
         p.RemoveAura(1127)
         return

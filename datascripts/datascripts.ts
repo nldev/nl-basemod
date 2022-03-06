@@ -749,6 +749,23 @@ function main () {
   $.std.Items.load(4540).Spells.get(0).Spell.getRef().Effects.get(0).PointsBase.set(1000)
   $.std.Items.load(2092).Damage.clearAll().Damage.addPhysical(10, 20)
 
+  const rest = $.std.Spells.load(1127)
+  rest.Name.enGB.set('Resting')
+  rest.Description.enGB.set('Restoring 2% health and mana every 3 seconds.')
+  rest.Duration.set(-1)
+  const regenHp = rest.Effects.get(0).Aura.MOD_HEALTH_REGEN_PERCENT.set()
+  regenHp
+  regenHp.PercentBase.set(2)
+  regenHp.PercentDieSides.set(0)
+  regenHp.PercentPerLevel.set(0)
+  regenHp.PercentPerCombo.set(0)
+  const regenMp = rest.Effects.get(1).Aura.MOD_POWER_REGEN_PERCENT.set()
+  regenMp.PowerType.MANA.set()
+  regenMp.PowerPctBase.set(2)
+  regenMp.PowerPctDieSides.set(0)
+  regenMp.PowerPerLevelPct.set(0)
+  regenMp.PowerPerComboPct.set(0)
+
 
   const STEALTH = 1784
   const AMBUSH = 11267

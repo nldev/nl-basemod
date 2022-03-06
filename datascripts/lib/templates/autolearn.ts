@@ -161,7 +161,7 @@ export const AUTOLEARN = createTemplates<Autolearn>(CREATE_AUTOLEARN_TASK, [
   },
   {
     id: 'blind',
-    spellId: 2894,
+    spellId: 2094,
     level: 13,
     class: ['ROGUE'],
   },
