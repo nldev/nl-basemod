@@ -2,6 +2,7 @@ import { Element } from './app'
 import { Get } from './app'
 import { Rgb } from './types'
 
+// TODO: make function for store access
 export function Movable (element: Element<any, any>, defaultPoint: WoWAPI.Point = 'CENTER', defaultX: number = 0, defaultY:number = 0) {
   const app = Get()
 
