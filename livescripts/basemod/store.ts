@@ -27,7 +27,6 @@ export function Store (events: TSEvents) {
     if (!str.includes(opcode))
      return
     const playerGuid = sender.GetGUID()
-    console.log(playerGuid)
     const a = QueryWorld(`
       select * from __addon_data where playerGuid = ${playerGuid};
     `)

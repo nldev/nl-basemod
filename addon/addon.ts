@@ -7,7 +7,5 @@ export const app = new App(app => {
   Talents()
   EasyLoot()
   Chests()
-
-  console.log(app.playerInfo.name)
 })
 
