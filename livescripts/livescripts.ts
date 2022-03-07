@@ -5,6 +5,7 @@ import { Rest } from './basemod/rest'
 import { Chests } from './basemod/chests'
 import { Autolearn } from './basemod/autolearn'
 import { Combat } from './basemod/combat/combat'
+import { attr2object } from 'terminal-kit/ScreenBufferHD'
 
 export function Main (events: TSEvents) {
   Store(events)
@@ -36,10 +37,12 @@ export function Main (events: TSEvents) {
 
   events.Spells.OnCalcHit((spell, hitChance, attacker, defender) => hitChance.set(100))
 
-  events.Unit.OnMeleeSpellHitResult((attacker, victim, dodgeChance, blockChance, parryChance) => {
+  events.Unit.OnMeleeSpellHitResult((attacker, victim, dodgeChance, blockChance, parryChance, attackType) => {
     dodgeChance.set(100)
-    parryChance.set(100)
     blockChance.set(100)
+    parryChance.set(100)
+    if (attacker.IsPlayer())
+      attacker.ToPlayer().SendBroadcastMessage(`${dodgeChance.get()} ${blockChance.get()} ${parryChance.get()}`)
   })
 
   // events.Spells.OnApply((effect, application) => {
