@@ -21,14 +21,25 @@ export function Main (events: TSEvents) {
     blockChance.set(0)
     parryChance.set(0)
   })
+
   events.Spells.OnCalcHit((spell, hitChance, attacker, defender) => {
     hitChance.set(100)
   })
+
   events.Spells.OnCalcResist((spell, resistChance, attacker, defender) => {
     resistChance.set(0)
   })
+
   events.Spells.OnCalcMeleeMiss((spell, miss, attacker, victim, attackType, skillDiff) => {
     miss.set(0)
+  })
+
+  events.Spells.OnCalcHit((spell, hitChance, attacker, defender) => hitChance.set(100))
+
+  events.Unit.OnMeleeSpellHitResult((attacker, victim, dodgeChance, blockChance, parryChance) => {
+    dodgeChance.set(100)
+    parryChance.set(100)
+    blockChance.set(100)
   })
 
   // events.Spells.OnApply((effect, application) => {
