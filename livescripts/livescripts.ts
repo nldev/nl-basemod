@@ -14,6 +14,23 @@ export function Main (events: TSEvents) {
   Chests(events)
   Autolearn(events)
   Combat(events)
+
+  events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
+    missChance.set(0)
+    dodgeChance.set(0)
+    blockChance.set(0)
+    parryChance.set(0)
+  })
+  events.Spells.OnCalcHit((spell, hitChance, attacker, defender) => {
+    hitChance.set(100)
+  })
+  events.Spells.OnCalcResist((spell, resistChance, attacker, defender) => {
+    resistChance.set(0)
+  })
+  events.Spells.OnCalcMeleeMiss((spell, miss, attacker, victim, attackType, skillDiff) => {
+    miss.set(0)
+  })
+
   // events.Spells.OnApply((effect, application) => {
   //   if (effect.GetID() === 8326) {
   //     const player = application.GetTarget().ToPlayer()
