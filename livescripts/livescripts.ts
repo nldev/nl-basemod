@@ -14,7 +14,6 @@ export function Main (events: TSEvents) {
   Chests(events)
   Autolearn(events)
   Combat(events)
-
   // events.Spells.OnApply((effect, application) => {
   //   if (effect.GetID() === 8326) {
   //     const player = application.GetTarget().ToPlayer()
