@@ -20,7 +20,6 @@ export function EasyLoot (events: TSEvents) {
   })
   events.Creatures.OnGenerateLoot((creature, player) => {
     const loot = creature.GetLoot()
-    loot.Filter(item => false)
     const money = loot.GetMoney()
 
     // FIXME this shouldnt be necessary
@@ -47,7 +46,8 @@ export function EasyLoot (events: TSEvents) {
       )
     }
     player.TryAddMoney(money)
-    loot.Clear()
+    // loot.Clear()
+    loot.Filter(item => false)
     loot.SetMoney(0)
 
     // FIXME this too
