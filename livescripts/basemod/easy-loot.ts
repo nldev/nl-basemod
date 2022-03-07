@@ -46,9 +46,9 @@ export function EasyLoot (events: TSEvents) {
       )
     }
     player.TryAddMoney(money)
-    // loot.Clear()
-    // loot.Filter(item => false)
-    // loot.SetMoney(0)
+    loot.Clear()
+    loot.Filter(() => false)
+    loot.SetMoney(0)
 
     // FIXME this too
     // loot.SetGeneratesNormally(false)
