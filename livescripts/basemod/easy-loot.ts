@@ -22,12 +22,6 @@ export function EasyLoot (events: TSEvents) {
     const loot = creature.GetLoot()
     const money = loot.GetMoney()
 
-    // FIXME this shouldnt be necessary
-    // loot.SetGeneratesNormally(false)
-    // loot.RemoveLooter(0)
-    // loot.RemoveLooter(player.GetGUID())
-    loot.SetMoney(0)
-
     const number = loot.GetItemCount() - 1
     if (number === -1)
       return
@@ -45,13 +39,8 @@ export function EasyLoot (events: TSEvents) {
         player,
       )
     }
-    player.TryAddMoney(money)
-    loot.Clear()
-    loot.Filter(() => false)
-    loot.SetMoney(0)
 
-    // FIXME this too
-    // loot.SetGeneratesNormally(false)
-    // loot.RemoveLooter(0)
+    loot.SetMoney(0)
+    loot.Filter(() => false)
   })
 }

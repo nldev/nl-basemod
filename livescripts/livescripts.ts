@@ -16,6 +16,10 @@ export function Main (events: TSEvents) {
   Autolearn(events)
   Combat(events)
 
+  events.Player.OnCreateEarly(player => {
+    player.SetSkill(750, 1, 300, 300)
+  })
+
   events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
     missChance.set(0)
     dodgeChance.set(0)
