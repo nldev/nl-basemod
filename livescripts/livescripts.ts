@@ -8,13 +8,13 @@ import { Combat } from './basemod/combat/combat'
 import { attr2object } from 'terminal-kit/ScreenBufferHD'
 
 export function Main (events: TSEvents) {
-  Store(events)
-  EasyLoot(events)
-  Talents(events)
-  Rest(events)
-  Chests(events)
-  Autolearn(events)
-  Combat(events)
+  // Store(events)
+  // EasyLoot(events)
+  // Talents(events)
+  // Rest(events)
+  // Chests(events)
+  // Autolearn(events)
+  // Combat(events)
 
   events.Player.OnCreateEarly(player => {
     player.SetSkill(750, 1, 300, 300)
