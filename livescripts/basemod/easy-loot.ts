@@ -21,6 +21,7 @@ export function EasyLoot (events: TSEvents) {
   events.Creatures.OnGenerateLoot((creature, player) => {
     const loot = creature.GetLoot()
     const money = loot.GetMoney()
+    player.SendBroadcastMessage(`${money}`)
 
     const number = loot.GetItemCount() - 1
     if (number === -1)

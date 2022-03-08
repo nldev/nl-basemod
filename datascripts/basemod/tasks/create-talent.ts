@@ -19,6 +19,7 @@ export class CreateTalent extends NWTask {
   static readonly id = CREATE_TALENT_TASK
 
   setup () {
+    console.log('here')
     this.builder.std.DBC.Talent.queryAll({}).forEach(talent => {
       talent.PrereqRank.set([0, 0, 0, 0, 0, 0, 0, 0])
       talent.Flags.set(0)
