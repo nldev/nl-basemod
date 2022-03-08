@@ -37,13 +37,13 @@ export function Main (events: TSEvents) {
 
   events.Spells.OnCalcHit((spell, hitChance, attacker, defender) => hitChance.set(100))
 
-  events.Unit.OnMeleeSpellHitResult((attacker, victim, dodgeChance, parryChance, blockChance, attackType) => {
-    dodgeChance.set(0)
-    parryChance.set(0)
-    blockChance.set(0)
-    if (attacker.IsPlayer())
-      attacker.ToPlayer().SendBroadcastMessage(`${dodgeChance.get()} ${blockChance.get()} ${parryChance.get()}`)
-  })
+  // events.Unit.OnMeleeSpellHitResult((attacker, victim, dodgeChance, parryChance, blockChance, attackType) => {
+  //   dodgeChance.set(0)
+  //   parryChance.set(0)
+  //   blockChance.set(0)
+  //   if (attacker.IsPlayer())
+  //     attacker.ToPlayer().SendBroadcastMessage(`${dodgeChance.get()} ${blockChance.get()} ${parryChance.get()}`)
+  // })
 
   // events.Spells.OnApply((effect, application) => {
   //   if (effect.GetID() === 8326) {
