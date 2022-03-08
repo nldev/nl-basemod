@@ -3,14 +3,14 @@ import { Builder } from './basemod'
 import { createClassMask, createRaceMask, resolveDuration } from './basemod/utils'
 
 function main () {
-  // const $ = new Builder()
+  const $ = new Builder()
 
   // FIXME: give weapon skills
   // FIXME: set config to max weapon skills
 
-  // $.init()
+  $.init()
 
-  // temp($)
+  temp($)
 }
 
 const temp = ($: Builder) => {
