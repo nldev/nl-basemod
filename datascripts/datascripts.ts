@@ -14,7 +14,7 @@ function main () {
 }
 
 const temp = ($: Builder) => {
-  StarterSpells($)
+//  StarterSpells($)
 
 //   const b = $.std.Items.load(2504)
 //   b.Name.enGB.set('Bow')
