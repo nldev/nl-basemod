@@ -9,10 +9,10 @@ import { attr2object } from 'terminal-kit/ScreenBufferHD'
 
 export function Main (events: TSEvents) {
   Store(events)
+  Chests(events)
   EasyLoot(events)
   Talents(events)
   Rest(events)
-  Chests(events)
   Autolearn(events)
   Combat(events)
 
