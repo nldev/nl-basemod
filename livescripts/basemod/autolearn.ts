@@ -19,19 +19,8 @@ function SetAbilities (player: TSPlayer) {
   }
 }
 
-export function Leveling (events: TSEvents) {
-  events.Player.OnCreateEarly(player => {
-    SetAbilities(player)
-  })
-
-  events.Player.OnLevelChanged(player => {
-    SetAbilities(player)
-    // player.SetPower(player.GetMaxPower(-1), -1)
-  })
-}
-
 export function Autolearn (events: TSEvents) {
-  events.Player.OnLogin(player => {
+  events.Player.OnCreateEarly(player => {
     SetAbilities(player)
   })
 
