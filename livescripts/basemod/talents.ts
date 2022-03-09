@@ -8,7 +8,7 @@ function SetTalents(player: TSPlayer) {
   `)
   let used: number = 0
   // let max: number = level
-  let max: number = ((level + 20) > 80) ? 80 : (level + 20)
+  let max: number = (level < 20) ? 0 : (((level - 20) + 1) * 2)
   while (a.GetRow())
     used = a.GetUInt32(1)
   if (used > max)
