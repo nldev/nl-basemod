@@ -268,11 +268,9 @@ function OnLogin (events: TSEvents) {
 function OnLevelup (events: TSEvents) {
   events.Player.OnLevelChanged((player, oldLevel) => {
     SetTalents(player)
-    if (oldLevel > player.GetLevel()) {
+    if (oldLevel > player.GetLevel())
       ResetTalents(player)
-    } else {
-      ApplyTalents(player)
-    }
+    ApplyTalents(player)
   })
 }
 
