@@ -59,7 +59,7 @@ function SitSpell ($: Builder) {
       m.SpellEffects.clearAll()
       m.StartAnimation.set(0)
     })
-    m.CastKit.modRefCopy(c => {
+    m.CasterImpactKit.modRefCopy(c => {
       c.Animation.SIT_GROUND.set()
       c.BaseEffect.set(0)
       c.HeadEffect.set(0)
