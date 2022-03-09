@@ -5,9 +5,6 @@ import { createClassMask, createRaceMask, resolveDuration } from './basemod/util
 function main () {
   const $ = new Builder()
 
-  // FIXME: give weapon skills
-  // FIXME: set config to max weapon skills
-
   temp($)
 }
 
@@ -19,6 +16,7 @@ const temp = ($: Builder) => {
   BuffWornDagger($)
   RestSpell($)
   SpellCategories($)
+  InfiniteRangedWeapon($)
   PlaceholderEnchants()
 }
 
@@ -701,6 +699,37 @@ function SpellCategories ($: Builder) {
     SkillLine: 9000,
   })
   $.std.DBC.SkillLineAbility.queryAll({}).forEach(v => v.CharacterPoints)
+}
+
+function InfiniteRangedWeapon ($: Builder) {
+  const b = $.std.Items.load(2504)
+  b.Name.enGB.set('Bow')
+  b.Damage.clearAll()
+  b.Damage.addPhysical(25, 42)
+  b.Delay.set(1700)
+  b.ItemLevel.set(5)
+  b.AmmoType.NONE.set()
+  b.Durability.set(0)
+  b.Spells.addMod(i => {
+    i.Spell.set(46699)
+    i.Trigger.ON_EQUIP.set()
+    i.Charges.set('UNLIMITED')
+  })
+  const g = $.std.Items.load(2508)
+  g.Durability.set(0)
+  g.Name.enGB.set('Gun')
+  g.Damage.clearAll()
+  g.Damage.addPhysical(25, 42)
+  g.Delay.set(1700)
+  g.ItemLevel.set(5)
+  g.AmmoType.NONE.set()
+  g.Spells.addMod(i => {
+    i.Spell.set(46699)
+    i.Trigger.ON_EQUIP.set()
+    i.Charges.set('UNLIMITED')
+  })
+  $.std.Spells.load(46699)
+    .Description.enGB.set('')
 }
 
 main()
