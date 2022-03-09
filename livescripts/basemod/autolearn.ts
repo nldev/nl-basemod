@@ -20,7 +20,7 @@ function SetAbilities (player: TSPlayer) {
 }
 
 export function Leveling (events: TSEvents) {
-  events.Player.OnLogin(player => {
+  events.Player.OnCreateEarly(player => {
     SetAbilities(player)
   })
 
