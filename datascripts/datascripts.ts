@@ -1,12 +1,17 @@
 import { std } from 'wow/wotlk'
 import { Builder } from './basemod'
-import { createClassMask, createRaceMask, resolveDuration } from './basemod/utils'
+import { createClassMask, createRaceMask } from './basemod/utils'
+import { Map } from './basemod/types'
+import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
+
 
 function main () {
   const $ = new Builder()
 
-  const sl = $.std.SkillLines.load(201)
-  sl.Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
+  const SKILLS: Map<SkillLine> = {}
+
+  $.std.SkillLines.forEach(e => SKILLS[e.Name.enGB.get()] = e)
+  SKILLS['Swords'].Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
 
   temp($)
 }
