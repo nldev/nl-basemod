@@ -9,7 +9,6 @@ function main () {
   const $ = new Builder()
 
   const SKILLS: Map<SkillLine> = {}
-
   $.std.SkillLines.forEach(e => SKILLS[e.Name.enGB.get()] = e)
   SKILLS['Swords'].Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
 
