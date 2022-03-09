@@ -5,6 +5,8 @@ import { createClassMask, createRaceMask, resolveDuration } from './basemod/util
 function main () {
   const $ = new Builder()
 
+  $.std.SkillLines.load()
+
   temp($)
 }
 
