@@ -44,7 +44,7 @@ function SitSpell ($: Builder) {
   sit.Visual.modRef(m => {
     m.AllKits().forEach(k => {
       const m = k.getRefCopy()
-      m.Animation.SIT_GROUND.set()
+      m.Animation.KNEEL_LOOP.set()
       m.BaseEffect.set(0)
       m.HeadEffect.set(0)
       m.CameraShake.set(0)
