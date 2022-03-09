@@ -5107,6 +5107,7 @@ Spell|basemod:shadow-resist-96|85687|85687|
 Spell|basemod:shadow-resist-97|85688|85688|
 Spell|basemod:shadow-resist-98|85689|85689|
 Spell|basemod:shadow-resist-99|85690|85690|
+Spell|basemod:sit|86808|86808|
 Spell|basemod:sp-1|81910|81910|
 Spell|basemod:sp-10|81919|81919|
 Spell|basemod:sp-100|82009|82009|
