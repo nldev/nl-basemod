@@ -25,27 +25,21 @@ export function Main (events: TSEvents) {
     parryChance.set(0)
   })
 
-  // events.Spells.OnCalcHit((spell, hitChance, attacker, defender) => {
-  //   hitChance.set(100)
-  // })
-
-  // events.Spells.OnCalcResist((spell, resistChance, attacker, defender) => {
-  //   resistChance.set(0)
-  // })
-
-  // events.Spells.OnCalcMeleeMiss((spell, miss, attacker, victim, attackType, skillDiff) => {
-  //   miss.set(0)
-  // })
-
-  // events.Spells.OnCalcHit((spell, hitChance, attacker, defender) => hitChance.set(100))
-
-  events.Unit.OnMeleeSpellHitResult((attacker, victim, dodgeChance, parryChance, blockChance, attackType) => {
-    dodgeChance.set(0)
-    parryChance.set(0)
-    blockChance.set(0)
-    if (attacker.IsPlayer())
-      attacker.ToPlayer().SendBroadcastMessage(`${dodgeChance.get()} ${blockChance.get()} ${parryChance.get()}`)
+  events.Spells.OnCalcResist((spell, resistChance, attacker, defender) => {
+    resistChance.set(0)
   })
+
+  events.Spells.OnCalcMeleeMiss((spell, miss, attacker, victim, attackType, skillDiff) => {
+    miss.set(0)
+  })
+
+  // events.Unit.OnMeleeSpellHitResult((attacker, victim, dodgeChance, parryChance, blockChance, attackType) => {
+  //   dodgeChance.set(0)
+  //   parryChance.set(0)
+  //   blockChance.set(0)
+  //   if (attacker.IsPlayer())
+  //     attacker.ToPlayer().SendBroadcastMessage(`${dodgeChance.get()} ${blockChance.get()} ${parryChance.get()}`)
+  // })
 }
 
 //
