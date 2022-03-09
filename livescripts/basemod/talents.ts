@@ -20,7 +20,7 @@ function SetTalents(player: TSPlayer) {
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
       max=${max}, used=${used}
   `)
-  player.SendAddonMessage('get-talent-info-success', `${max - (max - used)} ${max}`, 0, player)
+  player.SendAddonMessage('get-talent-info-success', `${max - used} ${max}`, 0, player)
 }
 
 function ResetTalents(player: TSPlayer) {
@@ -32,9 +32,6 @@ function ResetTalents(player: TSPlayer) {
   while (a.GetRow()) {
     max = a.GetString(2)
   }
-  QueryWorld(`
-    delete * from __talent_instances where playerGuid = ${playerGuid};
-  `)
   QueryWorld(`
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, 0) on duplicate key update
       max=${max}, used=0
