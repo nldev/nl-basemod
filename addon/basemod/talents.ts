@@ -293,6 +293,8 @@ export const Talents: Component = options => {
   counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
   // costText.SetTextColor(red, green, blue)
 
+  const list: Element<TalentState, TalentFns>[] = []
+
   for (const key of Object.keys(TALENTS)) {
     const spell: TalentSpell = TALENTS[key]
 
@@ -307,6 +309,7 @@ export const Talents: Component = options => {
         },
       })
 
+      list.push(talent)
       grid.fns.Attach(talent)
     }
   }
@@ -354,6 +357,13 @@ export const Talents: Component = options => {
       return
     if (!text)
       return
+    console.log('success')
+  })
+
+  Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
+    if (prefix !== 'reset-talents')
+      return
+    list.forEach(e => e.fns.deactivate())
     console.log('success')
   })
 

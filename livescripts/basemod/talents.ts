@@ -43,7 +43,7 @@ function ResetTalents(player: TSPlayer) {
       max=${max}, used=0
   `)
   player.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, player)
-  player.SendAddonMessage('reset-talents', `0 ${max}`, 0, player)
+  player.SendAddonMessage('reset-talents', ``, 0, player)
 }
 
 function ApplyTalents(player: TSPlayer) {
