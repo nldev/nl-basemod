@@ -14,6 +14,8 @@ function SetTalents(player: TSPlayer) {
   while (a.GetRow()) {
     used = a.GetUInt32(2)
   }
+  if (used > max)
+    used = max
   QueryWorld(`
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
       max=${max}, used=${used}
