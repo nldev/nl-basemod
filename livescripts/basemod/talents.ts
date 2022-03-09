@@ -3,6 +3,73 @@ import { Opcode } from './utils'
 function Setup (events: TSEvents) {
 }
 
+function SetTalents(player: TSPlayer) {
+  const playerGuid = player.GetGUID()
+  const level = player.GetLevel()
+  const a = QueryWorld(`
+    select * from __player_talents where playerGuid = ${playerGuid};
+  `)
+  let used: number = 0
+  let max: number = level + 9
+  while (a.GetRow()) {
+    used = a.GetUInt32(2)
+  }
+  const b = QueryWorld(`
+    delete * from __talent_instances where playerGuid = ${playerGuid};
+  `)
+  QueryWorld(`
+    insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
+      max=${max}, used=${used}
+  `)
+  player.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, player)
+}
+
+function ResetTalents(player: TSPlayer) {
+  const playerGuid = player.GetGUID()
+  const a = QueryWorld(`
+    select * from __player_talents where playerGuid = ${playerGuid};
+  `)
+  let max: string = '0'
+  while (a.GetRow()) {
+    max = a.GetString(2)
+  }
+  QueryWorld(`
+    delete * from __talent_instances where playerGuid = ${playerGuid};
+  `)
+  QueryWorld(`
+    insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, 0) on duplicate key update
+      max=${max}, used=0
+  `)
+  player.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, player)
+  player.SendAddonMessage('reset-talents', '', 0, player)
+}
+
+function ApplyTalents(player: TSPlayer) {
+  const playerGuid = player.GetGUID()
+  const a = QueryWorld(`
+    select * from __talent_instances where playerGuid = ${playerGuid};
+  `)
+  while (a.GetRow()) {
+    const id = a.GetString(2)
+    const isActive = a.GetUInt16(3)
+    if (id && isActive) {
+      // FIXME: create a row if doesnt exist
+      const c = QueryWorld(`
+        select * from __talents where id = "${id}";
+      `)
+      let spellId = 0
+      while (c.GetRow()) {
+        spellId = c.GetUInt16(2)
+        if (player.HasSpell(spellId)) {
+          player.LearnSpell(spellId)
+        } else {
+          player.RemoveSpell(spellId, false, false)
+        }
+      }
+    }
+  }
+}
+
 function HandleGetTalentInfo (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
     const opcode = Opcode('get-talent-info')
@@ -40,72 +107,6 @@ function HandleGetTalentInfo (events: TSEvents) {
     }
     sender.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, sender)
   })
-}
-
-function SetTalents(player: TSPlayer) {
-  const playerGuid = player.GetGUID()
-  const level = player.GetLevel()
-  const a = QueryWorld(`
-    select * from __player_talents where playerGuid = ${playerGuid};
-  `)
-  let used: number = 0
-  let max: number = level + 9
-  while (a.GetRow()) {
-    used = a.GetUInt32(2)
-  }
-  const b = QueryWorld(`
-    delete * from __talent_instances where playerGuid = ${playerGuid};
-  `)
-  QueryWorld(`
-    insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
-      max=${max}, used=${used}
-  `)
-  player.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, player)
-}
-
-function ResetTalents(player: TSPlayer) {
-  const playerGuid = player.GetGUID()
-  const a = QueryWorld(`
-    select * from __player_talents where playerGuid = ${playerGuid};
-  `)
-  let max: string = '0'
-  while (a.GetRow()) {
-    max = a.GetString(2)
-  }
-  const b = QueryWorld(`
-    delete * from __talent_instances where playerGuid = ${playerGuid};
-  `)
-  QueryWorld(`
-    insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, 0) on duplicate key update
-      max=${max}, used=0
-  `)
-  player.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, player)
-}
-
-function ApplyTalents(player: TSPlayer) {
-  const playerGuid = player.GetGUID()
-  const a = QueryWorld(`
-    select * from __talent_instances where playerGuid = ${playerGuid};
-  `)
-  while (a.GetRow()) {
-    const id = a.GetString(2)
-    const isActive = a.GetUInt16(3)
-    if (id && isActive) {
-      // FIXME: create a row if doesnt exist
-      const c = QueryWorld(`
-        select * from __talents where id = "${id}";
-      `)
-      let spellId = 0
-      while (c.GetRow()) {
-        spellId = c.GetUInt16(2)
-        if (player.HasSpell(spellId)) {
-          player.LearnSpell(spellId)
-        } else {
-          player.RemoveSpell(spellId, false, false)
-        }
-      }
-    }
-  }
 }
 
 function HandleLearnTalent (events: TSEvents) {
