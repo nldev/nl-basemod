@@ -262,15 +262,9 @@ function HandleResetTalents (events: TSEvents) {
   })
 }
 
-function OnCreate (events: TSEvents) {
-  events.Player.OnCreateEarly(player => {
-    SetTalents(player, 11)
-  })
-}
-
 function OnLogin (events: TSEvents) {
-  events.Player.OnLogin(player => {
-    SetTalents(player)
+  events.Player.OnLogin((player, isFirstLogin) => {
+    SetTalents(player, isFirstLogin ? 11 : 0)
     ApplyTalents(player)
   })
 }
@@ -297,7 +291,6 @@ export function Talents (events: TSEvents) {
   HandleGetTalentInfo(events)
   HandleLearnTalent(events)
   HandleUnlearnTalent(events)
-  OnCreate(events)
   OnLogin(events)
   OnLevelup(events)
   GM(events)
