@@ -4499,6 +4499,7 @@ Spell|basemod:nature-resist-99|85093|85093|
 Spell|basemod:palomino-horse|86793|86793|
 Spell|basemod:pinto-horse|86790|86790|
 Spell|basemod:red-drake|86803|86803|
+Spell|basemod:rest|86809|86809|
 Spell|basemod:riding-turtle|86798|86798|
 Spell|basemod:rp5-1|81307|81307|
 Spell|basemod:rp5-2|81308|81308|
