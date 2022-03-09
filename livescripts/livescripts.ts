@@ -15,8 +15,6 @@ export function Main (events: TSEvents) {
   Chests(events)
   Autolearn(events)
   Combat(events)
-  // FIXME
-  events.Player.OnCreateEarly(player => {})
 
   events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
     missChance.set(0)
