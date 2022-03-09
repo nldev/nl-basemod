@@ -7,25 +7,13 @@ import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
 // FIXME move
 export const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
 export const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
+const SKILLS: Map<SkillLine> = {}
+std.SkillLines.forEach(e => {
+  SKILLS[e.Name.enGB.get()] = e
+})
 
 function main () {
   const $ = new Builder()
-
-  const SKILLS: Map<SkillLine> = {}
-  const l = std.SkillLines.create('BASEMOD', 'thing')
-  $.std.SkillLines.forEach(e => {
-    console.log(e.Name.enGB.get())
-    SKILLS[e.Name.enGB.get()] = e
-  })
-  const t = SKILLS['Two-Handed Swords']
-  t.RaceClassInfos.add(ALL_RACE_MASK, ALL_CLASS_MASK)
-  t.Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
-  // SKILLS['Swords'].Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
-  // a.SkillLine.set(SKILLS['Swords'].ID)
-  // a.MinSkillLineRank.set(0)
-  // a.Spell.set(202)
-  // $.dbc.SkillRaceClassInfo.add(20000).SkillID.set(SKILLS['Swords'].ID).RaceMask.set(ALL_RACE_MASK).ClassMask.set(createClassMask('ROGUE')).MinLevel.set(0)
-  SKILLS['Swords'].Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
 
   temp($)
 }
@@ -377,254 +365,44 @@ function SetupStats ($: Builder) {
   })
 }
 
+const ALL_CLASSES: any = ['WARRIOR', 'PALADIN', 'HUNTER', 'ROGUE', 'MAGE', 'WARLOCK', 'DRUID', 'SHAMAN', 'PALADIN', 'PRIEST']
 function SetupSkills ($: Builder) {
   // dual wield
-  $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.set(1)).Category.set(6).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 118 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.SupercededBySpell.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Dual Wield'].Autolearn.addMod(['ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // dagger
-  $.std.SkillLines.load(173).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('ROGUE', 'DRUID', 'HUNTER', 'MAGE', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 173 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Dual Wield'].Autolearn.addMod(['ROGUE', 'DRUID', 'HUNTER', 'MAGE', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // fist weapon
-  $.std.SkillLines.load(473).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 473 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Dual Wield'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'], ALL_CLASSES, e => e.Rank.set(0))
   // 1h sword
-  $.std.SkillLines.load(43).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'WARLOCK', 'MAGE', 'PALADIN'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 43 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Swords'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'WARLOCK', 'MAGE', 'PALADIN'], ALL_CLASSES, e => e.Rank.set(0))
   // 1h axe
-  $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 44 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Axes'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN'], ALL_CLASSES, e => e.Rank.set(0))
   // thrown
-  $.std.SkillLines.load(176).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 176 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Thrown'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // wand
-  $.std.SkillLines.load(228).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('MAGE', 'WARLOCK', 'PRIEST'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 228 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Wands'].Autolearn.addMod(['MAGE', 'WARLOCK', 'PRIEST'], ALL_CLASSES, e => e.Rank.set(0))
   // staff
-  $.std.SkillLines.load(136).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('MAGE', 'WARLOCK', 'WARRIOR', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 136 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Staves'].Autolearn.addMod(['MAGE', 'WARLOCK', 'WARRIOR', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN'], ALL_CLASSES, e => e.Rank.set(0))
   // polearm
-  $.std.SkillLines.load(229).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('PALADIN', 'HUNTER', 'WARRIOR'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 229 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Polearms'].Autolearn.addMod(['PALADIN', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // 2h sword
-  $.std.SkillLines.load(55).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('PALADIN', 'HUNTER', 'WARRIOR'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 55 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Two-Handed Swords'].Autolearn.addMod(['PALADIN', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // 2h axe
-  $.std.SkillLines.load(172).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('HUNTER', 'SHAMAN', 'WARRIOR', 'PALADIN'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 172 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Two-Handed Axes'].Autolearn.addMod(['HUNTER', 'SHAMAN', 'WARRIOR', 'PALADIN'], ALL_CLASSES, e => e.Rank.set(0))
   // 2h mace
-  $.std.SkillLines.load(160).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('PALADIN', 'SHAMAN', 'WARRIOR', 'DRUID'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 160 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Two-Handed Maces'].Autolearn.addMod(['PALADIN', 'SHAMAN', 'WARRIOR', 'DRUID'], ALL_CLASSES, e => e.Rank.set(0))
   // shield
-  $.std.SkillLines.load(433).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('PALADIN', 'SHAMAN', 'WARRIOR'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 433 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Shields'].Autolearn.addMod(['PALADIN', 'SHAMAN', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // crossbow
-  $.std.SkillLines.load(226).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 226 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Crossbows'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // gun
-  $.std.SkillLines.load(46).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 46 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Guns'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // bow
-  $.std.SkillLines.load(44).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('ROGUE', 'HUNTER', 'WARRIOR'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 44 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Bows'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // plate
-  $.std.SkillLines.load(293).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('PALADIN', 'WARRIOR'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 293 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
+  SKILLS['Plate Mail'].Autolearn.addMod(['PALADIN', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // mail
-  $.std.SkillLines.load(413).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(createClassMask('PALADIN', 'WARRIOR', 'HUNTER', 'SHAMAN'))
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 413 }).forEach(a => {
-    a.SupercededBySpell.set(0)
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
-  // cloth
-  $.std.SkillLines.load(415).Spells.forEach(s => s.AcquireMethod.set(1)).RaceClassInfos.forEach(r => {
-    r.ClassMask.set(ALL_CLASS_MASK)
-    r.RaceMask.set(ALL_RACE_MASK)
-    r.Flags.clearAll()
-    r.row.MinLevel.set(1)
-  })
-  $.dbc.SkillLineAbility.queryAll({ SkillLine: 415 }).forEach(a => {
-    a.MinSkillLineRank.set(0)
-    a.RaceMaskForbidden.markAll([0])
-    a.ClassMaskForbidden.markAll([0])
-  })
-
+  SKILLS['Mail'].Autolearn.addMod(['PALADIN', 'WARRIOR', 'HUNTER', 'SHAMAN'], ALL_CLASSES, e => e.Rank.set(0))
 }
 
 function SetupMaps ($: Builder) {
