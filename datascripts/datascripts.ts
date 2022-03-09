@@ -34,6 +34,7 @@ const temp = ($: Builder) => {
 
 function SitSpell ($: Builder) {
   const sit = $.std.Spells.create($.mod, 'sit', 59752)
+  console.log(sit.ID)
   sit.Name.enGB.set('Rest')
   sit.Cooldown.set(0)
   sit.Cooldown.CategoryTime.set(0)
