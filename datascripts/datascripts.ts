@@ -17,6 +17,7 @@ function main () {
   const $ = new Builder()
 
   temp($)
+  $.dbc.SpellItemEnchantment.query({ ID: 22 }).Flags.set(0)
 }
 
 const temp = ($: Builder) => {
@@ -33,7 +34,7 @@ const temp = ($: Builder) => {
 }
 
 function RestSpell ($: Builder) {
-  const rest = $.std.Spells.create($.mod, 'sit', 35067)
+  const rest = $.std.Spells.create($.mod, 'rest', 35067)
   rest.Name.enGB.set('Rest')
   rest.Cooldown.set(0)
   rest.Cooldown.CategoryTime.set(0)
