@@ -42,8 +42,8 @@ function ResetTalents(player: TSPlayer) {
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, 0) on duplicate key update
       max=${max}, used=0
   `)
-  player.SendAddonMessage('get-talent-info-success', `${max} ${max}`, 0, player)
-  player.SendAddonMessage('reset-talents', `${max} ${max}`, 0, player)
+  player.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, player)
+  player.SendAddonMessage('reset-talents', `0 ${max}`, 0, player)
 }
 
 function ApplyTalents(player: TSPlayer) {
