@@ -20,6 +20,8 @@ function SetTalents(player: TSPlayer) {
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
       max=${max}, used=${used}
   `)
+  player.SendBroadcastMessage(`max: ${max}`)
+  player.SendBroadcastMessage(`used: ${used}`)
   player.SendAddonMessage('get-talent-info-success', `${max - used} ${max}`, 0, player)
 }
 
