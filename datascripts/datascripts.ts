@@ -396,58 +396,40 @@ function SetupStats ($: Builder) {
 function SetupSkills ($: Builder) {
   // dual wield
   SKILLS['Dual Wield'].Autolearn.addMod(['ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('dual wield')
   // dagger
   SKILLS['Daggers'].Autolearn.addMod(['ROGUE', 'DRUID', 'HUNTER', 'MAGE', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('daggers')
   // fist weapon
   SKILLS['Fist Weapons'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('fist weapon')
   // 1h sword
   SKILLS['Swords'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'WARLOCK', 'MAGE', 'PALADIN'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('sword')
   // 1h axe
   SKILLS['Axes'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('axe')
   // thrown
   SKILLS['Thrown'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('throwing')
   // wand
   SKILLS['Wands'].Autolearn.addMod(['MAGE', 'WARLOCK', 'PRIEST'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('wands')
   // staff
   SKILLS['Staves'].Autolearn.addMod(['MAGE', 'WARLOCK', 'WARRIOR', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('staves')
   // polearm
   SKILLS['Polearms'].Autolearn.addMod(['PALADIN', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('polarms')
   // 2h sword
   SKILLS['Two-Handed Swords'].Autolearn.addMod(['PALADIN', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('two handed swords')
   // 2h axe
   SKILLS['Two-Handed Axes'].Autolearn.addMod(['HUNTER', 'SHAMAN', 'WARRIOR', 'PALADIN'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('two handed axes')
   // 2h mace
   SKILLS['Two-Handed Maces'].Autolearn.addMod(['PALADIN', 'SHAMAN', 'WARRIOR', 'DRUID'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('two handed maces')
   // shield
   SKILLS['Shield'].Autolearn.addMod(['PALADIN', 'SHAMAN', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('shield')
   // crossbow
   SKILLS['Crossbows'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('crossbows')
   // gun
   SKILLS['Guns'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('gun')
   // bow
   SKILLS['Bows'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('bow')
   // plate
   SKILLS['Plate Mail'].Autolearn.addMod(['PALADIN', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('plate')
   // mail
   SKILLS['Mail'].Autolearn.addMod(['PALADIN', 'WARRIOR', 'HUNTER', 'SHAMAN'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('mail')
 }
 
 function SetupMaps ($: Builder) {
