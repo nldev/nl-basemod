@@ -14,14 +14,15 @@ function SetTalents(player: TSPlayer) {
   while (a.GetRow()) {
     used = a.GetUInt32(2)
   }
+  player.SendBroadcastMessage(`max: ${max}`)
+  player.SendBroadcastMessage(`used: ${used}`)
+  player.SendBroadcastMessage(`remainder: ${max - used}`)
   if (used > max)
     used = max
   QueryWorld(`
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
       max=${max}, used=${used}
   `)
-  player.SendBroadcastMessage(`max: ${max}`)
-  player.SendBroadcastMessage(`used: ${used}`)
   player.SendAddonMessage('get-talent-info-success', `${max - used} ${max}`, 0, player)
 }
 
