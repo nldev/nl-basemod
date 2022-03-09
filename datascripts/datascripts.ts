@@ -6,7 +6,6 @@ function main () {
   const $ = new Builder()
 
   const sl = $.std.SkillLines.load(201)
-  sl.enableAutolearn('ROGUE')
   sl.Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
 
   temp($)
