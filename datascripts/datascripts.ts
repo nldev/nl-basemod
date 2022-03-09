@@ -18,7 +18,7 @@ function main () {
 
   temp($)
   $.dbc.SpellItemEnchantment.query({ ID: 22 }).Flags.set(0)
-  $.std.Spells.load(3409).Visual.getRef().CasterImpactKit.getRef().Animation.SPELL_CAST_DIRECTED.set()
+  $.std.Spells.load(3409).Visual.getRef().CastKit.getRef().Animation.SPELL_CAST_DIRECTED.set()
 }
 
 const temp = ($: Builder) => {
