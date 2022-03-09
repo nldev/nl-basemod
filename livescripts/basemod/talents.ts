@@ -113,12 +113,12 @@ function InitTalents (player: TSPlayer) {
     select * from __talents;
   `)
   while (a.GetRow()) {
-    let talentId = a.GetUInt16(0)
+    let talentId = a.GetUInt16(1)
     let spellId = a.GetUInt16(2)
     let cost = a.GetUInt16(3)
     let classMask = a.GetUInt16(5)
     QueryWorld(`
-      insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", 1) on duplicate key update
+      insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", 0) on duplicate key update
         playerGuid=${playerGuid}, talentId="${talentId}", isActive=0;
     `)
   }
