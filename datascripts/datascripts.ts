@@ -26,13 +26,13 @@ const temp = ($: Builder) => {
   SetupMaps($)
   BuffWornDagger($)
   RestSpell($)
+  RestingSpell($)
   SpellCategories($)
   InfiniteRangedWeapon($)
-  SitSpell($)
   PlaceholderEnchants()
 }
 
-function SitSpell ($: Builder) {
+function RestSpell ($: Builder) {
   const rest = $.std.Spells.create($.mod, 'sit', 35067)
   rest.Name.enGB.set('Rest')
   rest.Cooldown.set(0)
@@ -460,7 +460,7 @@ function BuffWornDagger ($: Builder) {
 }
 
 
-function RestSpell ($: Builder) {
+function RestingSpell ($: Builder) {
   const rest = $.std.Spells.load(1127)
   rest.Name.enGB.set('Resting')
   rest.Attributes.IS_FOOD_BUFF.set(false)
