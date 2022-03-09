@@ -33,7 +33,7 @@ function ResetTalents(player: TSPlayer) {
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, 0) on duplicate key update
       max=${max}, used=0
   `)
-   InitTalents(player)
+  InitTalents(player)
   player.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, player)
   player.SendAddonMessage('reset-talents', ``, 0, player)
 }
@@ -113,10 +113,12 @@ function InitTalents (player: TSPlayer) {
     select * from __talents;
   `)
   while (a.GetRow()) {
-    let talentId = a.GetUInt16(1)
+    let talentId = a.GetString(1)
     let spellId = a.GetUInt16(2)
     let cost = a.GetUInt16(3)
     let classMask = a.GetUInt16(5)
+    if (player.HasSpell(spellId))
+      player.RemoveSpell(spellId, false, false)
     QueryWorld(`
       insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", 0) on duplicate key update
         playerGuid=${playerGuid}, talentId="${talentId}", isActive=0;
