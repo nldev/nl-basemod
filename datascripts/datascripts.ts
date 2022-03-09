@@ -308,7 +308,7 @@ function SetupNpcStats ($: Builder) {
 
 function SetupStats ($: Builder) {
   $.std.Classes.queryAll({}).forEach(cls => {
-    if (cls.ID !== 6)
+    if (cls.ID === 6)
       return
     cls.Stats.ParryCap.set(0)
     cls.Stats.DodgeCap.set(0)
