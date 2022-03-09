@@ -3,7 +3,7 @@ import { Opcode } from './utils'
 function Setup (events: TSEvents) {
 }
 
-function SetTalents(player: TSPlayer) {
+function SetTalents(player: TSPlayer, amount: number = 0) {
   const playerGuid = player.GetGUID()
   const level = player.GetLevel()
   const a = QueryWorld(`
@@ -12,10 +12,14 @@ function SetTalents(player: TSPlayer) {
   let used: number = 0
   let max: number = level + 9
   while (a.GetRow()) {
+    player.SendBroadcastMessage(`1: ${a.GetUInt32(0)}`)
+    player.SendBroadcastMessage(`2: ${a.GetUInt32(1)}`)
+    player.SendBroadcastMessage(`3: ${a.GetUInt32(2)}`)
     used = a.GetUInt32(2)
   }
+  if (amount)
+    used = amount
   player.SendBroadcastMessage(`max: ${max}`)
-  player.SendBroadcastMessage(`used: ${used}`)
   player.SendBroadcastMessage(`remainder: ${max - used}`)
   if (used > max)
     used = max
@@ -256,14 +260,14 @@ function HandleResetTalents (events: TSEvents) {
 
 function OnCreate (events: TSEvents) {
   events.Player.OnCreateEarly(player => {
-    SetTalents(player)
+    SetTalents(player, 10)
   })
 }
 
 function OnLogin (events: TSEvents) {
   events.Player.OnLogin(player => {
-    ApplyTalents(player)
     SetTalents(player)
+    ApplyTalents(player)
   })
 }
 
