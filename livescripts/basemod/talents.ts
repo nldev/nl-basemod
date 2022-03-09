@@ -31,7 +31,7 @@ function SetTalents(player: TSPlayer, amount: number = 0) {
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
       max=${max}, used=${used}
   `)
-  player.SendAddonMessage('get-talent-info-success', `${max - used} ${max}`, 0, player)
+  player.SendAddonMessage('get-talent-info-success', `${max - (max - used)} ${max}`, 0, player)
 }
 
 function ResetTalents(player: TSPlayer) {
