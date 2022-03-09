@@ -4,12 +4,24 @@ import { createClassMask, createRaceMask } from './basemod/utils'
 import { Map } from './basemod/types'
 import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
 
+// FIXME move
+export const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
+export const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
 
 function main () {
   const $ = new Builder()
 
   const SKILLS: Map<SkillLine> = {}
-  $.std.SkillLines.forEach(e => SKILLS[e.Name.enGB.get()] = e)
+  const l = $.std.SkillLines.create('BASEMOD', 'thing')
+  $.std.SkillLines.forEach(e => {
+    console.log(e.Name.enGB.get())
+    SKILLS[e.Name.enGB.get()] = e
+  })
+  const a = $.dbc.SkillLineAbility.add(9000)
+  a.SkillLine.set(SKILLS['Swords'].ID)
+  a.MinSkillLineRank.set(0)
+  a.Spell.set(202)
+  $.dbc.SkillRaceClassInfo.add(20000).SkillID.set(SKILLS['Swords'].ID).RaceMask.set(ALL_RACE_MASK).ClassMask.set(createClassMask('ROGUE')).MinLevel.set(0)
   SKILLS['Swords'].Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
 
   temp($)
@@ -363,9 +375,6 @@ function SetupStats ($: Builder) {
 }
 
 function SetupSkills ($: Builder) {
-  const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
-  const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
-
   // dual wield
   $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.set(1)).Category.set(6).RaceClassInfos.forEach(r => {
     r.ClassMask.set(createClassMask('ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'))
