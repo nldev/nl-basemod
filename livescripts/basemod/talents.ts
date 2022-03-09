@@ -1,8 +1,5 @@
 import { Opcode } from './utils'
 
-function Setup (events: TSEvents) {
-}
-
 function SetTalents(player: TSPlayer) {
   const playerGuid = player.GetGUID()
   const level = player.GetLevel()
@@ -37,7 +34,7 @@ function ResetTalents(player: TSPlayer) {
       max=${max}, used=0
   `)
   QueryWorld(`
-    delete from __talent_instances where playerGuid = ${playerGuid}";
+    delete from __talent_instances where playerGuid = ${playerGuid};
   `)
   player.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, player)
   player.SendAddonMessage('reset-talents', ``, 0, player)
@@ -214,8 +211,7 @@ function HandleUnlearnTalent (events: TSEvents) {
       delete from __talent_instances where playerGuid=${playerGuid} and talentId="${talentId}"
     `)
     QueryWorld(`
-      insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", 0) on duplicate key update
-        playerGuid=${playerGuid}, talentId="${talentId}", isActive=0
+      insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", 0) on duplicate key update playerGuid=${playerGuid}, talentId="${talentId}", isActive=0
     `)
     // update __player_talents
     QueryWorld(`
@@ -278,7 +274,6 @@ function GM (events: TSEvents) {
 }
 
 export function Talents (events: TSEvents) {
-  Setup(events)
   HandleGetTalentInfo(events)
   HandleLearnTalent(events)
   HandleUnlearnTalent(events)
