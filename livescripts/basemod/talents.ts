@@ -10,7 +10,8 @@ function SetTalents(player: TSPlayer) {
     select * from __player_talents where playerGuid = ${playerGuid};
   `)
   let used: number = 0
-  let max: number = level
+  // let max: number = level
+  let max: number = ((level + 20) > 80) ? 80 : (level + 20)
   while (a.GetRow())
     used = a.GetUInt32(1)
   if (used > max)
