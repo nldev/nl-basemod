@@ -17,12 +17,14 @@ function SetTalents(player: TSPlayer, amount: number = 0) {
     player.SendBroadcastMessage(`3: ${a.GetUInt32(2)}`)
     used = a.GetUInt32(2)
   }
-  if (amount)
-    used = amount
   player.SendBroadcastMessage(`max: ${max}`)
   player.SendBroadcastMessage(`remainder: ${max - used}`)
   if (used > max)
     used = max
+  if (amount) {
+    used = 0
+    max = amount
+  }
   QueryWorld(`
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
       max=${max}, used=${used}
@@ -260,7 +262,7 @@ function HandleResetTalents (events: TSEvents) {
 
 function OnCreate (events: TSEvents) {
   events.Player.OnCreateEarly(player => {
-    SetTalents(player, 10)
+    SetTalents(player, 11)
   })
 }
 
