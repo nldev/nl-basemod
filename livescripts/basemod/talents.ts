@@ -18,7 +18,7 @@ function SetTalents(player: TSPlayer) {
     used = max
   QueryWorld(`
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
-      max=${max}, used=${used};
+      max=${max}, used=${used}
   `)
   player.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, player)
 }
@@ -34,10 +34,10 @@ function ResetTalents(player: TSPlayer) {
   }
   QueryWorld(`
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, 0) on duplicate key update
-      max=${max}, used=0;
+      max=${max}, used=0
   `)
   QueryWorld(`
-    delete * from __talent_instances where playerGuid=${playerGuid}";
+    delete from __talent_instances where playerGuid = ${playerGuid}";
   `)
   player.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, player)
   player.SendAddonMessage('reset-talents', ``, 0, player)
@@ -163,7 +163,7 @@ function HandleLearnTalent (events: TSEvents) {
     // update __player_talents
     QueryWorld(`
       insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${max - remaining}) on duplicate key update
-max=${max}, used=${max - remaining};
+        max=${max}, used=${max - remaining};
     `)
     sender.SaveToDB()
     sender.SendAddonMessage('learn-talent-success', talentId, 0, sender)
