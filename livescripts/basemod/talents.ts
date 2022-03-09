@@ -17,14 +17,16 @@ function SetTalents(player: TSPlayer, amount: number = 0) {
     player.SendBroadcastMessage(`3: ${a.GetUInt32(2)}`)
     used = a.GetUInt32(2)
   }
-  player.SendBroadcastMessage(`max: ${max}`)
-  player.SendBroadcastMessage(`remainder: ${max - used}`)
   if (used > max)
     used = max
   if (amount) {
     used = 0
     max = amount
   }
+  player.SendBroadcastMessage(`amount: ${amount}`)
+  player.SendBroadcastMessage(`used: ${used}`)
+  player.SendBroadcastMessage(`max: ${max}`)
+  player.SendBroadcastMessage(`remainder: ${max - used}`)
   QueryWorld(`
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
       max=${max}, used=${used}
