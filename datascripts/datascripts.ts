@@ -367,7 +367,6 @@ function SetupStats ($: Builder) {
 }
 
 function SetupSkills ($: Builder) {
-  console.log('dual wield')
   // dual wield
   SKILLS['Dual Wield'].Autolearn.addMod(['ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   console.log('dual wield')
@@ -405,8 +404,8 @@ function SetupSkills ($: Builder) {
   SKILLS['Two-Handed Maces'].Autolearn.addMod(['PALADIN', 'SHAMAN', 'WARRIOR', 'DRUID'], ALL_CLASSES, e => e.Rank.set(0))
   console.log('two handed maces')
   // shield
-  SKILLS['Shields'].Autolearn.addMod(['PALADIN', 'SHAMAN', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
-  console.log('two handed shields')
+  SKILLS['Shield'].Autolearn.addMod(['PALADIN', 'SHAMAN', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
+  console.log('shield')
   // crossbow
   SKILLS['Crossbows'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   console.log('crossbows')
