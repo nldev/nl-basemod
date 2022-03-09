@@ -210,7 +210,13 @@ export const AUTOLEARN = createTemplates<Autolearn>(CREATE_AUTOLEARN_TASK, [
   {
     id: 'anesthetic-poison',
     spellId: 26785,
-    level: 20,
+    level: 19,
+    class: ['ROGUE'],
+  },
+  {
+    id: 'deadly-throw',
+    spellId: 26679,
+    level: 19,
     class: ['ROGUE'],
   },
 ])

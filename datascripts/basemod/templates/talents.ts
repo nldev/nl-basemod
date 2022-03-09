@@ -472,12 +472,6 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
     class: { ROGUE: true },
   },
   {
-    id: 'deadly-throw',
-    spellId: 48674,
-    cost: 6,
-    class: { ROGUE: true },
-  },
-  {
     id: 'dismantle',
     spellId: 51722,
     cost: 5,
