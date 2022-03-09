@@ -33,34 +33,17 @@ const temp = ($: Builder) => {
 }
 
 function SitSpell ($: Builder) {
-  const rest = $.std.Spells.create($.mod, 'sit', 59752)
-  console.log(rest.ID)
+  const rest = $.std.Spells.create($.mod, 'sit', 35067)
   rest.Name.enGB.set('Rest')
   rest.Cooldown.set(0)
   rest.Cooldown.CategoryTime.set(0)
   rest.Cooldown.StartCategory.set(0)
-  rest.Effects.clearAll()
-  rest.Effects.addMod(m => m.Type.DUMMY.set())
-  rest.Visual.modRef(m => {
-    m.AllKits().forEach(k => {
-      const m = k.getRefCopy()
-      m.Animation.KNEEL_LOOP.set()
-      m.Animation.set(0)
-      m.BaseEffect.set(0)
-      m.HeadEffect.set(0)
-      m.CameraShake.set(0)
-      m.ChestEffect.set(0)
-      m.WorldEffect.set(0)
-      m.BreathEffect.set(0)
-      m.CharProcedures.clearAll()
-      m.LeftHandEffect.set(0)
-      m.RightHandEffect.set(0)
-      m.LeftHandEffect.set(0)
-      m.RightWeaponEffect.set(0)
-      m.SpellEffects.clearAll()
-      m.StartAnimation.set(0)
-    })
-  })
+  rest.Effects.get(0).ImplicitTargetA.DEST_CASTER.set()
+  rest.Attributes.HIDE_FROM_AURA_BAR.set(0)
+  rest.AuraInterruptFlags.CAST.set(0)
+  rest.AuraInterruptFlags.MOVE.set(0)
+  rest.AuraInterruptFlags.HIT_BY_SPELL.set(0)
+  rest.AuraInterruptFlags.TAKE_DAMAGE.set(0)
 }
 
 const STATS: any = {
