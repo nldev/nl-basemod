@@ -4,7 +4,8 @@ import { createClassMask, createRaceMask } from './basemod/utils'
 import { Map } from './basemod/types'
 import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
 
-// FIXME move
+// FIXME move & fix
+export const ALL_CLASSES: any = ['WARRIOR', 'PALADIN', 'HUNTER', 'ROGUE', 'MAGE', 'WARLOCK', 'DRUID', 'SHAMAN', 'PALADIN', 'PRIEST']
 export const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
 export const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
 const SKILLS: Map<SkillLine> = {}
@@ -365,7 +366,6 @@ function SetupStats ($: Builder) {
   })
 }
 
-const ALL_CLASSES: any = ['WARRIOR', 'PALADIN', 'HUNTER', 'ROGUE', 'MAGE', 'WARLOCK', 'DRUID', 'SHAMAN', 'PALADIN', 'PRIEST']
 function SetupSkills ($: Builder) {
   // dual wield
   SKILLS['Dual Wield'].Autolearn.addMod(['ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
