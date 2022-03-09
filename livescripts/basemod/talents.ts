@@ -42,6 +42,72 @@ function HandleGetTalentInfo (events: TSEvents) {
   })
 }
 
+function SetTalents(player: TSPlayer) {
+  const playerGuid = player.GetGUID()
+  const level = player.GetLevel()
+  const a = QueryWorld(`
+    select * from __player_talents where playerGuid = ${playerGuid};
+  `)
+  let used: number = 0
+  let max: number = level + 9
+  while (a.GetRow()) {
+    used = a.GetUInt32(2)
+  }
+  const b = QueryWorld(`
+    delete * from __talent_instances where playerGuid = ${playerGuid};
+  `)
+  QueryWorld(`
+    insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
+      max=${max}, used=${used}
+  `)
+  player.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, player)
+}
+
+function ResetTalents(player: TSPlayer) {
+  const playerGuid = player.GetGUID()
+  const a = QueryWorld(`
+    select * from __player_talents where playerGuid = ${playerGuid};
+  `)
+  let max: string = '0'
+  while (a.GetRow()) {
+    max = a.GetString(2)
+  }
+  const b = QueryWorld(`
+    delete * from __talent_instances where playerGuid = ${playerGuid};
+  `)
+  QueryWorld(`
+    insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, 0) on duplicate key update
+      max=${max}, used=0
+  `)
+  player.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, player)
+}
+
+function ApplyTalents(player: TSPlayer) {
+  const playerGuid = player.GetGUID()
+  const a = QueryWorld(`
+    select * from __talent_instances where playerGuid = ${playerGuid};
+  `)
+  while (a.GetRow()) {
+    const id = a.GetString(2)
+    const isActive = a.GetUInt16(3)
+    if (id && isActive) {
+      // FIXME: create a row if doesnt exist
+      const c = QueryWorld(`
+        select * from __talents where id = "${id}";
+      `)
+      let spellId = 0
+      while (c.GetRow()) {
+        spellId = c.GetUInt16(2)
+        if (player.HasSpell(spellId)) {
+          player.LearnSpell(spellId)
+        } else {
+          player.RemoveSpell(spellId, false, false)
+        }
+      }
+    }
+  }
+}
+
 function HandleLearnTalent (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
     const opcode = Opcode('learn-talent')
@@ -139,7 +205,7 @@ function HandleUnlearnTalent (events: TSEvents) {
       max = b.GetUInt16(2)
     }
     const existingRemaining = max - used
-    const remaining = existingRemaining + cost
+    const remaining = ((existingRemaining + cost) > max) ? max : (existingRemaining + cost)
     // unlearn spell
     sender.RemoveSpell(spellId, true, false)
     // update __talent_instances
@@ -181,8 +247,41 @@ function HandleSetTalentPoints (events: TSEvents) {
   })
 }
 
+function HandleResetTalents (events: TSEvents) {
+  events.Player.OnSay((p, m) => {
+    if (m.get() === '@reset')
+      ResetTalents(p)
+  })
+}
+
+function OnCreate (events: TSEvents) {
+  events.Player.OnCreateEarly(player => {
+    SetTalents(player)
+  })
+}
+
+function OnLogin (events: TSEvents) {
+  events.Player.OnLogin(player => {
+    ApplyTalents(player)
+    SetTalents(player)
+  })
+}
+
+
+function OnLevelup (events: TSEvents) {
+  events.Player.OnLevelChanged((player, oldLevel) => {
+    SetTalents(player)
+    if (oldLevel > player.GetLevel()) {
+      ApplyTalents(player)
+    } else {
+      ResetTalents(player)
+    }
+  })
+}
+
 function GM (events: TSEvents) {
   HandleSetTalentPoints(events)
+  HandleResetTalents(events)
 }
 
 export function Talents (events: TSEvents) {
@@ -190,6 +289,9 @@ export function Talents (events: TSEvents) {
   HandleGetTalentInfo(events)
   HandleLearnTalent(events)
   HandleUnlearnTalent(events)
+  OnCreate(events)
+  OnLogin(events)
+  OnLevelup(events)
   GM(events)
 }
 
