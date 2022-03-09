@@ -12,14 +12,15 @@ function main () {
   const $ = new Builder()
 
   const SKILLS: Map<SkillLine> = {}
-  const l = $.std.SkillLines.create('BASEMOD', 'thing')
+  const l = std.SkillLines.create('BASEMOD', 'thing')
   $.std.SkillLines.forEach(e => {
     console.log(e.Name.enGB.get())
     SKILLS[e.Name.enGB.get()] = e
   })
-  const a = $.dbc.SkillLineAbility.query({ Spell: 202 })
-  a.SkillLine.set(SKILLS['Swords'].ID)
-  console.log(a.objectify())
+  const t = SKILLS['Two-Handed Swords']
+  t.Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
+  // t.RaceClassInfos.add(ALL_RACE_MASK, ALL_CLASS_MASK)
+  // SKILLS['Swords'].Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
   // a.SkillLine.set(SKILLS['Swords'].ID)
   // a.MinSkillLineRank.set(0)
   // a.Spell.set(202)
