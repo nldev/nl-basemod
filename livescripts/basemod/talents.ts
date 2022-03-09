@@ -10,7 +10,7 @@ function SetTalents(player: TSPlayer, amount: number = 0) {
     select * from __player_talents where playerGuid = ${playerGuid};
   `)
   let used: number = 0
-  let max: number = level + 9
+  let max: number = level + 10
   while (a.GetRow()) {
     player.SendBroadcastMessage(`1: ${a.GetUInt32(0)}`)
     player.SendBroadcastMessage(`2: ${a.GetUInt32(1)}`)
@@ -19,7 +19,7 @@ function SetTalents(player: TSPlayer, amount: number = 0) {
   }
   if (used > max)
     used = max
-  if (amount) {
+  if (amount > 0) {
     used = 0
     max = amount
   }
@@ -31,7 +31,7 @@ function SetTalents(player: TSPlayer, amount: number = 0) {
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
       max=${max}, used=${used}
   `)
-  player.SendAddonMessage('get-talent-info-success', `${max - (max - used)} ${max}`, 0, player)
+  player.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, player)
 }
 
 function ResetTalents(player: TSPlayer) {
