@@ -666,8 +666,6 @@ function RestSpell ($: Builder) {
   })
 }
 
-main()
-
 function PlaceholderEnchants () {
   const special = std.DBC.SpellItemEnchantment.add(9999)
   special.Name.enGB.set('[special]')
