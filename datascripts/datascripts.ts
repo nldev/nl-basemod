@@ -28,7 +28,33 @@ const temp = ($: Builder) => {
   RestSpell($)
   SpellCategories($)
   InfiniteRangedWeapon($)
+  SitSpell($)
   PlaceholderEnchants()
+}
+
+function SitSpell ($: Builder) {
+  const sit = $.std.Spells.create($.mod, 'sit', 59752)
+  sit.Cooldown.set(0)
+  sit.Cooldown.CategoryTime.set(0)
+  sit.Cooldown.StartCategory.set(0)
+  sit.Effects.clearAll()
+  sit.Effects.addMod(m => m.Type.DUMMY.set())
+  sit.Visual.modRef(m => m.CastKit.modRefCopy(c => {
+    c.Animation.SIT_GROUND.set()
+    c.BaseEffect.set(0)
+    c.HeadEffect.set(0)
+    c.CameraShake.set(0)
+    c.ChestEffect.set(0)
+    c.WorldEffect.set(0)
+    c.BreathEffect.set(0)
+    c.CharProcedures.clearAll()
+    c.LeftHandEffect.set(0)
+    c.RightHandEffect.set(0)
+    c.LeftHandEffect.set(0)
+    c.RightWeaponEffect.set(0)
+    c.SpellEffects.clearAll()
+    c.StartAnimation.set(0)
+  }))
 }
 
 const STATS: any = {
