@@ -44,7 +44,7 @@ function SitSpell ($: Builder) {
   sit.Visual.modRef(m => {
     m.AllKits().forEach(k => {
       const m = k.getRefCopy()
-      m.Animation.set(0)
+      m.Animation.SIT_GROUND.set()
       m.BaseEffect.set(0)
       m.HeadEffect.set(0)
       m.CameraShake.set(0)
@@ -58,22 +58,6 @@ function SitSpell ($: Builder) {
       m.RightWeaponEffect.set(0)
       m.SpellEffects.clearAll()
       m.StartAnimation.set(0)
-    })
-    m.CasterImpactKit.modRefCopy(c => {
-      c.Animation.SIT_GROUND.set()
-      c.BaseEffect.set(0)
-      c.HeadEffect.set(0)
-      c.CameraShake.set(0)
-      c.ChestEffect.set(0)
-      c.WorldEffect.set(0)
-      c.BreathEffect.set(0)
-      c.CharProcedures.clearAll()
-      c.LeftHandEffect.set(0)
-      c.RightHandEffect.set(0)
-      c.LeftHandEffect.set(0)
-      c.RightWeaponEffect.set(0)
-      c.SpellEffects.clearAll()
-      c.StartAnimation.set(0)
     })
   })
 }
