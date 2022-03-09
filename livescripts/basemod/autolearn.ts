@@ -20,6 +20,10 @@ function SetAbilities (player: TSPlayer) {
 }
 
 export function Autolearn (events: TSEvents) {
+  events.Player.OnLogin(player => {
+    SetAbilities(player)
+  })
+
   events.Player.OnCreateEarly(player => {
     SetAbilities(player)
   })
