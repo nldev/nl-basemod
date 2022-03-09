@@ -42,7 +42,6 @@ function SitSpell ($: Builder) {
   rest.Attributes.HIDE_FROM_AURA_BAR.set(0)
   rest.AuraInterruptFlags.CAST.set(0)
   rest.AuraInterruptFlags.MOVE.set(0)
-  rest.AuraInterruptFlags.HIT_BY_SPELL.set(0)
   rest.AuraInterruptFlags.TAKE_DAMAGE.set(0)
 }
 
