@@ -3,7 +3,7 @@ import { Opcode } from './utils'
 function Setup (events: TSEvents) {
 }
 
-function SetTalents(player: TSPlayer, amount: number = 0) {
+function SetTalents(player: TSPlayer) {
   const playerGuid = player.GetGUID()
   const level = player.GetLevel()
   const a = QueryWorld(`
@@ -19,11 +19,6 @@ function SetTalents(player: TSPlayer, amount: number = 0) {
   }
   if (used > max)
     used = max
-  if (amount > 0) {
-    used = 0
-    max = amount
-  }
-  player.SendBroadcastMessage(`amount: ${amount}`)
   player.SendBroadcastMessage(`used: ${used}`)
   player.SendBroadcastMessage(`max: ${max}`)
   player.SendBroadcastMessage(`remainder: ${max - used}`)
@@ -48,7 +43,7 @@ function ResetTalents(player: TSPlayer) {
       max=${max}, used=0
   `)
   player.SendAddonMessage('get-talent-info-success', `${max} ${max}`, 0, player)
-  player.SendAddonMessage('reset-talents', `${max}`, 0, player)
+  player.SendAddonMessage('reset-talents', `${max} ${max}`, 0, player)
 }
 
 function ApplyTalents(player: TSPlayer) {
@@ -263,8 +258,8 @@ function HandleResetTalents (events: TSEvents) {
 }
 
 function OnLogin (events: TSEvents) {
-  events.Player.OnLogin((player, isFirstLogin) => {
-    SetTalents(player, isFirstLogin ? 11 : 0)
+  events.Player.OnLogin(player => {
+    SetTalents(player)
     ApplyTalents(player)
   })
 }
@@ -274,9 +269,9 @@ function OnLevelup (events: TSEvents) {
   events.Player.OnLevelChanged((player, oldLevel) => {
     SetTalents(player)
     if (oldLevel > player.GetLevel()) {
-      ApplyTalents(player)
-    } else {
       ResetTalents(player)
+    } else {
+      ApplyTalents(player)
     }
   })
 }
