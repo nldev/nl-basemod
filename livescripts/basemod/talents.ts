@@ -60,6 +60,7 @@ function ApplyTalents(player: TSPlayer) {
           player.LearnSpell(spellId)
         } else {
           player.RemoveSpell(spellId, false, false)
+          player.RemoveAura(spellId)
         }
       }
     }
