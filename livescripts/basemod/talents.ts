@@ -11,17 +11,10 @@ function SetTalents(player: TSPlayer) {
   `)
   let used: number = 0
   let max: number = level
-  while (a.GetRow()) {
-    player.SendBroadcastMessage(`1: ${a.GetUInt32(0)}`)
-    player.SendBroadcastMessage(`2: ${a.GetUInt32(1)}`)
-    player.SendBroadcastMessage(`3: ${a.GetUInt32(2)}`)
+  while (a.GetRow())
     used = a.GetUInt32(1)
-  }
   if (used > max)
     used = max
-  player.SendBroadcastMessage(`used: ${used}`)
-  player.SendBroadcastMessage(`max: ${max}`)
-  player.SendBroadcastMessage(`remainder: ${max - used}`)
   QueryWorld(`
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, ${used}) on duplicate key update
       max=${max}, used=${used}
