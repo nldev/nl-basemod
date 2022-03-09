@@ -370,9 +370,9 @@ function SetupSkills ($: Builder) {
   // dual wield
   SKILLS['Dual Wield'].Autolearn.addMod(['ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // dagger
-  SKILLS['Dual Wield'].Autolearn.addMod(['ROGUE', 'DRUID', 'HUNTER', 'MAGE', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
+  SKILLS['Daggers'].Autolearn.addMod(['ROGUE', 'DRUID', 'HUNTER', 'MAGE', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR'], ALL_CLASSES, e => e.Rank.set(0))
   // fist weapon
-  SKILLS['Dual Wield'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'], ALL_CLASSES, e => e.Rank.set(0))
+  SKILLS['Fist Weapons'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'], ALL_CLASSES, e => e.Rank.set(0))
   // 1h sword
   SKILLS['Swords'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'WARLOCK', 'MAGE', 'PALADIN'], ALL_CLASSES, e => e.Rank.set(0))
   // 1h axe
