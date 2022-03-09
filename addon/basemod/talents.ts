@@ -357,14 +357,12 @@ export const Talents: Component = options => {
       return
     if (!text)
       return
-    console.log('success')
   })
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
     if (prefix !== 'reset-talents')
       return
     list.forEach(e => e.fns.deactivate())
-    console.log('success')
   })
 
   SendAddonMessage(REQUESTS.GET_TALENT_INFO, '', 'WHISPER', name)
