@@ -14,14 +14,13 @@ export function EasyLoot (events: TSEvents) {
   events.GameObjects.OnLootStateChanged((go, state, player) => {
     if (player.IsPlayer()) {
       const p = go.GetLootRecipient()
-      if (p.IsNull())
-        player.ToPlayer().SendBroadcastMessage(`${state}`)
+      // if (p.IsNull())
+      //   player.ToPlayer().SendBroadcastMessage(`${state}`)
     }
   })
   events.Creatures.OnGenerateLoot((creature, player) => {
     const loot = creature.GetLoot()
     const money = loot.GetMoney()
-    player.SendBroadcastMessage(`${money}`)
 
     const number = loot.GetItemCount() - 1
     if (number === -1)
