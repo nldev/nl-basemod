@@ -17,11 +17,13 @@ function main () {
     console.log(e.Name.enGB.get())
     SKILLS[e.Name.enGB.get()] = e
   })
-  const a = $.dbc.SkillLineAbility.add(9000)
+  const a = $.dbc.SkillLineAbility.query({ Spell: 202 })
   a.SkillLine.set(SKILLS['Swords'].ID)
-  a.MinSkillLineRank.set(0)
-  a.Spell.set(202)
-  $.dbc.SkillRaceClassInfo.add(20000).SkillID.set(SKILLS['Swords'].ID).RaceMask.set(ALL_RACE_MASK).ClassMask.set(createClassMask('ROGUE')).MinLevel.set(0)
+  console.log(a.objectify())
+  // a.SkillLine.set(SKILLS['Swords'].ID)
+  // a.MinSkillLineRank.set(0)
+  // a.Spell.set(202)
+  // $.dbc.SkillRaceClassInfo.add(20000).SkillID.set(SKILLS['Swords'].ID).RaceMask.set(ALL_RACE_MASK).ClassMask.set(createClassMask('ROGUE')).MinLevel.set(0)
   SKILLS['Swords'].Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
 
   temp($)
