@@ -33,18 +33,18 @@ const temp = ($: Builder) => {
 }
 
 function SitSpell ($: Builder) {
-  const sit = $.std.Spells.create($.mod, 'sit', 59752)
-  console.log(sit.ID)
-  sit.Name.enGB.set('Rest')
-  sit.Cooldown.set(0)
-  sit.Cooldown.CategoryTime.set(0)
-  sit.Cooldown.StartCategory.set(0)
-  sit.Effects.clearAll()
-  sit.Effects.addMod(m => m.Type.DUMMY.set())
-  sit.Visual.modRef(m => {
+  const rest = $.std.Spells.create($.mod, 'sit', 59752)
+  console.log(rest.ID)
+  rest.Name.enGB.set('Rest')
+  rest.Cooldown.set(0)
+  rest.Cooldown.CategoryTime.set(0)
+  rest.Cooldown.StartCategory.set(0)
+  rest.Effects.clearAll()
+  rest.Effects.addMod(m => m.Type.DUMMY.set())
+  rest.Visual.modRef(m => {
     m.AllKits().forEach(k => {
       const m = k.getRefCopy()
-      m.Animation.KNEEL_LOOP.set()
+      m.Animation.SIT_GROUND.set()
       m.BaseEffect.set(0)
       m.HeadEffect.set(0)
       m.CameraShake.set(0)
@@ -58,6 +58,22 @@ function SitSpell ($: Builder) {
       m.RightWeaponEffect.set(0)
       m.SpellEffects.clearAll()
       m.StartAnimation.set(0)
+    })
+    m.CastKit.modRefCopy(c => {
+      c.Animation.KNEEL_LOOP.set()
+      c.BaseEffect.set(0)
+      c.HeadEffect.set(0)
+      c.CameraShake.set(0)
+      c.ChestEffect.set(0)
+      c.WorldEffect.set(0)
+      c.BreathEffect.set(0)
+      c.CharProcedures.clearAll()
+      c.LeftHandEffect.set(0)
+      c.RightHandEffect.set(0)
+      c.LeftHandEffect.set(0)
+      c.RightWeaponEffect.set(0)
+      c.SpellEffects.clearAll()
+      c.StartAnimation.set(0)
     })
   })
 }
