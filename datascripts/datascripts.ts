@@ -5,7 +5,9 @@ import { createClassMask, createRaceMask, resolveDuration } from './basemod/util
 function main () {
   const $ = new Builder()
 
-  $.std.SkillLines.load()
+  const sl = $.std.SkillLines.load(201)
+  sl.enableAutolearn('ROGUE')
+  sl.Autolearn.addMod('ROGUE', ['HUMAN'], e => e.Rank.set(0))
 
   temp($)
 }
