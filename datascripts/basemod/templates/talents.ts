@@ -294,7 +294,7 @@ export const TALENTS = createTemplates<Talent>(CREATE_TALENT_TASK, [
   {
     id: 'improved-sinister-strike',
     spellId: 13863,
-    cost: 1,
+    cost: 2,
     class: { ROGUE: true },
   },
   {
