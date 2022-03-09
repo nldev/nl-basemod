@@ -15,7 +15,7 @@ function SetTalents(player: TSPlayer, amount: number = 0) {
     player.SendBroadcastMessage(`1: ${a.GetUInt32(0)}`)
     player.SendBroadcastMessage(`2: ${a.GetUInt32(1)}`)
     player.SendBroadcastMessage(`3: ${a.GetUInt32(2)}`)
-    used = a.GetUInt32(2)
+    used = a.GetUInt32(1)
   }
   if (used > max)
     used = max
