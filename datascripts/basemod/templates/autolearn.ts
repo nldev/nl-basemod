@@ -196,15 +196,15 @@ export const AUTOLEARN = createTemplates<Autolearn>(CREATE_AUTOLEARN_TASK, [
     class: ['ROGUE'],
   },
   {
-    id: 'wound-poison',
-    spellId: 13227,
-    level: 18,
+    id: 'mind-numbing-poison',
+    spellId: 5761,
+    level: 17,
     class: ['ROGUE'],
   },
   {
-    id: 'mind-numbing-poison',
-    spellId: 5761,
-    level: 19,
+    id: 'wound-poison',
+    spellId: 13227,
+    level: 18,
     class: ['ROGUE'],
   },
   {
