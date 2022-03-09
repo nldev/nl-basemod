@@ -137,16 +137,6 @@ export const defaultConfig: Required<Config> = {
   logger: noop,
 }
 
-export function Build (config?: Config) {
-  return (options?: Options) => {
-    const $ = new Builder(config, options)
-
-    $.init()
-
-    return $
-  }
-}
-
 export interface Config {
   project: string
   hooks?: HookConstructor[]
@@ -225,6 +215,8 @@ export class Builder {
       fs.rmdirSync(ADDON_DATA_PATH, { recursive: true })
 
     fs.mkdirSync(ADDON_DATA_PATH, { recursive: true })
+
+    this.init()
   }
 
   private hooks (options: Options, config: Config) {
@@ -341,7 +333,7 @@ export class Builder {
     }
   }
 
-  public init () {
+  private init () {
     // onInitBegin
     for (const hook of this.Hook.list)
       hook.onInitBegin()

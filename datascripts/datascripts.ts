@@ -8,8 +8,6 @@ function main () {
   // FIXME: give weapon skills
   // FIXME: set config to max weapon skills
 
-  $.init()
-
   temp($)
 }
 
