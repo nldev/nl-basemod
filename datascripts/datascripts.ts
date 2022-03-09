@@ -14,153 +14,15 @@ function main () {
 }
 
 const temp = ($: Builder) => {
-  StarterSpells($)
-
-  const b = $.std.Items.load(2504)
-  b.Name.enGB.set('Bow')
-  b.Damage.clearAll()
-  b.Damage.addPhysical(25, 42)
-  b.Delay.set(1700)
-  b.ItemLevel.set(5)
-  b.AmmoType.NONE.set()
-  b.Durability.set(0)
-  b.Spells.addMod(i => {
-    i.Spell.set(46699)
-    i.Trigger.ON_EQUIP.set()
-    i.Charges.set('UNLIMITED')
-  })
-  const g = $.std.Items.load(2508)
-  g.Durability.set(0)
-  g.Name.enGB.set('Gun')
-  g.Damage.clearAll()
-  g.Damage.addPhysical(25, 42)
-  g.Delay.set(1700)
-  g.ItemLevel.set(5)
-  g.AmmoType.NONE.set()
-  g.Spells.addMod(i => {
-    i.Spell.set(46699)
-    i.Trigger.ON_EQUIP.set()
-    i.Charges.set('UNLIMITED')
-  })
-  $.std.Spells.load(46699)
-    .Description.enGB.set('')
-
-  const zeal = $.Spell.add({
-    id: 'zeal',
-    name: 'Zeal',
-    base: 2983,
-  })
-
-  zeal.asset.Effects.get(0)
-    .Type.APPLY_AURA.set()
-    .Aura.MOD_MINIMUM_SPEED.set()
-    .PercentBase.set(300)
-
-  zeal.asset.Effects.addMod(effect => effect
-    .Type.APPLY_AURA.set()
-    .Aura.MOD_PACIFY_SILENCE.set()
-    .ImplicitTargetA.UNIT_CASTER.set()
-  )
-
-  zeal.asset.Attributes.IGNORE_IMMUNE_FLAGS.set(1)
-  zeal.asset.Duration.setSimple(resolveDuration(0.5), 0, resolveDuration(1))
-  zeal.asset.Cooldown.set(0, 0, 0, 0)
-
-  zeal.asset.Power.setMana(0, 50, 0, 0 ,0)
-
-  const visual = zeal.asset.Visual.getRef()
-  visual.StateKit.getRef().clear()
-
-  // TODO: hunter spell - disappear hunter + control pet + random facing corpse spawn
-
-  const map = $.std.Maps.create($.mod, 'dev').Directory.set('dev')
-
-  map.Expansion.set(0)
-  map.Name.enGB.set('Dev')
-  map.TimeofDayOverride.set(0)
-
-  const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
-  const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
-
-  $.sql.creature_classlevelstats.queryAll({}).forEach(v => v.delete())
-  const npcWarriorMin = $.sql.creature_classlevelstats.query({ level: 35, class: 1 })
-  const npcWarriorMax = $.sql.creature_classlevelstats.query({ level: 70, class: 1 })
-  const npcPaladinMin = $.sql.creature_classlevelstats.query({ level: 35, class: 2 })
-  const npcPaladinMax = $.sql.creature_classlevelstats.query({ level: 70, class: 2 })
-  const npcRogueMin = $.sql.creature_classlevelstats.query({ level: 35, class: 4 })
-  const npcRogueMax = $.sql.creature_classlevelstats.query({ level: 80, class: 4 })
-  const npcMageMin = $.sql.creature_classlevelstats.query({ level: 35, class: 8 })
-  const npcMageMax = $.sql.creature_classlevelstats.query({ level: 70, class: 8 })
-
-  // FIXME
-  // iterate through all creature templates
-  // increase stat inc size every 10 levels
-  // increase base damage
-  // decrease base hp (and probably mp)
-  // do not give mana to anything that has 0 mana
-  for (let i = 0; i < 99; i++) {
-    const level = i + 1
-    $.sql.creature_classlevelstats.add(level, 1, {
-      level,
-      class: 1,
-      basehp0: Math.ceil(npcWarriorMin.basehp0.get() + (level * ((npcWarriorMax.basehp0.get() - npcWarriorMin.basehp0.get()) / 99))),
-      basehp1: Math.ceil(npcWarriorMin.basehp1.get() + (level * ((npcWarriorMax.basehp1.get() - npcWarriorMin.basehp1.get()) / 99))),
-      basehp2: Math.ceil(npcWarriorMin.basehp2.get() + (level * ((npcWarriorMax.basehp2.get() - npcWarriorMin.basehp2.get()) / 99))),
-      basemana: Math.ceil(npcWarriorMin.basemana.get() + (level * ((npcWarriorMax.basemana.get() - npcWarriorMin.basemana.get()) / 99))),
-      basearmor: Math.ceil(npcWarriorMin.basearmor.get() + (level * ((npcWarriorMax.basearmor.get() - npcWarriorMin.basearmor.get()) / 99))),
-      attackpower: Math.ceil(npcWarriorMin.attackpower.get() + (level * ((npcWarriorMax.attackpower.get() - npcWarriorMin.attackpower.get()) / 99))),
-      rangedattackpower: Math.ceil(npcWarriorMin.rangedattackpower.get() + (level * ((npcWarriorMax.rangedattackpower.get() - npcWarriorMin.rangedattackpower.get()) / 99))),
-      damage_base: Math.ceil(npcWarriorMin.damage_base.get() + (level * ((npcWarriorMax.damage_base.get() - npcWarriorMin.damage_base.get()) / 99))),
-      damage_exp1: Math.ceil(npcWarriorMin.damage_exp1.get() + (level * ((npcWarriorMax.damage_exp1.get() - npcWarriorMin.damage_exp1.get()) / 99))),
-      damage_exp2: Math.ceil(npcWarriorMin.damage_exp2.get() + (level * ((npcWarriorMax.damage_exp2.get() - npcWarriorMin.damage_exp2.get()) / 99))),
-      comment: 'basemod',
-    })
-    $.sql.creature_classlevelstats.add(level, 2, {
-      level,
-      class: 1,
-      basehp0: Math.ceil(npcPaladinMin.basehp0.get() + (level * ((npcPaladinMax.basehp0.get() - npcPaladinMin.basehp0.get()) / 99))),
-      basehp1: Math.ceil(npcPaladinMin.basehp1.get() + (level * ((npcPaladinMax.basehp1.get() - npcPaladinMin.basehp1.get()) / 99))),
-      basehp2: Math.ceil(npcPaladinMin.basehp2.get() + (level * ((npcPaladinMax.basehp2.get() - npcPaladinMin.basehp2.get()) / 99))),
-      basemana: Math.ceil(npcPaladinMin.basemana.get() + (level * ((npcPaladinMax.basemana.get() - npcPaladinMin.basemana.get()) / 99))),
-      basearmor: Math.ceil(npcPaladinMin.basearmor.get() + (level * ((npcPaladinMax.basearmor.get() - npcPaladinMin.basearmor.get()) / 99))),
-      attackpower: Math.ceil(npcPaladinMin.attackpower.get() + (level * ((npcPaladinMax.attackpower.get() - npcPaladinMin.attackpower.get()) / 99))),
-      rangedattackpower: Math.ceil(npcPaladinMin.rangedattackpower.get() + (level * ((npcPaladinMax.rangedattackpower.get() - npcPaladinMin.rangedattackpower.get()) / 99))),
-      damage_base: Math.ceil(npcPaladinMin.damage_base.get() + (level * ((npcPaladinMax.damage_base.get() - npcPaladinMin.damage_base.get()) / 99))),
-      damage_exp1: Math.ceil(npcPaladinMin.damage_exp1.get() + (level * ((npcPaladinMax.damage_exp1.get() - npcPaladinMin.damage_exp1.get()) / 99))),
-      damage_exp2: Math.ceil(npcPaladinMin.damage_exp2.get() + (level * ((npcPaladinMax.damage_exp2.get() - npcPaladinMin.damage_exp2.get()) / 99))),
-      comment: 'basemod',
-    })
-    $.sql.creature_classlevelstats.add(level, 4, {
-      level,
-      class: 1,
-      basehp0: Math.ceil(npcRogueMin.basehp0.get() + (level * ((npcRogueMax.basehp0.get() - npcRogueMin.basehp0.get()) / 99))),
-      basehp1: Math.ceil(npcRogueMin.basehp1.get() + (level * ((npcRogueMax.basehp1.get() - npcRogueMin.basehp1.get()) / 99))),
-      basehp2: Math.ceil(npcRogueMin.basehp2.get() + (level * ((npcRogueMax.basehp2.get() - npcRogueMin.basehp2.get()) / 99))),
-      basemana: Math.ceil(npcRogueMin.basemana.get() + (level * ((npcRogueMax.basemana.get() - npcRogueMin.basemana.get()) / 99))),
-      basearmor: Math.ceil(npcRogueMin.basearmor.get() + (level * ((npcRogueMax.basearmor.get() - npcRogueMin.basearmor.get()) / 99))),
-      attackpower: Math.ceil(npcRogueMin.attackpower.get() + (level * ((npcRogueMax.attackpower.get() - npcRogueMin.attackpower.get()) / 99))),
-      rangedattackpower: Math.ceil(npcRogueMin.rangedattackpower.get() + (level * ((npcRogueMax.rangedattackpower.get() - npcRogueMin.rangedattackpower.get()) / 99))),
-      damage_base: Math.ceil(npcRogueMin.damage_base.get() + (level * ((npcRogueMax.damage_base.get() - npcRogueMin.damage_base.get()) / 99))),
-      damage_exp1: Math.ceil(npcRogueMin.damage_exp1.get() + (level * ((npcRogueMax.damage_exp1.get() - npcRogueMin.damage_exp1.get()) / 99))),
-      damage_exp2: Math.ceil(npcRogueMin.damage_exp2.get() + (level * ((npcRogueMax.damage_exp2.get() - npcRogueMin.damage_exp2.get()) / 99))),
-      comment: 'basemod',
-    })
-    $.sql.creature_classlevelstats.add(level, 8, {
-      level,
-      class: 1,
-      basehp0: Math.ceil(npcMageMin.basehp0.get() + (level * ((npcMageMax.basehp0.get() - npcMageMin.basehp0.get()) / 99))),
-      basehp1: Math.ceil(npcMageMin.basehp1.get() + (level * ((npcMageMax.basehp1.get() - npcMageMin.basehp1.get()) / 99))),
-      basehp2: Math.ceil(npcMageMin.basehp2.get() + (level * ((npcMageMax.basehp2.get() - npcMageMin.basehp2.get()) / 99))),
-      basemana: Math.ceil(npcMageMin.basemana.get() + (level * ((npcMageMax.basemana.get() - npcMageMin.basemana.get()) / 99))),
-      basearmor: Math.ceil(npcMageMin.basearmor.get() + (level * ((npcMageMax.basearmor.get() - npcMageMin.basearmor.get()) / 99))),
-      attackpower: Math.ceil(npcMageMin.attackpower.get() + (level * ((npcMageMax.attackpower.get() - npcMageMin.attackpower.get()) / 99))),
-      rangedattackpower: Math.ceil(npcMageMin.rangedattackpower.get() + (level * ((npcMageMax.rangedattackpower.get() - npcMageMin.rangedattackpower.get()) / 99))),
-      damage_base: Math.ceil(npcMageMin.damage_base.get() + (level * ((npcMageMax.damage_base.get() - npcMageMin.damage_base.get()) / 99))),
-      damage_exp1: Math.ceil(npcMageMin.damage_exp1.get() + (level * ((npcMageMax.damage_exp1.get() - npcMageMin.damage_exp1.get()) / 99))),
-      damage_exp2: Math.ceil(npcMageMin.damage_exp2.get() + (level * ((npcMageMax.damage_exp2.get() - npcMageMin.damage_exp2.get()) / 99))),
-      comment: 'basemod',
-    })
-  }
+  SetupNpcStats($)
+  SetupStats($)
+  SetupSkills($)
+  SetupMaps($)
+  BuffWornDagger($)
+  RestSpell($)
+  SpellCategories($)
+  PlaceholderEnchants()
+}
 
 const STATS: any = {
   1: {
@@ -325,6 +187,100 @@ const STATS: any = {
   },
 }
 
+function SetupNpcStats ($: Builder) {
+  $.sql.creature_classlevelstats.queryAll({}).forEach(v => v.delete())
+  const npcWarriorMin = $.sql.creature_classlevelstats.query({ level: 35, class: 1 })
+  const npcWarriorMax = $.sql.creature_classlevelstats.query({ level: 70, class: 1 })
+  const npcPaladinMin = $.sql.creature_classlevelstats.query({ level: 35, class: 2 })
+  const npcPaladinMax = $.sql.creature_classlevelstats.query({ level: 70, class: 2 })
+  const npcRogueMin = $.sql.creature_classlevelstats.query({ level: 35, class: 4 })
+  const npcRogueMax = $.sql.creature_classlevelstats.query({ level: 80, class: 4 })
+  const npcMageMin = $.sql.creature_classlevelstats.query({ level: 35, class: 8 })
+  const npcMageMax = $.sql.creature_classlevelstats.query({ level: 70, class: 8 })
+
+  // FIXME
+  // iterate through all creature templates
+  // increase stat inc size every 10 levels
+  // increase base damage
+  // decrease base hp (and probably mp)
+  // do not give mana to anything that has 0 mana
+  for (let i = 0; i < 99; i++) {
+    const level = i + 1
+    $.sql.creature_classlevelstats.add(level, 1, {
+      level,
+      class: 1,
+      basehp0: Math.ceil(npcWarriorMin.basehp0.get() + (level * ((npcWarriorMax.basehp0.get() - npcWarriorMin.basehp0.get()) / 99))),
+      basehp1: Math.ceil(npcWarriorMin.basehp1.get() + (level * ((npcWarriorMax.basehp1.get() - npcWarriorMin.basehp1.get()) / 99))),
+      basehp2: Math.ceil(npcWarriorMin.basehp2.get() + (level * ((npcWarriorMax.basehp2.get() - npcWarriorMin.basehp2.get()) / 99))),
+      basemana: Math.ceil(npcWarriorMin.basemana.get() + (level * ((npcWarriorMax.basemana.get() - npcWarriorMin.basemana.get()) / 99))),
+      basearmor: Math.ceil(npcWarriorMin.basearmor.get() + (level * ((npcWarriorMax.basearmor.get() - npcWarriorMin.basearmor.get()) / 99))),
+      attackpower: Math.ceil(npcWarriorMin.attackpower.get() + (level * ((npcWarriorMax.attackpower.get() - npcWarriorMin.attackpower.get()) / 99))),
+      rangedattackpower: Math.ceil(npcWarriorMin.rangedattackpower.get() + (level * ((npcWarriorMax.rangedattackpower.get() - npcWarriorMin.rangedattackpower.get()) / 99))),
+      damage_base: Math.ceil(npcWarriorMin.damage_base.get() + (level * ((npcWarriorMax.damage_base.get() - npcWarriorMin.damage_base.get()) / 99))),
+      damage_exp1: Math.ceil(npcWarriorMin.damage_exp1.get() + (level * ((npcWarriorMax.damage_exp1.get() - npcWarriorMin.damage_exp1.get()) / 99))),
+      damage_exp2: Math.ceil(npcWarriorMin.damage_exp2.get() + (level * ((npcWarriorMax.damage_exp2.get() - npcWarriorMin.damage_exp2.get()) / 99))),
+      comment: 'basemod',
+    })
+    $.sql.creature_classlevelstats.add(level, 2, {
+      level,
+      class: 1,
+      basehp0: Math.ceil(npcPaladinMin.basehp0.get() + (level * ((npcPaladinMax.basehp0.get() - npcPaladinMin.basehp0.get()) / 99))),
+      basehp1: Math.ceil(npcPaladinMin.basehp1.get() + (level * ((npcPaladinMax.basehp1.get() - npcPaladinMin.basehp1.get()) / 99))),
+      basehp2: Math.ceil(npcPaladinMin.basehp2.get() + (level * ((npcPaladinMax.basehp2.get() - npcPaladinMin.basehp2.get()) / 99))),
+      basemana: Math.ceil(npcPaladinMin.basemana.get() + (level * ((npcPaladinMax.basemana.get() - npcPaladinMin.basemana.get()) / 99))),
+      basearmor: Math.ceil(npcPaladinMin.basearmor.get() + (level * ((npcPaladinMax.basearmor.get() - npcPaladinMin.basearmor.get()) / 99))),
+      attackpower: Math.ceil(npcPaladinMin.attackpower.get() + (level * ((npcPaladinMax.attackpower.get() - npcPaladinMin.attackpower.get()) / 99))),
+      rangedattackpower: Math.ceil(npcPaladinMin.rangedattackpower.get() + (level * ((npcPaladinMax.rangedattackpower.get() - npcPaladinMin.rangedattackpower.get()) / 99))),
+      damage_base: Math.ceil(npcPaladinMin.damage_base.get() + (level * ((npcPaladinMax.damage_base.get() - npcPaladinMin.damage_base.get()) / 99))),
+      damage_exp1: Math.ceil(npcPaladinMin.damage_exp1.get() + (level * ((npcPaladinMax.damage_exp1.get() - npcPaladinMin.damage_exp1.get()) / 99))),
+      damage_exp2: Math.ceil(npcPaladinMin.damage_exp2.get() + (level * ((npcPaladinMax.damage_exp2.get() - npcPaladinMin.damage_exp2.get()) / 99))),
+      comment: 'basemod',
+    })
+    $.sql.creature_classlevelstats.add(level, 4, {
+      level,
+      class: 1,
+      basehp0: Math.ceil(npcRogueMin.basehp0.get() + (level * ((npcRogueMax.basehp0.get() - npcRogueMin.basehp0.get()) / 99))),
+      basehp1: Math.ceil(npcRogueMin.basehp1.get() + (level * ((npcRogueMax.basehp1.get() - npcRogueMin.basehp1.get()) / 99))),
+      basehp2: Math.ceil(npcRogueMin.basehp2.get() + (level * ((npcRogueMax.basehp2.get() - npcRogueMin.basehp2.get()) / 99))),
+      basemana: Math.ceil(npcRogueMin.basemana.get() + (level * ((npcRogueMax.basemana.get() - npcRogueMin.basemana.get()) / 99))),
+      basearmor: Math.ceil(npcRogueMin.basearmor.get() + (level * ((npcRogueMax.basearmor.get() - npcRogueMin.basearmor.get()) / 99))),
+      attackpower: Math.ceil(npcRogueMin.attackpower.get() + (level * ((npcRogueMax.attackpower.get() - npcRogueMin.attackpower.get()) / 99))),
+      rangedattackpower: Math.ceil(npcRogueMin.rangedattackpower.get() + (level * ((npcRogueMax.rangedattackpower.get() - npcRogueMin.rangedattackpower.get()) / 99))),
+      damage_base: Math.ceil(npcRogueMin.damage_base.get() + (level * ((npcRogueMax.damage_base.get() - npcRogueMin.damage_base.get()) / 99))),
+      damage_exp1: Math.ceil(npcRogueMin.damage_exp1.get() + (level * ((npcRogueMax.damage_exp1.get() - npcRogueMin.damage_exp1.get()) / 99))),
+      damage_exp2: Math.ceil(npcRogueMin.damage_exp2.get() + (level * ((npcRogueMax.damage_exp2.get() - npcRogueMin.damage_exp2.get()) / 99))),
+      comment: 'basemod',
+    })
+    $.sql.creature_classlevelstats.add(level, 8, {
+      level,
+      class: 1,
+      basehp0: Math.ceil(npcMageMin.basehp0.get() + (level * ((npcMageMax.basehp0.get() - npcMageMin.basehp0.get()) / 99))),
+      basehp1: Math.ceil(npcMageMin.basehp1.get() + (level * ((npcMageMax.basehp1.get() - npcMageMin.basehp1.get()) / 99))),
+      basehp2: Math.ceil(npcMageMin.basehp2.get() + (level * ((npcMageMax.basehp2.get() - npcMageMin.basehp2.get()) / 99))),
+      basemana: Math.ceil(npcMageMin.basemana.get() + (level * ((npcMageMax.basemana.get() - npcMageMin.basemana.get()) / 99))),
+      basearmor: Math.ceil(npcMageMin.basearmor.get() + (level * ((npcMageMax.basearmor.get() - npcMageMin.basearmor.get()) / 99))),
+      attackpower: Math.ceil(npcMageMin.attackpower.get() + (level * ((npcMageMax.attackpower.get() - npcMageMin.attackpower.get()) / 99))),
+      rangedattackpower: Math.ceil(npcMageMin.rangedattackpower.get() + (level * ((npcMageMax.rangedattackpower.get() - npcMageMin.rangedattackpower.get()) / 99))),
+      damage_base: Math.ceil(npcMageMin.damage_base.get() + (level * ((npcMageMax.damage_base.get() - npcMageMin.damage_base.get()) / 99))),
+      damage_exp1: Math.ceil(npcMageMin.damage_exp1.get() + (level * ((npcMageMax.damage_exp1.get() - npcMageMin.damage_exp1.get()) / 99))),
+      damage_exp2: Math.ceil(npcMageMin.damage_exp2.get() + (level * ((npcMageMax.damage_exp2.get() - npcMageMin.damage_exp2.get()) / 99))),
+      comment: 'basemod',
+    })
+  }
+  // $.std.CreatureTemplates.load(299).Level.Min.set(99)
+  // $.std.CreatureTemplates.load(299).Level.Max.set(99)
+  // $.std.CreatureTemplates.load(299).Level.set(99)
+  // $.std.CreatureTemplates.load(257).Stats.DamageMod.set(2)
+  // $.std.CreatureTemplates.load(257).Stats.HealthMod.set(0.9)
+  // $.std.CreatureTemplates.load(257).Stats.ArmorMod.set(0.9)
+  $.sql.creature_template.queryAll({}).forEach(c => {
+    c.HealthModifier.set(1.3)
+    c.ArmorModifier.set(1)
+    c.DamageModifier.set(1.6)
+  })
+}
+
+function SetupStats ($: Builder) {
   $.std.Classes.queryAll({}).forEach(cls => {
     if (cls.ID === 6)
       return
@@ -401,6 +357,11 @@ const STATS: any = {
     cls.Stats.RegenMPPerSpt.set(() => $.dbc.GtRegenMPPerSpt.getRow(560).Data.get())
     cls.Stats.RegenHPPerSpt.set(() => $.dbc.GtRegenHPPerSpt.getRow(560).Data.get())
   })
+}
+
+function SetupSkills ($: Builder) {
+  const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
+  const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
 
   // dual wield
   $.std.SkillLines.load(118).Spells.forEach(s => s.AcquireMethod.set(1)).Category.set(6).RaceClassInfos.forEach(r => {
@@ -649,6 +610,15 @@ const STATS: any = {
     a.ClassMaskForbidden.markAll([0])
   })
 
+}
+
+function SetupMaps ($: Builder) {
+  const map = $.std.Maps.create($.mod, 'dev').Directory.set('dev')
+
+  map.Expansion.set(0)
+  map.Name.enGB.set('Dev')
+  map.TimeofDayOverride.set(0)
+
   $.std.Maps.forEach(m => {
     if (m.Name.enGB.get() !== 'Outland')
       return
@@ -676,26 +646,14 @@ const STATS: any = {
       })
     }
   })
+}
 
-  for (let i = 0; i <= 3000; i++)
-    $.dbc.Item.add(90000 + i, {
-    })
-
-  // $.std.CreatureTemplates.load(299).Level.Min.set(99)
-  // $.std.CreatureTemplates.load(299).Level.Max.set(99)
-  // $.std.CreatureTemplates.load(299).Level.set(99)
-  // $.std.CreatureTemplates.load(257).Stats.DamageMod.set(2)
-  // $.std.CreatureTemplates.load(257).Stats.HealthMod.set(0.9)
-  // $.std.CreatureTemplates.load(257).Stats.ArmorMod.set(0.9)
-  $.sql.creature_template.queryAll({}).forEach(c => {
-    c.HealthModifier.set(1.3)
-    c.ArmorModifier.set(1)
-    c.DamageModifier.set(1.6)
-  })
-
-  $.std.Items.load(4540).Spells.get(0).Spell.getRef().Effects.get(0).PointsBase.set(1000)
+function BuffWornDagger ($: Builder) {
   $.std.Items.load(2092).Damage.clearAll().Damage.addPhysical(10, 20)
+}
 
+
+function RestSpell ($: Builder) {
   const rest = $.std.Spells.load(1127)
   rest.Name.enGB.set('Resting')
   rest.Attributes.IS_FOOD_BUFF.set(false)
@@ -706,69 +664,11 @@ const STATS: any = {
     kit.RightHandEffect.set(0)
     kit.Animation.set(0)
   })
-  const regenHp = rest.Effects.get(0).Aura.MOD_HEALTH_REGEN_PERCENT.set()
-  regenHp
-  regenHp.PercentBase.set(4)
-  regenHp.PercentDieSides.set(0)
-  regenHp.PercentPerLevel.set(0)
-  regenHp.PercentPerCombo.set(0)
-  const regenMp = rest.Effects.get(1).Aura.MOD_POWER_REGEN_PERCENT.set()
-  regenMp.PowerType.MANA.set()
-  regenMp.PowerPctBase.set(4)
-  regenMp.PowerPctDieSides.set(0)
-  regenMp.PowerPerLevelPct.set(0)
-  regenMp.PowerPerComboPct.set(0)
-
-  const STEALTH = 1784
-  const AMBUSH = 11267
-  const SINISTER_STRIKE = 11294
-  const GOUGE = 1776
-  const CHEAP_SHOT = 1833
-  const SAFE_FALL = 1860
-  const EVISCERATE = 11299
-  const VANISH = 1857
-  const PICK_POCKET = 921
-  const MASTER_OF_DECEPTION = 13971
-  const CAMOUFLAGE = 14063
-  const DIRTY_TRICKS = 14094
-  const KIDNEY_SHOT = 8643
-  const SHIV = 5938
-  const SPRINT = 11305
-  const EVASION = 26669
-  const SAP = 11297
-  const BACKSTAB = 25300
-  const GARROTE = 11290
-  const RUPTURE = 11274
-  const BLIND = 2094
-  const KICK = 1766
-  const DISARM_TRAP = 1842
-  const DETECT_TRAP = 2836
-  const EXPOSE_ARMOR = 8647
-  const DISTRACT = 1725
-  const FEINT = 25302
-  const INITIATIVE = 13980
-  const CRIPPLING_POISON = 3408
-  const WOUND_POISON = 13227
-  const MIND_NUMBING_POISON = 5761
-  const DEADLY_POISON = 25351
-  const INSTANT_POISON = 11339
-  const ANESTHETIC_POISON = 26785
-
-  $.std.Spells.load(SAP).Power.setEnergy(40)
-  $.std.Spells.load(GARROTE).Power.setEnergy(30)
-  $.std.Spells.load(CHEAP_SHOT).Power.setEnergy(40)
-  $.std.Spells.load(AMBUSH).Power.setEnergy(40)
-  $.std.Spells.load(RUPTURE).Power.setEnergy(25)
-  $.std.Spells.load(KIDNEY_SHOT).Power.setEnergy(10)
-  $.std.Spells.load(EXPOSE_ARMOR).Power.setEnergy(25)
-  $.std.Spells.load(GOUGE).Power.setEnergy(35)
-  $.std.Spells.load(SPRINT).Effects.get(0).PointsBase.set(130)
 }
 
 main()
 
-// FIXME: move this
-function CreatePlaceholderEnchants () {
+function PlaceholderEnchants () {
   const special = std.DBC.SpellItemEnchantment.add(9999)
   special.Name.enGB.set('[special]')
   special.Flags.set(0)
@@ -787,14 +687,7 @@ function CreatePlaceholderEnchants () {
   }
 }
 
-CreatePlaceholderEnchants()
-
-// ability
-// passive
-// utility
-
-// FIXME: move this
-function StarterSpells ($: Builder) {
+function SpellCategories ($: Builder) {
   const ability = $.std.DBC.SkillLine.add(9000)
   const passive = $.std.DBC.SkillLine.add(9001)
   const utility = $.std.DBC.SkillLine.add(9002)
@@ -812,14 +705,7 @@ function StarterSpells ($: Builder) {
     SkillLine: 9000,
   })
   $.std.DBC.SkillLineAbility.queryAll({}).forEach(v => v.CharacterPoints)
-  // console.log('skill line abilities')
-  // $.std.DBC.SkillLineAbility.queryAll({}).forEach(v => {
-  //   const spell = $.std.Spells.load(v.Spell.get())
-  //   if (spell && spell.Name && spell.Name.enGB)
-  //     console.log(spell.Name.enGB.get())
-  // })
-
-  // console.log('skill lines')
-  // $.std.DBC.SkillLine.queryAll({}).forEach(v => console.log(v.DisplayName.enGB.get()))
 }
+
+main()
 
