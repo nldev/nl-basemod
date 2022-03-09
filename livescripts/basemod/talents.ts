@@ -33,9 +33,7 @@ function ResetTalents(player: TSPlayer) {
     insert into __player_talents (playerGuid, max, used) values(${playerGuid}, ${max}, 0) on duplicate key update
       max=${max}, used=0
   `)
-  QueryWorld(`
-    delete from __talent_instances where playerGuid = ${playerGuid};
-  `)
+   InitTalents(player)
   player.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, player)
   player.SendAddonMessage('reset-talents', ``, 0, player)
 }
@@ -104,6 +102,26 @@ function HandleGetTalentInfo (events: TSEvents) {
     }
     sender.SendAddonMessage('get-talent-info-success', `${used} ${max}`, 0, sender)
   })
+}
+
+function InitTalents (player: TSPlayer) {
+  const playerGuid = player.GetGUID()
+  QueryWorld(`
+    delete from __talent_instances where playerGuid = ${playerGuid};
+  `)
+  const a = QueryWorld(`
+    select * from __talents;
+  `)
+  while (a.GetRow()) {
+    let talentId = a.GetUInt16(0)
+    let spellId = a.GetUInt16(2)
+    let cost = a.GetUInt16(3)
+    let classMask = a.GetUInt16(5)
+    QueryWorld(`
+      insert into __talent_instances (playerGuid, talentId, isActive) values(${playerGuid}, "${talentId}", 1) on duplicate key update
+        playerGuid=${playerGuid}, talentId="${talentId}", isActive=0;
+    `)
+  }
 }
 
 function HandleLearnTalent (events: TSEvents) {
@@ -252,7 +270,9 @@ function HandleResetTalents (events: TSEvents) {
 }
 
 function OnLogin (events: TSEvents) {
-  events.Player.OnLogin(player => {
+  events.Player.OnLogin((player, isFirstLogin) => {
+    if (isFirstLogin)
+      InitTalents(player)
     SetTalents(player)
     ApplyTalents(player)
   })
