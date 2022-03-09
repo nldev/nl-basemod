@@ -25,5 +25,5 @@ DBErrors.log
 **/datasets/*/luaxml_source
 
 # Addon data
-addon/data
+addon/data/**/*
 
