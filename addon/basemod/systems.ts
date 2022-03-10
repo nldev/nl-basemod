@@ -32,6 +32,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   menu.ref.SetSize(200, 300)
   menu.ref.SetBackdrop(BASE_BACKDROP)
   menu.ref.SetBackdropColor(0, 0, 0, 1)
+  menu.ref.Hide()
 
   // button
   const button = CreateFrame('Button', 'dropdown-button', a.ref)
