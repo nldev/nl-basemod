@@ -19,13 +19,14 @@ interface DropdownOptions extends ComponentOptions {
 }
 
 export const Dropdown: Component<DropdownOptions> = options => {
-  const a = Frame()
+  const a = Frame(options)
   a.ref.SetWidth(150)
-  a.ref.SetHeight(50)
+  a.ref.SetHeight(30)
   a.ref.SetBackdrop(BASE_BACKDROP)
-  const list = List()
+  // const list = List()
   return a
 }
+
 export const Checkboxes: Component = () => {
   const a = Frame()
   return a
@@ -43,7 +44,7 @@ export const Systems: Component = () => {
 
   Movable(a)
 
-  const dropdown = Dropdown({ parent: b })
+  const dropdown = Dropdown({ name: 'test-dropdown', parent: b })
 
   dropdown.ref.SetPoint('TOPLEFT')
 
