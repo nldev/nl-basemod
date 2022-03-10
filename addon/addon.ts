@@ -20,7 +20,19 @@ export const app = new App(app => {
       txt = name
       console.log(name)
       if (name === 'InterfaceOptionsControlsPanelAutoLootKeyDropDownButton') {
-        AllChildren(f).forEach(f => console.log(f.GetName()))
+        const b: WoWAPI.Button = f as any
+        const t = b.GetNormalTexture()
+        const h = b.GetHighlightTexture()
+        const p = b.GetPushedTexture()
+        const d = b.GetDisabledTexture()
+        console.log(((t as any ) as WoWAPI.Texture).GetTexture())
+        console.log(((h as any ) as WoWAPI.Texture).GetTexture())
+        console.log(((p as any ) as WoWAPI.Texture).GetTexture())
+        console.log(((d as any ) as WoWAPI.Texture).GetTexture())
+        // Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up
+        // Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down
+        // Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled
+        // Interface\Buttons\UI-Common-MouseHilight
       }
     }
   })
