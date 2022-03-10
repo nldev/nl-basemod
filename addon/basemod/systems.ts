@@ -1,6 +1,35 @@
-import { App, Component, Frame } from './app'
+import { App, Component, ComponentOptions, Frame } from './app'
+import { List } from './components/list'
 import { BASE_BACKDROP } from './constants'
 import { Movable } from './utils'
+
+interface DropdownItem {
+  id: string
+  text: string
+  value: string | number | boolean | null
+}
+
+interface DropdownOptions extends ComponentOptions {
+  width?: number
+  items?: DropdownItem[]
+  selection?: string
+  emptyItem?: boolean
+  emptyItemText?: string
+  onSelect?: (item: DropdownItem) => void
+}
+
+export const Dropdown: Component<DropdownOptions> = options => {
+  const a = Frame()
+  a.ref.SetWidth(150)
+  a.ref.SetHeight(50)
+  a.ref.SetBackdrop(BASE_BACKDROP)
+  const list = List()
+  return a
+}
+export const Checkboxes: Component = () => {
+  const a = Frame()
+  return a
+}
 
 export const Systems: Component = () => {
   const a = Frame({ name: 'systems' })
@@ -14,12 +43,9 @@ export const Systems: Component = () => {
 
   Movable(a)
 
-  const dropdown = Frame({ name: 'systems-dropdown', parent: b })
-  UIDropDownMenu_Initialize(dropdown.ref, (self, level, menuList) => {
-    UIDropDownMenu_AddButton({ text: 'hello', checked: true })
-    UIDropDownMenu_SetWidth(self, 500)
-    self.SetPoint('TOPLEFT')
-  })
+  const dropdown = Dropdown({ parent: b })
+
+  dropdown.ref.SetPoint('TOPLEFT')
 
   return a
 }
