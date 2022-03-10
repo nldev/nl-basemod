@@ -10,7 +10,7 @@ export const Systems: Component = () => {
   dropdown.ref.SetPoint('TOPLEFT')
   UIDropDownMenu_Initialize(dropdown.ref, (self, level, menuList) => {
   })
-  console.log('hello')
+  UIDropDownMenu_AddButton({ text: 'hello', checked: true })
 
   a.ref.SetSize(300, 400)
   a.ref.SetBackdrop(BASE_BACKDROP)
