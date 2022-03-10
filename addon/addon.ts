@@ -3,6 +3,7 @@ import { Talents } from './basemod/talents'
 import { EasyLoot } from './basemod/easy-loot'
 import { Chests } from './basemod/chests'
 import { Systems } from './basemod/systems'
+import { AllChildren } from './basemod/utils'
 
 export const app = new App(app => {
   Talents()
@@ -12,11 +13,15 @@ export const app = new App(app => {
   let txt = ''
   app.root.ref.SetScript('OnUpdate', () => {
     const f = GetMouseFocus()
+    if (!f)
+      return
     const name = f.GetName()
     if (txt !== name) {
       txt = name
-      if (name === 'InterfaceOptionsControlsPanelAutoLootKeyDropDownButton')
-        console.log('hello')
+      console.log(name)
+      if (name === 'InterfaceOptionsControlsPanelAutoLootKeyDropDownButton') {
+        AllChildren(f).forEach(f => console.log(f.GetName()))
+      }
     }
   })
 })
