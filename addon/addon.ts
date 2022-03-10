@@ -8,5 +8,6 @@ export const app = new App(app => {
   Talents()
   EasyLoot()
   Chests()
+  Systems()
 })
 

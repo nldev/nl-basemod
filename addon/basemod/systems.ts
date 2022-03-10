@@ -6,6 +6,12 @@ export const Systems: Component = () => {
   const a = Frame({ name: 'systems' })
   const b = Frame({ name: 'systems-inner', parent: a })
 
+  const dropdown = Frame({ name: 'systems-dropdown', parent: b })
+  dropdown.ref.SetPoint('TOPLEFT')
+  UIDropDownMenu_Initialize(dropdown.ref, (self, level, menuList) => {
+  })
+  console.log('hello')
+
   a.ref.SetSize(300, 400)
   a.ref.SetBackdrop(BASE_BACKDROP)
   a.ref.SetBackdropColor(0, 0, 0, 1)
