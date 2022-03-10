@@ -25,18 +25,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   a.ref.SetHeight(30)
   a.ref.SetBackdrop(BASE_BACKDROP)
 
-  //
-  const button = CreateFrame('Button', 'dropdown-button', a.ref)
-
-  //
-  button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
-  button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
-  button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
-  button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
-  button.SetSize(20, 20)
-  button.SetPoint('RIGHT', -5, 0)
-
-  //
+  // menu
   const menu = Frame({ name: 'dropdown-menu', parent: a })
 
   menu.ref.SetPoint('TOP', a.ref, 'BOTTOM', 0, -3)
@@ -44,20 +33,40 @@ export const Dropdown: Component<DropdownOptions> = options => {
   menu.ref.SetBackdrop(BASE_BACKDROP)
   menu.ref.SetBackdropColor(0, 0, 0, 1)
 
+  // button
+  const button = CreateFrame('Button', 'dropdown-button', a.ref)
+
+  button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
+  button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
+  button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
+  button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
+  button.SetSize(20, 20)
+  button.SetPoint('RIGHT', -5, 0)
+
+  // onclick
+  button.SetScript('OnClick', () => {
+    if (menu.ref.IsVisible()) {
+      menu.ref.Hide()
+    } else {
+      menu.ref.Show()
+    }
+  })
+
+  // list
   const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
 
-  // counter
-  const counterTextName = `${a.ref.GetName()}-label`
-  const counterText = a.ref.CreateFontString(
-    counterTextName,
+  // text
+  const textName = `${a.ref.GetName()}-label`
+  const text = a.ref.CreateFontString(
+    textName,
     'OVERLAY',
     'GameTooltipText',
   )
 
-  counterText.SetParent(a.ref)
-  counterText.SetPoint('LEFT', 10, 0)
-  counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
-  counterText.SetText('bustaz talkin sh*t')
+  text.SetParent(a.ref)
+  text.SetPoint('LEFT', 10, 0)
+  text.SetFont('Fonts/FRIZQT__.TTF', 10)
+  text.SetText('bustaz talkin sh*t')
 
   // const list = List()
   return a
