@@ -20,9 +20,33 @@ interface DropdownOptions extends ComponentOptions {
 
 export const Dropdown: Component<DropdownOptions> = options => {
   const a = Frame(options)
-  a.ref.SetWidth(150)
+
+  a.ref.SetWidth(200)
   a.ref.SetHeight(30)
   a.ref.SetBackdrop(BASE_BACKDROP)
+
+  const button = CreateFrame('Button', 'dropdown-button', a.ref)
+
+  button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
+  button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
+  button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
+  button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
+  button.SetSize(20, 20)
+  button.SetPoint('RIGHT', -5, 0)
+
+  // counter
+  const counterTextName = `${a.ref.GetName()}-label`
+  const counterText = a.ref.CreateFontString(
+    counterTextName,
+    'OVERLAY',
+    'GameTooltipText',
+  )
+
+  counterText.SetParent(a.ref)
+  counterText.SetPoint('LEFT', 5, 0)
+  counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
+  counterText.SetText('bustaz talkin sh*t')
+
   // const list = List()
   return a
 }

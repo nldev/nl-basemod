@@ -25,16 +25,16 @@ export const app = new App(app => {
         const h = b.GetHighlightTexture()
         const p = b.GetPushedTexture()
         const d = b.GetDisabledTexture()
-        console.log(((t as any ) as WoWAPI.Texture).GetTexture())
-        console.log(((h as any ) as WoWAPI.Texture).GetTexture())
-        console.log(((p as any ) as WoWAPI.Texture).GetTexture())
-        console.log(((d as any ) as WoWAPI.Texture).GetTexture())
-        // Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up
-        // Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down
-        // Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled
-        // Interface\Buttons\UI-Common-MouseHilight
+        console.log(((t as any) as WoWAPI.Texture).GetTexture())
+        console.log(((h as any) as WoWAPI.Texture).GetTexture())
+        console.log(((p as any) as WoWAPI.Texture).GetTexture())
+        console.log(((d as any) as WoWAPI.Texture).GetTexture())
+        //
+        //
       }
     }
+        //
+        //
   })
 })
 
