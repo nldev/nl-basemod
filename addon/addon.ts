@@ -10,14 +10,14 @@ export const app = new App(app => {
   Chests()
   Systems()
   let txt = ''
-  app.root.ref.HookScript('OnUpdate', () => {
+  app.root.ref.SetScript('OnUpdate', () => {
     const f = GetMouseFocus()
     const name = f.GetName()
-    if (txt === name)
-      return
-    txt = name
-    if (f.GetName() === 'InterfaceOptionsControlsPanelAutoLootKeyDropDownButton')
-      console.log('hello')
+    if (txt !== name) {
+      txt = name
+      if (name === 'InterfaceOptionsControlsPanelAutoLootKeyDropDownButton')
+        console.log('hello')
+    }
   })
 })
 
