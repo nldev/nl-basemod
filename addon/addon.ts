@@ -9,14 +9,18 @@ export const app = new App(app => {
   EasyLoot()
   Chests()
   Systems()
+  let txt = ''
   app.root.ref.HookScript('OnUpdate', () => {
-    test()
+    const f = GetMouseFocus()
+    const name = f.GetName()
+    if (txt === name)
+      return
+    txt = name
+    if (f.GetName() === 'InterfaceOptionsControlsPanelAutoLootKeyDropDownButton')
+      console.log('hello')
   })
 })
 
 function test () {
-  const f = GetMouseFocus()
-  if (f.GetName() === 'InterfaceOptionsControlsPanelAutoLootKeyDropDownButton')
-    console.log('hello')
 }
 
