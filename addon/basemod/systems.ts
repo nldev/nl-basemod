@@ -25,14 +25,26 @@ export const Dropdown: Component<DropdownOptions> = options => {
   a.ref.SetHeight(30)
   a.ref.SetBackdrop(BASE_BACKDROP)
 
+  //
   const button = CreateFrame('Button', 'dropdown-button', a.ref)
 
+  //
   button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
   button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
   button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
   button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
   button.SetSize(20, 20)
   button.SetPoint('RIGHT', -5, 0)
+
+  //
+  const menu = Frame({ name: 'dropdown-menu', parent: a })
+
+  menu.ref.SetPoint('TOP', a.ref, 'BOTTOM', 0, -3)
+  menu.ref.SetSize(200, 300)
+  menu.ref.SetBackdrop(BASE_BACKDROP)
+  menu.ref.SetBackdropColor(0, 0, 0, 1)
+
+  const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
 
   // counter
   const counterTextName = `${a.ref.GetName()}-label`
@@ -43,7 +55,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   )
 
   counterText.SetParent(a.ref)
-  counterText.SetPoint('LEFT', 5, 0)
+  counterText.SetPoint('LEFT', 10, 0)
   counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
   counterText.SetText('bustaz talkin sh*t')
 
