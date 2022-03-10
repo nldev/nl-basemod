@@ -45,6 +45,14 @@ export const Dropdown: Component<DropdownOptions> = options => {
   button.SetPoint('RIGHT', -5, 0)
 
   // onclick
+  a.ref.EnableMouse(true)
+  a.ref.SetScript('OnMouseDown', () => {
+    if (menu.ref.IsVisible()) {
+      menu.ref.Hide()
+    } else {
+      menu.ref.Show()
+    }
+  })
   button.SetScript('OnClick', () => {
     if (menu.ref.IsVisible()) {
       menu.ref.Hide()
