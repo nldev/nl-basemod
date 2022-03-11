@@ -1,4 +1,4 @@
-import { App, Component, ComponentOptions, Frame } from './app'
+import { Component, ComponentOptions, Frame, Element } from './app'
 import { List } from './components/list'
 import { BASE_BACKDROP } from './constants'
 import { Movable } from './utils'
@@ -31,6 +31,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   p.ref.SetSize(200, 3)
 
   const menu = Frame({ name: 'dropdown-menu', parent: p })
+  menu.ref.SetSize(200, 300)
   menu.ref.SetPoint('TOP', p.ref, 'BOTTOM', 0, 0)
   menu.ref.SetBackdrop(BASE_BACKDROP)
   menu.ref.SetBackdropColor(0, 0, 0, 1)
@@ -47,25 +48,22 @@ export const Dropdown: Component<DropdownOptions> = options => {
   button.SetSize(20, 20)
   button.SetPoint('RIGHT', -5, 0)
 
-  // onclick
+  // toggle
   a.ref.EnableMouse(true)
   a.ref.SetScript('OnMouseDown', () => {
     if (menu.ref.IsVisible()) {
-      menu.ref.Hide()
+      p.ref.Hide()
     } else {
-      menu.ref.Show()
+      p.ref.Show()
     }
   })
   button.SetScript('OnClick', () => {
     if (menu.ref.IsVisible()) {
-      menu.ref.Hide()
+      p.ref.Hide()
     } else {
-      menu.ref.Show()
+      p.ref.Show()
     }
   })
-
-  // list
-  const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
 
   // text
   const textName = `${a.ref.GetName()}-label`
@@ -80,7 +78,34 @@ export const Dropdown: Component<DropdownOptions> = options => {
   text.SetFont('Fonts/FRIZQT__.TTF', 10)
   text.SetText('bustaz talkin sh*t')
 
-  // const list = List()
+  // list
+  const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
+  list.ref.SetAllPoints(menu.ref)
+
+  // item
+  const Item = (options: DropdownItem) => {
+    options.id
+    options.text
+    options.value
+
+    const w = Frame({ name: `${options.id}-wrapper` })
+    const t = w.ref.CreateFontString(`${options.id}-wrapper-text`)
+
+    t.SetParent(w.ref)
+    t.SetPoint('LEFT', 10, 0)
+    t.SetFont('Fonts/FRIZQT__.TTF', 10)
+    t.SetText(options.text)
+
+    list.fns.Attach(options.id, w)
+  }
+
+  Item({
+    id: 'foo-1',
+    text: 'foo 1',
+    value: 0,
+  })
+
+
   return a
 }
 

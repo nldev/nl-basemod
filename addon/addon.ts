@@ -29,12 +29,8 @@ export const app = new App(app => {
         console.log(((h as any) as WoWAPI.Texture).GetTexture())
         console.log(((p as any) as WoWAPI.Texture).GetTexture())
         console.log(((d as any) as WoWAPI.Texture).GetTexture())
-        //
-        //
       }
     }
-        //
-        //
   })
 })
 
