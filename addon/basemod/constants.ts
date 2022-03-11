@@ -22,10 +22,10 @@ export const PALADIN = 'PALADIN'
 export const HUNTER = 'HUNTER'
 
 export const BASE_BACKDROP = {
-  bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
+  // bgFile: 'Interface/Tooltips/UI-Tooltip-Background',
   // edgeFile: "Interface/DialogFrame/UI-DialogBox-Border",
   edgeFile: 'Interface/Tooltips/UI-Tooltip-Border',
-  // bgFile: 'Interface/TutorialFrame/TutorialFrameBackground',
+  bgFile: 'Interface/TutorialFrame/TutorialFrameBackground',
   tile: true,
   tileSize: 16,
   edgeSize: 16,
