@@ -31,7 +31,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   p.ref.SetSize(200, 3)
 
   const menu = Frame({ name: 'dropdown-menu', parent: p })
-  menu.ref.SetSize(200, 100)
+  menu.ref.SetSize(200, 90)
   menu.ref.SetPoint('TOP', p.ref, 'BOTTOM', 0, 0)
   menu.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
   menu.ref.SetBackdropColor(0, 0, 0, 1)
@@ -76,7 +76,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   text.SetParent(a.ref)
   text.SetPoint('LEFT', 10, 0)
   text.SetFont('Fonts/FRIZQT__.TTF', 10)
-  text.SetText('bustaz talkin sh*t')
+  text.SetText('select')
 
   // list
   const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
@@ -115,18 +115,18 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   Item({
     id: 'foo-1',
-    text: 'foo 1',
-    value: 0,
+    text: 'aaa',
+    value: 1,
   })
   Item({
     id: 'foo-2',
-    text: 'foo 2',
-    value: 0,
+    text: 'bbb',
+    value: 2,
   })
   Item({
     id: 'foo-3',
-    text: 'foo 3',
-    value: 0,
+    text: 'ccc',
+    value: 3,
   })
 
 
