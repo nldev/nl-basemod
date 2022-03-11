@@ -31,9 +31,9 @@ export const Dropdown: Component<DropdownOptions> = options => {
   p.ref.SetSize(200, 3)
 
   const menu = Frame({ name: 'dropdown-menu', parent: p })
-  menu.ref.SetSize(200, 300)
+  menu.ref.SetSize(200, 100)
   menu.ref.SetPoint('TOP', p.ref, 'BOTTOM', 0, 0)
-  menu.ref.SetBackdrop(BASE_BACKDROP)
+  menu.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
   menu.ref.SetBackdropColor(0, 0, 0, 1)
 
   p.ref.Hide()
@@ -80,7 +80,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   // list
   const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
-  list.ref.SetSize(200, 300)
+  list.ref.SetSize(200, 100)
 
   // item
   const Item = (options: DropdownItem) => {
@@ -96,16 +96,17 @@ export const Dropdown: Component<DropdownOptions> = options => {
     t.SetFont('Fonts/FRIZQT__.TTF', 10)
     t.SetText(options.text)
 
-    w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
     w.ref.SetBackdropColor(0, 0, 0, 1)
 
     w.ref.EnableMouse(true)
     w.ref.SetScript('OnEnter', () => {
       console.log(options.text)
+      w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background', edgeFile: '' })
       w.ref.SetBackdropColor(0, 0, 1, 1)
     })
     w.ref.SetScript('OnLeave', () => {
       console.log(options.text)
+      w.ref.SetBackdrop({ bgFile: '', insets: { left:0, right:0, top:0, bottom:0 } })
       w.ref.SetBackdropColor(0, 0, 0, 1)
     })
 
