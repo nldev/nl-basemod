@@ -80,7 +80,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   // list
   const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
-  list.ref.SetAllPoints(menu.ref)
+  list.ref.SetSize(200, 300)
 
   // item
   const Item = (options: DropdownItem) => {
@@ -96,12 +96,35 @@ export const Dropdown: Component<DropdownOptions> = options => {
     t.SetFont('Fonts/FRIZQT__.TTF', 10)
     t.SetText(options.text)
 
+    w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
+    w.ref.SetBackdropColor(0, 0, 0, 1)
+
+    w.ref.EnableMouse(true)
+    w.ref.SetScript('OnEnter', () => {
+      console.log(options.text)
+      w.ref.SetBackdropColor(0, 0, 1, 1)
+    })
+    w.ref.SetScript('OnLeave', () => {
+      console.log(options.text)
+      w.ref.SetBackdropColor(0, 0, 0, 1)
+    })
+
     list.fns.Attach(options.id, w)
   }
 
   Item({
     id: 'foo-1',
     text: 'foo 1',
+    value: 0,
+  })
+  Item({
+    id: 'foo-2',
+    text: 'foo 2',
+    value: 0,
+  })
+  Item({
+    id: 'foo-3',
+    text: 'foo 3',
     value: 0,
   })
 
