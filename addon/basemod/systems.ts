@@ -26,13 +26,16 @@ export const Dropdown: Component<DropdownOptions> = options => {
   a.ref.SetBackdrop(BASE_BACKDROP)
 
   // menu
-  const menu = Frame({ name: 'dropdown-menu', parent: a })
+  const p = Frame({ name: 'dropdown-menu-padding', parent: a })
+  p.ref.SetPoint('TOP', a.ref, 'BOTTOM', 0, 0)
+  p.ref.SetSize(200, 3)
 
-  menu.ref.SetPoint('TOP', a.ref, 'BOTTOM', 0, -3)
-  menu.ref.SetSize(200, 300)
+  const menu = Frame({ name: 'dropdown-menu', parent: p })
+  menu.ref.SetPoint('TOP', p.ref, 'BOTTOM', 0, 0)
   menu.ref.SetBackdrop(BASE_BACKDROP)
   menu.ref.SetBackdropColor(0, 0, 0, 1)
-  menu.ref.Hide()
+
+  p.ref.Hide()
 
   // button
   const button = CreateFrame('Button', 'dropdown-button', a.ref)
