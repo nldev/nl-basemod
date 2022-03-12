@@ -110,6 +110,8 @@ export class Store {
         return
 
       const [primitive, type, key, value] = text.split(' ')
+      console.log(type)
+      console.log(key)
 
       const n = Number(primitive)
       this.state[type][key] = (n === 0)
@@ -143,6 +145,9 @@ export class Store {
       : typeof value === 'boolean'
       ? 2 // boolean
       : 3 // null
+
+    if (primitive === 2)
+      value = value ? 1 : 0
 
     this.state[type][key] = value
 
