@@ -208,6 +208,9 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     t.SetFont('Fonts/FRIZQT__.TTF', 10)
     t.SetText(options.text)
 
+    const e: any = w.ref
+    e.text = t
+
     w.ref.SetBackdropColor(0, 0, 0, 1)
 
     w.ref.EnableMouse(true)
@@ -315,6 +318,8 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       checkmark.ref.SetParent(item.item.ref)
       checkmark.ref.SetPoint('LEFT', 12, 0)
     } else {
+      for (const key of Object.keys(items))
+        items[key].ref.text.SetPoint('LEFT', 12, 0)
       checkmark.ref.Hide()
     }
     texture.SetAllPoints()
