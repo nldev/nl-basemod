@@ -357,18 +357,17 @@ export const Systems: Component = () => {
         id: 'foo',
         text: 'Foo',
         value: 1,
-        tooltip: 'this has a tooltip',
       },
       {
         id: 'bar',
         text: 'Bar',
         value: 2,
-        tooltip: 'this has a different tooltip',
       },
       {
         id: 'baz',
         text: 'Baz',
         value: 3,
+        tooltip: 'this has a tooltip',
       },
     ],
     onSelect: ({ id }) => {
