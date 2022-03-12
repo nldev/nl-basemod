@@ -91,7 +91,7 @@ const ACCOUNT = 'ACCOUNT'
 const CHARACTER = 'CHARACTER'
 
 export type StoreType = typeof ACCOUNT | typeof CHARACTER
-export type StoreValue = string | number | null
+export type StoreValue = string | number | boolean | null
 
 export class Store {
   isLoaded = false

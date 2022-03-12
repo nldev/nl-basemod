@@ -73,7 +73,7 @@ export function Store (events: TSEvents) {
       entry = a.GetUInt32(0)
       if (entry === -1) {
         QueryWorld(`
-          insert into __store (guid, primitive, type, storeKey, storeValue) value (${guid}, ${primitive}, "${type}", "${key}", "${value}");
+          insert into __store (guid, primitive, type, storeKey, storeValue) value (${guid}, ${primitive}, ${type}, "${key}", "${value}");
         `)
       } else {
         QueryWorld(`
