@@ -36,7 +36,10 @@ export const TABLES = createTemplates<SQLTable>(CREATE_TABLE_TASK, [
       },
       {
         name: 'type',
-        type: 'mediumtext',
+        type: 'mediumint',
+        typeParams: {
+          size: 8,
+        },
         isNotNullable: true,
       },
       {
