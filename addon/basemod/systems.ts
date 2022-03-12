@@ -273,6 +273,9 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   const Select = (id: string, isTrigger: boolean = true) => {
     const item = items[id]
 
+    if (selection.id === item.id)
+      return
+
     selection = {
       id: item.id,
       text: item.text,
