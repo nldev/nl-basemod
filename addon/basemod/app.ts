@@ -46,8 +46,6 @@ export const Root = (ref?: WoWAPI.Frame): Element<any, any> => {
     fns: {},
   }
 
-  frame.HookScript('OnMouseDown', () => app.TriggerGlobalClick(element))
-
   app.elements[ROOT] = element
 
   return element
@@ -84,7 +82,6 @@ export const Frame: Component = options => {
   }
 
   frame.EnableMouse(true)
-  frame.HookScript('OnMouseDown', () => app.TriggerGlobalClick(element))
 
   app.elements[options.name] = element
 
@@ -218,14 +215,5 @@ export class App {
         this.store.Init(() => this.onInit(this))
       }
     }
-  }
-
-  public TriggerGlobalClick (element: Element<any, any>) {
-    console.log('hello')
-    this.fns.forEach(fn => fn(element.ref.GetName(), element))
-  }
-
-  public OnGlobalClick (fn: (name: string, element: Element<any, any>) => void) {
-    this.fns.push(fn)
   }
 }
