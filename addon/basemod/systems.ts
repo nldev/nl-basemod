@@ -1,4 +1,3 @@
-import { Get } from './app'
 import { Component, ComponentOptions, Frame, Element } from './app'
 import { List } from './components/list'
 import { BASE_BACKDROP } from './constants'
