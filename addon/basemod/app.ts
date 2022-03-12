@@ -144,8 +144,15 @@ export class Store {
     SendAddonMessage('store-set', `${t} ${type} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
   }
 
-  public Get (type: StoreType, key: string) {
-    return this.state[type][key]
+  public Get (type: StoreType, key: string, defaultValue?: StoreValue) {
+    let value = this.state[type][key]
+
+    if (!value) {
+      this.Set(type, key, defaultValue)
+      value = defaultValue
+    }
+
+    return value
   }
 }
 
