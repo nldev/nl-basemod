@@ -8,7 +8,7 @@ export function Store (events: TSEvents) {
      return
     const pGuid = sender.GetGUID()
     const a = QueryWorld(`
-      select * from __addon_data where guid = ${pGuid};
+      select * from __store where guid = ${pGuid};
     `)
     while (a.GetRow()) {
       const primitive = a.GetUInt8(2)
@@ -24,7 +24,7 @@ export function Store (events: TSEvents) {
     }
     const aGuid = sender.GetAccountID()
     const b = QueryWorld(`
-      select * from __addon_data where guid = ${aGuid};
+      select * from __store where guid = ${aGuid};
     `)
     while (b.GetRow()) {
       const primitive = a.GetUInt8(2)
