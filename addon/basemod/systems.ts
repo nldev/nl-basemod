@@ -30,6 +30,7 @@ interface DropdownOptions extends ComponentOptions {
   items?: DropdownItemOptions[]
   isSelectableEmpty?: boolean
   isTriggerOnInit?: boolean,
+  isTriggerOnSameSelection?: boolean,
   emptyText?: string
   defaultSelectionId?: string
   onSelect?: (item: DropdownItem) => void
@@ -273,14 +274,13 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   const Select = (id: string, isTrigger: boolean = true) => {
     const item = items[id]
 
-    if (selection.id === item.id)
-      return
+    selection = { ...item }
 
-    selection = {
-      id: item.id,
-      text: item.text,
-      value: item.value,
-      item: item.item,
+    if (selection.id === item.id) {
+      if (options.isTriggerOnSameSelection)
+        if (options.onSelect && isTrigger)
+          options.onSelect(selection)
+      return
     }
 
     a.state.selection = { ...selection }
@@ -327,6 +327,7 @@ export const Systems: Component = () => {
     parent: b,
     isSelectableEmpty: true,
     isTriggerOnInit: true,
+    isTriggerOnSameSelection: true,
     emptyText: 'select a thing',
     items: [
       {
