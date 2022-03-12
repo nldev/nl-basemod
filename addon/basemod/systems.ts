@@ -322,7 +322,7 @@ export const Systems: Component = () => {
     name: 'test-dropdown',
     parent: b,
     isSelectableEmpty: true,
-    emptyText: 'hello-world',
+    emptyText: 'select a thing',
     items: [
       {
         id: 'foo',
