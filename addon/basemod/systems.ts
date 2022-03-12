@@ -99,7 +99,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   // toggle
   a.ref.EnableMouse(true)
   a.ref.SetScript('OnMouseDown', () => {
-    if (menu.ref.IsVisible()) {
+    if (p.ref.IsVisible()) {
       p.ref.Hide()
     } else {
       p.ref.Show()
@@ -107,7 +107,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   })
 
   button.SetScript('OnClick', () => {
-    if (menu.ref.IsVisible()) {
+    if (p.ref.IsVisible()) {
       p.ref.Hide()
     } else {
       p.ref.Show()
@@ -195,17 +195,20 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
     for (const key of Object.keys(autohide)) {
       const isMouseEnter: boolean = autohide[key]
-      if (isMouseEnter)
+      if (isMouseEnter) {
         bool = true
+      }
     }
+
+    console.log(bool)
 
     return bool
   }
 
   a.ref.SetScript('OnUpdate', () => {
-    console.log(GetTime() - timer)
-    if (GetTime() >= (timer + 6))
-      if (p.ref.IsVisible())
+    IsMouseEnter()
+    if ((timer > 0) && (GetTime() > (timer + 6)))
+      if (!IsMouseEnter())
         p.ref.Hide()
   })
 
