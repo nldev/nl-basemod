@@ -200,8 +200,6 @@ export const Dropdown: Component<DropdownOptions> = options => {
       }
     }
 
-    console.log(bool)
-
     return bool
   }
 
