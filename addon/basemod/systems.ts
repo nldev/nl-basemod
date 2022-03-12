@@ -313,7 +313,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     if (item.id !== 'empty') {
       checkmark.ref.Show()
       checkmark.ref.SetParent(item.item.ref)
-      checkmark.ref.SetPoint('LEFT', 10, 0)
+      checkmark.ref.SetPoint('LEFT', 12, 0)
     } else {
       checkmark.ref.Hide()
     }
@@ -322,7 +322,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
   // checkmark
   const checkmark = Frame({ name: `${a.ref.GetName()}-checkmark`, parent: menu })
-  checkmark.ref.SetSize(15, 15)
+  checkmark.ref.SetSize(12, 12)
   checkmark.ref.Hide()
 
   const texture = checkmark.ref.CreateTexture()
