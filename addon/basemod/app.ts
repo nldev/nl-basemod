@@ -87,17 +87,17 @@ export const Frame: Component = options => {
 }
 
 // store
-const STORE_TYPE_ACCOUNT = 'ACCOUNT'
-const STORE_TYPE_CHARACTER = 'CHARACTER'
+const ACCOUNT = 'ACCOUNT'
+const CHARACTER = 'CHARACTER'
 
-export type StoreType = typeof STORE_TYPE_ACCOUNT | typeof STORE_TYPE_CHARACTER
+export type StoreType = typeof ACCOUNT | typeof CHARACTER
 export type StoreValue = string | number | null
 
 export class Store {
   isLoaded = false
   state: any = {
-    [STORE_TYPE_ACCOUNT]: {},
-    [STORE_TYPE_CHARACTER]: {},
+    [ACCOUNT]: {},
+    [CHARACTER]: {},
   }
 
   public Init (onInit: () => void) {
