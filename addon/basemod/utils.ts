@@ -2,16 +2,15 @@ import { Element } from './app'
 import { Get } from './app'
 import { Rgb } from './types'
 
-// TODO: make function for store access
 export function Movable (element: Element<any, any>, defaultPoint: WoWAPI.Point = 'CENTER', defaultX: number = 0, defaultY:number = 0) {
-  const app = Get()
+  const $ = Get()
 
   const name = element.ref.GetName()
 
-  let a = app.store.Get('STORE_TYPE_CHARACTER', `${name}-point-a`) || defaultPoint
-  let b = app.store.Get('STORE_TYPE_CHARACTER', `${name}-point-b`) || defaultPoint
-  let x = app.store.Get('STORE_TYPE_CHARACTER', `${name}-x`) || defaultX
-  let y = app.store.Get('STORE_TYPE_CHARACTER', `${name}-y`) || defaultY
+  let a = $.store.Get('STORE_TYPE_CHARACTER', `${name}-point-a`) || defaultPoint
+  let b = $.store.Get('STORE_TYPE_CHARACTER', `${name}-point-b`) || defaultPoint
+  let x = $.store.Get('STORE_TYPE_CHARACTER', `${name}-x`) || defaultX
+  let y = $.store.Get('STORE_TYPE_CHARACTER', `${name}-y`) || defaultY
 
   if ((a !== '') && !a) {
     element.ref.SetPoint(defaultPoint, defaultX, defaultY)
@@ -23,10 +22,10 @@ export function Movable (element: Element<any, any>, defaultPoint: WoWAPI.Point 
     x = a4
     y = a5
 
-    app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-a`, a)
-    app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-b`, b)
-    app.store.Set('STORE_TYPE_CHARACTER', `${name}-x`, x)
-    app.store.Set('STORE_TYPE_CHARACTER', `${name}-y`, y)
+    $.store.Set('STORE_TYPE_CHARACTER', `${name}-point-a`, a)
+    $.store.Set('STORE_TYPE_CHARACTER', `${name}-point-b`, b)
+    $.store.Set('STORE_TYPE_CHARACTER', `${name}-x`, x)
+    $.store.Set('STORE_TYPE_CHARACTER', `${name}-y`, y)
   }
 
   element.ref.EnableMouse(true)
@@ -44,13 +43,13 @@ export function Movable (element: Element<any, any>, defaultPoint: WoWAPI.Point 
     let x = point[3]
     let y = point[4]
 
-    app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-a`, a)
-    app.store.Set('STORE_TYPE_CHARACTER', `${name}-point-b`, b)
-    app.store.Set('STORE_TYPE_CHARACTER', `${name}-x`, x)
-    app.store.Set('STORE_TYPE_CHARACTER', `${name}-y`, y)
+    $.store.Set('STORE_TYPE_CHARACTER', `${name}-point-a`, a)
+    $.store.Set('STORE_TYPE_CHARACTER', `${name}-point-b`, b)
+    $.store.Set('STORE_TYPE_CHARACTER', `${name}-x`, x)
+    $.store.Set('STORE_TYPE_CHARACTER', `${name}-y`, y)
   })
 
-  element.ref.SetPoint(a, app.root.ref, b, x, y)
+  element.ref.SetPoint(a, $.root.ref, b, x, y)
 }
 
 export const AllChildren = (frame: WoWAPI.Frame, list: WoWAPI.Frame[] = []) => {

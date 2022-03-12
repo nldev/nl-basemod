@@ -321,6 +321,7 @@ export const Systems: Component = () => {
   const dropdown = Dropdown({
     name: 'test-dropdown',
     parent: b,
+    // defaultSelectionId: 'foo',
     // isSelectableEmpty: true,
     // isTriggerOnInit: true,
     // isTriggerOnSameSelection: false,
@@ -342,7 +343,6 @@ export const Systems: Component = () => {
         value: 'baz',
       },
     ],
-    // defaultSelectionId: 'foo',
     onSelect: ({ text }) => console.log(text),
   })
 
