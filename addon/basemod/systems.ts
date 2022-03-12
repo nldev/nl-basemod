@@ -299,7 +299,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     let item = items[id]
 
     if (!item)
-      item = items['empty']
+      item = items[options.defaultSelectionId || 'empty']
 
     if (a.state.selection.id === item.id) {
       if (options.isTriggerOnReselect && options.onSelect && isTrigger)
@@ -317,9 +317,11 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       checkmark.ref.Show()
       checkmark.ref.SetParent(item.item.ref)
       checkmark.ref.SetPoint('LEFT', 12, 0)
+      for (const key of Object.keys(items))
+        items[key].item.ref.text.SetPoint('LEFT', 30, 0)
     } else {
       for (const key of Object.keys(items))
-        items[key].item.ref.text.SetPoint('LEFT', 0, 0)
+        items[key].item.ref.text.SetPoint('LEFT', 12, 0)
       checkmark.ref.Hide()
     }
     texture.SetAllPoints()
