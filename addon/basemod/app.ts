@@ -36,6 +36,7 @@ export const Root = (ref?: WoWAPI.Frame): Element<any, any> => {
     || ref
 
   frame.SetAllPoints(UIParent)
+  frame.HookScript('OnMouseDown', frame => app.TriggerGlobalClick(element))
 
   const element = {
     name: ROOT,
@@ -219,6 +220,7 @@ export class App {
   }
 
   public TriggerGlobalClick (element: Element<any, any>) {
+    console.log('hello')
     this.fns.forEach(fn => fn(element.ref.GetName(), element))
   }
 
