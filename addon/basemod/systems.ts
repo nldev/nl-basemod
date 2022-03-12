@@ -277,9 +277,8 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     selection = { ...item }
 
     if (selection.id === item.id) {
-      if (options.isTriggerOnSameSelection)
-        if (options.onSelect && isTrigger)
-          options.onSelect(selection)
+      if (options.isTriggerOnSameSelection && options.onSelect && isTrigger)
+        options.onSelect(selection)
       return
     }
 
