@@ -17,6 +17,7 @@ interface DropdownItem {
   id: string
   text: string
   value: string | number | boolean | null
+  tooltip?: string
   item?: Element<DropdownOptions>
 }
 
@@ -356,6 +357,7 @@ export const Systems: Component = () => {
         id: 'baz',
         text: 'Baz',
         value: 3,
+        tooltip: 'hello world',
       },
     ],
     onSelect: ({ id }) => {
