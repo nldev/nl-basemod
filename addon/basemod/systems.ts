@@ -283,7 +283,8 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
     text.SetText(item.text)
 
-    // TODO: OnSelect
+    if (options.onSelect)
+      options.onSelect(selection)
   }
 
   // empty
