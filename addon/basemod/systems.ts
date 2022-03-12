@@ -284,6 +284,9 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   const Select = (id: string, isTrigger: boolean = true) => {
     const item = items[id]
 
+    if (!item)
+      return
+
     if (a.state.selection.id === item.id) {
       if (options.isTriggerOnSameSelection && options.onSelect && isTrigger)
         options.onSelect(a.state.selection)
@@ -334,7 +337,7 @@ export const Systems: Component = () => {
     name: 'test-dropdown',
     parent: b,
     defaultSelectionId: $.store.Get('STORE_TYPE_CHARACTER', 'test-dropdown-id', 'foo'),
-    // isSelectableEmpty: true,
+    isSelectableEmpty: true,
     // isTriggerOnInit: true,
     // isTriggerOnSameSelection: false,
     emptyText: 'select a thing',
