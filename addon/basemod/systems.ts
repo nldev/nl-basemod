@@ -28,9 +28,9 @@ interface DropdownState {
 interface DropdownOptions extends ComponentOptions {
   width?: number
   items?: DropdownItemOptions[]
-  selection?: string
   isSelectableEmpty?: boolean
   emptyText?: string
+  defaultSelectionId?: string
   onSelect?: (item: DropdownItem) => void
 }
 
@@ -297,8 +297,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       value: i,
     })
 
-  // TODO: default selection
-  Select('empty')
+  Select(options.defaultSelectionId || 'empty')
 
   return a
 }
