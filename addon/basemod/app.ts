@@ -111,15 +111,6 @@ export class Store {
 
       const [t, type, key, value] = text.split(' ')
 
-
-    // 0: player
-    // 1: account
-
-    // 0: number
-    // 1: string
-    // 2: boolean
-    // 3: null
-
       const n = Number(t)
       this.state[type][key] = (n === 0)
         ? Number(value)
@@ -155,7 +146,7 @@ export class Store {
 
     this.state[type][key] = value
 
-    SendAddonMessage('store-set', `${t} ${type} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
+    SendAddonMessage('store-set', `${t} ${(type === 'ACCOUNT') ? 0 : 1} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
   }
 
   public Get (type: StoreType, key: string, defaultValue?: StoreValue) {
