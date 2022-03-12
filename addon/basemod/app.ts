@@ -109,9 +109,9 @@ export class Store {
       if (!text)
         return
 
-      const [t, type, key, value] = text.split(' ')
+      const [primitive, type, key, value] = text.split(' ')
 
-      const n = Number(t)
+      const n = Number(primitive)
       this.state[type][key] = (n === 0)
         ? Number(value)
         : (n === 2)
@@ -136,7 +136,7 @@ export class Store {
   public Set (type: StoreType, key: string, value: StoreValue) {
     const app = Get()
 
-    const t = typeof value === 'number'
+    const primitive = typeof value === 'number'
       ? 0 // number
       : typeof value === 'string'
       ? 1 // string
@@ -146,7 +146,7 @@ export class Store {
 
     this.state[type][key] = value
 
-    SendAddonMessage('store-set', `${t} ${(type === 'ACCOUNT') ? 0 : 1} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
+    SendAddonMessage('store-set', `${primitive} ${(type === 'ACCOUNT') ? 0 : 1} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
   }
 
   public Get (type: StoreType, key: string, defaultValue?: StoreValue) {
