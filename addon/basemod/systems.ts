@@ -296,7 +296,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     options.items.forEach(options => Item(options))
 
   // default selection
-  Select(options.defaultSelectionId || 'empty', options.isTriggerOnInit)
+  Select(options.defaultSelectionId || 'empty', options.isTriggerOnInit || false)
 
   return a
 }
@@ -322,7 +322,7 @@ export const Systems: Component = () => {
     name: 'test-dropdown',
     parent: b,
     isSelectableEmpty: true,
-    // isTriggerOnInit: true,
+    isTriggerOnInit: true,
     emptyText: 'select a thing',
     items: [
       {
