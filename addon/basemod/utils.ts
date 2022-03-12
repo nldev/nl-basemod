@@ -2,18 +2,19 @@ import { Element } from './app'
 import { Get } from './app'
 import { Rgb } from './types'
 
-export function Movable (element: Element<any, any>, defaultPoint: WoWAPI.Point = 'CENTER', defaultX: number = 0, defaultY:number = 0) {
+export function Movable (element: Element<any, any>, defaultItemPoint: WoWAPI.Point = 'CENTER', defaultParentPoint: WoWAPI.Point = 'CENTER', defaultX: number = 0, defaultY:number = 0) {
   const $ = Get()
 
   const name = element.ref.GetName()
 
-  let a = $.store.Get('STORE_TYPE_CHARACTER', `${name}-point-a`) || defaultPoint
-  let b = $.store.Get('STORE_TYPE_CHARACTER', `${name}-point-b`) || defaultPoint
+  let a = $.store.Get('STORE_TYPE_CHARACTER', `${name}-item-point-a`) || defaultItemPoint
+  let b = $.store.Get('STORE_TYPE_CHARACTER', `${name}-parent-point-b`) || defaultParentPoint
   let x = $.store.Get('STORE_TYPE_CHARACTER', `${name}-x`) || defaultX
   let y = $.store.Get('STORE_TYPE_CHARACTER', `${name}-y`) || defaultY
 
   if ((a !== '') && !a) {
-    element.ref.SetPoint(defaultPoint, defaultX, defaultY)
+    const parent: WoWAPI.Frame = element.ref.GetParent() as any
+    element.ref.SetPoint(defaultItemPoint, parent, defaultParentPoint, defaultX, defaultY)
 
     let [a1, _, a3, a4, a5] = element.ref.GetPoint()
 
