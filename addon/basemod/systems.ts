@@ -333,7 +333,7 @@ export const Systems: Component = () => {
   const dropdown = Dropdown({
     name: 'test-dropdown',
     parent: b,
-    defaultSelectionId: 'foo',
+    defaultSelectionId: $.store.Get('STORE_TYPE_CHARACTER', 'test-dropdown-id', 'foo'),
     // isSelectableEmpty: true,
     // isTriggerOnInit: true,
     // isTriggerOnSameSelection: false,
@@ -342,20 +342,20 @@ export const Systems: Component = () => {
       {
         id: 'foo',
         text: 'Foo',
-        value: $.store.Get('STORE_TYPE_CHARACTER', 'foo', 1),
+        value: 1,
       },
       {
         id: 'bar',
         text: 'Bar',
-        value: $.store.Get('STORE_TYPE_CHARACTER', 'foo', 2),
+        value: 2,
       },
       {
         id: 'baz',
         text: 'Baz',
-        value: $.store.Get('STORE_TYPE_CHARACTER', 'foo', 3),
+        value: 3,
       },
     ],
-    onSelect: ({ text }) => console.log(text),
+    onSelect: ({ id }) => $.store.Set('STORE_TYPE_CHARACTER', 'test-dropdown-id', id),
   })
 
   dropdown.ref.SetPoint('TOPLEFT')
