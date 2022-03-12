@@ -84,7 +84,7 @@ export const Frame: Component = options => {
   }
 
   frame.EnableMouse(true)
-  frame.HookScript('OnMouseDown', frame => app.TriggerGlobalClick(element))
+  frame.HookScript('OnMouseDown', () => app.TriggerGlobalClick(element))
 
   app.elements[options.name] = element
 
