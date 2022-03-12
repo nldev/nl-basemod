@@ -111,9 +111,21 @@ export class Store {
 
       const [t, type, key, value] = text.split(' ')
 
-      this.state[type][key] = t === 'number'
+
+    // 0: player
+    // 1: account
+
+    // 0: number
+    // 1: string
+    // 2: boolean
+    // 3: null
+
+      const n = Number(t)
+      this.state[type][key] = (n === 0)
         ? Number(value)
-        : t === 'null'
+        : (n === 2)
+        ? Boolean(value)
+        : (n === 3)
         ? null
         : value
     })
@@ -134,10 +146,12 @@ export class Store {
     const app = Get()
 
     const t = typeof value === 'number'
-      ? 'number'
+      ? 0 // number
       : typeof value === 'string'
-      ? 'string'
-      : null
+      ? 1 // string
+      : typeof value === 'boolean'
+      ? 2 // boolean
+      : 3 // null
 
     this.state[type][key] = value
 

@@ -1,13 +1,5 @@
 import { Opcode } from './utils'
 
-  // 0: player
-  // 1: account
-
-  // 0: number
-  // 1: string
-  // 2: boolean
-  // 3: null
-
 export function Store (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
     const opcode = Opcode('store-init')
