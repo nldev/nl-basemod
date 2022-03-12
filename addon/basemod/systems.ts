@@ -358,7 +358,10 @@ export const Systems: Component = () => {
         value: 3,
       },
     ],
-    onSelect: ({ id }) => $.store.Set('STORE_TYPE_CHARACTER', 'test-dropdown-id', id),
+    onSelect: ({ id }) => {
+      console.log(id)
+      $.store.Set('STORE_TYPE_CHARACTER', 'test-dropdown-id', id)
+    },
   })
 
   dropdown.ref.SetPoint('TOPLEFT')
