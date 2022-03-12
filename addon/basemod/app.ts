@@ -117,7 +117,7 @@ export class Store {
       this.state[type][key] = (n === 0)
         ? Number(value)
         : (n === 2)
-      ? ((value === '1') ? true : false)
+        ? ((value === '1') ? true : false)
         : (n === 3)
         ? null
         : value
