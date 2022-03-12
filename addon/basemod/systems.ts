@@ -282,10 +282,10 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
   // select
   const Select = (id: string, isTrigger: boolean = true) => {
-    const item = items[id]
+    let item = items[id]
 
     if (!item)
-      return
+      item = items['empty']
 
     if (a.state.selection.id === item.id) {
       if (options.isTriggerOnSameSelection && options.onSelect && isTrigger)
