@@ -81,8 +81,6 @@ export const Frame: Component = options => {
     fns: options.fns || {},
   }
 
-  frame.EnableMouse(true)
-
   app.elements[options.name] = element
 
   return element
