@@ -13,11 +13,20 @@ interface DropdownItem {
   id: string
   text: string
   value: string | number | boolean | null
+  item?: Element<DropdownOptions>
+}
+
+type DropdownItemOptions = Omit<DropdownItem , 'item'>
+
+interface DropdownState {
+  length: number
+  items: DropdownItem[]
+
 }
 
 interface DropdownOptions extends ComponentOptions {
   width?: number
-  items?: DropdownItem[]
+  items?: DropdownItemOptions[]
   selection?: string
   isSelectableEmpty?: boolean
   emptyText?: string
@@ -177,11 +186,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   })
 
   // item
-  const Item = (options: DropdownItem) => {
-    options.id
-    options.text
-    options.value
-
+  const Item = (options: DropdownItemOptions) => {
     const w = Frame({ name: `${options.id}-wrapper` })
     const t = w.ref.CreateFontString(`${options.id}-wrapper-text`)
 
@@ -224,7 +229,10 @@ export const Dropdown: Component<DropdownOptions> = options => {
     list.ref.SetHeight(i * 30)
 
     autohide[`item-${i}`] = false
-    items[options.id] = options
+    items[options.id] = {
+      ...options,
+      item: w,
+    }
   }
 
   // autohide
