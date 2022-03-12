@@ -321,9 +321,9 @@ export const Systems: Component = () => {
   const dropdown = Dropdown({
     name: 'test-dropdown',
     parent: b,
-    isSelectableEmpty: true,
-    isTriggerOnInit: true,
-    isTriggerOnSameSelection: true,
+    // isSelectableEmpty: true,
+    // isTriggerOnInit: true,
+    // isTriggerOnSameSelection: false,
     emptyText: 'select a thing',
     items: [
       {
