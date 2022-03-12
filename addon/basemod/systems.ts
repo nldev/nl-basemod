@@ -4,6 +4,8 @@ import { BASE_BACKDROP } from './constants'
 import { Mapping } from './types'
 import { Movable } from './utils'
 
+const AUTOHIDE_TIME = 1
+
 const DEFAULT_SELECTION = {
   id: '',
   text: '',
@@ -71,7 +73,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
   a.ref.SetScript('OnLeave', () => {
     autohide['a'] = false
-    timer = GetTime() + 2
+    timer = GetTime() + AUTOHIDE_TIME
     a.ref.SetBackdropColor(0, 0, 0, 1)
   })
 
@@ -97,7 +99,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
   p.ref.SetScript('OnLeave', () => {
     autohide['p'] = false
-    timer = GetTime() + 2
+    timer = GetTime() + AUTOHIDE_TIME
   })
 
   menu.ref.SetScript('OnEnter', () => {
@@ -106,7 +108,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
   menu.ref.SetScript('OnLeave', () => {
     autohide['menu'] = false
-    timer = GetTime() + 2
+    timer = GetTime() + AUTOHIDE_TIME
   })
 
   // button
@@ -128,7 +130,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
   button.SetScript('OnLeave', () => {
     autohide['button'] = false
-    timer = GetTime() + 2
+    timer = GetTime() + AUTOHIDE_TIME
   })
 
   // toggle
@@ -191,7 +193,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
   list.ref.SetScript('OnLeave', () => {
     autohide['list'] = false
-    timer = GetTime() + 2
+    timer = GetTime() + AUTOHIDE_TIME
   })
 
   // item
@@ -217,7 +219,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     w.ref.SetScript('OnLeave', () => {
       w.ref.SetBackdrop({ bgFile: '', insets: { left:0, right:0, top:0, bottom:0 } })
       w.ref.SetBackdropColor(0, 0, 0, 1)
-      timer = GetTime() + 2
+      timer = GetTime() + AUTOHIDE_TIME
       autohide['item-' + options.id] = false
     })
 
