@@ -91,7 +91,7 @@ const ACCOUNT = 'ACCOUNT'
 const CHARACTER = 'CHARACTER'
 
 export type StoreType = typeof ACCOUNT | typeof CHARACTER
-export type StoreValue = string | number | boolean | null
+export type StoreValue = string | number | null
 
 export class Store {
   isLoaded = false
@@ -117,7 +117,7 @@ export class Store {
       this.state[type][key] = (n === 0)
         ? Number(value)
         : (n === 2)
-        ? Boolean(value)
+      ? ((value === '1') ? true : false)
         : (n === 3)
         ? null
         : value
@@ -145,9 +145,6 @@ export class Store {
       : typeof value === 'boolean'
       ? 2 // boolean
       : 3 // null
-
-    if (primitive === 2)
-      value = value ? 1 : 0
 
     this.state[type][key] = value
 
