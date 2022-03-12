@@ -188,6 +188,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
     t.SetParent(w.ref)
     t.SetPoint('LEFT', 10, 0)
     t.SetFont('Fonts/FRIZQT__.TTF', 10)
+    t.SetText(options.text)
 
     w.ref.SetBackdropColor(0, 0, 0, 1)
 
@@ -223,7 +224,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
     list.ref.SetHeight(i * 30)
 
     autohide[`item-${i}`] = false
-    items[`${options.id}`] = w
+    items[options.id] = options
   }
 
   // autohide
@@ -269,9 +270,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   }
 
   // empty
-  // TODO
-  // if (options.isSelectableEmpty)
-  if (true)
+  if (options.isSelectableEmpty)
     Item(items['empty'])
 
   for (let i = 0; i <= 15; i++)
