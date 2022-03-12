@@ -11,8 +11,8 @@ export function Store (events: TSEvents) {
       select * from __store where guid = ${pGuid};
     `)
     while (a.GetRow()) {
-      const primitive = a.GetUInt32(2)
-      const type = a.GetUInt32(3)
+      const primitive = a.GetUInt8(2)
+      const type = a.GetUInt8(3)
       const key = a.GetString(4)
       const value = a.GetString(5)
       sender.SendAddonMessage(
