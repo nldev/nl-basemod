@@ -27,10 +27,10 @@ export function Store (events: TSEvents) {
       select * from __store where guid = ${aGuid};
     `)
     while (b.GetRow()) {
-      const primitive = a.GetUInt32(2)
-      const type = a.GetUInt32(3)
-      const key = a.GetString(4)
-      const value = a.GetString(5)
+      const primitive = b.GetUInt32(2)
+      const type = b.GetUInt32(3)
+      const key = b.GetString(4)
+      const value = b.GetString(5)
       sender.SendAddonMessage(
         'store-get',
         `${primitive} ${type} ${key} ${value}`,
