@@ -218,7 +218,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       autohide['item-' + options.id] = true
       if (options.tooltip) {
         GameTooltip.ClearLines()
-        GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
+        GameTooltip.SetOwner(w.ref, 'ANCHOR_RIGHT', 0, -30)
         GameTooltip.SetText(options.tooltip)
         GameTooltip.Show()
       }
