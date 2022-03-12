@@ -216,6 +216,12 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background', edgeFile: '' })
       w.ref.SetBackdropColor(0.21, 0.49, 1, 1)
       autohide['item-' + options.id] = true
+      if (options.tooltip) {
+        GameTooltip.ClearLines()
+        GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
+        GameTooltip.SetText(options.tooltip)
+        GameTooltip.Show()
+      }
     })
 
     w.ref.HookScript('OnLeave', () => {
@@ -223,6 +229,10 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       w.ref.SetBackdropColor(0, 0, 0, 1)
       timer = GetTime() + AUTOHIDE_TIMER
       autohide['item-' + options.id] = false
+      if (options.tooltip) {
+        GameTooltip.ClearLines()
+        GameTooltip.Hide()
+      }
     })
 
     w.ref.HookScript('OnMouseUp', () => {
