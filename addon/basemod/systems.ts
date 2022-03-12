@@ -33,7 +33,7 @@ interface DropdownOptions extends ComponentOptions {
   items?: DropdownItemOptions[]
   isSelectableEmpty?: boolean
   isTriggerOnInit?: boolean,
-  isTriggerOnSameSelection?: boolean,
+  isTriggerOnReselect?: boolean,
   emptyText?: string
   defaultSelectionId?: string
   onSelect?: (item: DropdownItem) => void
@@ -288,7 +288,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       item = items['empty']
 
     if (a.state.selection.id === item.id) {
-      if (options.isTriggerOnSameSelection && options.onSelect && isTrigger)
+      if (options.isTriggerOnReselect && options.onSelect && isTrigger)
         options.onSelect(a.state.selection)
       return
     }
@@ -339,7 +339,7 @@ export const Systems: Component = () => {
     defaultSelectionId: $.store.Get('STORE_TYPE_CHARACTER', 'test-dropdown-id', 'foo'),
     isSelectableEmpty: true,
     // isTriggerOnInit: true,
-    // isTriggerOnSameSelection: false,
+    // isTriggerOnReselect: false,
     emptyText: 'select a thing',
     items: [
       {
