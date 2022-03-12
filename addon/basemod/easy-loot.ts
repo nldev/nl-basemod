@@ -62,13 +62,13 @@ export const LootItem: Component<
 
     const limit = GetTime() + options.timer
 
-    frame.ref.HookScript('OnUpdate', () => {
+    frame.ref.SetScript('OnUpdate', () => {
       const current = GetTime()
       const time = limit - current
       counterText.SetText(`${Math.floor(time)}`)
       if (time < 0) {
         Detach()
-        frame.ref.HookScript('OnUpdate', () => {})
+        frame.ref.SetScript('OnUpdate', () => {})
       }
     })
   }

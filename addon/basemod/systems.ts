@@ -280,7 +280,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     return bool
   }
 
-  a.ref.HookScript('OnUpdate', () => {
+  a.ref.SetScript('OnUpdate', () => {
     if ((timer > 0) && (GetTime() >= timer)) {
       if (!IsMouseEnter())
         p.ref.Hide()
