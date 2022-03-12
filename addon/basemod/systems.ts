@@ -209,14 +209,14 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       timer = 0
       w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background', edgeFile: '' })
       w.ref.SetBackdropColor(0.21, 0.49, 1, 1)
-      autohide[`item-${i}`] = true
+      autohide['item-' + options.id] = true
     })
 
     w.ref.SetScript('OnLeave', () => {
       w.ref.SetBackdrop({ bgFile: '', insets: { left:0, right:0, top:0, bottom:0 } })
       w.ref.SetBackdropColor(0, 0, 0, 1)
       timer = GetTime() + 2
-      autohide[`item-${i}`] = false
+      autohide['item-' + options.id] = false
     })
 
     w.ref.SetScript('OnMouseDown', () => {
@@ -230,12 +230,12 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
     list.fns.Attach(options.id, w)
 
-    const i = list.state.items.length
+    a.state.length = list.state.items.length
 
-    menu.ref.SetHeight(i * 30)
-    list.ref.SetHeight(i * 30)
+    menu.ref.SetHeight(a.state.length * 30)
+    list.ref.SetHeight(a.state.length * 30)
 
-    autohide[`item-${i}`] = false
+    autohide[`item-${options.id}`] = false
     items[options.id] = {
       ...options,
       item: w,
