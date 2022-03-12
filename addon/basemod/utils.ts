@@ -7,10 +7,10 @@ export function Movable (element: Element<any, any>, defaultItemPoint: WoWAPI.Po
 
   const name = element.ref.GetName()
 
-  let a = $.store.Get('STORE_TYPE_CHARACTER', `${name}-point-a`) || defaultItemPoint
-  let b = $.store.Get('STORE_TYPE_CHARACTER', `${name}-point-b`) || defaultParentPoint
-  let x = $.store.Get('STORE_TYPE_CHARACTER', `${name}-x`) || defaultX
-  let y = $.store.Get('STORE_TYPE_CHARACTER', `${name}-y`) || defaultY
+  let a = $.store.Get('CHARACTER', `${name}-point-a`) || defaultItemPoint
+  let b = $.store.Get('CHARACTER', `${name}-point-b`) || defaultParentPoint
+  let x = $.store.Get('CHARACTER', `${name}-x`) || defaultX
+  let y = $.store.Get('CHARACTER', `${name}-y`) || defaultY
 
   if ((a !== '') && !a) {
     const parent: WoWAPI.Frame = element.ref.GetParent() as any
@@ -23,10 +23,10 @@ export function Movable (element: Element<any, any>, defaultItemPoint: WoWAPI.Po
     x = a4
     y = a5
 
-    $.store.Set('STORE_TYPE_CHARACTER', `${name}-point-a`, a)
-    $.store.Set('STORE_TYPE_CHARACTER', `${name}-point-b`, b)
-    $.store.Set('STORE_TYPE_CHARACTER', `${name}-x`, x)
-    $.store.Set('STORE_TYPE_CHARACTER', `${name}-y`, y)
+    $.store.Set('CHARACTER', `${name}-point-a`, a)
+    $.store.Set('CHARACTER', `${name}-point-b`, b)
+    $.store.Set('CHARACTER', `${name}-x`, x)
+    $.store.Set('CHARACTER', `${name}-y`, y)
   }
 
   element.ref.EnableMouse(true)
@@ -44,10 +44,10 @@ export function Movable (element: Element<any, any>, defaultItemPoint: WoWAPI.Po
     let x = point[3]
     let y = point[4]
 
-    $.store.Set('STORE_TYPE_CHARACTER', `${name}-point-a`, a)
-    $.store.Set('STORE_TYPE_CHARACTER', `${name}-point-b`, b)
-    $.store.Set('STORE_TYPE_CHARACTER', `${name}-x`, x)
-    $.store.Set('STORE_TYPE_CHARACTER', `${name}-y`, y)
+    $.store.Set('CHARACTER', `${name}-point-a`, a)
+    $.store.Set('CHARACTER', `${name}-point-b`, b)
+    $.store.Set('CHARACTER', `${name}-x`, x)
+    $.store.Set('CHARACTER', `${name}-y`, y)
   })
 
   element.ref.SetPoint(a, $.root.ref, b, x, y)

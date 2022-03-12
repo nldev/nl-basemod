@@ -4,7 +4,7 @@ import { SQLTable } from '../types'
 
 export const TABLES = createTemplates<SQLTable>(CREATE_TABLE_TASK, [
   {
-    name: 'addon_data',
+    name: 'store',
     database: 'world',
     isPersist: true,
     columns: [
@@ -19,13 +19,19 @@ export const TABLES = createTemplates<SQLTable>(CREATE_TABLE_TASK, [
         isAutoIncrement: true,
       },
       {
-        name: 'playerGuid',
-        type: 'mediumtext',
+        name: 'guid',
+        type: 'mediumint',
+        typeParams: {
+          size: 16,
+        },
         isNotNullable: true,
       },
       {
         name: 'primitive',
-        type: 'mediumtext',
+        type: 'mediumint',
+        typeParams: {
+          size: 8,
+        },
         isNotNullable: true,
       },
       {
@@ -34,12 +40,12 @@ export const TABLES = createTemplates<SQLTable>(CREATE_TABLE_TASK, [
         isNotNullable: true,
       },
       {
-        name: '_key',
+        name: 'storeKey',
         type: 'mediumtext',
         isNotNullable: true,
       },
       {
-        name: 'value',
+        name: 'storeValue',
         type: 'mediumtext',
         isNotNullable: true,
       },

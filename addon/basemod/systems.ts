@@ -370,7 +370,7 @@ export const Systems: Component = () => {
   const dropdown = Dropdown({
     name: 'test-dropdown',
     parent: b,
-    defaultSelectionId: $.store.Get('STORE_TYPE_CHARACTER', 'test-dropdown-id', 'foo'),
+    defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'foo'),
     isSelectableEmpty: true,
     // isTriggerOnInit: true,
     // isTriggerOnReselect: false,
@@ -395,7 +395,7 @@ export const Systems: Component = () => {
     ],
     onSelect: ({ id }) => {
       console.log(id)
-      $.store.Set('STORE_TYPE_CHARACTER', 'test-dropdown-id', id)
+      $.store.Set('CHARACTER', 'test-dropdown-id', id)
     },
   })
 
