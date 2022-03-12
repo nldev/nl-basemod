@@ -52,13 +52,13 @@ export function Store (events: TSEvents) {
     if (!str.includes(opcode))
      return
     const w = str.substr(opcode.length).split(' ')
-    const primitive = ToUInt32(w[0])
-    const type = ToUInt32(w[1])
+    const primitive = w[0]
+    const type = w[1]
     const key = w[2]
     const value = w[3]
     const pGuid = sender.GetGUID()
     const aGuid = sender.GetAccountID()
-    const guid = (type === 0) ? pGuid : aGuid
+    const guid = (type === '0') ? pGuid : aGuid
     const a = QueryWorld(`
       select * from __store where guid = ${guid} and type = ${type} and storeKey = "${key}";
     `)
