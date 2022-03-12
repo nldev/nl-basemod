@@ -143,7 +143,7 @@ export class Store {
       ? 2 // boolean
       : 3 // null
     this.state[storeType][storeKey] = storeValue
-    const t = storeType === 'ACCOUNT' ? 1 : 0
+    const t = (storeType === 'ACCOUNT') ? 1 : 0
     SendAddonMessage('store-set', `${primitive} ${t} ${storeKey} ${storeValue}`, 'WHISPER', app.playerInfo.name)
   }
 
