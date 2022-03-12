@@ -291,13 +291,11 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   if (options.isSelectableEmpty)
     Item(items['empty'])
 
-  for (let i = 0; i <= 15; i++)
-    Item({
-      id: `item-${i}`,
-      text: `Item ${i}`,
-      value: i,
-    })
+  // create items
+  if (options.items)
+    options.items.forEach(options => Item(options))
 
+  // default selection
   Select(options.defaultSelectionId || 'empty')
 
   return a
@@ -320,7 +318,33 @@ export const Systems: Component = () => {
 
   Movable(a)
 
-  const dropdown = Dropdown({ name: 'test-dropdown', parent: b })
+  const dropdown = Dropdown({
+    name: 'test-dropdown',
+    parent: b,
+    isSelectableEmpty: true,
+    emptyText: 'hello-world',
+    items: [
+      {
+        id: 'foo',
+        text: 'Foo',
+        value: 'foo',
+      },
+      {
+        id: 'bar',
+        text: 'Bar',
+        value: 'bar',
+      },
+      {
+        id: 'baz',
+        text: 'Baz',
+        value: 'baz',
+      },
+    ],
+    defaultSelectionId: 'foo',
+    onSelect: item => {
+      console.log(item.text)
+    },
+  })
 
   dropdown.ref.SetPoint('TOPLEFT')
 
