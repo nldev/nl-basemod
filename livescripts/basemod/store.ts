@@ -67,7 +67,7 @@ export function Store (events: TSEvents) {
     console.log(primitive)
     console.log(type)
     console.log(key)
-    console.log(key)
+    console.log(value)
     console.log(guid)
     while (a.GetRow()) {
       entry = a.GetUInt32(0)
