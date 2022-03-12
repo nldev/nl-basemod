@@ -3,6 +3,12 @@ import { List } from './components/list'
 import { BASE_BACKDROP } from './constants'
 import { Movable } from './utils'
 
+const DEFAULT_SELECTION = {
+  id: '',
+  text: '',
+  value: null,
+}
+
 interface DropdownItem {
   id: string
   text: string
@@ -13,19 +19,22 @@ interface DropdownOptions extends ComponentOptions {
   width?: number
   items?: DropdownItem[]
   selection?: string
-  emptyItem?: boolean
-  emptyItemText?: string
+  isSelectableEmpty?: boolean
+  emptyText?: string
   onSelect?: (item: DropdownItem) => void
 }
 
 export const Dropdown: Component<DropdownOptions> = options => {
+  const items = {
+    empty: {
+      id: 'empty',
+      text: options.emptyText || 'select',
+      value: null,
+    }
+  }
   const autohide = {}
   let timer = 0
-  let selection: DropdownItem = {
-    id: '',
-    text: '',
-    value: null,
-  }
+  let selection: DropdownItem = { ...DEFAULT_SELECTION }
 
   const a = Frame(options)
 
@@ -149,7 +158,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   text.SetParent(a.ref)
   text.SetPoint('LEFT', 10, 0)
   text.SetFont('Fonts/FRIZQT__.TTF', 10)
-  text.SetText('select')
+  text.SetText(options.emptyText || 'select')
 
   // list
   const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
@@ -179,7 +188,6 @@ export const Dropdown: Component<DropdownOptions> = options => {
     t.SetParent(w.ref)
     t.SetPoint('LEFT', 10, 0)
     t.SetFont('Fonts/FRIZQT__.TTF', 10)
-    t.SetText(options.text)
 
     w.ref.SetBackdropColor(0, 0, 0, 1)
 
@@ -204,7 +212,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
       button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
       button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
       button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
-      Select(options)
+      Select(options.id)
     })
 
     list.fns.Attach(options.id, w)
@@ -215,6 +223,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
     list.ref.SetHeight(i * 30)
 
     autohide[`item-${i}`] = false
+    items[`${options.id}`] = w
   }
 
   // autohide
@@ -243,7 +252,9 @@ export const Dropdown: Component<DropdownOptions> = options => {
   })
 
   // select
-  const Select = (item: DropdownItem) => {
+  const Select = (id: string) => {
+    const item = items[id]
+
     selection = {
       id: item.id,
       text: item.text,
@@ -257,12 +268,24 @@ export const Dropdown: Component<DropdownOptions> = options => {
     // TODO: OnSelect
   }
 
+  // empty
+  if (true) {
+    Item({
+      id: items['empty'].id,
+      text: items['empty'].text,
+      value: items['empty'].value,
+    })
+  }
+
   for (let i = 0; i <= 15; i++)
     Item({
       id: `item-${i}`,
       text: `Item ${i}`,
       value: i,
     })
+
+  // TODO: default selection
+  Select('empty')
 
   return a
 }
