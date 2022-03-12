@@ -9,7 +9,7 @@ export const app = new App(app => {
   Talents()
   EasyLoot()
   Chests()
-  // Systems()
+  Systems()
   let txt = ''
   app.root.ref.HookScript('OnUpdate', () => {
     const f = GetMouseFocus()
