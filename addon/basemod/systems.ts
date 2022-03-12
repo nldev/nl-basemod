@@ -31,7 +31,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   p.ref.SetSize(200, 3)
 
   const menu = Frame({ name: 'dropdown-menu', parent: p })
-  menu.ref.SetSize(200, 90)
+  menu.ref.SetSize(200, 0)
   menu.ref.SetPoint('TOP', p.ref, 'BOTTOM', 0, 0)
   menu.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
   menu.ref.SetBackdropColor(0, 0, 0, 1)
@@ -80,7 +80,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   // list
   const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
-  list.ref.SetSize(200, 100)
+  list.ref.SetSize(200, 0)
 
   // item
   const Item = (options: DropdownItem) => {
@@ -100,29 +100,39 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
     w.ref.EnableMouse(true)
     w.ref.SetScript('OnEnter', () => {
-      console.log(options.text)
       w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background', edgeFile: '' })
       w.ref.SetBackdropColor(0, 0, 1, 1)
     })
     w.ref.SetScript('OnLeave', () => {
-      console.log(options.text)
       w.ref.SetBackdrop({ bgFile: '', insets: { left:0, right:0, top:0, bottom:0 } })
       w.ref.SetBackdropColor(0, 0, 0, 1)
     })
 
     list.fns.Attach(options.id, w)
+
+    menu.ref.SetHeight((list.state.items.length * 30) + 1)
+    list.ref.SetHeight((list.state.items.length * 30) + 1)
   }
+
+  // autohide
+  a.ref.SetScript('OnEnter', () => {
+    console.log('hello')
+  })
+
+  a.ref.SetScript('OnLeave', () => {
+    console.log('bye')
+  })
 
   Item({
     id: 'foo-1',
     text: 'aaa',
     value: 1,
   })
-  Item({
-    id: 'foo-2',
-    text: 'bbb',
-    value: 2,
-  })
+  // Item({
+  //   id: 'foo-2',
+  //   text: 'bbb',
+  //   value: 2,
+  // })
   Item({
     id: 'foo-3',
     text: 'ccc',
