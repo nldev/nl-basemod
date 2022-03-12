@@ -224,6 +224,14 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       autohide['item-' + options.id] = false
     })
 
+    w.ref.HookScript('OnMouseUp', () => {
+      p.ref.Hide()
+      button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
+      button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
+      button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
+      button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
+      Select(options.id)
+    })
     w.ref.HookScript('OnMouseDown', () => {
       p.ref.Hide()
       button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
