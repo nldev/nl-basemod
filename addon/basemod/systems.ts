@@ -268,7 +268,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   })
 
   // select
-  const Select = (id: string) => {
+  const Select = (id: string, isTrigger: boolean = true) => {
     const item = items[id]
 
     selection = {
@@ -283,7 +283,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
     text.SetText(item.text)
 
-    if (options.onSelect)
+    if (options.onSelect && isTrigger)
       options.onSelect(selection)
   }
 
@@ -296,7 +296,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     options.items.forEach(options => Item(options))
 
   // default selection
-  Select(options.defaultSelectionId || 'empty')
+  Select(options.defaultSelectionId || 'empty', false)
 
   return a
 }
