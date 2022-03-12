@@ -24,7 +24,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   const a = Frame(options)
 
-  a.ref.SetWidth(200)
+  a.ref.SetWidth(options.width || 200)
   a.ref.SetHeight(30)
   a.ref.SetBackdrop(BASE_BACKDROP)
 
@@ -43,10 +43,10 @@ export const Dropdown: Component<DropdownOptions> = options => {
   // menu
   const p = Frame({ name: 'dropdown-menu-padding', parent: a })
   p.ref.SetPoint('TOP', a.ref, 'BOTTOM', 0, 0)
-  p.ref.SetSize(200, 3)
+  p.ref.SetSize(options.width || 200, 3)
 
   const menu = Frame({ name: 'dropdown-menu', parent: p })
-  menu.ref.SetSize(200, 0)
+  menu.ref.SetSize(options.width || 200, 0)
   menu.ref.SetPoint('TOP', p.ref, 'BOTTOM', 0, 0)
   menu.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
   menu.ref.SetBackdropColor(0, 0, 0, 1)
@@ -129,7 +129,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   // list
   const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
-  list.ref.SetSize(200, 0)
+  list.ref.SetSize(options.width || 200, 0)
 
   autohide['list'] = false
 
