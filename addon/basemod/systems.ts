@@ -29,6 +29,7 @@ interface DropdownOptions extends ComponentOptions {
   width?: number
   items?: DropdownItemOptions[]
   isSelectableEmpty?: boolean
+  isTriggerOnInit?: boolean,
   emptyText?: string
   defaultSelectionId?: string
   onSelect?: (item: DropdownItem) => void
@@ -295,7 +296,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     options.items.forEach(options => Item(options))
 
   // default selection
-  Select(options.defaultSelectionId || 'empty', false)
+  Select(options.defaultSelectionId || 'empty', options.isTriggerOnInit)
 
   return a
 }
@@ -321,6 +322,7 @@ export const Systems: Component = () => {
     name: 'test-dropdown',
     parent: b,
     isSelectableEmpty: true,
+    // isTriggerOnInit: true,
     emptyText: 'select a thing',
     items: [
       {
