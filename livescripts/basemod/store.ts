@@ -63,6 +63,12 @@ export function Store (events: TSEvents) {
       select * from __store where guid = ${guid} and type = ${type} and storeKey = "${key}";
     `)
     let entry = -1
+    console.log(entry)
+    console.log(primitive)
+    console.log(type)
+    console.log(key)
+    console.log(key)
+    console.log(guid)
     while (a.GetRow()) {
       entry = a.GetUInt32(0)
       if (entry === -1) {
