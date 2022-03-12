@@ -109,18 +109,16 @@ export class Store {
       if (!text)
         return
 
-      const [primitive, type, key, value] = text.split(' ')
-      console.log(type)
-      console.log(key)
+      const [primitive, type, storeKey, storeValue] = text.split(' ')
 
       const n = Number(primitive)
-      this.state[type][key] = (n === 0)
-        ? Number(value)
+      this.state[(type === '1') ? 'ACCOUNT' : 'CHARACTER'][storeKey] = (n === 0)
+        ? Number(storeValue)
         : (n === 2)
-        ? ((value === '1') ? true : false)
+        ? ((storeValue === '1') ? true : false)
         : (n === 3)
         ? null
-        : value
+        : storeValue
     })
 
     Events.ChatInfo.OnChatMsgAddon(app.root.ref, prefix => {
@@ -135,27 +133,27 @@ export class Store {
     SendAddonMessage('store-init', ' ', 'WHISPER', app.playerInfo.name)
   }
 
-  public Set (type: StoreType, key: string, value: StoreValue) {
+  public Set (type: StoreType, storeKey: string, storeValue: StoreValue) {
     const app = Get()
 
-    const primitive = typeof value === 'number'
+    const primitive = typeof storeValue === 'number'
       ? 0 // number
-      : typeof value === 'string'
+      : typeof storeValue === 'string'
       ? 1 // string
-      : typeof value === 'boolean'
+      : typeof storeValue === 'boolean'
       ? 2 // boolean
       : 3 // null
 
-    this.state[type][key] = value
+    this.state[type][storeKey] = storeValue
 
-    SendAddonMessage('store-set', `${primitive} ${(type === 'ACCOUNT') ? 0 : 1} ${key} ${value}`, 'WHISPER', app.playerInfo.name)
+    SendAddonMessage('store-set', `${primitive} ${(type === 'ACCOUNT') ? 0 : 1} ${storeKey} ${storeValue}`, 'WHISPER', app.playerInfo.name)
   }
 
-  public Get (type: StoreType, key: string, defaultValue?: StoreValue) {
-    let value = this.state[type][key]
+  public Get (type: StoreType, storeKey: string, defaultValue?: StoreValue) {
+    let value = this.state[type][storeKey]
 
     if (!value && defaultValue) {
-      this.Set(type, key, defaultValue)
+      this.Set(type, storeKey, defaultValue)
       value = defaultValue
     }
 

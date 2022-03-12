@@ -63,23 +63,17 @@ export function Store (events: TSEvents) {
       select * from __store where guid = ${guid} and type = ${type} and storeKey = "${key}";
     `)
     let entry = -1
-    console.log(entry)
-    console.log(primitive)
-    console.log(type)
-    console.log(key)
-    console.log(value)
-    console.log(guid)
     while (a.GetRow()) {
       entry = a.GetUInt32(0)
-      if (entry === -1) {
-        QueryWorld(`
-          insert into __store (guid, primitive, type, storeKey, storeValue) value (${guid}, ${primitive}, ${type}, "${key}", "${value}");
-        `)
-      } else {
-        QueryWorld(`
-          update __store set primitive = ${primitive}, type = ${type}, storeKey = "${key}", storeValue = "${value}" where entry = ${entry};
-        `)
-      }
+    }
+    if (entry === -1) {
+      QueryWorld(`
+        insert into __store (guid, primitive, type, storeKey, storeValue) value (${guid}, ${primitive}, ${type}, "${key}", "${value}");
+      `)
+    } else {
+      QueryWorld(`
+        update __store set primitive = ${primitive}, type = ${type}, storeKey = "${key}", storeValue = "${value}" where entry = ${entry};
+      `)
     }
     sender.SendAddonMessage(
       'store-get',
