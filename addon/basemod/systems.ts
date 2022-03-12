@@ -37,7 +37,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   a.ref.SetScript('OnLeave', () => {
     autohide['a'] = false
-    timer = GetTime() + 3
+    timer = GetTime() + 2
   })
 
   // menu
@@ -62,7 +62,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   p.ref.SetScript('OnLeave', () => {
     autohide['p'] = false
-    timer = GetTime() + 3
+    timer = GetTime() + 2
   })
 
   menu.ref.SetScript('OnEnter', () => {
@@ -71,7 +71,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   menu.ref.SetScript('OnLeave', () => {
     autohide['menu'] = false
-    timer = GetTime() + 3
+    timer = GetTime() + 2
   })
 
   // button
@@ -93,7 +93,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   button.SetScript('OnLeave', () => {
     autohide['button'] = false
-    timer = GetTime() + 3
+    timer = GetTime() + 2
   })
 
   // toggle
@@ -140,7 +140,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   list.ref.SetScript('OnLeave', () => {
     autohide['list'] = false
-    timer = GetTime() + 3
+    timer = GetTime() + 2
   })
 
   // item
@@ -170,7 +170,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
     w.ref.SetScript('OnLeave', () => {
       w.ref.SetBackdrop({ bgFile: '', insets: { left:0, right:0, top:0, bottom:0 } })
       w.ref.SetBackdropColor(0, 0, 0, 1)
-      timer = GetTime() + 3
+      timer = GetTime() + 2
       autohide[`item-${i}`] = false
     })
 
@@ -204,7 +204,6 @@ export const Dropdown: Component<DropdownOptions> = options => {
   }
 
   a.ref.SetScript('OnUpdate', () => {
-    console.log(timer)
     if ((timer > 0) && (GetTime() >= timer)) {
       if (!IsMouseEnter())
         p.ref.Hide()
