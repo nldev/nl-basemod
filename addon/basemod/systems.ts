@@ -269,13 +269,10 @@ export const Dropdown: Component<DropdownOptions> = options => {
   }
 
   // empty
-  if (true) {
-    Item({
-      id: items['empty'].id,
-      text: items['empty'].text,
-      value: items['empty'].value,
-    })
-  }
+  // TODO
+  // if (options.isSelectableEmpty)
+  if (true)
+    Item(items['empty'])
 
   for (let i = 0; i <= 15; i++)
     Item({
