@@ -21,6 +21,11 @@ interface DropdownOptions extends ComponentOptions {
 export const Dropdown: Component<DropdownOptions> = options => {
   const autohide = {}
   let timer = 0
+  let selection: DropdownItem = {
+    id: '',
+    text: '',
+    value: null,
+  }
 
   const a = Frame(options)
 
@@ -194,12 +199,12 @@ export const Dropdown: Component<DropdownOptions> = options => {
     })
 
     w.ref.SetScript('OnMouseDown', () => {
-      text.SetText(options.text)
       p.ref.Hide()
       button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
       button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
       button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
       button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
+      Select(options)
     })
 
     list.fns.Attach(options.id, w)
@@ -237,22 +242,25 @@ export const Dropdown: Component<DropdownOptions> = options => {
     }
   })
 
-  Item({
-    id: 'foo-1',
-    text: 'aaa',
-    value: 1,
-  })
-  Item({
-    id: 'foo-2',
-    text: 'bbb',
-    value: 2,
-  })
-  Item({
-    id: 'foo-3',
-    text: 'ccc',
-    value: 3,
-  })
+  // select
+  const Select = (item: DropdownItem) => {
+    selection = {
+      id: item.id,
+      text: item.text,
+      value: item.value,
+    }
 
+    text.SetText(item.text)
+
+    // TODO: OnSelect
+  }
+
+  for (let i = 0; i <= 15; i++)
+    Item({
+      id: `item-${i}`,
+      text: `Item ${i}`,
+      value: i,
+    })
 
   return a
 }
@@ -266,7 +274,7 @@ export const Systems: Component = () => {
   const a = Frame({ name: 'systems' })
   const b = Frame({ name: 'systems-inner', parent: a })
 
-  a.ref.SetSize(300, 400)
+  a.ref.SetSize(340, 430)
   a.ref.SetBackdrop(BASE_BACKDROP)
   a.ref.SetBackdropColor(0, 0, 0, 1)
   b.ref.SetSize(300 - 30, 400 - 30)
