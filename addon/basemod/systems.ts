@@ -1,6 +1,7 @@
 import { Component, ComponentOptions, Frame, Element } from './app'
 import { List } from './components/list'
 import { BASE_BACKDROP } from './constants'
+import { Mapping } from './types'
 import { Movable } from './utils'
 
 const DEFAULT_SELECTION = {
@@ -20,8 +21,8 @@ type DropdownItemOptions = Omit<DropdownItem , 'item'>
 
 interface DropdownState {
   length: number
-  items: DropdownItem[]
-
+  items: Mapping<DropdownItem>
+  selection: DropdownItem
 }
 
 interface DropdownOptions extends ComponentOptions {
@@ -33,7 +34,7 @@ interface DropdownOptions extends ComponentOptions {
   onSelect?: (item: DropdownItem) => void
 }
 
-export const Dropdown: Component<DropdownOptions> = options => {
+export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   const items = {
     empty: {
       id: 'empty',
@@ -45,7 +46,13 @@ export const Dropdown: Component<DropdownOptions> = options => {
   let timer = 0
   let selection: DropdownItem = { ...DEFAULT_SELECTION }
 
-  const a = Frame(options)
+  const a: Element<DropdownState> = Frame(options) as any
+
+  a.state = {
+    length: 0,
+    items: items,
+    selection: selection,
+  }
 
   a.ref.SetWidth(options.width || 200)
   a.ref.SetHeight(30)
@@ -268,6 +275,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
       id: item.id,
       text: item.text,
       value: item.value,
+      item: item.item,
     }
 
     console.log(`${item.id}: ${item.value}`)
