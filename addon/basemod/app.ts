@@ -81,6 +81,7 @@ export const Frame: Component = options => {
     fns: options.fns || {},
   }
 
+  frame.EnableMouse(true)
   frame.HookScript('OnMouseDown', frame => app.TriggerGlobalClick(element))
 
   app.elements[options.name] = element
@@ -169,7 +170,7 @@ export class App {
   public talentInfo: TalentInfo
   public elements: Mapping<Element<any, any>> = {}
   public store: Store = new Store()
-  public fns: any[]
+  public fns: any[] = []
 
   constructor (public onInit: ($: App) => void) {
     this.talentInfo = {
