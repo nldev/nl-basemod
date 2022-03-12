@@ -147,7 +147,7 @@ export class Store {
   public Get (type: StoreType, key: string, defaultValue?: StoreValue) {
     let value = this.state[type][key]
 
-    if (!value) {
+    if (!value && defaultValue) {
       this.Set(type, key, defaultValue)
       value = defaultValue
     }
