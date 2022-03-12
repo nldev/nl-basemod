@@ -342,7 +342,7 @@ export const Systems: Component = () => {
         value: 'baz',
       },
     ],
-    defaultSelectionId: 'foo',
+    // defaultSelectionId: 'foo',
     onSelect: ({ text }) => console.log(text),
   })
 
