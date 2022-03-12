@@ -346,9 +346,7 @@ export const Systems: Component = () => {
       },
     ],
     defaultSelectionId: 'foo',
-    onSelect: item => {
-      console.log(item.text)
-    },
+    onSelect: ({ text }) => console.log(text),
   })
 
   dropdown.ref.SetPoint('TOPLEFT')
