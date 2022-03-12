@@ -184,11 +184,11 @@ export class App {
 
     const root = CreateFrame('Frame', ROOT, UIParent)
 
-    root.SetScript('OnUpdate', () => {
+    root.HookScript('OnUpdate', () => {
       if (!this.isStarted) {
         this.start(root)
       } else {
-        root.SetScript('OnUpdate', () => {})
+        root.HookScript('OnUpdate', () => {})
       }
     })
   }

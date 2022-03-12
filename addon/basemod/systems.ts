@@ -65,13 +65,13 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
   autohide['a'] = false
 
-  a.ref.SetScript('OnEnter', () => {
+  a.ref.HookScript('OnEnter', () => {
     autohide['a'] = true
     timer = 0
     a.ref.SetBackdropColor(0.21, 0.49, 1, 1)
   })
 
-  a.ref.SetScript('OnLeave', () => {
+  a.ref.HookScript('OnLeave', () => {
     autohide['a'] = false
     timer = GetTime() + AUTOHIDE_TIME
     a.ref.SetBackdropColor(0, 0, 0, 1)
@@ -93,20 +93,20 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   autohide['p'] = false
   autohide['menu'] = false
 
-  p.ref.SetScript('OnEnter', () => {
+  p.ref.HookScript('OnEnter', () => {
     autohide['p'] = true
   })
 
-  p.ref.SetScript('OnLeave', () => {
+  p.ref.HookScript('OnLeave', () => {
     autohide['p'] = false
     timer = GetTime() + AUTOHIDE_TIME
   })
 
-  menu.ref.SetScript('OnEnter', () => {
+  menu.ref.HookScript('OnEnter', () => {
     autohide['menu'] = true
   })
 
-  menu.ref.SetScript('OnLeave', () => {
+  menu.ref.HookScript('OnLeave', () => {
     autohide['menu'] = false
     timer = GetTime() + AUTOHIDE_TIME
   })
@@ -123,19 +123,19 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
   autohide['button'] = false
 
-  button.SetScript('OnEnter', () => {
+  button.HookScript('OnEnter', () => {
     autohide['button'] = true
     timer = 0
   })
 
-  button.SetScript('OnLeave', () => {
+  button.HookScript('OnLeave', () => {
     autohide['button'] = false
     timer = GetTime() + AUTOHIDE_TIME
   })
 
   // toggle
   a.ref.EnableMouse(true)
-  a.ref.SetScript('OnMouseDown', () => {
+  a.ref.HookScript('OnMouseDown', () => {
     if (p.ref.IsVisible()) {
       p.ref.Hide()
       button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
@@ -151,7 +151,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     }
   })
 
-  button.SetScript('OnClick', () => {
+  button.HookScript('OnClick', () => {
     if (p.ref.IsVisible()) {
       p.ref.Hide()
       button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
@@ -186,12 +186,12 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
   autohide['list'] = false
 
-  list.ref.SetScript('OnEnter', () => {
+  list.ref.HookScript('OnEnter', () => {
     autohide['list'] = true
     timer = 0
   })
 
-  list.ref.SetScript('OnLeave', () => {
+  list.ref.HookScript('OnLeave', () => {
     autohide['list'] = false
     timer = GetTime() + AUTOHIDE_TIME
   })
@@ -209,21 +209,21 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     w.ref.SetBackdropColor(0, 0, 0, 1)
 
     w.ref.EnableMouse(true)
-    w.ref.SetScript('OnEnter', () => {
+    w.ref.HookScript('OnEnter', () => {
       timer = 0
       w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background', edgeFile: '' })
       w.ref.SetBackdropColor(0.21, 0.49, 1, 1)
       autohide['item-' + options.id] = true
     })
 
-    w.ref.SetScript('OnLeave', () => {
+    w.ref.HookScript('OnLeave', () => {
       w.ref.SetBackdrop({ bgFile: '', insets: { left:0, right:0, top:0, bottom:0 } })
       w.ref.SetBackdropColor(0, 0, 0, 1)
       timer = GetTime() + AUTOHIDE_TIME
       autohide['item-' + options.id] = false
     })
 
-    w.ref.SetScript('OnMouseDown', () => {
+    w.ref.HookScript('OnMouseDown', () => {
       p.ref.Hide()
       button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
       button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
@@ -260,7 +260,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     return bool
   }
 
-  a.ref.SetScript('OnUpdate', () => {
+  a.ref.HookScript('OnUpdate', () => {
     if ((timer > 0) && (GetTime() >= timer)) {
       if (!IsMouseEnter())
         p.ref.Hide()

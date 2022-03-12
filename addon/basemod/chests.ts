@@ -23,15 +23,15 @@ export const ChestItem: Component<ChestItemOptions> = options => {
     GameTooltip.SetHyperlink(`item:${id}`)
     GameTooltip.Show()
   }
-  ref.SetScript('OnEnter', frame => {
+  ref.HookScript('OnEnter', frame => {
     if (id)
       DrawTooltip()
   })
-  ref.SetScript('OnLeave', frame => {
+  ref.HookScript('OnLeave', frame => {
     GameTooltip.ClearLines()
     GameTooltip.Hide()
   })
-  ref.SetScript('OnMouseDown', frame => {
+  ref.HookScript('OnMouseDown', frame => {
     if (SelectedItem) {
       texture = texture || frame.CreateTexture()
       texture.SetTexture(GetItemIcon(SelectedItem.id))
@@ -57,7 +57,7 @@ export const Chests: Component = () => {
   const padding = Frame({ name: 'chest' })
   padding.ref.RegisterEvent('LOOT_OPENED')
   padding.ref.RegisterEvent('LOOT_CLOSED')
-  padding.ref.SetScript('OnEvent', (f, e) => {
+  padding.ref.HookScript('OnEvent', (f, e) => {
     if (e === 'LOOT_OPENED') {
       padding.ref.Show()
     }

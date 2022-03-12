@@ -127,7 +127,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   frame.ref.EnableMouse(true)
 
   // onClick
-  frame.inner.SetScript('OnMouseDown', (_, button) => {
+  frame.inner.HookScript('OnMouseDown', (_, button) => {
     const remainder = app.talentInfo.max - app.talentInfo.used
     if (button === 'LeftButton' && !frame.state.isActive && (options.spell.cost <= remainder))
       frame.fns.requestActivate()
@@ -157,7 +157,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     GameTooltip.Hide()
   }
 
-  frame.ref.SetScript('OnEnter', () => {
+  frame.ref.HookScript('OnEnter', () => {
     const remainder = app.talentInfo.max - app.talentInfo.used
     if (options.spell.cost <= remainder)
       SetDesaturation(texture, false)
@@ -165,7 +165,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     drawTooltip()
   })
 
-  frame.ref.SetScript('OnLeave', () => {
+  frame.ref.HookScript('OnLeave', () => {
     if (!frame.state.isActive)
       SetDesaturation(texture, true)
     frame.state.isHover = true
@@ -226,7 +226,7 @@ export const Talents: Component = options => {
 
   Movable(talents)
 
-  talents.inner.SetScript('OnMouseDown', (_, button) => {
+  talents.inner.HookScript('OnMouseDown', (_, button) => {
     if (button === 'LeftButton')
       console.log('left click')
   })

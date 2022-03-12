@@ -33,8 +33,8 @@ export function Movable (element: Element<any, any>, defaultItemPoint: WoWAPI.Po
   element.ref.SetMovable(true)
   element.ref.RegisterForDrag('RightButton')
 
-  element.ref.SetScript('OnDragStart', f => f.StartMoving())
-  element.ref.SetScript('OnDragStop', f => {
+  element.ref.HookScript('OnDragStart', f => f.StartMoving())
+  element.ref.HookScript('OnDragStop', f => {
     f.StopMovingOrSizing()
 
     const point = f.GetPoint()

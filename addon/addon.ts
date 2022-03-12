@@ -11,7 +11,7 @@ export const app = new App(app => {
   Chests()
   Systems()
   let txt = ''
-  app.root.ref.SetScript('OnUpdate', () => {
+  app.root.ref.HookScript('OnUpdate', () => {
     const f = GetMouseFocus()
     if (!f)
       return
