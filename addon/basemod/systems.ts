@@ -104,16 +104,32 @@ export const Dropdown: Component<DropdownOptions> = options => {
   a.ref.SetScript('OnMouseDown', () => {
     if (p.ref.IsVisible()) {
       p.ref.Hide()
+      button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
+      button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
+      button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
+      button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
     } else {
       p.ref.Show()
+      button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollUp-Up')
+      button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
+      button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollUp-Down')
+      button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollUp-Disabled')
     }
   })
 
   button.SetScript('OnClick', () => {
     if (p.ref.IsVisible()) {
       p.ref.Hide()
+      button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
+      button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
+      button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
+      button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
     } else {
       p.ref.Show()
+      button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollUp-Up')
+      button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
+      button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollUp-Down')
+      button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollUp-Disabled')
     }
   })
 
@@ -180,6 +196,10 @@ export const Dropdown: Component<DropdownOptions> = options => {
     w.ref.SetScript('OnMouseDown', () => {
       text.SetText(options.text)
       p.ref.Hide()
+      button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
+      button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
+      button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
+      button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
     })
 
     list.fns.Attach(options.id, w)
@@ -210,6 +230,10 @@ export const Dropdown: Component<DropdownOptions> = options => {
     if ((timer > 0) && (GetTime() >= timer)) {
       if (!IsMouseEnter())
         p.ref.Hide()
+        button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
+        button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
+        button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
+        button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
     }
   })
 
