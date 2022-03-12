@@ -215,11 +215,11 @@ export const Dropdown: Component<DropdownOptions> = options => {
     text: 'aaa',
     value: 1,
   })
-  // Item({
-  //   id: 'foo-2',
-  //   text: 'bbb',
-  //   value: 2,
-  // })
+  Item({
+    id: 'foo-2',
+    text: 'bbb',
+    value: 2,
+  })
   Item({
     id: 'foo-3',
     text: 'ccc',
