@@ -19,11 +19,25 @@ interface DropdownOptions extends ComponentOptions {
 }
 
 export const Dropdown: Component<DropdownOptions> = options => {
+  const autohide = {}
+  let timer = 0
+
   const a = Frame(options)
 
   a.ref.SetWidth(200)
   a.ref.SetHeight(30)
   a.ref.SetBackdrop(BASE_BACKDROP)
+
+  autohide['a'] = false
+
+  a.ref.SetScript('OnEnter', () => {
+    autohide['a'] = true
+  })
+
+  a.ref.SetScript('OnLeave', () => {
+    autohide['a'] = false
+    timer = GetTime() + 6
+  })
 
   // menu
   const p = Frame({ name: 'dropdown-menu-padding', parent: a })
@@ -38,6 +52,27 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   p.ref.Hide()
 
+  autohide['p'] = false
+  autohide['menu'] = false
+
+  p.ref.SetScript('OnEnter', () => {
+    autohide['p'] = true
+  })
+
+  p.ref.SetScript('OnLeave', () => {
+    autohide['p'] = false
+    timer = GetTime() + 6
+  })
+
+  menu.ref.SetScript('OnEnter', () => {
+    autohide['menu'] = true
+  })
+
+  menu.ref.SetScript('OnLeave', () => {
+    autohide['menu'] = false
+    timer = GetTime() + 6
+  })
+
   // button
   const button = CreateFrame('Button', 'dropdown-button', a.ref)
 
@@ -47,6 +82,17 @@ export const Dropdown: Component<DropdownOptions> = options => {
   button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
   button.SetSize(20, 20)
   button.SetPoint('RIGHT', -5, 0)
+
+  autohide['button'] = false
+
+  button.SetScript('OnEnter', () => {
+    autohide['button'] = true
+  })
+
+  button.SetScript('OnLeave', () => {
+    autohide['button'] = false
+    timer = GetTime() + 6
+  })
 
   // toggle
   a.ref.EnableMouse(true)
@@ -82,6 +128,17 @@ export const Dropdown: Component<DropdownOptions> = options => {
   const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
   list.ref.SetSize(200, 0)
 
+  autohide['list'] = false
+
+  list.ref.SetScript('OnEnter', () => {
+    autohide['list'] = true
+  })
+
+  list.ref.SetScript('OnLeave', () => {
+    autohide['list'] = false
+    timer = GetTime() + 6
+  })
+
   // item
   const Item = (options: DropdownItem) => {
     options.id
@@ -102,25 +159,47 @@ export const Dropdown: Component<DropdownOptions> = options => {
     w.ref.SetScript('OnEnter', () => {
       w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background', edgeFile: '' })
       w.ref.SetBackdropColor(0, 0, 1, 1)
+      autohide[`item-${i}`] = true
     })
+
     w.ref.SetScript('OnLeave', () => {
       w.ref.SetBackdrop({ bgFile: '', insets: { left:0, right:0, top:0, bottom:0 } })
       w.ref.SetBackdropColor(0, 0, 0, 1)
+      timer = GetTime() + 6
+      autohide[`item-${i}`] = false
+    })
+
+    w.ref.SetScript('OnMouseDown', () => {
+      p.ref.Hide()
     })
 
     list.fns.Attach(options.id, w)
 
-    menu.ref.SetHeight((list.state.items.length * 30) + 1)
-    list.ref.SetHeight((list.state.items.length * 30) + 1)
+    const i = list.state.items.length
+
+    menu.ref.SetHeight((i * 30) + 1)
+    list.ref.SetHeight((i * 30) + 1)
+
+    autohide[`item-${i}`] = false
   }
 
   // autohide
-  a.ref.SetScript('OnEnter', () => {
-    console.log('hello')
-  })
+  const IsMouseEnter = () => {
+    let bool = false
 
-  a.ref.SetScript('OnLeave', () => {
-    console.log('bye')
+    for (const key of Object.keys(autohide)) {
+      const isMouseEnter: boolean = autohide[key]
+      if (isMouseEnter)
+        bool = true
+    }
+
+    return bool
+  }
+
+  a.ref.HookScript('OnUpdate', () => {
+    if (GetTime() >= (timer + 6))
+      if (p.ref.IsVisible())
+        p.ref.Hide()
   })
 
   Item({
