@@ -133,9 +133,8 @@ export class Store {
     SendAddonMessage('store-init', ' ', 'WHISPER', app.playerInfo.name)
   }
 
-  public Set (type: StoreType, storeKey: string, storeValue: StoreValue) {
+  public Set (storeType: StoreType, storeKey: string, storeValue: StoreValue) {
     const app = Get()
-
     const primitive = typeof storeValue === 'number'
       ? 0 // number
       : typeof storeValue === 'string'
@@ -143,10 +142,9 @@ export class Store {
       : typeof storeValue === 'boolean'
       ? 2 // boolean
       : 3 // null
-
-    this.state[type][storeKey] = storeValue
-
-    SendAddonMessage('store-set', `${primitive} ${(type === 'ACCOUNT') ? 0 : 1} ${storeKey} ${storeValue}`, 'WHISPER', app.playerInfo.name)
+    this.state[storeType][storeKey] = storeValue
+    const t = storeType === 'ACCOUNT' ? 1 : 0
+    SendAddonMessage('store-set', `${primitive} ${t} ${storeKey} ${storeValue}`, 'WHISPER', app.playerInfo.name)
   }
 
   public Get (type: StoreType, storeKey: string, defaultValue?: StoreValue) {
