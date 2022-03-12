@@ -5,7 +5,7 @@ import { BASE_BACKDROP } from './constants'
 import { Mapping } from './types'
 import { Movable } from './utils'
 
-const AUTOHIDE_TIMER = 3
+const AUTOHIDE_TIMER = 2
 
 const DEFAULT_SELECTION = {
   id: '',
