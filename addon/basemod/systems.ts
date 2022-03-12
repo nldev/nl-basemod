@@ -34,7 +34,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   a.ref.SetScript('OnEnter', () => {
     autohide['a'] = true
     timer = 0
-    a.ref.SetBackdropColor(1, 1, 1, 1)
+    a.ref.SetBackdropColor(0.2, 0.2, 0.2, 1)
   })
 
   a.ref.SetScript('OnLeave', () => {
