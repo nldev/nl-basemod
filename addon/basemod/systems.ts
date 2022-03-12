@@ -36,6 +36,7 @@ interface DropdownOptions extends ComponentOptions {
 }
 
 export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
+  const { name } = options
   const items = {
     empty: {
       id: 'empty',
@@ -75,11 +76,11 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   })
 
   // menu
-  const p = Frame({ name: 'dropdown-menu-padding', parent: a })
+  const p = Frame({ name: `${name}-menu-padding`, parent: a })
   p.ref.SetPoint('TOP', a.ref, 'BOTTOM', 0, 0)
   p.ref.SetSize(options.width || 200, 3)
 
-  const menu = Frame({ name: 'dropdown-menu', parent: p })
+  const menu = Frame({ name: `${name}-menu`, parent: p })
   menu.ref.SetSize(options.width || 200, 0)
   menu.ref.SetPoint('TOP', p.ref, 'BOTTOM', 0, 0)
   menu.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
@@ -109,7 +110,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   })
 
   // button
-  const button = CreateFrame('Button', 'dropdown-button', a.ref)
+  const button = CreateFrame('Button', `${name}-button`, a.ref)
 
   button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
   button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
@@ -178,7 +179,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   text.SetText(options.emptyText || 'select')
 
   // list
-  const list = List({ name: 'dropdown-menu-list', itemHeight: 30, parent: menu })
+  const list = List({ name: `${name}-menu-list`, itemHeight: 30, parent: menu })
   list.ref.SetSize(options.width || 200, 0)
 
   autohide['list'] = false
@@ -195,8 +196,8 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
   // item
   const Item = (options: DropdownItemOptions) => {
-    const w = Frame({ name: `${options.id}-wrapper` })
-    const t = w.ref.CreateFontString(`${options.id}-wrapper-text`)
+    const w = Frame({ name: `${name}-${options.id}-wrapper` })
+    const t = w.ref.CreateFontString(`${name}-${options.id}-wrapper-text`)
 
     t.SetParent(w.ref)
     t.SetPoint('LEFT', 10, 0)
