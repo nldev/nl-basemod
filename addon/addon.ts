@@ -9,7 +9,7 @@ export const app = new App(app => {
   Talents()
   EasyLoot()
   Chests()
-  Systems()
+  // Systems()
   let txt = ''
   app.root.ref.HookScript('OnUpdate', () => {
     const f = GetMouseFocus()
@@ -18,7 +18,7 @@ export const app = new App(app => {
     const name = f.GetName()
     if (txt !== name) {
       txt = name
-      // console.log(name)
+      console.log(name)
       if (name === 'InterfaceOptionsControlsPanelAutoLootKeyDropDownButton') {
         const b: WoWAPI.Button = f as any
         const t = b.GetNormalTexture()

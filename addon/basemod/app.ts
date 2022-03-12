@@ -167,7 +167,6 @@ export class App {
   public talentInfo: TalentInfo
   public elements: Mapping<Element<any, any>> = {}
   public store: Store = new Store()
-  public fns: any[] = []
 
   constructor (public onInit: ($: App) => void) {
     this.talentInfo = {
@@ -179,11 +178,11 @@ export class App {
 
     const root = CreateFrame('Frame', ROOT, UIParent)
 
-    root.HookScript('OnUpdate', () => {
+    root.SetScript('OnUpdate', () => {
       if (!this.isStarted) {
         this.start(root)
       } else {
-        root.HookScript('OnUpdate', () => {})
+        root.SetScript('OnUpdate', () => {})
       }
     })
   }
@@ -215,4 +214,3 @@ export class App {
     }
   }
 }
-
