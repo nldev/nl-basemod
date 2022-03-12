@@ -27,17 +27,20 @@ export const Dropdown: Component<DropdownOptions> = options => {
   a.ref.SetWidth(options.width || 200)
   a.ref.SetHeight(30)
   a.ref.SetBackdrop(BASE_BACKDROP)
+  a.ref.SetBackdropColor(0, 0, 0, 1)
 
   autohide['a'] = false
 
   a.ref.SetScript('OnEnter', () => {
     autohide['a'] = true
     timer = 0
+    a.ref.SetBackdropColor(1, 1, 1, 0.5)
   })
 
   a.ref.SetScript('OnLeave', () => {
     autohide['a'] = false
     timer = GetTime() + 2
+    a.ref.SetBackdropColor(0, 0, 0, 1)
   })
 
   // menu
