@@ -1,3 +1,4 @@
+import { Get } from './app'
 import { Component, ComponentOptions, Frame, Element } from './app'
 import { List } from './components/list'
 import { BASE_BACKDROP } from './constants'
@@ -317,6 +318,7 @@ export const Checkboxes: Component = () => {
 }
 
 export const Systems: Component = () => {
+  const $ = Get()
   const a = Frame({ name: 'systems' })
   const b = Frame({ name: 'systems-inner', parent: a })
 
@@ -340,17 +342,17 @@ export const Systems: Component = () => {
       {
         id: 'foo',
         text: 'Foo',
-        value: 'foo',
+        value: $.store.Get('STORE_TYPE_CHARACTER', 'foo', 1),
       },
       {
         id: 'bar',
         text: 'Bar',
-        value: 'bar',
+        value: $.store.Get('STORE_TYPE_CHARACTER', 'foo', 2),
       },
       {
         id: 'baz',
         text: 'Baz',
-        value: 'baz',
+        value: $.store.Get('STORE_TYPE_CHARACTER', 'foo', 3),
       },
     ],
     onSelect: ({ text }) => console.log(text),
