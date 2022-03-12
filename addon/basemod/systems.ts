@@ -204,7 +204,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     const t = w.ref.CreateFontString(`${name}-${options.id}-wrapper-text`)
 
     t.SetParent(w.ref)
-    t.SetPoint('LEFT', 10, 0)
+    t.SetPoint('LEFT', 30, 0)
     t.SetFont('Fonts/FRIZQT__.TTF', 10)
     t.SetText(options.text)
 
@@ -301,16 +301,32 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     if (a.state.selection.id === item.id) {
       if (options.isTriggerOnReselect && options.onSelect && isTrigger)
         options.onSelect(a.state.selection)
-      return
+    } else {
+      a.state.selection = { ...item }
+
+      text.SetText(item.text)
+
+      if (options.onSelect && isTrigger)
+        options.onSelect(a.state.selection)
     }
 
-    a.state.selection = { ...item }
-
-    text.SetText(item.text)
-
-    if (options.onSelect && isTrigger)
-      options.onSelect(a.state.selection)
+    if (item.id !== 'empty') {
+      checkmark.ref.Show()
+      checkmark.ref.SetParent(item.item.ref)
+      checkmark.ref.SetPoint('LEFT', 10, 0)
+    } else {
+      checkmark.ref.Hide()
+    }
+    texture.SetAllPoints()
   }
+
+  // checkmark
+  const checkmark = Frame({ name: `${a.ref.GetName()}-checkmark`, parent: menu })
+  checkmark.ref.SetSize(15, 15)
+  checkmark.ref.Hide()
+
+  const texture = checkmark.ref.CreateTexture()
+  texture.SetTexture('Interface/BUTTONS/UI-CheckBox-Check.blp')
 
   // empty
   if (options.isSelectableEmpty)

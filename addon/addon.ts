@@ -17,18 +17,10 @@ export const app = new App(app => {
       return
     const name = f.GetName()
     if (txt !== name) {
-      console.log(name)
       txt = name
       if (name === 'DropDownList1') {
-        const b: WoWAPI.Button = f as any
-        const t = b.GetNormalTexture()
-        const h = b.GetHighlightTexture()
-        const p = b.GetPushedTexture()
-        const d = b.GetDisabledTexture()
-        console.log(((t as any) as WoWAPI.Texture).GetTexture())
-        console.log(((h as any) as WoWAPI.Texture).GetTexture())
-        console.log(((p as any) as WoWAPI.Texture).GetTexture())
-        console.log(((d as any) as WoWAPI.Texture).GetTexture())
+        const a: WoWAPI.Frame = f as any
+        AllChildren(a).forEach(c => console.log(c.GetName()))
       }
     }
   })
