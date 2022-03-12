@@ -250,6 +250,8 @@ export const Dropdown: Component<DropdownOptions> = options => {
       value: item.value,
     }
 
+    console.log(`${item.id}: ${item.value}`)
+
     text.SetText(item.text)
 
     // TODO: OnSelect
