@@ -11,8 +11,8 @@ export function Store (events: TSEvents) {
       select * from __store where guid = ${pGuid};
     `)
     while (a.GetRow()) {
-      const primitive = a.GetUInt8(2)
-      const type = a.GetUInt8(3)
+      const primitive = a.GetUInt32(2)
+      const type = a.GetUInt32(3)
       const key = a.GetString(4)
       const value = a.GetString(5)
       sender.SendAddonMessage(
@@ -27,8 +27,8 @@ export function Store (events: TSEvents) {
       select * from __store where guid = ${aGuid};
     `)
     while (b.GetRow()) {
-      const primitive = a.GetUInt8(2)
-      const type = a.GetUInt8(3)
+      const primitive = a.GetUInt32(2)
+      const type = a.GetUInt32(3)
       const key = a.GetString(4)
       const value = a.GetString(5)
       sender.SendAddonMessage(
@@ -52,8 +52,8 @@ export function Store (events: TSEvents) {
     if (!str.includes(opcode))
      return
     const w = str.substr(opcode.length).split(' ')
-    const primitive = ToUInt8(w[0])
-    const type = ToUInt8(w[1])
+    const primitive = ToUInt32(w[0])
+    const type = ToUInt32(w[1])
     const key = w[2]
     const value = w[3]
     const pGuid = sender.GetGUID()
