@@ -26,7 +26,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   a.ref.SetWidth(options.width || 200)
   a.ref.SetHeight(30)
-  a.ref.SetBackdrop(BASE_BACKDROP)
+  a.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
   a.ref.SetBackdropColor(0, 0, 0, 1)
 
   autohide['a'] = false
@@ -34,7 +34,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
   a.ref.SetScript('OnEnter', () => {
     autohide['a'] = true
     timer = 0
-    a.ref.SetBackdropColor(1, 1, 1, 0.5)
+    a.ref.SetBackdropColor(1, 1, 1, 1)
   })
 
   a.ref.SetScript('OnLeave', () => {
