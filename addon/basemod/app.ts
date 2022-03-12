@@ -81,6 +81,8 @@ export const Frame: Component = options => {
     fns: options.fns || {},
   }
 
+  frame.HookScript('OnMouseDown', frame => app.TriggerGlobalClick(element))
+
   app.elements[options.name] = element
 
   return element
@@ -167,6 +169,7 @@ export class App {
   public talentInfo: TalentInfo
   public elements: Mapping<Element<any, any>> = {}
   public store: Store = new Store()
+  public fns: any[]
 
   constructor (public onInit: ($: App) => void) {
     this.talentInfo = {
@@ -212,5 +215,13 @@ export class App {
         this.store.Init(() => this.onInit(this))
       }
     }
+  }
+
+  public TriggerGlobalClick (element: Element<any, any>) {
+    this.fns.forEach(fn => fn(element.ref.GetName(), element))
+  }
+
+  public OnGlobalClick (fn: (name: string, element: Element<any, any>) => void) {
+    this.fns.push(fn)
   }
 }
