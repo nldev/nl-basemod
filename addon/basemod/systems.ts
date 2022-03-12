@@ -32,6 +32,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   a.ref.SetScript('OnEnter', () => {
     autohide['a'] = true
+    timer = 0
   })
 
   a.ref.SetScript('OnLeave', () => {
@@ -87,6 +88,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   button.SetScript('OnEnter', () => {
     autohide['button'] = true
+    timer = 0
   })
 
   button.SetScript('OnLeave', () => {
@@ -103,6 +105,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
       p.ref.Show()
     }
   })
+
   button.SetScript('OnClick', () => {
     if (menu.ref.IsVisible()) {
       p.ref.Hide()
@@ -132,6 +135,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
   list.ref.SetScript('OnEnter', () => {
     autohide['list'] = true
+    timer = 0
   })
 
   list.ref.SetScript('OnLeave', () => {
@@ -157,6 +161,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
 
     w.ref.EnableMouse(true)
     w.ref.SetScript('OnEnter', () => {
+      timer = 0
       w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background', edgeFile: '' })
       w.ref.SetBackdropColor(0, 0, 1, 1)
       autohide[`item-${i}`] = true
@@ -170,6 +175,7 @@ export const Dropdown: Component<DropdownOptions> = options => {
     })
 
     w.ref.SetScript('OnMouseDown', () => {
+      text.SetText(options.text)
       p.ref.Hide()
     })
 
@@ -196,7 +202,8 @@ export const Dropdown: Component<DropdownOptions> = options => {
     return bool
   }
 
-  a.ref.HookScript('OnUpdate', () => {
+  a.ref.SetScript('OnUpdate', () => {
+    console.log(GetTime() - timer)
     if (GetTime() >= (timer + 6))
       if (p.ref.IsVisible())
         p.ref.Hide()
