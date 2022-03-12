@@ -278,6 +278,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       item: item.item,
     }
 
+    a.state.selection = { ...selection }
     console.log(`${item.id}: ${item.value}`)
 
     text.SetText(item.text)
