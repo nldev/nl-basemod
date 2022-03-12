@@ -47,14 +47,13 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   }
   const autohide = {}
   let timer = 0
-  let selection: DropdownItem = { ...DEFAULT_SELECTION }
 
   const a: Element<DropdownState> = Frame(options) as any
 
   a.state = {
     length: 0,
     items: items,
-    selection: selection,
+    selection: { ...DEFAULT_SELECTION },
   }
 
   a.ref.SetWidth(options.width || 200)
@@ -274,20 +273,18 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   const Select = (id: string, isTrigger: boolean = true) => {
     const item = items[id]
 
-    if (selection.id === item.id) {
+    if (a.state.selection.id === item.id) {
       if (options.isTriggerOnSameSelection && options.onSelect && isTrigger)
-        options.onSelect(selection)
+        options.onSelect(a.state.selection)
       return
     }
 
-    selection = { ...item }
-
-    a.state.selection = { ...selection }
+    a.state.selection = { ...item }
 
     text.SetText(item.text)
 
     if (options.onSelect && isTrigger)
-      options.onSelect(selection)
+      options.onSelect(a.state.selection)
   }
 
   // empty
