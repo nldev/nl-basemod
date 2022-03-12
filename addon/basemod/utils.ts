@@ -7,8 +7,8 @@ export function Movable (element: Element<any, any>, defaultItemPoint: WoWAPI.Po
 
   const name = element.ref.GetName()
 
-  let a = $.store.Get('STORE_TYPE_CHARACTER', `${name}-item-point-a`) || defaultItemPoint
-  let b = $.store.Get('STORE_TYPE_CHARACTER', `${name}-parent-point-b`) || defaultParentPoint
+  let a = $.store.Get('STORE_TYPE_CHARACTER', `${name}-point-a`) || defaultItemPoint
+  let b = $.store.Get('STORE_TYPE_CHARACTER', `${name}-point-b`) || defaultParentPoint
   let x = $.store.Get('STORE_TYPE_CHARACTER', `${name}-x`) || defaultX
   let y = $.store.Get('STORE_TYPE_CHARACTER', `${name}-y`) || defaultY
 
