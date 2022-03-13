@@ -20,6 +20,7 @@ export const Panel: Component = options => {
 
   const dropdown = Dropdown({
     name: 'test-dropdown',
+    width: 150,
     defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'foo'),
     isSelectableEmpty: true,
     // isTriggerOnInit: true,
@@ -47,7 +48,7 @@ export const Panel: Component = options => {
   })
 
   dropdown.ref.SetParent(a.ref)
-  dropdown.ref.SetPoint('TOPLEFT')
+  dropdown.ref.SetPoint('TOPLEFT', 0, -40)
 
 
   a.ref.SetSize(340, 430)
