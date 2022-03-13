@@ -39,17 +39,19 @@ export const Panel: Component<PanelOptions> = options => {
 
   // panel
   const a = Frame({ name: `${title.ref.GetName()}-panel`, parent: title })
-  const b = Frame({ name: `${title.ref.GetName()}-inner`, parent: a })
-
-  title.inner = b.ref
 
   a.ref.SetSize(340, 410)
   a.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
   a.ref.SetBackdropColor(0, 0, 0, 1)
   a.ref.SetPoint('TOP', title.ref, 'BOTTOM', 0, 0)
 
+  // panel-inner
+  const b = Frame({ name: `${title.ref.GetName()}-inner`, parent: a })
+
   b.ref.SetSize(300 - 30, 400 - 30)
   b.ref.SetPoint('CENTER')
+
+  title.inner = b.ref
 
   //dropdown
   // const dropdown = Dropdown({
