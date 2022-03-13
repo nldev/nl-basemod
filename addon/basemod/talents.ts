@@ -223,7 +223,10 @@ export const Talents: Component = options => {
     name: 'talents',
   })
 
+  a.ref.SetParent(UIParent)
   a.ref.SetSize(320, 390)
+  a.ref.SetPoint('CENTER')
+  a.ref.Hide()
 
   const b = Frame({
     name: 'b',
