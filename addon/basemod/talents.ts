@@ -143,7 +143,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   })
 
   // tooltip
-  const drawTooltip = () => {
+  const drawTooltip = (isOverride?: boolean) => {
     if (frame.state.isHover && GetMouseFocus().GetName() === frame.ref.GetName()) {
 
       GameTooltip.ClearLines()
@@ -152,7 +152,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
       if (!frame.state.isActive) {
         const [red, green, blue] = rgb(102, 217, 239)
         GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, red, green, blue, 1, 1, 1)
-        if (CanAfford()) {
+        if (CanAfford() || isOverride) {
           GameTooltip.AddLine('Left click to learn', ...rgb(166, 226, 46))
         } else {
           GameTooltip.AddLine('Insufficient talent points', ...rgb(249, 38, 114))
@@ -210,11 +210,11 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     },
     deactivate: () => {
       frame.state.isActive = false
-      drawTooltip()
       setCostTextColor()
       SetDesaturation(texture, true)
       if (options.onDeactivate)
         options.onDeactivate()
+      drawTooltip(true)
     },
     toggle: () => {
       frame.state.isActive
