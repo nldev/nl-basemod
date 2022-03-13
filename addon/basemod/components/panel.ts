@@ -136,9 +136,11 @@ export const Panel: Component<PanelOptions> = options => {
   // toggle visibility
   const TogglePanel = () => {
     if (dropdown.ref.IsVisible()) {
+      $.store.Set('CHARACTER', 'test-panel-visibility', false)
       dropdown.ref.Hide()
       a.ref.Hide()
     } else {
+      $.store.Set('CHARACTER', 'test-panel-visibility', true)
       dropdown.ref.Show()
       a.ref.Show()
     }
@@ -152,8 +154,10 @@ export const Panel: Component<PanelOptions> = options => {
       TogglePanel()
   })
 
-  dropdown.ref.Hide()
-  a.ref.Hide()
+  if (!$.store.Get('CHARACTER', 'test-panel-visibility')) {
+    dropdown.ref.Hide()
+    a.ref.Hide()
+  }
 
   // make title movable
   Movable(title)
