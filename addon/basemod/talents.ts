@@ -337,9 +337,9 @@ export const Talents: Component = options => {
       app.talentInfo.used = used
       app.talentInfo.max = max
       counterText.SetText(`${app.talentInfo.max - app.talentInfo.used} / ${app.talentInfo.max}`)
-      if (used === 0)
-        button.Hide()
     }
+    if (used === 0)
+      button.Hide()
   })
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, talentId) => {
