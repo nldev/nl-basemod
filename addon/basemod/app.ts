@@ -143,7 +143,10 @@ export class Store {
       : 3 // null
     this.state[storeType][storeKey] = storeValue
     const t = (storeType === 'ACCOUNT') ? 1 : 0
-    SendAddonMessage('store-set', `${primitive} ${t} ${storeKey} ${storeValue}`, 'WHISPER', app.playerInfo.name)
+    const v = (primitive === 2)
+      ? (storeValue ? '1' : '0')
+      : storeValue
+    SendAddonMessage('store-set', `${primitive} ${t} ${storeKey} ${v}`, 'WHISPER', app.playerInfo.name)
   }
 
   public Get (type: StoreType, storeKey: string, defaultValue?: StoreValue) {
