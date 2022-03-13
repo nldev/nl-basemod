@@ -320,6 +320,7 @@ export const Talents: Component = options => {
     if (app.talentInfo.used !== 0)
       SendAddonMessage('reset-talents-request', '', 'WHISPER', name)
   })
+  button.Enable()
 
   // event handlers
   const { name, level, chrRace, chrClass } = app.playerInfo
@@ -338,8 +339,6 @@ export const Talents: Component = options => {
       app.talentInfo.max = max
       counterText.SetText(`${app.talentInfo.max - app.talentInfo.used} / ${app.talentInfo.max}`)
     }
-    if (used === 0)
-      button.Hide()
   })
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, talentId) => {
@@ -348,10 +347,8 @@ export const Talents: Component = options => {
     if (!talentId)
       return
     const ele = app.elements[`talent-${talentId}`] as Element<TalentState, TalentFns>
-    if (ele && !ele.state.isActive) {
+    if (ele && !ele.state.isActive)
       ele.fns.activate()
-      button.Show()
-    }
   })
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, talentId) => {
@@ -362,7 +359,7 @@ export const Talents: Component = options => {
     const ele = app.elements[`talent-${talentId}`] as Element<TalentState, TalentFns>
     if (ele && ele.state.isActive) {
       ele.fns.deactivate()
-      if (app.talentInfo.used === 0)
+      if (button.IsShown())
         button.Hide()
     }
   })
@@ -378,7 +375,6 @@ export const Talents: Component = options => {
     if (prefix !== 'reset-talents-success')
       return
     list.forEach(e => e.fns.deactivate())
-    button.Hide()
   })
 
   SendAddonMessage(REQUESTS.GET_TALENT_INFO, '', 'WHISPER', name)
