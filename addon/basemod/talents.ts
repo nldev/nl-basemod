@@ -302,7 +302,7 @@ export const Talents: Component = options => {
   button.SetText('Reset')
   button.EnableMouse(true)
   button.SetSize(90, 30)
-  button.SetPoint('BOTTOMRIGHT', -4, -26)
+  button.SetPoint('BOTTOMRIGHT', -5, -26)
   button.SetFrameStrata('HIGH')
   button.SetScript(('OnClick'), () => {
     SendAddonMessage('reset-talents', '', 'WHISPER', name)
