@@ -58,16 +58,19 @@ export const Panel: Component<PanelOptions> = options => {
   // FIXME
   const COMPONENTS = [Talents]
   const pages: Mapping<Element> = {}
-  for (let key of Object.keys(COMPONENTS)) {
-    const Component: Component = COMPONENTS[key]
+  COMPONENTS.forEach(Component => {
     const page = Component()
+    const name = page.ref.GetName()
 
-    pages[key] = page
+    pages[name] = page
 
     page.ref.SetParent(title.inner)
+    page.ref.SetPoint('CENTER')
 
     page.ref.Hide()
-  }
+  })
+
+  console.log(pages['talents'].ref.GetName())
 
   //dropdown
   const dropdown = Dropdown({
@@ -104,6 +107,9 @@ export const Panel: Component<PanelOptions> = options => {
         const page = pages[key]
         page.ref.Hide()
       }
+
+      if (!pages[id])
+        return
 
       pages[id].ref.Show()
     },
