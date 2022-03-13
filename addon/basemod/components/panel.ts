@@ -4,6 +4,7 @@ import { Dropdown, DropdownItemOptions } from './dropdown'
 import { BASE_BACKDROP } from '../constants'
 import { Movable } from '../utils'
 import { Mapping } from '../types'
+import { Talents } from '../talents'
 
 export interface PanelOptions extends ComponentOptions {
   // FIXME
@@ -52,6 +53,16 @@ export const Panel: Component<PanelOptions> = options => {
   b.ref.SetPoint('CENTER')
 
   title.inner = b.ref
+
+  // pages
+  // FIXME
+  const COMPONENTS = [Talents]
+  const pages: Mapping<Element> = {}
+  for (let key of Object.keys(COMPONENTS)) {
+    const Component = COMPONENTS[key]
+    const page = Component()
+    pages[key] = page
+  }
 
   //dropdown
   const dropdown = Dropdown({

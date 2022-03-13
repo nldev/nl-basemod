@@ -221,38 +221,9 @@ export const Talents: Component = options => {
   const app = Get()
   const talents = Frame({
     name: 'talents',
-    parent: app.root,
   })
 
-  Movable(talents)
-
-  talents.inner.HookScript('OnMouseDown', (_, button) => {
-    if (button === 'LeftButton')
-      console.log('left click')
-  })
-
-  talents.inner.SetSize(500, 600)
-  talents.inner.SetBackdrop(BASE_BACKDROP)
-  talents.inner.SetBackdropColor(0, 0, 0, 1)
-
-  const title = Frame({
-    name: 'title',
-    parent: talents,
-  })
-
-  title.ref.SetSize(140, 30)
-  title.ref.SetBackdrop(BASE_BACKDROP)
-  title.ref.SetBackdropColor(0, 0, 0, 1)
-  title.ref.SetPoint('TOPRIGHT', 0, 35)
-  const titleText = talents.ref.CreateFontString(
-    'talent-countertext',
-    'OVERLAY',
-    'GameTooltipText',
-  )
-  titleText.SetParent(title.ref)
-  titleText.SetPoint('CENTER')
-  titleText.SetText('basemod v0.1.0')
-  titleText.SetFont('Fonts/FRIZQT__.TTF', 10)
+  talents.ref.SetSize(320, 390)
 
   const b = Frame({
     name: 'b',
