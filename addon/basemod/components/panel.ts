@@ -77,16 +77,16 @@ export const Panel: Component<PanelOptions> = options => {
     //
     items: [
       {
-        id: 'settings',
-        text: 'Settings',
+        id: 'talents',
+        text: 'Talents',
       },
       {
         id: 'loadouts',
         text: 'Loadouts',
       },
       {
-        id: 'talents',
-        text: 'Talents',
+        id: 'settings',
+        text: 'Settings',
       },
       {
         id: 'dev-tools',
