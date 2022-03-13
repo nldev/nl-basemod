@@ -125,8 +125,8 @@ export const Panel: Component<PanelOptions> = options => {
   dropdown.ref.SetPoint('RIGHT', title.ref, 'LEFT', -4, -1)
 
   // frame level
-  a.ref.SetFrameLevel(0)
-  dropdown.ref.SetFrameLevel(2)
+  a.ref.SetFrameStrata('LOW')
+  dropdown.ref.SetFrameStrata('HIGH')
 
   // toggle visibility
   const TogglePanel = () => {
@@ -138,6 +138,9 @@ export const Panel: Component<PanelOptions> = options => {
       a.ref.Show()
     }
   }
+
+  title.ref.HookScript('OnEnter', () => title.ref.SetBackdropColor(0.21, 0.49, 1, 1))
+  title.ref.HookScript('OnLeave', () => title.ref.SetBackdropColor(0, 0, 0, 1))
 
   title.ref.SetScript('OnMouseDown', (frame, type: WoWAPI.MouseButton) => {
     if (type === 'LeftButton')
