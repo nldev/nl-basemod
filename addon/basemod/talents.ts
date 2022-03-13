@@ -302,8 +302,10 @@ export const Talents: Component = options => {
   button.EnableMouse(true)
   button.SetSize(90, 30)
   button.SetPoint('BOTTOMRIGHT', 0, -80)
-  button.SetScript(('OnClick'), () =>
+  button.SetScript(('OnClick'), () => {
     SendAddonMessage('reset-talents', '', 'WHISPER', name)
+    GameTooltip.Hide()
+  }
   )
   button.Enable()
 
