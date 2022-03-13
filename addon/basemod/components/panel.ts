@@ -74,11 +74,11 @@ export const Panel: Component<PanelOptions> = options => {
         id: 'talents',
         text: 'Talents',
       },
-      // {
-      //   id: 'bar',
-      //   text: 'Bar',
-      //   value: 2,
-      // },
+      {
+        id: 'dev-character',
+        text: '[Development] Game Master',
+        value: 2,
+      },
       // {
       //   id: 'baz',
       //   text: 'Baz',
