@@ -57,28 +57,29 @@ export const Panel: Component<PanelOptions> = options => {
   const dropdown = Dropdown({
     name: `${a.ref.GetName()}-dropdown`,
     width: 168,
-    defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'foo'),
+    defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'talents'),
     // isSelectableEmpty: false,
     isTriggerOnInit: true,
     // isTriggerOnReselect: false,
     // emptyText: 'Minimize',
+    //
     items: [
       {
-        id: 'foo',
-        text: 'Foo',
-        value: 1,
+        id: 'talents',
+        text: 'talents',
+        value: 'talents',
       },
-      {
-        id: 'bar',
-        text: 'Bar',
-        value: 2,
-      },
-      {
-        id: 'baz',
-        text: 'Baz',
-        value: 3,
-        tooltip: 'this has a tooltip',
-      },
+      // {
+      //   id: 'bar',
+      //   text: 'Bar',
+      //   value: 2,
+      // },
+      // {
+      //   id: 'baz',
+      //   text: 'Baz',
+      //   value: 3,
+      //   tooltip: 'this has a tooltip',
+      // },
     ],
     onSelect: ({ id }) => {
       // FIXME
