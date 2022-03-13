@@ -86,11 +86,11 @@ export const Panel: Component<PanelOptions> = options => {
       },
       {
         id: 'storage',
-        text: 'Loadouts',
+        text: 'Storage',
       },
       {
         id: 'market',
-        text: 'Loadouts',
+        text: 'Market',
       },
       {
         id: 'settings',
