@@ -205,6 +205,10 @@ function HandleUnlearnTalent (events: TSEvents) {
     const talentId = str.substr(opcode.length)
     if (!talentId)
       return
+    if (sender.IsInCombat()) {
+      sender.SendBroadcastMessage('Cannot unlearn talent while in combat')
+      return
+    }
     // check if is valid talent
     const a = QueryWorld(`
       select * from __talents where id = "${talentId}";
