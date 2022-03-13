@@ -126,10 +126,16 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   // mouse
   frame.ref.EnableMouse(true)
 
+  // can afford
+  const CanAfford = () => {
+    const remainder = app.talentInfo.max - app.talentInfo.used
+    return options.spell.cost <= remainder
+  }
+
   // onClick
   frame.inner.SetScript('OnMouseDown', (_, button) => {
     const remainder = app.talentInfo.max - app.talentInfo.used
-    if (button === 'LeftButton' && !frame.state.isActive && (options.spell.cost <= remainder))
+    if (button === 'LeftButton' && !frame.state.isActive && (CanAfford()))
       frame.fns.requestActivate()
 
     if (button === 'RightButton' && frame.state.isActive)
@@ -146,10 +152,11 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
       if (!frame.state.isActive) {
         const [red, green, blue] = rgb(102, 217, 239)
         GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, red, green, blue, 1, 1, 1)
-        GameTooltip.AddLine('Left click to learn', ...rgb(102, 217, 239))
+        if (CanAfford())
+          GameTooltip.AddLine('Left click to learn', ...rgb(253, 151, 31))
       } else {
         GameTooltip.AddLine('Learned', ...rgb(166, 226, 46))
-        GameTooltip.AddLine('Right click to remove', ...rgb(249, 38, 114))
+        GameTooltip.AddLine('Right click to remove', ...rgb(253, 151, 31))
       }
       GameTooltip.Show()
     }
