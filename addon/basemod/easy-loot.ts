@@ -290,6 +290,8 @@ export const EasyLoot: Component<LootOptions, LootState, LootFns> = () => {
 
   padding.ref.Hide()
 
+  padding.ref.SetScale(0.8)
+
   return padding
 }
 
