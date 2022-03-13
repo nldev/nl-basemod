@@ -57,9 +57,12 @@ export const Panel: Component<PanelOptions> = options => {
   // pages
   // FIXME
   const COMPONENTS = {
-    'settings': Frame,
     'talents': Talents,
-    'dev-gm': Frame,
+    'loadouts': Frame,
+    'storage': Frame,
+    'market': Frame,
+    'settings': Frame,
+    'dev-tools': Frame,
     'dev-equip': Frame,
     'dev-consume': Frame,
   }
