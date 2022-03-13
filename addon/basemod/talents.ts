@@ -317,7 +317,8 @@ export const Talents: Component = options => {
   button.SetPoint('BOTTOMRIGHT', -5, -26)
   button.SetFrameStrata('HIGH')
   button.SetScript(('OnClick'), () => {
-    SendAddonMessage('reset-talents-request', '', 'WHISPER', name)
+    if (app.talentInfo.used !== app.talentInfo.max)
+      SendAddonMessage('reset-talents-request', '', 'WHISPER', name)
   }
   )
   button.Enable()
