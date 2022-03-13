@@ -63,6 +63,7 @@ export const Panel: Component<PanelOptions> = options => {
     'stash': Frame,
     'market': Frame,
     'settings': Frame,
+    'help': Frame,
     'dev-tools': Frame,
     'dev-equip': Frame,
     'dev-consume': Frame,
@@ -103,6 +104,10 @@ export const Panel: Component<PanelOptions> = options => {
       {
         id: 'settings',
         text: 'Settings',
+      },
+      {
+        id: 'help',
+        text: 'Help',
       },
       {
         id: 'dev-tools',
