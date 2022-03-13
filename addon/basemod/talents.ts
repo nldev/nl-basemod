@@ -359,7 +359,7 @@ export const Talents: Component = options => {
     const ele = app.elements[`talent-${talentId}`] as Element<TalentState, TalentFns>
     if (ele && ele.state.isActive) {
       ele.fns.deactivate()
-      if (button.IsShown())
+      if ((app.talentInfo.used === 0) && button.IsShown())
         button.Hide()
     }
   })
