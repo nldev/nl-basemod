@@ -95,19 +95,17 @@ export const Panel: Component<PanelOptions> = options => {
         page.ref.Hide()
       }
 
-      if (!pages[id]) {
+      if (!pages[id] && COMPONENTS[id]) {
         const page = COMPONENTS[id]()
 
         pages[id] = page
 
         page.ref.SetParent(title.inner)
         page.ref.SetPoint('CENTER')
-
-        page.ref.Hide()
       }
 
-
-      pages[id].ref.Show()
+      if (pages[id])
+        pages[id].ref.Show()
     },
   })
 
