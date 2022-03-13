@@ -123,7 +123,10 @@ export const Panel: Component<PanelOptions> = options => {
     }
   }
 
-  title.ref.SetScript('OnMouseDown', () => TogglePanel())
+  title.ref.SetScript('OnMouseDown', (frame, type: WoWAPI.MouseButton) => {
+    if (type === 'LeftButton')
+      TogglePanel()
+  })
 
   dropdown.ref.Hide()
   a.ref.Hide()
