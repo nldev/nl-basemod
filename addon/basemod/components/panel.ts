@@ -112,6 +112,23 @@ export const Panel: Component<PanelOptions> = options => {
   dropdown.ref.SetParent(title.ref)
   dropdown.ref.SetPoint('RIGHT', title.ref, 'LEFT', -4, -1)
 
+  // toggle visibility
+  const TogglePanel = () => {
+    if (dropdown.ref.IsVisible()) {
+      dropdown.ref.Hide()
+      a.ref.Hide()
+    } else {
+      dropdown.ref.Show()
+      a.ref.Show()
+    }
+  }
+
+  title.ref.SetScript('OnMouseDown', () => TogglePanel())
+
+  dropdown.ref.Hide()
+  a.ref.Hide()
+
+  // make title movable
   Movable(title)
 
   return title
