@@ -270,7 +270,11 @@ export const Talents: Component = options => {
   const talents: TalentSpell[] = [
     ...Object.keys(TALENTS).map(key => TALENTS[key])
   ].sort((a, b) => {
-    return (a.cost > b.cost) ? a.cost : b.cost
+    if (a.cost < b.cost)
+      return -1
+    if (a.cost > b.cost)
+      return 1
+    return 0
   })
 
   talents.forEach(spell => {
