@@ -55,6 +55,6 @@ export const RESPONSES = {
   GET_TALENT_INFO_SUCCESS: 'get-talent-info-success',
   LEARN_TALENT_SUCCESS: 'learn-talent-success',
   LEARN_TALENT_FAIL: 'learn-talent-fail',
-  UNLEARN_TALENT_SUCCESS: 'remove-success',
+  UNLEARN_TALENT_SUCCESS: 'remove-talent-success',
 }
 
