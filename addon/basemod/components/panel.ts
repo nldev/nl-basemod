@@ -81,6 +81,10 @@ export const Panel: Component<PanelOptions> = options => {
         text: 'Settings',
       },
       {
+        id: 'loadouts',
+        text: 'Loadouts',
+      },
+      {
         id: 'talents',
         text: 'Talents',
       },
