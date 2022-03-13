@@ -319,8 +319,7 @@ export const Talents: Component = options => {
   button.SetScript(('OnClick'), () => {
     if (app.talentInfo.used !== app.talentInfo.max)
       SendAddonMessage('reset-talents-request', '', 'WHISPER', name)
-  }
-  )
+  })
   button.Enable()
 
   // event handlers
