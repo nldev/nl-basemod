@@ -126,7 +126,7 @@ export const Panel: Component<PanelOptions> = options => {
 
   // frame level
   a.ref.SetFrameLevel(0)
-  dropdown.ref.SetFrameLevel(1)
+  dropdown.ref.SetFrameLevel(2)
 
   // toggle visibility
   const TogglePanel = () => {
