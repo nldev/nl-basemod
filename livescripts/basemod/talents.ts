@@ -140,7 +140,7 @@ function HandleLearnTalent (events: TSEvents) {
     if (!talentId)
       return
     if (sender.IsInCombat()) {
-      sender.SendBroadcastMessage('Cannot learn talent while in combat')
+      sender.SendBroadcastMessage('Cannot learn talents while in combat')
       return
     }
     // check if is valid talent
@@ -206,7 +206,7 @@ function HandleUnlearnTalent (events: TSEvents) {
     if (!talentId)
       return
     if (sender.IsInCombat()) {
-      sender.SendBroadcastMessage('Cannot remove talent while in combat')
+      sender.SendBroadcastMessage('Cannot remove talents while in combat')
       return
     }
     // check if is valid talent
