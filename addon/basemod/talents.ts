@@ -320,7 +320,6 @@ export const Talents: Component = options => {
     if (app.talentInfo.used !== 0)
       SendAddonMessage('reset-talents-request', '', 'WHISPER', name)
   })
-  button.Enable()
 
   // event handlers
   const { name, level, chrRace, chrClass } = app.playerInfo
@@ -338,6 +337,8 @@ export const Talents: Component = options => {
       app.talentInfo.used = used
       app.talentInfo.max = max
       counterText.SetText(`${app.talentInfo.max - app.talentInfo.used} / ${app.talentInfo.max}`)
+      if (used === 0)
+        button.Hide()
     }
   })
 
