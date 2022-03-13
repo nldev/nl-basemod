@@ -266,7 +266,7 @@ export const Talents: Component = options => {
   counter.ref.SetSize(80, 30)
   counter.ref.SetBackdrop(BASE_BACKDROP)
   counter.ref.SetBackdropColor(0, 0, 0, 1)
-  counter.ref.SetPoint('BOTTOMLEFT', 5, -27)
+  counter.ref.SetPoint('BOTTOMLEFT', 5, -28)
   const counterText = b.ref.CreateFontString(
     'talent-countertext',
     'OVERLAY',
@@ -314,7 +314,7 @@ export const Talents: Component = options => {
   button.SetText('Reset')
   button.EnableMouse(true)
   button.SetSize(90, 30)
-  button.SetPoint('BOTTOMRIGHT', -5, -26)
+  button.SetPoint('BOTTOMRIGHT', -5, -28)
   button.SetFrameStrata('HIGH')
   button.SetScript(('OnClick'), () => {
     if (app.talentInfo.used !== 0)
