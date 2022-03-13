@@ -82,6 +82,8 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   const p = Frame({ name: `${name}-menu-padding`, parent: a })
   p.ref.SetPoint('TOP', a.ref, 'BOTTOM', 0, 0)
   p.ref.SetSize(options.width || 200, 3)
+  p.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
+  p.ref.SetBackdropColor(0, 0, 0, 1)
 
   const menu = Frame({ name: `${name}-menu`, parent: p })
   menu.ref.SetSize(options.width || 200, 0)
