@@ -153,7 +153,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
         const [red, green, blue] = rgb(102, 217, 239)
         GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, red, green, blue, 1, 1, 1)
         if (CanAfford() || isOverride) {
-          GameTooltip.AddLine('Left click to learn', ...rgb(102, 217, 239))
+          GameTooltip.AddLine('Left click to learn', ...rgb(253, 151, 31))
         } else {
           GameTooltip.AddLine('Insufficient talent points', ...rgb(249, 38, 114))
         }
