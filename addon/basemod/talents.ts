@@ -146,10 +146,10 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
       if (!frame.state.isActive) {
         const [red, green, blue] = rgb(102, 217, 239)
         GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, red, green, blue, 1, 1, 1)
-        GameTooltip.AddLine('Left click to learn')
+        GameTooltip.AddLine('Left click to learn', ...rgb(249, 38, 114))
       } else {
         GameTooltip.AddLine('Learned', ...rgb(166, 226, 46))
-        GameTooltip.AddLine('Right click to remove')
+        GameTooltip.AddLine('Right click to remove', ...rgb(102, 217, 239))
       }
       GameTooltip.Show()
     }
