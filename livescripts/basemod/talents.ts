@@ -281,6 +281,10 @@ function HandleResetTalents (events: TSEvents) {
     const str = message.get()
     if (!str.includes(opcode))
      return
+    if (sender.IsInCombat()) {
+      sender.SendBroadcastMessage('Cannot reset talents while in combat')
+      return
+    }
     ResetTalents(sender)
     sender.SendBroadcastMessage('Your talents have been reset')
   })
