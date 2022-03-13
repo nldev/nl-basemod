@@ -46,9 +46,10 @@ export const Panel: Component<PanelOptions> = options => {
   a.ref.SetSize(340, 410)
   a.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
   a.ref.SetBackdropColor(0, 0, 0, 1)
-  a.ref.SetPoint('BOTTOMRIGHT')
+  a.ref.SetPoint('TOP', title.ref, 'BOTTOM', 0, 0)
+
   b.ref.SetSize(300 - 30, 400 - 30)
-  b.ref.SetPoint('TOP', title.ref, 'BOTTOM', 0, 0)
+  b.ref.SetPoint('CENTER')
 
   //dropdown
   // const dropdown = Dropdown({
