@@ -202,11 +202,11 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     },
     activate: () => {
       frame.state.isActive = true
-      drawTooltip()
       setCostTextColor()
       SetDesaturation(texture, false)
       if (options.onActivate)
         options.onActivate()
+      drawTooltip()
     },
     deactivate: () => {
       frame.state.isActive = false
