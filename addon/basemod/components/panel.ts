@@ -81,7 +81,7 @@ export const Panel: Component<PanelOptions> = options => {
       },
       {
         id: 'dev-gm',
-        text: '[dev] Game Master',
+        text: '[dev] General',
       },
       {
         id: 'dev-equip',
