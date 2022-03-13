@@ -17,73 +17,76 @@ export interface PanelOptions extends ComponentOptions {
 
 export const Panel: Component<PanelOptions> = options => {
   const $ = Get()
-  const a: Element<PanelOptions> = Frame(options) as any
-  const b = Frame({ name: `${a.ref.GetName()}-inner`, parent: a })
-  a.inner = b.ref
+
+  // title
+  const title: Element<PanelOptions> = Frame(options) as any
+
+  title.ref.SetSize(168, 30)
+  title.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
+  title.ref.SetBackdropColor(0, 0, 0, 1)
+  title.ref.SetPoint('CENTER', 0, 0)
+
+  const titleText = title.ref.CreateFontString(
+    'talent-countertext',
+    'OVERLAY',
+    'GameTooltipText',
+  )
+  titleText.SetParent(title.ref)
+  titleText.SetPoint('CENTER')
+  // FIXME
+  titleText.SetText('basemod v0.1.0')
+  titleText.SetFont('Fonts/FRIZQT__.TTF', 10)
+
+  // panel
+  const a = Frame({ name: `${title.ref.GetName()}-panel`, parent: title })
+  const b = Frame({ name: `${title.ref.GetName()}-inner`, parent: a })
+
+  title.inner = b.ref
 
   a.ref.SetSize(340, 410)
-  a.ref.SetBackdrop(BASE_BACKDROP)
+  a.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
   a.ref.SetBackdropColor(0, 0, 0, 1)
+  a.ref.SetPoint('BOTTOMRIGHT')
   b.ref.SetSize(300 - 30, 400 - 30)
   b.ref.SetPoint('CENTER')
 
   //dropdown
-  const dropdown = Dropdown({
-    name: `${a.ref.GetName()}-dropdown`,
-    width: 168,
-    defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'foo'),
-    isSelectableEmpty: true,
-    // isTriggerOnInit: true,
-    // isTriggerOnReselect: false,
-    emptyText: 'select a thing',
-    items: [
-      {
-        id: 'foo',
-        text: 'Foo',
-        value: 1,
-      },
-      {
-        id: 'bar',
-        text: 'Bar',
-        value: 2,
-      },
-      {
-        id: 'baz',
-        text: 'Baz',
-        value: 3,
-        tooltip: 'this has a tooltip',
-      },
-    ],
-    onSelect: ({ id }) => $.store.Set('CHARACTER', 'test-dropdown-id', id),
-  })
+  // const dropdown = Dropdown({
+  //   name: `${a.ref.GetName()}-dropdown`,
+  //   width: 168,
+  //   defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'foo'),
+  //   isSelectableEmpty: true,
+  //   // isTriggerOnInit: true,
+  //   // isTriggerOnReselect: false,
+  //   emptyText: 'select a thing',
+  //   items: [
+  //     {
+  //       id: 'foo',
+  //       text: 'Foo',
+  //       value: 1,
+  //     },
+  //     {
+  //       id: 'bar',
+  //       text: 'Bar',
+  //       value: 2,
+  //     },
+  //     {
+  //       id: 'baz',
+  //       text: 'Baz',
+  //       value: 3,
+  //       tooltip: 'this has a tooltip',
+  //     },
+  //   ],
+  //   onSelect: ({ id }) => {
+  //     if (id === 'empty')
+  //       a
+  //   },
+  // })
 
-  dropdown.ref.SetParent(a.ref)
-  dropdown.ref.SetPoint('TOPLEFT', 0, 34)
+  // dropdown.ref.SetParent(a.ref)
+  // dropdown.ref.SetPoint('TOPLEFT', 0, 33)
 
-  // title
-  // if (options.title) {
-    const title = Frame({
-      name: `${a.ref.GetName()}-title`,
-    })
+  Movable(title)
 
-    title.ref.SetParent(a.ref)
-    title.ref.SetSize(168, 30)
-    title.ref.SetBackdrop(BASE_BACKDROP)
-    title.ref.SetBackdropColor(0, 0, 0, 1)
-    title.ref.SetPoint('TOPRIGHT', 0, 35)
-    const titleText = title.ref.CreateFontString(
-      'talent-countertext',
-      'OVERLAY',
-      'GameTooltipText',
-    )
-    titleText.SetParent(title.ref)
-    titleText.SetPoint('CENTER')
-    // FIXME
-    titleText.SetText('basemod v0.1.0')
-    titleText.SetFont('Fonts/FRIZQT__.TTF', 10)
-  // }
-
-  Movable(a)
-
-  return a
+  return title
 }
