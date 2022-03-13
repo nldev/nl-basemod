@@ -52,14 +52,13 @@ export const Root = (ref?: WoWAPI.Frame): Element<any, any> => {
 }
 
 export const Frame: Component = options => {
-  if (!options.name)
-    throw new Error('Frame requires a name')
+  const name = options.name || 'frame'
 
   const app = Get()
 
   const parent = options.parent
-  const frame: WoWAPI.Frame = (app.elements[options.name] && app.elements[options.name].ref)
-    || CreateFrame(options.type || 'Frame', options.name, parent ? parent.inner : app.root.ref, options.inherits) as WoWAPI.Frame
+  const frame: WoWAPI.Frame = (app.elements[name] && app.elements[name].ref)
+    || CreateFrame(options.type || 'Frame', name, parent ? parent.inner : app.root.ref, options.inherits) as WoWAPI.Frame
 
   // if (typeof options.mod === 'function') {
   //   options.mod(frame)
@@ -74,14 +73,14 @@ export const Frame: Component = options => {
 
   const element = {
     parent,
-    name: options.name,
+    name,
     ref: frame,
     inner: frame,
     state: options.state || {},
     fns: options.fns || {},
   }
 
-  app.elements[options.name] = element
+  app.elements[name] = element
 
   return element
 }
