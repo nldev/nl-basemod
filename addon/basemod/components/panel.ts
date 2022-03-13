@@ -56,7 +56,12 @@ export const Panel: Component<PanelOptions> = options => {
 
   // pages
   // FIXME
-  const COMPONENTS = { talents: Talents }
+  const COMPONENTS = {
+    'talents': Talents,
+    'dev-gm': Frame,
+    'dev-equip': Frame,
+    'dev-consume': Frame,
+  }
   const pages: Mapping<Element> = {}
 
   //dropdown
@@ -75,9 +80,16 @@ export const Panel: Component<PanelOptions> = options => {
         text: 'Talents',
       },
       {
-        id: 'dev-character',
+        id: 'dev-gm',
         text: '[Development] Game Master',
-        value: 2,
+      },
+      {
+        id: 'dev-equip',
+        text: '[Development] Equipment',
+      },
+      {
+        id: 'dev-consume',
+        text: '[Development] Consumables',
       },
       // {
       //   id: 'baz',
