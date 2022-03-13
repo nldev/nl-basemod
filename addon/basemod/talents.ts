@@ -347,8 +347,10 @@ export const Talents: Component = options => {
     if (!talentId)
       return
     const ele = app.elements[`talent-${talentId}`] as Element<TalentState, TalentFns>
-    if (ele && !ele.state.isActive)
+    if (ele && !ele.state.isActive) {
       ele.fns.activate()
+      button.Show()
+    }
   })
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, talentId) => {
@@ -357,8 +359,11 @@ export const Talents: Component = options => {
     if (!talentId)
       return
     const ele = app.elements[`talent-${talentId}`] as Element<TalentState, TalentFns>
-    if (ele && ele.state.isActive)
+    if (ele && ele.state.isActive) {
       ele.fns.deactivate()
+      if (app.talentInfo.used === 0)
+        button.Hide()
+    }
   })
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
@@ -371,19 +376,11 @@ export const Talents: Component = options => {
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
     if (prefix !== 'reset-talents-success')
       return
+    button.Hide()
     list.forEach(e => e.fns.deactivate())
   })
 
   SendAddonMessage(REQUESTS.GET_TALENT_INFO, '', 'WHISPER', name)
-
-  Events.ChatInfo.OnChatMsgSay(app.root.ref, (text, player) => {
-    if (player.toLowerCase() !== name)
-      return
-    if (text.indexOf('@talents ') === 0) {
-      const amount = text.replace('@talents ', '')
-      SendAddonMessage(REQUESTS.GM.SET_TALENT_POINTS, amount, 'WHISPER', name)
-    }
-  })
 
   return a
 }
