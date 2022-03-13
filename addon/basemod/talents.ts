@@ -128,14 +128,12 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
   // onClick
   frame.inner.SetScript('OnMouseDown', (_, button) => {
-    if (GetMouseFocus().GetName() === options.name) {
-      const remainder = app.talentInfo.max - app.talentInfo.used
-      if (button === 'LeftButton' && !frame.state.isActive && (options.spell.cost <= remainder))
-        frame.fns.requestActivate()
+    const remainder = app.talentInfo.max - app.talentInfo.used
+    if (button === 'LeftButton' && !frame.state.isActive && (options.spell.cost <= remainder))
+      frame.fns.requestActivate()
 
-      if (button === 'RightButton' && frame.state.isActive)
-        frame.fns.requestDeactivate()
-    }
+    if (button === 'RightButton' && frame.state.isActive)
+      frame.fns.requestDeactivate()
   })
 
   // tooltip
