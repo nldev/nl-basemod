@@ -219,18 +219,18 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 }
 export const Talents: Component = options => {
   const app = Get()
-  const talents = Frame({
+  const a = Frame({
     name: 'talents',
   })
 
-  talents.ref.SetSize(320, 390)
+  a.ref.SetSize(320, 390)
 
   const b = Frame({
     name: 'b',
-    parent: talents,
+    parent: a,
   })
 
-  b.inner.SetSize(talents.inner.GetWidth() - 60, talents.inner.GetHeight() - 60)
+  b.inner.SetSize(a.inner.GetWidth() - 60, a.inner.GetHeight() - 60)
   b.inner.SetPoint('CENTER')
 
   const scroll = Scroll({
@@ -248,7 +248,7 @@ export const Talents: Component = options => {
   grid.ref.SetAllPoints(scroll.inner)
 
   // counterText
-  const counter = Frame({ name: 'talent-counter', parent: talents })
+  const counter = Frame({ name: 'talent-counter', parent: a })
   counter.ref.SetSize(80, 30)
   counter.ref.SetBackdrop(BASE_BACKDROP)
   counter.ref.SetBackdropColor(0, 0, 0, 1)
@@ -292,8 +292,8 @@ export const Talents: Component = options => {
       return
     if (!text)
       return
-    const [talents, b] = text.split(' ')
-    const used = Number(talents)
+    const [a, b] = text.split(' ')
+    const used = Number(a)
     const max = Number(b)
     if (used && max) {
       app.talentInfo.isEnabled = true
@@ -347,5 +347,5 @@ export const Talents: Component = options => {
     }
   })
 
-  return talents
+  return a
 }
