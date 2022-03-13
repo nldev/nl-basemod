@@ -266,12 +266,14 @@ export const Talents: Component = options => {
   // costText.SetTextColor(red, green, blue)
 
   const list: Element<TalentState, TalentFns>[] = []
-  const talents: TalentSpell[] = [...Object.keys(TALENTS).map(key => TALENTS[key])]
-  const sorted = talents.sort((a, b) => {
+
+  const talents: TalentSpell[] = [
+    ...Object.keys(TALENTS).map(key => TALENTS[key])
+  ].sort((a, b) => {
     return (a.cost > b.cost) ? a.cost : b.cost
   })
 
-  sorted.forEach(spell => {
+  talents.forEach(spell => {
     if (spell.class[app.playerInfo.chrClass]) {
       const talent = Talent({
         spell,
