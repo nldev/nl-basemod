@@ -80,7 +80,7 @@ export const Panel: Component<PanelOptions> = options => {
         text: 'Talents',
       },
       {
-        id: 'dev-gm',
+        id: 'dev-general',
         text: '[dev] General',
       },
       {
