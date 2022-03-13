@@ -81,15 +81,15 @@ export const Panel: Component<PanelOptions> = options => {
       },
       {
         id: 'dev-gm',
-        text: '[Development] Game Master',
+        text: '[dev] Game Master',
       },
       {
         id: 'dev-equip',
-        text: '[Development] Equipment',
+        text: '[dev] Equipment',
       },
       {
         id: 'dev-consume',
-        text: '[Development] Consumables',
+        text: '[dev] Consumables',
       },
       // {
       //   id: 'baz',
@@ -123,6 +123,10 @@ export const Panel: Component<PanelOptions> = options => {
 
   dropdown.ref.SetParent(title.ref)
   dropdown.ref.SetPoint('RIGHT', title.ref, 'LEFT', -4, -1)
+
+  // frame level
+  a.ref.SetFrameLevel(0)
+  dropdown.ref.SetFrameLevel(1)
 
   // toggle visibility
   const TogglePanel = () => {
