@@ -138,7 +138,8 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
 
   // tooltip
   const drawTooltip = () => {
-    if (frame.state.isHover) {
+    if (frame.state.isHover && GetMouseFocus().GetName() === frame.ref.GetName()) {
+
       GameTooltip.ClearLines()
       GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
       GameTooltip.SetHyperlink(`spell:${options.spell.spellId}`)
@@ -301,10 +302,10 @@ export const Talents: Component = options => {
   button.SetText('Reset')
   button.EnableMouse(true)
   button.SetSize(90, 30)
-  button.SetPoint('BOTTOMRIGHT', 0, -80)
+  button.SetPoint('BOTTOMRIGHT', 0, -40)
+  button.SetFrameStrata('HIGH')
   button.SetScript(('OnClick'), () => {
     SendAddonMessage('reset-talents', '', 'WHISPER', name)
-    GameTooltip.Hide()
   }
   )
   button.Enable()
