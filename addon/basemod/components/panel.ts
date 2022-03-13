@@ -58,10 +58,10 @@ export const Panel: Component<PanelOptions> = options => {
     name: `${a.ref.GetName()}-dropdown`,
     width: 168,
     defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'foo'),
-    isSelectableEmpty: true,
-    // isTriggerOnInit: true,
+    isSelectableEmpty: false,
+    isTriggerOnInit: true,
     // isTriggerOnReselect: false,
-    emptyText: 'select a thing',
+    // emptyText: 'Minimize',
     items: [
       {
         id: 'foo',

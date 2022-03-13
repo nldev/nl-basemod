@@ -317,10 +317,12 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       checkmark.ref.SetParent(item.item.ref)
       checkmark.ref.SetPoint('LEFT', 12, 0)
       for (const key of Object.keys(items))
-        items[key].item.ref.text.SetPoint('LEFT', 30, 0)
+        if (items[key].item)
+          items[key].item.ref.text.SetPoint('LEFT', 30, 0)
     } else {
       for (const key of Object.keys(items))
-        items[key].item.ref.text.SetPoint('LEFT', 12, 0)
+        if (items[key].item)
+          items[key].item.ref.text.SetPoint('LEFT', 12, 0)
       checkmark.ref.Hide()
     }
     texture.SetAllPoints()
