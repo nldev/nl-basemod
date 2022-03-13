@@ -81,6 +81,9 @@ export const Panel: Component<PanelOptions> = options => {
       },
     ],
     onSelect: ({ id }) => {
+      // FIXME
+      $.store.Set('CHARACTER', 'test-dropdown-id', id)
+
       if (id === 'empty') {
         a.ref.Hide()
       } else {
