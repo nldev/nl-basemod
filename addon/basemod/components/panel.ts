@@ -57,6 +57,7 @@ export const Panel: Component<PanelOptions> = options => {
   // pages
   // FIXME
   const COMPONENTS = {
+    'settings': Frame,
     'talents': Talents,
     'dev-gm': Frame,
     'dev-equip': Frame,
@@ -75,6 +76,10 @@ export const Panel: Component<PanelOptions> = options => {
     // emptyText: 'Minimize',
     //
     items: [
+      {
+        id: 'settings',
+        text: 'Settings',
+      },
       {
         id: 'talents',
         text: 'Talents',
