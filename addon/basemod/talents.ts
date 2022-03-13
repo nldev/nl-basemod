@@ -149,11 +149,9 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
       GameTooltip.ClearLines()
       GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
       GameTooltip.SetHyperlink(`spell:${options.spell.spellId}`)
-
-      const [red, green, blue] = rgb(102, 217, 239)
-      GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, red, green, blue, 1, 1, 1)
-
       if (!frame.state.isActive) {
+        const [red, green, blue] = rgb(102, 217, 239)
+        GameTooltip.AddDoubleLine('Cost: ', `${options.spell.cost}`, red, green, blue, 1, 1, 1)
         if (CanAfford() || isOverride) {
           GameTooltip.AddLine('Left click to learn', ...rgb(253, 151, 31))
         } else {
