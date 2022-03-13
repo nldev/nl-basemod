@@ -305,7 +305,7 @@ export const Talents: Component = options => {
   button.SetPoint('BOTTOMRIGHT', -5, -26)
   button.SetFrameStrata('HIGH')
   button.SetScript(('OnClick'), () => {
-    SendAddonMessage('reset-talents', '', 'WHISPER', name)
+    SendAddonMessage('reset-talents-request', '', 'WHISPER', name)
   }
   )
   button.Enable()
@@ -357,7 +357,7 @@ export const Talents: Component = options => {
   })
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
-    if (prefix !== 'reset-talents')
+    if (prefix !== 'reset-talents-success')
       return
     list.forEach(e => e.fns.deactivate())
   })

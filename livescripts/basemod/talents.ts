@@ -38,7 +38,7 @@ function ResetTalents(player: TSPlayer) {
   `)
   InitTalents(player)
   player.SendAddonMessage('get-talent-info-success', `0 ${max}`, 0, player)
-  player.SendAddonMessage('reset-talents', ``, 0, player)
+  player.SendAddonMessage('reset-talents-success', ``, 0, player)
 }
 
 function ApplyTalents(player: TSPlayer) {
@@ -276,9 +276,12 @@ function HandleSetTalentPoints (events: TSEvents) {
 }
 
 function HandleResetTalents (events: TSEvents) {
-  events.Player.OnSay((p, m) => {
-    if (m.get() === '@reset')
-      ResetTalents(p)
+  events.Player.OnWhisper((sender, _, message) => {
+    const opcode = Opcode('reset-talents-request')
+    const str = message.get()
+    if (!str.includes(opcode))
+     return
+    ResetTalents(sender)
   })
 }
 
@@ -312,6 +315,7 @@ export function Talents (events: TSEvents) {
   HandleGetTalentInfo(events)
   HandleLearnTalent(events)
   HandleUnlearnTalent(events)
+  HandleResetTalents(events)
   OnLogin(events)
   OnLevelup(events)
   GM(events)
