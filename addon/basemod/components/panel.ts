@@ -54,40 +54,40 @@ export const Panel: Component<PanelOptions> = options => {
   title.inner = b.ref
 
   //dropdown
-  // const dropdown = Dropdown({
-  //   name: `${a.ref.GetName()}-dropdown`,
-  //   width: 168,
-  //   defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'foo'),
-  //   isSelectableEmpty: true,
-  //   // isTriggerOnInit: true,
-  //   // isTriggerOnReselect: false,
-  //   emptyText: 'select a thing',
-  //   items: [
-  //     {
-  //       id: 'foo',
-  //       text: 'Foo',
-  //       value: 1,
-  //     },
-  //     {
-  //       id: 'bar',
-  //       text: 'Bar',
-  //       value: 2,
-  //     },
-  //     {
-  //       id: 'baz',
-  //       text: 'Baz',
-  //       value: 3,
-  //       tooltip: 'this has a tooltip',
-  //     },
-  //   ],
-  //   onSelect: ({ id }) => {
-  //     if (id === 'empty')
-  //       a
-  //   },
-  // })
+  const dropdown = Dropdown({
+    name: `${a.ref.GetName()}-dropdown`,
+    width: 168,
+    defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'foo'),
+    isSelectableEmpty: true,
+    // isTriggerOnInit: true,
+    // isTriggerOnReselect: false,
+    emptyText: 'select a thing',
+    items: [
+      {
+        id: 'foo',
+        text: 'Foo',
+        value: 1,
+      },
+      {
+        id: 'bar',
+        text: 'Bar',
+        value: 2,
+      },
+      {
+        id: 'baz',
+        text: 'Baz',
+        value: 3,
+        tooltip: 'this has a tooltip',
+      },
+    ],
+    onSelect: ({ id }) => {
+      if (id === 'empty')
+        a
+    },
+  })
 
-  // dropdown.ref.SetParent(a.ref)
-  // dropdown.ref.SetPoint('TOPLEFT', 0, 33)
+  dropdown.ref.SetParent(title.ref)
+  dropdown.ref.SetPoint('RIGHT', title.ref, 'LEFT', -4, 0)
 
   Movable(title)
 
