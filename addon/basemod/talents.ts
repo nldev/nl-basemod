@@ -253,7 +253,7 @@ export const Talents: Component = options => {
   counter.ref.SetSize(80, 30)
   counter.ref.SetBackdrop(BASE_BACKDROP)
   counter.ref.SetBackdropColor(0, 0, 0, 1)
-  counter.ref.SetPoint('BOTTOMLEFT', 0, -35)
+  counter.ref.SetPoint('BOTTOMLEFT', 5, -22)
   const counterText = b.ref.CreateFontString(
     'talent-countertext',
     'OVERLAY',
