@@ -66,8 +66,7 @@ export const Panel: Component<PanelOptions> = options => {
     items: [
       {
         id: 'talents',
-        text: 'talents',
-        value: 'talents',
+        text: 'Talents',
       },
       // {
       //   id: 'bar',

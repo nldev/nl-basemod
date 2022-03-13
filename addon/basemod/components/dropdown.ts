@@ -15,7 +15,7 @@ const DEFAULT_SELECTION = {
 export interface DropdownItem {
   id: string
   text: string
-  value: string | number | boolean | null
+  value?: string | number | boolean | null
   tooltip?: string
   item?: Element<DropdownOptions>
 }
