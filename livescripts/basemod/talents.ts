@@ -197,7 +197,7 @@ function HandleLearnTalent (events: TSEvents) {
 
 function HandleUnlearnTalent (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
-    const opcode = Opcode('unlearn-talent')
+    const opcode = Opcode('remove-talent')
     const str = message.get()
     if (!str.includes(opcode))
      return
@@ -250,7 +250,7 @@ function HandleUnlearnTalent (events: TSEvents) {
         max=${max}, used=${max - remaining}
     `)
     sender.SaveToDB()
-    sender.SendAddonMessage('unlearn-talent-success', talentId, 0, sender)
+    sender.SendAddonMessage('remove-talent-success', talentId, 0, sender)
     sender.SendAddonMessage('get-talent-info-success', `${max - remaining} ${max}`, 0, sender)
   })
 }
