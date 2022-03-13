@@ -85,6 +85,14 @@ export const Panel: Component<PanelOptions> = options => {
         text: 'Loadouts',
       },
       {
+        id: 'storage',
+        text: 'Loadouts',
+      },
+      {
+        id: 'market',
+        text: 'Loadouts',
+      },
+      {
         id: 'settings',
         text: 'Settings',
       },
