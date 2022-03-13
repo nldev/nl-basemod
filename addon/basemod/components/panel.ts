@@ -59,9 +59,14 @@ export const Panel: Component<PanelOptions> = options => {
   const COMPONENTS = [Talents]
   const pages: Mapping<Element> = {}
   for (let key of Object.keys(COMPONENTS)) {
-    const Component = COMPONENTS[key]
+    const Component: Component = COMPONENTS[key]
     const page = Component()
+
     pages[key] = page
+
+    page.ref.SetParent(title.inner)
+
+    page.ref.Hide()
   }
 
   //dropdown
@@ -94,6 +99,13 @@ export const Panel: Component<PanelOptions> = options => {
     onSelect: ({ id }) => {
       // FIXME
       $.store.Set('CHARACTER', 'test-dropdown-id', id)
+
+      for (let key of Object.keys(pages)) {
+        const page = pages[key]
+        page.ref.Hide()
+      }
+
+      pages[id].ref.Show()
     },
   })
 
