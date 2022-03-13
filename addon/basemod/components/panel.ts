@@ -81,13 +81,16 @@ export const Panel: Component<PanelOptions> = options => {
       },
     ],
     onSelect: ({ id }) => {
-      if (id === 'empty')
-        a
+      if (id === 'empty') {
+        a.ref.Hide()
+      } else {
+        a.ref.Show()
+      }
     },
   })
 
   dropdown.ref.SetParent(title.ref)
-  dropdown.ref.SetPoint('RIGHT', title.ref, 'LEFT', -4, 0)
+  dropdown.ref.SetPoint('RIGHT', title.ref, 'LEFT', -4, -1)
 
   Movable(title)
 
