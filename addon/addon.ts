@@ -1,5 +1,5 @@
 import { App } from './basemod/app'
-import { Talents } from './basemod/talents'
+// import { Talents } from './basemod/talents'
 import { EasyLoot } from './basemod/easy-loot'
 import { Chests } from './basemod/chests'
 import { AllChildren } from './basemod/utils'
@@ -7,7 +7,7 @@ import { Panel } from './basemod/components/panel'
 import { Dropdown } from './basemod/components/dropdown'
 
 export const app = new App(app => {
-  Talents()
+  // Talents()
   EasyLoot()
   Chests()
 
