@@ -1,10 +1,10 @@
-import { Get } from './app'
-import { Component, ComponentOptions, Frame, Element } from './app'
-import { List } from './components/list'
-import { Dropdown } from './components/dropdown'
-import { BASE_BACKDROP } from './constants'
-import { Mapping } from './types'
-import { Movable } from './utils'
+import { Get } from '../app'
+import { Component, ComponentOptions, Frame, Element } from '../app'
+import { List } from './list'
+import { Dropdown } from './dropdown'
+import { BASE_BACKDROP } from '../constants'
+import { Mapping } from '../types'
+import { Movable } from '../utils'
 
 export const Panel: Component = options => {
   const $ = Get()
