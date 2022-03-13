@@ -159,7 +159,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
         }
       } else {
         GameTooltip.AddLine('Learned', ...rgb(166, 226, 46))
-        GameTooltip.AddLine('Right click to remove', ...rgb(102, 217, 239))
+        GameTooltip.AddLine('Right click to remove', ...rgb(253, 151, 31))
       }
       GameTooltip.Show()
     }
