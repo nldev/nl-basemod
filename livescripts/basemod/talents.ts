@@ -308,7 +308,6 @@ function OnLevelup (events: TSEvents) {
 
 function GM (events: TSEvents) {
   HandleSetTalentPoints(events)
-  HandleResetTalents(events)
 }
 
 export function Talents (events: TSEvents) {
