@@ -339,6 +339,11 @@ export const Talents: Component = options => {
       app.talentInfo.max = max
       counterText.SetText(`${app.talentInfo.max - app.talentInfo.used} / ${app.talentInfo.max}`)
     }
+    if (used === 0) {
+      button.SetPoint('BOTTOMRIGHT', -5, -99999)
+    } else {
+      button.SetPoint('BOTTOMRIGHT', -5, -28)
+    }
   })
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, talentId) => {
@@ -349,6 +354,7 @@ export const Talents: Component = options => {
     const ele = app.elements[`talent-${talentId}`] as Element<TalentState, TalentFns>
     if (ele && !ele.state.isActive)
       ele.fns.activate()
+    button.SetPoint('BOTTOMRIGHT', -5, -28)
   })
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, talentId) => {
@@ -359,8 +365,9 @@ export const Talents: Component = options => {
     const ele = app.elements[`talent-${talentId}`] as Element<TalentState, TalentFns>
     if (ele && ele.state.isActive) {
       ele.fns.deactivate()
-      if ((app.talentInfo.used === 0) && button.IsShown())
-        button.Hide()
+    }
+    if (app.talentInfo.used === 0) {
+      button.SetPoint('BOTTOMRIGHT', -5, -99999)
     }
   })
 
@@ -375,6 +382,7 @@ export const Talents: Component = options => {
     if (prefix !== 'reset-talents-success')
       return
     list.forEach(e => e.fns.deactivate())
+    button.SetPoint('BOTTOMRIGHT', -5, -99999)
   })
 
   SendAddonMessage(REQUESTS.GET_TALENT_INFO, '', 'WHISPER', name)
