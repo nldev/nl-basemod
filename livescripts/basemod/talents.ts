@@ -282,6 +282,7 @@ function HandleResetTalents (events: TSEvents) {
     if (!str.includes(opcode))
      return
     ResetTalents(sender)
+    sender.SendBroadcastMessage('Your talents have been reset')
   })
 }
 
