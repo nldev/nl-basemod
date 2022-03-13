@@ -17,6 +17,8 @@ export const Panel: Component = options => {
   b.ref.SetSize(300 - 30, 400 - 30)
   b.ref.SetPoint('CENTER')
 
+  a.inner = b.ref
+
   Movable(a)
 
   return a

@@ -11,7 +11,7 @@ export const app = new App(app => {
   EasyLoot()
   Chests()
 
-  const panel = Panel()
+  const panel = Panel({ name: 'panel', parent: app.root })
   const dropdown = Dropdown({
     name: 'test-dropdown',
     parent: panel,
