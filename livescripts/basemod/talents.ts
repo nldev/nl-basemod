@@ -206,7 +206,7 @@ function HandleUnlearnTalent (events: TSEvents) {
     if (!talentId)
       return
     if (sender.IsInCombat()) {
-      sender.SendBroadcastMessage('Cannot unlearn talent while in combat')
+      sender.SendBroadcastMessage('Cannot remove talent while in combat')
       return
     }
     // check if is valid talent
