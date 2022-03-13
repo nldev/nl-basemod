@@ -59,7 +59,7 @@ export const Panel: Component<PanelOptions> = options => {
   const COMPONENTS = {
     'talents': Talents,
     'loadouts': Frame,
-    'storage': Frame,
+    'stash': Frame,
     'market': Frame,
     'settings': Frame,
     'dev-tools': Frame,
@@ -88,8 +88,8 @@ export const Panel: Component<PanelOptions> = options => {
         text: 'Loadouts',
       },
       {
-        id: 'storage',
-        text: 'Storage',
+        id: 'stash',
+        text: 'Stash',
       },
       {
         id: 'market',
