@@ -21,7 +21,7 @@ export const Panel: Component<PanelOptions> = options => {
   const b = Frame({ name: `${a.ref.GetName()}-inner`, parent: a })
   a.inner = b.ref
 
-  a.ref.SetSize(340, 430)
+  a.ref.SetSize(340, 410)
   a.ref.SetBackdrop(BASE_BACKDROP)
   a.ref.SetBackdropColor(0, 0, 0, 1)
   b.ref.SetSize(300 - 30, 400 - 30)
@@ -30,7 +30,7 @@ export const Panel: Component<PanelOptions> = options => {
   //dropdown
   const dropdown = Dropdown({
     name: `${a.ref.GetName()}-dropdown`,
-    width: 150,
+    width: 168,
     defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'foo'),
     isSelectableEmpty: true,
     // isTriggerOnInit: true,
@@ -67,7 +67,7 @@ export const Panel: Component<PanelOptions> = options => {
     })
 
     title.ref.SetParent(a.ref)
-    title.ref.SetSize(140, 30)
+    title.ref.SetSize(168, 30)
     title.ref.SetBackdrop(BASE_BACKDROP)
     title.ref.SetBackdropColor(0, 0, 0, 1)
     title.ref.SetPoint('TOPRIGHT', 0, 35)
