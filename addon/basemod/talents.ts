@@ -266,10 +266,12 @@ export const Talents: Component = options => {
   // costText.SetTextColor(red, green, blue)
 
   const list: Element<TalentState, TalentFns>[] = []
+  const talents: TalentSpell[] = [...Object.keys(TALENTS).map(key => TALENTS[key])]
+  const sorted = talents.sort((a, b) => {
+    return (a.cost > b.cost) ? a.cost : b.cost
+  })
 
-  for (const key of Object.keys(TALENTS)) {
-    const spell: TalentSpell = TALENTS[key]
-
+  sorted.forEach(spell => {
     if (spell.class[app.playerInfo.chrClass]) {
       const talent = Talent({
         spell,
@@ -284,7 +286,7 @@ export const Talents: Component = options => {
       list.push(talent)
       grid.fns.Attach(talent)
     }
-  }
+  })
 
   const { name, level, chrRace, chrClass } = app.playerInfo
 
