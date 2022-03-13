@@ -48,7 +48,7 @@ export const Panel: Component<PanelOptions> = options => {
   a.ref.SetBackdropColor(0, 0, 0, 1)
   a.ref.SetPoint('BOTTOMRIGHT')
   b.ref.SetSize(300 - 30, 400 - 30)
-  b.ref.SetPoint('CENTER')
+  b.ref.SetPoint('TOP', title.ref, 'BOTTOM', 0, 0)
 
   //dropdown
   // const dropdown = Dropdown({
