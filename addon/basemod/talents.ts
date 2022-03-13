@@ -224,9 +224,8 @@ export const Talents: Component = options => {
   })
 
   a.ref.SetParent(UIParent)
-  a.ref.SetSize(320, 390)
+  a.ref.SetSize(330, 400)
   a.ref.SetPoint('CENTER')
-  a.ref.Hide()
 
   const b = Frame({
     name: 'b',
@@ -243,7 +242,7 @@ export const Talents: Component = options => {
 
   const grid = Grid({
     name: 'grid',
-    itemsPerRow: 5,
+    itemsPerRow: 4,
     rowHeight: 80,
     parent: scroll,
   })
