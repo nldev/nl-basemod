@@ -179,7 +179,6 @@ export const Panel: Component<PanelOptions> = options => {
       TogglePanel()
   })
 
-  console.log($.store.Get('CHARACTER', 'test-panel-visibility'))
   if (!$.store.Get('CHARACTER', 'test-panel-visibility')) {
     dropdown.ref.Hide()
     a.ref.Hide()
