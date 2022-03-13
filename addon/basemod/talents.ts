@@ -127,7 +127,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
   frame.ref.EnableMouse(true)
 
   // onClick
-  frame.inner.HookScript('OnMouseDown', (_, button) => {
+  frame.inner.SetScript('OnMouseDown', (_, button) => {
     const remainder = app.talentInfo.max - app.talentInfo.used
     if (button === 'LeftButton' && !frame.state.isActive && (options.spell.cost <= remainder))
       frame.fns.requestActivate()
@@ -157,7 +157,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     GameTooltip.Hide()
   }
 
-  frame.ref.HookScript('OnEnter', () => {
+  frame.ref.SetScript('OnEnter', () => {
     const remainder = app.talentInfo.max - app.talentInfo.used
     if (options.spell.cost <= remainder)
       SetDesaturation(texture, false)
@@ -165,7 +165,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
     drawTooltip()
   })
 
-  frame.ref.HookScript('OnLeave', () => {
+  frame.ref.SetScript('OnLeave', () => {
     if (!frame.state.isActive)
       SetDesaturation(texture, true)
     frame.state.isHover = true
@@ -265,6 +265,7 @@ export const Talents: Component = options => {
   counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
   // costText.SetTextColor(red, green, blue)
 
+  // create talent buttons
   const list: Element<TalentState, TalentFns>[] = []
 
   const talents: TalentSpell[] = [
@@ -294,6 +295,19 @@ export const Talents: Component = options => {
     }
   })
 
+  // reset button
+  const button = CreateFrame('Button', 'talent-reset-button', a.ref, 'UIPanelButtonTemplate')
+
+  button.SetText('Reset')
+  button.EnableMouse(true)
+  button.SetSize(90, 30)
+  button.SetPoint('BOTTOMRIGHT', 0, -80)
+  button.SetScript(('OnClick'), () =>
+    SendAddonMessage('reset-talents', '', 'WHISPER', name)
+  )
+  button.Enable()
+
+  // event handlers
   const { name, level, chrRace, chrClass } = app.playerInfo
 
   Events.ChatInfo.OnChatMsgAddon(app.root.ref, (prefix, text) => {
