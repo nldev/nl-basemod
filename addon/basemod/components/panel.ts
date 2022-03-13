@@ -144,6 +144,8 @@ export const Panel: Component<PanelOptions> = options => {
       dropdown.ref.Show()
       a.ref.Show()
     }
+    console.log($.store.Get('CHARACTER', 'test-panel-visibility'))
+    console.log(typeof $.store.Get('CHARACTER', 'test-panel-visibility'))
   }
 
   title.ref.HookScript('OnEnter', () => title.ref.SetBackdropColor(0.21, 0.49, 1, 1))
@@ -154,7 +156,7 @@ export const Panel: Component<PanelOptions> = options => {
       TogglePanel()
   })
 
-  if (!$.store.Get('CHARACTER', 'test-panel-visibility')) {
+  if ($.store.Get('CHARACTER', 'test-panel-visibility')) {
     dropdown.ref.Hide()
     a.ref.Hide()
   }
