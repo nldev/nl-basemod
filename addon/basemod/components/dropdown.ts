@@ -12,7 +12,7 @@ const DEFAULT_SELECTION = {
   value: null,
 }
 
-interface DropdownItem {
+export interface DropdownItem {
   id: string
   text: string
   value: string | number | boolean | null
@@ -20,15 +20,15 @@ interface DropdownItem {
   item?: Element<DropdownOptions>
 }
 
-type DropdownItemOptions = Omit<DropdownItem , 'item'>
+export type DropdownItemOptions = Omit<DropdownItem , 'item'>
 
-interface DropdownState {
+export interface DropdownState {
   length: number
   items: Mapping<DropdownItem>
   selection: DropdownItem
 }
 
-interface DropdownOptions extends ComponentOptions {
+export interface DropdownOptions extends ComponentOptions {
   width?: number
   items?: DropdownItemOptions[]
   isSelectableEmpty?: boolean

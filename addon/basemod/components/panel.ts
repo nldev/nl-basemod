@@ -1,10 +1,16 @@
 import { Get } from '../app'
 import { Component, ComponentOptions, Frame, Element } from '../app'
-import { List } from './list'
-import { Dropdown } from './dropdown'
+import { Dropdown, DropdownItemOptions } from './dropdown'
 import { BASE_BACKDROP } from '../constants'
-import { Mapping } from '../types'
 import { Movable } from '../utils'
+import { Mapping } from '../types'
+
+export interface PanelOptions extends ComponentOptions {
+  nav: DropdownItemOptions[]
+  pages: Mapping<Component>
+  defaultSelectionId?: string
+  isHiddenOnEmpty?: boolean
+}
 
 export const Panel: Component = options => {
   const $ = Get()
@@ -14,7 +20,6 @@ export const Panel: Component = options => {
 
   const dropdown = Dropdown({
     name: 'test-dropdown',
-    parent: a,
     defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'foo'),
     isSelectableEmpty: true,
     // isTriggerOnInit: true,
@@ -41,6 +46,7 @@ export const Panel: Component = options => {
     onSelect: ({ id }) => $.store.Set('CHARACTER', 'test-dropdown-id', id),
   })
 
+  dropdown.ref.SetParent(a.ref)
   dropdown.ref.SetPoint('TOPLEFT')
 
 
