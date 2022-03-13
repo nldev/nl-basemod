@@ -43,7 +43,7 @@ export const Panel: Component<PanelOptions> = options => {
   a.ref.SetSize(340, 410)
   a.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
   a.ref.SetBackdropColor(0, 0, 0, 1)
-  a.ref.SetPoint('TOP', title.ref, 'BOTTOM', 0, 0)
+  a.ref.SetPoint('TOP', title.ref, 'BOTTOMLEFT', 0, 3)
 
   // panel-inner
   const b = Frame({ name: `${title.ref.GetName()}-inner`, parent: a })
