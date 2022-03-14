@@ -103,12 +103,12 @@ export const RACE_IDS: Mapping<number> = {
   DRAENEI: 11,
 }
 
-export const ASSET_TYPE: Mapping<AssetType> = {
-  SPELL: SPELL,
-  ITEM: ITEM,
-  NPC: NPC,
-  ACHIEVEMENT: ACHIEVEMENT,
-}
+// export const ASSET_TYPE: Mapping<AssetType> = {
+//   SPELL: SPELL,
+//   ITEM: ITEM,
+//   NPC: NPC,
+//   ACHIEVEMENT: ACHIEVEMENT,
+// }
 
 export const SCHOOLS = {
   FIRE: 'FIRE',
