@@ -3,6 +3,5 @@ import { Builder } from './basemod'
 
 const $ = new Builder()
 
-const x = $.Get<Spell>('spells', 'fireball')
-
-
+// TODO:
+// - check 'needs' in templates (use data)

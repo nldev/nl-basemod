@@ -19,7 +19,6 @@ export function TitleCaseToDashCase (string: string) {
     .toLowerCase()
 }
 
-
 export function DashCaseToConstantCase (string: string) {
   return string.toUpperCase().replace(/-/g, '_')
 }

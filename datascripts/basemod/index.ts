@@ -3,7 +3,7 @@ import { std } from 'wow/wotlk'
 
 import { ENV, DEFAULT_MOD, DEFAULT_TABLE_PREFIX } from './constants'
 import { Database, Env, Mapping, SQLTable } from './types'
-import { dashCaseToConstantCase } from './utils'
+import { DashCaseToConstantCase } from './utils'
 import { CreateSpell } from './spell'
 
 export const ADDON_PATH = __dirname + '/../../../addon'
@@ -264,7 +264,7 @@ export class Builder {
     const list: string[] = []
 
     for (const key of Object.keys(data))
-      list.push(`export const ${dashCaseToConstantCase(key)} = ${JSON.stringify(data[key])};`)
+      list.push(`export const ${DashCaseToConstantCase(key)} = ${JSON.stringify(data[key])};`)
 
     const filePath = `${ADDON_DATA_PATH}/${file}.ts`
 
