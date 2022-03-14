@@ -3,9 +3,7 @@ import { CLASS_MASKS, RACE_MASKS } from './constants'
 
 import { CharacterClass, CharacterRace, Mapping } from './types'
 
-export const noop = () => {}
-
-export function capitalize (string: string) {
+export function Capitalize (string: string) {
   const words = string.split(' ')
 
   for (let i = 0; i < words.length; i++)
@@ -14,7 +12,7 @@ export function capitalize (string: string) {
   return words.join(' ')
 }
 
-export function titleCaseToDashCase (string: string) {
+export function TitleCaseToDashCase (string: string) {
   return string
     .replace(/[-|\s]+/g, '-')
     .replace(/[^-a-zA-Z0-9]/g,'')
@@ -22,37 +20,13 @@ export function titleCaseToDashCase (string: string) {
 }
 
 
-export function dashCaseToConstantCase (string: string) {
+export function DashCaseToConstantCase (string: string) {
   return string.toUpperCase().replace(/-/g, '_')
 }
 
-export function dashCaseToTitleCase (string: string) {
-  return capitalize(string.replace('-', ' '))
+export function DashCaseToTitleCase (string: string) {
+  return Capitalize(string.replace('-', ' '))
 }
-
-// export function localeify (text: TSText): Localization {
-//   if (typeof text === 'string')
-//     return { enGB: text }
-//
-//   // FIXME: build out a mapper from LocSystem to Localization
-//   // if (text instanceof LocSystem)
-//   if (text.enGB)
-//     return { enGB: text.enGB.get() }
-//
-//   return text
-// }
-//
-// export function englishify (text: TSText): string {
-//   if (typeof text === 'string')
-//     return text
-//
-//   // FIXME
-//   // if (text instanceof LocSystem)
-//   if (text.enGB)
-//     return text.enGB.get()
-//
-//   return text.enGB ? text.enGB : ''
-// }
 
 export function Gold (values: [number, number, number]) {
   const [copper, silver, gold] = values
@@ -104,7 +78,7 @@ export function ItemSpellCount (asset: TSItem) {
   return count
 }
 
-export function createRaceMask (...chrRaces: CharacterRace[]) {
+export function RaceMask (...chrRaces: CharacterRace[]) {
   const used: Mapping<boolean> = {}
 
   let mask = 0
@@ -119,7 +93,7 @@ export function createRaceMask (...chrRaces: CharacterRace[]) {
   return mask
 }
 
-export function createClassMask (...chrClasses: CharacterClass[]) {
+export function ClassMask (...chrClasses: CharacterClass[]) {
   const used: Mapping<boolean> = {}
 
   let mask = 0
