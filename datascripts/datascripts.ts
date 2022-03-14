@@ -1,9 +1,8 @@
-import { Spell } from 'wow/wotlk/std/Spell/Spell'
 import { Builder } from './basemod'
 
 const $ = new Builder()
 
-// TODO:
+// FIXME:
 // - add 'AssetOptions' type
 // - add 'transforms' prop in AssetOptions
 // - add 'needs' prop in Template (use data)
