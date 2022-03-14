@@ -54,16 +54,17 @@ export const DEFAULT_CONFIG = {
   tablePrefix: DEFAULT_TABLE_PREFIX,
   tasks: {
     // 'create-modifier': true,
-    'CREATE_MOUNT': true,
     // 'create-npc': true,
-    'CREATE_ITEM': true,
-    'CREATE_SPELL': true,
-    'CREATE_STAT': true,
-    'CREATE_TALENT': true,
-    'CREATE_TABLE': true,
-    'CREATE_AUTOLEARN': true,
-    'INSERT_SERVER_DATA': true,
-    'INSERT_CLIENT_DATA': true,
+
+    // 'CREATE_MOUNT': true,
+    // 'CREATE_ITEM': true,
+    // 'CREATE_SPELL': true,
+    // 'CREATE_STAT': true,
+    // 'CREATE_TALENT': true,
+    // 'CREATE_TABLE': true,
+    // 'CREATE_AUTOLEARN': true,
+    // 'INSERT_SERVER_DATA': true,
+    // 'INSERT_CLIENT_DATA': true,
   },
   templates: [
     ...TABLES,
@@ -118,41 +119,62 @@ export interface BuilderConfig {
   mod: string
   version: string
   env: Env
-  tasks: Mapping<any>
+  tasks: Mapping<Task>
   templates: any[]
   baseSpeed?: number
   tablePrefix?: string
 }
 
 export interface Task {
-  start?: () => void
-  process?: (template: any) => void
-  done?: () => void
+  setup?: ($: Builder) => void
+  process?: ($: Builder, template: any) => void
 }
 
 export class Builder {
-  public readonly mod: string = DEFAULT_MOD
-  public readonly version: string = DEFAULT_VERSION
-  public readonly env: Env = ENV.DEV
-  public readonly baseSpeed: number = DEFAULT_SPEED
-  public readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
+  public readonly Mod: string = DEFAULT_MOD
+  public readonly Version: string = DEFAULT_VERSION
+  public readonly Env: Env = ENV.DEV
+  public readonly BaseSpeed: number = DEFAULT_SPEED
+  public readonly TablePrefix: string = DEFAULT_TABLE_PREFIX
 
-  protected readonly data: Mapping<any> = {}
-
+  protected readonly tasks: any = {}
+  protected readonly data: any = {}
   protected readonly addonFiles: Mapping<boolean> = {}
   protected readonly databaseTables: Mapping<boolean> = {}
 
-  // protected readonly logger: Logger
-
-  // protected templates: Template[]
-
   constructor (options: BuilderOptions = DEFAULT_OPTIONS, config: BuilderConfig = DEFAULT_CONFIG) {
-    if (config.baseSpeed)
-      this.baseSpeed = config.baseSpeed
+    if (config.mod)
+      this.Mod = config.mod
+
+    if (config.version)
+      this.Version = config.version
 
     if (config.env)
-      this.env = config.env
+      this.Env = config.env
+
+    if (config.baseSpeed)
+      this.BaseSpeed = config.baseSpeed
+
+    if (config.tablePrefix)
+      this.Mod = config.tablePrefix
+
+    for (const key of Object.keys(config.tasks)) {
+      this.tasks = options.tasks
+      // const task = config.tasks[key]
+
+      // if (task.setup)
+      //   task.setup()
+    }
   }
+
+  private Setup () {}
+
+  private Process () {}
+
+  public Data <T>(id: string): Mapping<T> {
+    return this.data[id]
+  }
+
 
   // private tasks (options: Options, config: Config) {
   //   return new TaskState((config.tasks || []).map(
