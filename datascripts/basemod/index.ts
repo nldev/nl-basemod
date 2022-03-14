@@ -53,8 +53,8 @@ export const DEFAULT_CONFIG = {
   baseSpeed: DEFAULT_SPEED,
   tablePrefix: DEFAULT_TABLE_PREFIX,
   tasks: {
-    // 'create-modifier': true,
-    // 'create-npc': true,
+    // 'CREATE_MODIFIER': true,
+    // 'CREATE_NPC': true,
 
     // 'CREATE_MOUNT': true,
     // 'CREATE_ITEM': true,
@@ -112,7 +112,7 @@ export const DEFAULT_OPTIONS = {
 }
 
 export interface BuilderOptions {
-  tasks: any[]
+  tasks: Task[]
 }
 
 export interface BuilderConfig {
@@ -125,9 +125,15 @@ export interface BuilderConfig {
   tablePrefix?: string
 }
 
+export interface Template<T = any> {
+  id: string
+  data: T
+}
+
 export interface Task {
+  id: string
   setup?: ($: Builder) => void
-  process?: ($: Builder, template: any) => void
+  process?: ($: Builder, template: Template) => void
 }
 
 export class Builder {
@@ -135,12 +141,15 @@ export class Builder {
   public readonly Version: string = DEFAULT_VERSION
   public readonly Env: Env = ENV.DEV
   public readonly BaseSpeed: number = DEFAULT_SPEED
-  public readonly TablePrefix: string = DEFAULT_TABLE_PREFIX
 
-  protected readonly tasks: any = {}
-  protected readonly data: any = {}
+  protected readonly TablePrefix: string = DEFAULT_TABLE_PREFIX
+
+  protected readonly templates: Template[] = []
+  protected readonly tasks: Mapping<Task> = {}
   protected readonly addonFiles: Mapping<boolean> = {}
   protected readonly databaseTables: Mapping<boolean> = {}
+
+  protected readonly data: any = {}
 
   constructor (options: BuilderOptions = DEFAULT_OPTIONS, config: BuilderConfig = DEFAULT_CONFIG) {
     if (config.mod)
@@ -158,238 +167,54 @@ export class Builder {
     if (config.tablePrefix)
       this.Mod = config.tablePrefix
 
-    for (const key of Object.keys(config.tasks)) {
-      this.tasks = options.tasks
-      // const task = config.tasks[key]
+    if (config.templates)
+      config.templates.forEach(template => this.templates.push(template))
 
-      // if (task.setup)
-      //   task.setup()
+    for (const task of options.tasks) {
+      if (config.tasks[task.id])
+        this.tasks[task.id] = task
     }
-  }
 
-  private Setup () {}
-
-  private Process () {}
-
-  public Data <T>(id: string): Mapping<T> {
-    return this.data[id]
-  }
-
-
-  // private tasks (options: Options, config: Config) {
-  //   return new TaskState((config.tasks || []).map(
-  //     Constructor =>
-  //       (options && options.tasks && options.tasks[Constructor.id])
-  //         ? new Constructor(
-  //             typeof options.tasks[Constructor.id] === 'boolean'
-  //               ? { id: Constructor.id, options: {} }
-  //               : (options.tasks[Constructor.id] as TaskOptions),
-  //             this,
-  //           )
-  //         : null
-  //   ).reduce((previous, current) => {
-  //     const map: Map<NWTask> = { ...previous }
-  //     if (current)
-  //       map[current.id] = current
-
-  //     return map
-  //   }, {}), this)
-  // }
-
-  // private setup () {
-  //   for (const task of this.Task.list)
-  //     task.setup()
-  // }
-
-  // private load () {
-  //   for (const task of this.Task.list)
-  //     this.templates = [
-  //       ...this.templates,
-  //       ...task.load(),
-  //     ]
-  // }
-
-  // private process () {
-  //   const attempts: Attempt[] = []
-
-  //   for (const template of this.templates) for (const task of this.Task.list) {
-  //     const attempt: Attempt = {
-  //       template,
-  //       task,
-  //       fn: () => task.process(template),
-  //     }
-
-  //     if (task.isReducer || (template.id === task.id)) {
-  //       this.attempt(attempt.fn, {
-  //         message: (d: any) => `failed at task '${d.task.id}'`,
-  //         info: [
-  //           {
-  //             id: 'task',
-  //             fn: (d: any) => ({
-  //               id: d.task.id,
-  //               data: d.task.data,
-  //               isReducer: d.task.isReducer,
-  //             }),
-  //           },
-  //           {
-  //             id: 'template',
-  //             fn: (d: any) => ({
-  //               id: d.template.id,
-  //               options: d.template.options,
-  //             }),
-  //           },
-  //         ],
-  //         data: {
-  //           task,
-  //           template,
-  //         },
-  //       })
-  //     }
-  //   }
-
-  //   for (const attempt of attempts) {
-  //       const { task, template } = attempt
-
-  //       attempt.fn()
-  //   }
-  // }
-
-  private init () {
     this.setup()
-    this.load()
     this.process()
   }
 
-  // public query <T extends number = number>(options?: Queryable<number, QueryType>, defaultValue?: T): number
-  // public query <T extends string = string>(options?: Queryable<string, QueryType>, defaultValue?: T): string
-  // public query <T = any>(options?: Queryable<Value, QueryType>, defaultValue?: T) {
-  //   if ((typeof options === 'string') || (typeof options === 'number'))
-  //     return (defaultValue && !options) ? defaultValue : options
-
-  //   if ((options === null) || (typeof options === 'undefined') || (typeof options === 'boolean'))
-  //     return defaultValue ? defaultValue : null
-
-  //   const { query: type, subquery: subtype, id } = options
-
-  //   let result: string | number
-  //   let asset: TSAsset = this.std.Spells.load(DEFAULT_ICON_SPELL_BASE)
-
-  //   switch (type) {
-  //     case QUERY_ICON:
-  //       switch (subtype) {
-  //         case 'SPELL':
-  //           asset = typeof id === 'number'
-  //             ? this.std.Spells.load(id)
-  //             : this.Spell.get(id).asset
-  //           break
-  //         case 'ITEM':
-  //           asset = typeof id === 'number'
-  //             ? this.std.Items.load(id)
-  //             : this.Item.get(id).asset
-  //           break
-  //         case 'ACHIEVEMENT':
-  //           asset = typeof id === 'number'
-  //             ? this.std.Achievements.load(id)
-  //             : asset
-  //           break
-  //       }
-
-  //       return resolveIcon(asset)
-
-  //     case QUERY_ID:
-  //       result = DEFAULT_SPELL_BASE
-
-  //       switch (subtype) {
-  //         case 'SPELL':
-  //           result = typeof id === 'number'
-  //             ? this.std.Spells.load(id).ID
-  //             : this.Spell.get(id).asset.ID
-  //           break
-  //         case 'ITEM':
-  //           result = typeof id === 'number'
-  //             ? this.std.Items.load(id).ID
-  //             : this.Item.get(id).asset.ID
-  //           break
-  //         case 'NPC':
-  //           result = typeof id === 'number'
-  //             ? this.std.CreatureTemplates.load(id).ID
-  //             : this.Npc.get(id).asset.ID
-  //           break
-  //       }
-
-  //       return result
-
-  //     case QUERY_EFFECT_POINTS:
-  //       result = typeof id === 'number'
-  //         ? this.std.Spells.load(id)
-  //           .Effects.get(subtype as number).PointsBase.get()
-
-  //         : this.Spell.get(id).asset
-  //           .Effects.get(subtype as number).PointsBase.get()
-
-  //       return result
-
-  //     case QUERY_MOUNT_NPC:
-  //       result = DEFAULT_MOUNT_NPC_BASE
-
-  //       switch (subtype) {
-  //         case 'SPELL':
-
-  //           asset = typeof id === 'number'
-  //             ? this.std.Spells.load(id)
-  //             : this.Spell.get(id).asset
-
-  //           result = asset.Effects.get(0).MiscValueA.get()
-
-  //           break
-  //         case 'ITEM':
-  //           asset = typeof id === 'number'
-  //             ? this.std.Items.load(id)
-  //             : this.Item.get(id).asset
-
-  //           result = this.std.Spells.load(asset.Spells.get(0).Spell.getRef().ID)
-  //             .Effects.get(0).MiscValueA.get()
-
-  //           break
-  //       }
-
-  //       return result
-  //   }
-  // }
-
-  private attempt (fn: (...args: any[]) => any, log: ErrorLog) {
-    return fn()
+  protected setup () {
+    for (const [_, task] of Object.entries<Task>(this.tasks)) {
+      if (task.setup)
+        task.setup(this)
+    }
   }
 
-  public log (input: any = '', data?: LogData, type: LogType = 'log') {
-    if (type === 'log')
-      data ? console.log(input, data) : console.log(input)
-
-    if (type === 'warn')
-      data ? console.warn(input, data) : console.warn(input)
-
-    if (type === 'error')
-      data ? console.error(input, data) : console.error(input)
-
-    this.logger(input, data, type)
+  protected process () {
+    for (const template of this.templates)
+      this.Run(template)
   }
 
-  public objectify (input: any) {
-    let result: Data = {}
 
-    if (input)
-      result = input.objectify()
+  public Run (template: Template) {
+    for (const [_, task] of Object.entries<Task>(this.tasks))
+      if (task.process)
+        task.process(this, template)
+  }
 
-    return result
+  public Get <T>(a: string, b?: string) {
+    if (b)
+      return this.data[a][b] as T
+    return this.data[a] as T
+  }
+
+  public Set <T>(a: string, b: string, data: T) {
+    this.data[a][b] = data
   }
 
   public Table (options: SQLTable) {
     const lines = []
 
     if (!options.isPersist)
-      lines.push(`drop table if exists ${this.tablePrefix}${options.name};`)
+      lines.push(`drop table if exists ${this.TablePrefix}${options.name};`)
 
-    lines.push(`create table if not exists ${this.tablePrefix}${options.name} (`)
+    lines.push(`create table if not exists ${this.TablePrefix}${options.name} (`)
 
     let primaryKey
 
@@ -459,8 +284,8 @@ export class Builder {
     this.databaseTables[options.name] = true
 
     const db = (options.database === 'auth')
-      ? this.sql.Databases.auth
-      : this.sql.Databases.world_dest
+      ? std.SQL.Databases.auth
+      : std.SQL.Databases.world_dest
 
     const query = lines.join('\n')
 
@@ -469,9 +294,9 @@ export class Builder {
 
   public ServerData (table: string, data: any, database: Database = 'world') {
     if (!this.databaseTables[table])
-      throw new Error(`Database table ${database}.${this.tablePrefix}${table} does not exist, cannot insert record.`)
+      throw new Error(`Database table ${database}.${this.TablePrefix}${table} does not exist, cannot insert record.`)
 
-    let lines = [`insert into ${this.tablePrefix}${table} (`]
+    let lines = [`insert into ${this.TablePrefix}${table} (`]
 
     const columns = []
     const values = []
@@ -498,8 +323,8 @@ export class Builder {
     lines.push(');')
 
     const db = (database === 'auth')
-      ? this.sql.Databases.auth
-      : this.sql.Databases.world_dest
+      ? std.SQL.Databases.auth
+      : std.SQL.Databases.world_dest
     const query = lines.join('\n')
 
     db.write(query)
