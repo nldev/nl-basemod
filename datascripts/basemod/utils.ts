@@ -1,7 +1,4 @@
-import { std } from 'wow/wotlk'
-import { Achievement as TSAchievement } from 'wow/wotlk/std/Achievement/Achievement'
 import { ItemTemplate as TSItem } from 'wow/wotlk/std/Item/ItemTemplate'
-import { Spell as TSSpell } from 'wow/wotlk/std/Spell/Spell'
 import { CLASS_MASKS, RACE_MASKS } from './constants'
 
 import { CharacterClass, CharacterRace, Mapping } from './types'
