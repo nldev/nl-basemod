@@ -1,9 +1,9 @@
 import fs from 'fs'
-import { std, DBC, SQL } from 'wow/wotlk'
+import { std } from 'wow/wotlk'
 
 import { ENV, DEFAULT_MOD, DEFAULT_TABLE_PREFIX } from './constants'
-import { Data, Database, Env, Mapping, SQLTable } from './types'
-import { dashCaseToConstantCase, noop } from './utils'
+import { Database, Env, Mapping, SQLTable } from './types'
+import { dashCaseToConstantCase } from './utils'
 
 export const ADDON_PATH = __dirname + '/../../../addon'
 export const ADDON_DATA_PATH = ADDON_PATH + '/data'
@@ -22,9 +22,10 @@ export const DEFAULT_CONFIG = {
   ],
 }
 
+export type TaskOptions<T = any> = boolean | Mapping<T>
+
 export const DEFAULT_OPTIONS = {
-  tasks: [
-  ],
+  tasks: [],
 }
 
 export interface BuilderOptions {
@@ -35,7 +36,7 @@ export interface BuilderConfig {
   mod: string
   version: string
   env: Env
-  tasks: Mapping<Task>
+  tasks: Mapping<TaskOptions>
   templates: Template[]
   baseSpeed?: number
   tablePrefix?: string
@@ -51,9 +52,9 @@ export interface Template<T = any> {
   data: T
 }
 
-export interface Task<T = any> {
+export interface Task<T = any, O = any> {
   id: string
-  setup?: ($: Builder) => void
+  setup?: ($: Builder, options: O) => void
   process?: ($: Builder, template: Template<T>) => void
 }
 
@@ -91,16 +92,16 @@ export class Builder {
     if (config.templates)
       config.templates.forEach(template => this.templates.push(template))
 
-    for (const task of options.tasks) {
-      if (config.tasks[task.id])
-        this.tasks[task.id] = task
+    for (const [key, isActive] of Object.entries<TaskOptions>(config.tasks)) {
+      for (const task of options.tasks)
+        if ((task.id === key) && isActive)
+          this.tasks[key] = task
     }
 
     // init
-    for (const [_, task] of Object.entries<Task>(this.tasks)) {
+    for (const [_, task] of Object.entries<Task>(this.tasks))
       if (task.setup)
-        task.setup(this)
-    }
+        task.setup(this, config.tasks[task.id])
 
     for (const template of this.templates)
       this.Process(template)
