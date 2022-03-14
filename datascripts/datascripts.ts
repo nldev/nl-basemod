@@ -9,3 +9,13 @@ const $ = new Builder()
 // - add 'needs' prop in Template (use data)
 // - attempt to rerun needs after every Process call
 
+// TODO: reimplement
+// - mount
+// - autolearn
+// - spell
+// - item
+// - npc
+// - skill
+// - stat
+// - talent
+
