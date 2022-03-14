@@ -4,6 +4,7 @@ import { std } from 'wow/wotlk'
 import { ENV, DEFAULT_MOD, DEFAULT_TABLE_PREFIX } from './constants'
 import { Database, Env, Mapping, SQLTable } from './types'
 import { dashCaseToConstantCase } from './utils'
+import { CreateSpell } from './spell'
 
 export const ADDON_PATH = __dirname + '/../../../addon'
 export const ADDON_DATA_PATH = ADDON_PATH + '/data'
@@ -17,6 +18,7 @@ export const DEFAULT_CONFIG = {
   baseSpeed: DEFAULT_SPEED,
   tablePrefix: DEFAULT_TABLE_PREFIX,
   tasks: {
+    'create-spell': true,
   },
   templates: [
   ],
@@ -25,7 +27,9 @@ export const DEFAULT_CONFIG = {
 export type TaskOptions<T = any> = boolean | Mapping<T>
 
 export const DEFAULT_OPTIONS = {
-  tasks: [],
+  tasks: [
+    CreateSpell,
+  ],
 }
 
 export interface BuilderOptions {
@@ -55,7 +59,7 @@ export interface Template<T = any> {
 export interface Task<T = any, O = any> {
   id: string
   setup?: ($: Builder, options: O) => void
-  process?: ($: Builder, template: Template<T>) => void
+  process?: ($: Builder, template: Template<T>, options: O) => void
 }
 
 export class Builder {
@@ -72,7 +76,10 @@ export class Builder {
   protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
   protected readonly data: any = {}
 
-  constructor (options: BuilderOptions = DEFAULT_OPTIONS, config: BuilderConfig = DEFAULT_CONFIG) {
+  constructor (
+    protected readonly options: BuilderOptions = DEFAULT_OPTIONS,
+    protected readonly config: BuilderConfig = DEFAULT_CONFIG,
+  ) {
     // setup
     if (config.mod)
       this.Mod = config.mod
@@ -112,13 +119,13 @@ export class Builder {
       if (task.process)
         for (const data of list)
           if (task.id === id)
-            task.process(this, { id, data })
+            task.process(this, { id, data }, this.config.tasks[task.id])
   }
 
   public Process <T = any>(template: Template<T>) {
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
       if (task.process)
-        task.process(this, template)
+        task.process(this, template, this.config.tasks[task.id])
   }
 
   public Get <T = any>(a: string, b?: string) {
