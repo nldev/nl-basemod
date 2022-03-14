@@ -292,7 +292,7 @@ export class Builder {
     db.write(query)
   }
 
-  public ServerData (table: string, data: any, database: Database = 'world') {
+  public WriteToDatabase (table: string, data: any, database: Database = 'world') {
     if (!this.databaseTables[table])
       throw new Error(`Database table ${database}.${this.TablePrefix}${table} does not exist, cannot insert record.`)
 
@@ -330,7 +330,7 @@ export class Builder {
     db.write(query)
   }
 
-  public ClientData (file: string, data: any) {
+  public WriteToAddon (file: string, data: any) {
     const list: string[] = []
 
     for (const key of Object.keys(data))
