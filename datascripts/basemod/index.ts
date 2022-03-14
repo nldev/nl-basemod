@@ -1,42 +1,6 @@
 import fs from 'fs'
 import { std, DBC, SQL } from 'wow/wotlk'
 
-import { CreateAchievement } from './tasks/create-achievement'
-import { CreateEnchant } from './tasks/create-enchant'
-import { CreateGem } from './tasks/create-gem'
-import { CreateItem } from './tasks/create-item'
-import { CreateModifier } from './tasks/create-modifier'
-import { CreateMount } from './tasks/create-mount'
-import { CreateNpc } from './tasks/create-npc'
-import { CreateProfession } from './tasks/create-profession'
-import { CreateSpell } from './tasks/create-spell'
-import { CreateStat } from './tasks/create-stat'
-import { CreateTalent } from './tasks/create-talent'
-import { CreateTable } from './tasks/create-table'
-import { CreateAutolearn } from './tasks/create-autolearn'
-import { GenerateEquipment } from './tasks/generate-equipment'
-import { SetupCharacterCreation } from './tasks/setup-character-creation'
-import { SetupClassDruid } from './tasks/setup-class-druid'
-import { SetupClassHunter } from './tasks/setup-class-hunter'
-import { SetupClassMage } from './tasks/setup-class-mage'
-import { SetupClassPaladin } from './tasks/setup-class-paladin'
-import { SetupClassPriest } from './tasks/setup-class-priest'
-import { SetupClassRogue } from './tasks/setup-class-rogue'
-import { SetupClassShaman } from './tasks/setup-class-shaman'
-import { SetupClassWarlock } from './tasks/setup-class-warlock'
-import { SetupClassWarrior } from './tasks/setup-class-warrior'
-import { SetupSkills } from './tasks/setup-skills'
-import { InsertServerData } from './tasks/insert-server-data'
-import { InsertClientData } from './tasks/insert-client-data'
-import { ITEMS } from './templates/items'
-import { MODIFIERS } from './templates/modifiers'
-import { MOUNTS } from './templates/mounts'
-import { NPCS } from './templates/npcs'
-import { SPELLS } from './templates/spells'
-import { STATS } from './templates/stats'
-import { TALENTS } from './templates/talents'
-import { TABLES } from './templates/tables'
-import { AUTOLEARN } from './templates/autolearn'
 import { ENV, DEFAULT_MOD, DEFAULT_TABLE_PREFIX } from './constants'
 import { Data, Database, Env, Mapping, SQLTable } from './types'
 import { dashCaseToConstantCase, noop } from './utils'
@@ -53,61 +17,13 @@ export const DEFAULT_CONFIG = {
   baseSpeed: DEFAULT_SPEED,
   tablePrefix: DEFAULT_TABLE_PREFIX,
   tasks: {
-    // 'CREATE_MODIFIER': true,
-    // 'CREATE_NPC': true,
-
-    // 'CREATE_MOUNT': true,
-    // 'CREATE_ITEM': true,
-    // 'CREATE_SPELL': true,
-    // 'CREATE_STAT': true,
-    // 'CREATE_TALENT': true,
-    // 'CREATE_TABLE': true,
-    // 'CREATE_AUTOLEARN': true,
-    // 'INSERT_SERVER_DATA': true,
-    // 'INSERT_CLIENT_DATA': true,
   },
   templates: [
-    ...TABLES,
-    ...STATS,
-    ...SPELLS,
-    ...ITEMS,
-    ...TALENTS,
-    ...AUTOLEARN,
-    // ...NPCS,
-    // ...MODIFIERS,
-    ...MOUNTS,
   ],
 }
 
 export const DEFAULT_OPTIONS = {
   tasks: [
-    CreateStat,
-    CreateSpell,
-    CreateItem,
-    CreateTalent,
-    CreateTable,
-    InsertServerData,
-    InsertClientData,
-    // CreateNpc,
-    // CreateModifier,
-    CreateMount,
-    CreateAutolearn,
-    // CreateAchievement,
-    // CreateEnchant,
-    // CreateGem,
-    // CreateProfession,
-    // GenerateEquipment,
-    // SetupCharacterCreation,
-    // SetupClassDruid,
-    // SetupClassHunter,
-    // SetupClassMage,
-    // SetupClassPaladin,
-    // SetupClassPriest,
-    // SetupClassRogue,
-    // SetupClassShaman,
-    // SetupClassWarlock,
-    // SetupClassWarrior,
-    // SetupSkills,
   ],
 }
 
@@ -120,7 +36,7 @@ export interface BuilderConfig {
   version: string
   env: Env
   tasks: Mapping<Task>
-  templates: any[]
+  templates: Template[]
   baseSpeed?: number
   tablePrefix?: string
 }
@@ -135,10 +51,10 @@ export interface Template<T = any> {
   data: T
 }
 
-export interface Task {
+export interface Task<T = any> {
   id: string
   setup?: ($: Builder) => void
-  process?: ($: Builder, template: Template) => void
+  process?: ($: Builder, template: Template<T>) => void
 }
 
 export class Builder {
@@ -190,27 +106,27 @@ export class Builder {
       this.Process(template)
   }
 
-  public ProcessMany <T>({ id, list }: Templates) {
-    for (const [_, task] of Object.entries<Task>(this.tasks))
+  public ProcessMany <T = any>({ id, list }: Templates<T>) {
+    for (const [_, task] of Object.entries<Task<T>>(this.tasks))
       if (task.process)
         for (const data of list)
           if (task.id === id)
             task.process(this, { id, data })
   }
 
-  public Process (template: Template) {
-    for (const [_, task] of Object.entries<Task>(this.tasks))
+  public Process <T = any>(template: Template<T>) {
+    for (const [_, task] of Object.entries<Task<T>>(this.tasks))
       if (task.process)
         task.process(this, template)
   }
 
-  public Get <T>(a: string, b?: string) {
+  public Get <T = any>(a: string, b?: string) {
     if (b)
       return this.data[a][b] as T
     return this.data[a] as T
   }
 
-  public Set <T>(a: string, b: string, data: T) {
+  public Set <T = any>(a: string, b: string, data: T) {
     this.data[a][b] = data
   }
 
