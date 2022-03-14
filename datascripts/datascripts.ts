@@ -8,7 +8,9 @@ import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
 export const ALL_CLASSES: any = ['WARRIOR', 'PALADIN', 'HUNTER', 'ROGUE', 'MAGE', 'WARLOCK', 'DRUID', 'SHAMAN', 'PALADIN', 'PRIEST']
 export const ALL_RACE_MASK = createRaceMask('ORC', 'DWARF', 'GNOME', 'HUMAN', 'TROLL', 'TAUREN', 'UNDEAD', 'DRAENEI', 'BLOOD_ELF', 'NIGHT_ELF')
 export const ALL_CLASS_MASK = createClassMask('ROGUE', 'MAGE', 'DRUID', 'HUNTER', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR', 'PALADIN')
+
 const SKILLS: Map<SkillLine> = {}
+
 std.SkillLines.forEach(e => {
   SKILLS[e.Name.enGB.get()] = e
 })
