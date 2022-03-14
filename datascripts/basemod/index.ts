@@ -191,6 +191,13 @@ export class Builder {
       this.Run(template)
   }
 
+  public RunMany <T>(id: string, list: T[]) {
+    for (const [_, task] of Object.entries<Task>(this.tasks))
+      if (task.process)
+        for (const data of list)
+          if (task.id === id)
+            task.process(this, { id, data })
+  }
 
   public Run (template: Template) {
     for (const [_, task] of Object.entries<Task>(this.tasks))
