@@ -1,5 +1,4 @@
-import { AssetType } from './asset'
-import { ItemSpellTrigger, Map, Query } from './types'
+import { Mapping } from './types'
 
 export const ENV = {
   DEV: 'DEV',
@@ -42,7 +41,7 @@ export const PRIEST = 'PRIEST'
 export const PALADIN = 'PALADIN'
 export const HUNTER = 'HUNTER'
 
-export const CLASS_MASKS: Map<number> = {
+export const CLASS_MASKS: Mapping<number> = {
   WARRIOR: 1,
   PALADIN: 2,
   HUNTER: 4,
@@ -54,7 +53,7 @@ export const CLASS_MASKS: Map<number> = {
   DRUID: 1024,
 }
 
-export const CLASS_IDS: Map<number> = {
+export const CLASS_IDS: Mapping<number> = {
   WARRIOR: 1,
   PALADIN: 2,
   HUNTER: 3,
@@ -78,7 +77,7 @@ export const TROLL = 'TROLL'
 export const BLOOD_ELF = 'BLOOD_ELF'
 export const DRAENEI = 'DRAENEI'
 
-export const RACE_MASKS: Map<number> = {
+export const RACE_MASKS: Mapping<number> = {
   HUMAN: 1,
   ORC: 2,
   DWARF: 4,
@@ -91,7 +90,7 @@ export const RACE_MASKS: Map<number> = {
   DRAENEI: 1024,
 }
 
-export const RACE_IDS: Map<number> = {
+export const RACE_IDS: Mapping<number> = {
   HUMAN: 1,
   ORC: 2,
   DWARF: 3,
@@ -104,7 +103,7 @@ export const RACE_IDS: Map<number> = {
   DRAENEI: 11,
 }
 
-export const ASSET_TYPE: Map<AssetType> = {
+export const ASSET_TYPE: Mapping<AssetType> = {
   SPELL: SPELL,
   ITEM: ITEM,
   NPC: NPC,
@@ -166,12 +165,6 @@ export const QUERY_ENCHANT = 'QUERY_ENCHANT'
 export const QUERY_GEM = 'QUERY_GEM'
 export const QUERY_MODIFIER = 'QUERY_MODIFIER'
 
-export const DEFAULT_ICON_QUERY: Query<typeof QUERY_ICON> = {
-  query: QUERY_ICON,
-  subquery: SPELL,
-  id: DEFAULT_ICON_SPELL_BASE,
-}
-
 export const MAX_ITEM_SPELL_COUNT = 5
 
 export const ITEM_SPELL_TRIGGER_ON_EQUIP = 'ON_EQUIP'
@@ -183,14 +176,14 @@ export const ITEM_SPELL_TRIGGER_LEARN_SPELL = 'LEARN_SPELL'
 
 export const DEFAULT_ITEM_SPELL_TRIGGER_ID = 'default'
 
-export const ITEM_SPELL_TRIGGERS: Map<ItemSpellTrigger> = {
-  [ITEM_SPELL_TRIGGER_ON_EQUIP]: ITEM_SPELL_TRIGGER_ON_EQUIP,
-  [ITEM_SPELL_TRIGGER_ON_USE]: ITEM_SPELL_TRIGGER_ON_USE,
-  [ITEM_SPELL_TRIGGER_ON_USE_NO_DELAY]: ITEM_SPELL_TRIGGER_ON_USE_NO_DELAY,
-  [ITEM_SPELL_TRIGGER_CHANCE_ON_HIT]: ITEM_SPELL_TRIGGER_CHANCE_ON_HIT,
-  [ITEM_SPELL_TRIGGER_SOULSTONE]: ITEM_SPELL_TRIGGER_SOULSTONE,
-  [ITEM_SPELL_TRIGGER_LEARN_SPELL]: ITEM_SPELL_TRIGGER_LEARN_SPELL,
-}
+// export const ITEM_SPELL_TRIGGERS: Mapping<ItemSpellTrigger> = {
+//   [ITEM_SPELL_TRIGGER_ON_EQUIP]: ITEM_SPELL_TRIGGER_ON_EQUIP,
+//   [ITEM_SPELL_TRIGGER_ON_USE]: ITEM_SPELL_TRIGGER_ON_USE,
+//   [ITEM_SPELL_TRIGGER_ON_USE_NO_DELAY]: ITEM_SPELL_TRIGGER_ON_USE_NO_DELAY,
+//   [ITEM_SPELL_TRIGGER_CHANCE_ON_HIT]: ITEM_SPELL_TRIGGER_CHANCE_ON_HIT,
+//   [ITEM_SPELL_TRIGGER_SOULSTONE]: ITEM_SPELL_TRIGGER_SOULSTONE,
+//   [ITEM_SPELL_TRIGGER_LEARN_SPELL]: ITEM_SPELL_TRIGGER_LEARN_SPELL,
+// }
 
 export const DEFAULT_TABLE_PREFIX = '__'
 

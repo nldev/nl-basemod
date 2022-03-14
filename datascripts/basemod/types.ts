@@ -9,10 +9,6 @@ import {
 } from './constants'
 // import { NWSpell } from './spell'
 
-export interface Localization {
-  enGB: string
-}
-
 export type Env = typeof ENV.DEV | typeof ENV.TEST | typeof ENV.PROD
 
 export interface Mapping<T> {
