@@ -1,19 +1,6 @@
 import fs from 'fs'
 import { std, DBC, SQL } from 'wow/wotlk'
 
-import { TSAsset } from './asset'
-import {
-    DEFAULT_ICON_SPELL_BASE, DEFAULT_MOD, DEFAULT_MOUNT_NPC_BASE, DEFAULT_SPELL_BASE, ENV,
-    QUERY_EFFECT_POINTS, QUERY_ICON, QUERY_ID, QUERY_MOUNT_NPC, DEFAULT_TABLE_PREFIX,
-} from './constants'
-import { HookConstructor, HookOptions, HookState, NWHook } from './hook'
-import { LogTasks } from './hooks/log-tasks'
-import { ObjectifyToJson } from './hooks/objectify-to-json'
-import { ItemOptions, ItemState } from './item'
-import { NpcOptions, NpcState } from './npc'
-import { SpellOptions, SpellState } from './spell'
-import { StoreState } from './store'
-import { Attempt, NWTask, TaskConstructor, TaskOptions, TaskState, Template } from './task'
 import { CreateAchievement } from './tasks/create-achievement'
 import { CreateEnchant } from './tasks/create-enchant'
 import { CreateGem } from './tasks/create-gem'
@@ -50,25 +37,21 @@ import { STATS } from './templates/stats'
 import { TALENTS } from './templates/talents'
 import { TABLES } from './templates/tables'
 import { AUTOLEARN } from './templates/autolearn'
-import { Data, Database, Env, LogData, Logger, LogType, Map, Queryable, QueryType, SQLTable, Value } from './types'
-import { dashCaseToConstantCase, noop, resolveIcon } from './utils'
+import { ENV, DEFAULT_MOD, DEFAULT_TABLE_PREFIX } from './constants'
+import { Data, Database, Env, Mapping, SQLTable } from './types'
+import { dashCaseToConstantCase, noop } from './utils'
 
-// FIXME: move to constants
-export const PROJECT = 'basemod'
 export const VERSION = '0.0.0'
 export const ADDON_PATH = __dirname + '/../../../addon'
 export const ADDON_DATA_PATH = ADDON_PATH + '/data'
-// FIXME
 export const DEFAULT_SPEED = 0.8
-// export const DEFAULT_SPEED = 1
 
-export const DEFAULT_OPTIONS: Required<Options> = {
+export const DEFAULT_CONFIG = {
   mod: DEFAULT_MOD,
   version: VERSION,
   env: ENV.DEV,
   baseSpeed: DEFAULT_SPEED,
   tablePrefix: DEFAULT_TABLE_PREFIX,
-  hooks: {},
   tasks: {
     // 'create-modifier': true,
     'CREATE_MOUNT': true,
@@ -95,16 +78,7 @@ export const DEFAULT_OPTIONS: Required<Options> = {
   ],
 }
 
-export type Json =
-  | Json[]
-  | { [key: string]: Json | Value }
-
-export const defaultConfig: Required<Config> = {
-  project: PROJECT,
-  hooks: [
-    // LogTasks,
-    // ObjectifyToJson,
-  ],
+export const DEFAULT_OPTIONS = {
   tasks: [
     CreateStat,
     CreateSpell,
@@ -134,315 +108,220 @@ export const defaultConfig: Required<Config> = {
     // SetupClassWarrior,
     // SetupSkills,
   ],
-  logger: noop,
 }
 
-export interface Config {
-  project: string
-  hooks?: HookConstructor[]
-  tasks?: TaskConstructor[]
-  logger?: Logger
+export interface BuilderOptions {
+  tasks: any[]
 }
 
-export interface Options {
+export interface BuilderConfig {
   mod: string
   version: string
   env: Env
-  baseSpeed: number
+  tasks: Mapping<any>
+  templates: any[]
+  baseSpeed?: number
   tablePrefix?: string
-  hooks?: Map<HookOptions | boolean>
-  tasks?: Map<TaskOptions | boolean>
-  templates?: Template[]
-}
-
-// FIXME: move this to types
-export interface ErrorData {
-  id: string
-  fn: ((...args: any[]) => any)
-}
-
-export interface ErrorLog {
-  message: ((...args: any[]) => string)
-  info?: ErrorData[]
-  data?: any
 }
 
 export class Builder {
-  public readonly mod: string
+  public readonly mod: string = DEFAULT_MOD
 
-  public readonly std: typeof std = std
-  public readonly dbc: typeof DBC = DBC
-  public readonly sql: typeof SQL = SQL
+  public readonly baseSpeed: number = DEFAULT_SPEED
+  public readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
 
-  public readonly Store = new StoreState({}, this)
-  public readonly Spell = new SpellState({}, this)
-  public readonly Item = new ItemState({}, this)
-  public readonly Npc = new NpcState({}, this)
+  protected readonly data: Mapping<any> = {}
 
-  public readonly Hook: HookState
-  public readonly Task: TaskState
+  protected readonly addonFiles: Mapping<boolean> = {}
+  protected readonly databaseTables: Mapping<boolean> = {}
 
-  public readonly baseSpeed: number
-  public readonly tablePrefix: string
+  // protected readonly logger: Logger
 
-  protected readonly spells: SpellOptions[] = []
-  protected readonly items: ItemOptions[] = []
-  protected readonly npcs: NpcOptions[] = []
+  // protected templates: Template[]
 
-  protected readonly addonFiles: Map<boolean> = {}
-  protected readonly databaseTables: Map<boolean> = {}
-
-  protected readonly logger: Logger
-
-  protected templates: Template[]
-
-  constructor (
-    public config: Config = defaultConfig,
-    public options: Options = DEFAULT_OPTIONS,
-  ) {
-    this.mod = options.mod || DEFAULT_OPTIONS.mod
-
-    this.logger = config.logger || noop
-
-    this.Hook = this.hooks(options, config)
-    this.Task = this.tasks(options, config)
-
-    this.templates = options.templates || []
-    this.baseSpeed = options.baseSpeed || 1
-    this.tablePrefix = options.tablePrefix || DEFAULT_TABLE_PREFIX
-
-    if (fs.existsSync(ADDON_DATA_PATH))
-      fs.rmdirSync(ADDON_DATA_PATH, { recursive: true })
-
-    fs.mkdirSync(ADDON_DATA_PATH, { recursive: true })
-
-    this.init()
+  constructor (options: BuilderOptions = DEFAULT_OPTIONS, config: BuilderConfig = DEFAULT_CONFIG) {
   }
 
-  private hooks (options: Options, config: Config) {
-    return new HookState((config.hooks || []).map(
-      Constructor =>
-        (options && options.hooks && options.hooks[Constructor.id])
-          ? new Constructor(
-              typeof options.hooks[Constructor.id] === 'boolean'
-                ? { id: Constructor.id, options: {} }
-                : (options.hooks[Constructor.id] as HookOptions),
-              this,
-            )
-          : null
-    ).reduce((previous, current) => {
-      const map: Map<NWHook> = { ...previous }
+  // private tasks (options: Options, config: Config) {
+  //   return new TaskState((config.tasks || []).map(
+  //     Constructor =>
+  //       (options && options.tasks && options.tasks[Constructor.id])
+  //         ? new Constructor(
+  //             typeof options.tasks[Constructor.id] === 'boolean'
+  //               ? { id: Constructor.id, options: {} }
+  //               : (options.tasks[Constructor.id] as TaskOptions),
+  //             this,
+  //           )
+  //         : null
+  //   ).reduce((previous, current) => {
+  //     const map: Map<NWTask> = { ...previous }
+  //     if (current)
+  //       map[current.id] = current
 
-      if (current)
-        map[current.id] = current
+  //     return map
+  //   }, {}), this)
+  // }
 
-      return map
-    }, {}), this)
-  }
+  // private setup () {
+  //   for (const task of this.Task.list)
+  //     task.setup()
+  // }
 
-  private tasks (options: Options, config: Config) {
-    return new TaskState((config.tasks || []).map(
-      Constructor =>
-        (options && options.tasks && options.tasks[Constructor.id])
-          ? new Constructor(
-              typeof options.tasks[Constructor.id] === 'boolean'
-                ? { id: Constructor.id, options: {} }
-                : (options.tasks[Constructor.id] as TaskOptions),
-              this,
-            )
-          : null
-    ).reduce((previous, current) => {
-      const map: Map<NWTask> = { ...previous }
-      if (current)
-        map[current.id] = current
+  // private load () {
+  //   for (const task of this.Task.list)
+  //     this.templates = [
+  //       ...this.templates,
+  //       ...task.load(),
+  //     ]
+  // }
 
-      return map
-    }, {}), this)
-  }
+  // private process () {
+  //   const attempts: Attempt[] = []
 
-  private setup () {
-    for (const hook of this.Hook.list)
-      hook.setup()
+  //   for (const template of this.templates) for (const task of this.Task.list) {
+  //     const attempt: Attempt = {
+  //       template,
+  //       task,
+  //       fn: () => task.process(template),
+  //     }
 
-    for (const task of this.Task.list)
-      task.setup()
-  }
+  //     if (task.isReducer || (template.id === task.id)) {
+  //       this.attempt(attempt.fn, {
+  //         message: (d: any) => `failed at task '${d.task.id}'`,
+  //         info: [
+  //           {
+  //             id: 'task',
+  //             fn: (d: any) => ({
+  //               id: d.task.id,
+  //               data: d.task.data,
+  //               isReducer: d.task.isReducer,
+  //             }),
+  //           },
+  //           {
+  //             id: 'template',
+  //             fn: (d: any) => ({
+  //               id: d.template.id,
+  //               options: d.template.options,
+  //             }),
+  //           },
+  //         ],
+  //         data: {
+  //           task,
+  //           template,
+  //         },
+  //       })
+  //     }
+  //   }
 
-  private load () {
-    for (const task of this.Task.list)
-      this.templates = [
-        ...this.templates,
-        ...task.load(),
-      ]
-  }
+  //   for (const attempt of attempts) {
+  //       const { task, template } = attempt
 
-  private process () {
-    const attempts: Attempt[] = []
-
-    for (const template of this.templates) for (const task of this.Task.list) {
-      const attempt: Attempt = {
-        template,
-        task,
-        fn: () => task.process(template),
-      }
-
-      if (task.isReducer || (template.id === task.id)) {
-        // onTaskProcessBegin
-        for (const hook of this.Hook.list)
-          hook.onTaskProcessBegin(task, template)
-
-        this.attempt(attempt.fn, {
-          message: (d: any) => `failed at task '${d.task.id}'`,
-          info: [
-            {
-              id: 'task',
-              fn: (d: any) => ({
-                id: d.task.id,
-                data: d.task.data,
-                isReducer: d.task.isReducer,
-              }),
-            },
-            {
-              id: 'template',
-              fn: (d: any) => ({
-                id: d.template.id,
-                options: d.template.options,
-              }),
-            },
-          ],
-          data: {
-            task,
-            template,
-          },
-        })
-
-        // onTaskProcessSuccess
-        for (const hook of this.Hook.list)
-          hook.onTaskProcessSuccess(task, template)
-      }
-    }
-
-    for (const attempt of attempts) {
-        const { task, template } = attempt
-
-        attempt.fn()
-
-        // onTaskProcessSuccess
-        for (const hook of this.Hook.list)
-          hook.onTaskProcessSuccess(task, template)
-    }
-  }
+  //       attempt.fn()
+  //   }
+  // }
 
   private init () {
-    // onInitBegin
-    for (const hook of this.Hook.list)
-      hook.onInitBegin()
-
     this.setup()
     this.load()
     this.process()
-
-    // OnInitSuccess
-    for (const hook of this.Hook.list)
-      hook.onInitSuccess()
   }
 
-  public query <T extends number = number>(options?: Queryable<number, QueryType>, defaultValue?: T): number
-  public query <T extends string = string>(options?: Queryable<string, QueryType>, defaultValue?: T): string
-  public query <T = any>(options?: Queryable<Value, QueryType>, defaultValue?: T) {
-    if ((typeof options === 'string') || (typeof options === 'number'))
-      return (defaultValue && !options) ? defaultValue : options
+  // public query <T extends number = number>(options?: Queryable<number, QueryType>, defaultValue?: T): number
+  // public query <T extends string = string>(options?: Queryable<string, QueryType>, defaultValue?: T): string
+  // public query <T = any>(options?: Queryable<Value, QueryType>, defaultValue?: T) {
+  //   if ((typeof options === 'string') || (typeof options === 'number'))
+  //     return (defaultValue && !options) ? defaultValue : options
 
-    if ((options === null) || (typeof options === 'undefined') || (typeof options === 'boolean'))
-      return defaultValue ? defaultValue : null
+  //   if ((options === null) || (typeof options === 'undefined') || (typeof options === 'boolean'))
+  //     return defaultValue ? defaultValue : null
 
-    const { query: type, subquery: subtype, id } = options
+  //   const { query: type, subquery: subtype, id } = options
 
-    let result: string | number
-    let asset: TSAsset = this.std.Spells.load(DEFAULT_ICON_SPELL_BASE)
+  //   let result: string | number
+  //   let asset: TSAsset = this.std.Spells.load(DEFAULT_ICON_SPELL_BASE)
 
-    switch (type) {
-      case QUERY_ICON:
-        switch (subtype) {
-          case 'SPELL':
-            asset = typeof id === 'number'
-              ? this.std.Spells.load(id)
-              : this.Spell.get(id).asset
-            break
-          case 'ITEM':
-            asset = typeof id === 'number'
-              ? this.std.Items.load(id)
-              : this.Item.get(id).asset
-            break
-          case 'ACHIEVEMENT':
-            asset = typeof id === 'number'
-              ? this.std.Achievements.load(id)
-              : asset
-            break
-        }
+  //   switch (type) {
+  //     case QUERY_ICON:
+  //       switch (subtype) {
+  //         case 'SPELL':
+  //           asset = typeof id === 'number'
+  //             ? this.std.Spells.load(id)
+  //             : this.Spell.get(id).asset
+  //           break
+  //         case 'ITEM':
+  //           asset = typeof id === 'number'
+  //             ? this.std.Items.load(id)
+  //             : this.Item.get(id).asset
+  //           break
+  //         case 'ACHIEVEMENT':
+  //           asset = typeof id === 'number'
+  //             ? this.std.Achievements.load(id)
+  //             : asset
+  //           break
+  //       }
 
-        return resolveIcon(asset)
+  //       return resolveIcon(asset)
 
-      case QUERY_ID:
-        result = DEFAULT_SPELL_BASE
+  //     case QUERY_ID:
+  //       result = DEFAULT_SPELL_BASE
 
-        switch (subtype) {
-          case 'SPELL':
-            result = typeof id === 'number'
-              ? this.std.Spells.load(id).ID
-              : this.Spell.get(id).asset.ID
-            break
-          case 'ITEM':
-            result = typeof id === 'number'
-              ? this.std.Items.load(id).ID
-              : this.Item.get(id).asset.ID
-            break
-          case 'NPC':
-            result = typeof id === 'number'
-              ? this.std.CreatureTemplates.load(id).ID
-              : this.Npc.get(id).asset.ID
-            break
-        }
+  //       switch (subtype) {
+  //         case 'SPELL':
+  //           result = typeof id === 'number'
+  //             ? this.std.Spells.load(id).ID
+  //             : this.Spell.get(id).asset.ID
+  //           break
+  //         case 'ITEM':
+  //           result = typeof id === 'number'
+  //             ? this.std.Items.load(id).ID
+  //             : this.Item.get(id).asset.ID
+  //           break
+  //         case 'NPC':
+  //           result = typeof id === 'number'
+  //             ? this.std.CreatureTemplates.load(id).ID
+  //             : this.Npc.get(id).asset.ID
+  //           break
+  //       }
 
-        return result
+  //       return result
 
-      case QUERY_EFFECT_POINTS:
-        result = typeof id === 'number'
-          ? this.std.Spells.load(id)
-            .Effects.get(subtype as number).PointsBase.get()
+  //     case QUERY_EFFECT_POINTS:
+  //       result = typeof id === 'number'
+  //         ? this.std.Spells.load(id)
+  //           .Effects.get(subtype as number).PointsBase.get()
 
-          : this.Spell.get(id).asset
-            .Effects.get(subtype as number).PointsBase.get()
+  //         : this.Spell.get(id).asset
+  //           .Effects.get(subtype as number).PointsBase.get()
 
-        return result
+  //       return result
 
-      case QUERY_MOUNT_NPC:
-        result = DEFAULT_MOUNT_NPC_BASE
+  //     case QUERY_MOUNT_NPC:
+  //       result = DEFAULT_MOUNT_NPC_BASE
 
-        switch (subtype) {
-          case 'SPELL':
+  //       switch (subtype) {
+  //         case 'SPELL':
 
-            asset = typeof id === 'number'
-              ? this.std.Spells.load(id)
-              : this.Spell.get(id).asset
+  //           asset = typeof id === 'number'
+  //             ? this.std.Spells.load(id)
+  //             : this.Spell.get(id).asset
 
-            result = asset.Effects.get(0).MiscValueA.get()
+  //           result = asset.Effects.get(0).MiscValueA.get()
 
-            break
-          case 'ITEM':
-            asset = typeof id === 'number'
-              ? this.std.Items.load(id)
-              : this.Item.get(id).asset
+  //           break
+  //         case 'ITEM':
+  //           asset = typeof id === 'number'
+  //             ? this.std.Items.load(id)
+  //             : this.Item.get(id).asset
 
-            result = this.std.Spells.load(asset.Spells.get(0).Spell.getRef().ID)
-              .Effects.get(0).MiscValueA.get()
+  //           result = this.std.Spells.load(asset.Spells.get(0).Spell.getRef().ID)
+  //             .Effects.get(0).MiscValueA.get()
 
-            break
-        }
+  //           break
+  //       }
 
-        return result
-    }
-  }
+  //       return result
+  //   }
+  // }
 
   private attempt (fn: (...args: any[]) => any, log: ErrorLog) {
     return fn()

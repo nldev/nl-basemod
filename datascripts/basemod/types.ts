@@ -7,7 +7,7 @@ import {
    ITEM_SPELL_TRIGGER_SOULSTONE, ITEM_SPELL_TRIGGERS, NPC, QUERY_EFFECT_POINTS, QUERY_ICON,
    QUERY_ID, QUERY_MOUNT_NPC, SCHOOLS, SPELL, ROGUE, WARRIOR, DRUID, MAGE, WARLOCK, SHAMAN, PRIEST, PALADIN, HUNTER, HUMAN, ORC, DWARF, NIGHT_ELF, UNDEAD, TAUREN, GNOME, TROLL, BLOOD_ELF, DRAENEI
 } from './constants'
-import { NWSpell } from './spell'
+// import { NWSpell } from './spell'
 
 export interface Localization {
   enGB: string
@@ -45,7 +45,7 @@ export type Json =
   | Json[]
   | { [key: string]: Json | Value }
 
-export interface Map<T> {
+export interface Mapping<T> {
   [key: string]: T
 }
 
@@ -55,19 +55,19 @@ export type Nullable<T> = T | null | undefined
 
 // FIXME
 // export type TSText<T = any> = string | Localization | LocSystem<T>
-export type TSText = string | Localization | any
-
-export type TSKeysExcludable = 'objectify' | 'set' | 'get' | 'end'
-
-export type TSKeys<
-  // C extends EnumCellWrapper<unknown>,
-  C extends any,
-  E extends string = TSKeysExcludable,
-> = keyof Omit<C, E>
-
+// export type TSText = string | Localization | any
+//
+// export type TSKeysExcludable = 'objectify' | 'set' | 'get' | 'end'
+//
+// export type TSKeys<
+//   // C extends EnumCellWrapper<unknown>,
+//   C extends any,
+//   E extends string = TSKeysExcludable,
+// > = keyof Omit<C, E>
+//
 export type Effect<T> = T | [T] | [T, T] | [T, T, T]
 
-export type AssetId = number | string
+// export type AssetId = number | string
 
 // copper, silver, gold
 export type Gold =
@@ -94,29 +94,29 @@ export type LogType = 'log' | 'warn' | 'error'
 
 export type Logger = (string: string, data?: LogData, type?: LogType) => void
 
-export type QueryType = typeof QUERY_ID | typeof QUERY_ICON | typeof QUERY_EFFECT_POINTS | typeof QUERY_MOUNT_NPC
-
-export type QueryIconSubquery = typeof SPELL | typeof ITEM | typeof ACHIEVEMENT
-
-export type QueryIdSubquery = typeof SPELL | typeof ITEM | typeof NPC
-
-export type QueryMountNpcSubquery = typeof SPELL | typeof ITEM
-
-export interface Query<K extends QueryType = QueryType> {
-  query: K
-  subquery: K extends typeof QUERY_ID
-    ? QueryIdSubquery
-    : K extends typeof QUERY_ICON
-    ? QueryIconSubquery
-    : K extends typeof QUERY_EFFECT_POINTS
-    ? number
-    : K extends typeof QUERY_MOUNT_NPC
-    ? QueryMountNpcSubquery
-    : string
-  id: AssetId
-}
-
-export type Queryable<V extends Value, K extends QueryType = QueryType> = V | Query<K>
+// export type QueryType = typeof QUERY_ID | typeof QUERY_ICON | typeof QUERY_EFFECT_POINTS | typeof QUERY_MOUNT_NPC
+//
+// export type QueryIconSubquery = typeof SPELL | typeof ITEM | typeof ACHIEVEMENT
+//
+// export type QueryIdSubquery = typeof SPELL | typeof ITEM | typeof NPC
+//
+// export type QueryMountNpcSubquery = typeof SPELL | typeof ITEM
+//
+// export interface Query<K extends QueryType = QueryType> {
+//   query: K
+//   subquery: K extends typeof QUERY_ID
+//     ? QueryIdSubquery
+//     : K extends typeof QUERY_ICON
+//     ? QueryIconSubquery
+//     : K extends typeof QUERY_EFFECT_POINTS
+//     ? number
+//     : K extends typeof QUERY_MOUNT_NPC
+//     ? QueryMountNpcSubquery
+//     : string
+//   id: AssetId
+// }
+//
+// export type Queryable<V extends Value, K extends QueryType = QueryType> = V | Query<K>
 
 export type School =
   | typeof SCHOOLS.FIRE
@@ -149,24 +149,12 @@ export type ItemSpellOptions = Omit<Partial<ItemSpell>, 'spell'> & {
   iLevel: number
 }
 
-export interface BaseMissileOptions {
-  type: 'base'
- // | 'copy' | 'create'
-
-}
-
-export interface CreateMissileOptions {
-}
-
-export type CopyMissileOptions = CreateMissileOptions & {
-}
-
-export interface Debug {
-  showAllAuras: boolean;
-  enableDebugScripts: boolean;
-}
-
-export type DebugOptions = Optional<Debug>
+// export interface Debug {
+//   showAllAuras: boolean;
+//   enableDebugScripts: boolean;
+// }
+//
+// export type DebugOptions = Optional<Debug>
 
 export type Database = 'world' | 'auth'
 
