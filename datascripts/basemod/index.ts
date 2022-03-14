@@ -125,6 +125,11 @@ export interface BuilderConfig {
   tablePrefix?: string
 }
 
+export interface Templates<T = any> {
+  id: string
+  list: T[]
+}
+
 export interface Template<T = any> {
   id: string
   data: T
@@ -142,16 +147,16 @@ export class Builder {
   public readonly Env: Env = ENV.DEV
   public readonly BaseSpeed: number = DEFAULT_SPEED
 
-  protected readonly TablePrefix: string = DEFAULT_TABLE_PREFIX
-
   protected readonly templates: Template[] = []
   protected readonly tasks: Mapping<Task> = {}
   protected readonly addonFiles: Mapping<boolean> = {}
   protected readonly databaseTables: Mapping<boolean> = {}
 
+  protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
   protected readonly data: any = {}
 
   constructor (options: BuilderOptions = DEFAULT_OPTIONS, config: BuilderConfig = DEFAULT_CONFIG) {
+    // setup
     if (config.mod)
       this.Mod = config.mod
 
@@ -175,23 +180,17 @@ export class Builder {
         this.tasks[task.id] = task
     }
 
-    this.setup()
-    this.process()
-  }
-
-  protected setup () {
+    // init
     for (const [_, task] of Object.entries<Task>(this.tasks)) {
       if (task.setup)
         task.setup(this)
     }
-  }
 
-  protected process () {
     for (const template of this.templates)
-      this.Run(template)
+      this.Process(template)
   }
 
-  public RunMany <T>(id: string, list: T[]) {
+  public ProcessMany <T>({ id, list }: Templates) {
     for (const [_, task] of Object.entries<Task>(this.tasks))
       if (task.process)
         for (const data of list)
@@ -199,7 +198,7 @@ export class Builder {
             task.process(this, { id, data })
   }
 
-  public Run (template: Template) {
+  public Process (template: Template) {
     for (const [_, task] of Object.entries<Task>(this.tasks))
       if (task.process)
         task.process(this, template)
@@ -219,9 +218,9 @@ export class Builder {
     const lines = []
 
     if (!options.isPersist)
-      lines.push(`drop table if exists ${this.TablePrefix}${options.name};`)
+      lines.push(`drop table if exists ${this.tablePrefix}${options.name};`)
 
-    lines.push(`create table if not exists ${this.TablePrefix}${options.name} (`)
+    lines.push(`create table if not exists ${this.tablePrefix}${options.name} (`)
 
     let primaryKey
 
@@ -301,9 +300,9 @@ export class Builder {
 
   public WriteToDatabase (table: string, data: any, database: Database = 'world') {
     if (!this.databaseTables[table])
-      throw new Error(`Database table ${database}.${this.TablePrefix}${table} does not exist, cannot insert record.`)
+      throw new Error(`Database table ${database}.${this.tablePrefix}${table} does not exist, cannot insert record.`)
 
-    let lines = [`insert into ${this.TablePrefix}${table} (`]
+    let lines = [`insert into ${this.tablePrefix}${table} (`]
 
     const columns = []
     const values = []
