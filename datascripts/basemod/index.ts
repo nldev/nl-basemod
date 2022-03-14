@@ -41,14 +41,14 @@ import { ENV, DEFAULT_MOD, DEFAULT_TABLE_PREFIX } from './constants'
 import { Data, Database, Env, Mapping, SQLTable } from './types'
 import { dashCaseToConstantCase, noop } from './utils'
 
-export const VERSION = '0.0.0'
 export const ADDON_PATH = __dirname + '/../../../addon'
 export const ADDON_DATA_PATH = ADDON_PATH + '/data'
 export const DEFAULT_SPEED = 0.8
+export const DEFAULT_VERSION = '0.1.0'
 
 export const DEFAULT_CONFIG = {
   mod: DEFAULT_MOD,
-  version: VERSION,
+  version: DEFAULT_VERSION,
   env: ENV.DEV,
   baseSpeed: DEFAULT_SPEED,
   tablePrefix: DEFAULT_TABLE_PREFIX,
@@ -124,9 +124,16 @@ export interface BuilderConfig {
   tablePrefix?: string
 }
 
+export interface Task {
+  start?: () => void
+  process?: (template: any) => void
+  done?: () => void
+}
+
 export class Builder {
   public readonly mod: string = DEFAULT_MOD
-
+  public readonly version: string = DEFAULT_VERSION
+  public readonly env: Env = ENV.DEV
   public readonly baseSpeed: number = DEFAULT_SPEED
   public readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
 
@@ -140,6 +147,11 @@ export class Builder {
   // protected templates: Template[]
 
   constructor (options: BuilderOptions = DEFAULT_OPTIONS, config: BuilderConfig = DEFAULT_CONFIG) {
+    if (config.baseSpeed)
+      this.baseSpeed = config.baseSpeed
+
+    if (config.env)
+      this.env = config.env
   }
 
   // private tasks (options: Options, config: Config) {
