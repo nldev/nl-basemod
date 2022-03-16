@@ -77,6 +77,10 @@ export class Builder {
   protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
   protected readonly data: any = {}
 
+  protected last_found_id: number=  0
+  protected id_count: number = 0
+  protected queue: any[] = []
+
   constructor (
     protected readonly options: BuilderOptions = DEFAULT_OPTIONS,
     protected readonly config: BuilderConfig = DEFAULT_CONFIG,
@@ -130,8 +134,15 @@ export class Builder {
   // ignore isRerun: attempt to process anything that doesn't exist with param isRerun = true
   // check for `needs`
   // if doesn't exist, add to list (store last_id + increment last_id_found)
-  // if
-  public Process <T = any>(template: Template<T>) {
+  public Process <T = any>(template: Template<T>, isRerun = false) {
+    if (this.id_count === 2)
+      throw Error
+    // check 'isrerun'
+    // check 'needs'
+    if (isRerun) {
+      // find & pop item from array
+      this.queue.forEach(item => this.Process(item))
+    }
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
       if (task.process && (template.id === task.id))
         task.process(this, template, this.config.tasks[task.id])
