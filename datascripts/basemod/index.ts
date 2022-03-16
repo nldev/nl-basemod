@@ -134,7 +134,7 @@ export class Builder {
     // check 'isrerun'
     // check 'needs' -> add to queue
     if (isRerun) {
-      // find -> pop item from array -> iterate id_count + last_found_id
+      // find + pop template from queue -> iterate id_count + last_found_id
       this.queue.forEach(item => this.Process(item))
     }
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
