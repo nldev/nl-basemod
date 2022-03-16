@@ -48,11 +48,12 @@ export interface BuilderConfig {
 
 export interface Templates<T = any> {
   id: string
-  list: T[]
+  list: Template<T>[]
 }
 
 export interface Template<T = any> {
   id: string
+  needs: string[]
   data: T
 }
 
@@ -119,12 +120,20 @@ export class Builder {
       if (task.process)
         for (const data of list)
           if (task.id === id)
-            task.process(this, { id, data }, this.config.tasks[task.id])
+            this.Process(data)
   }
 
+  // FIXME
+  // at start of process:
+  //
+  // if thing is processed three times in row, throw error
+  // ignore isRerun: attempt to process anything that doesn't exist with param isRerun = true
+  // check for `needs`
+  // if doesn't exist, add to list (store last_id + increment last_id_found)
+  // if
   public Process <T = any>(template: Template<T>) {
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
-      if (task.process)
+      if (task.process && (template.id === task.id))
         task.process(this, template, this.config.tasks[task.id])
   }
 
