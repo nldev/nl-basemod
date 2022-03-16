@@ -128,19 +128,13 @@ export class Builder {
   }
 
   // FIXME
-  // at start of process:
-  //
-  // if thing is processed three times in row, throw error
-  // ignore isRerun: attempt to process anything that doesn't exist with param isRerun = true
-  // check for `needs`
-  // if doesn't exist, add to list (store last_id + increment last_id_found)
   public Process <T = any>(template: Template<T>, isRerun = false) {
     if (this.id_count === 2)
       throw Error
     // check 'isrerun'
-    // check 'needs'
+    // check 'needs' -> add to queue
     if (isRerun) {
-      // find & pop item from array
+      // find -> pop item from array -> iterate id_count + last_found_id
       this.queue.forEach(item => this.Process(item))
     }
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
