@@ -163,13 +163,13 @@ export class Builder {
       if (task.process && (template.id === task.id))
         task.process(this, template, this.config.tasks[task.id])
 
-    if (!lastId)
-      this.queue.forEach(item => this.Process(item, template.id))
-
     this.queue.forEach((item, i) => {
       if (item.id === template.id)
         this.queue.splice(i, 1)
     })
+
+    if (!lastId)
+      this.queue.forEach(item => this.Process(item, template.id))
   }
 
   public Get <T = any>(a: string, b?: string) {
