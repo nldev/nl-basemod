@@ -63,29 +63,17 @@ export interface Task<T = any, O = any> {
   process?: ($: Builder, template: Template<T>, options: O) => void
 }
 
-export function Select <T = any>(path: string | string[], object: any): T {
-  if (typeof object !== 'object')
-    return object
-
-  console.log(object)
-  if (!Array.isArray(path))
-    path = path.split('.')
-
-  let selection
-
-  for (let key of Object.keys(object)) {
-    if (object[key])
-      selection = object[key]
+export function Select <T = any>(o: T, s: string): T {
+  s = s.replace(/\[(\w+)\]/g, '.$1')
+  s = s.replace(/^\./, '')
+  const a = s.split('.')
+  for (var i = 0, n = a.length; i < n; ++i) {
+    var k = a[i]
+    if (k in o) {
+      o = (o as any)[k]
+    }
   }
-
-  if (path.length === 1) {
-    return selection as any
-  } else {
-    if (!selection)
-      selection = null
-  }
-
-  return Select(path, selection)
+  return o
 }
 
 export class Builder {
@@ -159,7 +147,7 @@ export class Builder {
 
     if (template.needs)
       template.needs.forEach(t => {
-        const data = Select(t, this.data)
+        const data = Select(this.data, t)
         if (!data)
           isNeedsSatisfied = false
       })
