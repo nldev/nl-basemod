@@ -326,7 +326,6 @@ export interface ExportData {
 export type AssetTransform = (asset: Asset) => Asset
 
 export interface Asset<T = any> {
-  id: string
   isModify: boolean
   asset: T
   baseId: number
@@ -334,7 +333,6 @@ export interface Asset<T = any> {
 }
 
 export interface AssetOptions<T = any> {
-  id: string
   isModify?: boolean
   asset?: T
   baseId?: number

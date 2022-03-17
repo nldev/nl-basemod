@@ -8,29 +8,29 @@ $.ProcessMany<SpellOptions>({
   taskId: 'create-spell',
   list: [
     {
+      id: 'thing',
       needs: ['spells.pp'],
       data: {
-        id: 'thing',
         baseId: 233,
       },
     },
     {
+      id: 'pp',
       data: {
-        id: 'pp',
         baseId: 233,
       },
     },
     {
+      id: 'qq',
       needs: ['spells.pp'],
       data: {
-        id: 'qq',
         baseId: 233,
       },
     },
     {
+      id: 'foo',
       needs: ['spells.thing', 'spells.qq'],
       data: {
-        id: 'foo',
         baseId: 233,
       },
     },
