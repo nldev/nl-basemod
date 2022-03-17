@@ -5,10 +5,10 @@ import { SpellOptions } from './basemod/spell'
 const $ = new Builder()
 
 $.Process<SpellOptions>({
+  id: 'create-spell',
   data: {
     id: 'thing',
   },
-  id: 'create-spell',
 })
 throw Error
 
