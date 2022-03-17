@@ -52,8 +52,8 @@ export interface Templates<T = any> {
 }
 
 export interface Template<T = any> {
-  id: string
   data: T
+  id?: string
   needs?: string[]
 }
 
