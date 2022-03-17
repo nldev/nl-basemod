@@ -68,7 +68,6 @@ export function Select <T = any>(path: string | string[], object: any): T {
     return object
 
   console.log(object)
-
   if (!Array.isArray(path))
     path = path.split('.')
 
@@ -167,7 +166,6 @@ export class Builder {
 
     if (!isNeedsSatisfied) {
       this.queue.push(template)
-      console.log(this.queue)
       return
     }
 

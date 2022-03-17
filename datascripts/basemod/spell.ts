@@ -14,13 +14,10 @@ export interface CreateSpellOptions extends SpellOptions {
 
 export const CreateSpell: Task<SpellOptions, CreateSpellOptions> = {
   id: 'create-spell',
-  setup: ($, options) => {
-  },
+  setup: ($, options) => {},
   process: ($, template, options) => {
-    console.log(template)
     // isModify ? load : create
     $.Set('spells', template.data.id, template.data)
-    console.log($.Get('spells'))
   },
 }
 
