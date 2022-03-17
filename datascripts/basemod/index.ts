@@ -150,7 +150,6 @@ export class Builder {
     if (template.needs)
       template.needs.forEach(t => {
         const data = Select(this.data, t)
-        console.log(data)
         if (!data)
           isNeedsSatisfied = false
       })

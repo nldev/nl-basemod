@@ -37,5 +37,7 @@ $.ProcessMany<SpellOptions>({
   ]
 })
 
+console.log($.Get('spells'))
+
 throw new Error('complete')
 
