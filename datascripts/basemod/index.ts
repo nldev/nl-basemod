@@ -158,7 +158,7 @@ export class Builder {
     if (!isNeedsSatisfied) {
       let isAlreadyExists = false
       this.queue.forEach((item, i) => {
-        if (item.data.id === template.id)
+        if (item.id === template.id)
           isAlreadyExists = true
       })
       if (!isAlreadyExists)
