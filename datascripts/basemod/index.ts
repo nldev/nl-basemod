@@ -64,22 +64,28 @@ export interface Task<T = any, O = any> {
 }
 
 export function Select <T = any>(path: string | string[], object: any): T {
+  if (typeof object !== 'object')
+    return object
+
+  console.log(object)
+
   if (!Array.isArray(path))
     path = path.split('.')
 
   let selection
 
-  path.forEach(key => selection = object[key])
-
+  for (let key of Object.keys(object)) {
+    if (object[key])
+      selection = object[key]
+  }
 
   if (path.length === 1) {
     return selection as any
   } else {
     if (!selection)
-      selection = {}
+      selection = null
   }
 
-  path.shift()
   return Select(path, selection)
 }
 
