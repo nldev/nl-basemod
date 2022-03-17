@@ -53,8 +53,8 @@ export interface Templates<T = any> {
 
 export interface Template<T = any> {
   id: string
-  needs: string[]
   data: T
+  needs?: string[]
 }
 
 export interface Task<T = any, O = any> {
@@ -142,7 +142,6 @@ export class Builder {
             this.Process(data)
   }
 
-  // FIXME
   public Process <T = any>(template: Template<T>, lastId: (null | string) = null) {
     if (lastId === template.id)
       return

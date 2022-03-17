@@ -329,6 +329,13 @@ export interface Asset<T = any> {
   id: string
   isModify: boolean
   asset: T
-  transforms: string[]
+  transforms: AssetTransform[]
+}
+
+export interface AssetOptions<T = any> {
+  id: string
+  isModify?: boolean
+  asset?: T
+  transforms?: AssetTransform[]
 }
 

@@ -1,10 +1,15 @@
 import { std } from 'wow/wotlk'
 import { Builder } from './basemod'
+import { SpellOptions } from './basemod/spell'
 
 const $ = new Builder()
 
-console.log(std.DBC.SpellItemEnchantment.findById(22).objectify())
-
+$.Process<SpellOptions>({
+  data: {
+    id: 'thing',
+  },
+  id: 'create-spell',
+})
 throw Error
 
 console.log('end')
