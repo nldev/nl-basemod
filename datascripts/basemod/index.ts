@@ -150,12 +150,19 @@ export class Builder {
     if (template.needs)
       template.needs.forEach(t => {
         const data = Select(this.data, t)
+        console.log(data)
         if (!data)
           isNeedsSatisfied = false
       })
 
     if (!isNeedsSatisfied) {
-      this.queue.push(template)
+      let isAlreadyExists = false
+      this.queue.forEach((item, i) => {
+        if (item.id === template.id)
+          isAlreadyExists = true
+      })
+      if (!isAlreadyExists)
+        this.queue.push(template)
       return
     }
 
