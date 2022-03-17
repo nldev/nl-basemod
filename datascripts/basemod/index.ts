@@ -65,8 +65,7 @@ export interface Task<T = any, O = any> {
 }
 
 export function Select <T = any>(o: T, s: string): T | null {
-  s = s.replace(/\[(\w+)\]/g, '.$1')
-  s = s.replace(/^\./, '')
+  s = s.replace(/\[(\w+)\]/g, '.$1').replace(/^\./, '')
   const a = s.split('.')
   for (let i = 0, n = a.length; i < n; ++i) {
     const k = a[i]
@@ -143,9 +142,6 @@ export class Builder {
   }
 
   public Process <T = any>(template: Template<T>, lastId: (null | string) = null) {
-    if (lastId === (template.id))
-      return
-
     let isNeedsSatisfied = true
 
     if (template.needs)
