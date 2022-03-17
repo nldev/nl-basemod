@@ -142,7 +142,7 @@ export class Builder {
   }
 
   public Process <T = any>(template: Template<T>, lastId: (null | string) = null) {
-    if (lastId === template.id)
+    if (lastId === (template.data as any).id)
       return
 
     let isNeedsSatisfied = true
@@ -157,7 +157,7 @@ export class Builder {
     if (!isNeedsSatisfied) {
       let isAlreadyExists = false
       this.queue.forEach((item, i) => {
-        if (item.id === template.id)
+        if (item.data.id === (template.data as any).id)
           isAlreadyExists = true
       })
       if (!isAlreadyExists)
@@ -166,16 +166,16 @@ export class Builder {
     }
 
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
-      if (task.process && (template.id === task.id))
+      if (task.process && (task.id === template.id))
         task.process(this, template, this.config.tasks[task.id])
 
     this.queue.forEach((item, i) => {
-      if (item.id === template.id)
+      if (item.id === (template.data as any).id)
         this.queue.splice(i, 1)
     })
 
     if (!lastId)
-      this.queue.forEach(item => this.Process(item, template.id))
+      this.queue.forEach(item => this.Process(item, (template.data as any).id))
   }
 
   public Get <T = any>(a: string, b?: string) {
