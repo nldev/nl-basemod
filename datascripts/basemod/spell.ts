@@ -1,6 +1,6 @@
 import { Spell } from 'wow/wotlk/std/Spell/Spell'
 import { Task } from '.'
-import { Asset, AssetOptions } from './types'
+import { AssetOptions } from './types'
 
 export interface SpellOptions extends AssetOptions {
   asset?: Spell
