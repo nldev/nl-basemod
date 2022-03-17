@@ -94,7 +94,7 @@ export class Builder {
 
   protected last_found_id: number=  0
   protected id_count: number = 0
-  protected queue: any[] = []
+  protected queue: Template[] = []
 
   constructor (
     protected readonly options: BuilderOptions = DEFAULT_OPTIONS,
@@ -146,22 +146,32 @@ export class Builder {
   public Process <T = any>(template: Template<T>, lastId: (null | string) = null) {
     if (lastId === template.id)
       return
-    if (this.id_count === 2)
-      throw Error
+
+    let isNeedsSatisfied = true
+
     if (template.needs)
-      template.needs.forEach(n => {
-        const items = n.split('.')
-
-
+      template.needs.forEach(t => {
+        const data = Select(t, this.data)
+        if (!data)
+          isNeedsSatisfied = false
       })
-    // check 'needs' -> add to queue
-    if (!lastId) {
-      // find + pop template from queue -> iterate id_count + last_found_id
-      this.queue.forEach(item => this.Process(item, template.id))
+
+    if (!isNeedsSatisfied) {
+      this.queue.push(template)
+      return
     }
+
+    if (!lastId)
+      this.queue.forEach(item => this.Process(item, template.id))
+
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
       if (task.process && (template.id === task.id))
         task.process(this, template, this.config.tasks[task.id])
+
+    this.queue.forEach((item, i) => {
+      if (item.id === template.id)
+        this.queue.splice(i, 1)
+    })
   }
 
   public Get <T = any>(a: string, b?: string) {
