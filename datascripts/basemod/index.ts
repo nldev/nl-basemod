@@ -63,7 +63,7 @@ export interface Task<T = any, O = any> {
   process?: ($: Builder, template: Template<T>, options: O) => void
 }
 
-export function Select <T = any>(o: T, s: string): T {
+export function Select <T = any>(o: T, s: string): T | null {
   s = s.replace(/\[(\w+)\]/g, '.$1')
   s = s.replace(/^\./, '')
   const a = s.split('.')
@@ -71,6 +71,8 @@ export function Select <T = any>(o: T, s: string): T {
     const k = a[i]
     if (k in o) {
       o = (o as any)[k]
+    } else {
+      return null
     }
   }
   return o
@@ -165,8 +167,6 @@ export class Builder {
       if (item.id === template.id)
         this.queue.splice(i, 1)
     })
-
-    this.queue.forEach(i => console.log(i.id))
 
     if (!lastId)
       this.queue.forEach(item => this.Process(item, template.id))

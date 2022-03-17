@@ -27,6 +27,13 @@ $.ProcessMany<SpellOptions>({
         baseId: 233,
       },
     },
+    {
+      needs: ['spells.thing', 'spells.qq'],
+      data: {
+        id: 'foo',
+        baseId: 233,
+      },
+    },
   ]
 })
 
