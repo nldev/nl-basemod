@@ -21,6 +21,7 @@ $.ProcessMany<SpellOptions>({
       },
     },
     {
+      needs: ['spells.pp'],
       data: {
         id: 'qq',
         baseId: 233,
