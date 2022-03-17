@@ -92,8 +92,7 @@ export class Builder {
   protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
   protected readonly data: any = {}
 
-  protected last_found_id: number=  0
-  protected id_count: number = 0
+  protected process_count: number = 0
   protected queue: Template[] = []
 
   constructor (
