@@ -53,8 +53,8 @@ export interface Templates<T = any> {
 
 export interface Template<T = any> {
   data: T
+  id: string
   taskId?: string
-  id?: string
   needs?: string[]
 }
 
