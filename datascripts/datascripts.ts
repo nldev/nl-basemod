@@ -25,7 +25,7 @@ $.ProcessMany<SpellOptions>({
   ]
 })
 
-console.log('complete')
-throw Error
-console.log('end')
+console.log($.Get('spells'))
+
+throw new Error('complete')
 
