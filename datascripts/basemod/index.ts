@@ -47,12 +47,13 @@ export interface BuilderConfig {
 }
 
 export interface Templates<T = any> {
-  id: string
+  taskId: string
   list: Template<T>[]
 }
 
 export interface Template<T = any> {
   data: T
+  taskId?: string
   id?: string
   needs?: string[]
 }
@@ -133,16 +134,16 @@ export class Builder {
       this.Process(template)
   }
 
-  public ProcessMany <T = any>({ id, list }: Templates<T>) {
+  public ProcessMany <T = any>({ taskId, list }: Templates<T>) {
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
       if (task.process)
         for (const data of list)
-          if (task.id === id)
-            this.Process({ id, ...data })
+          if (task.id === taskId)
+            this.Process({ ...data, taskId })
   }
 
   public Process <T = any>(template: Template<T>, lastId: (null | string) = null) {
-    if (lastId === (template.data as any).id)
+    if (lastId === (template.id))
       return
 
     let isNeedsSatisfied = true
@@ -157,7 +158,7 @@ export class Builder {
     if (!isNeedsSatisfied) {
       let isAlreadyExists = false
       this.queue.forEach((item, i) => {
-        if (item.data.id === (template.data as any).id)
+        if (item.data.id === template.id)
           isAlreadyExists = true
       })
       if (!isAlreadyExists)
@@ -166,16 +167,16 @@ export class Builder {
     }
 
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
-      if (task.process && (task.id === template.id))
+      if (task.process && (task.id === template.taskId))
         task.process(this, template, this.config.tasks[task.id])
 
     this.queue.forEach((item, i) => {
-      if (item.id === (template.data as any).id)
+      if (item.id === template.id)
         this.queue.splice(i, 1)
     })
 
     if (!lastId)
-      this.queue.forEach(item => this.Process(item, (template.data as any).id))
+      this.queue.forEach(item => this.Process(item, template.id))
   }
 
   public Get <T = any>(a: string, b?: string) {

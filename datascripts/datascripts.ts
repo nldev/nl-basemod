@@ -5,7 +5,7 @@ import { SpellOptions } from './basemod/spell'
 const $ = new Builder()
 
 $.ProcessMany<SpellOptions>({
-  id: 'create-spell',
+  taskId: 'create-spell',
   list: [
     {
       needs: ['spells.pp'],
