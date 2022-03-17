@@ -34,6 +34,12 @@ $.ProcessMany<SpellOptions>({
         baseId: 233,
       },
     },
+    {
+      id: 'e',
+      data: {
+        baseId: 233,
+      },
+    },
   ],
 })
 
