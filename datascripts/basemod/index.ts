@@ -136,7 +136,7 @@ export class Builder {
       if (task.process)
         for (const data of list)
           if (task.id === id)
-            this.Process(data)
+            this.Process({ id, ...data })
   }
 
   public Process <T = any>(template: Template<T>, lastId: (null | string) = null) {
