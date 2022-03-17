@@ -71,8 +71,13 @@ export function Select <T = any>(path: string | string[], object: any): T {
 
   path.forEach(key => selection = object[key])
 
-  if (path.length === 1)
+
+  if (path.length === 1) {
     return selection as any
+  } else {
+    if (!selection)
+      selection = {}
+  }
 
   path.shift()
   return Select(path, selection)
@@ -156,6 +161,7 @@ export class Builder {
 
     if (!isNeedsSatisfied) {
       this.queue.push(template)
+      console.log(this.queue)
       return
     }
 
@@ -167,6 +173,8 @@ export class Builder {
       if (item.id === template.id)
         this.queue.splice(i, 1)
     })
+
+    this.queue.forEach(i => console.log(i.id))
 
     if (!lastId)
       this.queue.forEach(item => this.Process(item, template.id))

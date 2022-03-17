@@ -9,7 +9,7 @@ $.ProcessMany<SpellOptions>({
   list: [
     {
       id: 'create-spell',
-      needs: ['pp'],
+      needs: ['spells.pp'],
       data: {
         id: 'thing',
         baseId: 233,
