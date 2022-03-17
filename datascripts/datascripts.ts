@@ -10,7 +10,7 @@ $.Process<SpellOptions>({
     id: 'thing',
   },
 })
-throw Error
 
+throw Error
 console.log('end')
 
