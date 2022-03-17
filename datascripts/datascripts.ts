@@ -34,7 +34,7 @@ $.ProcessMany<SpellOptions>({
         baseId: 233,
       },
     },
-  ]
+  ],
 })
 
 console.log($.Get('spells'))
