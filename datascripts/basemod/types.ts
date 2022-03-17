@@ -329,6 +329,7 @@ export interface Asset<T = any> {
   id: string
   isModify: boolean
   asset: T
+  baseId: number
   transforms: AssetTransform[]
 }
 
@@ -336,6 +337,7 @@ export interface AssetOptions<T = any> {
   id: string
   isModify?: boolean
   asset?: T
+  baseId?: number
   transforms?: AssetTransform[]
 }
 

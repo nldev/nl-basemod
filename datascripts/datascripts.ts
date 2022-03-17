@@ -4,13 +4,28 @@ import { SpellOptions } from './basemod/spell'
 
 const $ = new Builder()
 
-$.Process<SpellOptions>({
+$.ProcessMany<SpellOptions>({
   id: 'create-spell',
-  data: {
-    id: 'thing',
-  },
+  list: [
+    {
+      id: 'create-spell',
+      needs: ['pp'],
+      data: {
+        id: 'thing',
+        baseId: 233,
+      },
+    },
+    {
+      id: 'create-spell',
+      data: {
+        id: 'pp',
+        baseId: 233,
+      },
+    },
+  ]
 })
 
+console.log('complete')
 throw Error
 console.log('end')
 

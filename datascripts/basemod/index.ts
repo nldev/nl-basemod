@@ -159,12 +159,12 @@ export class Builder {
       return
     }
 
-    if (!lastId)
-      this.queue.forEach(item => this.Process(item, template.id))
-
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
       if (task.process && (template.id === task.id))
         task.process(this, template, this.config.tasks[task.id])
+
+    if (!lastId)
+      this.queue.forEach(item => this.Process(item, template.id))
 
     this.queue.forEach((item, i) => {
       if (item.id === template.id)
@@ -179,6 +179,8 @@ export class Builder {
   }
 
   public Set <T = any>(a: string, b: string, data: T) {
+    if (!this.data[a])
+      this.data[a] = {}
     this.data[a][b] = data
   }
 

@@ -17,6 +17,10 @@ export const CreateSpell: Task<SpellOptions, CreateSpellOptions> = {
   setup: ($, options) => {
   },
   process: ($, template, options) => {
+    console.log(template)
+    // isModify ? load : create
+    $.Set('spells', template.data.id, template.data)
+    console.log($.Get('spells'))
   },
 }
 
