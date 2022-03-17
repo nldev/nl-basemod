@@ -63,6 +63,21 @@ export interface Task<T = any, O = any> {
   process?: ($: Builder, template: Template<T>, options: O) => void
 }
 
+export function Select <T = any>(path: string | string[], object: any): T {
+  if (!Array.isArray(path))
+    path = path.split('.')
+
+  let selection
+
+  path.forEach(key => selection = object[key])
+
+  if (path.length === 1)
+    return selection as any
+
+  path.shift()
+  return Select(path, selection)
+}
+
 export class Builder {
   public readonly Mod: string = DEFAULT_MOD
   public readonly Version: string = DEFAULT_VERSION
@@ -128,14 +143,21 @@ export class Builder {
   }
 
   // FIXME
-  public Process <T = any>(template: Template<T>, isRerun = false) {
+  public Process <T = any>(template: Template<T>, lastId: (null | string) = null) {
+    if (lastId === template.id)
+      return
     if (this.id_count === 2)
       throw Error
-    // check 'isrerun'
+    if (template.needs)
+      template.needs.forEach(n => {
+        const items = n.split('.')
+
+
+      })
     // check 'needs' -> add to queue
-    if (isRerun) {
+    if (!lastId) {
       // find + pop template from queue -> iterate id_count + last_found_id
-      this.queue.forEach(item => this.Process(item))
+      this.queue.forEach(item => this.Process(item, template.id))
     }
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
       if (task.process && (template.id === task.id))
