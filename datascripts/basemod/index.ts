@@ -171,8 +171,7 @@ export class Builder {
         this.queue.splice(i, 1)
     })
 
-    if (!lastId)
-      this.queue.forEach(item => this.Process(item, template.id))
+    this.queue.forEach(item => this.Process(item, template.id))
   }
 
   public Get <T = any>(a: string, b?: string) {
