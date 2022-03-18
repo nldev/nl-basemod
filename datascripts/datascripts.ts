@@ -7,10 +7,6 @@ import { TALENTS } from './config/talents'
 new Builder($ => {
   $.ProcessMany<TalentOptions>(TALENTS)
 
-  console.log(
-    $.Get<Mapping<Talent>>('talents')
-  )
-
-  throw new Error('complete')
+  console.log($.Get<Mapping<Talent>>('talents'))
 })
 

@@ -165,6 +165,7 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
     const spell = std.Spells.load(item.spellId)
 
    // FIXME move this to Spell
+    spell.Attributes.IS_HIDDEN_IN_SPELLBOOK.set(0)
     spell.Subtext.enGB.set('')
 
     const classMask = typeof item.class === 'string'
