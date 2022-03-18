@@ -40,7 +40,7 @@ export const CreateSpell: Task<MapOptions, CreateMapConfig> = {
         : std.Maps.create($.Mod, template.id),
     }
 
-    $.Set('spells', template.id, item)
+    $.Set('maps', template.id, item)
   },
 }
 
