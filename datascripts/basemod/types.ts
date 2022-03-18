@@ -323,19 +323,15 @@ export interface ExportData {
   database: Database
 }
 
-export type AssetTransform = (asset: Asset) => Asset
-
 export interface Asset<T = any> {
   isModify: boolean
   asset: T
   baseId: number
-  transforms: AssetTransform[]
 }
 
 export interface AssetOptions<T = any> {
   isModify?: boolean
   asset?: T
   baseId?: number
-  transforms?: AssetTransform[]
 }
 
