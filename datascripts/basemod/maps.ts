@@ -18,8 +18,8 @@ export interface CreateMapConfig {
   // isPrefix?: boolean
 }
 
-export const CreateSpell: Task<MapOptions, CreateMapConfig> = {
-  id: 'create-spell',
+export const CreateMap: Task<MapOptions, CreateMapConfig> = {
+  id: 'create-map',
   identify: ($, config, options) => {
     if (!config.data.baseId)
       throw new Error('create-map templates require a baseId to automatically assign ID')
