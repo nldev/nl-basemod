@@ -20,7 +20,7 @@ export const CreateNpc: Task<NpcOptions, CreateNpcConfig> = {
   id: 'create-npc',
   identify: ($, config, options) => {
     if (!config.data.baseId)
-      throw new Error('create-cnpc templates require a baseId to automatically assign ID')
+      throw new Error('create-npc templates require a baseId to automatically assign ID')
 
     return TitleCaseToDashCase(std.CreatureTemplates.load(config.data.baseId).Name.enGB.get())
   },
