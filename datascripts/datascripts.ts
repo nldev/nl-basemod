@@ -1,9 +1,8 @@
-import { std } from 'wow/wotlk'
-import { Builder, Template } from './basemod'
-import { Talent, TalentOptions } from './basemod/talents'
+import { Builder } from './basemod'
+import { TalentOptions } from './basemod/talents'
+import { Autolearn } from './basemod/autolearn'
 import { TALENTS } from './config/talents'
 import { AUTOLEARN } from './config/autolearn'
-import { Autolearn } from './basemod/autolearn'
 
 new Builder($ => {
   $.ProcessMany<TalentOptions>(TALENTS)
