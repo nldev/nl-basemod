@@ -52,7 +52,7 @@ new Builder($ => {
 
   $.Set('foo', 'bar', 'hello')
 
-  console.log($.Get<Template<Spell>>('spells.a').data.asset.objectify())
+  console.log($.Get<Spell>('spells.a').asset.objectify())
   console.log($.Get('spells'))
 
   throw new Error('complete')
