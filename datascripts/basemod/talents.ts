@@ -175,10 +175,10 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
 
     if (!item.isActive)
       spell.Attributes.IS_PASSIVE.set(1)
-    spell.Rank.set(0, 0)
    // FIXME move this to Spell
     spell.Attributes.IS_HIDDEN_IN_SPELLBOOK.set(0)
     spell.Subtext.enGB.set('')
+    spell.Rank.set(0, 0)
 
     const classMask = typeof item.class === 'string'
       ? ClassMask(item.class)
