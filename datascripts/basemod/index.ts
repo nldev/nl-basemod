@@ -91,10 +91,10 @@ export class Builder {
 
   protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
   protected readonly data: any = {}
-  protected readonly templateMap: any = {}
+  protected readonly ranTemplates: any = {}
+  protected readonly processQueue: Template[] = []
 
-  protected process_count: number = 0
-  protected queue: Template[] = []
+  protected processCount: number = 0
 
   constructor (
     cb: ($: Builder) => void = () => {},
@@ -136,8 +136,8 @@ export class Builder {
 
     cb(this)
 
-    if (this.queue.length)
-      throw new Error(`${this.queue.length} items left in processing queue`)
+    if (this.processQueue.length)
+      throw new Error(`${this.processQueue.length} items left in processing queue`)
   }
 
   public ProcessMany <T = any>({ taskId, list }: Templates<T>) {
@@ -151,24 +151,24 @@ export class Builder {
   public Process <T = any>(template: Template<T>, lastId: (null | string) = null) {
     let isNeedsSatisfied = true
 
-    if (this.templateMap[template.id])
+    if (this.ranTemplates[template.id])
       throw Error(`Template ${template.id} has already been processed`)
 
     if (template.needs)
       template.needs.forEach(n => {
-        const t = this.templateMap[n]
+        const t = this.ranTemplates[n]
         if (!t)
           isNeedsSatisfied = false
       })
 
     if (!isNeedsSatisfied) {
       let isAlreadyExists = false
-      this.queue.forEach((item, i) => {
+      this.processQueue.forEach((item, i) => {
         if (item.id === template.id)
           isAlreadyExists = true
       })
       if (!isAlreadyExists)
-        this.queue.push(template)
+        this.processQueue.push(template)
       return
     }
 
@@ -176,14 +176,14 @@ export class Builder {
       if (task.process && (task.id === template.taskId))
         task.process(this, template, this.config.tasks[task.id])
 
-    this.queue.forEach((item, i) => {
+    this.processQueue.forEach((item, i) => {
       if (item.id === template.id)
-        this.queue.splice(i, 1)
+        this.processQueue.splice(i, 1)
     })
 
-    this.templateMap[template.id] = template
+    this.ranTemplates[template.id] = template
 
-    this.queue.forEach(item => this.Process(item, template.id))
+    this.processQueue.forEach(item => this.Process(item, template.id))
   }
 
   public Get <T = any>(selection: string) {
