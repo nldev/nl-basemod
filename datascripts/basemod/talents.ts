@@ -189,10 +189,11 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
       spell.CastTime.set(1)
       spell.Subtext.enGB.set('Passive')
       spell.Levels.set(0, 0, 0)
+    } else {
+      spell.Subtext.enGB.set('')
     }
    // FIXME move this to Spell
     spell.Attributes.IS_HIDDEN_IN_SPELLBOOK.set(0)
-    spell.Subtext.enGB.set('')
     spell.Rank.set(0, 0)
 
     const classMask = typeof item.class === 'string'
