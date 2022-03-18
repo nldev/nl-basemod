@@ -207,7 +207,7 @@ export class Builder {
     this.processQueue.forEach(item => this.Process(item, template.id))
   }
 
-  public Get <T = any>(selection: string) {
+  public Get <T = any>(selection: string): T {
     return Select(this.data, selection)
   }
 
