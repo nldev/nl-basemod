@@ -324,6 +324,7 @@ export interface ExportData {
 }
 
 export interface Asset<T = any> {
+  id: string
   isModify: boolean
   asset: T
   baseId: number

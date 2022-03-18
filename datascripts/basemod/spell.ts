@@ -28,21 +28,14 @@ export const CreateSpell: Task<SpellOptions, CreateSpellConfig> = {
   process: ($, template, config) => {
     const item: any = {
       id: template.id,
-      taskId: template.taskId,
-      needs: template.needs,
-      data: {},
+      baseId: template.data.baseId || DEFAULT_SPELL,
+      isModify: (typeof template.data.isModify === 'boolean') ? template.data.isModify : false,
     }
 
-    if (!template.data.baseId)
-      item.data.baseId = DEFAULT_SPELL
-
-    if (!template.data.isModify)
-      item.data.isModify = false
-
     if (template.data.isModify) {
-      item.data.asset = std.Spells.load(template.data.baseId || DEFAULT_SPELL)
+      item.asset = std.Spells.load(template.data.baseId || DEFAULT_SPELL)
     } else {
-      item.data.asset = std.Spells.create($.Mod, template.id, template.data.baseId || DEFAULT_SPELL)
+      item.asset = std.Spells.create($.Mod, template.id, template.data.baseId || DEFAULT_SPELL)
     }
 
     $.Set('spells', template.id, item)
