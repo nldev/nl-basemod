@@ -5,13 +5,21 @@ import { CharacterClass, ClassMap } from './types'
 
 export interface Talent {
   id: string
+  isActive: boolean
   // FIXME make string
   spellId: number
   cost: number
   class: ClassMap | CharacterClass
 }
 
-export type TalentOptions = Omit<Talent, 'id'>
+export type TalentOptions = {
+  id?: string
+  isActive?: boolean
+  // FIXME make string
+  spellId: number
+  cost: number
+  class: ClassMap | CharacterClass
+}
 
 export interface CreateTalentConfig {}
 
@@ -156,6 +164,7 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
   },
   process: ($, template, config) => {
     const item: Talent = {
+      isActive: template.data.isActive || false,
       id: template.id,
       spellId: template.data.spellId,
       cost: template.data.cost,
@@ -164,6 +173,9 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
 
     const spell = std.Spells.load(item.spellId)
 
+    if (!item.isActive)
+      spell.Attributes.IS_PASSIVE.set(1)
+    spell.Rank.set(0, 0)
    // FIXME move this to Spell
     spell.Attributes.IS_HIDDEN_IN_SPELLBOOK.set(0)
     spell.Subtext.enGB.set('')

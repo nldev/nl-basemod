@@ -23,6 +23,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'vigor',
       data: {
+        isActive: true,
         spellId: 14983,
         cost: 5,
         class: { ROGUE: true },
@@ -31,6 +32,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'shadowstep',
       data: {
+        isActive: true,
         spellId: 36554,
         cost: 18,
         class: { ROGUE: true },
@@ -39,6 +41,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'mutilate',
       data: {
+        isActive: true,
         spellId: 34412,
         cost: 16,
         class: { ROGUE: true },
@@ -47,6 +50,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'hemorrhage',
       data: {
+        isActive: true,
         spellId: 17348,
         cost: 14,
         class: { ROGUE: true },
@@ -55,6 +59,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'adrenaline-rush',
       data: {
+        isActive: true,
         spellId: 13750,
         cost: 22,
         class: { ROGUE: true },
@@ -63,6 +68,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'blade-flurry',
       data: {
+        isActive: true,
         spellId: 13877,
         cost: 10,
         class: { ROGUE: true },
@@ -95,6 +101,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'ghostly-strike',
       data: {
+        isActive: true,
         spellId: 14278,
         cost: 4,
         class: { ROGUE: true },
@@ -191,6 +198,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'shadow-dance',
       data: {
+        isActive: true,
         spellId: 51713,
         cost: 22,
         class: { ROGUE: true },
@@ -279,6 +287,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'preparation',
       data: {
+        isActive: true,
         spellId: 14185,
         cost: 24,
         class: { ROGUE: true },
@@ -287,6 +296,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'premeditation',
       data: {
+        isActive: true,
         spellId: 14183,
         cost: 5,
         class: { ROGUE: true },
@@ -567,6 +577,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'cold-blood',
       data: {
+        isActive: true,
         spellId: 14177,
         cost: 16,
         class: { ROGUE: true },
@@ -599,6 +610,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'cloak-of-shadows',
       data: {
+        isActive: true,
         spellId: 31224,
         cost: 20,
         class: { ROGUE: true },
@@ -607,6 +619,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'tricks-of-the-trade',
       data: {
+        isActive: true,
         spellId: 57934,
         cost: 3,
         class: { ROGUE: true },
@@ -615,6 +628,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'fan-of-knives',
       data: {
+        isActive: true,
         spellId: 51723,
         cost: 8,
         class: { ROGUE: true },
@@ -623,6 +637,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'envenom',
       data: {
+        isActive: true,
         spellId: 57993,
         cost: 5,
         class: { ROGUE: true },
@@ -631,6 +646,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'dismantle',
       data: {
+        isActive: true,
         spellId: 51722,
         cost: 5,
         class: { ROGUE: true },
