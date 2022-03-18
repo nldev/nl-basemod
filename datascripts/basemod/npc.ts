@@ -26,15 +26,16 @@ export const CreateNpc: Task<NpcOptions, CreateNpcConfig> = {
   },
   setup: ($, config) => {},
   process: ($, template, config) => {
+    const baseId = template.data.baseId || DEFAULT_NPC
     const item: Npc = {
+      baseId,
       id: template.id,
-      baseId: template.data.baseId || DEFAULT_NPC,
       isModify: (typeof template.data.isModify === 'boolean')
         ? template.data.isModify
         : false,
       asset: template.data.isModify
-        ? std.CreatureTemplates.load(template.data.baseId || DEFAULT_NPC)
-        : std.CreatureTemplates.create($.Mod, template.id, template.data.baseId || DEFAULT_NPC),
+        ? std.CreatureTemplates.load(baseId)
+        : std.CreatureTemplates.create($.Mod, template.id, baseId),
     }
 
     $.Set('npcs', template.id, item)
