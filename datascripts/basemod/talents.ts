@@ -181,7 +181,10 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
       spell.Attributes.UN_AUTOCASTABLE_BY_PET.set(true)
       spell.Attributes.NOT_SHAPESHIFTED.set(true)
       spell.Attributes.SHEATHE_UNCHANGED.set(true)
-      spell.CastTime.set(0)
+      spell.Cooldown.set(0, 1500, 133)
+      spell.CastTime.set(1)
+      spell.Description.enGB.set('Passive')
+      spell.Levels.set(0, 0, 0)
     }
    // FIXME move this to Spell
     spell.Attributes.IS_HIDDEN_IN_SPELLBOOK.set(0)
