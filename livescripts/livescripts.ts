@@ -16,11 +16,6 @@ export function Main (events: TSEvents) {
   Autolearn(events)
   Combat(events)
 
-  events.Player.OnSay(p => {
-    p.SetNativeDisplayID(19896)
-    p.SetDisplayID(19896)
-  })
-
   events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
     missChance.set(0)
     dodgeChance.set(0)
