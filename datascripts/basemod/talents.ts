@@ -185,7 +185,7 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
       spell.Attributes.NOT_SHAPESHIFTED.set(true)
       spell.Attributes.SHEATHE_UNCHANGED.set(true)
       spell.Attributes.IS_HIDDEN_FROM_LOG.set(true)
-      spell.Cooldown.set(0, 1500, 133)
+      spell.Cooldown.set(0, 0, 0)
       spell.CastTime.set(1)
       spell.Subtext.enGB.set('Passive')
       spell.Levels.set(0, 0, 0)
