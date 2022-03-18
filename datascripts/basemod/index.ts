@@ -186,10 +186,8 @@ export class Builder {
     this.queue.forEach(item => this.Process(item, template.id))
   }
 
-  public Get <T = any>(a: string, b?: string) {
-    if (b)
-      return this.data[a][b] as T
-    return this.data[a] as T
+  public Get <T = any>(selection: string) {
+    return Select(this.data, selection)
   }
 
   public Set <T = any>(a: string, b: string, data: T) {
