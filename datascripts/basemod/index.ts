@@ -60,6 +60,7 @@ export interface Template<T = any> {
 
 export interface Task<T = any, O = any> {
   id: string
+  identify?: ($: Builder, template: Template<T>, options: O) => string
   setup?: ($: Builder, options: O) => void
   process?: ($: Builder, template: Template<T>, options: O) => void
 }
@@ -147,6 +148,14 @@ export class Builder {
 
   public Process <T = any>(template: Template<T>, lastId: (null | string) = null) {
     let isNeedsSatisfied = true
+
+    if (!template.id && template.taskId && this.tasks[template.taskId] && this.tasks[template.taskId].identify) {
+      const identify: any = this.tasks[template.taskId].identify
+      template.id = identify(this, template, this.config.tasks[template.taskId])
+    }
+
+    if (!template.id)
+      throw Error(`Templates must have a unique ID`)
 
     if (this.ranTemplates[template.id])
       throw Error(`Template ${template.id} has already been processed`)
