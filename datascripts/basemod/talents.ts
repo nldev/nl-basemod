@@ -177,7 +177,7 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
       // spell.Attributes.CASTABLE_WHILE_DEAD.set(true)
       // spell.Attributes.PERSISTS_DEATH.set(true)
       // spell.Attributes.HIDE_FROM_AURA_BAR.set(true)
-      // spell.Attributes.IS_PASSIVE.set(true)
+      spell.Attributes.IS_PASSIVE.set(true)
       // spell.Attributes.CASTABLE_WHILE_SITTING.set(true)
       // spell.Attributes.CASTABLE_WHILE_MOUNTED.set(true)
       // spell.Attributes.NOT_BREAK_STEALTH.set(true)
