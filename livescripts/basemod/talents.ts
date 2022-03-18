@@ -59,6 +59,10 @@ function ApplyTalents(player: TSPlayer) {
         spellId = c.GetUInt16(2)
         if (player.HasSpell(spellId)) {
           player.LearnSpell(spellId)
+          const info = GetSpellInfo(spellId)
+          if (!info.IsNull())
+            if ((64 & info.GetAttributes()) === 64)
+              player.AddAura(spellId, player)
         } else {
           player.RemoveSpell(spellId, false, false)
           player.RemoveAura(spellId)
