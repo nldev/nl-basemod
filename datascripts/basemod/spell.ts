@@ -14,6 +14,9 @@ export interface CreateSpellConfig {
 
 export const CreateSpell: Task<SpellOptions, CreateSpellConfig> = {
   id: 'create-spell',
+  identify: ($, config, options) => {
+    return ''
+  },
   setup: ($, config) => {},
   process: ($, template, config) => {
     let asset

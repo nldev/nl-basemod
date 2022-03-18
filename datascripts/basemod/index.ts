@@ -41,19 +41,26 @@ export interface BuilderConfig {
   version: string
   env: Env
   tasks: Mapping<TaskOptions>
-  templates: Template[]
+  templates: TemplateOptions[]
   baseSpeed?: number
   tablePrefix?: string
 }
 
 export interface Templates<T = any> {
   taskId: string
-  list: Template<T>[]
+  list: TemplateOptions<T>[]
+}
+
+export interface TemplateOptions<T = any> {
+  data?: T
+  id?: string
+  taskId?: string
+  needs?: string[]
 }
 
 export interface Template<T = any> {
-  data: T
   id: string
+  data?: T
   taskId?: string
   needs?: string[]
 }
@@ -85,14 +92,14 @@ export class Builder {
   public readonly Env: Env = ENV.DEV
   public readonly BaseSpeed: number = DEFAULT_SPEED
 
-  protected readonly templates: Template[] = []
+  protected readonly templates: TemplateOptions[] = []
   protected readonly tasks: Mapping<Task> = {}
   protected readonly addonFiles: Mapping<boolean> = {}
   protected readonly databaseTables: Mapping<boolean> = {}
   protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
   protected readonly data: any = {}
   protected readonly ranTemplates: any = {}
-  protected readonly processQueue: Template[] = []
+  protected readonly processQueue: TemplateOptions[] = []
 
   constructor (
     cb: ($: Builder) => void = () => {},
@@ -141,12 +148,12 @@ export class Builder {
   public ProcessMany <T = any>({ taskId, list }: Templates<T>) {
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
       if (task.process)
-        for (const data of list)
+        for (const template of list)
           if (task.id === taskId)
-            this.Process({ ...data, taskId })
+            this.Process({ ...template, taskId })
   }
 
-  public Process <T = any>(template: Template<T>, lastId: (null | string) = null) {
+  public Process <T = any>(template: TemplateOptions<T>, lastId: (null | string) = null) {
     let isNeedsSatisfied = true
 
     if (!template.id && template.taskId && this.tasks[template.taskId] && this.tasks[template.taskId].identify) {
@@ -180,7 +187,7 @@ export class Builder {
 
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
       if (task.process && (task.id === template.taskId))
-        task.process(this, template, this.config.tasks[task.id])
+        task.process(this, template as Template, this.config.tasks[task.id])
 
     this.processQueue.forEach((item, i) => {
       if (item.id === template.id)
