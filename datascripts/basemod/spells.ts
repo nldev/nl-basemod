@@ -14,7 +14,9 @@ export interface SpellOptions extends AssetOptions {
   asset?: TSSpell
 }
 
-export interface CreateSpellConfig {}
+export interface CreateSpellConfig {
+  // isPrefix?: boolean
+}
 
 export const CreateSpell: Task<SpellOptions, CreateSpellConfig> = {
   id: 'create-spell',

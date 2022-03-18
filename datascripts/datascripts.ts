@@ -1,23 +1,15 @@
 import { std } from 'wow/wotlk'
 import { Builder, Template } from './basemod'
-import { Spell, SpellOptions } from './basemod/spell'
+import { Talent, TalentOptions } from './basemod/talents'
+import { Mapping } from './basemod/types'
+import { TALENTS } from './config/talents'
 
 new Builder($ => {
-  $.ProcessMany<SpellOptions>({
-    taskId: 'create-spell',
-    list: [
-      {
-        data: {
-          baseId: 133,
-        },
-      },
-    ],
-  })
+  $.ProcessMany<TalentOptions>(TALENTS)
 
-  $.Set('foo', 'bar', 'hello')
-
-  const s = $.Get<Spell>('spells.fireball').asset.objectify()
-  console.log(s)
+  console.log(
+    $.Get<Mapping<Talent>>('talents')
+  )
 
   throw new Error('complete')
 })
