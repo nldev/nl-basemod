@@ -91,6 +91,7 @@ export class Builder {
 
   protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
   protected readonly data: any = {}
+  protected readonly templateMap: any = {}
 
   protected process_count: number = 0
   protected queue: Template[] = []
@@ -145,8 +146,8 @@ export class Builder {
     let isNeedsSatisfied = true
 
     if (template.needs)
-      template.needs.forEach(t => {
-        const data = Select(this.data, t)
+      template.needs.forEach(n => {
+        const data = this.templateMap[n]
         if (!data)
           isNeedsSatisfied = false
       })
@@ -172,6 +173,7 @@ export class Builder {
     })
 
     this.queue.forEach(item => this.Process(item, template.id))
+    this.templateMap[template.id] = template
   }
 
   public Get <T = any>(a: string, b?: string) {

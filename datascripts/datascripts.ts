@@ -9,7 +9,7 @@ $.ProcessMany<SpellOptions>({
   list: [
     {
       id: 'a',
-      needs: ['spells.e'],
+      needs: ['e'],
       data: {
         baseId: 233,
       },
@@ -22,28 +22,28 @@ $.ProcessMany<SpellOptions>({
     },
     {
       id: 'c',
-      needs: ['spells.d'],
+      needs: ['d'],
       data: {
         baseId: 233,
       },
     },
     {
       id: 'd',
-      needs: ['spells.a', 'spells.b'],
+      needs: ['a', 'b'],
       data: {
         baseId: 233,
       },
     },
     {
       id: 'e',
-      needs: ['spells.b'],
+      needs: ['b'],
       data: {
         baseId: 233,
       },
     },
     {
       id: 'f',
-      needs: ['spells.c'],
+      needs: ['c'],
       data: {
         baseId: 233,
       },
