@@ -145,6 +145,9 @@ export class Builder {
   public Process <T = any>(template: Template<T>, lastId: (null | string) = null) {
     let isNeedsSatisfied = true
 
+    if (this.templateMap[template.id])
+      throw Error(`Template ${template.id} has already been processed`)
+
     if (template.needs)
       template.needs.forEach(n => {
         const t = this.templateMap[n]
