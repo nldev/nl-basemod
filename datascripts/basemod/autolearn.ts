@@ -68,6 +68,8 @@ export const CreateAutolearn: Task<Autolearn, CreateAutolearnConfig> = {
     })
   },
   process: ($, template, config) => {
+    $.Set('autolearn', template.id, template)
+
     $.WriteToDatabase('autolearn', {
       id: template.id,
       spellId: template.data.spellId,
