@@ -58,11 +58,8 @@ export interface TemplateOptions<T = any> {
   needs?: string[]
 }
 
-export interface Template<T = any> {
+export interface Template<T = any> extends TemplateOptions {
   id: string
-  data?: T
-  taskId?: string
-  needs?: string[]
 }
 
 export interface Task<T = any, O = any> {
