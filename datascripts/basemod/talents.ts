@@ -174,6 +174,9 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
     const spell = std.Spells.load(item.spellId)
 
     if (!item.isActive) {
+      spell.Attributes.CASTABLE_WHILE_DEAD.set(true)
+      spell.Attributes.PERSISTS_DEATH.set(true)
+      spell.Attributes.HIDE_FROM_AURA_BAR.set(false)
       spell.Attributes.IS_PASSIVE.set(true)
       spell.Attributes.CASTABLE_WHILE_SITTING.set(true)
       spell.Attributes.CASTABLE_WHILE_MOUNTED.set(true)
@@ -181,9 +184,10 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
       spell.Attributes.UN_AUTOCASTABLE_BY_PET.set(true)
       spell.Attributes.NOT_SHAPESHIFTED.set(true)
       spell.Attributes.SHEATHE_UNCHANGED.set(true)
+      spell.Attributes.IS_HIDDEN_FROM_LOG.set(true)
       spell.Cooldown.set(0, 1500, 133)
       spell.CastTime.set(1)
-      spell.Description.enGB.set('Passive')
+      spell.Subtext.enGB.set('Passive')
       spell.Levels.set(0, 0, 0)
     }
    // FIXME move this to Spell
