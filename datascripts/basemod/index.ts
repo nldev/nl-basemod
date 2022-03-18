@@ -97,6 +97,7 @@ export class Builder {
   protected queue: Template[] = []
 
   constructor (
+    cb: ($: Builder) => void,
     protected readonly options: BuilderOptions = DEFAULT_OPTIONS,
     protected readonly config: BuilderConfig = DEFAULT_CONFIG,
   ) {
@@ -132,6 +133,11 @@ export class Builder {
 
     for (const template of this.templates)
       this.Process(template)
+
+    cb(this)
+
+    if (this.queue.length)
+      throw new Error(`${this.queue.length} items left in processing queue`)
   }
 
   public ProcessMany <T = any>({ taskId, list }: Templates<T>) {
