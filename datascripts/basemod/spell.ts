@@ -29,7 +29,9 @@ export const CreateSpell: Task<SpellOptions, CreateSpellConfig> = {
     const item: any = {
       id: template.id,
       baseId: template.data.baseId || DEFAULT_SPELL,
-      isModify: (typeof template.data.isModify === 'boolean') ? template.data.isModify : false,
+      isModify: (typeof template.data.isModify === 'boolean')
+        ? template.data.isModify
+        : false,
     }
 
     if (template.data.isModify) {
