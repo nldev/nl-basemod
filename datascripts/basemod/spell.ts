@@ -38,7 +38,6 @@ export const CreateSpell: Task<SpellOptions, CreateSpellConfig> = {
         : std.Spells.create($.Mod, template.id, template.data.baseId || DEFAULT_SPELL),
     }
 
-    console.log(template.id)
     $.Set('spells', template.id, item)
   },
 }
