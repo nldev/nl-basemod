@@ -88,13 +88,10 @@ export class Builder {
   protected readonly tasks: Mapping<Task> = {}
   protected readonly addonFiles: Mapping<boolean> = {}
   protected readonly databaseTables: Mapping<boolean> = {}
-
   protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
   protected readonly data: any = {}
   protected readonly ranTemplates: any = {}
   protected readonly processQueue: Template[] = []
-
-  protected processCount: number = 0
 
   constructor (
     cb: ($: Builder) => void = () => {},
