@@ -97,7 +97,7 @@ export class Builder {
   protected queue: Template[] = []
 
   constructor (
-    cb: ($: Builder) => void,
+    cb: ($: Builder) => void = () => {},
     protected readonly options: BuilderOptions = DEFAULT_OPTIONS,
     protected readonly config: BuilderConfig = DEFAULT_CONFIG,
   ) {

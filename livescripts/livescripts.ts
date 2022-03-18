@@ -40,9 +40,6 @@ export function Main (events: TSEvents) {
   // })
 }
 
-//
-//
-
   // events.Spells.OnApply((effect, application) => {
   //   if (effect.GetID() === 8326) {
   //     const player = application.GetTarget().ToPlayer()
