@@ -155,6 +155,7 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
     })
   },
   process: ($, template, config) => {
+    console.log(templates)
     const item: Talent = {
       id: template.id,
       spellId: template.data.spellId,

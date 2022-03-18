@@ -4,7 +4,10 @@ import { std } from 'wow/wotlk'
 import { ENV, DEFAULT_MOD, DEFAULT_TABLE_PREFIX } from './constants'
 import { Database, Env, Mapping, SQLTable } from './types'
 import { DashCaseToConstantCase } from './utils'
-import { CreateSpell } from './spell'
+import { CreateSpell } from './spells'
+import { CreateItem } from './items'
+import { CreateNpc } from './npcs'
+import { CreateTalent } from './talents'
 
 export const ADDON_PATH = __dirname + '/../../../addon'
 export const ADDON_DATA_PATH = ADDON_PATH + '/data'
@@ -19,6 +22,9 @@ export const DEFAULT_CONFIG = {
   tablePrefix: DEFAULT_TABLE_PREFIX,
   tasks: {
     'create-spell': true,
+    'create-item': true,
+    'create-npc': true,
+    'create-talent': true,
   },
   templates: [
   ],
@@ -29,6 +35,9 @@ export type TaskOptions<T = any> = boolean | Mapping<T>
 export const DEFAULT_OPTIONS = {
   tasks: [
     CreateSpell,
+    CreateItem,
+    CreateNpc,
+    CreateTalent,
   ],
 }
 
