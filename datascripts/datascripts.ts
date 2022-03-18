@@ -7,42 +7,6 @@ new Builder($ => {
     taskId: 'create-spell',
     list: [
       {
-        id: 'a',
-        needs: ['e'],
-        data: {
-          baseId: 133,
-        },
-      },
-      {
-        id: 'b',
-        data: {
-          baseId: 133,
-        },
-      },
-      {
-        id: 'c',
-        needs: ['d'],
-        data: {
-          baseId: 133,
-        },
-      },
-      {
-        id: 'd',
-        needs: ['a', 'b'],
-        data: {
-          baseId: 133,
-        },
-      },
-      {
-        id: 'e',
-        needs: ['b'],
-        data: {
-          baseId: 133,
-        },
-      },
-      {
-        id: 'f',
-        needs: ['c'],
         data: {
           baseId: 133,
         },
@@ -52,8 +16,8 @@ new Builder($ => {
 
   $.Set('foo', 'bar', 'hello')
 
-  console.log($.Get<Spell>('spells.a').asset.objectify())
-  console.log($.Get('spells'))
+  const s = $.Get<Spell>('spells.fireball').asset.objectify()
+  console.log(s)
 
   throw new Error('complete')
 })

@@ -156,7 +156,7 @@ export class Builder {
   public Process <T = any>(template: TemplateOptions<T>, lastId: (null | string) = null) {
     let isNeedsSatisfied = true
 
-    if (!template.id && template.taskId && this.tasks[template.taskId] && this.tasks[template.taskId].identify) {
+    if (!template.id && template.taskId) {
       const identify: any = this.tasks[template.taskId].identify
       template.id = identify(this, template, this.config.tasks[template.taskId])
     }
