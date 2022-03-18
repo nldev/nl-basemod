@@ -6,7 +6,8 @@ import { TALENTS } from './config/talents'
 
 new Builder($ => {
   $.ProcessMany<TalentOptions>(TALENTS)
+  console.log(std.Spells.load(2836).objectify())
 
-  console.log($.Get<Mapping<Talent>>('talents'))
+  console.log(std.Spells.load($.Get<Talent>('talents.improved-gouge').spellId).objectify())
 })
 

@@ -173,8 +173,16 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
 
     const spell = std.Spells.load(item.spellId)
 
-    if (!item.isActive)
-      spell.Attributes.IS_PASSIVE.set(1)
+    if (!item.isActive) {
+      spell.Attributes.IS_PASSIVE.set(true)
+      spell.Attributes.CASTABLE_WHILE_SITTING.set(true)
+      spell.Attributes.CASTABLE_WHILE_MOUNTED.set(true)
+      spell.Attributes.NOT_BREAK_STEALTH.set(true)
+      spell.Attributes.UN_AUTOCASTABLE_BY_PET.set(true)
+      spell.Attributes.NOT_SHAPESHIFTED.set(true)
+      spell.Attributes.SHEATHE_UNCHANGED.set(true)
+      spell.CastTime.set(0)
+    }
    // FIXME move this to Spell
     spell.Attributes.IS_HIDDEN_IN_SPELLBOOK.set(0)
     spell.Subtext.enGB.set('')
