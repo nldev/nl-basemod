@@ -23,7 +23,6 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'vigor',
       data: {
-        isActive: true,
         spellId: 14983,
         cost: 5,
         class: { ROGUE: true },
