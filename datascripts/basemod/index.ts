@@ -147,8 +147,8 @@ export class Builder {
 
     if (template.needs)
       template.needs.forEach(n => {
-        const data = this.templateMap[n]
-        if (!data)
+        const t = this.templateMap[n]
+        if (!t)
           isNeedsSatisfied = false
       })
 
@@ -172,8 +172,9 @@ export class Builder {
         this.queue.splice(i, 1)
     })
 
-    this.queue.forEach(item => this.Process(item, template.id))
     this.templateMap[template.id] = template
+
+    this.queue.forEach(item => this.Process(item, template.id))
   }
 
   public Get <T = any>(a: string, b?: string) {
