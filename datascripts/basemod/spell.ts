@@ -15,9 +15,6 @@ export interface SpellOptions extends AssetOptions {
 }
 
 export interface CreateSpellConfig {
-  foo: 'bar'
-  bar: 'baz'
-  baz: 'hello'
 }
 
 export const CreateSpell: Task<SpellOptions, CreateSpellConfig> = {
