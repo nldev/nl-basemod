@@ -26,15 +26,16 @@ export const CreateItem: Task<ItemOptions, CreateItemConfig> = {
   },
   setup: ($, config) => {},
   process: ($, template, config) => {
+    const baseId = template.data.baseId || DEFAULT_ITEM
     const item: Item = {
+      baseId,
       id: template.id,
-      baseId: template.data.baseId || DEFAULT_ITEM,
       isModify: (typeof template.data.isModify === 'boolean')
         ? template.data.isModify
         : false,
       asset: template.data.isModify
-        ? std.Items.load(template.data.baseId || DEFAULT_ITEM)
-        : std.Items.create($.Mod, template.id, template.data.baseId || DEFAULT_ITEM),
+        ? std.Items.load(baseId)
+        : std.Items.create($.Mod, template.id, baseId),
     }
 
     $.Set('items', template.id, item)
