@@ -24,7 +24,6 @@ export interface CreateMapConfig {
 
 export const CreateMap: Task<MapOptions, CreateMapConfig> = {
   id: 'create-map',
-  setup: ($, config) => {},
   process: ($, template, config) => {
     if (!template.data.baseId && template.data.isModify)
       throw new Error('create-map template cannot be isModify=true and baseId=null')

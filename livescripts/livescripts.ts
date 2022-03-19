@@ -16,6 +16,12 @@ export function Main (events: TSEvents) {
   Autolearn(events)
   Combat(events)
 
+  events.Player.OnSay((p, m) => {
+    if (m.get() === 'x') {
+      p.Teleport(47, 1947, 1556, 81, 1.3)
+    }
+  })
+
   events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
     missChance.set(0)
     dodgeChance.set(0)
