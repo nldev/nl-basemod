@@ -16,12 +16,14 @@ new Builder($ => {
   $.ProcessMany<MapOptions>(MAPS)
 
   console.log($.Get<Map[]>('maps'))
-
-  function RemoveFlagDropDebuff () {
-    std.Spells.load(42792).delete()
-  }
-
-  function Settings () {
-  }
 })
+
+
+function RemoveFlagDropDebuff () {
+  std.Spells.load(42792).delete()
+}
+
+function Settings () {
+  RemoveFlagDropDebuff()
+}
 
