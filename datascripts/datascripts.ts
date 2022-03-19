@@ -15,8 +15,6 @@ new Builder($ => {
   $.ProcessMany<Autolearn>(AUTOLEARN)
   $.ProcessMany<MapOptions>(MAPS)
 
-  console.log(std.DBC.SpellItemEnchantment.query({ ID: 22 }).objectify())
-
   Settings()
 })
 
@@ -196,6 +194,8 @@ function SetupPoisons () {
   woundEnchant.Name.enGB.set('Wound Poison')
   woundEffect.Name.enGB.set('Wound Poison')
 
+  console.log(cripplingEnchant.objectify())
+
   mindEnchant.EffectPointsMin.set([20])
   mindEnchant.EffectPointsMax.set([20])
   anestheticEnchant.EffectPointsMin.set([30])
@@ -208,6 +208,8 @@ function SetupPoisons () {
   instantEnchant.EffectPointsMax.set([20])
   woundEnchant.EffectPointsMin.set([30])
   woundEnchant.EffectPointsMax.set([30])
+
+  console.log(cripplingEnchant.objectify())
 
   const enchants = [
     mindEnchant,
