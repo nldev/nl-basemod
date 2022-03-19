@@ -167,16 +167,22 @@ function RemoveFlagDropDebuff () {
 }
 
 function SetupPoisons () {
+  const mindEffect = std.Spells.load(5760)
   const mindEnchant = std.DBC.SpellItemEnchantment.query({ ID: 35 })
   const mind = std.Spells.load(5761)
+  const anestheticEffect = std.Spells.load(26688)
   const anestheticEnchant = std.DBC.SpellItemEnchantment.query({ ID: 2640 })
   const anesthetic = std.Spells.load(26785)
+  const cripplingEffect = std.Spells.load(3409)
   const cripplingEnchant = std.DBC.SpellItemEnchantment.query({ ID: 22 })
   const crippling = std.Spells.load(3408)
+  const deadlyEffect = std.Spells.load(25349)
   const deadlyEnchant = std.DBC.SpellItemEnchantment.query({ ID: 2630 })
   const deadly = std.Spells.load(25351)
+  const instantEffect = std.Spells.load(11336)
   const instantEnchant = std.DBC.SpellItemEnchantment.query({ ID: 624 })
   const instant = std.Spells.load(11339)
+  const woundEffect = std.Spells.load(13224)
   const woundEnchant = std.DBC.SpellItemEnchantment.query({ ID: 706 })
   const wound = std.Spells.load(13227)
 
@@ -218,12 +224,22 @@ function SetupPoisons () {
     wound,
   ]
 
+  const effects = [
+    mindEffect,
+    anestheticEffect,
+    cripplingEffect,
+    deadlyEffect,
+    instantEffect,
+    woundEffect,
+  ]
+
   enchants.forEach(e => {
     e.Flags.set(0)
   })
 
-  spells.forEach(s => s
-    .Duration.set(0)
+  spells.forEach(s => s.Duration.set(0))
+
+  effects.forEach(e => e
     .Visual.getRef()
       .CastKit.getRef()
         .Animation.SPELL_CAST_DIRECTED.set()
