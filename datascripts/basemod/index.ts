@@ -4,6 +4,7 @@ import { std } from 'wow/wotlk'
 import { ENV, DEFAULT_MOD, DEFAULT_TABLE_PREFIX } from './constants'
 import { Database, Env, Mapping, SQLTable } from './types'
 import { DashCaseToConstantCase } from './utils'
+import { CreateTable } from './sql'
 import { CreateSpell } from './spells'
 import { CreateItem } from './items'
 import { CreateNpc } from './npcs'
@@ -23,6 +24,7 @@ export const DEFAULT_CONFIG = {
   baseSpeed: DEFAULT_SPEED,
   tablePrefix: DEFAULT_TABLE_PREFIX,
   tasks: {
+    'create-table': true,
     'create-spell': true,
     'create-item': true,
     'create-npc': true,
@@ -38,6 +40,7 @@ export type TaskOptions<T = any> = boolean | Mapping<T>
 
 export const DEFAULT_OPTIONS = {
   tasks: [
+    CreateTable,
     CreateSpell,
     CreateItem,
     CreateNpc,

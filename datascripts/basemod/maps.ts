@@ -46,6 +46,7 @@ export const CreateMap: Task<MapOptions, CreateMapConfig> = {
 
     item.asset.Name.enGB.set(template.data.name)
     item.asset.Expansion.set(0)
+    item.asset.delete
 
     if (typeof template.data.timeOfDay === 'number')
       item.asset.TimeofDayOverride.set(template.data.timeOfDay)
