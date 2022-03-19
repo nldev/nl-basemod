@@ -15,7 +15,6 @@ new Builder($ => {
   $.ProcessMany<Autolearn>(AUTOLEARN)
   $.ProcessMany<MapOptions>(MAPS)
 
-  console.log($.Get<Map[]>('maps.dev'))
   const info = std.SQL.playercreateinfo.queryAll({})
   info.forEach(i => {
     i.map.set(726)
