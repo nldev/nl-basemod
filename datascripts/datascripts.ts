@@ -21,7 +21,11 @@ new Builder($ => {
 
 
 function RemoveFlagDropDebuff () {
+  // flag drop debuff
   std.Spells.load(42792).delete()
+
+  // honorless target
+  std.Spells.load(2479).delete()
 }
 
 function Settings () {

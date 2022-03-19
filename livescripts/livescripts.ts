@@ -15,6 +15,9 @@ export function Main (events: TSEvents) {
   Autolearn(events)
   Combat(events)
 
+  events.Items.OnEquip((item, player, slot) => {
+    player.SendBroadcastMessage(`${item.GetName} ${slot}`)
+  })
   events.Player.OnSay((p, m) => {
     if (m.get() === 'x') {
       p.Teleport(47, 1944, 1550, 82.2, 1.3)

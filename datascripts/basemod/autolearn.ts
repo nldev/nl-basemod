@@ -71,8 +71,8 @@ export const CreateAutolearn: Task<Autolearn, CreateAutolearnConfig> = {
     // FIXME: move to spell transforms
     const spell = std.Spells.load(template.data.spellId)
     // spell.Rank.set(0, 0)
-    if (spell.Rank.getRank() > 0)
-      spell.Rank.set(0, 0)
+    if (spell.Rank.getFirstSpell() > 0)
+      spell.Rank.set(spell.ID, 1)
     if (spell.Subtext.enGB.get() !== 'Passive')
       spell.Subtext.enGB.set('')
 
