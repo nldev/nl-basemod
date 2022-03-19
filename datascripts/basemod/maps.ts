@@ -38,8 +38,8 @@ export const CreateMap: Task<MapOptions, CreateMapConfig> = {
         : std.Maps.create($.Mod, template.id),
     }
 
+    item.asset.Name.enGB.set(template.data.name)
     item.asset.Expansion.set(0)
-    item.asset.Name.enGB.set('Dev')
 
     if (typeof template.data.timeOfDay === 'number')
       item.asset.TimeofDayOverride.set(template.data.timeOfDay)
