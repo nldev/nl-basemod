@@ -222,9 +222,13 @@ function SetupPoisons () {
   enchants.forEach(e => {
     e.Flags.set(0)
   })
-  spells.forEach(s => {
-    s.Duration.set(-1)
-  })
+  spells.forEach(s => s
+    .Duration.set(-1)
+    .Visual.getRef()
+      .CastKit.getRef()
+        .Animation.SPELL_CAST_DIRECTED.set()
+        .RightHandEffect.set(std.Spells.load(8690).Visual.getRef().CastKit.getRef().RightHandEffect.get())
+  )
 }
 
 function Settings () {
