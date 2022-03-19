@@ -31,7 +31,7 @@ export const CreateMap: Task<MapOptions, CreateMapConfig> = {
 
     const item: Map = {
       name: template.data.name || '',
-      timeofDay: template.data.timeOfDay || null,
+      timeofDay: (typeof template.data.timeOfDay === 'number') ? template.data.timeOfDay : null,
       baseId: template.data.baseId || 0,
       id: template.id,
       isModify: (typeof template.data.isModify === 'boolean')

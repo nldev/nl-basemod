@@ -1,3 +1,4 @@
+Map|__:dev|726|726|
 Map|basemod:dev|725|725|
 SkillLine|BASEMOD:thing|789|789|
 Spell|basemod:agility-1|81415|81415|
