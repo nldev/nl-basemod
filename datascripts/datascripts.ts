@@ -249,6 +249,9 @@ function SetupPoisons () {
         .RightHandEffect.set(std.Spells.load(8690).Visual.getRef().CastKit.getRef().RightHandEffect.get())
         .LeftHandEffect.set(std.Spells.load(8690).Visual.getRef().CastKit.getRef().LeftHandEffect.get())
   )
+
+  // nerfs
+  woundEffect.Effects.get(1).PointsBase.set(18)
 }
 
 function NormalizeSprint ($: Builder) {
