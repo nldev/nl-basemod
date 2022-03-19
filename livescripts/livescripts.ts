@@ -5,7 +5,6 @@ import { Rest } from './basemod/rest'
 import { Chests } from './basemod/chests'
 import { Autolearn } from './basemod/autolearn'
 import { Combat } from './basemod/combat/combat'
-import { attr2object } from 'terminal-kit/ScreenBufferHD'
 
 export function Main (events: TSEvents) {
   Store(events)
@@ -18,7 +17,7 @@ export function Main (events: TSEvents) {
 
   events.Player.OnSay((p, m) => {
     if (m.get() === 'x') {
-      p.Teleport(47, 1947, 1556, 81, 1.3)
+      p.Teleport(47, 1944, 1550, 82.2, 1.3)
     }
   })
 
