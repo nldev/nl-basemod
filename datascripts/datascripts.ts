@@ -194,8 +194,6 @@ function SetupPoisons () {
   woundEnchant.Name.enGB.set('Wound Poison')
   woundEffect.Name.enGB.set('Wound Poison')
 
-  console.log(cripplingEnchant.objectify())
-
   mindEnchant.EffectPointsMin.set([20])
   mindEnchant.EffectPointsMax.set([20])
   anestheticEnchant.EffectPointsMin.set([30])
@@ -208,8 +206,6 @@ function SetupPoisons () {
   instantEnchant.EffectPointsMax.set([20])
   woundEnchant.EffectPointsMin.set([30])
   woundEnchant.EffectPointsMax.set([30])
-
-  console.log(cripplingEnchant.objectify())
 
   const enchants = [
     mindEnchant,
@@ -249,6 +245,7 @@ function SetupPoisons () {
       .CastKit.getRef()
         .Animation.SPELL_CAST_DIRECTED.set()
         .RightHandEffect.set(std.Spells.load(8690).Visual.getRef().CastKit.getRef().RightHandEffect.get())
+        .LeftHandEffect.set(std.Spells.load(8690).Visual.getRef().CastKit.getRef().LeftHandEffect.get())
   )
 }
 
