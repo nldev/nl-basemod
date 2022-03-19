@@ -7,13 +7,15 @@ import { TitleCaseToDashCase } from './utils'
 const DEFAULT_MAP = 0
 
 export interface Map extends Asset {
+  name: string
   asset: TSMap
+  timeofDay: number | null
 }
 
 export interface MapOptions extends AssetOptions {
   name: string
   asset?: TSMap
-  timeOfDay?: Number
+  timeOfDay?: number
 }
 
 export interface CreateMapConfig {
@@ -28,6 +30,8 @@ export const CreateMap: Task<MapOptions, CreateMapConfig> = {
       throw new Error('create-map template cannot be isModify=true and baseId=null')
 
     const item: Map = {
+      name: template.data.name || '',
+      timeofDay: template.data.timeOfDay || null,
       baseId: template.data.baseId || 0,
       id: template.id,
       isModify: (typeof template.data.isModify === 'boolean')
