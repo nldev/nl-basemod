@@ -249,9 +249,19 @@ function SetupPoisons () {
   )
 }
 
+function NormalizeSprint () {
+  const sprint = std.Spells.load(11305)
+  sprint.Effects.get(0).PointsBase.set(99)
+}
+
+function Rogue () {
+  SetupPoisons()
+  NormalizeSprint()
+}
+
 function Settings () {
   RemoveFlagDropDebuff()
   SetStartingZone()
-  SetupPoisons()
+  Rogue()
 }
 
