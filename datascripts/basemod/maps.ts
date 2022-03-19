@@ -29,17 +29,19 @@ export const CreateMap: Task<MapOptions, CreateMapConfig> = {
     if (!template.data.baseId && template.data.isModify)
       throw new Error('create-map template cannot be isModify=true and baseId=null')
 
+    const asset = template.data.isModify
+        ? std.Maps.load(template.data.baseId || 0)
+        : std.Maps.create($.Mod, template.id)
+
     const item: Map = {
+      asset,
       name: template.data.name || '',
       timeofDay: (typeof template.data.timeOfDay === 'number') ? template.data.timeOfDay : null,
-      baseId: template.data.baseId || 0,
+      baseId: template.data.baseId || asset.ID,
       id: template.id,
       isModify: (typeof template.data.isModify === 'boolean')
         ? template.data.isModify
         : false,
-      asset: template.data.isModify
-        ? std.Maps.load(template.data.baseId || 0)
-        : std.Maps.create($.Mod, template.id),
     }
 
     item.asset.Name.enGB.set(template.data.name)
