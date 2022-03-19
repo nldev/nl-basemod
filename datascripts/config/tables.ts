@@ -57,6 +57,6 @@ export const TABLES: Templates<SQLTable> = {
           },
         ],
       },
-      },
+    },
   ],
 }
