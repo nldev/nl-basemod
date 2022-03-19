@@ -76,6 +76,8 @@ export const CreateAutolearn: Task<Autolearn, CreateAutolearnConfig> = {
     if (spell.Subtext.enGB.get() !== 'Passive')
       spell.Subtext.enGB.set('')
 
+    spell.Levels.set(0, 0, 0)
+
     $.Set('autolearn', template.id, template)
 
     $.WriteToDatabase('autolearn', {
