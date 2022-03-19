@@ -166,6 +166,7 @@ function RemoveFlagDropDebuff () {
 }
 
 function SetupPoisons () {
+  // FIXME fix tooltip
   const mindEffect = std.Spells.load(5760)
   const mindEnchant = std.DBC.SpellItemEnchantment.query({ ID: 35 })
   const mind = std.Spells.load(5761)
@@ -251,6 +252,7 @@ function SetupPoisons () {
 }
 
 function NormalizeSprint ($: Builder) {
+  // FIXME fix tooltip
   const sprint = std.Spells.load(11305)
   sprint.Effects.get(0).PointsBase.set(Speed($.BaseSpeed, 79))
   sprint.Effects.get(0).PointsDieSides.set(Speed($.BaseSpeed, 1))
