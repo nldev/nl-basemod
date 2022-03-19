@@ -253,6 +253,7 @@ function SetupPoisons () {
   // nerfs
   woundEffect.Effects.get(1).PointsBase.set(18)
   instantEffect.Effects.get(1).PointsBase.set(32)
+  deadlyEffect.Effects.get(1).PointsBase.set(8)
 }
 
 function NormalizeSprint ($: Builder) {
