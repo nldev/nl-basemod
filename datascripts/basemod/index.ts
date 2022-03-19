@@ -9,6 +9,7 @@ import { CreateItem } from './items'
 import { CreateNpc } from './npcs'
 import { CreateTalent } from './talents'
 import { CreateAutolearn } from './autolearn'
+import { CreateMap } from './maps'
 
 export const ADDON_PATH = __dirname + '/../../../addon'
 export const ADDON_DATA_PATH = ADDON_PATH + '/data'
@@ -27,6 +28,7 @@ export const DEFAULT_CONFIG = {
     'create-npc': true,
     'create-talent': true,
     'create-autolearn': true,
+    'create-map': true,
   },
   templates: [
   ],
@@ -41,6 +43,7 @@ export const DEFAULT_OPTIONS = {
     CreateNpc,
     CreateTalent,
     CreateAutolearn,
+    CreateMap,
   ],
 }
 
