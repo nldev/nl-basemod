@@ -164,8 +164,72 @@ function RemoveFlagDropDebuff () {
   std.Spells.load(2479).delete()
 }
 
+function SetupPoisons () {
+  const list = [
+    35,   // 0: mind numbing
+    2640, // 1: anesthetic
+    22,   // 2: crippling
+    2630, // 3: deadly
+    624,  // 4: instant
+    706,  // 5: wound
+  ]
+  const mindEnchant = std.DBC.SpellItemEnchantment.query({ ID: 35 })
+  const mind = std.Spells.load(5761)
+  const anestheticEnchant = std.DBC.SpellItemEnchantment.query({ ID: 2640 })
+  const anesthetic = std.Spells.load(26785)
+  const cripplingEnchant = std.DBC.SpellItemEnchantment.query({ ID: 22 })
+  const crippling = std.Spells.load(3408)
+  const deadlyEnchant = std.DBC.SpellItemEnchantment.query({ ID: 2630 })
+  const deadly = std.Spells.load(25351)
+  const instantEnchant = std.DBC.SpellItemEnchantment.query({ ID: 624 })
+  const instant = std.Spells.load(11339)
+  const woundEnchant = std.DBC.SpellItemEnchantment.query({ ID: 706 })
+  const wound = std.Spells.load(13227)
+  deadly.Name.enGB.set('Deadly Poison')
+  deadlyEnchant.Name.enGB.set('Deadly Poison')
+  instant.Name.enGB.set('Instant Poison')
+  instantEnchant.Name.enGB.set('Instant Poison')
+  wound.Name.enGB.set('Wound Poison')
+  woundEnchant.Name.enGB.set('Wound Poison')
+  mindEnchant.EffectPointsMin.set([20])
+  mindEnchant.EffectPointsMax.set([20])
+  anestheticEnchant.EffectPointsMin.set([30])
+  anestheticEnchant.EffectPointsMax.set([30])
+  cripplingEnchant.EffectPointsMin.set([30])
+  cripplingEnchant.EffectPointsMax.set([30])
+  deadlyEnchant.EffectPointsMin.set([30])
+  deadlyEnchant.EffectPointsMax.set([30])
+  instantEnchant.EffectPointsMin.set([20])
+  instantEnchant.EffectPointsMax.set([20])
+  woundEnchant.EffectPointsMin.set([30])
+  woundEnchant.EffectPointsMax.set([30])
+  const enchants = [
+    mindEnchant,
+    anestheticEnchant,
+    cripplingEnchant,
+    deadlyEnchant,
+    instantEnchant,
+    woundEnchant,
+  ]
+  const spells = [
+    mind,
+    anesthetic,
+    crippling,
+    deadly,
+    instant,
+    wound,
+  ]
+  enchants.forEach(e => {
+    e.Flags.set(0)
+  })
+  spells.forEach(s => {
+    s.Duration.set(-1)
+  })
+}
+
 function Settings () {
   RemoveFlagDropDebuff()
   SetStartingZone()
+  SetupPoisons()
 }
 
