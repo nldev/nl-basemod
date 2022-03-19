@@ -31,7 +31,7 @@ const UNUSED_STARTING_SPELLS = [
   1126,
   5176,
   // hunter
-  75,
+  // 75,
   2973,
   1494,
   // mage
