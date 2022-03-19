@@ -12,6 +12,6 @@ new Builder($ => {
   $.ProcessMany<Autolearn>(AUTOLEARN)
   $.ProcessMany<MapOptions>(MAPS)
 
-  console.log($.Get<Autolearn[]>('autolearn'))
+  console.log($.Get<Autolearn[]>('maps'))
 })
 

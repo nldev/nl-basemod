@@ -10,8 +10,8 @@ export const MAPS: Templates<MapOptions> = {
         name: 'World',
         timeOfDay: 0,
         isModify: false,
-      }
-    }
+      },
+    },
   ],
 }
 
