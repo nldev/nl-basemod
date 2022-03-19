@@ -15,6 +15,11 @@ new Builder($ => {
   $.ProcessMany<Autolearn>(AUTOLEARN)
   $.ProcessMany<MapOptions>(MAPS)
 
+  console.log(std.DBC.SpellItemEnchantment.query({ ID: 22 }).objectify())
+})
+
+
+function SetStartingZone() {
   const info = std.SQL.playercreateinfo.queryAll({})
   info.forEach(i => {
     i.map.set(726)
@@ -23,9 +28,7 @@ new Builder($ => {
     i.position_z.set(2.031755)
     i.orientation.set(1)
   })
-  console.log(std.DBC.SpellItemEnchantment.query({ ID: 22 }).objectify())
-})
-
+}
 
 function RemoveFlagDropDebuff () {
   // flag drop debuff
@@ -37,5 +40,6 @@ function RemoveFlagDropDebuff () {
 
 function Settings () {
   RemoveFlagDropDebuff()
+  SetStartingZone()
 }
 
