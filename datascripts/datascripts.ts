@@ -17,8 +17,11 @@ new Builder($ => {
 
   console.log($.Get<Map[]>('maps'))
 
-  function Settings () {
+  function RemoveFlagDropDebuff () {
     std.Spells.load(42792).delete()
+  }
+
+  function Settings () {
   }
 })
 
