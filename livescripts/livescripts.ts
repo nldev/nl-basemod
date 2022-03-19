@@ -15,8 +15,11 @@ export function Main (events: TSEvents) {
   Autolearn(events)
   Combat(events)
 
-  events.Items.OnEquip((item, player, slot) => {
-    player.SendBroadcastMessage(`${item.GetName} ${slot}`)
+  events.Items.OnEquip((item, player, slot, isMerge) => {
+    player.SendBroadcastMessage(`EQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
+  })
+  events.Items.OnUnequip((item, player, isSwap, result) => {
+    player.SendBroadcastMessage(`UNEQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
   })
   events.Player.OnSay((p, m) => {
     if (m.get() === 'x') {

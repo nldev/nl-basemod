@@ -15,7 +15,15 @@ new Builder($ => {
   $.ProcessMany<Autolearn>(AUTOLEARN)
   $.ProcessMany<MapOptions>(MAPS)
 
-  console.log($.Get<Map[]>('maps'))
+  console.log($.Get<Map[]>('maps.dev'))
+  const info = std.SQL.playercreateinfo.queryAll({})
+  info.forEach(i => {
+    i.map.set(726)
+    i.position_x.set(16138)
+    i.position_y.set(15957)
+    i.position_z.set(2.031755)
+    i.orientation.set(1)
+  })
   console.log(std.DBC.SpellItemEnchantment.query({ ID: 22 }).objectify())
 })
 
