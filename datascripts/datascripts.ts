@@ -16,6 +16,7 @@ new Builder($ => {
   $.ProcessMany<MapOptions>(MAPS)
 
   console.log($.Get<Map[]>('maps'))
+  console.log(std.DBC.SpellItemEnchantment.query({ ID: 22 }).objectify())
 })
 
 

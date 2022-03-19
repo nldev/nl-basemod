@@ -68,6 +68,12 @@ export const CreateAutolearn: Task<Autolearn, CreateAutolearnConfig> = {
     })
   },
   process: ($, template, config) => {
+    // FIXME: move to spell transforms
+    const spell = std.Spells.load(template.data.spellId)
+    spell.Rank.set(0, 0)
+    if (spell.Subtext.enGB.get() !== 'Passive')
+      spell.Subtext.enGB.set('')
+
     $.Set('autolearn', template.id, template)
 
     $.WriteToDatabase('autolearn', {
