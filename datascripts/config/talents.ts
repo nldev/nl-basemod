@@ -1,4 +1,4 @@
-import { Task, Templates } from '../basemod'
+import { Templates } from '../basemod'
 import { TalentOptions } from '../basemod/talents'
 
 export const TALENTS: Templates<TalentOptions> = {

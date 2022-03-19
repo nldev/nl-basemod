@@ -1,4 +1,4 @@
-import { Task, Templates } from '../basemod'
+import { Templates } from '../basemod'
 import { Autolearn } from '../basemod/autolearn'
 
 export const AUTOLEARN: Templates<Autolearn> = {
