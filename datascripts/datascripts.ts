@@ -252,7 +252,7 @@ function SetupPoisons () {
 
 function NormalizeSprint ($: Builder) {
   const sprint = std.Spells.load(11305)
-  sprint.Effects.get(0).PointsBase.set(Speed($.BaseSpeed, 70))
+  sprint.Effects.get(0).PointsBase.set(Speed($.BaseSpeed, 71))
 }
 
 function Rogue ($: Builder) {
