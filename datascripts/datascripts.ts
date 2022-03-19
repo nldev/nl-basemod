@@ -188,10 +188,13 @@ function SetupPoisons () {
 
   deadly.Name.enGB.set('Deadly Poison')
   deadlyEnchant.Name.enGB.set('Deadly Poison')
+  deadlyEffect.Name.enGB.set('Deadly Poison')
   instant.Name.enGB.set('Instant Poison')
   instantEnchant.Name.enGB.set('Instant Poison')
+  instantEffect.Name.enGB.set('Instant Poison')
   wound.Name.enGB.set('Wound Poison')
   woundEnchant.Name.enGB.set('Wound Poison')
+  woundEffect.Name.enGB.set('Wound Poison')
 
   mindEnchant.EffectPointsMin.set([20])
   mindEnchant.EffectPointsMax.set([20])
