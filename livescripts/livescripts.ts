@@ -19,7 +19,7 @@ export function Main (events: TSEvents) {
     player.SendBroadcastMessage(`EQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
   })
   events.Items.OnUnequip((item, player, isSwap, result) => {
-    if (result.get())
+    if (result.get() === 1)
       player.SendBroadcastMessage(`UNEQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
   })
   events.Player.OnSay((p, m) => {
