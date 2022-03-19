@@ -223,7 +223,7 @@ function SetupPoisons () {
   })
 
   spells.forEach(s => s
-    .Duration.set(-1)
+    .Duration.set(0)
     .Visual.getRef()
       .CastKit.getRef()
         .Animation.SPELL_CAST_DIRECTED.set()
