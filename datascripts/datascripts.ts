@@ -16,6 +16,8 @@ new Builder($ => {
   $.ProcessMany<MapOptions>(MAPS)
 
   console.log(std.DBC.SpellItemEnchantment.query({ ID: 22 }).objectify())
+
+  Settings()
 })
 
 const UNUSED_STARTING_SPELLS = [
