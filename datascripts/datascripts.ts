@@ -165,14 +165,6 @@ function RemoveFlagDropDebuff () {
 }
 
 function SetupPoisons () {
-  const list = [
-    35,   // 0: mind numbing
-    2640, // 1: anesthetic
-    22,   // 2: crippling
-    2630, // 3: deadly
-    624,  // 4: instant
-    706,  // 5: wound
-  ]
   const mindEnchant = std.DBC.SpellItemEnchantment.query({ ID: 35 })
   const mind = std.Spells.load(5761)
   const anestheticEnchant = std.DBC.SpellItemEnchantment.query({ ID: 2640 })
@@ -185,12 +177,14 @@ function SetupPoisons () {
   const instant = std.Spells.load(11339)
   const woundEnchant = std.DBC.SpellItemEnchantment.query({ ID: 706 })
   const wound = std.Spells.load(13227)
+
   deadly.Name.enGB.set('Deadly Poison')
   deadlyEnchant.Name.enGB.set('Deadly Poison')
   instant.Name.enGB.set('Instant Poison')
   instantEnchant.Name.enGB.set('Instant Poison')
   wound.Name.enGB.set('Wound Poison')
   woundEnchant.Name.enGB.set('Wound Poison')
+
   mindEnchant.EffectPointsMin.set([20])
   mindEnchant.EffectPointsMax.set([20])
   anestheticEnchant.EffectPointsMin.set([30])
@@ -203,6 +197,7 @@ function SetupPoisons () {
   instantEnchant.EffectPointsMax.set([20])
   woundEnchant.EffectPointsMin.set([30])
   woundEnchant.EffectPointsMax.set([30])
+
   const enchants = [
     mindEnchant,
     anestheticEnchant,
@@ -211,6 +206,7 @@ function SetupPoisons () {
     instantEnchant,
     woundEnchant,
   ]
+
   const spells = [
     mind,
     anesthetic,
@@ -219,9 +215,11 @@ function SetupPoisons () {
     instant,
     wound,
   ]
+
   enchants.forEach(e => {
     e.Flags.set(0)
   })
+
   spells.forEach(s => s
     .Duration.set(-1)
     .Visual.getRef()
