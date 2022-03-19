@@ -20,27 +20,55 @@ export interface CreateMapConfig {
 
 export const CreateMap: Task<MapOptions, CreateMapConfig> = {
   id: 'create-map',
-  identify: ($, config, options) => {
-    if (!config.data.baseId)
-      throw new Error('create-map templates require a baseId to automatically assign ID')
-
-    return TitleCaseToDashCase(std.Maps.load(config.data.baseId).Name.enGB.get())
-  },
   setup: ($, config) => {},
   process: ($, template, config) => {
-    const baseId = template.data.baseId || DEFAULT_MAP
     const item: Map = {
-      baseId,
+      baseId: template.data.baseId || 0,
       id: template.id,
       isModify: (typeof template.data.isModify === 'boolean')
         ? template.data.isModify
         : false,
       asset: template.data.isModify
-        ? std.Maps.load(baseId)
+        ? std.Maps.load(template.data.baseId || 0)
         : std.Maps.create($.Mod, template.id),
     }
 
+    const map = std.Maps.create($.Mod, 'dev').Directory.set('dev')
+
+    map.Expansion.set(0)
+    map.Name.enGB.set('Dev')
+    map.TimeofDayOverride.set(0)
+
+  // $.std.Maps.forEach(m => {
+  //   if (m.Name.enGB.get() !== 'Outland')
+  //     return
+  // })
+  //
+  // $.std.Areas.forEach(a => {
+  //   // console.log(a.Name.enGB.get(), ': ', a.Light.get())
+  //   if (a.Name.enGB.get() !== 'Nagrand')
+  //     return
+  //
+  //   a.Map.set(map.ID)
+  //   a.Name.enGB.set('World')
+  // })
+  //
+  // $.std.Lights.filter({}).forEach(l => {
+  //   if (l.row.MapID.get() === 530) {
+  //     l.row.MapID.set(map.ID)
+  //     l.row.LightParamsID.get().forEach(ID => {
+  //       // console.log(ID)
+  //       if (ID) {
+  //         const p = $.dbc.LightParams.query({ ID })
+  //
+  //         p.LightSkyboxID.set(553)
+  //       }
+  //     })
+  //   }
+  // })
+  //}
+
     $.Set('maps', template.id, item)
-  },
+  }
 }
 
