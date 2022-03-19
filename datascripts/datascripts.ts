@@ -2,6 +2,7 @@ import { Builder } from './basemod'
 import { SQLTable } from './basemod/types'
 import { TalentOptions } from './basemod/talents'
 import { Autolearn } from './basemod/autolearn'
+import { Speed } from './basemod/utils'
 import { Map, MapOptions } from './basemod/maps'
 import { TABLES } from './config/tables'
 import { TALENTS } from './config/talents'
@@ -15,7 +16,7 @@ new Builder($ => {
   $.ProcessMany<Autolearn>(AUTOLEARN)
   $.ProcessMany<MapOptions>(MAPS)
 
-  Settings()
+  Settings($)
 })
 
 const UNUSED_STARTING_SPELLS = [
@@ -249,19 +250,19 @@ function SetupPoisons () {
   )
 }
 
-function NormalizeSprint () {
+function NormalizeSprint ($: Builder) {
   const sprint = std.Spells.load(11305)
-  sprint.Effects.get(0).PointsBase.set(99)
+  sprint.Effects.get(0).PointsBase.set(Speed($.BaseSpeed, 70))
 }
 
-function Rogue () {
+function Rogue ($: Builder) {
   SetupPoisons()
-  NormalizeSprint()
+  NormalizeSprint($)
 }
 
-function Settings () {
+function Settings ($: Builder) {
   RemoveFlagDropDebuff()
   SetStartingZone()
-  Rogue()
+  Rogue($)
 }
 
