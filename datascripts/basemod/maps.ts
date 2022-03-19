@@ -11,7 +11,9 @@ export interface Map extends Asset {
 }
 
 export interface MapOptions extends AssetOptions {
+  name: string
   asset?: TSMap
+  timeOfDay?: Number
 }
 
 export interface CreateMapConfig {
@@ -36,40 +38,11 @@ export const CreateMap: Task<MapOptions, CreateMapConfig> = {
         : std.Maps.create($.Mod, template.id),
     }
 
-    const map = std.Maps.create($.Mod, 'dev').Directory.set('dev')
+    item.asset.Expansion.set(0)
+    item.asset.Name.enGB.set('Dev')
 
-    map.Expansion.set(0)
-    map.Name.enGB.set('Dev')
-    map.TimeofDayOverride.set(0)
-
-  // $.std.Maps.forEach(m => {
-  //   if (m.Name.enGB.get() !== 'Outland')
-  //     return
-  // })
-  //
-  // $.std.Areas.forEach(a => {
-  //   // console.log(a.Name.enGB.get(), ': ', a.Light.get())
-  //   if (a.Name.enGB.get() !== 'Nagrand')
-  //     return
-  //
-  //   a.Map.set(map.ID)
-  //   a.Name.enGB.set('World')
-  // })
-  //
-  // $.std.Lights.filter({}).forEach(l => {
-  //   if (l.row.MapID.get() === 530) {
-  //     l.row.MapID.set(map.ID)
-  //     l.row.LightParamsID.get().forEach(ID => {
-  //       // console.log(ID)
-  //       if (ID) {
-  //         const p = $.dbc.LightParams.query({ ID })
-  //
-  //         p.LightSkyboxID.set(553)
-  //       }
-  //     })
-  //   }
-  // })
-  //}
+    if (typeof template.data.timeOfDay === 'number')
+      item.asset.TimeofDayOverride.set(template.data.timeOfDay)
 
     $.Set('maps', template.id, item)
   }
