@@ -256,7 +256,7 @@ function SetupPoisons () {
   deadlyEffect.Effects.get(1).PointsBase.set(8)
 }
 
-function HearthSpell () {
+function RecallSpell () {
   const spell = std.Spells.load(8690)
   spell.Cooldown.set(1000 * 60 * 60) // 1 hour
   spell.Name.enGB.set('Recall')
