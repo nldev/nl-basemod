@@ -194,7 +194,10 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
     }
     // FIXME move this to Spell
     // spell.Attributes.IS_HIDDEN_IN_SPELLBOOK.set(0)
-    spell.Rank.set(0, 0)
+    if (spell.Rank.getFirstSpell() > 0)
+      spell.Rank.set(spell.ID, 1)
+
+    spell.Levels.set(0, 0, 0)
 
     const classMask = typeof item.class === 'string'
       ? ClassMask(item.class)
