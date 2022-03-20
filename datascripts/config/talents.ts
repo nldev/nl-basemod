@@ -246,6 +246,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'riposte',
       data: {
+        isActive: true,
         spellId: 14251,
         cost: 3,
         class: { ROGUE: true },
