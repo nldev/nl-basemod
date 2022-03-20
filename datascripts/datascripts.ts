@@ -497,7 +497,7 @@ function SetupSkills ($: Builder) {
   // dagger
   SKILLS['Daggers'].Autolearn.addMod(['ROGUE', 'DRUID', 'HUNTER', 'MAGE', 'PRIEST', 'SHAMAN', 'WARLOCK', 'WARRIOR'], ALL_CLASSES as any, e => e.Rank.set(0))
   // fist weapon
-  SKILLS['Fist Weapons'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'], ALL_CLASSES as any, e => e.Rank.set(0))
+  std.SkillLines.load(473).Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'], ALL_CLASSES as any, e => e.Rank.set(0))
   // 1h sword
   SKILLS['Swords'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'WARLOCK', 'MAGE', 'PALADIN'], ALL_CLASSES as any, e => e.Rank.set(0))
   // 1h mace
