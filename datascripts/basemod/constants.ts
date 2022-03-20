@@ -66,8 +66,6 @@ export const ALL_CLASSES: CharacterClass[] = [
   'DRUID',
 ]
 
-export const ALL_CLASS_MASK = ClassMask(...ALL_CLASSES)
-
 export const CLASS_IDS: Mapping<number> = {
   WARRIOR: 1,
   PALADIN: 2,
@@ -117,8 +115,6 @@ export const ALL_RACES: CharacterRace[] = [
   'BLOOD_ELF',
   'DRAENEI',
 ]
-
-export const ALL_RACE_MASK = RaceMask(...ALL_RACES)
 
 export const RACE_IDS: Mapping<number> = {
   HUMAN: 1,
