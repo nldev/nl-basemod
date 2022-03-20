@@ -21,137 +21,13 @@ new Builder($ => {
   Settings($)
 })
 
-const SKILLS: Mapping<SkillLine> = {}
-std.SkillLines.forEach(e => {
-  SKILLS[e.Name.enGB.get()] = e
-})
-
-const UNUSED_STARTING_SPELLS = [
-  // general
-  107,
-  81,
-  // rogue
-  2098,
-  1752,
-  1784,
-  // druid
-  5185,
-  1126,
-  5176,
-  // hunter
-  // 75,
-  2973,
-  1494,
-  // mage
-  1459,
-  133,
-  168,
-  // paladin
-  465,
-  635,
-  20187,
-  21084,
-  // priest
-  2050,
-  1243,
-  585,
-  // shaman
-  331,
-  403,
-  8017,
-  // warlock
-  687,
-  348,
-  686,
-  688,
-  // warrior
-  6673,
-  2457,
-  20647,
-  78,
-  // human
-  20599,
-  59752,
-  20864,
-  58985,
-  20597,
-  20598,
-  // blood elf
-  28877,
-  25046,
-  28730,
-  50613,
-  822,
-  // draenei
-  28875,
-  28880,
-  59542,
-  59543,
-  59544,
-  59545,
-  59547,
-  59548,
-  6562,
-  28878,
-  59221,
-  59535,
-  59536,
-  59538,
-  59539,
-  59540,
-  59541,
-  // dwarf
-  2481,
-  20596,
-  20595,
-  59224,
-  20594,
-  // gnome
-  20592,
-  20593,
-  20589,
-  20591,
-  // night elf
-  21009,
-  20583,
-  20582,
-  58984,
-  20585,
-  // orc
-  20574,
-  20572,
-  33697,
-  33702,
-  20575,
-  20576,
-  21563,
-  54562,
-  65222,
-  20573,
-  // tauren
-  20552,
-  20550,
-  20551,
-  20549,
-  // troll
-  20557,
-  26297,
-  26290,
-  58943,
-  20555,
-  20558,
-  // undead
-  20577,
-  20579,
-  5227,
-  7744,
-]
-
-std.SQL.playercreateinfo_spell_custom.queryAll({}).forEach(c => c.delete())
-std.DBC.SkillLineAbility.queryAll({}).forEach(a => {
-  if (UNUSED_STARTING_SPELLS.includes(a.Spell.get()))
-    a.delete()
-})
+function RemoveUnusedStartingSpells () {
+  std.SQL.playercreateinfo_spell_custom.queryAll({}).forEach(c => c.delete())
+  std.DBC.SkillLineAbility.queryAll({}).forEach(a => {
+    if (UNUSED_STARTING_SPELLS.includes(a.Spell.get()))
+      a.delete()
+  })
+}
 
 function SetStartingZone() {
   const info = std.SQL.playercreateinfo.queryAll({})
@@ -285,6 +161,11 @@ function Rogue ($: Builder) {
 function Settings ($: Builder) {
   RecallSpell()
   RemoveFlagDropDebuff()
+  RemoveUnusedStartingSpells()
+  InfiniteRangedWeapon($)
+  SetupStats($)
+  SetupSkills($)
+  SetupNpcStats($)
   SetStartingZone()
   Rogue($)
 }
@@ -357,170 +238,6 @@ function SetupSkills ($: Builder) {
   SKILLS['Plate Mail'].Autolearn.addMod(['PALADIN', 'WARRIOR'], ALL_CLASSES as any, e => e.Rank.set(0))
   // mail
   SKILLS['Mail'].Autolearn.addMod(['PALADIN', 'WARRIOR', 'HUNTER', 'SHAMAN'], ALL_CLASSES as any, e => e.Rank.set(0))
-}
-
-
-const STATS: any = {
-  1: {
-    mpMax: 0,
-    mpMin: 0,
-    hpMax: 1689,
-    hpMin: 839,
-    strMax: 128,
-    strMin: 98,
-    agiMax: 87,
-    agiMin: 68,
-    staMax: 116,
-    staMin: 88,
-    intMax: 34,
-    intMin: 30,
-    spiMax: 50,
-    spiMin: 40,
-  },
-  2: {
-    mpMax: 1512,
-    mpMin: 1137,
-    hpMax: 1381,
-    hpMin: 786,
-    strMax: 109,
-    strMin: 83,
-    agiMax: 68,
-    agiMin: 54,
-    staMax: 105,
-    staMin: 81,
-    intMax: 75,
-    intMin: 59,
-    spiMax: 78,
-    spiMin: 61,
-  },
-  3: {
-    mpMax: 1720,
-    mpMin: 1270,
-    hpMax: 1467,
-    hpMin: 842,
-    strMax: 61,
-    strMin: 49,
-    agiMax: 133,
-    agiMin: 101,
-    staMax: 95,
-    staMin: 73,
-    intMax: 70,
-    intMin: 56,
-    spiMax: 74,
-    spiMin: 58,
-  },
-  4: {
-    mpMax: 0,
-    mpMin: 0,
-    hpMax: 1523,
-    hpMin: 878,
-    strMax: 84,
-    strMin: 66,
-    agiMax: 139,
-    agiMin: 105,
-    staMax: 79,
-    staMin: 62,
-    intMax: 39,
-    intMin: 34,
-    spiMax: 54,
-    spiMin: 44,
-  },
-  5: {
-    mpMax: 1376,
-    mpMin: 1046,
-    hpMax: 1397,
-    hpMin: 792,
-    strMax: 36,
-    strMin: 32,
-    agiMax: 45,
-    agiMin: 38,
-    staMax: 54,
-    staMin: 44,
-    intMax: 127,
-    intMin: 96,
-    spiMax: 133,
-    spiMin: 101,
-  },
-  6: {
-    mpMax: 1,
-    mpMin: 1,
-    hpMax: 1,
-    hpMin: 1,
-    strMax: 1,
-    strMin: 1,
-    agiMax: 1,
-    agiMin: 1,
-    staMax: 1,
-    staMin: 1,
-    intMax: 1,
-    intMin: 1,
-    spiMax: 1,
-    spiMin: 1,
-  },
-  7: {
-    mpMax: 1520,
-    mpMin: 760,
-    hpMax: 1423,
-    hpMin: 1115,
-    strMax: 92,
-    strMin: 72,
-    agiMax: 58,
-    agiMin: 46,
-    staMax: 99,
-    staMin: 76,
-    intMax: 93,
-    intMin: 71,
-    spiMax: 105,
-    spiMin: 81,
-  },
-  8: {
-    mpMax: 1213,
-    mpMin: 958,
-    hpMax: 1370,
-    hpMin: 775,
-    strMax: 31,
-    strMin: 27,
-    agiMax: 38,
-    agiMin: 33,
-    staMax: 46,
-    staMin: 38,
-    intMax: 132,
-    intMin: 100,
-    spiMax: 128,
-    spiMin: 97,
-  },
-  9: {
-    mpMax: 1373,
-    mpMin: 1043,
-    hpMax: 1414,
-    hpMin: 799,
-    strMax: 48,
-    strMin: 40,
-    agiMax: 51,
-    agiMin: 44,
-    staMax: 68,
-    staMin: 54,
-    intMax: 117,
-    intMin: 89,
-    spiMax: 116,
-    spiMin: 89,
-  },
-  11: {
-    mpMax: 1244,
-    mpMin: 959,
-    hpMax: 1483,
-    hpMin: 858,
-    strMax: 71,
-    strMin: 57,
-    agiMax: 66,
-    agiMin: 53,
-    staMax: 70,
-    staMin: 57,
-    intMax: 102,
-    intMin: 78,
-    spiMax: 113,
-    spiMin: 87,
-  },
 }
 
 function SetupNpcStats ($: Builder) {
@@ -694,4 +411,293 @@ function SetupStats ($: Builder) {
     cls.Stats.RegenHPPerSpt.set(() => std.DBC.GtRegenHPPerSpt.getRow(560).Data.get())
   })
 }
+
+const SKILLS: Mapping<SkillLine> = {}
+std.SkillLines.forEach(e => {
+  SKILLS[e.Name.enGB.get()] = e
+})
+
+const STATS: any = {
+  1: {
+    mpMax: 0,
+    mpMin: 0,
+    hpMax: 1689,
+    hpMin: 839,
+    strMax: 128,
+    strMin: 98,
+    agiMax: 87,
+    agiMin: 68,
+    staMax: 116,
+    staMin: 88,
+    intMax: 34,
+    intMin: 30,
+    spiMax: 50,
+    spiMin: 40,
+  },
+  2: {
+    mpMax: 1512,
+    mpMin: 1137,
+    hpMax: 1381,
+    hpMin: 786,
+    strMax: 109,
+    strMin: 83,
+    agiMax: 68,
+    agiMin: 54,
+    staMax: 105,
+    staMin: 81,
+    intMax: 75,
+    intMin: 59,
+    spiMax: 78,
+    spiMin: 61,
+  },
+  3: {
+    mpMax: 1720,
+    mpMin: 1270,
+    hpMax: 1467,
+    hpMin: 842,
+    strMax: 61,
+    strMin: 49,
+    agiMax: 133,
+    agiMin: 101,
+    staMax: 95,
+    staMin: 73,
+    intMax: 70,
+    intMin: 56,
+    spiMax: 74,
+    spiMin: 58,
+  },
+  4: {
+    mpMax: 0,
+    mpMin: 0,
+    hpMax: 1523,
+    hpMin: 878,
+    strMax: 84,
+    strMin: 66,
+    agiMax: 139,
+    agiMin: 105,
+    staMax: 79,
+    staMin: 62,
+    intMax: 39,
+    intMin: 34,
+    spiMax: 54,
+    spiMin: 44,
+  },
+  5: {
+    mpMax: 1376,
+    mpMin: 1046,
+    hpMax: 1397,
+    hpMin: 792,
+    strMax: 36,
+    strMin: 32,
+    agiMax: 45,
+    agiMin: 38,
+    staMax: 54,
+    staMin: 44,
+    intMax: 127,
+    intMin: 96,
+    spiMax: 133,
+    spiMin: 101,
+  },
+  6: {
+    mpMax: 1,
+    mpMin: 1,
+    hpMax: 1,
+    hpMin: 1,
+    strMax: 1,
+    strMin: 1,
+    agiMax: 1,
+    agiMin: 1,
+    staMax: 1,
+    staMin: 1,
+    intMax: 1,
+    intMin: 1,
+    spiMax: 1,
+    spiMin: 1,
+  },
+  7: {
+    mpMax: 1520,
+    mpMin: 760,
+    hpMax: 1423,
+    hpMin: 1115,
+    strMax: 92,
+    strMin: 72,
+    agiMax: 58,
+    agiMin: 46,
+    staMax: 99,
+    staMin: 76,
+    intMax: 93,
+    intMin: 71,
+    spiMax: 105,
+    spiMin: 81,
+  },
+  8: {
+    mpMax: 1213,
+    mpMin: 958,
+    hpMax: 1370,
+    hpMin: 775,
+    strMax: 31,
+    strMin: 27,
+    agiMax: 38,
+    agiMin: 33,
+    staMax: 46,
+    staMin: 38,
+    intMax: 132,
+    intMin: 100,
+    spiMax: 128,
+    spiMin: 97,
+  },
+  9: {
+    mpMax: 1373,
+    mpMin: 1043,
+    hpMax: 1414,
+    hpMin: 799,
+    strMax: 48,
+    strMin: 40,
+    agiMax: 51,
+    agiMin: 44,
+    staMax: 68,
+    staMin: 54,
+    intMax: 117,
+    intMin: 89,
+    spiMax: 116,
+    spiMin: 89,
+  },
+  11: {
+    mpMax: 1244,
+    mpMin: 959,
+    hpMax: 1483,
+    hpMin: 858,
+    strMax: 71,
+    strMin: 57,
+    agiMax: 66,
+    agiMin: 53,
+    staMax: 70,
+    staMin: 57,
+    intMax: 102,
+    intMin: 78,
+    spiMax: 113,
+    spiMin: 87,
+  },
+}
+
+const UNUSED_STARTING_SPELLS = [
+  // general
+  107,
+  81,
+  // rogue
+  2098,
+  1752,
+  1784,
+  // druid
+  5185,
+  1126,
+  5176,
+  // hunter
+  // 75,
+  2973,
+  1494,
+  // mage
+  1459,
+  133,
+  168,
+  // paladin
+  465,
+  635,
+  20187,
+  21084,
+  // priest
+  2050,
+  1243,
+  585,
+  // shaman
+  331,
+  403,
+  8017,
+  // warlock
+  687,
+  348,
+  686,
+  688,
+  // warrior
+  6673,
+  2457,
+  20647,
+  78,
+  // human
+  20599,
+  59752,
+  20864,
+  58985,
+  20597,
+  20598,
+  // blood elf
+  28877,
+  25046,
+  28730,
+  50613,
+  822,
+  // draenei
+  28875,
+  28880,
+  59542,
+  59543,
+  59544,
+  59545,
+  59547,
+  59548,
+  6562,
+  28878,
+  59221,
+  59535,
+  59536,
+  59538,
+  59539,
+  59540,
+  59541,
+  // dwarf
+  2481,
+  20596,
+  20595,
+  59224,
+  20594,
+  // gnome
+  20592,
+  20593,
+  20589,
+  20591,
+  // night elf
+  21009,
+  20583,
+  20582,
+  58984,
+  20585,
+  // orc
+  20574,
+  20572,
+  33697,
+  33702,
+  20575,
+  20576,
+  21563,
+  54562,
+  65222,
+  20573,
+  // tauren
+  20552,
+  20550,
+  20551,
+  20549,
+  // troll
+  20557,
+  26297,
+  26290,
+  58943,
+  20555,
+  20558,
+  // undead
+  20577,
+  20579,
+  5227,
+  7744,
+]
 
