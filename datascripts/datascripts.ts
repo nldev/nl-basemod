@@ -256,6 +256,14 @@ function SetupPoisons () {
   deadlyEffect.Effects.get(1).PointsBase.set(8)
 }
 
+function HearthSpell () {
+  const spell = std.Spells.load(8690)
+  spell.Cooldown.set(1000 * 60 * 60) // 1 hour
+  spell.Name.enGB.set('Recall')
+  spell.Description.enGB.set('Return home.')
+
+}
+
 function NormalizeSprint ($: Builder) {
   // FIXME fix tooltip
   const sprint = std.Spells.load(11305)
