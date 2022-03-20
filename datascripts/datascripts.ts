@@ -3,23 +3,14 @@ import { Mapping, SQLTable } from './basemod/types'
 import { TalentOptions } from './basemod/talents'
 import { Autolearn } from './basemod/autolearn'
 import { Speed } from './basemod/utils'
-import { Map, MapOptions } from './basemod/maps'
+import { MapOptions } from './basemod/maps'
 import { TABLES } from './config/tables'
 import { TALENTS } from './config/talents'
 import { AUTOLEARN } from './config/autolearn'
 import { MAPS } from './config/maps'
 import { std } from 'wow/wotlk'
-import { ALL_CLASSES, ALL_RACES } from './basemod/constants'
+import { ALL_CLASSES } from './basemod/constants'
 import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
-
-new Builder($ => {
-  $.ProcessMany<SQLTable>(TABLES)
-  $.ProcessMany<TalentOptions>(TALENTS)
-  $.ProcessMany<Autolearn>(AUTOLEARN)
-  $.ProcessMany<MapOptions>(MAPS)
-
-  Settings($)
-})
 
 const SKILLS: Mapping<SkillLine> = {}
 std.SkillLines.forEach(e => {
@@ -310,6 +301,15 @@ const UNUSED_STARTING_SPELLS = [
   7744,
 ]
 
+
+new Builder($ => {
+  $.ProcessMany<SQLTable>(TABLES)
+  $.ProcessMany<TalentOptions>(TALENTS)
+  $.ProcessMany<Autolearn>(AUTOLEARN)
+  $.ProcessMany<MapOptions>(MAPS)
+
+  Settings($)
+})
 
 function RemoveUnusedStartingSpells () {
   std.SQL.playercreateinfo_spell_custom.queryAll({}).forEach(c => c.delete())
