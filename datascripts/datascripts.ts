@@ -261,7 +261,6 @@ function HearthSpell () {
   spell.Cooldown.set(1000 * 60 * 60) // 1 hour
   spell.Name.enGB.set('Recall')
   spell.Description.enGB.set('Return home.')
-
 }
 
 function NormalizeSprint ($: Builder) {

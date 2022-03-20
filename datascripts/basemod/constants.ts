@@ -1,4 +1,5 @@
-import { Mapping } from './types'
+import { CharacterClass, CharacterRace, Mapping } from './types'
+import { ClassMask, RaceMask } from './utils'
 
 export const ENV = {
   DEV: 'DEV',
@@ -53,6 +54,20 @@ export const CLASS_MASKS: Mapping<number> = {
   DRUID: 1024,
 }
 
+export const ALL_CLASSES: CharacterClass[] = [
+  'WARRIOR',
+  'PALADIN',
+  'HUNTER',
+  'ROGUE',
+  'PRIEST',
+  'SHAMAN',
+  'MAGE',
+  'WARLOCK',
+  'DRUID',
+]
+
+export const ALL_CLASS_MASK = ClassMask(...ALL_CLASSES)
+
 export const CLASS_IDS: Mapping<number> = {
   WARRIOR: 1,
   PALADIN: 2,
@@ -89,6 +104,21 @@ export const RACE_MASKS: Mapping<number> = {
   BLOOD_ELF: 512,
   DRAENEI: 1024,
 }
+
+export const ALL_RACES: CharacterRace[] = [
+  'HUMAN',
+  'ORC',
+  'DWARF',
+  'NIGHT_ELF',
+  'UNDEAD',
+  'TAUREN',
+  'GNOME',
+  'TROLL',
+  'BLOOD_ELF',
+  'DRAENEI',
+]
+
+export const ALL_RACE_MASK = RaceMask(...ALL_RACES)
 
 export const RACE_IDS: Mapping<number> = {
   HUMAN: 1,

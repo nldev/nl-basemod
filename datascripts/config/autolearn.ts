@@ -1,9 +1,18 @@
 import { Templates } from '../basemod'
 import { Autolearn } from '../basemod/autolearn'
+import { ALL_CLASSES } from '../basemod/constants'
 
 export const AUTOLEARN: Templates<Autolearn> = {
   taskId: 'create-autolearn',
   list: [
+    {
+      id: 'recall',
+      data: {
+        spellId: 8690,
+        level: 1,
+        class: ALL_CLASSES,
+      }
+    },
     {
       id: 'stealth',
       data: {
