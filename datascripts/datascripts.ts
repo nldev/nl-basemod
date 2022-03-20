@@ -276,7 +276,7 @@ function Rogue ($: Builder) {
 }
 
 function Settings ($: Builder) {
-  RecallSpell
+  RecallSpell()
   RemoveFlagDropDebuff()
   SetStartingZone()
   Rogue($)
