@@ -500,6 +500,8 @@ function SetupSkills ($: Builder) {
   SKILLS['Fist Weapons'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN', 'DRUID'], ALL_CLASSES as any, e => e.Rank.set(0))
   // 1h sword
   SKILLS['Swords'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'WARLOCK', 'MAGE', 'PALADIN'], ALL_CLASSES as any, e => e.Rank.set(0))
+  // 1h mace
+  SKILLS['Maces'].Autolearn.addMod(['ROGUE', 'WARRIOR', 'WARLOCK', 'PALADIN', 'SHAMAN', 'DRUID', 'PRIEST'], ALL_CLASSES as any, e => e.Rank.set(0))
   // 1h axe
   SKILLS['Axes'].Autolearn.addMod(['ROGUE', 'HUNTER', 'WARRIOR', 'SHAMAN'], ALL_CLASSES as any, e => e.Rank.set(0))
   // thrown
