@@ -1,4 +1,5 @@
 import { std } from 'wow/wotlk'
+import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
 import { Builder } from './basemod'
 import { Mapping, SQLTable } from './basemod/types'
 import { TalentOptions } from './basemod/talents'
@@ -10,7 +11,6 @@ import { TALENTS } from './config/talents'
 import { AUTOLEARN } from './config/autolearn'
 import { MAPS } from './config/maps'
 import { ALL_CLASSES } from './basemod/constants'
-import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
 
 const SKILLS: Mapping<SkillLine> = {}
 std.SkillLines.forEach(e => {
