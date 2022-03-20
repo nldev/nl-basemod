@@ -1,3 +1,4 @@
+import { std } from 'wow/wotlk'
 import { Builder } from './basemod'
 import { Mapping, SQLTable } from './basemod/types'
 import { TalentOptions } from './basemod/talents'
@@ -8,7 +9,6 @@ import { TABLES } from './config/tables'
 import { TALENTS } from './config/talents'
 import { AUTOLEARN } from './config/autolearn'
 import { MAPS } from './config/maps'
-import { std } from 'wow/wotlk'
 import { ALL_CLASSES } from './basemod/constants'
 import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
 
