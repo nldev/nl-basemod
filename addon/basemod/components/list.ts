@@ -96,12 +96,19 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
         console.log(i.state.id)
         console.log(i.name)
       })
-      const item = list.state.items.splice(index, 1)[0]
+      let item
+      list.state.items = list.state.items.filter(i => {
+        const isMatch = i.state.id === id
+        if (isMatch)
+          item = i
+        return !isMatch
+      })
 
-      // if (item) {
-      //   item.ref.Hide()
-      //   list.fns.Reflow()
-      // }
+      if (item) {
+        item.state.id = null
+        item.ref.Hide()
+        list.fns.Reflow()
+      }
     }
   }
 
