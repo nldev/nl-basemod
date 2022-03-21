@@ -124,23 +124,17 @@ export const Panel: Component<PanelOptions> = options => {
         id: 'help',
         text: 'Help',
       },
-      {
-        id: 'dev-tools',
-        text: '[dev] Tools',
-      },
-      {
-        id: 'dev-equip',
-        text: '[dev] Equipment',
-      },
-      {
-        id: 'dev-consume',
-        text: '[dev] Consumables',
-      },
       // {
-      //   id: 'baz',
-      //   text: 'Baz',
-      //   value: 3,
-      //   tooltip: 'this has a tooltip',
+      //   id: 'dev-tools',
+      //   text: '[dev] Tools',
+      // },
+      // {
+      //   id: 'dev-equip',
+      //   text: '[dev] Equipment',
+      // },
+      // {
+      //   id: 'dev-consume',
+      //   text: '[dev] Consumables',
       // },
     ],
     onSelect: ({ id }) => {
