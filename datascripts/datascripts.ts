@@ -654,7 +654,7 @@ function SetupStats ($: Builder) {
     cls.Stats.CritToDodge.set(0)
     cls.Stats.DodgeBase.set(0)
     // cls.Stats.DiminishingK.set(0)
-    cls.Stats.Intellect.set((o, i) => {
+    cls.Stats.Intellect.set((o, r, i) => {
       const id = cls.ID
       const min = STATS[id].intMin
       const max = STATS[id].intMax
@@ -662,7 +662,7 @@ function SetupStats ($: Builder) {
       const amount = min + (inc * i)
       return amount
     })
-    cls.Stats.Strength.set((o, i) => {
+    cls.Stats.Strength.set((o, r, i) => {
       const id = cls.ID
       const min = STATS[id].strMin
       const max = STATS[id].strMax
@@ -670,7 +670,7 @@ function SetupStats ($: Builder) {
       const amount = min + (inc * i)
       return amount
     })
-    cls.Stats.Stamina.set((o, i) => {
+    cls.Stats.Stamina.set((o, r, i) => {
       const id = cls.ID
       const min = STATS[id].staMin
       const max = STATS[id].staMax
@@ -678,7 +678,7 @@ function SetupStats ($: Builder) {
       const amount = min + (inc * i)
       return amount
     })
-    cls.Stats.Agility.set((o, i) => {
+    cls.Stats.Agility.set((o, r, i) => {
       const id = cls.ID
       const min = STATS[id].agiMin
       const max = STATS[id].agiMax
@@ -686,7 +686,7 @@ function SetupStats ($: Builder) {
       const amount = min + (inc * i)
       return amount
     })
-    cls.Stats.Spirit.set((o, i) => {
+    cls.Stats.Spirit.set((o, r, i) => {
       const id = cls.ID
       const min = STATS[id].spiMin
       const max = STATS[id].spiMax
