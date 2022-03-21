@@ -92,11 +92,7 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
 
     Detach: (id: string) => {
       const index = list.state.map[id]
-      console.log(list.state.items.length)
-      list.state.items.forEach(i => console.log(i.name))
-      let item
-      if (list.state.items && list.state.items[index])
-        item = list.state.items.splice(index, 1)[0]
+      const item = list.state.items.splice(index, 1)[0]
 
       if (item) {
         item.ref.Hide()
