@@ -62,8 +62,8 @@ export const Panel: Component<PanelOptions> = options => {
     'loadout': Frame,
     'stash': Frame,
     'market': Frame,
-    'lfg': Frame,
     'clan': Frame,
+    'lfg': Frame,
     'keybinds': Frame,
     'settings': Frame,
     'help': Frame,
@@ -105,12 +105,12 @@ export const Panel: Component<PanelOptions> = options => {
         text: 'Market',
       },
       {
-        id: 'lfg',
-        text: 'Group Finder',
-      },
-      {
         id: 'clan',
         text: 'Clans',
+      },
+      {
+        id: 'lfg',
+        text: 'Group Finder',
       },
       {
         id: 'keybinds',
