@@ -96,7 +96,9 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
         console.log(i.state.id)
         console.log(i.name)
       })
+
       let item
+
       list.state.items = list.state.items.filter(i => {
         const isMatch = i.state.id === id
         if (isMatch)
