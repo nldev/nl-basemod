@@ -62,6 +62,8 @@ export const Panel: Component<PanelOptions> = options => {
     'loadouts': Frame,
     'stash': Frame,
     'market': Frame,
+    'clan': Frame,
+    'keybinds': Frame,
     'settings': Frame,
     'help': Frame,
     'dev-tools': Frame,
