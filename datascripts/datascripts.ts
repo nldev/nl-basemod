@@ -10,7 +10,7 @@ import { TABLES } from './config/tables'
 import { TALENTS } from './config/talents'
 import { AUTOLEARN } from './config/autolearn'
 import { MAPS } from './config/maps'
-import { ALL_CLASSES } from './basemod/constants'
+import { ALL_CLASSES, CLASS_IDS, RACE_IDS } from './basemod/constants'
 
 const SKILLS: Mapping<SkillLine> = {}
 std.SkillLines.forEach(e => {
@@ -654,11 +654,39 @@ function SetupStats ($: Builder) {
     cls.Stats.CritToDodge.set(0)
     cls.Stats.DodgeBase.set(0)
     // cls.Stats.DiminishingK.set(0)
+    std.SQL.player_levelstats.queryAll({}).forEach(x => x.delete())
+    std.SQL.player_classlevelstats.queryAll({}).forEach(x => x.delete())
+
+    for (let c in Object.keys(CLASS_IDS)) {
+      const cid = CLASS_IDS[c]
+      for (let r in Object.keys(RACE_IDS)) {
+        const rid = RACE_IDS[r]
+        for (let i = 1; i <= 99; i++) {
+          std.SQL.player_levelstats.add(rid, cid, i, {
+            agi: STATS[cid].agiMin + (((STATS[cid].agiMax - STATS[cid].agiMin) / 99) * i),
+            inte: STATS[cid].intMin + (((STATS[cid].intMax - STATS[cid].intMin) / 99) * i),
+            sta: STATS[cid].staMin + (((STATS[cid].staMax - STATS[cid].staMin) / 99) * i),
+            str: STATS[cid].strMin + (((STATS[cid].strMax - STATS[cid].strMin) / 99) * i),
+            spi: STATS[cid].spiMin + (((STATS[cid].spiMax - STATS[cid].spiMin) / 99) * i),
+            level: i,
+            class: cid,
+            race: rid,
+          })
+          std.SQL.player_classlevelstats.add(cid, i, {
+            class: cid,
+            level: i,
+            basehp: STATS[cid].hpMin + (((STATS[cid].hpMax - STATS[cid].hpMin) / 99) * i),
+            basemana: STATS[cid].mpMin + (((STATS[cid].mpMax - STATS[cid].mpMin) / 99) * i),
+          })
+        }
+      }
+    }
+
     cls.Stats.Intellect.set((o, r, i) => {
       const id = cls.ID
       const min = STATS[id].intMin
       const max = STATS[id].intMax
-      const inc = (max - min) / 80
+      const inc = (max - min) / 99
       const amount = min + (inc * i)
       return amount
     })
@@ -666,7 +694,7 @@ function SetupStats ($: Builder) {
       const id = cls.ID
       const min = STATS[id].strMin
       const max = STATS[id].strMax
-      const inc = (max - min) / 80
+      const inc = (max - min) / 99
       const amount = min + (inc * i)
       return amount
     })
@@ -674,7 +702,7 @@ function SetupStats ($: Builder) {
       const id = cls.ID
       const min = STATS[id].staMin
       const max = STATS[id].staMax
-      const inc = (max - min) / 80
+      const inc = (max - min) / 99
       const amount = min + (inc * i)
       return amount
     })
@@ -682,7 +710,7 @@ function SetupStats ($: Builder) {
       const id = cls.ID
       const min = STATS[id].agiMin
       const max = STATS[id].agiMax
-      const inc = (max - min) / 80
+      const inc = (max - min) / 99
       const amount = min + (inc * i)
       return amount
     })
@@ -690,7 +718,7 @@ function SetupStats ($: Builder) {
       const id = cls.ID
       const min = STATS[id].spiMin
       const max = STATS[id].spiMax
-      const inc = (max - min) / 80
+      const inc = (max - min) / 99
       const amount = min + (inc * i)
       return amount
     })
@@ -698,7 +726,7 @@ function SetupStats ($: Builder) {
       const id = cls.ID
       const min = STATS[id].hpMin
       const max = STATS[id].hpMax
-      const inc = (max - min) / 80
+      const inc = (max - min) / 99
       const amount = min + (inc * i)
       return amount
     })
@@ -706,7 +734,7 @@ function SetupStats ($: Builder) {
       const id = cls.ID
       const min = STATS[id].mpMin
       const max = STATS[id].mpMax
-      const inc = (max - min) / 80
+      const inc = (max - min) / 99
       const amount = min + (inc * i)
       return amount
     })
