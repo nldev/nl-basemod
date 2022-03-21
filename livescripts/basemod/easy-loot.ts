@@ -25,7 +25,7 @@ export function EasyLoot (events: TSEvents) {
     if (number === -1)
       return
     const id = 0
-    const timer = 99
+    const timer = 100
     const mechanic = 0
     for (let i = 0; i <= number; i++) {
       const itemId = loot.GetItem(i).GetItemID()
