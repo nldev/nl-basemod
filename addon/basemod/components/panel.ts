@@ -106,11 +106,11 @@ export const Panel: Component<PanelOptions> = options => {
       },
       {
         id: 'lfg',
-        text: 'LFG',
+        text: 'Group Finder',
       },
       {
         id: 'clan',
-        text: 'Clan',
+        text: 'Clans',
       },
       {
         id: 'keybinds',
