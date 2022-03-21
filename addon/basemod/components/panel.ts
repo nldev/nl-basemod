@@ -59,9 +59,10 @@ export const Panel: Component<PanelOptions> = options => {
   const COMPONENTS = {
     'profile': Frame,
     'talents': Talents,
-    'loadouts': Frame,
+    'loadout': Frame,
     'stash': Frame,
     'market': Frame,
+    'lfg': Frame,
     'clan': Frame,
     'keybinds': Frame,
     'settings': Frame,
@@ -92,8 +93,8 @@ export const Panel: Component<PanelOptions> = options => {
         text: 'Talents',
       },
       {
-        id: 'loadouts',
-        text: 'Loadouts',
+        id: 'loadout',
+        text: 'Loadout',
       },
       {
         id: 'stash',
@@ -102,6 +103,18 @@ export const Panel: Component<PanelOptions> = options => {
       {
         id: 'market',
         text: 'Market',
+      },
+      {
+        id: 'lfg',
+        text: 'LFG',
+      },
+      {
+        id: 'clan',
+        text: 'Clan',
+      },
+      {
+        id: 'keybinds',
+        text: 'Keybinds',
       },
       {
         id: 'settings',
