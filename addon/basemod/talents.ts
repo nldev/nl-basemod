@@ -285,9 +285,9 @@ export const Talents: Component = options => {
     ...Object.keys(TALENTS).map(key => TALENTS[key])
   ].sort((a, b) => {
     if (a.cost > b.cost)
-      return -1
-    if (a.cost < b.cost)
       return 1
+    if (a.cost < b.cost)
+      return -1
     return 0
   })
 
