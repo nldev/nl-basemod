@@ -106,7 +106,7 @@ export const Panel: Component<PanelOptions> = options => {
       },
       {
         id: 'clan',
-        text: 'Clans',
+        text: 'Clan',
       },
       {
         id: 'lfg',
