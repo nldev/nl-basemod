@@ -619,9 +619,11 @@ function SetupNpcStats ($: Builder) {
   // $.std.CreatureTemplates.load(257).Stats.HealthMod.set(0.9)
   // $.std.CreatureTemplates.load(257).Stats.ArmorMod.set(0.9)
   std.SQL.creature_template.queryAll({}).forEach(c => {
-    c.HealthModifier.set(1.3)
-    c.ArmorModifier.set(1)
-    c.DamageModifier.set(1.6)
+    if (c.type.get() !== 8) {
+      c.HealthModifier.set(1.3)
+      c.ArmorModifier.set(1)
+      c.DamageModifier.set(1.6)
+    }
   })
 }
 
