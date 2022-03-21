@@ -585,7 +585,7 @@ function SetupNpcStats ($: Builder) {
     })
     std.SQL.creature_classlevelstats.add(level, 2, {
       level,
-      class: 1,
+      class: 2,
       basehp0: Math.ceil(npcPaladinMin.basehp0.get() + (level * ((npcPaladinMax.basehp0.get() - npcPaladinMin.basehp0.get()) / 99))),
       basehp1: Math.ceil(npcPaladinMin.basehp1.get() + (level * ((npcPaladinMax.basehp1.get() - npcPaladinMin.basehp1.get()) / 99))),
       basehp2: Math.ceil(npcPaladinMin.basehp2.get() + (level * ((npcPaladinMax.basehp2.get() - npcPaladinMin.basehp2.get()) / 99))),
@@ -600,7 +600,7 @@ function SetupNpcStats ($: Builder) {
     })
     std.SQL.creature_classlevelstats.add(level, 4, {
       level,
-      class: 1,
+      class: 4,
       basehp0: Math.ceil(npcRogueMin.basehp0.get() + (level * ((npcRogueMax.basehp0.get() - npcRogueMin.basehp0.get()) / 99))),
       basehp1: Math.ceil(npcRogueMin.basehp1.get() + (level * ((npcRogueMax.basehp1.get() - npcRogueMin.basehp1.get()) / 99))),
       basehp2: Math.ceil(npcRogueMin.basehp2.get() + (level * ((npcRogueMax.basehp2.get() - npcRogueMin.basehp2.get()) / 99))),
@@ -615,7 +615,7 @@ function SetupNpcStats ($: Builder) {
     })
     std.SQL.creature_classlevelstats.add(level, 8, {
       level,
-      class: 1,
+      class: 8,
       basehp0: Math.ceil(npcMageMin.basehp0.get() + (level * ((npcMageMax.basehp0.get() - npcMageMin.basehp0.get()) / 99))),
       basehp1: Math.ceil(npcMageMin.basehp1.get() + (level * ((npcMageMax.basehp1.get() - npcMageMin.basehp1.get()) / 99))),
       basehp2: Math.ceil(npcMageMin.basehp2.get() + (level * ((npcMageMax.basehp2.get() - npcMageMin.basehp2.get()) / 99))),
