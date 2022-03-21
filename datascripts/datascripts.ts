@@ -538,10 +538,10 @@ function SetupNpcStats ($: Builder) {
   const npcWarriorMax = std.SQL.creature_classlevelstats.query({ level: 70, class: 1 })
   const npcPaladinMin = std.SQL.creature_classlevelstats.query({ level: 35, class: 2 })
   const npcPaladinMax = std.SQL.creature_classlevelstats.query({ level: 70, class: 2 })
-  const npcRogueMin =   std.SQL.creature_classlevelstats.query({ level: 35, class: 4 })
-  const npcRogueMax =   std.SQL.creature_classlevelstats.query({ level: 80, class: 4 })
-  const npcMageMin =    std.SQL.creature_classlevelstats.query({ level: 35, class: 8 })
-  const npcMageMax =    std.SQL.creature_classlevelstats.query({ level: 70, class: 8 })
+  const npcRogueMin   = std.SQL.creature_classlevelstats.query({ level: 35, class: 4 })
+  const npcRogueMax   = std.SQL.creature_classlevelstats.query({ level: 80, class: 4 })
+  const npcMageMin    = std.SQL.creature_classlevelstats.query({ level: 35, class: 8 })
+  const npcMageMax    = std.SQL.creature_classlevelstats.query({ level: 70, class: 8 })
 
   // FIXME
   // iterate through all creature templates
