@@ -681,63 +681,62 @@ function SetupStats ($: Builder) {
         }
       }
     }
-
-    cls.Stats.Intellect.set((o, r, i) => {
-      const id = cls.ID
-      const min = STATS[id].intMin
-      const max = STATS[id].intMax
-      const inc = (max - min) / 99
-      const amount = min + (inc * i)
-      return amount
-    })
-    cls.Stats.Strength.set((o, r, i) => {
-      const id = cls.ID
-      const min = STATS[id].strMin
-      const max = STATS[id].strMax
-      const inc = (max - min) / 99
-      const amount = min + (inc * i)
-      return amount
-    })
-    cls.Stats.Stamina.set((o, r, i) => {
-      const id = cls.ID
-      const min = STATS[id].staMin
-      const max = STATS[id].staMax
-      const inc = (max - min) / 99
-      const amount = min + (inc * i)
-      return amount
-    })
-    cls.Stats.Agility.set((o, r, i) => {
-      const id = cls.ID
-      const min = STATS[id].agiMin
-      const max = STATS[id].agiMax
-      const inc = (max - min) / 99
-      const amount = min + (inc * i)
-      return amount
-    })
-    cls.Stats.Spirit.set((o, r, i) => {
-      const id = cls.ID
-      const min = STATS[id].spiMin
-      const max = STATS[id].spiMax
-      const inc = (max - min) / 99
-      const amount = min + (inc * i)
-      return amount
-    })
-    cls.Stats.BaseHP.set((o, i) => {
-      const id = cls.ID
-      const min = STATS[id].hpMin
-      const max = STATS[id].hpMax
-      const inc = (max - min) / 99
-      const amount = min + (inc * i)
-      return amount
-    })
-    cls.Stats.BaseMana.set((o, i) => {
-      const id = cls.ID
-      const min = STATS[id].mpMin
-      const max = STATS[id].mpMax
-      const inc = (max - min) / 99
-      const amount = min + (inc * i)
-      return amount
-    })
+    // cls.Stats.Intellect.set((o, r, i) => {
+    //   const id = cls.ID
+    //   const min = STATS[id].intMin
+    //   const max = STATS[id].intMax
+    //   const inc = (max - min) / 99
+    //   const amount = min + (inc * i)
+    //   return amount
+    // })
+    // cls.Stats.Strength.set((o, r, i) => {
+    //   const id = cls.ID
+    //   const min = STATS[id].strMin
+    //   const max = STATS[id].strMax
+    //   const inc = (max - min) / 99
+    //   const amount = min + (inc * i)
+    //   return amount
+    // })
+    // cls.Stats.Stamina.set((o, r, i) => {
+    //   const id = cls.ID
+    //   const min = STATS[id].staMin
+    //   const max = STATS[id].staMax
+    //   const inc = (max - min) / 99
+    //   const amount = min + (inc * i)
+    //   return amount
+    // })
+    // cls.Stats.Agility.set((o, r, i) => {
+    //   const id = cls.ID
+    //   const min = STATS[id].agiMin
+    //   const max = STATS[id].agiMax
+    //   const inc = (max - min) / 99
+    //   const amount = min + (inc * i)
+    //   return amount
+    // })
+    // cls.Stats.Spirit.set((o, r, i) => {
+    //   const id = cls.ID
+    //   const min = STATS[id].spiMin
+    //   const max = STATS[id].spiMax
+    //   const inc = (max - min) / 99
+    //   const amount = min + (inc * i)
+    //   return amount
+    // })
+    // cls.Stats.BaseHP.set((o, i) => {
+    //   const id = cls.ID
+    //   const min = STATS[id].hpMin
+    //   const max = STATS[id].hpMax
+    //   const inc = (max - min) / 99
+    //   const amount = min + (inc * i)
+    //   return amount
+    // })
+    // cls.Stats.BaseMana.set((o, i) => {
+    //   const id = cls.ID
+    //   const min = STATS[id].mpMin
+    //   const max = STATS[id].mpMax
+    //   const inc = (max - min) / 99
+    //   const amount = min + (inc * i)
+    //   return amount
+    // })
     cls.Stats.BaseSpellCrit.set(() => 0)
     cls.Stats.BaseMeleeCrit.set(() => 0)
     cls.Stats.CombatRatingsScalar.set(() => 0)
