@@ -90,7 +90,7 @@ export const LootItem: Component<
   texture.SetAllPoints()
 
   icon.ref.EnableMouse(true)
-  icon.ref.HookScript('OnMouseDown', (_, button) => {
+  icon.ref.SetScript('OnMouseDown', (_, button) => {
     SendAddonMessage('loot-item', `${options.itemId} ${options.amount}`, 'WHISPER', app.playerInfo.name)
     Detach()
   })
@@ -145,7 +145,7 @@ export const LootItem: Component<
   // })
 
   // tooltip
-  icon.ref.HookScript('OnEnter', () => {
+  icon.ref.SetScript('OnEnter', () => {
     GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`item:${options.itemId}`)
@@ -154,7 +154,7 @@ export const LootItem: Component<
     GameTooltip.Show()
   })
 
-  icon.ref.HookScript('OnLeave', () => {
+  icon.ref.SetScript('OnLeave', () => {
     GameTooltip.ClearLines()
     GameTooltip.Hide()
   })
