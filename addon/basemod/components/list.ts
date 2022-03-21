@@ -91,13 +91,7 @@ export const List: Component<ListOptions, ListState, ListFns> = options => {
     },
 
     Detach: (id: string) => {
-      const index = list.state.map[id]
-      list.state.items.forEach(i => {
-        console.log(i.state.id)
-        console.log(i.name)
-      })
-
-      let item
+      let item: any
 
       list.state.items = list.state.items.filter(i => {
         const isMatch = i.state.id === id
