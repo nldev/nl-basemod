@@ -657,9 +657,9 @@ function SetupStats ($: Builder) {
     std.SQL.player_levelstats.queryAll({}).forEach(x => x.delete())
     std.SQL.player_classlevelstats.queryAll({}).forEach(x => x.delete())
 
-    for (let c in Object.keys(CLASS_IDS)) {
+    for (let c of Object.keys(CLASS_IDS)) {
       const cid = CLASS_IDS[c]
-      for (let r in Object.keys(RACE_IDS)) {
+      for (let r of Object.keys(RACE_IDS)) {
         const rid = RACE_IDS[r]
         for (let i = 1; i <= 99; i++) {
           std.SQL.player_levelstats.add(rid, cid, i, {
