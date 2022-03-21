@@ -338,6 +338,34 @@ function RemoveFlagDropDebuff () {
   std.Spells.load(2479).delete()
 }
 
+function CreateDevMovementBoots ($: Builder) {
+  for (let i = 1; i <= 10; i++) {
+    const amount = i * 10
+    const boots = std.Items.create($.Mod, `dev-boots-${amount}`, 20903)
+    boots.Spells.addMod(is => {
+      const spell = std.Spells.create($.Mod, `speed-${amount}`, 2836)
+      spell.Levels.set(0, 0, 0)
+      spell.ClassMask.set(0, 0, 0)
+      spell.Effects.clearAll()
+      spell.Effects.addMod(e => e
+        .Type.APPLY_AURA.set()
+        .Aura.MOD_INCREASE_SPEED.set()
+        .PercentBase.set(amount)
+        .PercentDieSides.set(0)
+        .PercentPerCombo.set(0)
+        .PercentPerLevel.set(0)
+        .ImplicitTargetA.UNIT_CASTER.set()
+      )
+      is.Spell.set(spell.ID)
+      is.Trigger.ON_EQUIP.set()
+      is.Charges.set('UNLIMITED')
+      is.Cooldown.set(0)
+      is.CategoryCooldown.set(0)
+      is.ProcsPerMinute.set(0)
+    })
+  }
+}
+
 function SetupPoisons () {
   // FIXME fix tooltip
   const mindEffect = std.Spells.load(5760)
