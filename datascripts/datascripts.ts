@@ -342,6 +342,7 @@ function CreateDevMovementBoots ($: Builder) {
   for (let i = 1; i <= 10; i++) {
     const amount = i * 10
     const boots = std.Items.create($.Mod, `dev-boots-${amount}`, 20903)
+    boots.Name.enGB.set(`${amount}% Movespeed Boots`)
     boots.Spells.addMod(is => {
       const spell = std.Spells.create($.Mod, `speed-${amount}`, 2836)
       spell.Levels.set(0, 0, 0)
