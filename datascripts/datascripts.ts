@@ -477,18 +477,6 @@ function Rogue ($: Builder) {
   NormalizeSprint($)
 }
 
-function Settings ($: Builder) {
-  RecallSpell()
-  RemoveFlagDropDebuff()
-  RemoveUnusedStartingSpells()
-  InfiniteRangedWeapon($)
-  SetupStats($)
-  SetupSkills($)
-  SetupNpcStats($)
-  SetStartingZone()
-  Rogue($)
-}
-
 function InfiniteRangedWeapon ($: Builder) {
   const b = std.Items.load(2504)
   b.Name.enGB.set('Bow')
@@ -734,3 +722,17 @@ function SetupStats ($: Builder) {
     cls.Stats.RegenHPPerSpt.set(() => std.DBC.GtRegenHPPerSpt.getRow(560).Data.get())
   })
 }
+
+function Settings ($: Builder) {
+  RecallSpell()
+  RemoveFlagDropDebuff()
+  RemoveUnusedStartingSpells()
+  InfiniteRangedWeapon($)
+  SetupStats($)
+  SetupSkills($)
+  SetupNpcStats($)
+  SetStartingZone()
+  CreateDevMovementBoots($)
+  Rogue($)
+}
+
