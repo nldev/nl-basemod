@@ -640,6 +640,10 @@ function SetupNpcStats ($: Builder) {
       c.HealthModifier.set(1.3)
       c.ArmorModifier.set(1)
       c.DamageModifier.set(1.6)
+      c.ManaModifier.set(1)
+      c.ExperienceModifier.set(1)
+      c.RegenHealth.set(1)
+      c.exp.set(0)
     }
   })
 }
