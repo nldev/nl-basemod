@@ -275,7 +275,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
     a.state.length = list.state.items.length
 
-    menu.ref.SetHeight((a.state.length * 30) + 6)
+    menu.ref.SetHeight((a.state.length * 30) + 14)
     listwrap.ref.SetHeight(a.state.length * 30)
 
     listwrap.ref.SetPoint('CENTER')
