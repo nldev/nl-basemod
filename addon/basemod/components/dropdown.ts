@@ -221,11 +221,11 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     w.ref.EnableMouse(true)
 
     w.ref.HookScript('OnEnter', () => {
+      autohide['item-' + options.id] = true
       if (!options.disabled) {
         timer = 0
         w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background', edgeFile: '' })
         w.ref.SetBackdropColor(0.21, 0.49, 1, 1)
-        autohide['item-' + options.id] = true
         if (options.tooltip) {
           GameTooltip.ClearLines()
           GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
@@ -236,11 +236,11 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     })
 
     w.ref.HookScript('OnLeave', () => {
+      timer = GetTime() + AUTOHIDE_TIMER
+      autohide['item-' + options.id] = false
       if (!options.disabled) {
         w.ref.SetBackdrop({ bgFile: '', insets: { left:0, right:0, top:0, bottom:0 } })
         w.ref.SetBackdropColor(0, 0, 0, 1)
-        timer = GetTime() + AUTOHIDE_TIMER
-        autohide['item-' + options.id] = false
         if (options.tooltip) {
           GameTooltip.ClearLines()
           GameTooltip.Hide()
