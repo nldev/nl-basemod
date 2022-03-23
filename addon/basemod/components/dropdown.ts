@@ -274,7 +274,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
     menu.ref.SetHeight((a.state.length * 30) + 20)
     list.ref.SetHeight(a.state.length * 30)
-    list.ref.SetPoint('BOTTOM', menu.ref, 'BOTTOM')
+    list.ref.SetPoint('CENTER', menu.ref, 'CENTER')
 
     autohide[`item-${options.id}`] = false
     items[options.id] = {
