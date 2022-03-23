@@ -6,6 +6,13 @@ import { Movable } from '../utils'
 import { Mapping } from '../types'
 import { Talents } from '../talents'
 
+export const DevTools: Component = () => {
+  const f = Frame({ name: 'devtools' })
+  return f
+
+  // reset bags
+}
+
 export interface PanelOptions extends ComponentOptions {
   // FIXME
   nav?: DropdownItemOptions[]
@@ -57,6 +64,9 @@ export const Panel: Component<PanelOptions> = options => {
   // pages
   // FIXME
   const COMPONENTS = {
+    'dev-tools': DevTools,
+    'dev-equip': Frame,
+    'dev-consume': Frame,
     'profile': Frame,
     'talents': Talents,
     'loadout': Frame,
@@ -64,12 +74,8 @@ export const Panel: Component<PanelOptions> = options => {
     'market': Frame,
     'clan': Frame,
     'lfg': Frame,
-    'keybinds': Frame,
     'settings': Frame,
     'help': Frame,
-    'dev-tools': Frame,
-    'dev-equip': Frame,
-    'dev-consume': Frame,
   }
   const pages: Mapping<Element> = {}
 
@@ -128,11 +134,6 @@ export const Panel: Component<PanelOptions> = options => {
       {
         id: 'lfg',
         text: 'Group Finder',
-        disabled: true,
-      },
-      {
-        id: 'keybinds',
-        text: 'Keybinds',
         disabled: true,
       },
       {
