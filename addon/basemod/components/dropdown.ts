@@ -184,7 +184,10 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   text.SetText(options.emptyText || 'select')
 
   // list
-  const list = List({ name: `${name}-menu-list`, itemHeight: 30, parent: menu })
+  const listwrap = Frame({ name: `${name}-menu-list-wrapper`, parent: menu })
+  const list = List({ name: `${name}-menu-list`, itemHeight: 30, parent: listwrap })
+
+  listwrap.ref.SetSize(options.width || 200, 0)
   list.ref.SetSize(options.width || 200, 0)
 
   autohide['list'] = false
@@ -273,6 +276,9 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     a.state.length = list.state.items.length
 
     menu.ref.SetHeight((a.state.length * 30) + 20)
+    listwrap.ref.SetHeight((a.state.length * 30))
+
+    listwrap.ref.SetPoint('CENTER')
 
     autohide[`item-${options.id}`] = false
     items[options.id] = {

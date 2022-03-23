@@ -26,8 +26,8 @@ export const ListItem: Component<ListItemOptions, ListItemState, ListItemFns> = 
   }
   frame.fns = {
     Reflow: (newY?: number) => {
-      y = y
-      frame.ref.SetPoint('TOPLEFT', 0, newY || y)
+      y = newY || y
+      frame.ref.SetPoint('TOPLEFT', 0, y)
     }
   }
   frame.fns.Reflow()
