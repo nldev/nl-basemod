@@ -85,6 +85,18 @@ export const Panel: Component<PanelOptions> = options => {
     //
     items: [
       {
+        id: 'dev-tools',
+        text: '[dev] Tools',
+      },
+      {
+        id: 'dev-equip',
+        text: '[dev] Equipment',
+      },
+      {
+        id: 'dev-consume',
+        text: '[dev] Consumables',
+      },
+      {
         id: 'profile',
         text: 'Profile',
         disabled: true,
@@ -133,18 +145,6 @@ export const Panel: Component<PanelOptions> = options => {
         text: 'Help',
         disabled: true,
       },
-      // {
-      //   id: 'dev-tools',
-      //   text: '[dev] Tools',
-      // },
-      // {
-      //   id: 'dev-equip',
-      //   text: '[dev] Equipment',
-      // },
-      // {
-      //   id: 'dev-consume',
-      //   text: '[dev] Consumables',
-      // },
     ],
     onSelect: ({ id }) => {
       // FIXME
