@@ -2,7 +2,6 @@ import { Component, ComponentOptions, Frame, Element } from '../app'
 import { List } from '../components/list'
 import { BASE_BACKDROP } from '../constants'
 import { Mapping } from '../types'
-import { Movable } from '../utils'
 
 const AUTOHIDE_TIMER = 2
 
