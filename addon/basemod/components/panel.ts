@@ -8,9 +8,17 @@ import { Talents } from '../talents'
 
 export const DevTools: Component = () => {
   const f = Frame({ name: 'devtools' })
-  return f
 
   // reset bags
+  const rb = Frame({ name: 'devtools-reset-bags', parent: f })
+  rb.ref.SetPoint('TOPLEFT')
+  const rbButton = CreateFrame('Button', 'devtools-reset-bags-button', rb.ref, 'UIPanelButtonTemplate')
+  rbButton.SetSize(90, 30)
+  rbButton.SetParent(rb.ref)
+  rbButton.SetText('Reset Bags')
+  rbButton.SetPoint('CENTER')
+
+  return f
 }
 
 export interface PanelOptions extends ComponentOptions {
