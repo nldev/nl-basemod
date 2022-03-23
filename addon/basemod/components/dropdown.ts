@@ -15,6 +15,7 @@ const DEFAULT_SELECTION = {
 export interface DropdownItem {
   id: string
   text: string
+  disabled?: boolean
   value?: string | number | boolean | null
   tooltip?: string
   item?: Element<DropdownOptions>
@@ -209,52 +210,62 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     t.SetFont('Fonts/FRIZQT__.TTF', 10)
     t.SetText(options.text)
 
+    if (options.disabled)
+      t.SetTextColor(0.4, 0.4, 0.4, 1)
+
     const e: any = w.ref
     e.text = t
 
     w.ref.SetBackdropColor(0, 0, 0, 1)
 
-    w.ref.EnableMouse(true)
-    w.ref.HookScript('OnEnter', () => {
-      timer = 0
-      w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background', edgeFile: '' })
-      w.ref.SetBackdropColor(0.21, 0.49, 1, 1)
-      autohide['item-' + options.id] = true
-      if (options.tooltip) {
-        GameTooltip.ClearLines()
-        GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
-        GameTooltip.SetText(options.tooltip)
-        GameTooltip.Show()
-      }
-    })
+    if (!options.disabled)
+      w.ref.EnableMouse(true)
 
-    w.ref.HookScript('OnLeave', () => {
-      w.ref.SetBackdrop({ bgFile: '', insets: { left:0, right:0, top:0, bottom:0 } })
-      w.ref.SetBackdropColor(0, 0, 0, 1)
-      timer = GetTime() + AUTOHIDE_TIMER
-      autohide['item-' + options.id] = false
-      if (options.tooltip) {
-        GameTooltip.ClearLines()
-        GameTooltip.Hide()
-      }
-    })
+    if (!options.disabled)
+      w.ref.HookScript('OnEnter', () => {
+        timer = 0
+        w.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background', edgeFile: '' })
+        w.ref.SetBackdropColor(0.21, 0.49, 1, 1)
+        autohide['item-' + options.id] = true
+        if (options.tooltip) {
+          GameTooltip.ClearLines()
+          GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
+          GameTooltip.SetText(options.tooltip)
+          GameTooltip.Show()
+        }
+      })
 
-    w.ref.HookScript('OnMouseUp', () => {
-      p.ref.Hide()
-      button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
-      button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
-      button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
-      button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
-      Select(options.id)
-    })
-    w.ref.HookScript('OnMouseDown', () => {
-      p.ref.Hide()
-      button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
-      button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
-      button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
-      button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
-      Select(options.id)
-    })
+    if (!options.disabled)
+      w.ref.HookScript('OnLeave', () => {
+        w.ref.SetBackdrop({ bgFile: '', insets: { left:0, right:0, top:0, bottom:0 } })
+        w.ref.SetBackdropColor(0, 0, 0, 1)
+        timer = GetTime() + AUTOHIDE_TIMER
+        autohide['item-' + options.id] = false
+        if (options.tooltip) {
+          GameTooltip.ClearLines()
+          GameTooltip.Hide()
+        }
+      })
+
+    if (!options.disabled)
+      w.ref.HookScript('OnMouseUp', () => {
+        p.ref.Hide()
+        button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
+        button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
+        button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
+        button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
+        Select(options.id)
+      })
+
+    if (!options.disabled)
+      w.ref.HookScript('OnMouseDown', () => {
+        p.ref.Hide()
+        button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
+        button.SetHighlightTexture('Interface\\Buttons\\UI-Common-MouseHilight')
+        button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down')
+        button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled')
+        Select(options.id)
+      })
 
     list.fns.Attach(options.id, w)
 
