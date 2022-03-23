@@ -87,6 +87,7 @@ export const Panel: Component<PanelOptions> = options => {
       {
         id: 'profile',
         text: 'Profile',
+        disabled: true,
       },
       {
         id: 'talents',
@@ -95,34 +96,42 @@ export const Panel: Component<PanelOptions> = options => {
       {
         id: 'loadout',
         text: 'Loadout',
+        disabled: true,
       },
       {
         id: 'stash',
         text: 'Stash',
+        disabled: true,
       },
       {
         id: 'market',
         text: 'Market',
+        disabled: true,
       },
       {
         id: 'clan',
         text: 'Clan',
+        disabled: true,
       },
       {
         id: 'lfg',
         text: 'Group Finder',
+        disabled: true,
       },
       {
         id: 'keybinds',
         text: 'Keybinds',
+        disabled: true,
       },
       {
         id: 'settings',
         text: 'Settings',
+        disabled: true,
       },
       {
         id: 'help',
         text: 'Help',
+        disabled: true,
       },
       // {
       //   id: 'dev-tools',
