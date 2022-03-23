@@ -8,10 +8,12 @@ import { Talents } from '../talents'
 
 export const DevTools: Component = () => {
   const f = Frame({ name: 'devtools' })
+  f.ref.SetSize(300,300)
 
   // reset bags
   const rb = Frame({ name: 'devtools-reset-bags', parent: f })
   rb.ref.SetPoint('TOPLEFT')
+  rb.ref.SetSize(90, 30)
   const rbButton = CreateFrame('Button', 'devtools-reset-bags-button', rb.ref, 'UIPanelButtonTemplate')
   rbButton.SetSize(90, 30)
   rbButton.SetParent(rb.ref)
