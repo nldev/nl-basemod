@@ -61,7 +61,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   }
 
   a.ref.SetWidth(options.width || 200)
-  a.ref.SetHeight(32)
+  a.ref.SetHeight(30)
   a.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
   a.ref.SetBackdropColor(0, 0, 0, 1)
 
@@ -273,8 +273,8 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
     a.state.length = list.state.items.length
 
-    menu.ref.SetHeight(a.state.length * 32)
-    list.ref.SetHeight(a.state.length * 32)
+    menu.ref.SetHeight(a.state.length * 30)
+    list.ref.SetHeight(a.state.length * 30)
 
     autohide[`item-${options.id}`] = false
     items[options.id] = {
