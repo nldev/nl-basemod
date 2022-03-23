@@ -7,7 +7,6 @@ import { Panel } from './basemod/components/panel'
 import { Dropdown } from './basemod/components/dropdown'
 
 export const app = new App(app => {
-  // Talents()
   EasyLoot()
   Chests()
 
