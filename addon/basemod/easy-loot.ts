@@ -91,20 +91,12 @@ export const LootItem: Component<
 
   icon.ref.EnableMouse(true)
   icon.ref.SetScript('OnMouseDown', (_, button) => {
-    console.log(IsControlKeyDown)
-    console.log(DressUpItemLink(GetItemInfo(options.itemId)[1]))
-    console.log(GetItemInfo(options.itemId)[0])
-    console.log(GetItemInfo(options.itemId)[1])
-    console.log(GetItemInfo(options.itemId)[2])
-    console.log(GetItemInfo(options.itemId)[3])
     if (IsControlKeyDown()) {
-      console.log('hello')
       DressUpItemLink(GetItemInfo(options.itemId)[1])
     } else {
-      console.log('bye')
       SendAddonMessage('loot-item', `${options.itemId} ${options.amount}`, 'WHISPER', app.playerInfo.name)
+      Detach()
     }
-    Detach()
   })
 
   icon.ref.SetPoint('LEFT', 8, 0)
