@@ -20,6 +20,8 @@ export type ComponentOptions = {
   inherits?: string
   type?: WoWAPI.FrameType
   state?: Mapping
+  height?: number
+  width?: number
   fns?: Mapping<ElementFn>
 }
 
@@ -70,6 +72,12 @@ export const Frame: Component = options => {
 
   if (options.parent)
     frame.SetParent(options.parent.inner)
+
+  if (options.width)
+    frame.SetWidth(options.width)
+
+  if (options.height)
+    frame.SetHeight(options.height)
 
   const element = {
     parent,

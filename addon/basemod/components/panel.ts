@@ -6,10 +6,20 @@ import { Movable } from '../utils'
 import { Mapping } from '../types'
 import { Talents } from '../talents'
 
+export interface LayoutOptions extends ComponentOptions {
+  title: string
+}
+
+export const Layout: Component<LayoutOptions> = options => {
+  const f = Frame(options)
+  return f
+}
+
 export const DevTools: Component = options => {
-  const f = Frame({ name: 'devtools', ...options })
-  f.ref.SetAllPoints(options.parent.inner)
-  f.ref.SetPoint('TOPLEFT')
+  const f = Frame({ name: 'devtools-inner' })
+  // const f = Frame({ name: 'devtools', ...options })
+  // f.ref.SetAllPoints(options.parent.inner)
+  // f.ref.SetPoint('TOPLEFT')
 
   // reset bags
   const ci = Frame({ name: 'devtools-reset-bags', parent: f })
