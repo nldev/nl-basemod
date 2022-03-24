@@ -92,6 +92,7 @@ export const Panel: Component<PanelOptions> = options => {
     'clan': Frame,
     'mail': Frame,
     'notes': Frame,
+    'statistics': Frame,
     'settings': Frame,
     'help': Frame,
   }
