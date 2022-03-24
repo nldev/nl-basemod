@@ -126,6 +126,16 @@ export const Panel: Component<PanelOptions> = options => {
         text: 'Talents',
       },
       {
+        id: 'missions',
+        text: 'Missions',
+        disabled: true,
+      },
+      {
+        id: 'lfg',
+        text: 'Group Finder',
+        disabled: true,
+      },
+      {
         id: 'loadout',
         text: 'Loadout',
         disabled: true,
@@ -146,8 +156,13 @@ export const Panel: Component<PanelOptions> = options => {
         disabled: true,
       },
       {
-        id: 'lfg',
-        text: 'Group Finder',
+        id: 'mail',
+        text: 'Mail',
+        disabled: true,
+      },
+      {
+        id: 'notes',
+        text: 'Notes',
         disabled: true,
       },
       {
