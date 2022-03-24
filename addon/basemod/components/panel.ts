@@ -24,7 +24,7 @@ export const DevTools: Component = options => {
   ciButton.SetPoint('CENTER')
 
   ciButton.SetScript('OnClick', frame =>
-    SendAddonMessage('dev-clear-bags', '', 'WHISPER', Get().playerInfo.name)
+    SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
   )
   // TODO
   // fix positioning

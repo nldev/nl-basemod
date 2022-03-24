@@ -5,6 +5,7 @@ import { Rest } from './basemod/rest'
 import { Chests } from './basemod/chests'
 import { Autolearn } from './basemod/autolearn'
 import { Combat } from './basemod/combat/combat'
+import { Opcode } from './basemod/utils'
 
 export function Main (events: TSEvents) {
   Store(events)
@@ -14,6 +15,18 @@ export function Main (events: TSEvents) {
   Chests(events)
   Autolearn(events)
   Combat(events)
+
+  events.Player.OnWhisper((sender, _, message) => {
+    const opcode = Opcode('dev-clear-inventory')
+    const str = message.get()
+    if (!str.includes(opcode))
+     return
+    for (let i = 1; i <= 16; i++) {
+      const item = sender.GetItemByPos(255, 1)
+      if (!item.IsNull())
+        sender.RemoveItem(item)
+    }
+  })
 
   events.Items.OnEquip((item, player, slot, isMerge) => {
     player.SendBroadcastMessage(`EQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
