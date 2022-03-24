@@ -6,8 +6,9 @@ import { Movable } from '../utils'
 import { Mapping } from '../types'
 import { Talents } from '../talents'
 
-export const DevTools: Component = () => {
-  const f = Frame({ name: 'devtools' })
+export const DevTools: Component = options => {
+  console.log(options.parent)
+  const f = Frame({ name: 'devtools', ...options })
   f.ref.SetSize(100, 100)
   f.ref.SetBackdrop(BASE_BACKDROP)
   f.ref.SetPoint('TOPLEFT')
@@ -105,7 +106,6 @@ export const Panel: Component<PanelOptions> = options => {
     isTriggerOnInit: true,
     // isTriggerOnReselect: false,
     // emptyText: 'Minimize',
-    //
     items: [
       {
         id: 'dev-tools',
