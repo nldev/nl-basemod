@@ -24,7 +24,8 @@ export function Main (events: TSEvents) {
     for (let i = 1; i <= 16; i++) {
       const item = sender.GetItemByPos(255, 1)
       if (!item.IsNull())
-        sender.RemoveItem(item)
+        console.log(item.GetName())
+        // sender.RemoveItem(item)
     }
   })
 
