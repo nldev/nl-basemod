@@ -7,7 +7,7 @@ import { Mapping } from '../types'
 import { Talents } from '../talents'
 
 export const DevTools: Component = options => {
-  console.log(options.parent)
+  console.log((options as any).foo)
   const f = Frame({ name: 'devtools', ...options })
   f.ref.SetSize(100, 100)
   f.ref.SetBackdrop(BASE_BACKDROP)
@@ -81,7 +81,7 @@ export const Panel: Component<PanelOptions> = options => {
 
   // pages
   // FIXME
-  const COMPONENTS = {
+  const COMPONENTS: Mapping<Component> = {
     'dev-tools': DevTools,
     'dev-equip': Frame,
     'dev-consume': Frame,
