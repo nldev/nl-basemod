@@ -3,15 +3,57 @@ import { Component, ComponentOptions, Frame, Element } from '../app'
 import { Dropdown, DropdownItemOptions } from './dropdown'
 import { BASE_BACKDROP } from '../constants'
 import { Movable } from '../utils'
-import { Mapping } from '../types'
+import { Mapping, Rgb } from '../types'
 import { Talents } from '../talents'
 
-export interface LayoutOptions extends ComponentOptions {
-  title: string
+export interface SectionOptions extends ComponentOptions {
+  parent: Element
+  height: number
+  previous?: Element
+  y?: number
+  title?: string
+  border?: boolean
+  color?: Rgb
 }
 
-export const Layout: Component<LayoutOptions> = options => {
+export const Section: Component<SectionOptions> = options => {
   const f = Frame(options)
+
+  // box
+  f.ref.SetHeight(options.height)
+  f.ref.SetWidth(options.parent.inner.GetWidth())
+
+  // position based on y
+  const y = options.y || 0
+  f.ref.SetPoint('TOPLEFT', 0, y)
+
+  // position based on previous
+  if (options.previous)
+    f.ref.SetPoint('TOPLEFT', options.previous.inner, 'BOTTOMLEFT')
+
+  // title
+  if (options.title) {
+    const text = f.ref.CreateFontString(
+      `${f.ref.GetName()}-title`,
+      'OVERLAY',
+      'GameTooltipText',
+    )
+    text.SetFont('Fonts/FRIZQT__.TTF', 10)
+    text.SetText(options.title)
+  }
+
+  // color
+  if (options.border || options.color) {
+    f.ref.SetBackdrop({
+      ...BASE_BACKDROP,
+      bgFile: options.color ? BASE_BACKDROP.bgFile : '',
+      edgeFile: options.border ? BASE_BACKDROP.edgeFile : '',
+    })
+
+    if (options.color)
+      f.ref.SetBackdropColor(...options.color, 1)
+  }
+
   return f
 }
 
