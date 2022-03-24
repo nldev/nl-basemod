@@ -23,6 +23,9 @@ export const DevTools: Component = options => {
   ciButton.SetText('Clear Inventory')
   ciButton.SetPoint('CENTER')
 
+  ciButton.SetScript('OnClick', frame =>
+    SendAddonMessage('dev-clear-bags', '', 'WHISPER', Get().playerInfo.name)
+  )
   // TODO
   // fix positioning
   // send event
