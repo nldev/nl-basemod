@@ -21,7 +21,6 @@ export function Main (events: TSEvents) {
     const str = message.get()
     if (!str.includes(opcode))
      return
-    sender.SendBroadcastMessage('here')
     for (let i = 0; i <= 15; i++) {
       const item = sender.GetItemByPos(255, 23 + i)
       if (!item.IsNull())
