@@ -24,10 +24,6 @@ export const DevTools: Component = options => {
   ciButton.SetScript('OnClick', frame =>
     SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
   )
-  // TODO
-  // fix positioning
-  // send event
-  // setup handler
 
   return f
 }
