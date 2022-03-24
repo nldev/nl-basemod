@@ -223,3 +223,4 @@ export const Panel: Component<PanelOptions> = options => {
 
   return title
 }
+
