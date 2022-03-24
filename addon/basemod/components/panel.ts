@@ -164,8 +164,13 @@ export const Panel: Component<PanelOptions> = options => {
         disabled: true,
       },
       {
-        id: 'notes',
-        text: 'Notes',
+        id: 'journal',
+        text: 'Journal',
+        disabled: true,
+      },
+      {
+        id: 'statistics',
+        text: 'Statistics',
         disabled: true,
       },
       {
