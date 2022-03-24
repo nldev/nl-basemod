@@ -8,7 +8,9 @@ import { Talents } from '../talents'
 
 export const DevTools: Component = () => {
   const f = Frame({ name: 'devtools' })
-  f.ref.SetSize(120, 30)
+  f.ref.SetSize(100, 100)
+  f.ref.SetBackdrop(BASE_BACKDROP)
+  f.ref.SetPoint('TOPLEFT')
 
   // reset bags
   const ci = Frame({ name: 'devtools-reset-bags', parent: f })
@@ -172,7 +174,7 @@ export const Panel: Component<PanelOptions> = options => {
       }
 
       if (!pages[id] && COMPONENTS[id]) {
-        const page = COMPONENTS[id]()
+        const page = COMPONENTS[id]({ parent: b })
 
         pages[id] = page
 
