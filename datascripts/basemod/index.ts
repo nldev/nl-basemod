@@ -180,10 +180,10 @@ export class Builder {
     }
 
     if (!template.id)
-      throw Error(`Templates must have a unique ID`)
+      throw new Error(`Templates must have a unique ID`)
 
     if (this.ranTemplates[template.id])
-      throw Error(`Template ${template.id} has already been processed`)
+      throw new Error(`Template ${template.id} has already been processed`)
 
     if (template.needs)
       template.needs.forEach(n => {

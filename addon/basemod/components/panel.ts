@@ -8,17 +8,22 @@ import { Talents } from '../talents'
 
 export const DevTools: Component = () => {
   const f = Frame({ name: 'devtools' })
-  f.ref.SetSize(300,300)
+  f.ref.SetSize(120, 30)
 
   // reset bags
-  const rb = Frame({ name: 'devtools-reset-bags', parent: f })
-  rb.ref.SetPoint('TOPLEFT')
-  rb.ref.SetSize(90, 30)
-  const rbButton = CreateFrame('Button', 'devtools-reset-bags-button', rb.ref, 'UIPanelButtonTemplate')
-  rbButton.SetSize(90, 30)
-  rbButton.SetParent(rb.ref)
-  rbButton.SetText('Reset Bags')
-  rbButton.SetPoint('CENTER')
+  const ci = Frame({ name: 'devtools-reset-bags', parent: f })
+  ci.ref.SetPoint('TOPLEFT')
+  ci.ref.SetSize(120, 30)
+  const ciButton = CreateFrame('Button', 'devtools-reset-bags-button', ci.ref, 'UIPanelButtonTemplate')
+  ciButton.SetSize(120, 30)
+  ciButton.SetParent(ci.ref)
+  ciButton.SetText('Clear Inventory')
+  ciButton.SetPoint('CENTER')
+
+  // TODO
+  // fix positioning
+  // send event
+  // setup handler
 
   return f
 }
