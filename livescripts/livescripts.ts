@@ -19,7 +19,6 @@ export function Main (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
     const opcode = Opcode('dev-clear-inventory')
     const str = message.get()
-    sender.SendBroadcastMessage('here')
     if (!str.includes(opcode))
      return
     sender.SendBroadcastMessage('here')
