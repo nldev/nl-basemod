@@ -21,8 +21,8 @@ export function Main (events: TSEvents) {
     const str = message.get()
     if (!str.includes(opcode))
      return
-    for (let i = 1; i <= 16; i++) {
-      const item = sender.GetItemByPos(255, 1)
+    for (let i = 0; i <= 15; i++) {
+      const item = sender.GetItemByPos(0, 23 + i)
       if (!item.IsNull())
         console.log(item.GetName())
         // sender.RemoveItem(item)
