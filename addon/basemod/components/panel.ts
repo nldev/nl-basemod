@@ -7,7 +7,6 @@ import { Mapping } from '../types'
 import { Talents } from '../talents'
 
 export const DevTools: Component = options => {
-  console.log(options.parent)
   const f = Frame({ name: 'devtools', ...options })
   f.ref.SetSize(100, 100)
   f.ref.SetBackdrop(BASE_BACKDROP)
