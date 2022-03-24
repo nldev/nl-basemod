@@ -204,16 +204,16 @@ export class Builder {
     }
 
     for (const [_, task] of Object.entries<Task<T>>(this.tasks))
-    if (task.process && (task.id === template.taskId)) {
-      const t: Template = {
-        data: template.data || {},
-        needs: template.needs || [],
-        taskId: template.taskId || '',
-        id: template.id,
-      }
+      if (task.process && (task.id === template.taskId)) {
+        const t: Template = {
+          data: template.data || {},
+          needs: template.needs || [],
+          taskId: template.taskId || '',
+          id: template.id,
+        }
 
-      task.process(this, t, this.config.tasks[task.id])
-    }
+        task.process(this, t, this.config.tasks[task.id])
+      }
 
     this.processQueue.forEach((item, i) => {
       if (item.id === template.id)
