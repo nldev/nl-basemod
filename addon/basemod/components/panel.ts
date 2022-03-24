@@ -8,7 +8,7 @@ import { Talents } from '../talents'
 
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
-  f.ref.SetSize(100, 100)
+  f.ref.SetAllPoints(options.parent.inner)
   f.ref.SetBackdrop(BASE_BACKDROP)
   f.ref.SetPoint('TOPLEFT')
 
