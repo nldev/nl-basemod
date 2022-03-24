@@ -12,7 +12,7 @@ export const DevTools: Component = () => {
 
   // reset bags
   const ci = Frame({ name: 'devtools-reset-bags', parent: f })
-  ci.ref.SetPoint('TOPLEFT')
+  ci.ref.SetPoint('CENTER')
   ci.ref.SetSize(120, 30)
   const ciButton = CreateFrame('Button', 'devtools-reset-bags-button', ci.ref, 'UIPanelButtonTemplate')
   ciButton.SetSize(120, 30)
