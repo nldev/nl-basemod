@@ -26,11 +26,11 @@ export const Section: Component<SectionOptions> = options => {
   p.ref.SetHeight(options.height)
   p.ref.SetWidth(options.width || options.parent.inner.GetWidth())
 
-  // x
+  // x, y
   const x = options.x || 0
+  const y = options.y || -8
 
   // position based on y
-  const y = options.y || -8
   p.ref.SetPoint('TOPLEFT', x, y)
 
   // position based on previous
