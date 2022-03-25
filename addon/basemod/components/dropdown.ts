@@ -317,7 +317,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
     let item = items[id]
 
     if (!item)
-      item = items[options.defaultSelectionId || 'empty']
+      item = items[options.defaultSelectionId] || items['empty']
 
     if (a.state.selection.id === item.id) {
       if (options.isTriggerOnReselect && options.onSelect && isTrigger)
