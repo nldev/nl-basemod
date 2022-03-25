@@ -84,6 +84,7 @@ export const DevTools: Component = options => {
   const a = Section({
     name: 'a-sect',
     title: 'a section',
+    y: -8,
     parent: scroll,
     height: 50,
   })
