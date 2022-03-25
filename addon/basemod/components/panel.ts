@@ -37,11 +37,12 @@ export const Section: Component<SectionOptions> = options => {
   f.ref.SetWidth(p.ref.GetWidth() - 10)
   f.ref.SetHeight(p.ref.GetHeight() - 10)
   f.ref.SetPoint('CENTER')
+  p.inner = f.ref
 
   // title
   if (options.title) {
-    const text = f.ref.CreateFontString(
-      `${f.ref.GetName()}-title`,
+    const text = p.ref.CreateFontString(
+      `${p.ref.GetName()}-title`,
       'OVERLAY',
       'GameTooltipText',
     )
