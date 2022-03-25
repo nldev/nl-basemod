@@ -35,7 +35,7 @@ export const Section: Component<SectionOptions> = options => {
 
   // position based on previous
   if (options.previous)
-    p.ref.SetPoint('TOPLEFT', options.previous.ref, 'BOTTOMLEFT', x, -22)
+    p.ref.SetPoint('TOPLEFT', options.previous.ref, 'BOTTOMLEFT', x, -24)
 
   // inner
   const f = Frame({ name: `${options.name}-inner`, parent: p })
