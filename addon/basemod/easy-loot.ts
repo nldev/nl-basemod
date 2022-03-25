@@ -150,6 +150,11 @@ export const LootItem: Component<
 
   // tooltip
   icon.ref.SetScript('OnEnter', () => {
+    if (IsControlKeyDown()) {
+      SetCursor('Inspect.blp')
+    } else {
+      SetCursor('Point.blp')
+    }
     GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`item:${options.itemId}`)
@@ -159,6 +164,7 @@ export const LootItem: Component<
   })
 
   icon.ref.SetScript('OnLeave', () => {
+    SetCursor('Point.blp')
     GameTooltip.ClearLines()
     GameTooltip.Hide()
   })
