@@ -178,7 +178,7 @@ export const Panel: Component<PanelOptions> = options => {
   title.ref.SetBackdropColor(0, 0, 0, 1)
   title.ref.SetPoint('CENTER', 0, 0)
   title.ref.SetFrameLevel(99)
-  title.ref.SetFrameStrata('HIGH')
+  title.ref.SetFrameStrata('DIALOG')
 
   const titleText = title.ref.CreateFontString(
     'talent-countertext',
