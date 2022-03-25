@@ -235,6 +235,8 @@ export const Talents: Component = options => {
   const a = Frame({
     name: 'talents',
   })
+  a.ref.SetFrameLevel(99)
+  a.ref.SetFrameStrata('DIALOG')
 
   a.ref.SetSize(350, 420)
   a.ref.SetPoint('CENTER')
