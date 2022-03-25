@@ -120,7 +120,6 @@ export const DevTools: Component = options => {
   ciButton.SetParent(ci.ref)
   ciButton.SetText('Clear Inventory')
   ciButton.SetPoint('CENTER')
-  ciButton.SetBackdropColor(0, 0, 1, 1)
 
   ciButton.SetScript('OnClick', frame =>
     SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
