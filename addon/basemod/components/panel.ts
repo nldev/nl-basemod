@@ -33,11 +33,13 @@ export const Section: Component<SectionOptions> = options => {
     p.ref.SetPoint('TOPLEFT', options.previous.ref, 'BOTTOMLEFT', 0, -18)
 
   // inner
-  const f = Frame({ name: `${options.name}-inner`, parent: p })
-  f.ref.SetWidth(p.ref.GetWidth() - 10)
-  f.ref.SetHeight(p.ref.GetHeight() - 10)
-  f.ref.SetPoint('CENTER')
-  p.inner = f.ref
+  if (options.border) {
+    const f = Frame({ name: `${options.name}-inner`, parent: p })
+    f.ref.SetWidth(p.ref.GetWidth() - 20)
+    f.ref.SetHeight(p.ref.GetHeight() - 20)
+    f.ref.SetPoint('CENTER')
+    p.inner = f.ref
+  }
 
   // title
   if (options.title) {
@@ -76,6 +78,7 @@ export const DevTools: Component = options => {
   const a = Section({
     name: 'a-sect',
     title: 'a section',
+    y: -8,
     height: 50,
     parent: f,
     border: true,
@@ -91,7 +94,7 @@ export const DevTools: Component = options => {
   })
 
   // reset bags
-  const ci = Frame({ name: 'devtools-reset-bags', parent: f })
+  const ci = Frame({ name: 'devtools-reset-bags', parent: a })
   ci.ref.SetPoint('TOPLEFT')
   ci.ref.SetSize(120, 30)
   const ciButton = CreateFrame('Button', 'devtools-reset-bags-button', ci.ref, 'UIPanelButtonTemplate')
