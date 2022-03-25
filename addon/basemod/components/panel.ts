@@ -90,7 +90,7 @@ export const DevTools: Component = options => {
     title: 'a section',
     parent: scroll,
     height: 50,
-    bg: true,
+    // bg: true,
   })
 
   const b = Section({
