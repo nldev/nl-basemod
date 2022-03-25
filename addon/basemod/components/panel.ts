@@ -131,7 +131,7 @@ export const DevTools: Component = options => {
   level.SetHeight(50)
   // level.SetBackdrop(BASE_BACKDROP)
   level.SetFont('Fonts/FRIZQT__.TTF', 12)
-  level.SetAutoFocus(true)
+  level.SetAutoFocus(false)
   level.SetMultiLine(true)
   level.ClearFocus()
   level.SetJustifyH('LEFT')
