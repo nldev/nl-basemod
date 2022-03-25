@@ -80,7 +80,7 @@ export const DevTools: Component = options => {
     y: -8,
     height: 50,
     parent: f,
-    border: true,
+    // border: true,
   })
 
   const b = Section({
