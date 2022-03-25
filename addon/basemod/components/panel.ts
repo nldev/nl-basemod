@@ -212,7 +212,7 @@ export const Panel: Component<PanelOptions> = options => {
     'dev-equip': Frame,
     'dev-consume': Frame,
     'profile': Frame,
-    'talents': Talents,
+    'abilities': Talents,
     'missions': Frame,
     'lfg': Frame,
     'stash': Frame,
@@ -253,8 +253,8 @@ export const Panel: Component<PanelOptions> = options => {
         disabled: true,
       },
       {
-        id: 'talents',
-        text: 'Talents',
+        id: 'abilities',
+        text: 'Abilities',
       },
       {
         id: 'missions',
