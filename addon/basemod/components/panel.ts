@@ -80,7 +80,7 @@ export const Section: Component<SectionOptions> = options => {
 
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
-  f.ref.SetSize(490, 360)
+  f.ref.SetSize(290, 360)
   f.ref.SetPoint('TOPLEFT')
 
   const scroll = Scroll({ name: 'devtools-scroll', parent: f, height: 300 })
