@@ -469,8 +469,9 @@ function SetupPoisons () {
 function RecallSpell () {
   const spell = std.Spells.load(8690)
   spell.Cooldown.set(1000 * 60 * 60) // 1 hour
-  spell.Name.enGB.set('Recall')
-  spell.Description.enGB.set('Return home.')
+  spell.Name.enGB.set('Sanctuary')
+  spell.Description.enGB.set('Return.')
+  spell.Icon.setPath('Achievement_WorldEvent_Lunar')
 }
 
 function NormalizeSprint ($: Builder) {
