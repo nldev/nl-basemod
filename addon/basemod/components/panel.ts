@@ -28,7 +28,7 @@ export const Section: Component<SectionOptions> = options => {
 
   // x, y
   const x = options.x || 0
-  const y = options.y || -8
+  const y = options.y || -12
 
   // position based on y
   p.ref.SetPoint('TOPLEFT', x, y)
@@ -58,7 +58,7 @@ export const Section: Component<SectionOptions> = options => {
     )
     text.SetFont('Fonts/FRIZQT__.TTF', 12)
     text.SetText(options.title)
-    text.SetPoint('TOPLEFT', 0, 10)
+    text.SetPoint('TOPLEFT', 0, 16)
   }
 
   // color
