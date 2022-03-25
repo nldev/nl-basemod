@@ -144,7 +144,7 @@ export const DevTools: Component = options => {
     level.ClearFocus()
   })
   level.Insert('test')
-  level.SetPoint('CENTER')
+  level.SetPoint('TOPLEFT')
 
   return f
 }
