@@ -38,7 +38,7 @@ export const Section: Component<SectionOptions> = options => {
     f.ref.SetHeight(p.ref.GetHeight() - 20)
     f.ref.SetWidth(p.ref.GetWidth() - 20)
   } else {
-    f.ref.SetWidth(p.ref.GetWidth())
+    f.ref.SetWidth(p.ref.GetWidth() + 2)
     f.ref.SetHeight(p.ref.GetHeight() - 16)
   }
   f.ref.SetPoint('CENTER')
