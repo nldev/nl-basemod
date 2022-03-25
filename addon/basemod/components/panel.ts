@@ -56,7 +56,7 @@ export const Section: Component<SectionOptions> = options => {
       'OVERLAY',
       'GameTooltipText',
     )
-    text.SetFont('Fonts/FRIZQT__.TTF', 10)
+    text.SetFont('Fonts/FRIZQT__.TTF', 12)
     text.SetText(options.title)
     text.SetPoint('TOPLEFT', 0, 10)
   }
