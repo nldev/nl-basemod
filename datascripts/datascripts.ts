@@ -12,6 +12,8 @@ import { AUTOLEARN } from './config/autolearn'
 import { MAPS } from './config/maps'
 import { ALL_CLASSES, CLASS_IDS, RACE_IDS } from './basemod/constants'
 
+console.log(std.Spells.load(23775).objectify())
+
 const SKILLS: Mapping<SkillLine> = {}
 std.SkillLines.forEach(e => {
   SKILLS[e.Name.enGB.get()] = e
@@ -450,9 +452,8 @@ function SetupPoisons () {
     e.Flags.set(0)
   })
 
-  effects.forEach(s => s.Duration.set(21))
-
   effects.forEach(e => e
+    .Duration.set(21)
     .Visual.getRef()
       .CastKit.getRef()
         .Animation.SPELL_CAST_DIRECTED.set()
@@ -464,8 +465,6 @@ function SetupPoisons () {
   woundEffect.Effects.get(1).PointsBase.set(18)
   instantEffect.Effects.get(1).PointsBase.set(32)
   deadlyEffect.Effects.get(1).PointsBase.set(8)
-
-  console.log(std.Spells.load(23775).Duration.objectify())
 }
 
 function RecallSpell () {
