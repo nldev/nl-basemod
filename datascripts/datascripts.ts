@@ -452,7 +452,15 @@ function SetupPoisons () {
     e.Flags.set(0)
   })
 
-  spells.forEach(s => s.Duration.modRefCopy(v => v.set(0, 0, 0)))
+  effects.forEach(s => {
+    const d = s.Duration.get()
+    let n = 0
+    if (d) {
+      n = std.DBC.Spell.query({ DurationIndex: d }).DurationIndex.get()
+      console.log(n)
+      s.Duration.set(n)
+    }
+  })
 
   effects.forEach(e => e
     .Visual.getRef()
