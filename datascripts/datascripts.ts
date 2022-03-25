@@ -451,6 +451,7 @@ function SetupPoisons () {
   })
 
   spells.forEach(s => {
+    s.ClassMask.Family.set(0)
     s.Duration.setSimple(0)
   })
 
