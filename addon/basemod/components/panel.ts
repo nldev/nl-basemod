@@ -93,7 +93,7 @@ export const DevTools: Component = options => {
     title: 'b section',
     parent: scroll,
     previous: a,
-    height: 50,
+    height: 100,
   })
 
   // reset bags
