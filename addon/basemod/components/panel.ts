@@ -129,6 +129,23 @@ export const DevTools: Component = options => {
   const level = CreateFrame('EditBox', 'devtools-set-level', b.inner)
   level.SetWidth(100)
   level.SetHeight(50)
+  // level.SetFontObject(GameFontNormal)
+  // level.SetBackdrop(/*GameTooltip.GetBackdrop()*/)
+  // level.SetBackdropColor(0, 0, 0, 0.8)
+  // level.SetBackdropBorderColor(0.6, 0.6, 0.6, 1)
+  level.SetPoint("CENTER",b.inner,"CENTER",0,40)
+  level.ClearFocus()
+  level.SetAutoFocus(false)
+
+  level.SetScript('OnEnterPressed', () => {
+    const text = level.GetText()
+    console.log(text)
+    level.ClearFocus()
+  })
+  level.SetScript('OnEscapePressed', () => {
+    level.ClearFocus()
+  })
+  level.Insert("text test")
 
   return f
 }
