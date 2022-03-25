@@ -87,8 +87,6 @@ export const DevTools: Component = options => {
     parent: scroll,
     y: -8,
     height: 50,
-    // color: [255, 0, 0],
-    // bg: true,
   })
 
   const b = Section({
@@ -97,7 +95,6 @@ export const DevTools: Component = options => {
     parent: scroll,
     previous: a,
     height: 50,
-    // bg: true,
   })
 
   // reset bags
