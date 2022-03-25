@@ -49,7 +49,7 @@ function ApplyTalents(player: TSPlayer) {
   while (a.GetRow()) {
     const id = a.GetString(2)
     const isActive = a.GetUInt16(3)
-    if (id && isActive) {
+    if (id) {
       // FIXME: create a row if doesnt exist
       const c = QueryWorld(`
         select * from __talents where id = "${id}";
@@ -306,10 +306,10 @@ function OnLogin (events: TSEvents) {
 
 function OnLevelup (events: TSEvents) {
   events.Player.OnLevelChanged((player, oldLevel) => {
-    SetTalents(player)
     if (oldLevel > player.GetLevel()) {
       ResetTalents(player)
     }
+    SetTalents(player)
     ApplyTalents(player)
   })
 }
