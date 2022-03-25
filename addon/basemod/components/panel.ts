@@ -135,8 +135,8 @@ export const DevTools: Component = options => {
   level.SetMultiLine(true)
   level.ClearFocus()
   level.SetJustifyH('LEFT')
-  b.inner.EnableMouse(true)
-  b.inner.SetScript('OnMouseDown', () => {
+  b.ref.EnableMouse(true)
+  b.ref.SetScript('OnMouseDown', () => {
     level.SetFocus()
   })
   level.SetScript('OnTabPressed', () => {
