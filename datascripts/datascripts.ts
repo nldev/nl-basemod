@@ -312,11 +312,11 @@ new Builder($ => {
 })
 
 function RemoveUnusedStartingItems () {
-  std.DBC.CharStartOutfit.query({ ItemID: 6948 }).delete() // hearthstone
-  std.DBC.CharStartOutfit.query({ ItemID: 2512 }).delete() // arrow
-  std.DBC.CharStartOutfit.query({ ItemID: 2516 }).delete() // bullet
-  std.DBC.CharStartOutfit.query({ ItemID: 2101 }).delete() // quiver
-  std.DBC.CharStartOutfit.query({ ItemID: 2102 }).delete() // ammo pouch
+  std.Items.load(6948).delete() // hearthstone
+  std.Items.load(2512).delete() // arrow
+  std.Items.load(2516).delete() // bullet
+  std.Items.load(2101).delete() // quiver
+  std.Items.load(2102).delete() // ammo pouch
 }
 
 function RemoveUnusedStartingSpells () {
