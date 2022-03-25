@@ -145,6 +145,7 @@ export const DevTools: Component = options => {
   })
   level.Insert('test')
   level.SetPoint('TOPLEFT')
+  level.SetMaxLetters(138)
 
   return f
 }
