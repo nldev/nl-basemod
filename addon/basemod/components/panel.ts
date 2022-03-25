@@ -135,6 +135,9 @@ export const DevTools: Component = options => {
   level.SetMultiLine(true)
   level.ClearFocus()
   level.SetJustifyH('LEFT')
+  level.SetScript('OnTabPressed', () => {
+    level.ClearFocus()
+  })
   level.SetScript('OnEnterPressed', () => {
     const text = level.GetText()
     console.log(text)
