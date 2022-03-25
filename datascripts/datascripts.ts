@@ -311,12 +311,15 @@ new Builder($ => {
   Settings($)
 })
 
-function RemoveUnusedStartingSpells () {
+function RemoveUnusedStartingItems () {
   std.DBC.CharStartOutfit.query({ ItemID: 6948 }).delete() // hearthstone
   std.DBC.CharStartOutfit.query({ ItemID: 2512 }).delete() // arrow
   std.DBC.CharStartOutfit.query({ ItemID: 2516 }).delete() // bullet
   std.DBC.CharStartOutfit.query({ ItemID: 2101 }).delete() // quiver
   std.DBC.CharStartOutfit.query({ ItemID: 2102 }).delete() // ammo pouch
+}
+
+function RemoveUnusedStartingSpells () {
   std.SQL.playercreateinfo_spell_custom.queryAll({}).forEach(c => c.delete())
   std.DBC.SkillLineAbility.queryAll({}).forEach(a => {
     if (UNUSED_STARTING_SPELLS.includes(a.Spell.get()))
@@ -763,6 +766,7 @@ function Settings ($: Builder) {
   RecallSpell()
   RemoveFlagDropDebuff()
   RemoveUnusedStartingSpells()
+  RemoveUnusedStartingItems()
   InfiniteRangedWeapon($)
   SetupStats($)
   SetupSkills($)
