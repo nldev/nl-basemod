@@ -149,16 +149,16 @@ export const LootItem: Component<
   // })
 
   // tooltip
-  icon.ref.SetScript('OnKeyDown', (frame, key) => {
-    console.log(key)
-  })
+  // icon.ref.SetScript('OnKeyDown', (frame, key) => {
+  //   console.log(key)
+  // })
 
   icon.ref.SetScript('OnEnter', () => {
-    if (IsControlKeyDown()) {
-      SetCursor('Interface/CURSOR/Inspect.blp')
-    } else {
-      SetCursor('Interface/CURSOR/Point.blp')
-    }
+    // if (IsControlKeyDown()) {
+    //   SetCursor('Interface/CURSOR/Inspect.blp')
+    // } else {
+    //   SetCursor('Interface/CURSOR/Point.blp')
+    // }
     GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`item:${options.itemId}`)
@@ -168,7 +168,7 @@ export const LootItem: Component<
   })
 
   icon.ref.SetScript('OnLeave', () => {
-    SetCursor('Interface/CURSOR/Point.blp')
+    // SetCursor('Interface/CURSOR/Point.blp')
     GameTooltip.ClearLines()
     GameTooltip.Hide()
   })
