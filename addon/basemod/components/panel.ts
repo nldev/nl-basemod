@@ -131,7 +131,6 @@ export const DevTools: Component = options => {
   level.SetHeight(50)
   level.SetBackdrop(BASE_BACKDROP)
   level.SetFont('Fonts/FRIZQT__.TTF', 12)
-  level.SetPoint('CENTER', b.inner, 'CENTER', 0, 40)
   level.ClearFocus()
   level.SetAutoFocus(false)
   level.SetScript('OnEnterPressed', () => {
@@ -142,7 +141,8 @@ export const DevTools: Component = options => {
   level.SetScript('OnEscapePressed', () => {
     level.ClearFocus()
   })
-  level.Insert("text test")
+  level.Insert('test')
+  level.SetPoint('TOPLEFT', b.inner, 'TOPLEFT', 0, 40)
 
   return f
 }
