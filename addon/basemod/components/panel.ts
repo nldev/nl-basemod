@@ -186,13 +186,11 @@ export const Panel: Component<PanelOptions> = options => {
     'talents': Talents,
     'missions': Frame,
     'lfg': Frame,
-    'loadout': Frame,
     'stash': Frame,
     'market': Frame,
     'clan': Frame,
     'mail': Frame,
     'notes': Frame,
-    'statistics': Frame,
     'settings': Frame,
     'support': Frame,
   }
@@ -240,11 +238,6 @@ export const Panel: Component<PanelOptions> = options => {
         disabled: true,
       },
       {
-        id: 'loadout',
-        text: 'Loadout',
-        disabled: true,
-      },
-      {
         id: 'stash',
         text: 'Stash',
         disabled: true,
@@ -267,11 +260,6 @@ export const Panel: Component<PanelOptions> = options => {
       {
         id: 'journal',
         text: 'Journal',
-        disabled: true,
-      },
-      {
-        id: 'statistics',
-        text: 'Statistics',
         disabled: true,
       },
       {
