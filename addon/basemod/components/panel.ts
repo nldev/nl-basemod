@@ -63,6 +63,15 @@ export const DevTools: Component = options => {
   f.ref.SetAllPoints(options.parent.inner)
   f.ref.SetPoint('TOPLEFT')
 
+  const section = Section({
+    name: 'testsect',
+    title: 'test section',
+    height: 50,
+    parent: f,
+    border: true,
+    color: [255, 255, 0],
+  })
+
   // reset bags
   const ci = Frame({ name: 'devtools-reset-bags', parent: f })
   ci.ref.SetPoint('TOPLEFT')
