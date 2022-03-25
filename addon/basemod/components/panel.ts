@@ -17,24 +17,24 @@ export interface SectionOptions extends ComponentOptions {
 }
 
 export const Section: Component<SectionOptions> = options => {
-  const f = Frame(options)
+  const p = Frame(options)
 
   // box
-  f.ref.SetHeight(options.height)
-  f.ref.SetWidth(options.parent.inner.GetWidth())
+  p.ref.SetHeight(options.height)
+  p.ref.SetWidth(options.parent.inner.GetWidth())
 
   // position based on y
   const y = options.y || 0
-  f.ref.SetPoint('TOPLEFT', 0, y)
+  p.ref.SetPoint('TOPLEFT', 0, y)
 
   // position based on previous
   if (options.previous)
-    f.ref.SetPoint('TOPLEFT', options.previous.inner, 'BOTTOMLEFT', 0, -12)
+    p.ref.SetPoint('TOPLEFT', options.previous.inner, 'BOTTOMLEFT', 0, -12)
 
   // title
   if (options.title) {
-    const text = f.ref.CreateFontString(
-      `${f.ref.GetName()}-title`,
+    const text = p.ref.CreateFontString(
+      `${p.ref.GetName()}-title`,
       'OVERLAY',
       'GameTooltipText',
     )
@@ -45,17 +45,17 @@ export const Section: Component<SectionOptions> = options => {
 
   // color
   if (options.border || options.color) {
-    f.ref.SetBackdrop({
+    p.ref.SetBackdrop({
       ...BASE_BACKDROP,
       bgFile: options.color ? BASE_BACKDROP.bgFile : '',
       edgeFile: options.border ? BASE_BACKDROP.edgeFile : '',
     })
 
     if (options.color)
-      f.ref.SetBackdropColor(...options.color, 1)
+      p.ref.SetBackdropColor(...options.color, 1)
   }
 
-  return f
+  return p
 }
 
 export const DevTools: Component = options => {
