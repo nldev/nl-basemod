@@ -24,7 +24,7 @@ export const Section: Component<SectionOptions> = options => {
 
   // padding
   p.ref.SetHeight(options.height)
-  p.ref.SetWidth(options.width || options.parent.inner.GetWidth())
+  p.ref.SetWidth(options.width || (options.parent.inner.GetWidth() - 10))
 
   // x, y
   const x = options.x || 0
@@ -41,7 +41,7 @@ export const Section: Component<SectionOptions> = options => {
   const f = Frame({ name: `${options.name}-inner`, parent: p })
   if (options.bg) {
     f.ref.SetHeight(p.ref.GetHeight() - 20)
-    f.ref.SetWidth(p.ref.GetWidth() - 18)
+    f.ref.SetWidth(p.ref.GetWidth() - 20)
   } else {
     f.ref.SetWidth(p.ref.GetWidth() + 4)
     f.ref.SetHeight(p.ref.GetHeight() - 12)
