@@ -96,6 +96,14 @@ export const DevTools: Component = options => {
     height: 100,
   })
 
+  const c = Section({
+    name: 'c-sect',
+    title: 'c section',
+    parent: scroll,
+    previous: b,
+    height: 40,
+  })
+
   // reset bags
   const ci = Frame({ name: 'devtools-reset-bags', parent: a })
   ci.ref.SetPoint('TOPLEFT')
