@@ -23,7 +23,7 @@ export const Section: Component<SectionOptions> = options => {
   const p = Frame(options)
 
   // padding
-  p.ref.SetHeight(options.height)
+  p.ref.SetHeight(options.bg ? options.height : (options.height - 20))
   p.ref.SetWidth(options.width || (options.parent.inner.GetWidth() - 6))
 
   // x, y
@@ -35,7 +35,7 @@ export const Section: Component<SectionOptions> = options => {
 
   // position based on previous
   if (options.previous)
-    p.ref.SetPoint('TOPLEFT', options.previous.ref, 'BOTTOMLEFT', x, -24)
+    p.ref.SetPoint('TOPLEFT', options.previous.ref, 'BOTTOMLEFT', x, -26)
 
   // inner
   const f = Frame({ name: `${options.name}-inner`, parent: p })
@@ -120,6 +120,7 @@ export const DevTools: Component = options => {
   ciButton.SetParent(ci.ref)
   ciButton.SetText('Clear Inventory')
   ciButton.SetPoint('CENTER')
+  ciButton.SetBackdropColor(0, 0, 1, 1)
 
   ciButton.SetScript('OnClick', frame =>
     SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
