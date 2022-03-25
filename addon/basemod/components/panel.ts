@@ -63,9 +63,19 @@ export const DevTools: Component = options => {
   f.ref.SetAllPoints(options.parent.inner)
   f.ref.SetPoint('TOPLEFT')
 
-  const section = Section({
-    name: 'testsect',
-    title: 'test section',
+  const a = Section({
+    name: 'a-sect',
+    title: 'a section',
+    height: 50,
+    parent: f,
+    border: true,
+    color: [255, 255, 0],
+  })
+
+  const b = Section({
+    name: 'b-sect',
+    title: 'b section',
+    previous: a,
     height: 50,
     parent: f,
     border: true,
