@@ -452,14 +452,10 @@ function SetupPoisons () {
     e.Flags.set(0)
   })
 
-  effects.forEach(s => {
+  spells.forEach(s => {
     const d = s.Duration.get()
-    let n = 0
-    if (d) {
-      n = std.DBC.Spell.query({ DurationIndex: d }).DurationIndex.get()
-      console.log(n)
-      s.Duration.set(n)
-    }
+    if (d)
+      std.DBC.Spell.query({ DurationIndex: d }).DurationIndex.set(21)
   })
 
   effects.forEach(e => e
