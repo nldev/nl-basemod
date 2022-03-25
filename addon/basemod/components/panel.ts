@@ -130,7 +130,7 @@ export const DevTools: Component = options => {
   level.SetWidth(b.inner.GetWidth() - 10)
   level.SetHeight(b.inner.GetHeight() - 4)
   level.SetNumeric()
-  level.SetNumber(Get().playerInfo.level)
+  level.SetNumber(UnitLevel('player'))
   level.SetPoint('TOPLEFT')
   level.SetAutoFocus(false)
   level.SetFont('Fonts/FRIZQT__.TTF', 12)
@@ -139,7 +139,6 @@ export const DevTools: Component = options => {
   })
   c.ref.EnableMouse(true)
   c.ref.SetScript('OnMouseDown', () => {
-    console.log(level.GetNumber())
     level.SetFocus()
   })
   level.SetScript('OnTabPressed', () => {
