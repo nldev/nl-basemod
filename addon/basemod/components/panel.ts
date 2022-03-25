@@ -177,6 +177,8 @@ export const Panel: Component<PanelOptions> = options => {
   title.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
   title.ref.SetBackdropColor(0, 0, 0, 1)
   title.ref.SetPoint('CENTER', 0, 0)
+  title.ref.SetFrameLevel(99)
+  title.ref.SetFrameStrata('HIGH')
 
   const titleText = title.ref.CreateFontString(
     'talent-countertext',
