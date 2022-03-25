@@ -30,7 +30,7 @@ export const Section: Component<SectionOptions> = options => {
 
   // position based on previous
   if (options.previous)
-    p.ref.SetPoint('TOPLEFT', options.previous.inner, 'BOTTOMLEFT', 0, -12)
+    p.ref.SetPoint('TOPLEFT', options.previous.ref, 'BOTTOMLEFT', 0, -12)
 
   // inner
   const f = Frame({ name: `${options.name}-inner`, parent: p })
@@ -58,6 +58,8 @@ export const Section: Component<SectionOptions> = options => {
       bgFile: options.color ? BASE_BACKDROP.bgFile : '',
       edgeFile: options.border ? BASE_BACKDROP.edgeFile : '',
     })
+
+    p.ref.SetBackdropColor(0, 0, 0, 0)
 
     if (options.color)
       p.ref.SetBackdropColor(...rgb(...options.color), 1)
