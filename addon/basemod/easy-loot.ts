@@ -149,6 +149,10 @@ export const LootItem: Component<
   // })
 
   // tooltip
+  icon.ref.SetScript('OnKeyDown', (frame, key) => {
+    console.log(key)
+  })
+
   icon.ref.SetScript('OnEnter', () => {
     if (IsControlKeyDown()) {
       SetCursor('Interface/CURSOR/Inspect.blp')
