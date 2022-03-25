@@ -24,7 +24,7 @@ export const Section: Component<SectionOptions> = options => {
 
   // padding
   p.ref.SetHeight(options.height)
-  p.ref.SetWidth(options.width || (options.parent.inner.GetWidth() - 10))
+  p.ref.SetWidth(options.width || (options.parent.inner.GetWidth() - 6))
 
   // x, y
   const x = options.x || 0
