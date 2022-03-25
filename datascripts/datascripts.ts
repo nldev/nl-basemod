@@ -452,8 +452,9 @@ function SetupPoisons () {
     e.Flags.set(0)
   })
 
+  spells.forEach(s => s.Duration.set(21))
+
   effects.forEach(e => e
-    .Duration.set(21)
     .Visual.getRef()
       .CastKit.getRef()
         .Animation.SPELL_CAST_DIRECTED.set()
