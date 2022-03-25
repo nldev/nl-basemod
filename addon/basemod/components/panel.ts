@@ -129,10 +129,14 @@ export const DevTools: Component = options => {
   const level = CreateFrame('EditBox', 'devtools-set-level', c.inner)
   level.SetWidth(b.inner.GetWidth() - 10)
   level.SetHeight(b.inner.GetHeight() - 4)
-  level.Insert('test')
+  level.SetNumeric()
+  level.SetNumber(0)
   level.SetPoint('TOPLEFT')
   level.SetAutoFocus(false)
   level.ClearFocus()
+  level.SetScript('OnTextChanged', () => {
+    console.log(`level.GetNumber()`)
+  })
   c.ref.EnableMouse(true)
   c.ref.SetScript('OnMouseDown', () => {
     bb.SetFocus()
