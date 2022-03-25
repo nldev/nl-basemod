@@ -450,10 +450,9 @@ function SetupPoisons () {
     e.Flags.set(0)
   })
 
-  spells.forEach(s => {
-    s.ClassMask.Family.set(0)
-    s.Duration.setSimple(0)
-  })
+  // spells.forEach(s => {
+  //   s.Duration.setSimple(0)
+  // })
 
   effects.forEach(e => e
     .Visual.getRef()
