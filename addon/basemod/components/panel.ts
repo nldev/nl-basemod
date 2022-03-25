@@ -142,7 +142,7 @@ export const DevTools: Component = options => {
     level.ClearFocus()
   })
   level.Insert('test')
-  level.SetPoint('TOPLEFT', b.inner, 'TOPLEFT', 0, 40)
+  level.SetPoint('TOPLEFT', b.inner, 'TOPLEFT', 0, 0)
 
   return f
 }
