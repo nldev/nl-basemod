@@ -451,8 +451,7 @@ function SetupPoisons () {
   })
 
   spells.forEach(s => {
-    s.Effects.get(0).Type.ENCHANT_ITEM_TEMPORARY.set()
-    s.Duration.setSimple(24 * 7 * 1000 * 60 * 60)
+    s.Duration.setSimple(500)
   })
 
   effects.forEach(e => e
