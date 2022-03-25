@@ -2,11 +2,12 @@ import { Get } from '../app'
 import { Component, ComponentOptions, Frame, Element } from '../app'
 import { Dropdown, DropdownItemOptions } from './dropdown'
 import { BASE_BACKDROP } from '../constants'
-import { Movable } from '../utils'
+import { Movable, rgb } from '../utils'
 import { Mapping, Rgb } from '../types'
 import { Talents } from '../talents'
 
 export interface SectionOptions extends ComponentOptions {
+  name: string
   parent: Element
   height: number
   previous?: Element
@@ -19,7 +20,7 @@ export interface SectionOptions extends ComponentOptions {
 export const Section: Component<SectionOptions> = options => {
   const p = Frame(options)
 
-  // box
+  // padding
   p.ref.SetHeight(options.height)
   p.ref.SetWidth(options.parent.inner.GetWidth())
 
@@ -31,10 +32,16 @@ export const Section: Component<SectionOptions> = options => {
   if (options.previous)
     p.ref.SetPoint('TOPLEFT', options.previous.inner, 'BOTTOMLEFT', 0, -12)
 
+  // inner
+  const f = Frame({ name: `${options.name}-inner`, parent: p })
+  f.ref.SetWidth(p.ref.GetWidth() - 10)
+  f.ref.SetHeight(p.ref.GetHeight() - 10)
+  f.ref.SetPoint('CENTER')
+
   // title
   if (options.title) {
-    const text = p.ref.CreateFontString(
-      `${p.ref.GetName()}-title`,
+    const text = f.ref.CreateFontString(
+      `${f.ref.GetName()}-title`,
       'OVERLAY',
       'GameTooltipText',
     )
@@ -52,7 +59,7 @@ export const Section: Component<SectionOptions> = options => {
     })
 
     if (options.color)
-      p.ref.SetBackdropColor(...options.color, 1)
+      p.ref.SetBackdropColor(...rgb(...options.color), 1)
   }
 
   return p
