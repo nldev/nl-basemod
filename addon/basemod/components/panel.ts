@@ -87,7 +87,7 @@ export const DevTools: Component = options => {
     parent: scroll,
     y: -8,
     height: 50,
-    color: [255, 0, 0],
+    // color: [255, 0, 0],
     // bg: true,
   })
 
