@@ -127,8 +127,8 @@ export const DevTools: Component = options => {
 
   // set level
   const level = CreateFrame('EditBox', 'devtools-set-level', c.inner)
-  level.SetWidth(b.inner.GetWidth() - 10)
-  level.SetHeight(b.inner.GetHeight() - 4)
+  level.SetWidth(c.inner.GetWidth() - 10)
+  level.SetHeight(c.inner.GetHeight() - 4)
   level.SetNumeric()
   level.SetNumber(UnitLevel('player'))
   level.SetPoint('TOPLEFT')
