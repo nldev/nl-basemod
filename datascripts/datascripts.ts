@@ -454,6 +454,7 @@ function SetupPoisons () {
 
   spells.forEach(s => {
     s.Effects.get(0).Type.ENCHANT_HELD_ITEM.set()
+    s.Duration.setSimple(1000 * 60 * 60 * 24)
   })
 
   effects.forEach(e => e
