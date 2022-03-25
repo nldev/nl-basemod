@@ -162,6 +162,7 @@ export const DevTools: Component = options => {
     console.log(`FIXME set level to ${level.GetNumber()} here`)
   })
   level.SetScript('OnEscapePressed', () => {
+    level.SetNumber(UnitLevel('player'))
     level.ClearFocus()
   })
 
