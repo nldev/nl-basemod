@@ -385,6 +385,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'killing-spree',
       data: {
+        isActive: true,
         spellId: 51690,
         cost: 20,
         class: { ROGUE: true },
@@ -449,6 +450,7 @@ export const TALENTS: Templates<TalentOptions> = {
     {
       id: 'hunger-for-blood',
       data: {
+        isActive: true,
         spellId: 51662,
         cost: 8,
         class: { ROGUE: true },
