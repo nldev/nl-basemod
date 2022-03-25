@@ -127,8 +127,8 @@ export const DevTools: Component = options => {
 
   // set level
   const level = CreateFrame('EditBox', 'devtools-set-level', b.inner)
-  level.SetWidth(150)
-  level.SetHeight(50)
+  level.SetWidth(b.inner.GetWidth() - 10)
+  level.SetHeight(b.inner.GetHeight() - 10)
   // level.SetBackdrop(BASE_BACKDROP)
   level.SetFont('Fonts/FRIZQT__.TTF', 12)
   level.SetAutoFocus(false)
@@ -144,7 +144,7 @@ export const DevTools: Component = options => {
     level.ClearFocus()
   })
   level.Insert('test')
-  level.SetPoint('TOPLEFT', b.inner, 'TOPLEFT', 0, 0)
+  level.SetPoint('CENTER')
 
   return f
 }
