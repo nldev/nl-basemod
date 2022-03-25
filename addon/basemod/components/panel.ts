@@ -55,7 +55,7 @@ export const Section: Component<SectionOptions> = options => {
   if (options.border || options.color) {
     p.ref.SetBackdrop({
       ...BASE_BACKDROP,
-      bgFile: options.color ? BASE_BACKDROP.bgFile : '',
+      bgFile: options.color ? 'Interface/Tooltips/UI-Tooltip-Background' : '',
       edgeFile: options.border ? BASE_BACKDROP.edgeFile : '',
     })
 
