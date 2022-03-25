@@ -5,12 +5,13 @@ import { BASE_BACKDROP } from '../constants'
 import { Movable, rgb } from '../utils'
 import { Mapping, Rgb } from '../types'
 import { Talents } from '../talents'
+import { Scroll } from './scroll'
 
 export interface SectionOptions extends ComponentOptions {
   name: string
-  parent: Element
+  parent: Element<any, any>
   height: number
-  previous?: Element
+  previous?: Element<any, any>
   y?: number
   title?: string
   bg?: boolean
@@ -78,12 +79,14 @@ export const DevTools: Component = options => {
   f.ref.SetAllPoints(options.parent.inner)
   f.ref.SetPoint('TOPLEFT')
 
+  const scroll = Scroll({ name: 'devtools-scroll', parent: f, height: 300 })
+
   const a = Section({
     name: 'a-sect',
     title: 'a section',
+    parent: scroll,
     y: -8,
     height: 50,
-    parent: f,
     color: [255, 0, 0],
     // bg: true,
   })
@@ -91,9 +94,9 @@ export const DevTools: Component = options => {
   const b = Section({
     name: 'b-sect',
     title: 'b section',
+    parent: scroll,
     previous: a,
     height: 50,
-    parent: f,
     bg: true,
   })
 
