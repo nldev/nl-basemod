@@ -103,12 +103,12 @@ export const DevTools: Component = options => {
   })
 
   const c = Section({
-    name: 'c-sect',
-    title: 'c section',
+    name: 'set-level',
+    title: 'set level',
     parent: scroll,
     previous: b,
     height: 40,
-    bg: true,
+    // bg: true,
   })
 
   // reset bags
@@ -126,33 +126,57 @@ export const DevTools: Component = options => {
   )
 
   // set level
-  const level = CreateFrame('EditBox', 'devtools-set-level', b.inner)
+  const level = CreateFrame('EditBox', 'devtools-set-level', c.inner)
   level.SetWidth(b.inner.GetWidth() - 10)
-  level.SetHeight(b.inner.GetHeight() - 10)
-  // level.SetBackdrop(BASE_BACKDROP)
-  level.SetFont('Fonts/FRIZQT__.TTF', 12)
-  level.SetAutoFocus(false)
-  level.SetMultiLine(true)
-  level.ClearFocus()
-  level.SetJustifyH('LEFT')
-  b.ref.EnableMouse(true)
-  b.ref.SetScript('OnMouseDown', () => {
-    level.SetFocus()
-  })
-  level.SetScript('OnTabPressed', () => {
-    level.ClearFocus()
-  })
-  level.SetScript('OnEnterPressed', () => {
-    const text = level.GetText()
-    console.log(text)
-    level.ClearFocus()
-  })
-  level.SetScript('OnEscapePressed', () => {
-    level.ClearFocus()
-  })
+  level.SetHeight(b.inner.GetHeight() - 4)
   level.Insert('test')
   level.SetPoint('TOPLEFT')
-  level.SetMaxLetters(138)
+  level.SetAutoFocus(false)
+  level.ClearFocus()
+  c.ref.EnableMouse(true)
+  c.ref.SetScript('OnMouseDown', () => {
+    bb.SetFocus()
+  })
+  level.SetScript('OnTabPressed', () => {
+    bb.ClearFocus()
+  })
+  level.SetScript('OnEnterPressed', () => {
+    const text = bb.GetText()
+    console.log(text)
+    bb.ClearFocus()
+  })
+  level.SetScript('OnEscapePressed', () => {
+    bb.ClearFocus()
+  })
+
+  // FIXME test
+  const bb = CreateFrame('EditBox', 'devtools-test', b.inner)
+  bb.SetWidth(b.inner.GetWidth() - 10)
+  bb.SetHeight(b.inner.GetHeight() - 10)
+  // level.SetBackdrop(BASE_BACKDROP)
+  bb.SetFont('Fonts/FRIZQT__.TTF', 12)
+  bb.SetAutoFocus(false)
+  bb.SetMultiLine(true)
+  bb.ClearFocus()
+  bb.SetJustifyH('LEFT')
+  b.ref.EnableMouse(true)
+  b.ref.SetScript('OnMouseDown', () => {
+    bb.SetFocus()
+  })
+  bb.SetScript('OnTabPressed', () => {
+    bb.ClearFocus()
+  })
+  bb.SetScript('OnEnterPressed', () => {
+    const text = bb.GetText()
+    console.log(text)
+    bb.ClearFocus()
+  })
+  bb.SetScript('OnEscapePressed', () => {
+    bb.ClearFocus()
+  })
+  bb.Insert('test')
+  bb.SetPoint('TOPLEFT')
+  bb.SetMaxLetters(138)
 
   return f
 }
