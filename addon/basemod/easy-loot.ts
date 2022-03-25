@@ -126,17 +126,17 @@ export const LootItem: Component<
   titleText.SetPoint('LEFT', 40, 0)
 
   // close
-  // const closeName = `${frame.ref.GetName()}-close`
-  // const close = icon.ref.CreateFontString(
-  //   closeName,
-  //   'OVERLAY',
-  //   'GameTooltipText',
-  // )
+  const closeName = `${frame.ref.GetName()}-close`
+  const close = icon.ref.CreateFontString(
+    closeName,
+    'OVERLAY',
+    'GameTooltipText',
+  )
 
-  // close.SetTextColor(1, 0, 0, 0.5)
-  // close.SetText('X')
-  // close.SetParent(frame.ref)
-  // close.SetPoint('BOTTOMRIGHT', -8, 8)
+  close.SetTextColor(1, 0, 0, 0.5)
+  close.SetText('X')
+  close.SetParent(frame.ref)
+  close.SetPoint('BOTTOMRIGHT', -8, 8)
   // close.SetScript('OnMouseDown', (_, button) => {
   //   // FIXME: send dismiss event
   //   Detach()
