@@ -127,12 +127,14 @@ export const DevTools: Component = options => {
 
   // set level
   const level = CreateFrame('EditBox', 'devtools-set-level', b.inner)
-  level.SetWidth(100)
+  level.SetWidth(200)
   level.SetHeight(50)
   level.SetBackdrop(BASE_BACKDROP)
   level.SetFont('Fonts/FRIZQT__.TTF', 12)
   level.ClearFocus()
   level.SetAutoFocus(false)
+  level.SetJustifyH('LEFT')
+  level.SetMultiLine(true)
   level.SetScript('OnEnterPressed', () => {
     const text = level.GetText()
     console.log(text)
