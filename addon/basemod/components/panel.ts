@@ -33,13 +33,12 @@ export const Section: Component<SectionOptions> = options => {
     p.ref.SetPoint('TOPLEFT', options.previous.ref, 'BOTTOMLEFT', 0, -18)
 
   // inner
-  if (options.border) {
-    const f = Frame({ name: `${options.name}-inner`, parent: p })
+  const f = Frame({ name: `${options.name}-inner`, parent: p })
+  if (options.border)
     f.ref.SetWidth(p.ref.GetWidth() - 20)
-    f.ref.SetHeight(p.ref.GetHeight() - 20)
-    f.ref.SetPoint('CENTER')
-    p.inner = f.ref
-  }
+  f.ref.SetHeight(p.ref.GetHeight() - 20)
+  f.ref.SetPoint('CENTER')
+  p.inner = f.ref
 
   // title
   if (options.title) {
