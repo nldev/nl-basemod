@@ -139,18 +139,18 @@ export const DevTools: Component = options => {
   })
   c.ref.EnableMouse(true)
   c.ref.SetScript('OnMouseDown', () => {
-    bb.SetFocus()
+    level.SetFocus()
   })
   level.SetScript('OnTabPressed', () => {
-    bb.ClearFocus()
+    level.ClearFocus()
   })
   level.SetScript('OnEnterPressed', () => {
-    const text = bb.GetText()
+    const text = level.GetText()
     console.log(text)
-    bb.ClearFocus()
+    level.ClearFocus()
   })
   level.SetScript('OnEscapePressed', () => {
-    bb.ClearFocus()
+    level.ClearFocus()
   })
 
   // FIXME test
