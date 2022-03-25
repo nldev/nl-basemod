@@ -107,7 +107,7 @@ export const DevTools: Component = options => {
     title: 'set level',
     parent: scroll,
     previous: b,
-    height: 40,
+    height: 10,
     // bg: true,
   })
 
@@ -130,12 +130,12 @@ export const DevTools: Component = options => {
   level.SetWidth(b.inner.GetWidth() - 10)
   level.SetHeight(b.inner.GetHeight() - 4)
   level.SetNumeric()
-  level.SetNumber(0)
+  level.SetNumber(Get().playerInfo.level)
   level.SetPoint('TOPLEFT')
   level.SetAutoFocus(false)
+  level.SetFont('Fonts/FRIZQT__.TTF', 12)
   level.ClearFocus()
   level.SetScript('OnTextChanged', () => {
-    console.log(`level.GetNumber()`)
   })
   c.ref.EnableMouse(true)
   c.ref.SetScript('OnMouseDown', () => {
@@ -143,12 +143,24 @@ export const DevTools: Component = options => {
     level.SetFocus()
   })
   level.SetScript('OnTabPressed', () => {
+    const current = level.GetNumber()
+    level.SetNumber(current)
+    if (current > 99)
+      level.SetNumber(99)
+    if (current < 1)
+      level.SetNumber(1)
     level.ClearFocus()
+    console.log(`FIXME set level to ${level.GetNumber()} here`)
   })
   level.SetScript('OnEnterPressed', () => {
-    const text = level.GetText()
-    console.log(text)
+    const current = level.GetNumber()
+    level.SetNumber(current)
+    if (current > 99)
+      level.SetNumber(99)
+    if (current < 1)
+      level.SetNumber(1)
     level.ClearFocus()
+    console.log(`FIXME set level to ${level.GetNumber()} here`)
   })
   level.SetScript('OnEscapePressed', () => {
     level.ClearFocus()
