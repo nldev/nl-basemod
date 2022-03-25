@@ -139,6 +139,7 @@ export const DevTools: Component = options => {
   })
   c.ref.EnableMouse(true)
   c.ref.SetScript('OnMouseDown', () => {
+    console.log(level.GetNumber())
     level.SetFocus()
   })
   level.SetScript('OnTabPressed', () => {
