@@ -13,7 +13,7 @@ export interface SectionOptions extends ComponentOptions {
   previous?: Element
   y?: number
   title?: string
-  border?: boolean
+  bg?: boolean
   color?: Rgb
 }
 
@@ -34,7 +34,7 @@ export const Section: Component<SectionOptions> = options => {
 
   // inner
   const f = Frame({ name: `${options.name}-inner`, parent: p })
-  if (options.border) {
+  if (options.bg) {
     f.ref.SetHeight(p.ref.GetHeight() - 20)
     f.ref.SetWidth(p.ref.GetWidth() - 20)
   } else {
@@ -57,11 +57,11 @@ export const Section: Component<SectionOptions> = options => {
   }
 
   // color
-  if (options.border || options.color) {
+  if (options.bg) {
     p.ref.SetBackdrop({
       ...BASE_BACKDROP,
       bgFile: options.color ? 'Interface/Tooltips/UI-Tooltip-Background' : '',
-      edgeFile: options.border ? BASE_BACKDROP.edgeFile : '',
+      edgeFile: options.bg ? BASE_BACKDROP.edgeFile : '',
     })
 
     p.ref.SetBackdropColor(0, 0, 0, 0)
@@ -85,7 +85,7 @@ export const DevTools: Component = options => {
     height: 50,
     parent: f,
     color: [255, 0, 0],
-    // border: true,
+    // bg: true,
   })
 
   const b = Section({
@@ -94,7 +94,7 @@ export const DevTools: Component = options => {
     previous: a,
     height: 50,
     parent: f,
-    border: true,
+    bg: true,
   })
 
   // reset bags
