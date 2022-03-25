@@ -97,7 +97,7 @@ export const DevTools: Component = options => {
     parent: scroll,
     previous: a,
     height: 50,
-    bg: true,
+    // bg: true,
   })
 
   // reset bags
