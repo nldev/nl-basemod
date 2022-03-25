@@ -149,6 +149,16 @@ export const LootItem: Component<
   // })
 
   // tooltip
+  icon.ref.RegisterEvent('MODIFIER_STATE_CHANGED')
+  icon.ref.SetScript('OnEvent', (frame, event) => {
+    if (event === 'MODIFIER_STATE_CHANGED') {
+      if (IsControlKeyDown()) {
+        SetCursor('Interface/CURSOR/Inspect.blp')
+      } else {
+        SetCursor('Interface/CURSOR/Point.blp')
+      }
+    }
+  })
   icon.ref.SetScript('OnEnter', () => {
     if (IsControlKeyDown()) {
       SetCursor('Interface/CURSOR/Inspect.blp')
