@@ -107,8 +107,8 @@ export const DevTools: Component = options => {
     title: 'set level',
     parent: scroll,
     previous: b,
-    height: 10,
-    // bg: true,
+    height: 40,
+    bg: true,
   })
 
   // reset bags
