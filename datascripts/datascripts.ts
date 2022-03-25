@@ -453,7 +453,7 @@ function SetupPoisons () {
   })
 
   spells.forEach(s => {
-    std.DBC.Spell.query({ ID: s.ID }).DurationIndex.set(21)
+    s.Effects.get(0).Type.ENCHANT_HELD_ITEM.set()
   })
 
   effects.forEach(e => e
