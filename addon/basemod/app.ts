@@ -214,7 +214,7 @@ export class App {
           name: info[5].toLowerCase(),
           chrRace: info[2].toUpperCase() as CharacterRace,
           chrClass: info[0].toUpperCase() as CharacterClass,
-          level: info[4],
+          level: UnitLevel('player'),
         }
 
         _G['app'] = this
