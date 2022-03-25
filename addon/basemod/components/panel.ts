@@ -125,6 +125,11 @@ export const DevTools: Component = options => {
     SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
   )
 
+  // set level
+  const level = CreateFrame('EditBox', 'devtools-set-level', b.inner)
+  level.SetWidth(100)
+  level.SetHeight(50)
+
   return f
 }
 
