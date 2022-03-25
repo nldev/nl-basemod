@@ -12,6 +12,7 @@ export interface SectionOptions extends ComponentOptions {
   parent: Element<any, any>
   height: number
   previous?: Element<any, any>
+  x?: number
   y?: number
   title?: string
   bg?: boolean
@@ -23,15 +24,18 @@ export const Section: Component<SectionOptions> = options => {
 
   // padding
   p.ref.SetHeight(options.height)
-  p.ref.SetWidth(options.parent.inner.GetWidth())
+  p.ref.SetWidth(options.width || options.parent.inner.GetWidth())
+
+  // x
+  const x = options.x || 0
 
   // position based on y
   const y = options.y || -8
-  p.ref.SetPoint('TOPLEFT', 0, y)
+  p.ref.SetPoint('TOPLEFT', x, y)
 
   // position based on previous
   if (options.previous)
-    p.ref.SetPoint('TOPLEFT', options.previous.ref, 'BOTTOMLEFT', 0, -18)
+    p.ref.SetPoint('TOPLEFT', options.previous.ref, 'BOTTOMLEFT', x, -18)
 
   // inner
   const f = Frame({ name: `${options.name}-inner`, parent: p })
