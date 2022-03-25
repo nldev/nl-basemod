@@ -29,7 +29,7 @@ export const Section: Component<SectionOptions> = options => {
 
   // position based on previous
   if (options.previous)
-    f.ref.SetPoint('TOPLEFT', options.previous.inner, 'BOTTOMLEFT')
+    f.ref.SetPoint('TOPLEFT', options.previous.inner, 'BOTTOMLEFT', 0, -20)
 
   // title
   if (options.title) {
