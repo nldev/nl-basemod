@@ -58,7 +58,7 @@ export const Section: Component<SectionOptions> = options => {
     )
     text.SetFont('Fonts/FRIZQT__.TTF', 12)
     text.SetText(options.title)
-    text.SetPoint('TOPLEFT', 0, 12)
+    text.SetPoint('TOPLEFT', 0, 10)
   }
 
   // color
