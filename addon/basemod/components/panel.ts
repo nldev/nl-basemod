@@ -134,7 +134,6 @@ export const DevTools: Component = options => {
   level.SetPoint('CENTER', b.inner, 'CENTER', 0, 40)
   level.ClearFocus()
   level.SetAutoFocus(false)
-
   level.SetScript('OnEnterPressed', () => {
     const text = level.GetText()
     console.log(text)
