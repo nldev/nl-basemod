@@ -126,27 +126,17 @@ export const LootItem: Component<
   titleText.SetPoint('LEFT', 40, 0)
 
   // close
-  const closeName = `${frame.ref.GetName()}-close`
-  const close = icon.ref.CreateFontString(
-    closeName,
-    'OVERLAY',
-    'GameTooltipText',
-  )
-
-  close.SetTextColor(1, 0, 0, 0.5)
-  close.SetText('X')
-  close.SetParent(frame.ref)
-  close.SetPoint('BOTTOMRIGHT', -8, 8)
-  // close.SetScript('OnMouseDown', (_, button) => {
-  //   // FIXME: send dismiss event
-  //   Detach()
-  // })
-  // close.SetScript('OnEnter', () => {
-  //   close.SetTextColor(1, 0, 0, 1)
-  // })
-  // close.SetScript('OnLeave', () => {
-  //   close.SetTextColor(1, 0, 0, 0.5)
-  // })
+  const dismiss = CreateFrame('Button', `${frame.ref.GetName()}-dismiss`)
+  dismiss.SetNormalTexture('Interface/BUTTONS/UI-GroupLoot-Pass-Up.blp')
+  dismiss.SetPushedTexture('Interface/BUTTONS/UI-GroupLoot-Pass-Down.blp')
+  dismiss.SetHighlightTexture('Interface/BUTTONS/UI-GroupLoot-Pass-Highlight.blp')
+  dismiss.SetSize(10, 10)
+  dismiss.SetParent(frame.ref)
+  dismiss.SetPoint('BOTTOMRIGHT', -8, 8)
+  dismiss.SetScript('OnClick', (_, button) => {
+    // FIXME: send dismiss event
+    Detach()
+  })
 
   // tooltip
   icon.ref.RegisterEvent('MODIFIER_STATE_CHANGED')
