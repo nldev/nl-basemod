@@ -53,7 +53,7 @@ export const LootItem: Component<
 
   counterText.Hide()
   counterText.SetParent(frame.ref)
-  counterText.SetPoint('TOPRIGHT', -8, -8)
+  counterText.SetPoint('TOPRIGHT', -10, -8)
   counterText.SetFont('Fonts/FRIZQT__.TTF', 10)
   counterText.SetText('')
 
@@ -176,6 +176,7 @@ export const LootItem: Component<
     counterText.ClearAllPoints()
     titleText.Hide()
     titleText.ClearAllPoints()
+    dismiss.Hide()
     frame.state.isLocked = false
     options.parent.fns.Reflow()
   }
