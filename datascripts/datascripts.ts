@@ -452,7 +452,7 @@ function SetupPoisons () {
     e.Flags.set(0)
   })
 
-  spells.forEach(s => s.Duration.setSimple(15, 0, 15))
+  spells.forEach(s => s.Duration.modRefCopy(v => v.set(0, 0, 0)))
 
   effects.forEach(e => e
     .Visual.getRef()

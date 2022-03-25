@@ -225,6 +225,14 @@ export class Builder {
     this.processQueue.forEach(item => this.Process(item, template.id))
   }
 
+  public Start (id: string) {
+    this.ranTemplates[id] = false
+  }
+
+  public Complete (id: string) {
+    this.ranTemplates[id] = true
+  }
+
   public Get <T = any>(selection: string): T {
     return Select(this.data, selection)
   }
