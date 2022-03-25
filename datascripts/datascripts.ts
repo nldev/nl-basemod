@@ -12,8 +12,6 @@ import { AUTOLEARN } from './config/autolearn'
 import { MAPS } from './config/maps'
 import { ALL_CLASSES, CLASS_IDS, RACE_IDS } from './basemod/constants'
 
-console.log(std.Spells.load(23775).objectify())
-
 const SKILLS: Mapping<SkillLine> = {}
 std.SkillLines.forEach(e => {
   SKILLS[e.Name.enGB.get()] = e
@@ -453,8 +451,8 @@ function SetupPoisons () {
   })
 
   spells.forEach(s => {
-    s.Effects.get(0).Type.ENCHANT_HELD_ITEM.set()
-    s.Duration.setSimple(1000 * 60 * 60 * 24)
+    s.Effects.get(0).Type.ENCHANT_ITEM_TEMPORARY.set()
+    s.Duration.setSimple(0)
   })
 
   effects.forEach(e => e
