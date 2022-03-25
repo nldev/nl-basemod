@@ -69,7 +69,7 @@ export const DevTools: Component = options => {
     height: 50,
     parent: f,
     border: true,
-    color: [255, 255, 0],
+    color: [0, 255, 0],
   })
 
   const b = Section({
@@ -79,7 +79,7 @@ export const DevTools: Component = options => {
     height: 50,
     parent: f,
     border: true,
-    color: [255, 255, 0],
+    color: [255, 0, 0],
   })
 
   // reset bags
