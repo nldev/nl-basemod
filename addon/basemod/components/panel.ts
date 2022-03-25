@@ -107,7 +107,7 @@ export const DevTools: Component = options => {
     title: 'set level',
     parent: scroll,
     previous: b,
-    height: 40,
+    height: 30,
     bg: true,
   })
 
