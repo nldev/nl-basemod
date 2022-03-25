@@ -149,7 +149,8 @@ export const DevTools: Component = options => {
     if (current < 1)
       level.SetNumber(1)
     level.ClearFocus()
-    console.log(`FIXME set level to ${level.GetNumber()} here`)
+    // FIXME
+    SendChatMessage(`.char level ${level.GetNumber()}}`)
   })
   level.SetScript('OnEnterPressed', () => {
     const current = level.GetNumber()
@@ -159,7 +160,8 @@ export const DevTools: Component = options => {
     if (current < 1)
       level.SetNumber(1)
     level.ClearFocus()
-    console.log(`FIXME set level to ${level.GetNumber()} here`)
+    // FIXME
+    SendChatMessage(`.char level ${level.GetNumber()}}`)
   })
   level.SetScript('OnEscapePressed', () => {
     level.SetNumber(UnitLevel('player'))
