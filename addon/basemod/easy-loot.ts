@@ -130,7 +130,7 @@ export const LootItem: Component<
   dismiss.SetNormalTexture('Interface/BUTTONS/UI-GroupLoot-Pass-Up.blp')
   dismiss.SetPushedTexture('Interface/BUTTONS/UI-GroupLoot-Pass-Down.blp')
   dismiss.SetHighlightTexture('Interface/BUTTONS/UI-GroupLoot-Pass-Highlight.blp')
-  dismiss.SetSize(10, 10)
+  dismiss.SetSize(16, 16)
   dismiss.SetParent(frame.ref)
   dismiss.SetPoint('BOTTOMRIGHT', -8, 8)
   dismiss.SetScript('OnClick', (_, button) => {
