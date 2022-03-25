@@ -453,9 +453,7 @@ function SetupPoisons () {
   })
 
   spells.forEach(s => {
-    const d = s.Duration.get()
-    if (d)
-      std.DBC.Spell.query({ DurationIndex: d }).DurationIndex.set(21)
+    std.DBC.Spell.query({ ID: s.ID }).DurationIndex.set(21)
   })
 
   effects.forEach(e => e
