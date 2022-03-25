@@ -451,7 +451,7 @@ function SetupPoisons () {
   })
 
   spells.forEach(s => {
-    s.Duration.setSimple(21)
+    s.Duration.setSimple(0)
   })
 
   effects.forEach(e => e
