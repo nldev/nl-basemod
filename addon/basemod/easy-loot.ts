@@ -155,7 +155,6 @@ export const LootItem: Component<
     } else {
       SetCursor('Interface/CURSOR/Point.blp')
     }
-    GameTooltip.ClearLines()
     GameTooltip.SetOwner(UIParent, 'ANCHOR_CURSOR')
     GameTooltip.SetHyperlink(`item:${options.itemId}`)
     if (options.amount > 1)
@@ -165,7 +164,6 @@ export const LootItem: Component<
 
   icon.ref.SetScript('OnLeave', () => {
     SetCursor('Interface/CURSOR/Point.blp')
-    GameTooltip.ClearLines()
     GameTooltip.Hide()
   })
 
