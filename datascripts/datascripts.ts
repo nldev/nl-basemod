@@ -450,7 +450,7 @@ function SetupPoisons () {
     e.Flags.set(0)
   })
 
-  spells.forEach(s => s.Duration.set(0))
+  effects.forEach(s => s.Duration.set(21))
 
   effects.forEach(e => e
     .Visual.getRef()
@@ -464,6 +464,8 @@ function SetupPoisons () {
   woundEffect.Effects.get(1).PointsBase.set(18)
   instantEffect.Effects.get(1).PointsBase.set(32)
   deadlyEffect.Effects.get(1).PointsBase.set(8)
+
+  console.log(std.Spells.load(23775).Duration.objectify())
 }
 
 function RecallSpell () {
