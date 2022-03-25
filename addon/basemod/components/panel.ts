@@ -35,7 +35,7 @@ export const Section: Component<SectionOptions> = options => {
 
   // position based on previous
   if (options.previous)
-    p.ref.SetPoint('TOPLEFT', options.previous.ref, 'BOTTOMLEFT', x, -18)
+    p.ref.SetPoint('TOPLEFT', options.previous.ref, 'BOTTOMLEFT', x, -22)
 
   // inner
   const f = Frame({ name: `${options.name}-inner`, parent: p })
@@ -44,7 +44,7 @@ export const Section: Component<SectionOptions> = options => {
     f.ref.SetWidth(p.ref.GetWidth() - 20)
   } else {
     f.ref.SetWidth(p.ref.GetWidth() + 4)
-    f.ref.SetHeight(p.ref.GetHeight() - 12)
+    f.ref.SetHeight(p.ref.GetHeight() - 4)
   }
   f.ref.SetPoint('CENTER')
   p.inner = f.ref
