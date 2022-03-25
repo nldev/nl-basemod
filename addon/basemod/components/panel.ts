@@ -81,7 +81,7 @@ export const Section: Component<SectionOptions> = options => {
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
   f.ref.SetSize(290, 360)
-  f.ref.SetPoint('TOPLEFT')
+  f.ref.SetPoint('CENTER')
 
   const scroll = Scroll({ name: 'devtools-scroll', parent: f, height: 300 })
 
@@ -194,7 +194,7 @@ export const Panel: Component<PanelOptions> = options => {
     'notes': Frame,
     'statistics': Frame,
     'settings': Frame,
-    'help': Frame,
+    'support': Frame,
   }
   const pages: Mapping<Element> = {}
 
@@ -280,8 +280,8 @@ export const Panel: Component<PanelOptions> = options => {
         disabled: true,
       },
       {
-        id: 'help',
-        text: 'Help',
+        id: 'support',
+        text: 'Support',
         disabled: true,
       },
     ],
