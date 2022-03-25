@@ -450,10 +450,6 @@ function SetupPoisons () {
     e.Flags.set(0)
   })
 
-  // spells.forEach(s => {
-  //   s.Duration.setSimple(0)
-  // })
-
   effects.forEach(e => e
     .Visual.getRef()
       .CastKit.getRef()
