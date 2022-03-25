@@ -84,6 +84,7 @@ export const DevTools: Component = options => {
     y: -8,
     height: 50,
     parent: f,
+    color: [255, 0, 0],
     // border: true,
   })
 
