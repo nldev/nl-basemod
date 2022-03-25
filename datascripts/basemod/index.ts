@@ -163,14 +163,6 @@ export class Builder {
       throw new Error(`${this.processQueue.length} items left in processing queue`)
   }
 
-  public ProcessMany <T = any>({ taskId, list }: Templates<T>) {
-    for (const [_, task] of Object.entries<Task<T>>(this.tasks))
-      if (task.process)
-        for (const template of list)
-          if (task.id === taskId)
-            this.Process({ ...template, taskId })
-  }
-
   public Process <T = any>(template: TemplateOptions<T>, lastId: (null | string) = null) {
     let isNeedsSatisfied = true
 
@@ -223,6 +215,14 @@ export class Builder {
     this.ranTemplates[template.id] = template
 
     this.processQueue.forEach(item => this.Process(item, template.id))
+  }
+
+  public ProcessMany <T = any>({ taskId, list }: Templates<T>) {
+    for (const [_, task] of Object.entries<Task<T>>(this.tasks))
+      if (task.process)
+        for (const template of list)
+          if (task.id === taskId)
+            this.Process({ ...template, taskId })
   }
 
   public Start (id: string) {
