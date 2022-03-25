@@ -28,19 +28,14 @@ export function Main (events: TSEvents) {
     }
   })
 
-  events.Items.OnEquip((item, player, slot, isMerge) => {
-    player.SendBroadcastMessage(`EQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
-  })
-  events.Items.OnUnequip((item, player, isSwap, result) => {
-    player.SendBroadcastMessage(`${result.get()}`)
-    if (result.get() === 1)
-      player.SendBroadcastMessage(`UNEQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
-  })
-  events.Player.OnSay((p, m) => {
-    if (m.get() === 'x') {
-      p.Teleport(47, 1944, 1550, 82.2, 1.3)
-    }
-  })
+  // events.Items.OnEquip((item, player, slot, isMerge) => {
+  //   player.SendBroadcastMessage(`EQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
+  // })
+  // events.Items.OnUnequip((item, player, isSwap, result) => {
+  //   player.SendBroadcastMessage(`${result.get()}`)
+  //   if (result.get() === 1)
+  //     player.SendBroadcastMessage(`UNEQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
+  // })
 
   events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
     missChance.set(0)
