@@ -5950,6 +5950,10 @@ item_template|__:dev-boots-60|60014|60014|
 item_template|__:dev-boots-70|60015|60015|
 item_template|__:dev-boots-80|60016|60016|
 item_template|__:dev-boots-90|60017|60017|
+item_template|__:linen-cloth|60020|60020|
+item_template|__:silk-cloth|60022|60022|
+item_template|__:test-currency|60019|60019|
+item_template|__:wool-cloth|60021|60021|
 item_template|basemod:greater-health-potion|60006|60006|
 item_template|basemod:greater-mana-potion|60007|60007|
 item_template|basemod:greater-rejuvenation-potion|60008|60008|

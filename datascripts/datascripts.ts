@@ -1,5 +1,6 @@
 import { std } from 'wow/wotlk'
 import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
+import { ItemQuality } from 'wow/wotlk/std/Item/ItemQuality'
 import { Builder } from './basemod'
 import { Mapping, SQLTable } from './basemod/types'
 import { TalentOptions } from './basemod/talents'
@@ -11,6 +12,8 @@ import { TALENTS } from './config/talents'
 import { AUTOLEARN } from './config/autolearn'
 import { MAPS } from './config/maps'
 import { ALL_CLASSES, CLASS_IDS, RACE_IDS } from './basemod/constants'
+
+let currency_id = 0
 
 const SKILLS: Mapping<SkillLine> = {}
 std.SkillLines.forEach(e => {
@@ -761,16 +764,69 @@ function SetupStats ($: Builder) {
   })
 }
 
+interface CurrencyOptions {
+  id: string
+  name: string
+  icon: number
+  quality?: ItemQuality
+  category?: string
+}
+
+function Currency ($: Builder, options: CurrencyOptions) {
+  const c = std.Items.create($.Mod, options.id, 29434)
+  c.Name.enGB.set(options.name)
+  c.Bonding.NO_BOUNDS.set()
+  c.DisplayInfo.getRefCopy().Icon.set(std.Items.load(options.icon).DisplayInfo.getRef().Icon.get())
+  c.Quality.set(options.quality || 'WHITE')
+  c.RequiredLevel.set(0)
+  currency_id += 1
+  const t = std.DBC.CurrencyTypes.add(50000 + currency_id)
+  t.CategoryID.set(1)
+  t.BitIndex.set(currency_id)
+  t.ItemID.set(c.ID)
+  return c
+}
+
+function CreateCurrencies ($: Builder) {
+  std.DBC.CurrencyTypes.queryAll({}).forEach(c => c.delete())
+
+  const linen = Currency($, {
+    id: 'linen-cloth',
+    name: 'Linen Cloth',
+    icon: 2589,
+  })
+
+  const wool = Currency($, {
+    id: 'wool-cloth',
+    name: 'Wool Cloth',
+    icon: 2592,
+  })
+
+  const silk = Currency($, {
+    id: 'silk-cloth',
+    name: 'Silk Cloth',
+    icon: 4306,
+  })
+
+  std.Spells.load(3275).CastTime.set(0).Reagents.clearAll().Reagents.add(linen.ID, 1)
+  std.Spells.load(3276).CastTime.set(0).Reagents.clearAll().Reagents.add(linen.ID, 2)
+  std.Spells.load(3277).CastTime.set(0).Reagents.clearAll().Reagents.add(wool.ID, 1)
+  std.Spells.load(3278).CastTime.set(0).Reagents.clearAll().Reagents.add(wool.ID, 2)
+  std.Spells.load(7928).CastTime.set(0).Reagents.clearAll().Reagents.add(silk.ID, 1)
+  std.Spells.load(7929).CastTime.set(0).Reagents.clearAll().Reagents.add(silk.ID, 2)
+}
+
 function Settings ($: Builder) {
   RecallSpell()
   RemoveFlagDropDebuff()
   RemoveUnusedStartingSpells()
   RemoveUnusedStartingItems()
+  SetStartingZone()
   InfiniteRangedWeapon($)
   SetupStats($)
   SetupSkills($)
   SetupNpcStats($)
-  SetStartingZone()
+  CreateCurrencies($)
   CreateDevMovementBoots($)
   Rogue($)
 }
