@@ -482,9 +482,16 @@ function NormalizeSprint ($: Builder) {
   sprint.Effects.get(0).PointsDieSides.set(Speed($.BaseSpeed, 1))
 }
 
+function KidneyShot () {
+  const s = std.Spells.load(8643)
+  s.Attributes.MAINHAND_REQUIRED.set(false)
+  s.ItemEquips.set(-1, -1, -1)
+}
+
 function Rogue ($: Builder) {
   SetupPoisons()
   NormalizeSprint($)
+  KidneyShot()
 }
 
 function InfiniteRangedWeapon ($: Builder) {
