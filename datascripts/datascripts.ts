@@ -825,7 +825,7 @@ function CreateCurrencies ($: Builder) {
 }
 
 function Settings ($: Builder) {
-  const recover = std.Spells.create($.Mod, 'recover', 9512)
+  const recover = std.Spells.create($.Mod, 'recover', 24532)
   recover.Name.enGB.set('Recover')
   recover.Icon.setPath('spell_nature_healingway')
   recover.Cooldown.set(1000 * 60 * 3, 0, 0, 0)
