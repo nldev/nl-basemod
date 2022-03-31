@@ -493,6 +493,9 @@ function Recover ($: Builder) {
   recover.Name.enGB.set('Recover')
   recover.Icon.setPath('spell_nature_healingway')
   recover.Cooldown.set(1000 * 60 * 3, 0, 0, 0)
+  const v = recover.Visual.getRefCopy()
+  const k = v.CastKit.getRefCopy()
+  k.Animation.set(0)
 }
 
 function Rogue ($: Builder) {
