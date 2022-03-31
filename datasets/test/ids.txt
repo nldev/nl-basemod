@@ -1,6 +1,7 @@
 Map|__:dev|726|726|
 Map|basemod:dev|725|725|
 SkillLine|BASEMOD:thing|789|789|
+Spell|__:recover|86820|86820|
 Spell|__:speed-10|86810|86810|
 Spell|__:speed-100|86819|86819|
 Spell|__:speed-20|86811|86811|

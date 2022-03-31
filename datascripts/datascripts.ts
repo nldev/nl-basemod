@@ -824,6 +824,11 @@ function CreateCurrencies ($: Builder) {
 }
 
 function Settings ($: Builder) {
+  const recover = std.Spells.create($.Mod, 'recover', 24532)
+  recover.Name.enGB.set('Recover')
+  recover.Icon.setFullPath('\\Interface\\ICONS\\Spell_BurningSoul.blp')
+  recover.Cooldown.StartCategory.set(0)
+  recover.Cooldown.CategoryTime.set(0)
   RecallSpell()
   RemoveFlagDropDebuff()
   RemoveUnusedStartingSpells()
