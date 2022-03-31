@@ -786,6 +786,7 @@ function Currency ($: Builder, options: CurrencyOptions) {
   c.DisplayInfo.getRefCopy().Icon.set(std.Items.load(options.icon).DisplayInfo.getRef().Icon.get())
   c.Quality.set(options.quality || 'WHITE')
   c.RequiredLevel.set(0)
+  c.ItemLevel.set(1)
   currency_id += 1
   const t = std.DBC.CurrencyTypes.add(50000 + currency_id)
   t.CategoryID.set(1)
@@ -824,11 +825,12 @@ function CreateCurrencies ($: Builder) {
 }
 
 function Settings ($: Builder) {
-  const recover = std.Spells.create($.Mod, 'recover', 24532)
-  recover.Name.enGB.set('Recover')
-  recover.Icon.setFullPath('Interface\\ICONS\\Spell_BurningSoul.blp')
+  const recover = std.Spells.create($.Mod, 'recover', 9512)
+  recover.Name.enGB.set('Coffee')
+  recover.Icon.setPath('inv_drink_15')
   recover.Cooldown.StartCategory.set(0)
   recover.Cooldown.CategoryTime.set(0)
+  recover.Cooldown.StartTime.set(1000 * 60 * 3)
   RecallSpell()
   RemoveFlagDropDebuff()
   RemoveUnusedStartingSpells()

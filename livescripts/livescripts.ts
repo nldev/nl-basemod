@@ -17,6 +17,12 @@ export function Main (events: TSEvents) {
   Combat(events)
 
   events.Player.OnWhisper((sender, _, message) => {
+    if (message.get() === 'water')
+    if (sender.IsInWater())
+      sender.SendBroadcastMessage('is in water')
+  })
+
+  events.Player.OnWhisper((sender, _, message) => {
     const opcode = Opcode('dev-clear-inventory')
     const str = message.get()
     if (!str.includes(opcode))
