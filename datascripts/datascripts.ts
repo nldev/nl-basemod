@@ -826,11 +826,9 @@ function CreateCurrencies ($: Builder) {
 
 function Settings ($: Builder) {
   const recover = std.Spells.create($.Mod, 'recover', 9512)
-  recover.Name.enGB.set('Coffee')
-  recover.Icon.setPath('inv_drink_15')
-  recover.Cooldown.StartCategory.set(0)
-  recover.Cooldown.CategoryTime.set(0)
-  recover.Cooldown.StartTime.set(1000 * 60 * 3)
+  recover.Name.enGB.set('Recover')
+  recover.Icon.setPath('spell_nature_healingway')
+  recover.Cooldown.set(1000 * 60 * 3, 0, 0, 0)
   RecallSpell()
   RemoveFlagDropDebuff()
   RemoveUnusedStartingSpells()
