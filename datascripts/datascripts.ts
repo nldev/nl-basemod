@@ -467,7 +467,7 @@ function SetupPoisons () {
   deadlyEffect.Effects.get(1).PointsBase.set(8)
 }
 
-function RecallSpell () {
+function Recall () {
   const spell = std.Spells.load(8690)
   spell.Cooldown.set(1000 * 60 * 60) // 1 hour
   spell.Name.enGB.set('Sanctuary')
@@ -488,10 +488,18 @@ function KidneyShot () {
   s.ItemEquips.set(-1, -1, -1)
 }
 
+function Recover ($: Builder) {
+  const recover = std.Spells.create($.Mod, 'recover', 24532)
+  recover.Name.enGB.set('Recover')
+  recover.Icon.setPath('spell_nature_healingway')
+  recover.Cooldown.set(1000 * 60 * 3, 0, 0, 0)
+}
+
 function Rogue ($: Builder) {
   SetupPoisons()
   NormalizeSprint($)
   KidneyShot()
+  Recover($)
 }
 
 function InfiniteRangedWeapon ($: Builder) {
@@ -825,11 +833,7 @@ function CreateCurrencies ($: Builder) {
 }
 
 function Settings ($: Builder) {
-  const recover = std.Spells.create($.Mod, 'recover', 24532)
-  recover.Name.enGB.set('Recover')
-  recover.Icon.setPath('spell_nature_healingway')
-  recover.Cooldown.set(1000 * 60 * 3, 0, 0, 0)
-  RecallSpell()
+  Recall()
   RemoveFlagDropDebuff()
   RemoveUnusedStartingSpells()
   RemoveUnusedStartingItems()
