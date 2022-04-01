@@ -13,11 +13,12 @@ export interface ButtonOptions extends ComponentOptions {
 export const Button: Component<ButtonOptions> = options => {
   // setup
   const f = Frame({ ...options })
-  const color = options.color || [0, 0, 0]
+  const color = options.color || [108, 153, 187]
 
   f.ref.SetBackdrop(BASE_BACKDROP)
   f.ref.SetBackdropColor(...rgb(...color), 1)
   f.ref.SetSize(options.width, 30)
+  f.ref.EnableMouse(true)
 
   // scripts
   f.ref.SetScript('OnLeave', (_, button) => {
