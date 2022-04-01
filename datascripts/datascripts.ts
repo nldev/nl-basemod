@@ -519,7 +519,7 @@ function Kick () {
   s.Power.setEnergy(15)
 }
 
-function Recover ($: Builder) {
+function Guile ($: Builder) {
   $.Process<SpellOptions>({
     id: 'recover',
     taskId: 'create-spell',
@@ -529,7 +529,7 @@ function Recover ($: Builder) {
     fn: (spell: Spell) => {
       const recover = spell.asset
       recover.Attributes.NOT_BREAK_STEALTH.set(true)
-      recover.Name.enGB.set('Recover')
+      recover.Name.enGB.set('Guile')
       recover.Icon.setPath('spell_nature_healingway')
       const e = recover.Effects.get(0)
       e.PointsBase.set(60)
@@ -553,7 +553,7 @@ function Rogue ($: Builder) {
   Ambush()
   Sap()
   Blind()
-  Recover($)
+  Guile($)
 }
 
 function InfiniteRangedWeapon ($: Builder) {

@@ -59,51 +59,61 @@ export const DevTools: Component = options => {
   )
 
   // set level
-  const level = CreateFrame('EditBox', 'devtools-set-level', c.inner)
-  // level.SetWidth(c.inner.GetWidth() - 10)
-  level.SetWidth(c.inner.GetWidth() - 30)
-  level.SetHeight(c.inner.GetHeight())
-  level.SetBackdrop({
+  const level = Frame({
+    name: 'set-level-input',
+    parent: c,
+  })
+  level.ref.SetBackdrop({
     ...BASE_BACKDROP,
   })
-  level.SetBackdropColor(0, 0, 0, 1)
-  level.SetNumeric()
-  level.SetNumber(UnitLevel('player'))
-  level.SetPoint('TOPLEFT')
-  level.SetAutoFocus(false)
-  level.SetFont('Fonts/FRIZQT__.TTF', 12)
-  level.ClearFocus()
-  level.SetScript('OnTextChanged', () => {
+  level.ref.SetBackdropColor(0, 0, 0, 1)
+  level.ref.SetHeight(30)
+
+  const input = CreateFrame('EditBox', 'devtools-set-level', level.ref)
+  // level.SetWidth(c.inner.GetWidth() - 10)
+  input.SetWidth(level.ref.GetWidth() - 30)
+  input.SetHeight(level.ref.GetHeight())
+  input.SetBackdrop({
+    ...BASE_BACKDROP,
+  })
+  input.SetBackdropColor(0, 0, 0, 1)
+  input.SetNumeric()
+  input.SetNumber(UnitLevel('player'))
+  input.SetPoint('TOPLEFT')
+  input.SetAutoFocus(false)
+  input.SetFont('Fonts/FRIZQT__.TTF', 12)
+  input.ClearFocus()
+  input.SetScript('OnTextChanged', () => {
   })
   c.ref.EnableMouse(true)
   c.ref.SetScript('OnMouseDown', () => {
-    level.SetFocus()
+    input.SetFocus()
   })
-  level.SetScript('OnTabPressed', () => {
-    const current = level.GetNumber()
-    level.SetNumber(current)
+  input.SetScript('OnTabPressed', () => {
+    const current = input.GetNumber()
+    input.SetNumber(current)
     if (current > 99)
-      level.SetNumber(99)
+      input.SetNumber(99)
     if (current < 1)
-      level.SetNumber(1)
-    level.ClearFocus()
+      input.SetNumber(1)
+    input.ClearFocus()
     // FIXME
-    SendChatMessage(`.char level ${level.GetNumber()}`)
+    SendChatMessage(`.char level ${input.GetNumber()}`)
   })
-  level.SetScript('OnEnterPressed', () => {
-    const current = level.GetNumber()
-    level.SetNumber(current)
+  input.SetScript('OnEnterPressed', () => {
+    const current = input.GetNumber()
+    input.SetNumber(current)
     if (current > 99)
-      level.SetNumber(99)
+      input.SetNumber(99)
     if (current < 1)
-      level.SetNumber(1)
-    level.ClearFocus()
+      input.SetNumber(1)
+    input.ClearFocus()
     // FIXME
-    SendChatMessage(`.char level ${level.GetNumber()}`)
+    SendChatMessage(`.char level ${input.GetNumber()}`)
   })
-  level.SetScript('OnEscapePressed', () => {
-    level.SetNumber(UnitLevel('player'))
-    level.ClearFocus()
+  input.SetScript('OnEscapePressed', () => {
+    input.SetNumber(UnitLevel('player'))
+    input.ClearFocus()
   })
 
   // FIXME test
