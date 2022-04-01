@@ -39,7 +39,6 @@ export const DevTools: Component = options => {
     parent: scroll,
     previous: b,
     height: 30,
-    bg: true,
   })
 
   // reset bags
@@ -61,8 +60,13 @@ export const DevTools: Component = options => {
 
   // set level
   const level = CreateFrame('EditBox', 'devtools-set-level', c.inner)
-  level.SetWidth(c.inner.GetWidth() - 10)
+  // level.SetWidth(c.inner.GetWidth() - 10)
+  level.SetWidth(c.inner.GetWidth() - 30)
   level.SetHeight(c.inner.GetHeight())
+  level.SetBackdrop({
+    ...BASE_BACKDROP,
+  })
+  level.SetBackdropColor(0, 0, 0, 1)
   level.SetNumeric()
   level.SetNumber(UnitLevel('player'))
   level.SetPoint('TOPLEFT')
