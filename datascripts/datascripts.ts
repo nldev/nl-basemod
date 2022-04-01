@@ -484,7 +484,7 @@ function NormalizeSprint ($: Builder) {
 
 function KidneyShot () {
   const s = std.Spells.load(8643)
-  s.Power.setEnergy(10)
+  s.Power.setEnergy(15)
   s.Attributes.MAINHAND_REQUIRED.set(false)
   s.ItemEquips.set(-1, -1, -1)
 }
@@ -505,12 +505,12 @@ function Ambush () {
 
 function Sap () {
   const s = std.Spells.load(51724)
-  s.Power.setEnergy(20)
+  s.Power.setEnergy(30)
 }
 
 function Blind () {
   const s = std.Spells.load(2094)
-  s.Power.setEnergy(10)
+  s.Power.setEnergy(15)
 }
 
 function Kick () {
