@@ -505,12 +505,12 @@ function Ambush () {
 
 function Sap () {
   const s = std.Spells.load(51724)
-  s.Power.setEnergy(31)
+  s.Power.setEnergy(35)
 }
 
 function Blind () {
   const s = std.Spells.load(2094)
-  s.Power.setEnergy(5)
+  s.Power.setEnergy(10)
 }
 
 function Kick () {
@@ -520,6 +520,7 @@ function Kick () {
 
 function Recover ($: Builder) {
   const recover = std.Spells.create($.Mod, 'recover', 24532)
+  recover.Attributes.NOT_BREAK_STEALTH.set(true)
   recover.Name.enGB.set('Recover')
   recover.Icon.setPath('spell_nature_healingway')
   const e = recover.Effects.get(0)
