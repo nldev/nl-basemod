@@ -68,6 +68,7 @@ export const DevTools: Component = options => {
   })
   level.ref.SetBackdropColor(0, 0, 0, 1)
   level.ref.SetHeight(30)
+  level.ref.SetPoint('TOPLEFT')
 
   const input = CreateFrame('EditBox', 'devtools-set-level', level.ref)
   // level.SetWidth(c.inner.GetWidth() - 10)
