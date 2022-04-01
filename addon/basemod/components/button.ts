@@ -13,30 +13,30 @@ export interface ButtonOptions extends ComponentOptions {
 export const Button: Component<ButtonOptions> = options => {
   // setup
   const f = Frame({ ...options })
-  const color = options.color || [108, 153, 187]
+  const color = rgb(...(options.color || [108, 153, 187]))
 
   f.ref.SetBackdrop(BASE_BACKDROP)
-  f.ref.SetBackdropColor(...rgb(...color), 1)
+  f.ref.SetBackdropColor(...color, 1)
   f.ref.SetSize(options.width, 30)
   f.ref.EnableMouse(true)
 
   // scripts
   f.ref.SetScript('OnLeave', (e, button) => {
-    e.SetBackdropColor(...rgb(...color), 1)
+    e.SetBackdropColor(...color, 1)
   })
 
   f.ref.SetScript('OnEnter', (e, button) => {
-    e.SetBackdropColor(...rgb(color[0] * 0.8, color[1] * 0.8, color[2] * 0.8), 1)
+    e.SetBackdropColor(color[0] * 0.8, color[1] * 0.8, color[2] * 0.8, 1)
   })
 
   f.ref.SetScript('OnMouseDown', (e, button) => {
-    e.SetBackdropColor(...rgb(color[0] * 0.6, color[1] * 0.6, color[2] * 0.6), 1)
+    e.SetBackdropColor(color[0] * 0.6, color[1] * 0.6, color[2] * 0.6, 1)
     if (options.onClick)
       options.onClick(f)
   })
 
   f.ref.SetScript('OnMouseUp', (e, button) => {
-    e.SetBackdropColor(...rgb(color[0] * 0.8, color[1] * 0.8, color[2] * 0.8), 1)
+    e.SetBackdropColor(color[0] * 0.8, color[1] * 0.8, color[2] * 0.8, 1)
   })
 
   // text
