@@ -22,6 +22,7 @@ export type ComponentOptions = {
   state?: Mapping
   height?: number
   width?: number
+  scale?: number
   fns?: Mapping<ElementFn>
 }
 
@@ -78,6 +79,9 @@ export const Frame: Component = options => {
 
   if (options.height)
     frame.SetHeight(options.height)
+
+  if (options.scale)
+    frame.SetScale(options.scale)
 
   const element = {
     parent,
