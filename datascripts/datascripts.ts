@@ -505,7 +505,7 @@ function Ambush () {
 
 function Sap () {
   const s = std.Spells.load(51724)
-  s.Power.setEnergy(35)
+  s.Power.setEnergy(20)
 }
 
 function Blind () {
