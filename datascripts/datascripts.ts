@@ -493,12 +493,14 @@ function Recover ($: Builder) {
   recover.Name.enGB.set('Recover')
   recover.Icon.setPath('spell_nature_healingway')
   const e = recover.Effects.get(0)
-  console.log(e.objectify())
-  recover.Cooldown.set(1000 * 60 * 3, 0, 0, 0)
-  recover.Description.enGB.set('Restore 60 energy.')
+  e.PointsBase.set(100)
+  e.PointsPerLevel.set(0)
+  recover.Cooldown.set(1000 * 60, 0, 0, 0)
+  // recover.Description.enGB.set('Restore 100 energy.')
   const v = recover.Visual.getRefCopy()
   const k = v.CastKit.getRefCopy()
-  k.Animation.set(0)
+  k.StartAnimation.set(-1)
+  k.Animation.set(-1)
 }
 
 function Rogue ($: Builder) {
