@@ -496,7 +496,7 @@ function Recover ($: Builder) {
   e.PointsBase.set(100)
   e.PointsPerLevel.set(0)
   recover.Cooldown.set(1000 * 60, 0, 0, 0)
-  // recover.Description.enGB.set('Restore 100 energy.')
+  recover.Description.enGB.set('Instantly restores 100 energy.')
   const v = recover.Visual.getRefCopy()
   const k = v.CastKit.getRefCopy()
   k.StartAnimation.set(-1)
