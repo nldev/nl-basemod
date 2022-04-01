@@ -7,7 +7,7 @@ export interface Talent {
   id: string
   isActive: boolean
   // FIXME make string
-  spellId: number
+  spellId: string | number
   cost: number
   class: ClassMap | CharacterClass
 }
@@ -29,7 +29,10 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
     if (!config.data.spellId)
       throw new Error('create-talent templates require a spellId to automatically assign ID')
 
-    return `talent-${TitleCaseToDashCase(std.Spells.load(config.data.spellId).Name.enGB.get())}`
+    const spellId = typeof config.data.spellId === 'number'
+      ? config.data.spellId
+      : $.Get(`spells.${config.data.spellId}`)
+    return `talent-${TitleCaseToDashCase(std.Spells.load(spellId).Name.enGB.get())}`
   },
   setup: ($, config) => {
     // std.DBC.Talent.queryAll({}).forEach(t => t.delete())
