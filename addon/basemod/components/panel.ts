@@ -86,7 +86,7 @@ export const DevTools: Component = options => {
   c.ref.SetScript('OnMouseDown', () => {
     input.SetFocus()
   })
-  // FIXME: counter buttons + scroll
+  // FIXME: counter buttons + debounced scroll
   input.SetScript('OnTabPressed', () => {
     const current = input.GetNumber()
     input.SetNumber(current)
