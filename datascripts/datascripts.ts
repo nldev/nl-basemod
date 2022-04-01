@@ -484,8 +484,33 @@ function NormalizeSprint ($: Builder) {
 
 function KidneyShot () {
   const s = std.Spells.load(8643)
+  s.Power.setEnergy(10)
   s.Attributes.MAINHAND_REQUIRED.set(false)
   s.ItemEquips.set(-1, -1, -1)
+}
+
+function CheapShot () {
+  const s = std.Spells.load(1833)
+  s.Power.setEnergy(40)
+}
+
+function Garrote () {
+  const s = std.Spells.load(11290)
+  s.Power.setEnergy(30)
+}
+
+function Ambush () {
+  const s = std.Spells.load(11267)
+}
+
+function Sap () {
+  const s = std.Spells.load(51724)
+  s.Power.setEnergy(42)
+}
+
+function Blind () {
+  const s = std.Spells.load(2094)
+  s.Power.setEnergy(5)
 }
 
 function Recover ($: Builder) {
@@ -507,6 +532,11 @@ function Rogue ($: Builder) {
   SetupPoisons()
   NormalizeSprint($)
   KidneyShot()
+  CheapShot()
+  Garrote()
+  Ambush()
+  Sap()
+  Blind()
   Recover($)
 }
 
