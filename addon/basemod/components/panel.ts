@@ -126,7 +126,7 @@ export const DevTools: Component = options => {
     text: '+',
     width: 30,
     fontSize: 20,
-    scale: 0.4,
+    scale: 0.5,
     onClick: () => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
@@ -137,7 +137,7 @@ export const DevTools: Component = options => {
     text: '-',
     width: 30,
     fontSize: 20,
-    scale: 0.4,
+    scale: 0.5,
     onClick: () => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
