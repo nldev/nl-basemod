@@ -73,11 +73,11 @@ export const DevTools: Component = options => {
 
   const input = CreateFrame('EditBox', 'devtools-set-level', level.ref)
   // level.SetWidth(c.inner.GetWidth() - 10)
-  input.SetWidth(level.ref.GetWidth() - 10)
+  input.SetWidth(level.ref.GetWidth() - 20)
   input.SetHeight(level.ref.GetHeight())
   input.SetNumeric()
   input.SetNumber(UnitLevel('player'))
-  input.SetPoint('TOPLEFT')
+  input.SetPoint('CENTER')
   input.SetAutoFocus(false)
   input.SetFont('Fonts/FRIZQT__.TTF', 12)
   input.ClearFocus()
