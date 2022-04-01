@@ -25,13 +25,13 @@ export interface CreateTalentConfig {}
 
 export const CreateTalent: Task<Talent, CreateTalentConfig> = {
   id: 'create-talent',
-  identify: ($, config, options) => {
-    if (!config.data.spellId)
+  identify: ($, template, options) => {
+    if (!template.data.spellId)
       throw new Error('create-talent templates require a spellId to automatically assign ID')
 
-    const spellId = typeof config.data.spellId === 'number'
-      ? config.data.spellId
-      : $.Get(`spells.${config.data.spellId}`)
+    const spellId = typeof template.data.spellId === 'number'
+      ? template.data.spellId
+      : $.Get(`spells.${template.data.spellId}`)
     return `talent-${TitleCaseToDashCase(std.Spells.load(spellId).Name.enGB.get())}`
   },
   setup: ($, config) => {
