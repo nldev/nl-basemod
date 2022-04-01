@@ -2,6 +2,7 @@ import { std } from 'wow/wotlk'
 import { Task } from '.'
 import { ClassMask, TitleCaseToDashCase } from './utils'
 import { CharacterClass, ClassMap } from './types'
+import { Spell } from 'wow/wotlk/std/Spell/Spell'
 
 export interface Talent {
   id: string
@@ -30,9 +31,10 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
       throw new Error('create-talent templates require a spellId to automatically assign ID')
 
     const spellId = typeof template.data.spellId === 'number'
-      ? template.data.spellId
-      : $.Get(`spells.${template.data.spellId}`)
-    return `talent-${TitleCaseToDashCase(std.Spells.load(spellId).Name.enGB.get())}`
+      ? `talent-${TitleCaseToDashCase(std.Spells.load(template.data.spellId).Name.enGB.get())}`
+      : `talent-${template.data.spellId}`
+
+    return spellId
   },
   setup: ($, config) => {
     // std.DBC.Talent.queryAll({}).forEach(t => t.delete())
@@ -166,18 +168,18 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
     })
   },
   process: ($, template, config) => {
-    const spellId = typeof template.data.spellId === 'number'
-      ? template.data.spellId
-      : $.Get(`spells.${template.data.spellId}`)
+    const spell = typeof template.data.spellId === 'number'
+      ? std.Spells.load(template.data.spellId)
+      : $.Get(`spells.${template.data.spellId}`) as Spell
 
     const item: Talent = {
-      spellId,
+      spellId: spell.ID,
       isActive: template.data.isActive || false,
       id: template.id,
       cost: template.data.cost,
       class: template.data.class,
     }
-    const spell = std.Spells.load(spellId)
+    //const spell = std.Spells.load(spellId)
 
     if (!item.isActive) {
       // spell.Attributes.CASTABLE_WHILE_DEAD.set(true)
