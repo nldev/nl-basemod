@@ -79,9 +79,7 @@ export const DevTools: Component = options => {
   })
   input.ref.SetPoint('CENTER')
   const i = CreateFrame('EditBox', 'devtools-set-level', input.ref)
-  i.SetPoint('TOPLEFT')
-  i.SetWidth(input.ref.GetWidth())
-  i.SetHeight(input.ref.GetHeight())
+  i.SetAllPoints(input.ref)
   i.SetNumeric()
   i.SetNumber(UnitLevel('player'))
   i.SetPoint('CENTER')
@@ -127,8 +125,8 @@ export const DevTools: Component = options => {
     parent: input,
     text: '+',
     width: 30,
-    fontSize: 14,
-    scale: 0.8,
+    fontSize: 20,
+    scale: 0.5,
     onClick: () => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
@@ -138,12 +136,14 @@ export const DevTools: Component = options => {
     parent: input,
     text: '-',
     width: 30,
+    fontSize: 20,
+    scale: 0.5,
     onClick: () => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
   })
-  plus.ref.SetPoint('TOPRIGHT', i, 'TOPLEFT')
-  minus.ref.SetPoint('BOTTOMRIGHT', i, 'BOTTOMLEFT')
+  plus.ref.SetPoint('TOPLEFT', i, 'TOPRIGHT')
+  minus.ref.SetPoint('BOTTOMLEFT', i, 'BOTTOMRIGHT')
 
   // FIXME test
   const bb = CreateFrame('EditBox', 'devtools-test', b.inner)
