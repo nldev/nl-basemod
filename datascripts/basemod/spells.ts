@@ -29,7 +29,7 @@ export const CreateSpell: Task<SpellOptions, CreateSpellConfig> = {
   setup: ($, config) => {},
   process: ($, template, config) => {
     const baseId = template.data.baseId || DEFAULT_SPELL
-    const item: Spell = {
+    const spell: Spell = {
       baseId,
       id: template.id,
       isModify: (typeof template.data.isModify === 'boolean')
@@ -40,7 +40,9 @@ export const CreateSpell: Task<SpellOptions, CreateSpellConfig> = {
         : std.Spells.create($.Mod, template.id, baseId),
     }
 
-    $.Set('spells', template.id, item)
+    template.fn(spell)
+
+    $.Set('spells', template.id, spell)
   },
 }
 

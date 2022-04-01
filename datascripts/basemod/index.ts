@@ -74,6 +74,7 @@ export interface TemplateOptions<T = any> {
   id?: string
   taskId?: string
   needs?: string[]
+  fn?: (result: any) => void
 }
 
 export interface Template<T = any> extends TemplateOptions {
@@ -81,6 +82,7 @@ export interface Template<T = any> extends TemplateOptions {
   id: string
   taskId: string
   needs: string[]
+  fn: (result: any) => void
 }
 
 export interface Task<T = any, O = any> {
@@ -202,6 +204,7 @@ export class Builder {
           needs: template.needs || [],
           taskId: template.taskId || '',
           id: template.id,
+          fn: template.fn || (() => {}),
         }
 
         task.process(this, t, this.config.tasks[task.id])
