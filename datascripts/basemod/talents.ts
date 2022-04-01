@@ -166,15 +166,18 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
     })
   },
   process: ($, template, config) => {
+    const spellId = typeof template.data.spellId === 'number'
+      ? template.data.spellId
+      : $.Get(`spells.${template.data.spellId}`)
+
     const item: Talent = {
+      spellId,
       isActive: template.data.isActive || false,
       id: template.id,
-      spellId: template.data.spellId,
       cost: template.data.cost,
       class: template.data.class,
     }
-
-    const spell = std.Spells.load(item.spellId)
+    const spell = std.Spells.load(spellId)
 
     if (!item.isActive) {
       // spell.Attributes.CASTABLE_WHILE_DEAD.set(true)
