@@ -21,22 +21,22 @@ export const Button: Component<ButtonOptions> = options => {
   f.ref.EnableMouse(true)
 
   // scripts
-  f.ref.SetScript('OnLeave', (_, button) => {
-    f.ref.SetBackdropColor(...rgb(...color), 1)
+  f.ref.SetScript('OnLeave', (e, button) => {
+    e.SetBackdropColor(...rgb(...color), 1)
   })
 
-  f.ref.SetScript('OnEnter', (_, button) => {
-    f.ref.SetBackdropColor(...rgb(color[0] * 0.8, color[1] * 0.8, color[2] * 0.8), 1)
+  f.ref.SetScript('OnEnter', (e, button) => {
+    e.SetBackdropColor(...rgb(color[0] * 0.8, color[1] * 0.8, color[2] * 0.8), 1)
   })
 
-  f.ref.SetScript('OnMouseDown', (_, button) => {
-    f.ref.SetBackdropColor(...rgb(color[0] * 0.6, color[1] * 0.6, color[2] * 0.6), 1)
+  f.ref.SetScript('OnMouseDown', (e, button) => {
+    e.SetBackdropColor(...rgb(color[0] * 0.6, color[1] * 0.6, color[2] * 0.6), 1)
     if (options.onClick)
       options.onClick(f)
   })
 
-  f.ref.SetScript('OnMouseUp', (_, button) => {
-    f.ref.SetBackdropColor(...rgb(color[0] * 0.8, color[1] * 0.8, color[2] * 0.8), 1)
+  f.ref.SetScript('OnMouseUp', (e, button) => {
+    e.SetBackdropColor(...rgb(color[0] * 0.8, color[1] * 0.8, color[2] * 0.8), 1)
   })
 
   // text
