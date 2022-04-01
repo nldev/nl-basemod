@@ -49,6 +49,7 @@ export const DevTools: Component = options => {
 
   const ciButton = Button({
     name: 'devtools-reset-bags-button',
+    parent: ci,
     text: 'Clear Inventory',
     width: 120,
   })
