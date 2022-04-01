@@ -73,7 +73,7 @@ export const DevTools: Component = options => {
 
   const input = CreateFrame('EditBox', 'devtools-set-level', level.ref)
   // level.SetWidth(c.inner.GetWidth() - 10)
-  input.SetWidth(level.ref.GetWidth() - 20)
+  input.SetWidth(level.ref.GetWidth() - 16)
   input.SetHeight(level.ref.GetHeight())
   input.SetNumeric()
   input.SetNumber(UnitLevel('player'))
