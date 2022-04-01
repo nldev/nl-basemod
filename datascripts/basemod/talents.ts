@@ -8,7 +8,7 @@ export interface Talent {
   id: string
   isActive: boolean
   // FIXME make string
-  spellId: string | number
+  spellId: number
   cost: number
   class: ClassMap | CharacterClass
 }
@@ -17,7 +17,7 @@ export type TalentOptions = {
   id?: string
   isActive?: boolean
   // FIXME make string
-  spellId: number
+  spellId: string | number
   cost: number
   class: ClassMap | CharacterClass
 }

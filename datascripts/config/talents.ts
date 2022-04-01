@@ -664,6 +664,7 @@ export const TALENTS: Templates<TalentOptions> = {
     },
     {
       id: 'recovery',
+      needs: ['spells.recovery'],
       data: {
         spellId: 'recovery',
         cost: 10,
