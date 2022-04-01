@@ -581,7 +581,7 @@ export const TALENTS: Templates<TalentOptions> = {
       data: {
         isActive: true,
         spellId: 14177,
-        cost: 16,
+        cost: 12,
         class: { ROGUE: true },
       },
     },

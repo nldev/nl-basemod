@@ -7,6 +7,7 @@ import { Mapping } from '../types'
 import { Talents } from '../talents'
 import { Scroll } from './scroll'
 import { Section } from './section'
+import { Button } from './button'
 
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
@@ -45,13 +46,15 @@ export const DevTools: Component = options => {
   const ci = Frame({ name: 'devtools-reset-bags', parent: a })
   ci.ref.SetPoint('TOPLEFT')
   ci.ref.SetSize(120, 30)
-  const ciButton = CreateFrame('Button', 'devtools-reset-bags-button', ci.ref, 'UIPanelButtonTemplate')
-  ciButton.SetSize(120, 30)
-  ciButton.SetParent(ci.ref)
-  ciButton.SetText('Clear Inventory')
-  ciButton.SetPoint('CENTER')
 
-  ciButton.SetScript('OnClick', frame =>
+  const ciButton = Button({
+    name: 'devtools-reset-bags-button',
+    text: 'Clear Inventory',
+    width: 120,
+  })
+
+  ciButton.ref.SetPoint('CENTER')
+  ciButton.inner.SetScript('OnClick', frame =>
     SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
   )
 
