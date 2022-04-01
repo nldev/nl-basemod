@@ -7,6 +7,7 @@ export interface ButtonOptions extends ComponentOptions {
   text: string
   width: number
   fontSize?: number
+  isBordered?: boolean
   color?: Rgb
   onClick?: (frame: Element<any, any>) => void
 }
@@ -16,7 +17,12 @@ export const Button: Component<ButtonOptions> = options => {
   const f = Frame({ ...options })
   const color = rgb(...(options.color || [108, 153, 187]))
 
-  f.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
+  if (options.isBordered === false) {
+    f.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background', edgeFile: '' })
+  } else {
+    f.ref.SetBackdrop({ ...BASE_BACKDROP, bgFile: 'Interface/Tooltips/UI-Tooltip-Background' })
+  }
+
   f.ref.SetBackdropColor(...color, 1)
   f.ref.SetSize(options.width, 30)
   f.ref.EnableMouse(true)
