@@ -16,6 +16,16 @@ export function Main (events: TSEvents) {
   Autolearn(events)
   Combat(events)
 
+  events.SpellID.OnHit(1833, s => {
+    const c = s.GetCaster()
+    const t = s.GetTarget()
+    if (!c.IsPlayer() && t.IsUnit())
+      return
+    const p = c.ToPlayer()
+    const u = t.ToUnit()
+    p.AddComboPoints(u, 1)
+  })
+
   events.Player.OnWhisper((sender, _, message) => {
     if (message.get() === 'water')
     if (sender.IsInWater())
