@@ -51,6 +51,7 @@ export const DevTools: Component = options => {
     parent: ci,
     text: 'Clear Inventory',
     width: 120,
+    color: [0, 0, 0],
   })
 
   ciButton.ref.SetPoint('CENTER')
