@@ -126,7 +126,7 @@ export const DevTools: Component = options => {
     text: '+',
     width: 30,
     fontSize: 20,
-    scale: 0.5,
+    scale: 0.6,
     onClick: () => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
@@ -137,13 +137,13 @@ export const DevTools: Component = options => {
     text: '-',
     width: 30,
     fontSize: 20,
-    scale: 0.5,
+    scale: 0.6,
     onClick: () => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
   })
-  plus.ref.SetPoint('TOPLEFT', i, 'TOPRIGHT')
-  minus.ref.SetPoint('BOTTOMLEFT', i, 'BOTTOMRIGHT')
+  plus.ref.SetPoint('TOPLEFT', i, 'TOPRIGHT', 15, -5)
+  minus.ref.SetPoint('BOTTOMLEFT', i, 'BOTTOMRIGHT', 15, -5)
 
   // FIXME test
   const bb = CreateFrame('EditBox', 'devtools-test', b.inner)
