@@ -12,9 +12,7 @@ import { TALENTS } from './config/talents'
 import { AUTOLEARN } from './config/autolearn'
 import { MAPS } from './config/maps'
 import { ALL_CLASSES, CLASS_IDS, RACE_IDS } from './basemod/constants'
-import { Talent } from 'wow/wotlk/std/Talents/Talent'
-import { SpellOptions } from './basemod/spells'
-import { Spell } from 'wow/wotlk/std/Spell/Spell'
+import { Spell, SpellOptions } from './basemod/spells'
 
 let currency_id = 0
 
@@ -529,7 +527,7 @@ function Recover ($: Builder) {
       baseId: 24532,
     },
   })
-  const recover = $.Get<Spell>('spells.recover')
+  const recover = $.Get<Spell>('spells').asset
   recover.Attributes.NOT_BREAK_STEALTH.set(true)
   recover.Name.enGB.set('Recover')
   recover.Icon.setPath('spell_nature_healingway')
