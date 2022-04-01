@@ -48,7 +48,6 @@ function ApplyTalents(player: TSPlayer) {
   `)
   while (a.GetRow()) {
     const id = a.GetString(2)
-    const isActive = a.GetUInt16(3)
     if (id) {
       // FIXME: create a row if doesnt exist
       const c = QueryWorld(`
@@ -155,7 +154,7 @@ function HandleLearnTalent (events: TSEvents) {
     let cost = 0
     let classMask = 0
     while (a.GetRow()) {
-      spellId = a.GetUInt16(2)
+      spellId = a.GetUInt32(2)
       cost = a.GetUInt16(3)
       classMask = a.GetUInt16(5)
     }
@@ -222,7 +221,7 @@ function HandleUnlearnTalent (events: TSEvents) {
     let cost = 0
     let classMask = 0
     while (a.GetRow()) {
-      spellId = a.GetUInt16(2)
+      spellId = a.GetUInt32(2)
       cost = a.GetUInt16(3)
       classMask = a.GetUInt16(5)
     }
