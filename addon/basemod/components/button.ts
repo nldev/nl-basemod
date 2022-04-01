@@ -11,6 +11,7 @@ export interface ButtonOptions extends ComponentOptions {
 }
 
 export const Button: Component<ButtonOptions> = options => {
+  // setup
   const f = Frame({ ...options })
   const color = options.color || [0, 0, 0]
 
@@ -18,6 +19,7 @@ export const Button: Component<ButtonOptions> = options => {
   f.ref.SetBackdropColor(...rgb(...color), 1)
   f.ref.SetSize(options.width, 30)
 
+  // scripts
   f.ref.SetScript('OnLeave', (_, button) => {
     f.ref.SetBackdropColor(...rgb(...color), 1)
   })
@@ -36,14 +38,17 @@ export const Button: Component<ButtonOptions> = options => {
     f.ref.SetBackdropColor(...rgb(color[0] * 0.8, color[1] * 0.8, color[2] * 0.8), 1)
   })
 
-  const button = CreateFrame('Button', options.name + '-inner', f.ref)
+  // text
+  const t = f.ref.CreateFontString(
+    `${options.name}-text`,
+    'OVERLAY',
+    'GameTooltipText',
+  )
 
-  button.SetSize(options.width, 30)
-  button.SetParent(f.ref)
-  button.SetText(options.text)
-  button.SetPoint('CENTER')
-
-  f.inner = button
+  t.SetParent(f.ref)
+  t.SetPoint('CENTER')
+  t.SetText(options.text)
+  t.SetFont('Fonts/FRIZQT__.TTF', 10)
 
   return f
 }

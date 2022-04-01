@@ -52,12 +52,12 @@ export const DevTools: Component = options => {
     text: 'Clear Inventory',
     width: 120,
     color: [0, 0, 0],
+    onClick: () => {
+      SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
+    },
   })
 
   ciButton.ref.SetPoint('CENTER')
-  ciButton.inner.SetScript('OnClick', frame =>
-    SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
-  )
 
   // set level
   const level = Frame({
