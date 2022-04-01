@@ -7,6 +7,20 @@ import { Autolearn } from './basemod/autolearn'
 import { Combat } from './basemod/combat/combat'
 import { Opcode } from './basemod/utils'
 
+function AddComboPoints (spell: TSSpell, amount: number) {
+  const c = spell.GetCaster()
+  const t = spell.GetTarget()
+  if (!c.IsPlayer() && t.IsUnit())
+    return
+  const p = c.ToPlayer()
+  const u = t.ToUnit()
+  p.AddComboPoints(u, amount)
+}
+
+const CHEAP_SHOT = 1833
+const AMBUSH = 11267
+const GARROTE = 11290
+
 export function Main (events: TSEvents) {
   Store(events)
   EasyLoot(events)
@@ -16,15 +30,9 @@ export function Main (events: TSEvents) {
   Autolearn(events)
   Combat(events)
 
-  events.SpellID.OnHit(1833, s => {
-    const c = s.GetCaster()
-    const t = s.GetTarget()
-    if (!c.IsPlayer() && t.IsUnit())
-      return
-    const p = c.ToPlayer()
-    const u = t.ToUnit()
-    p.AddComboPoints(u, 1)
-  })
+  events.SpellID.OnHit(CHEAP_SHOT, s => AddComboPoints(s, 1))
+  events.SpellID.OnHit(AMBUSH, s => AddComboPoints(s, 1))
+  events.SpellID.OnHit(GARROTE, s => AddComboPoints(s, 1))
 
   events.Player.OnWhisper((sender, _, message) => {
     if (message.get() === 'water')
