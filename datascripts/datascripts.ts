@@ -527,7 +527,7 @@ function Recover ($: Builder) {
       baseId: 24532,
     },
   })
-  const recover = $.Get<Spell>('spells').asset
+  const recover = $.Get<Spell>('spells.recover').asset
   recover.Attributes.NOT_BREAK_STEALTH.set(true)
   recover.Name.enGB.set('Recover')
   recover.Icon.setPath('spell_nature_healingway')

@@ -170,7 +170,7 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
   process: ($, template, config) => {
     const spell = typeof template.data.spellId === 'number'
       ? std.Spells.load(template.data.spellId)
-      : $.Get(`spells.${template.data.spellId}`) as Spell
+      : $.Get(`spells.${template.data.spellId}`).asset as Spell
 
     const item: Talent = {
       spellId: spell.ID,
