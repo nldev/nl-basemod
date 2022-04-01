@@ -505,12 +505,17 @@ function Ambush () {
 
 function Sap () {
   const s = std.Spells.load(51724)
-  s.Power.setEnergy(42)
+  s.Power.setEnergy(31)
 }
 
 function Blind () {
   const s = std.Spells.load(2094)
   s.Power.setEnergy(5)
+}
+
+function Kick () {
+  const s = std.Spells.load(1766)
+  s.Power.setEnergy(15)
 }
 
 function Recover ($: Builder) {
