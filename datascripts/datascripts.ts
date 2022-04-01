@@ -12,6 +12,9 @@ import { TALENTS } from './config/talents'
 import { AUTOLEARN } from './config/autolearn'
 import { MAPS } from './config/maps'
 import { ALL_CLASSES, CLASS_IDS, RACE_IDS } from './basemod/constants'
+import { Talent } from 'wow/wotlk/std/Talents/Talent'
+import { SpellOptions } from './basemod/spells'
+import { Spell } from 'wow/wotlk/std/Spell/Spell'
 
 let currency_id = 0
 
@@ -519,7 +522,14 @@ function Kick () {
 }
 
 function Recover ($: Builder) {
-  const recover = std.Spells.create($.Mod, 'recover', 24532)
+  $.Process<SpellOptions>({
+    id: 'recover',
+    taskId: 'create-spell',
+    data: {
+      baseId: 24532,
+    },
+  })
+  const recover = $.Get<Spell>('spells.recover')
   recover.Attributes.NOT_BREAK_STEALTH.set(true)
   recover.Name.enGB.set('Recover')
   recover.Icon.setPath('spell_nature_healingway')
