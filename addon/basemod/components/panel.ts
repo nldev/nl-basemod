@@ -68,16 +68,13 @@ export const DevTools: Component = options => {
   })
   level.ref.SetBackdropColor(0, 0, 0, 1)
   level.ref.SetHeight(30)
+  level.ref.SetWidth(c.inner.GetWidth() - 30)
   level.ref.SetPoint('TOPLEFT')
 
   const input = CreateFrame('EditBox', 'devtools-set-level', level.ref)
   // level.SetWidth(c.inner.GetWidth() - 10)
-  input.SetWidth(level.ref.GetWidth() - 30)
+  input.SetWidth(level.ref.GetWidth() - 10)
   input.SetHeight(level.ref.GetHeight())
-  input.SetBackdrop({
-    ...BASE_BACKDROP,
-  })
-  input.SetBackdropColor(0, 0, 0, 1)
   input.SetNumeric()
   input.SetNumber(UnitLevel('player'))
   input.SetPoint('TOPLEFT')
