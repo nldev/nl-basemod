@@ -73,6 +73,10 @@ export const Counter: Component<CounterOptions> = options => {
   }
   const increment = () => {
     const current = i.GetNumber() + 1
+    if (!!options.max && (current > options.max))
+      i.SetNumber(options.max)
+    if (!!options.min && (current < options.min))
+      i.SetNumber(options.min)
     i.SetNumber(current)
     count = current
     options.onAccept(count, counter)
