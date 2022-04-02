@@ -8,6 +8,7 @@ export interface ButtonOptions extends ComponentOptions {
   width: number
   fontSize?: number
   isBordered?: boolean
+  textOffset?: number
   color?: Rgb
   onClick?: (frame: Element<any, any>) => void
 }
@@ -56,7 +57,7 @@ export const Button: Component<ButtonOptions> = options => {
   )
 
   t.SetParent(f.ref)
-  t.SetPoint('CENTER')
+  t.SetPoint('CENTER', options.textOffset || 0, 0)
   t.SetText(options.text)
   t.SetFont('Fonts/FRIZQT__.TTF', options.fontSize || 10)
 
