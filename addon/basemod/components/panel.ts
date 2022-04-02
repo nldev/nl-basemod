@@ -60,13 +60,17 @@ export const DevTools: Component = options => {
   ciButton.ref.SetPoint('CENTER')
 
   // set level
-  const onLevelAccept = (num: number) => SendChatMessage(`.char level ${num}`)
+  const onLevelAccept = (num: number) => {
+    SendChatMessage(`.char level ${num}`)
+  }
   const level = Counter({
     name: 'set-level-counter',
     parent: c,
     width: c.inner.GetWidth(),
     initial: UnitLevel('player'),
     onAccept: onLevelAccept,
+    min: 1,
+    max: 99,
     onCancel: () => {},
   })
   level.ref.RegisterEvent('PLAYER_LEVEL_UP')

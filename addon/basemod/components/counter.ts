@@ -13,9 +13,11 @@ import { rgb } from '../utils'
 
 export interface CounterOptions extends ComponentOptions {
   width: number
+  min?: number
+  max?: number
   initial?: number
-  onAccept?: (amount: number, element: Element<any, any>) => void
-  onCancel?: (amount: number, element: Element<any, any>) => void
+  onAccept?: (amount: number, element: Element<any, any>) => number | void
+  onCancel?: (amount: number, element: Element<any, any>) => number | void
 }
 
 export const Counter: Component<CounterOptions> = options => {
@@ -44,7 +46,7 @@ export const Counter: Component<CounterOptions> = options => {
   const i = CreateFrame('EditBox', `${options.name}-editbox`, input.ref)
   i.SetAllPoints(input.ref)
   i.SetNumeric()
-  i.SetNumber(UnitLevel('player'))
+  i.SetNumber(count)
   i.SetPoint('CENTER')
   i.SetAutoFocus(false)
   i.SetFont('Fonts/FRIZQT__.TTF', 12)
@@ -56,24 +58,22 @@ export const Counter: Component<CounterOptions> = options => {
   counter.ref.SetScript('OnMouseDown', () => {
     i.SetFocus()
   })
-  i.SetScript('OnTabPressed', () => {
-    const current = i.GetNumber()
-    i.SetNumber(current)
+  const fn = () => {
+    i.ClearFocus()
+    let current = i.GetNumber()
+    if (!!options.max && (current > options.max))
+      i.SetNumber(options.max)
+    if (!!options.min && (current < options.min))
+      i.SetNumber(options.min)
     count = current
-    options.onAccept(count, counter)
-  })
-  i.SetScript('OnSpacePressed', () => {
-    const current = i.GetNumber()
-    i.SetNumber(current)
-    count = current
-    options.onAccept(count, counter)
-  })
-  i.SetScript('OnEnterPressed', () => {
-    const current = i.GetNumber()
-    i.SetNumber(current)
-    count = current
-    options.onAccept(count, counter)
-  })
+    const r = options.onAccept(count, counter)
+    if (typeof r === 'number')
+      count = r
+    i.SetNumber(count)
+  }
+  i.SetScript('OnTabPressed', () => fn())
+  i.SetScript('OnSpacePressed', () => fn())
+  i.SetScript('OnEnterPressed', () => fn())
   i.SetScript('OnEscapePressed', () => {
     i.ClearFocus()
     options.onCancel(count, counter)
