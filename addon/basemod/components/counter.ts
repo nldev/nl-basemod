@@ -85,7 +85,10 @@ export const Counter: Component<CounterOptions> = options => {
   }
   input.ref.EnableMouseWheel(true)
   input.ref.SetScript('OnMouseWheel', (f, d) => {
-    console.log(d)
+    if (d > 1)
+      increment()
+    if (d < 1)
+      decrement()
   })
   i.SetScript('OnTabPressed', () => fn())
   i.SetScript('OnSpacePressed', () => fn())
