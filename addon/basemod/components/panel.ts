@@ -68,7 +68,7 @@ export const DevTools: Component = options => {
     parent: c,
     width: c.inner.GetWidth(),
     initial: UnitLevel('player'),
-    onAccept: onLevelAccept,
+    onAccept: n => onLevelAccept(n),
     min: 1,
     max: 99,
     onCancel: () => {},
