@@ -61,6 +61,7 @@ export const DevTools: Component = options => {
 
   // set level
   const onLevelAccept = (num: number) => {
+    if (num !== UnitLevel('player'))
     SendChatMessage(`.char level ${num}`)
   }
   const level = Counter({
