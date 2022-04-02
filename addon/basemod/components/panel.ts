@@ -73,7 +73,7 @@ export const DevTools: Component = options => {
 
   const input = Frame({
     name: 'input',
-    width: level.ref.GetWidth(),
+    width: level.ref.GetWidth() - 16,
     height: level.ref.GetHeight(),
     parent: level,
   })
@@ -95,6 +95,17 @@ export const DevTools: Component = options => {
   })
   // FIXME: counter buttons + debounced scroll
   i.SetScript('OnTabPressed', () => {
+    const current = i.GetNumber()
+    i.SetNumber(current)
+    if (current > 99)
+      i.SetNumber(99)
+    if (current < 1)
+      i.SetNumber(1)
+    i.ClearFocus()
+    // FIXME
+    SendChatMessage(`.char level ${i.GetNumber()}`)
+  })
+  i.SetScript('OnSpacePressed', () => {
     const current = i.GetNumber()
     i.SetNumber(current)
     if (current > 99)
@@ -147,8 +158,8 @@ export const DevTools: Component = options => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
   })
-  plus.ref.SetPoint('TOPLEFT', i, 'TOPRIGHT', 15, -1)
-  minus.ref.SetPoint('BOTTOMLEFT', i, 'BOTTOMRIGHT', 15, 1)
+  plus.ref.SetPoint('TOPLEFT', i, 'TOPRIGHT', 15, 0)
+  minus.ref.SetPoint('BOTTOMLEFT', i, 'BOTTOMRIGHT', 15, 0)
 
   // FIXME test
   const bb = CreateFrame('EditBox', 'devtools-test', b.inner)
