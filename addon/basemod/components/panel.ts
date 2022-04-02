@@ -68,12 +68,12 @@ export const DevTools: Component = options => {
   })
   level.ref.SetBackdropColor(0, 0, 0, 1)
   level.ref.SetHeight(30)
-  level.ref.SetWidth(c.inner.GetWidth() - 30)
+  level.ref.SetWidth(c.inner.GetWidth() - 15)
   level.ref.SetPoint('TOPLEFT')
 
   const input = Frame({
     name: 'input',
-    width: level.ref.GetWidth() - 16,
+    width: level.ref.GetWidth(),
     height: level.ref.GetHeight(),
     parent: level,
   })
@@ -141,7 +141,7 @@ export const DevTools: Component = options => {
     fontSize: 24,
     isBordered: false,
     scale: 0.5,
-    textXOffset: -4,
+    textXOffset: 0,
     textYOffset: 2,
     onClick: () => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
