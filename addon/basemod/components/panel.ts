@@ -8,6 +8,7 @@ import { Talents } from '../talents'
 import { Scroll } from './scroll'
 import { Section } from './section'
 import { Button } from './button'
+import { Counter } from './counter'
 
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
@@ -59,107 +60,26 @@ export const DevTools: Component = options => {
   ciButton.ref.SetPoint('CENTER')
 
   // set level
-  const level = Frame({
-    name: 'set-level-input',
-    parent: c,
+  const level = Counter({
+    name: 'set-level',
+    width: c.inner.GetWidth(),
+    initial: UnitLevel('player'),
+    onAccept: amount => {
+      SendChatMessage(`.char level ${amount}`)
+    },
+    onCancel: () => {},
   })
-  level.ref.SetBackdrop({
-    ...BASE_BACKDROP,
-  })
-  level.ref.SetBackdropColor(0, 0, 0, 1)
-  level.ref.SetHeight(30)
-  level.ref.SetWidth(c.inner.GetWidth() - 15)
   level.ref.SetPoint('TOPLEFT')
-
-  const input = Frame({
-    name: 'input',
-    width: level.ref.GetWidth() - 16,
-    height: level.ref.GetHeight(),
-    parent: level,
-  })
-  input.ref.SetPoint('CENTER')
-  const i = CreateFrame('EditBox', 'devtools-set-level', input.ref)
-  i.SetAllPoints(input.ref)
-  i.SetNumeric()
-  i.SetNumber(UnitLevel('player'))
-  i.SetPoint('CENTER')
-  i.SetAutoFocus(false)
-  i.SetFont('Fonts/FRIZQT__.TTF', 12)
-  i.ClearFocus()
-  i.SetScript('OnTextChanged', () => {
-  })
-  input.inner = i as any
-  c.ref.EnableMouse(true)
-  c.ref.SetScript('OnMouseDown', () => {
-    i.SetFocus()
-  })
-  // FIXME: counter buttons + debounced scroll
-  i.SetScript('OnTabPressed', () => {
-    const current = i.GetNumber()
-    i.SetNumber(current)
-    if (current > 99)
-      i.SetNumber(99)
-    if (current < 1)
-      i.SetNumber(1)
-    i.ClearFocus()
-    // FIXME
-    SendChatMessage(`.char level ${i.GetNumber()}`)
-  })
-  i.SetScript('OnSpacePressed', () => {
-    const current = i.GetNumber()
-    i.SetNumber(current)
-    if (current > 99)
-      i.SetNumber(99)
-    if (current < 1)
-      i.SetNumber(1)
-    i.ClearFocus()
-    // FIXME
-    SendChatMessage(`.char level ${i.GetNumber()}`)
-  })
-  i.SetScript('OnEnterPressed', () => {
-    const current = i.GetNumber()
-    i.SetNumber(current)
-    if (current > 99)
-      i.SetNumber(99)
-    if (current < 1)
-      i.SetNumber(1)
-    i.ClearFocus()
-    // FIXME
-    SendChatMessage(`.char level ${i.GetNumber()}`)
-  })
-  i.SetScript('OnEscapePressed', () => {
-    i.SetNumber(UnitLevel('player'))
-    i.ClearFocus()
-  })
-  const plus = Button({
-    name: 'devtools-set-level-up',
-    parent: input,
-    text: '+',
-    width: 30,
-    fontSize: 20,
-    isBordered: false,
-    scale: 0.5,
-    textXOffset: -2,
-    onClick: () => {
-      SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
-    },
-  })
-  const minus = Button({
-    name: 'devtools-set-level-down',
-    parent: input,
-    text: '-',
-    width: 30,
-    fontSize: 24,
-    isBordered: false,
-    scale: 0.5,
-    textXOffset: 0,
-    textYOffset: 2,
-    onClick: () => {
-      SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
-    },
-  })
-  plus.ref.SetPoint('TOPLEFT', i, 'TOPRIGHT', 15, 0)
-  minus.ref.SetPoint('BOTTOMLEFT', i, 'BOTTOMRIGHT', 15, 0)
+  // const current = i.GetNumber()
+  // i.SetNumber(current)
+  // if (current > 99)
+  //   i.SetNumber(99)
+  // if (current < 1)
+  //   i.SetNumber(1)
+  // i.ClearFocus()
+  // // FIXME
+  // SendChatMessage(`.char level ${i.GetNumber()}`)
+  // i.SetNumber(UnitLevel('player'))
 
   // FIXME test
   const bb = CreateFrame('EditBox', 'devtools-test', b.inner)
