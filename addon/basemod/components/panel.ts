@@ -61,7 +61,7 @@ export const DevTools: Component = options => {
 
   // set level
   const level = Counter({
-    name: 'set-level',
+    name: 'set-level-counter',
     parent: c,
     width: c.inner.GetWidth(),
     initial: UnitLevel('player'),
