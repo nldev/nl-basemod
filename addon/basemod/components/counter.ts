@@ -71,6 +71,22 @@ export const Counter: Component<CounterOptions> = options => {
       count = r
     i.SetNumber(count)
   }
+  const increment = () => {
+    const current = i.GetNumber() + 1
+    i.SetNumber(current)
+    count = current
+    options.onAccept(count, counter)
+  }
+  const decrement = () => {
+    const current = i.GetNumber() - 1
+    i.SetNumber(current)
+    count = current
+    options.onAccept(count, counter)
+  }
+  input.ref.EnableMouseWheel(true)
+  input.ref.SetScript('OnMouseWheel', (f, d) => {
+    console.log(d)
+  })
   i.SetScript('OnTabPressed', () => fn())
   i.SetScript('OnSpacePressed', () => fn())
   i.SetScript('OnEnterPressed', () => fn())
@@ -88,10 +104,7 @@ export const Counter: Component<CounterOptions> = options => {
     scale: 0.5,
     textXOffset: -2,
     onClick: () => {
-      const current = i.GetNumber() + 1
-      i.SetNumber(current)
-      count = current
-      options.onAccept(count, counter)
+      increment()
     },
   })
   const minus = Button({
@@ -105,10 +118,7 @@ export const Counter: Component<CounterOptions> = options => {
     textXOffset: 0,
     textYOffset: 2,
     onClick: () => {
-      const current = i.GetNumber() - 1
-      i.SetNumber(current)
-      count = current
-      options.onAccept(count, counter)
+      decrement()
     },
   })
   plus.ref.SetPoint('TOPLEFT', i, 'TOPRIGHT', 15, 0)
