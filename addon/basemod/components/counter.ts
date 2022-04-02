@@ -25,7 +25,7 @@ export const Counter: Component<CounterOptions> = options => {
   const counter = Frame({
     ...options,
     height: options.height || 30,
-  })
+  }) as Element<any, any>
   counter.ref.SetBackdrop({
     ...BASE_BACKDROP,
   })
@@ -58,7 +58,7 @@ export const Counter: Component<CounterOptions> = options => {
   counter.ref.SetScript('OnMouseDown', () => {
     i.SetFocus()
   })
-  const fn = () => {
+  const fn = (isDontTrigger?: boolean) => {
     i.ClearFocus()
     let current = i.GetNumber()
     if (!!options.max && (current > options.max))
@@ -105,7 +105,7 @@ export const Counter: Component<CounterOptions> = options => {
     textXOffset: 0,
     textYOffset: 2,
     onClick: () => {
-      const current = i.GetNumber() + 1
+      const current = i.GetNumber() - 1
       i.SetNumber(current)
       count = current
       options.onAccept(count, counter)

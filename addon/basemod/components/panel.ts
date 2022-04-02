@@ -68,17 +68,12 @@ export const DevTools: Component = options => {
     parent: c,
     width: c.inner.GetWidth(),
     initial: UnitLevel('player'),
-    onAccept: n => onLevelAccept(n),
     min: 1,
     max: 99,
+    onAccept: n => onLevelAccept(n),
     onCancel: () => {},
   })
   level.ref.RegisterEvent('PLAYER_LEVEL_UP')
-  level.ref.SetScript('OnEvent', (f, e) => {
-    if (e !== 'PLAYER_LEVEL_UP')
-      return
-    onLevelAccept(UnitLevel('player'))
-  })
   level.ref.SetPoint('TOPLEFT')
   // const current = i.GetNumber()
   // i.SetNumber(current)
