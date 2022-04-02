@@ -62,9 +62,9 @@ export const Counter: Component<CounterOptions> = options => {
     i.ClearFocus()
     let current = i.GetNumber()
     if (!!options.max && (current > options.max))
-      i.SetNumber(options.max)
+      current = options.max
     if (!!options.min && (current < options.min))
-      i.SetNumber(options.min)
+      current = options.min
     count = current
     const r = options.onAccept(count, counter)
     if (typeof r === 'number')
@@ -72,20 +72,28 @@ export const Counter: Component<CounterOptions> = options => {
     i.SetNumber(count)
   }
   const increment = () => {
-    const current = i.GetNumber() + 1
+    let current = i.GetNumber() + 1
     if (!!options.max && (current > options.max))
-      i.SetNumber(options.max)
+      current = options.max
     if (!!options.min && (current < options.min))
-      i.SetNumber(options.min)
-    i.SetNumber(current)
+      current = options.min
     count = current
-    options.onAccept(count, counter)
+    const r = options.onAccept(count, counter)
+    if (typeof r === 'number')
+      count = r
+    i.SetNumber(current)
   }
   const decrement = () => {
-    const current = i.GetNumber() - 1
-    i.SetNumber(current)
+    let current = i.GetNumber() - 1
+    if (!!options.max && (current > options.max))
+      current = options.max
+    if (!!options.min && (current < options.min))
+      current = options.min
     count = current
-    options.onAccept(count, counter)
+    const r = options.onAccept(count, counter)
+    if (typeof r === 'number')
+      count = r
+    i.SetNumber(current)
   }
   input.ref.EnableMouseWheel(true)
   input.ref.SetScript('OnMouseWheel', (_, d) => {
