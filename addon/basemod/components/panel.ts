@@ -138,11 +138,11 @@ export const DevTools: Component = options => {
     parent: input,
     text: '-',
     width: 30,
-    fontSize: 20,
+    fontSize: 24,
     isBordered: false,
     scale: 0.5,
-    textXOffset: -2,
-    textYOffset: -2,
+    textXOffset: -4,
+    textYOffset: 2,
     onClick: () => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
