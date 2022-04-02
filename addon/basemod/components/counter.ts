@@ -84,7 +84,7 @@ export const Counter: Component<CounterOptions> = options => {
     options.onAccept(count, counter)
   }
   input.ref.EnableMouseWheel(true)
-  input.ref.SetScript('OnMouseWheel', (f, d) => {
+  input.ref.SetScript('OnMouseWheel', (_, d) => {
     if (d > 1)
       increment()
     if (d < 1)
@@ -94,6 +94,7 @@ export const Counter: Component<CounterOptions> = options => {
   i.SetScript('OnSpacePressed', () => fn())
   i.SetScript('OnEnterPressed', () => fn())
   i.SetScript('OnEscapePressed', () => {
+    i.SetNumber(count)
     i.ClearFocus()
     options.onCancel(count, counter)
   })
