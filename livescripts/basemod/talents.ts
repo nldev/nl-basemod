@@ -49,7 +49,6 @@ function ApplyTalents(player: TSPlayer) {
   while (a.GetRow()) {
     const id = a.GetString(2)
     if (id) {
-      // FIXME: create a row if doesnt exist
       const b = QueryWorld(`
         select * from __talents where id = "${id}";
       `)
@@ -64,23 +63,22 @@ function ApplyTalents(player: TSPlayer) {
       }
     }
   }
-  const c = QueryWorld(`
-    select * from __talent_instances where playerGuid = ${playerGuid} and isActive = 0;
-  `)
-  while (c.GetRow()) {
-    const id = c.GetString(2)
-    if (id) {
-      // FIXME: create a row if doesnt exist
-      const d = QueryWorld(`
-        select * from __talents where id = "${id}";
-      `)
-      while (d.GetRow()) {
-        const spellId = d.GetUInt32(2)
-        player.RemoveSpell(spellId, false, false)
-        player.RemoveAura(spellId)
-      }
-    }
-  }
+  // const c = QueryWorld(`
+  //   select * from __talent_instances where playerGuid = ${playerGuid} and isActive = 0;
+  // `)
+  // while (c.GetRow()) {
+  //   const id = c.GetString(2)
+  //   if (id) {
+  //     const d = QueryWorld(`
+  //       select * from __talents where id = "${id}";
+  //     `)
+  //     while (d.GetRow()) {
+  //       const spellId = d.GetUInt32(2)
+  //       player.RemoveSpell(spellId, false, false)
+  //       player.RemoveAura(spellId)
+  //     }
+  //   }
+  // }
 }
 
 function HandleGetTalentInfo (events: TSEvents) {
@@ -319,6 +317,8 @@ function OnLogin (events: TSEvents) {
 function OnLevelup (events: TSEvents) {
   events.Player.OnLevelChanged((player, oldLevel) => {
     if (oldLevel > player.GetLevel()) {
+      player.SendBroadcastMessage(`old: ${oldLevel}`)
+      player.SendBroadcastMessage(`new: ${player.GetLevel()}`)
       ResetTalents(player)
     }
     SetTalents(player)
