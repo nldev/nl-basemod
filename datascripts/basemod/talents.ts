@@ -38,14 +38,14 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
   },
   setup: ($, config) => {
     // std.DBC.Talent.queryAll({}).forEach(t => t.delete())
-    // std.DBC.Talent.queryAll({}).forEach(talent => {
-    //   talent.PrereqRank.set([0, 0, 0, 0, 0, 0, 0, 0])
-    //   talent.Flags.set(0)
-    //   talent.RequiredSpellID.set(0)
-    //   talent.TierID.set(0)
-    //   talent.ColumnIndex.set(0)
-    //   talent.PrereqTalent.set([0, 0, 0, 0, 0, 0, 0, 0, 0])
-    // })
+    std.DBC.Talent.queryAll({}).forEach(talent => {
+      talent.PrereqRank.set([0, 0, 0, 0, 0, 0, 0, 0])
+      // talent.Flags.set(0)
+      talent.RequiredSpellID.set(0)
+      // talent.TierID.set(0)
+      // talent.ColumnIndex.set(0)
+      talent.PrereqTalent.set([0, 0, 0, 0, 0, 0, 0, 0, 0])
+    })
 
     $.Table({
       name: 'player_talents',

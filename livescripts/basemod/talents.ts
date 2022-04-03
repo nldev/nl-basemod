@@ -56,16 +56,11 @@ function ApplyTalents(player: TSPlayer) {
       let spellId = 0
       while (c.GetRow()) {
         spellId = c.GetUInt16(2)
-        if (player.HasSpell(spellId)) {
-          player.LearnSpell(spellId)
-          const info = GetSpellInfo(spellId)
-          if (!info.IsNull())
-            if ((64 & info.GetAttributes()) === 64)
-              player.AddAura(spellId, player)
-        } else {
-          player.RemoveSpell(spellId, false, false)
-          player.RemoveAura(spellId)
-        }
+        player.LearnSpell(spellId)
+        const info = GetSpellInfo(spellId)
+        if (!info.IsNull())
+          if ((64 & info.GetAttributes()) === 64)
+            player.AddAura(spellId, player)
       }
     }
   }
