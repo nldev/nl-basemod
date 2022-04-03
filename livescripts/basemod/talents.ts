@@ -56,29 +56,29 @@ function ApplyTalents(player: TSPlayer) {
       while (b.GetRow()) {
         spellId = b.GetUInt32(2)
         player.LearnSpell(spellId)
-        const info = GetSpellInfo(spellId)
-        if (!info.IsNull())
-          if ((64 & info.GetAttributes()) === 64)
-            player.AddAura(spellId, player)
+        // const info = GetSpellInfo(spellId)
+        // if (!info.IsNull())
+        //   if ((64 & info.GetAttributes()) === 64)
+        //     player.AddAura(spellId, player)
       }
     }
   }
-  // const c = QueryWorld(`
-  //   select * from __talent_instances where playerGuid = ${playerGuid} and isActive = 0;
-  // `)
-  // while (c.GetRow()) {
-  //   const id = c.GetString(2)
-  //   if (id) {
-  //     const d = QueryWorld(`
-  //       select * from __talents where id = "${id}";
-  //     `)
-  //     while (d.GetRow()) {
-  //       const spellId = d.GetUInt32(2)
-  //       player.RemoveSpell(spellId, false, false)
-  //       player.RemoveAura(spellId)
-  //     }
-  //   }
-  // }
+  const c = QueryWorld(`
+    select * from __talent_instances where playerGuid = ${playerGuid} and isActive = 0;
+  `)
+  while (c.GetRow()) {
+    const id = c.GetString(2)
+    if (id) {
+      const d = QueryWorld(`
+        select * from __talents where id = "${id}";
+      `)
+      while (d.GetRow()) {
+        const spellId = d.GetUInt32(2)
+        player.RemoveSpell(spellId, false, false)
+        player.RemoveAura(spellId)
+      }
+    }
+  }
 }
 
 function HandleGetTalentInfo (events: TSEvents) {
@@ -271,6 +271,7 @@ function HandleUnlearnTalent (events: TSEvents) {
 
 function HandleSetTalentPoints (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
+    sender.SendBroadcastMessage(`${message.get()}`)
     const opcode = Opcode('set-talent-points')
     const str = message.get()
     if (!str.includes(opcode))

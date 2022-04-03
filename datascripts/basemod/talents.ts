@@ -41,6 +41,7 @@ export const CreateTalent: Task<Talent, CreateTalentConfig> = {
     std.DBC.Talent.queryAll({}).forEach(talent => {
       talent.PrereqRank.set([0, 0, 0, 0, 0, 0, 0, 0])
       // talent.Flags.set(0)
+      talent.SpellRank.set([0, 0, 0, 0, 0, 0, 0, 0])
       talent.RequiredSpellID.set(0)
       talent.TierID.set(0)
       talent.ColumnIndex.set(0)
