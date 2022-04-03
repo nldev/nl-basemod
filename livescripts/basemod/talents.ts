@@ -51,16 +51,21 @@ function ApplyTalents(player: TSPlayer) {
     if (id) {
       // FIXME: create a row if doesnt exist
       const c = QueryWorld(`
-        select * from __talents where id = "${id}";
+        select * from __talents where id = "${id}" and isActive = 1;
       `)
       let spellId = 0
       while (c.GetRow()) {
         spellId = c.GetUInt16(2)
-        player.LearnSpell(spellId)
-        const info = GetSpellInfo(spellId)
-        if (!info.IsNull())
-          if ((64 & info.GetAttributes()) === 64)
-            player.AddAura(spellId, player)
+        if (player.HasSpell(spellId)) {
+          player.LearnSpell(spellId)
+          const info = GetSpellInfo(spellId)
+          if (!info.IsNull())
+            if ((64 & info.GetAttributes()) === 64)
+              player.AddAura(spellId, player)
+        } else {
+          player.RemoveSpell(spellId, false, false)
+          player.RemoveAura(spellId)
+        }
       }
     }
   }
