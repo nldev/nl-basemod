@@ -44,28 +44,40 @@ function ResetTalents(player: TSPlayer) {
 function ApplyTalents(player: TSPlayer) {
   const playerGuid = player.GetGUID()
   const a = QueryWorld(`
-    select * from __talent_instances where playerGuid = ${playerGuid};
+    select * from __talent_instances where playerGuid = ${playerGuid} and isActive = 1;
   `)
   while (a.GetRow()) {
     const id = a.GetString(2)
     if (id) {
       // FIXME: create a row if doesnt exist
-      const c = QueryWorld(`
-        select * from __talents where id = "${id}" and isActive = 1;
+      const b = QueryWorld(`
+        select * from __talents where id = "${id}";
       `)
       let spellId = 0
-      while (c.GetRow()) {
-        spellId = c.GetUInt16(2)
-        if (player.HasSpell(spellId)) {
-          player.LearnSpell(spellId)
-          const info = GetSpellInfo(spellId)
-          if (!info.IsNull())
-            if ((64 & info.GetAttributes()) === 64)
-              player.AddAura(spellId, player)
-        } else {
-          player.RemoveSpell(spellId, false, false)
-          player.RemoveAura(spellId)
-        }
+      while (b.GetRow()) {
+        spellId = b.GetUInt32(2)
+        player.LearnSpell(spellId)
+        const info = GetSpellInfo(spellId)
+        if (!info.IsNull())
+          if ((64 & info.GetAttributes()) === 64)
+            player.AddAura(spellId, player)
+      }
+    }
+  }
+  const c = QueryWorld(`
+    select * from __talent_instances where playerGuid = ${playerGuid} and isActive = 0;
+  `)
+  while (c.GetRow()) {
+    const id = c.GetString(2)
+    if (id) {
+      // FIXME: create a row if doesnt exist
+      const d = QueryWorld(`
+        select * from __talents where id = "${id}";
+      `)
+      while (d.GetRow()) {
+        const spellId = d.GetUInt32(2)
+        player.RemoveSpell(spellId, false, false)
+        player.RemoveAura(spellId)
       }
     }
   }
