@@ -26,7 +26,6 @@ export const Scroll: Component<ScrollOptions, any, ScrollFns> = options => {
 
 
   const ref = scrollframe.ref as WoWAPI.ScrollFrame
-  ref.SetVerticalScroll(-5)
 
   const scrollchild = Frame({
     name: `${options.name}-scrollchild`,
