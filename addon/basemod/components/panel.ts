@@ -84,6 +84,7 @@ export const DevTools: Component = options => {
     name: 'test',
     parent: c,
   })
+  test.ref.SetPoint('TOPLEFT')
 }
 
 export interface PanelOptions extends ComponentOptions {
