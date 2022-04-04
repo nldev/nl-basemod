@@ -76,51 +76,6 @@ export const DevTools: Component = options => {
   })
   level.ref.RegisterEvent('PLAYER_LEVEL_UP')
   level.ref.SetPoint('TOPLEFT')
-  // const current = i.GetNumber()
-  // i.SetNumber(current)
-  // if (current > 99)
-  //   i.SetNumber(99)
-  // if (current < 1)
-  //   i.SetNumber(1)
-  // i.ClearFocus()
-  // // FIXME
-  // SendChatMessage(`.char level ${i.GetNumber()}`)
-  // i.SetNumber(UnitLevel('player'))
-
-  // FIXME test
-  const s = Scroll({ name: 'devtools-test-scroll', height: b.inner.GetHeight() - 10, scrollHeight: 50, parent: b })
-  const bb = CreateFrame('EditBox', 'devtools-test', s.inner)
-  bb.SetPoint('TOPLEFT')
-  bb.SetWidth(s.inner.GetWidth() - 10)
-  bb.SetHeight(s.inner.GetHeight())
-  // level.SetBackdrop(BASE_BACKDROP)
-  bb.SetFont('Fonts/FRIZQT__.TTF', 12)
-  bb.SetAutoFocus(false)
-  bb.SetMultiLine(true)
-  bb.ClearFocus()
-  bb.SetJustifyH('LEFT')
-  b.ref.EnableMouse(true)
-  b.ref.SetScript('OnMouseDown', () => {
-    bb.SetFocus()
-  })
-  bb.SetScript('OnTextChanged', () => {
-    s.fns.Height(bb.GetHeight())
-    s.fns.Bottom()
-  })
-  bb.SetScript('OnTabPressed', () => {
-    bb.ClearFocus()
-  })
-  bb.SetScript('OnEnterPressed', () => {
-    const text = bb.GetText()
-    console.log(text)
-    bb.ClearFocus()
-  })
-  bb.SetScript('OnEscapePressed', () => {
-    bb.ClearFocus()
-  })
-  bb.Insert('test')
-  bb.SetPoint('TOPLEFT')
-  // bb.SetMaxLetters(138)
 
   return f
 }
