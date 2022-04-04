@@ -105,6 +105,7 @@ export const DevTools: Component = options => {
   })
   bb.SetScript('OnTextChanged', () => {
     s.fns.Height(bb.GetHeight())
+    s.fns.Bottom()
   })
   bb.SetScript('OnTabPressed', () => {
     bb.ClearFocus()

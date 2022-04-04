@@ -7,7 +7,8 @@ export interface ScrollOptions extends ComponentOptions {
 }
 
 export interface ScrollFns {
-  Height: (amount: number) => void
+  Height: (amount: number) => void,
+  Bottom: () => void,
 }
 
 export const Scroll: Component<ScrollOptions, any, ScrollFns> = options => {
@@ -23,7 +24,9 @@ export const Scroll: Component<ScrollOptions, any, ScrollFns> = options => {
     parent: a,
   })
 
+
   const ref = scrollframe.ref as WoWAPI.ScrollFrame
+  ref.SetVerticalScroll(-5)
 
   const scrollchild = Frame({
     name: `${options.name}-scrollchild`,
@@ -46,7 +49,6 @@ export const Scroll: Component<ScrollOptions, any, ScrollFns> = options => {
   scrollbar.SetPoint('TOP', scrollupbutton, 'BOTTOM', 0, -2)
   scrollbar.SetPoint('BOTTOM', scrolldownbutton, 'TOP', 0, 2)
 
-  // frame.SetSize(frame.GetWidth() * 0.667, frame.GetHeight() * 0.667)
   frame.SetPoint('CENTER')
 
   ref.SetScrollChild(scrollchild)
@@ -64,7 +66,10 @@ export const Scroll: Component<ScrollOptions, any, ScrollFns> = options => {
     Height: (amount: number) => {
       scrollchild.SetHeight(amount)
       moduleoptions.SetHeight(amount)
-    }
+    },
+    Bottom: () => {
+      ref.SetVerticalScroll(ref.GetVerticalScrollRange())
+    },
   }
 
   a.inner = moduleoptions
