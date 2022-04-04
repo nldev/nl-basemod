@@ -18,11 +18,12 @@ export interface TextareaOptions extends ComponentOptions {
 }
 
 export const Textarea: Component<TextareaOptions> = options => {
-  const a = Frame({ ...options })
-  a.ref.SetSize(options.parent.inner.GetWidth(), options.parent.inner.GetHeight())
-  a.ref.SetPoint('LEFT')
-  a.ref.SetBackdrop(BASE_BACKDROP)
-  const s = Scroll({ name: `${options.name}-scroll`, height: a.inner.GetHeight() - 10, scrollHeight: 50, parent: a })
+  // console.log(options.parent.name)
+  // const a = Frame({ ...options })
+  // a.ref.SetSize(options.parent.inner.GetWidth(), 100)
+  // a.ref.SetPoint('TOPLEFT')
+  // a.ref.SetBackdrop(BASE_BACKDROP)
+  const s = Scroll({ name: options.name, scrollHeight: 50, parent: options.parent })
   const e = CreateFrame('EditBox', `${options.name}-inner`, s.inner)
   e.SetPoint('TOPLEFT')
   e.SetWidth(s.inner.GetWidth() - 10)
@@ -33,8 +34,8 @@ export const Textarea: Component<TextareaOptions> = options => {
   e.SetMultiLine(true)
   e.ClearFocus()
   e.SetJustifyH('LEFT')
-  a.ref.EnableMouse(true)
-  a.ref.SetScript('OnMouseDown', () => {
+  s.ref.EnableMouse(true)
+  s.ref.SetScript('OnMouseDown', () => {
     e.SetFocus()
   })
   e.SetScript('OnTextChanged', () => {
@@ -65,5 +66,5 @@ export const Textarea: Component<TextareaOptions> = options => {
   e.SetPoint('TOPLEFT')
   // bb.SetMaxLetters(138)
 
-  return a
+  return s as any
 }
