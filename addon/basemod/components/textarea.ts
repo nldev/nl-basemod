@@ -19,6 +19,7 @@ export interface TextareaOptions extends ComponentOptions {
 
 export const Textarea: Component<TextareaOptions> = options => {
   const a = Frame({ ...options })
+  a.ref.SetAllPoints(options.parent.ref)
   const s = Scroll({ name: `${options.name}-scroll`, height: a.inner.GetHeight() - 10, scrollHeight: 50, parent: a })
   const b = CreateFrame('EditBox', `${options.name}-inner`, s.inner)
   b.SetPoint('TOPLEFT')

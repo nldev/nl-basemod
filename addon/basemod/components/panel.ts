@@ -9,6 +9,7 @@ import { Scroll } from './scroll'
 import { Section } from './section'
 import { Button } from './button'
 import { Counter } from './counter'
+import { Textarea } from './textarea'
 
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
@@ -18,29 +19,28 @@ export const DevTools: Component = options => {
   const scroll = Scroll({ name: 'devtools-scroll', parent: f, height: 300 })
 
   const a = Section({
-    name: 'a-sect',
-    title: 'a section',
+    name: 'tools',
+    title: 'Tools',
     parent: scroll,
     height: 50,
-    // bg: true,
   })
 
   const b = Section({
-    name: 'b-sect',
-    title: 'b section',
-    parent: scroll,
-    previous: a,
-    height: 100,
-    bg: true,
-  })
-
-  const c = Section({
     name: 'set-level',
     title: 'set level',
     parent: scroll,
-    previous: b,
+    previous: a,
     height: 30,
   })
+
+  const c = Section({
+    name: 'c-sect',
+    title: 'c section',
+    parent: scroll,
+    previous: b,
+    height: 100,
+  })
+
 
   // reset bags
   const ci = Frame({ name: 'devtools-reset-bags', parent: a })
@@ -78,6 +78,12 @@ export const DevTools: Component = options => {
   level.ref.SetPoint('TOPLEFT')
 
   return f
+
+  // test
+  const test = Textarea({
+    name: 'test',
+    parent: c,
+  })
 }
 
 export interface PanelOptions extends ComponentOptions {
