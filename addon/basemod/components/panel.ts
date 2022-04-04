@@ -90,7 +90,7 @@ export const DevTools: Component = options => {
   // FIXME test
   const bb = CreateFrame('EditBox', 'devtools-test', b.inner)
   bb.SetWidth(b.inner.GetWidth() - 10)
-  bb.SetHeight(b.inner.GetHeight() - 10)
+  // bb.SetHeight(b.inner.GetHeight() - 10)
   // level.SetBackdrop(BASE_BACKDROP)
   bb.SetFont('Fonts/FRIZQT__.TTF', 12)
   bb.SetAutoFocus(false)
@@ -100,6 +100,9 @@ export const DevTools: Component = options => {
   b.ref.EnableMouse(true)
   b.ref.SetScript('OnMouseDown', () => {
     bb.SetFocus()
+  })
+  bb.SetScript('OnTextChanged', () => {
+    console.log(bb.GetHeight())
   })
   bb.SetScript('OnTabPressed', () => {
     bb.ClearFocus()
@@ -114,7 +117,7 @@ export const DevTools: Component = options => {
   })
   bb.Insert('test')
   bb.SetPoint('TOPLEFT')
-  bb.SetMaxLetters(138)
+  // bb.SetMaxLetters(138)
 
   return f
 }
