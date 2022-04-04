@@ -90,8 +90,9 @@ export const DevTools: Component = options => {
   // FIXME test
   const s = Scroll({ name: 'devtools-test-scroll', height: b.inner.GetHeight() - 10, scrollHeight: 50, parent: b })
   const bb = CreateFrame('EditBox', 'devtools-test', s.inner)
-  bb.SetAllPoints(s.inner)
-  // bb.SetHeight(b.inner.GetHeight() - 10)
+  bb.SetPoint('TOPLEFT')
+  bb.SetWidth(s.inner.GetWidth() - 10)
+  bb.SetHeight(s.inner.GetHeight())
   // level.SetBackdrop(BASE_BACKDROP)
   bb.SetFont('Fonts/FRIZQT__.TTF', 12)
   bb.SetAutoFocus(false)
