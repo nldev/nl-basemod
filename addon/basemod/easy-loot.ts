@@ -296,10 +296,11 @@ export const EasyLoot: Component<LootOptions, LootState, LootFns> = () => {
       timer,
       mechanic,
     })
+
+    scroll.fns.Bottom()
   })
 
   padding.ref.Hide()
-
   padding.ref.SetScale(0.8)
 
   return padding
