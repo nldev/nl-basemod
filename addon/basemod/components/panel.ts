@@ -79,11 +79,11 @@ export const DevTools: Component = options => {
   return f
 
   // test
+  console.log('hello world')
   const test = Textarea({
     name: 'test',
     parent: c,
   })
-  console.log('hello world')
 }
 
 export interface PanelOptions extends ComponentOptions {
