@@ -30,7 +30,7 @@ export const DevTools: Component = options => {
     title: 'set level',
     parent: scroll,
     previous: a,
-    height: 30,
+    height: 50,
   })
 
   const c = Section({
@@ -66,8 +66,8 @@ export const DevTools: Component = options => {
   }
   const level = Counter({
     name: 'set-level-counter',
-    parent: c,
-    width: c.inner.GetWidth(),
+    parent: b,
+    width: b.inner.GetWidth(),
     initial: UnitLevel('player'),
     min: 1,
     max: 99,
