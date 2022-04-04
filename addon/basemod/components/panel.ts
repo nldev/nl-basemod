@@ -41,7 +41,6 @@ export const DevTools: Component = options => {
     height: 100,
   })
 
-
   // reset bags
   const ci = Frame({ name: 'devtools-reset-bags', parent: a })
   ci.ref.SetPoint('TOPLEFT')
@@ -84,7 +83,7 @@ export const DevTools: Component = options => {
     name: 'test',
     parent: c,
   })
-  test.ref.SetPoint('TOPLEFT')
+  console.log('hello world')
 }
 
 export interface PanelOptions extends ComponentOptions {
