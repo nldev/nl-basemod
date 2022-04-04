@@ -88,8 +88,9 @@ export const DevTools: Component = options => {
   // i.SetNumber(UnitLevel('player'))
 
   // FIXME test
-  const bb = CreateFrame('EditBox', 'devtools-test', b.inner)
-  bb.SetWidth(b.inner.GetWidth() - 10)
+  const s = Scroll({ name: 'devtools-test-scroll', height: b.inner.GetHeight() - 10, scrollHeight: 50, parent: b })
+  const bb = CreateFrame('EditBox', 'devtools-test', s.inner)
+  bb.SetAllPoints(s.inner)
   // bb.SetHeight(b.inner.GetHeight() - 10)
   // level.SetBackdrop(BASE_BACKDROP)
   bb.SetFont('Fonts/FRIZQT__.TTF', 12)
@@ -102,7 +103,7 @@ export const DevTools: Component = options => {
     bb.SetFocus()
   })
   bb.SetScript('OnTextChanged', () => {
-    console.log(bb.GetHeight())
+    s.fns.Height(bb.GetHeight())
   })
   bb.SetScript('OnTabPressed', () => {
     bb.ClearFocus()
