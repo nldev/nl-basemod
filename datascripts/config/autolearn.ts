@@ -86,6 +86,12 @@ export const AUTOLEARN: Templates<Autolearn> = {
       },
     },
     {
+      id: 'glyph-of-safe-fall',
+      spellId: 58033,
+      level: 1,
+      class: ['ROGUE'],
+    }
+    {
       id: 'disarm-trap',
       data: {
         spellId: 1842,
