@@ -35,7 +35,7 @@ export const DevTools: Component = options => {
 
   const c = Section({
     name: 'c-sect',
-    title: 'C Section',
+    title: 'Note',
     parent: scroll,
     previous: b,
     height: 150,
