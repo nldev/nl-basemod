@@ -64,6 +64,7 @@ export const Textarea: Component<TextareaOptions> = options => {
   })
   e.SetScript('OnEscapePressed', () => {
     e.ClearFocus()
+    e.SetText(text)
     if (options.onCancel)
       options.onCancel(text)
   })
