@@ -79,6 +79,18 @@ export const DevTools: Component = options => {
   })
   grid.fns.Attach(revive)
 
+  // reset cooldowns
+  const resetCooldowns = Button({
+    name: 'devtools-reset-cooldowns',
+    text: 'Reset Cooldowns',
+    width: 130,
+    onClick: () => {
+      // SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
+      SendChatMessage(`.cooldown`)
+    },
+  })
+  grid.fns.Attach(revive)
+
   // set level
   const onLevelAccept = (num: number) => {
     if (num !== UnitLevel('player'))
