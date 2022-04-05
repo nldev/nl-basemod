@@ -52,9 +52,9 @@ export const DevTools: Component = options => {
   })
 
   // utils
-  const grid = Grid({ name: 'devtools-utils-grid', parent: a, rowHeight: 35, itemsPerRow: 2 })
+  const grid = Grid({ name: 'devtools-utils-grid', parent: a, rowHeight: 40, itemsPerRow: 2 })
   grid.ref.SetSize(a.inner.GetWidth(), a.inner.GetHeight())
-  grid.ref.SetPoint('TOPLEFT', -3, 0)
+  grid.ref.SetPoint('TOPLEFT', -2, 0)
 
   // reset bags
   const clearInventory = Button({
