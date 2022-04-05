@@ -12,12 +12,14 @@ import { Rgb } from '../types'
 import { rgb } from '../utils'
 
 export interface TextareaOptions extends ComponentOptions {
-  OnUpdate?: (text: string) => void
-  OnChange?: (text: string) => void
-  OnCancel?: (text: string) => void
+  initial?: string
+  onUpdate?: (text: string) => void
+  onChange?: (text: string) => void
+  onCancel?: (text: string) => void
 }
 
 export const Textarea: Component<TextareaOptions> = options => {
+  let text = options.initial || ''
   const a = Frame({ ...options })
   a.ref.SetPoint('TOPLEFT')
   a.ref.SetWidth(options.parent.inner.GetWidth())
@@ -44,27 +46,26 @@ export const Textarea: Component<TextareaOptions> = options => {
   })
   e.SetScript('OnTextChanged', () => {
     s.fns.Height(e.GetHeight())
-    const text = e.GetText()
-    if (options.OnChange)
-      options.OnChange(text)
+    text = e.GetText()
+    if (options.onChange)
+      options.onChange(text)
   })
   e.SetScript('OnTabPressed', () => {
     e.ClearFocus()
-    const text = e.GetText()
-    if (options.OnUpdate)
-      options.OnUpdate(text)
+    text = e.GetText()
+    if (options.onUpdate)
+      options.onUpdate(text)
   })
   e.SetScript('OnEnterPressed', () => {
-    const text = e.GetText()
-    if (options.OnUpdate)
-      options.OnUpdate(text)
+    text = e.GetText()
+    if (options.onUpdate)
+      options.onUpdate(text)
     e.ClearFocus()
   })
   e.SetScript('OnEscapePressed', () => {
     e.ClearFocus()
-    const text = e.GetText()
-    if (options.OnCancel)
-      options.OnCancel(text)
+    if (options.onCancel)
+      options.onCancel(text)
   })
   e.Insert('test')
   e.SetPoint('TOPLEFT')
