@@ -73,6 +73,16 @@ export const DevTools: Component = options => {
   grid.ref.SetSize(b.inner.GetWidth(), b.inner.GetHeight())
   grid.ref.SetPoint('TOPLEFT', -2, 0)
 
+  // recall
+  const recall = Button({
+    name: 'devtools-recall',
+    text: 'Recall',
+    width: 130,
+    onClick: () => {
+    },
+  })
+  grid.fns.Attach(recall)
+
   // reset bags
   const clearInventory = Button({
     name: 'devtools-clear-inventory',
@@ -120,16 +130,6 @@ export const DevTools: Component = options => {
   })
   grid.fns.Attach(resetCooldowns)
 
-  // home
-  const recall = Button({
-    name: 'devtools-recall',
-    text: 'Recall',
-    width: 130,
-    onClick: () => {
-    },
-  })
-  grid.fns.Attach(recall)
-
   // flight
   const flight = Button({
     name: 'devtools-toggle-flight',
@@ -150,7 +150,7 @@ export const DevTools: Component = options => {
   })
   grid.fns.Attach(speed)
 
-  // god-mode
+  // god mode
   const godMode = Button({
     name: 'devtools-toggle-god-mode',
     text: 'God Mode On',
