@@ -40,6 +40,7 @@ export const Textarea: Component<TextareaOptions> = options => {
   e.SetMultiLine(true)
   e.ClearFocus()
   e.SetJustifyH('LEFT')
+  e.SetText(text)
   s.ref.EnableMouse(true)
   s.ref.SetScript('OnMouseDown', () => {
     e.SetFocus()
