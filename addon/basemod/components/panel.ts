@@ -53,23 +53,16 @@ export const DevTools: Component = options => {
 
   // reset bags
   const grid = Grid({ name: 'devtools-utils-grid', parent: a, rowHeight: 35, itemsPerRow: 2 })
-  const ci = Frame({ name: 'devtools-reset-bags', parent: grid })
-  ci.ref.SetPoint('TOPLEFT')
-  ci.ref.SetSize(120, 30)
-  grid.ref.SetAllPoints(a.inner)
-  grid.fns.Attach(ci)
-
-  const ciButton = Button({
-    name: 'devtools-reset-bags-button',
-    parent: ci,
+  const clearInventory = Button({
+    name: 'devtools-clear-inventory',
     text: 'Clear Inventory',
     width: 120,
     onClick: () => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
   })
-
-  ciButton.ref.SetPoint('CENTER')
+  grid.ref.SetAllPoints(a.inner)
+  grid.fns.Attach(clearInventory)
 
   // set level
   const onLevelAccept = (num: number) => {
