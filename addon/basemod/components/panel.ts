@@ -20,14 +20,14 @@ export const DevTools: Component = options => {
 
   const a = Section({
     name: 'tools',
-    title: 'Tools',
+    title: 'Utilities',
     parent: scroll,
     height: 50,
   })
 
   const b = Section({
     name: 'set-level',
-    title: 'set level',
+    title: 'Set Level',
     parent: scroll,
     previous: a,
     height: 50,
@@ -35,10 +35,10 @@ export const DevTools: Component = options => {
 
   const c = Section({
     name: 'c-sect',
-    title: 'c section',
+    title: 'C Section',
     parent: scroll,
     previous: b,
-    height: 100,
+    height: 150,
   })
 
   // reset bags
