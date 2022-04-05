@@ -56,6 +56,7 @@ export const DevTools: Component = options => {
   const ci = Frame({ name: 'devtools-reset-bags', parent: grid })
   ci.ref.SetPoint('TOPLEFT')
   ci.ref.SetSize(120, 30)
+  grid.ref.SetAllPoints(a.inner)
   grid.fns.Attach(ci)
 
   const ciButton = Button({
