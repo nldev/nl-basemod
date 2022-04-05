@@ -60,7 +60,7 @@ export const DevTools: Component = options => {
   const clearInventory = Button({
     name: 'devtools-clear-inventory',
     text: 'Clear Inventory',
-    width: 128,
+    width: 130,
     onClick: () => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
@@ -71,7 +71,7 @@ export const DevTools: Component = options => {
   const revive = Button({
     name: 'devtools-revive',
     text: 'Revive',
-    width: 128,
+    width: 130,
     onClick: () => {
       // SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
       SendChatMessage(`.revive`)
