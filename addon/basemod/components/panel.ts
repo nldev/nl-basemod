@@ -11,6 +11,7 @@ import { Button } from './button'
 import { Counter } from './counter'
 import { Textarea } from './textarea'
 import { Input } from './input'
+import { Grid } from './grid'
 
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
@@ -51,9 +52,11 @@ export const DevTools: Component = options => {
   })
 
   // reset bags
-  const ci = Frame({ name: 'devtools-reset-bags', parent: a })
+  const grid = Grid({ name: 'devtools-utils-grid', parent: a, rowHeight: 35, itemsPerRow: 2 })
+  const ci = Frame({ name: 'devtools-reset-bags', parent: grid })
   ci.ref.SetPoint('TOPLEFT')
   ci.ref.SetSize(120, 30)
+  grid.fns.Attach(ci)
 
   const ciButton = Button({
     name: 'devtools-reset-bags-button',
