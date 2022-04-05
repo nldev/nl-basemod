@@ -32,7 +32,7 @@ export const DevTools: Component = options => {
     title: 'Utilities',
     parent: scroll,
     previous: a,
-    height: 90,
+    height: 170,
   })
 
   const c = Section({
@@ -166,6 +166,7 @@ export const DevTools: Component = options => {
     parent: c,
     initial: 'textarea',
   })
+  test.ref.SetPoint('TOPLEFT')
 
   // input
   const input = Input({
