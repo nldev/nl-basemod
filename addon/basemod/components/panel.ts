@@ -32,7 +32,7 @@ export const DevTools: Component = options => {
     title: 'Set Level',
     parent: scroll,
     previous: a,
-    height: 50,
+    height: 100,
   })
 
   const c = Section({
