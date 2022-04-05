@@ -37,18 +37,10 @@ export const DevTools: Component = options => {
 
   const c = Section({
     name: 'c-sect',
-    title: 'Section 1',
+    title: 'Note',
     parent: scroll,
     previous: b,
     height: 150,
-  })
-
-  const d = Section({
-    name: 'd-sect',
-    title: 'Section 2',
-    parent: scroll,
-    previous: c,
-    height: 50,
   })
 
   // set level
@@ -162,7 +154,7 @@ export const DevTools: Component = options => {
 
   // note
   const $ = Get()
-  const test = Textarea({
+  const note = Textarea({
     name: 'devtools-note',
     parent: c,
     initial: $.store.Get('CHARACTER', 'devtools-note'),
@@ -170,15 +162,7 @@ export const DevTools: Component = options => {
       $.store.Set('CHARACTER', 'devtools-note', note)
     }
   })
-  test.ref.SetPoint('TOPLEFT')
-
-  // input
-  const input = Input({
-    name: 'test-input',
-    parent: d,
-    initial: 'input',
-  })
-  input.ref.SetPoint('TOPLEFT')
+  note.ref.SetPoint('TOPLEFT')
 
   return f
 }
