@@ -89,7 +89,7 @@ export const DevTools: Component = options => {
       SendChatMessage(`.cooldown`)
     },
   })
-  grid.fns.Attach(revive)
+  grid.fns.Attach(resetCooldowns)
 
   // set level
   const onLevelAccept = (num: number) => {
