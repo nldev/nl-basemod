@@ -37,7 +37,7 @@ export const GridItem: Component<GridItemOptions> = options => {
   frame.ref.SetSize(options.width, options.height)
 
   options.item.ref.SetParent(frame.ref)
-  options.item.ref.SetPoint('TOPLEFT')
+  options.item.ref.SetPoint('CENTER')
 
   return frame
 }

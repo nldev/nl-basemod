@@ -61,7 +61,8 @@ export const DevTools: Component = options => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
   })
-  grid.ref.SetAllPoints(a.inner)
+  grid.ref.SetSize(a.inner.GetWidth(), a.inner.GetHeight())
+  grid.ref.SetPoint('TOPLEFT', -5, 0)
   grid.fns.Attach(clearInventory)
 
   // set level
