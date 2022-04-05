@@ -89,12 +89,14 @@ export const DevTools: Component = options => {
   const test = Textarea({
     name: 'test-textarea',
     parent: c,
+    initial: 'textarea',
   })
 
   // input
   const input = Input({
     name: 'test-input',
     parent: d,
+    initial: 'input',
   })
   input.ref.SetPoint('TOPLEFT')
 

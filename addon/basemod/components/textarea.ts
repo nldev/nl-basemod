@@ -16,6 +16,7 @@ export interface TextareaOptions extends ComponentOptions {
   onUpdate?: (text: string) => void
   onChange?: (text: string) => void
   onCancel?: (text: string) => void
+  // FIXME: min/max
 }
 
 export const Textarea: Component<TextareaOptions> = options => {
@@ -34,7 +35,6 @@ export const Textarea: Component<TextareaOptions> = options => {
   e.SetPoint('TOPLEFT')
   e.SetWidth(s.inner.GetWidth() - 10)
   e.SetHeight(s.inner.GetHeight())
-  // level.SetBackdrop(BASE_BACKDROP)
   e.SetFont('Fonts/FRIZQT__.TTF', 12)
   e.SetAutoFocus(false)
   e.SetMultiLine(true)
@@ -67,9 +67,7 @@ export const Textarea: Component<TextareaOptions> = options => {
     if (options.onCancel)
       options.onCancel(text)
   })
-  e.Insert('test')
   e.SetPoint('TOPLEFT')
-  // bb.SetMaxLetters(138)
 
   return s as any
 }
