@@ -160,11 +160,15 @@ export const DevTools: Component = options => {
   })
   grid.fns.Attach(godMode)
 
-  // textarea
+  // note
+  const $ = Get()
   const test = Textarea({
-    name: 'test-textarea',
+    name: 'devtools-note',
     parent: c,
-    initial: 'textarea',
+    initial: $.store.Get('CHARACTER', 'devtools-note'),
+    onAccept: note => {
+      $.store.Set('CHARACTER', 'devtools-note', note)
+    }
   })
   test.ref.SetPoint('TOPLEFT')
 
