@@ -24,7 +24,7 @@ export const DevTools: Component = options => {
     name: 'set-level',
     title: 'Set Level',
     parent: scroll,
-    height: 90,
+    height: 50,
   })
 
   const b = Section({
@@ -32,7 +32,7 @@ export const DevTools: Component = options => {
     title: 'Utilities',
     parent: scroll,
     previous: a,
-    height: 50,
+    height: 90,
   })
 
   const c = Section({
