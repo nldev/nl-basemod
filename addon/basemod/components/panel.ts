@@ -38,6 +38,7 @@ export const DevTools: Component = options => {
     title: 'c section',
     parent: scroll,
     previous: b,
+    bg: true,
     height: 100,
   })
 
