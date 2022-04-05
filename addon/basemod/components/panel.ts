@@ -54,13 +54,13 @@ export const DevTools: Component = options => {
   // utils
   const grid = Grid({ name: 'devtools-utils-grid', parent: a, rowHeight: 35, itemsPerRow: 2 })
   grid.ref.SetSize(a.inner.GetWidth(), a.inner.GetHeight())
-  grid.ref.SetPoint('TOPLEFT', 0, 0)
+  grid.ref.SetPoint('TOPLEFT', -7, 0)
 
   // reset bags
   const clearInventory = Button({
     name: 'devtools-clear-inventory',
     text: 'Clear Inventory',
-    width: 120,
+    width: 140,
     onClick: () => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
@@ -71,7 +71,7 @@ export const DevTools: Component = options => {
   const revive = Button({
     name: 'devtools-revive',
     text: 'Revive',
-    width: 120,
+    width: 140,
     onClick: () => {
       // SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
       SendChatMessage(`.revive`)
