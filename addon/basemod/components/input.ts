@@ -53,7 +53,6 @@ export const Input: Component<InputOptions> = options => {
   }
   inner.ref.EnableMouseWheel(true)
   e.SetScript('OnTabPressed', () => fn())
-  // e.SetScript('OnSpacePressed', () => fn())
   e.SetScript('OnEnterPressed', () => fn())
   e.SetScript('OnEscapePressed', () => {
     e.SetText(text)
