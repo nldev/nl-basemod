@@ -48,6 +48,8 @@ export const Input: Component<InputOptions> = options => {
   const fn = () => {
     text = e.GetText()
     e.ClearFocus()
+    if (options.onAccept)
+      options.onAccept(text, input)
   }
   inner.ref.EnableMouseWheel(true)
   e.SetScript('OnTabPressed', () => fn())
@@ -56,7 +58,8 @@ export const Input: Component<InputOptions> = options => {
   e.SetScript('OnEscapePressed', () => {
     e.SetText(text)
     e.ClearFocus()
-    options.onCancel(text, input)
+    if (options.onCancel)
+      options.onCancel(text, input)
   })
 
   return input
