@@ -51,6 +51,23 @@ export const DevTools: Component = options => {
     height: 50,
   })
 
+  // set level
+  const onLevelAccept = (num: number) => {
+    if (num !== UnitLevel('player'))
+    SendChatMessage(`.char level ${num}`)
+  }
+  const level = Counter({
+    name: 'set-level-counter',
+    parent: a,
+    initial: UnitLevel('player'),
+    min: 1,
+    max: 99,
+    onAccept: n => onLevelAccept(n),
+    onCancel: () => {},
+  })
+  level.ref.RegisterEvent('PLAYER_LEVEL_UP')
+  level.ref.SetPoint('TOPLEFT')
+
   // utils
   const grid = Grid({ name: 'devtools-utils-grid', parent: a, rowHeight: 35, itemsPerRow: 2 })
   grid.ref.SetSize(a.inner.GetWidth(), a.inner.GetHeight())
@@ -90,23 +107,6 @@ export const DevTools: Component = options => {
     },
   })
   grid.fns.Attach(resetCooldowns)
-
-  // set level
-  const onLevelAccept = (num: number) => {
-    if (num !== UnitLevel('player'))
-    SendChatMessage(`.char level ${num}`)
-  }
-  const level = Counter({
-    name: 'set-level-counter',
-    parent: b,
-    initial: UnitLevel('player'),
-    min: 1,
-    max: 99,
-    onAccept: n => onLevelAccept(n),
-    onCancel: () => {},
-  })
-  level.ref.RegisterEvent('PLAYER_LEVEL_UP')
-  level.ref.SetPoint('TOPLEFT')
 
   // textarea
   const test = Textarea({
