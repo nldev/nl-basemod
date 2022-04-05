@@ -35,13 +35,13 @@ export const DevTools: Component = options => {
     height: 160,
   })
 
-  const c = Section({
-    name: 'c-sect',
-    title: 'Notes',
-    parent: scroll,
-    previous: b,
-    height: 150,
-  })
+  // const c = Section({
+  //   name: 'c-sect',
+  //   title: 'Notes',
+  //   parent: scroll,
+  //   previous: b,
+  //   height: 150,
+  // })
 
   // set level
   const onLevelAccept = (num: number) => {
@@ -153,17 +153,17 @@ export const DevTools: Component = options => {
   grid.fns.Attach(godMode)
 
   // note
-  const $ = Get()
-  const note = Textarea({
-    name: 'devtools-note',
-    parent: c,
-    initial: $.store.Get('CHARACTER', 'devtools-note'),
-    onAccept: note => {
-      console.log(note)
-      $.store.Set('CHARACTER', 'devtools-note', note)
-    },
-  })
-  note.ref.SetPoint('TOPLEFT')
+  // const $ = Get()
+  // const note = Textarea({
+  //   name: 'devtools-note',
+  //   parent: c,
+  //   initial: $.store.Get('CHARACTER', 'devtools-note'),
+  //   onAccept: note => {
+  //     console.log(note)
+  //     $.store.Set('CHARACTER', 'devtools-note', note)
+  //   },
+  // })
+  // note.ref.SetPoint('TOPLEFT')
 
   return f
 }
