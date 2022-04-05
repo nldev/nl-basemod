@@ -24,7 +24,7 @@ export const DevTools: Component = options => {
     name: 'set-level',
     title: 'Set Level',
     parent: scroll,
-    height: 50,
+    height: 90,
   })
 
   const b = Section({
@@ -32,7 +32,7 @@ export const DevTools: Component = options => {
     title: 'Utilities',
     parent: scroll,
     previous: a,
-    height: 100,
+    height: 50,
   })
 
   const c = Section({
@@ -52,7 +52,7 @@ export const DevTools: Component = options => {
   })
 
   // utils
-  const grid = Grid({ name: 'devtools-utils-grid', parent: a, rowHeight: 40, itemsPerRow: 2 })
+  const grid = Grid({ name: 'devtools-utils-grid', parent: a, rowHeight: 35, itemsPerRow: 2 })
   grid.ref.SetSize(a.inner.GetWidth(), a.inner.GetHeight())
   grid.ref.SetPoint('TOPLEFT', -2, 0)
 
