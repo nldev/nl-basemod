@@ -96,6 +96,18 @@ export const DevTools: Component = options => {
   })
   grid.fns.Attach(revive)
 
+  // full power
+  const fullPower = Button({
+    name: 'devtools-full-power',
+    text: 'Full HP / MP',
+    width: 130,
+    onClick: () => {
+      // SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
+      SendChatMessage(`.revive`)
+    },
+  })
+  grid.fns.Attach(fullPower)
+
   // reset cooldowns
   const resetCooldowns = Button({
     name: 'devtools-reset-cooldowns',
@@ -107,6 +119,46 @@ export const DevTools: Component = options => {
     },
   })
   grid.fns.Attach(resetCooldowns)
+
+  // home
+  const recall = Button({
+    name: 'devtools-recall',
+    text: 'Recall',
+    width: 130,
+    onClick: () => {
+    },
+  })
+  grid.fns.Attach(recall)
+
+  // flight
+  const flight = Button({
+    name: 'devtools-toggle-flight',
+    text: 'Flight On',
+    width: 130,
+    onClick: () => {
+    },
+  })
+  grid.fns.Attach(flight)
+
+  // speed
+  const speed = Button({
+    name: 'devtools-toggle-speed',
+    text: 'Speed On',
+    width: 130,
+    onClick: () => {
+    },
+  })
+  grid.fns.Attach(speed)
+
+  // god-mode
+  const godMode = Button({
+    name: 'devtools-toggle-god-mode',
+    text: 'God Mode On',
+    width: 130,
+    onClick: () => {
+    },
+  })
+  grid.fns.Attach(godMode)
 
   // textarea
   const test = Textarea({
