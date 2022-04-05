@@ -21,18 +21,18 @@ export const DevTools: Component = options => {
   const scroll = Scroll({ name: 'devtools-scroll', parent: f, height: 300 })
 
   const a = Section({
-    name: 'tools',
-    title: 'Utilities',
-    parent: scroll,
-    height: 100,
-  })
-
-  const b = Section({
     name: 'set-level',
     title: 'Set Level',
     parent: scroll,
-    previous: a,
     height: 50,
+  })
+
+  const b = Section({
+    name: 'tools',
+    title: 'Utilities',
+    parent: scroll,
+    previous: a,
+    height: 100,
   })
 
   const c = Section({
