@@ -31,12 +31,10 @@ export const Button: Component<ButtonOptions> = options => {
 
   // scripts
   f.ref.SetScript('OnLeave', (e, button) => {
-    console.log('leave')
     e.SetBackdropColor(...color, 1)
   })
 
   f.ref.SetScript('OnEnter', (e, button) => {
-    console.log('enter')
     e.SetBackdropColor(color[0] * 0.8, color[1] * 0.8, color[2] * 0.8, 1)
   })
 

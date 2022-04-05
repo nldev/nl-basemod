@@ -97,6 +97,8 @@ export const DevTools: Component = options => {
     parent: d,
   })
   input.ref.SetPoint('TOPLEFT')
+  console.log(input.ref.GetWidth())
+  console.log(input.ref.GetHeight())
 
   return f
 }
