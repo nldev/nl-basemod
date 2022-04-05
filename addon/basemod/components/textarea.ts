@@ -27,7 +27,7 @@ export const Textarea: Component<TextareaOptions> = options => {
   b.ref.SetWidth(options.parent.inner.GetWidth() - 30)
   b.ref.SetHeight(options.parent.inner.GetHeight() - 30)
   const s = Scroll({ name: `${options.name}-scroll`, scrollHeight: 50, parent: b })
-  s.ref.SetBackdrop(BASE_BACKDROP)
+  a.ref.SetBackdrop(BASE_BACKDROP)
   const e = CreateFrame('EditBox', `${options.name}-inner`, s.inner)
   e.SetPoint('TOPLEFT')
   e.SetWidth(s.inner.GetWidth() - 10)
