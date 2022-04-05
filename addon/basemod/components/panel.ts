@@ -96,6 +96,7 @@ export const DevTools: Component = options => {
     name: 'test-input',
     parent: d,
   })
+  input.ref.SetPoint('TOPLEFT')
 
   return f
 }
