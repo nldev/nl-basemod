@@ -47,9 +47,8 @@ export const Textarea: Component<TextareaOptions> = options => {
   })
   e.SetScript('OnTextChanged', () => {
     s.fns.Height(e.GetHeight())
-    text = e.GetText()
     if (options.onChange)
-      options.onChange(text)
+      options.onChange(e.GetText())
   })
   e.SetScript('OnTabPressed', () => {
     e.ClearFocus()
