@@ -174,7 +174,6 @@ function HandleLearnTalent (events: TSEvents) {
     const b = QueryWorld(`
       select * from __player_talents where playerGuid = ${playerGuid};
     `)
-    sender.SendBroadcastMessage(`${spellId}`)
     let used = 0
     let max = 0
     while (b.GetRow()) {
