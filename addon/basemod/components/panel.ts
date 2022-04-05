@@ -243,6 +243,7 @@ export const Panel: Component<PanelOptions> = options => {
     'mail': Frame,
     'notes': Frame,
     'settings': Frame,
+    'feedback': Frame,
     'support': Frame,
   }
   const pages: Mapping<Element> = {}
@@ -316,6 +317,11 @@ export const Panel: Component<PanelOptions> = options => {
       {
         id: 'settings',
         text: 'Settings',
+        disabled: true,
+      },
+      {
+        id: 'feedback',
+        text: 'Feedback',
         disabled: true,
       },
       {
