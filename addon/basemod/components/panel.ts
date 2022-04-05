@@ -165,7 +165,7 @@ export const DevTools: Component = options => {
   const test = Textarea({
     name: 'devtools-note',
     parent: c,
-    initial: $.store.Get('CHARACTER', 'devtools-note') as any,
+    initial: $.store.Get('CHARACTER', 'devtools-note'),
     onAccept: note => {
       $.store.Set('CHARACTER', 'devtools-note', note)
     }
