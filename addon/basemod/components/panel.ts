@@ -10,6 +10,7 @@ import { Section } from './section'
 import { Button } from './button'
 import { Counter } from './counter'
 import { Textarea } from './textarea'
+import { Input } from './input'
 
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
@@ -41,6 +42,14 @@ export const DevTools: Component = options => {
     height: 150,
   })
 
+  const d = Section({
+    name: 'd-sect',
+    title: 'Input',
+    parent: scroll,
+    previous: c,
+    height: 50,
+  })
+
   // reset bags
   const ci = Frame({ name: 'devtools-reset-bags', parent: a })
   ci.ref.SetPoint('TOPLEFT')
@@ -66,7 +75,6 @@ export const DevTools: Component = options => {
   const level = Counter({
     name: 'set-level-counter',
     parent: b,
-    width: b.inner.GetWidth(),
     initial: UnitLevel('player'),
     min: 1,
     max: 99,
@@ -77,14 +85,17 @@ export const DevTools: Component = options => {
   level.ref.SetPoint('TOPLEFT')
 
 
-  // test
-  console.log('hello world')
+  // textarea
   const test = Textarea({
-    name: 'test',
+    name: 'test-textarea',
     parent: c,
   })
-  console.log()
-  console.log(test.ref.GetHeight())
+
+  // input
+  const input = Input({
+    name: 'test-input',
+    parent: d,
+  })
 
   return f
 }

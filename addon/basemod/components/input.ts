@@ -2,7 +2,7 @@ import { Component, ComponentOptions, Frame, Element } from '../app'
 import { BASE_BACKDROP } from '../constants'
 
 export interface InputOptions extends ComponentOptions {
-  width: number
+  width?: number
   initial?: string
   onAccept?: (text: string, element: Element<any, any>) => string | void
   onCancel?: (text: string, element: Element<any, any>) => string | void

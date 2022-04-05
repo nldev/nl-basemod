@@ -12,7 +12,7 @@ import { Rgb } from '../types'
 import { rgb } from '../utils'
 
 export interface CounterOptions extends ComponentOptions {
-  width: number
+  width?: number
   min?: number
   max?: number
   initial?: number
