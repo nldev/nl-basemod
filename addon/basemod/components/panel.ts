@@ -159,6 +159,7 @@ export const DevTools: Component = options => {
     parent: c,
     initial: $.store.Get('CHARACTER', 'devtools-note'),
     onAccept: note => {
+      console.log(note)
       $.store.Set('CHARACTER', 'devtools-note', note)
     },
     max: 2048,
