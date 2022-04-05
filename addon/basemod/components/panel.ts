@@ -51,8 +51,12 @@ export const DevTools: Component = options => {
     height: 50,
   })
 
-  // reset bags
+  // utils
   const grid = Grid({ name: 'devtools-utils-grid', parent: a, rowHeight: 35, itemsPerRow: 2 })
+  grid.ref.SetSize(a.inner.GetWidth(), a.inner.GetHeight())
+  grid.ref.SetPoint('TOPLEFT', -7, 0)
+
+  // reset bags
   const clearInventory = Button({
     name: 'devtools-clear-inventory',
     text: 'Clear Inventory',
@@ -61,9 +65,19 @@ export const DevTools: Component = options => {
       SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
     },
   })
-  grid.ref.SetSize(a.inner.GetWidth(), a.inner.GetHeight())
-  grid.ref.SetPoint('TOPLEFT', -7, 0)
   grid.fns.Attach(clearInventory)
+
+  // revive
+  const revive = Button({
+    name: 'devtools-revive',
+    text: 'Revive',
+    width: 120,
+    onClick: () => {
+      // SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
+      SendChatMessage(`.revive`)
+    },
+  })
+  grid.fns.Attach(revive)
 
   // set level
   const onLevelAccept = (num: number) => {
@@ -81,7 +95,6 @@ export const DevTools: Component = options => {
   })
   level.ref.RegisterEvent('PLAYER_LEVEL_UP')
   level.ref.SetPoint('TOPLEFT')
-
 
   // textarea
   const test = Textarea({
