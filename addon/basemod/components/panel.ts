@@ -162,7 +162,6 @@ export const DevTools: Component = options => {
       console.log(note)
       $.store.Set('CHARACTER', 'devtools-note', note)
     },
-    max: 2048,
   })
   note.ref.SetPoint('TOPLEFT')
 

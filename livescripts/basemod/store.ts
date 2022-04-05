@@ -55,7 +55,9 @@ export function Store (events: TSEvents) {
     const primitive = w[0]
     const type = w[1]
     const key = w[2]
-    const value = w[3]
+    let value = ''
+    for (let i = 3; i <= w.length; i++)
+      value = value + w[i]
     const pGuid = sender.GetGUID()
     const aGuid = sender.GetAccountID()
     const guid = (type === '0') ? pGuid : aGuid
