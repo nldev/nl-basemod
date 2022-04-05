@@ -16,7 +16,7 @@ export interface TextareaOptions extends ComponentOptions {
   onAccept?: (text: string) => void
   onChange?: (text: string) => void
   onCancel?: (text: string) => void
-  // FIXME: min/max
+  max?: number
 }
 
 export const Textarea: Component<TextareaOptions> = options => {
@@ -68,7 +68,9 @@ export const Textarea: Component<TextareaOptions> = options => {
     if (options.onCancel)
       options.onCancel(text)
   })
-  e.SetPoint('TOPLEFT')
+
+  if (options.max)
+    e.SetMaxLetters(options.max)
 
   return s as any
 }

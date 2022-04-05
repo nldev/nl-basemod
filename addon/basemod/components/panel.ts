@@ -37,7 +37,7 @@ export const DevTools: Component = options => {
 
   const c = Section({
     name: 'c-sect',
-    title: 'Note',
+    title: 'Notes',
     parent: scroll,
     previous: b,
     height: 150,
@@ -160,7 +160,8 @@ export const DevTools: Component = options => {
     initial: $.store.Get('CHARACTER', 'devtools-note'),
     onAccept: note => {
       $.store.Set('CHARACTER', 'devtools-note', note)
-    }
+    },
+    max: 55,
   })
   note.ref.SetPoint('TOPLEFT')
 
