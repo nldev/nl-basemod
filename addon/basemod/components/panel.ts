@@ -69,8 +69,8 @@ export const DevTools: Component = options => {
   level.ref.SetPoint('TOPLEFT')
 
   // utils
-  const grid = Grid({ name: 'devtools-utils-grid', parent: a, rowHeight: 35, itemsPerRow: 2 })
-  grid.ref.SetSize(a.inner.GetWidth(), a.inner.GetHeight())
+  const grid = Grid({ name: 'devtools-utils-grid', parent: b, rowHeight: 35, itemsPerRow: 2 })
+  grid.ref.SetSize(b.inner.GetWidth(), b.inner.GetHeight())
   grid.ref.SetPoint('TOPLEFT', -2, 0)
 
   // reset bags
