@@ -77,7 +77,6 @@ export const DevTools: Component = options => {
   level.ref.RegisterEvent('PLAYER_LEVEL_UP')
   level.ref.SetPoint('TOPLEFT')
 
-  return f
 
   // test
   console.log('hello world')
@@ -85,6 +84,10 @@ export const DevTools: Component = options => {
     name: 'test',
     parent: c,
   })
+  console.log()
+  console.log(test.ref.GetHeight())
+
+  return f
 }
 
 export interface PanelOptions extends ComponentOptions {
