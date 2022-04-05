@@ -13,7 +13,7 @@ import { rgb } from '../utils'
 
 export interface TextareaOptions extends ComponentOptions {
   initial?: string
-  onUpdate?: (text: string) => void
+  onAccept?: (text: string) => void
   onChange?: (text: string) => void
   onCancel?: (text: string) => void
   // FIXME: min/max
@@ -54,13 +54,13 @@ export const Textarea: Component<TextareaOptions> = options => {
   e.SetScript('OnTabPressed', () => {
     e.ClearFocus()
     text = e.GetText()
-    if (options.onUpdate)
-      options.onUpdate(text)
+    if (options.onAccept)
+      options.onAccept(text)
   })
   e.SetScript('OnEnterPressed', () => {
     text = e.GetText()
-    if (options.onUpdate)
-      options.onUpdate(text)
+    if (options.onAccept)
+      options.onAccept(text)
     e.ClearFocus()
   })
   e.SetScript('OnEscapePressed', () => {
