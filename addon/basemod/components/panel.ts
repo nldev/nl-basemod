@@ -32,7 +32,7 @@ export const DevTools: Component = options => {
     title: 'Utilities',
     parent: scroll,
     previous: a,
-    height: 170,
+    height: 160,
   })
 
   const c = Section({
