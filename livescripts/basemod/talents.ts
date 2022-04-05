@@ -271,7 +271,6 @@ function HandleUnlearnTalent (events: TSEvents) {
 
 function HandleSetTalentPoints (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
-    sender.SendBroadcastMessage(`${message.get()}`)
     const opcode = Opcode('set-talent-points')
     const str = message.get()
     if (!str.includes(opcode))
