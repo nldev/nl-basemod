@@ -128,47 +128,34 @@ export const DevTools: Component = options => {
   })
   grid.fns.Attach(reload)
 
-  // flight
-  const flight = Button({
-    name: 'devtools-toggle-flight',
-    text: 'Flight On',
-    width: 130,
-    onClick: () => {
-    },
-  })
-  grid.fns.Attach(flight)
-
-  // speed
-  const speed = Button({
-    name: 'devtools-toggle-speed',
-    text: 'Speed On',
-    width: 130,
-    onClick: () => {
-    },
-  })
-  grid.fns.Attach(speed)
-
-  // god mode
-  const godMode = Button({
-    name: 'devtools-toggle-god-mode',
-    text: 'God Mode On',
-    width: 130,
-    onClick: () => {
-    },
-  })
-  grid.fns.Attach(godMode)
-
   // cheats
-  const test = Checkbox({
-    name: 'test-box',
-    text: 'hello world',
+  // speed
+  const speed = Checkbox({
+    name: 'cheats-speed',
+    text: 'x10 Speed',
     parent: c,
-    onChange: () => console.log('changed'),
-    onCheck: () => console.log('checked'),
-    onUncheck: () => console.log('unchecked'),
+    onCheck: () => SendChatMessage('.mod speed 10'),
+    onUncheck: () => SendChatMessage('.mod speed 1'),
   })
-
-  test.ref.SetPoint('TOPLEFT', 0, -2)
+  speed.ref.SetPoint('TOPLEFT', 0, -2)
+  // flight
+  const flight = Checkbox({
+    name: 'cheats-flight',
+    text: 'Flying',
+    parent: c,
+    onCheck: () => SendChatMessage('.gm fly on'),
+    onUncheck: () => SendChatMessage('.gm fly off'),
+  })
+  flight.ref.SetPoint('TOPLEFT', 0, -26)
+  // god mode
+  const godMode = Checkbox({
+    name: 'cheats-godmode',
+    text: 'God Mode',
+    parent: c,
+    onCheck: () => SendChatMessage('.cheat god on'),
+    onUncheck: () => SendChatMessage('.cheat god off'),
+  })
+  godMode.ref.SetPoint('TOPLEFT', 0, -48)
 
   //  myCheckButton = CreateFrame("CheckButton", "myCheckButton_GlobalName", UIParent, "ChatConfigCheckButtonTemplate");
   //myCheckButton:SetPoint("TOPLEFT", 200, -65);
