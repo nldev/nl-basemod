@@ -65,16 +65,6 @@ export const DevTools: Component = options => {
   grid.ref.SetSize(b.inner.GetWidth(), b.inner.GetHeight())
   grid.ref.SetPoint('TOPLEFT', -2, 0)
 
-  // recall
-  const recall = Button({
-    name: 'devtools-recall',
-    text: 'Recall',
-    width: 130,
-    onClick: () => {
-    },
-  })
-  grid.fns.Attach(recall)
-
   // reset bags
   const clearInventory = Button({
     name: 'devtools-clear-inventory',
@@ -85,6 +75,16 @@ export const DevTools: Component = options => {
     },
   })
   grid.fns.Attach(clearInventory)
+
+  // recall
+  const recall = Button({
+    name: 'devtools-recall',
+    text: 'Recall',
+    width: 130,
+    onClick: () => {
+    },
+  })
+  grid.fns.Attach(recall)
 
   // revive
   const revive = Button({
@@ -97,18 +97,6 @@ export const DevTools: Component = options => {
     },
   })
   grid.fns.Attach(revive)
-
-  // full power
-  const fullPower = Button({
-    name: 'devtools-full-power',
-    text: 'Full HP / MP',
-    width: 130,
-    onClick: () => {
-      // SendAddonMessage('dev-clear-inventory', '', 'WHISPER', Get().playerInfo.name)
-      SendChatMessage(`.revive`)
-    },
-  })
-  grid.fns.Attach(fullPower)
 
   // reset cooldowns
   const resetCooldowns = Button({
