@@ -28,7 +28,7 @@ export const Checkbox: Component<CheckboxOptions> = options => {
 
   const t = check.CreateFontString(`${options.name}-checkbutton-text`, 'OVERLAY', 'GameTooltipText')
   t.SetFont('Fonts/FRIZQT__.TTF', 12)
-  t.SetText('Hello World')
+  t.SetText(options.text)
   t.SetParent(check)
   t.SetPoint('LEFT', check, 'RIGHT', 1, 0)
 

@@ -155,7 +155,7 @@ export const DevTools: Component = options => {
     onCheck: () => SendChatMessage('.cheat god on'),
     onUncheck: () => SendChatMessage('.cheat god off'),
   })
-  godMode.ref.SetPoint('TOPLEFT', 0, -48)
+  godMode.ref.SetPoint('TOPLEFT', 0, -54)
 
   //  myCheckButton = CreateFrame("CheckButton", "myCheckButton_GlobalName", UIParent, "ChatConfigCheckButtonTemplate");
   //myCheckButton:SetPoint("TOPLEFT", 200, -65);
