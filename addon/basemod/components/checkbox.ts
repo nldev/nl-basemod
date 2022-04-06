@@ -1,8 +1,8 @@
 import { Component, ComponentOptions, Frame, Element } from '../app'
 import { BASE_BACKDROP } from '../constants'
 export interface CheckButton extends WoWAPI.Frame {
-  GetChecked: () => number
-  SetChecked: (isChecked: number | boolean) => void
+  GetChecked: () => number | null
+  SetChecked: (isChecked: number | boolean | null) => void
   SetText: (text: string) => void
 }
 
@@ -38,7 +38,7 @@ export const Checkbox: Component<CheckboxOptions> = options => {
       options.onChange(value, f)
     if ((value === 1) && options.onCheck)
       options.onCheck(f)
-    if ((value === 0) && options.onUncheck)
+    if ((value === null) && options.onUncheck)
       options.onCheck(f)
     isChecked = value
   })
