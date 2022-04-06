@@ -34,7 +34,7 @@ export const DevTools: Component = options => {
     title: 'Tools',
     parent: scroll,
     previous: a,
-    height: 160,
+    height: 120,
   })
 
   const c = Section({
