@@ -171,7 +171,7 @@ export const DevTools: Component = options => {
   t.SetFont('Fonts/FRIZQT__.TTF', 10)
   t.SetText('hello world')
   t.SetParent(check)
-  t.SetPoint('LEFT', check, 'RIGHT', 10, 0)
+  t.SetPoint('LEFT', check, 'RIGHT', 5, 0)
 
   //  myCheckButton = CreateFrame("CheckButton", "myCheckButton_GlobalName", UIParent, "ChatConfigCheckButtonTemplate");
   //myCheckButton:SetPoint("TOPLEFT", 200, -65);
