@@ -17,13 +17,15 @@ export interface CheckboxOptions extends ComponentOptions {
 
 export const Checkbox: Component<CheckboxOptions> = options => {
   const f = Frame({ ...options }) as Element<any, any>
-  f.ref.SetSize(options.parent.inner.GetWidth(), 30)
+  f.ref.SetSize(options.parent.inner.GetWidth(), 24)
 
   const check = CreateFrame('CheckButton' as any, `${options.name}-checkbutton`, f.ref, 'ChatConfigCheckButtonTemplate') as CheckButton
   check.SetPoint('TOPLEFT')
   check.SetText('hello world')
+  let isChecked = options.initial
   if (options.initial)
     check.SetChecked(true)
+
   const t = check.CreateFontString(`${options.name}-checkbutton-text`, 'OVERLAY', 'GameTooltipText')
   t.SetFont('Fonts/FRIZQT__.TTF', 12)
   t.SetText('Hello World')
@@ -31,7 +33,14 @@ export const Checkbox: Component<CheckboxOptions> = options => {
   t.SetPoint('LEFT', check, 'RIGHT', 1, 0)
 
   check.SetScript('OnClick', () => {
-    console.log('hello world')
+    const value = check.GetChecked()
+    if ((value !== isChecked) && options.onChange)
+      options.onChange(value, f)
+    if (value && options.onCheck)
+      options.onCheck(f)
+    if (!value && options.onUncheck)
+      options.onCheck(f)
+    isChecked = value
   })
 
   return f
