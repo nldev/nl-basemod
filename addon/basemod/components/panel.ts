@@ -13,6 +13,11 @@ import { Textarea } from './textarea'
 import { Input } from './input'
 import { Grid } from './grid'
 
+export interface CheckButton extends WoWAPI.Frame {
+  GetChecked: () => boolean
+  SetChecked: (isChecked: boolean) => void
+}
+
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
   f.ref.SetSize(290, 360)
@@ -148,8 +153,10 @@ export const DevTools: Component = options => {
   grid.fns.Attach(godMode)
 
   // cheats
-  const check = CreateFrame('CheckButton' as any, 'checkbox-test', c.ref, 'ChatConfigCheckButtonTemplate')
+  const check = CreateFrame('CheckButton' as any, 'checkbox-test', c.ref, 'ChatConfigCheckButtonTemplate') as CheckButton
   check.SetPoint('TOPLEFT')
+  check.SetChecked(true)
+  console.log(check.GetChecked())
 
   //  myCheckButton = CreateFrame("CheckButton", "myCheckButton_GlobalName", UIParent, "ChatConfigCheckButtonTemplate");
   //myCheckButton:SetPoint("TOPLEFT", 200, -65);
