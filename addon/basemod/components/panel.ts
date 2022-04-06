@@ -14,12 +14,6 @@ import { Input } from './input'
 import { Grid } from './grid'
 declare function ReloadUI (): void;
 
-export interface CheckButton extends WoWAPI.Frame {
-  GetChecked: () => boolean
-  SetChecked: (isChecked: boolean) => void
-  SetText: (text: string) => void
-}
-
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
   f.ref.SetSize(290, 360)
