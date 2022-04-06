@@ -16,6 +16,7 @@ import { Grid } from './grid'
 export interface CheckButton extends WoWAPI.Frame {
   GetChecked: () => boolean
   SetChecked: (isChecked: boolean) => void
+  SetText: (text: string) => void
 }
 
 export const DevTools: Component = options => {
@@ -156,7 +157,12 @@ export const DevTools: Component = options => {
   const check = CreateFrame('CheckButton' as any, 'checkbox-test', c.ref, 'ChatConfigCheckButtonTemplate') as CheckButton
   check.SetPoint('TOPLEFT')
   check.SetChecked(true)
-  console.log(check.GetChecked())
+  check.SetText('hello world')
+  const t = check.CreateFontString('checkbox-text', 'OVERLAY', 'GameTooltipText')
+  t.SetFont('Fonts/FRIZQT__.TTF', 10)
+  t.SetText('hello world')
+  t.SetParent(check)
+  t.SetPoint('RIGHT', 10, 0)
 
   //  myCheckButton = CreateFrame("CheckButton", "myCheckButton_GlobalName", UIParent, "ChatConfigCheckButtonTemplate");
   //myCheckButton:SetPoint("TOPLEFT", 200, -65);
