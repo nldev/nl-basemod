@@ -164,7 +164,7 @@ export const DevTools: Component = options => {
 
   // cheats
   const check = CreateFrame('CheckButton' as any, 'checkbox-test', c.ref, 'ChatConfigCheckButtonTemplate') as CheckButton
-  check.SetPoint('TOPLEFT', 0, 3)
+  check.SetPoint('TOPLEFT', 0, -3)
   check.SetChecked(true)
   check.SetText('hello world')
   const t = check.CreateFontString('checkbox-text', 'OVERLAY', 'GameTooltipText')
