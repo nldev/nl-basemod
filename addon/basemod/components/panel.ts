@@ -124,13 +124,13 @@ export const DevTools: Component = options => {
   grid.fns.Attach(resetCooldowns)
 
   // reload ui
-  const reloadUi = Button({
+  const reload = Button({
     name: 'devtools-reload-ui',
     text: 'Reload UI',
     width: 130,
     onClick: () => SendChatMessage(`/reload`),
   })
-  grid.fns.Attach(resetCooldowns)
+  grid.fns.Attach(reload)
 
   // flight
   const flight = Button({
