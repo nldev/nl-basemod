@@ -74,7 +74,8 @@ function ApplyTalents(player: TSPlayer) {
       `)
       while (d.GetRow()) {
         const spellId = d.GetUInt32(2)
-        player.RemoveSpell(spellId, false, false)
+        if (player.HasSpell(spellId))
+          player.RemoveSpell(spellId, false, false)
         player.RemoveAura(spellId)
       }
     }
@@ -249,7 +250,8 @@ function HandleUnlearnTalent (events: TSEvents) {
     const existingRemaining = max - used
     const remaining = ((existingRemaining + cost) > max) ? max : (existingRemaining + cost)
     // unlearn spell
-    sender.RemoveSpell(spellId, true, false)
+    if (sender.HasSpell(spellId))
+      sender.RemoveSpell(spellId, false, false)
     // update __talent_instances
     QueryWorld(`
       delete from __talent_instances where playerGuid=${playerGuid} and talentId="${talentId}"
