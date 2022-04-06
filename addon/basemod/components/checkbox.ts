@@ -39,7 +39,7 @@ export const Checkbox: Component<CheckboxOptions> = options => {
     if ((value === 1) && options.onCheck)
       options.onCheck(f)
     if ((value === null) && options.onUncheck)
-      options.onCheck(f)
+      options.onUncheck(f)
     isChecked = value
   })
 
