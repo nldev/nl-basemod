@@ -12,6 +12,7 @@ import { Counter } from './counter'
 import { Textarea } from './textarea'
 import { Input } from './input'
 import { Grid } from './grid'
+declare function ReloadUI (): void;
 
 export interface CheckButton extends WoWAPI.Frame {
   GetChecked: () => boolean
@@ -35,7 +36,7 @@ export const DevTools: Component = options => {
 
   const b = Section({
     name: 'tools',
-    title: 'Utilities',
+    title: 'Tools',
     parent: scroll,
     previous: a,
     height: 160,
@@ -128,7 +129,7 @@ export const DevTools: Component = options => {
     name: 'devtools-reload-ui',
     text: 'Reload UI',
     width: 130,
-    onClick: () => SendChatMessage(`/reload`),
+    onClick: () => ReloadUI(),
   })
   grid.fns.Attach(reload)
 
@@ -280,7 +281,7 @@ export const Panel: Component<PanelOptions> = options => {
     items: [
       {
         id: 'dev-tools',
-        text: '[dev] Tools',
+        text: '[dev] General',
       },
       {
         id: 'dev-equip',
