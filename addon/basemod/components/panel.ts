@@ -163,6 +163,9 @@ export const DevTools: Component = options => {
     name: 'test-box',
     text: 'hello world',
     parent: c,
+    onChange: () => console.log('changed'),
+    onCheck: () => console.log('checked'),
+    onUncheck: () => console.log('unchecked'),
   })
 
   test.ref.SetPoint('TOPLEFT', 0, -2)
