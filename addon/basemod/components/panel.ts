@@ -12,6 +12,7 @@ import { Counter } from './counter'
 import { Textarea } from './textarea'
 import { Input } from './input'
 import { Grid } from './grid'
+import { Checkbox } from './checkbox'
 declare function ReloadUI (): void;
 
 export const DevTools: Component = options => {
@@ -158,15 +159,13 @@ export const DevTools: Component = options => {
   grid.fns.Attach(godMode)
 
   // cheats
-  const check = CreateFrame('CheckButton' as any, 'checkbox-test', c.ref, 'ChatConfigCheckButtonTemplate') as CheckButton
-  check.SetPoint('TOPLEFT', 0, -2)
-  check.SetChecked(true)
-  check.SetText('hello world')
-  const t = check.CreateFontString('checkbox-text', 'OVERLAY', 'GameTooltipText')
-  t.SetFont('Fonts/FRIZQT__.TTF', 12)
-  t.SetText('Hello World')
-  t.SetParent(check)
-  t.SetPoint('LEFT', check, 'RIGHT', 1, 0)
+  const test = Checkbox({
+    name: 'test-box',
+    text: 'hello world',
+    parent: c,
+  })
+
+  test.ref.SetPoint('TOPLEFT', 0, -2)
 
   //  myCheckButton = CreateFrame("CheckButton", "myCheckButton_GlobalName", UIParent, "ChatConfigCheckButtonTemplate");
   //myCheckButton:SetPoint("TOPLEFT", 200, -65);
