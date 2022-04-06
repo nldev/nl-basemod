@@ -168,7 +168,7 @@ export const DevTools: Component = options => {
   check.SetChecked(true)
   check.SetText('hello world')
   const t = check.CreateFontString('checkbox-text', 'OVERLAY', 'GameTooltipText')
-  t.SetFont('Fonts/FRIZQT__.TTF', 10)
+  t.SetFont('Fonts/FRIZQT__.TTF', 12)
   t.SetText('hello world')
   t.SetParent(check)
   t.SetPoint('LEFT', check, 'RIGHT', 2, 0)
