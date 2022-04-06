@@ -147,6 +147,20 @@ export const DevTools: Component = options => {
   })
   grid.fns.Attach(godMode)
 
+  // cheats
+  const check = CreateFrame('CheckButton' as any, 'checkbox-test', c.ref, 'ChatConfigCheckButtonTemplate')
+  check.SetPoint('TOPLEFT')
+
+  //  myCheckButton = CreateFrame("CheckButton", "myCheckButton_GlobalName", UIParent, "ChatConfigCheckButtonTemplate");
+  //myCheckButton:SetPoint("TOPLEFT", 200, -65);
+  //myCheckButton_GlobalNameText:SetText("CheckBox Name");
+  //myCheckButton.tooltip = "This is where you place MouseOver Text.";
+  //myCheckButton:SetScript("OnClick",
+  //  function()
+  //    --do stuff
+  //  end
+  //);
+
   // note
   // const $ = Get()
   // const note = Textarea({
