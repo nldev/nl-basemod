@@ -3,12 +3,13 @@ import { BASE_BACKDROP } from '../constants'
 
 export interface NumericOptions extends ComponentOptions {
   initial?: number
-  onAccept?: (text: number, element: Element<any, any>) => string | void
-  onCancel?: (text: number, element: Element<any, any>) => string | void
+  onAccept?: (text: number, element: Element<any, any>) => number | void
+  onCancel?: (text: number, element: Element<any, any>) => number | void
+  onChange?: (text: number, element: Element<any, any>) => number | void
   // FIXME: min/max
 }
 
-export const Input: Component<NumericOptions> = options => {
+export const Numeric: Component<NumericOptions> = options => {
   let number = options.initial || 0
   const input = Frame({
     ...options,
@@ -40,6 +41,8 @@ export const Input: Component<NumericOptions> = options => {
   e.SetFont('Fonts/FRIZQT__.TTF', 12)
   e.ClearFocus()
   e.SetScript('OnTextChanged', () => {
+    if (options.onChange)
+      options.onChange(number, input)
   })
   inner.inner = e as any
   input.ref.EnableMouse(true)

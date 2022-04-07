@@ -5,6 +5,7 @@ export interface InputOptions extends ComponentOptions {
   initial?: string
   onAccept?: (text: string, element: Element<any, any>) => string | void
   onCancel?: (text: string, element: Element<any, any>) => string | void
+  onChange?: (text: string, element: Element<any, any>) => string | void
   // FIXME: min/max
 }
 
@@ -39,6 +40,8 @@ export const Input: Component<InputOptions> = options => {
   e.SetFont('Fonts/FRIZQT__.TTF', 12)
   e.ClearFocus()
   e.SetScript('OnTextChanged', () => {
+    if (options.onChange)
+      options.onChange(text, input)
   })
   inner.inner = e as any
   input.ref.EnableMouse(true)
