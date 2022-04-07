@@ -8,7 +8,7 @@ import { Mapping } from '../types'
 export interface PanelOptions extends ComponentOptions {
   nav?: DropdownItemOptions[]
   pages?: Mapping<Element<any, any>>
-  components?: Mapping<Component>
+  components?: Mapping<any>
   defaultSelectionId?: string
   isHiddenOnEmpty?: boolean
   title?: string
