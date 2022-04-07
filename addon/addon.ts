@@ -13,7 +13,6 @@ export const app = new App(app => {
 
 const panel = Panel({
   title: 'basemod v0.1.0',
-  parent: Get().root,
   components: {
     'dev-tools': DevTools,
     'dev-equip': Frame,
