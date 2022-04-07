@@ -13,9 +13,11 @@ import { Textarea } from './textarea'
 import { Input } from './input'
 import { Grid } from './grid'
 import { Checkbox } from './checkbox'
-declare function ReloadUI (): void;
-declare function GetPlayerMapPosition (): void;
-console.log(GetPlayerMapPosition())
+declare function ReloadUI (): void
+declare function GetPlayerMapPosition (string: string): void
+declare function GetCurrentMapAreaID(): void
+
+console.log(GetCurrentMapAreaID())
 
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
