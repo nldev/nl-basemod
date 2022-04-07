@@ -23,25 +23,33 @@ export const DevTools: Component = options => {
   const scroll = Scroll({ name: 'devtools-scroll', parent: f, height: 300 })
 
   const a = Section({
-    name: 'set-level',
-    title: 'Character Level',
+    name: 'positioning',
+    title: 'Positioning',
     parent: scroll,
     height: 50,
   })
 
   const b = Section({
-    name: 'tools',
-    title: 'Tools',
+    name: 'set-level',
+    title: 'Character Level',
     parent: scroll,
     previous: a,
-    height: 123,
+    height: 50,
   })
 
   const c = Section({
+    name: 'tools',
+    title: 'Tools',
+    parent: scroll,
+    previous: b,
+    height: 123,
+  })
+
+  const d = Section({
     name: 'cheats',
     title: 'Cheats',
     parent: scroll,
-    previous: b,
+    previous: c,
     height: 150,
   })
   // const c = Section({
@@ -59,7 +67,7 @@ export const DevTools: Component = options => {
   }
   const level = Counter({
     name: 'set-level-counter',
-    parent: a,
+    parent: b,
     initial: UnitLevel('player'),
     min: 1,
     max: 99,
@@ -70,8 +78,8 @@ export const DevTools: Component = options => {
   level.ref.SetPoint('TOPLEFT')
 
   // utils
-  const grid = Grid({ name: 'devtools-utils-grid', parent: b, rowHeight: 35, itemsPerRow: 2 })
-  grid.ref.SetSize(b.inner.GetWidth(), b.inner.GetHeight())
+  const grid = Grid({ name: 'devtools-utils-grid', parent: c, rowHeight: 35, itemsPerRow: 2 })
+  grid.ref.SetSize(c.inner.GetWidth(), c.inner.GetHeight())
   grid.ref.SetPoint('TOPLEFT', -2, 0)
 
   // reset bags
@@ -133,7 +141,7 @@ export const DevTools: Component = options => {
   const speed = Checkbox({
     name: 'cheats-speed',
     text: 'x10 Speed',
-    parent: c,
+    parent: d,
     onCheck: () => SendChatMessage('.mod speed 10'),
     onUncheck: () => SendChatMessage('.mod speed 1'),
   })
@@ -142,7 +150,7 @@ export const DevTools: Component = options => {
   const flight = Checkbox({
     name: 'cheats-flight',
     text: 'Flying',
-    parent: c,
+    parent: d,
     onCheck: () => SendChatMessage('.gm fly on'),
     onUncheck: () => SendChatMessage('.gm fly off'),
   })
@@ -151,7 +159,7 @@ export const DevTools: Component = options => {
   const godMode = Checkbox({
     name: 'cheats-godmode',
     text: 'God Mode',
-    parent: c,
+    parent: d,
     onCheck: () => SendChatMessage('.cheat god on'),
     onUncheck: () => SendChatMessage('.cheat god off'),
   })
