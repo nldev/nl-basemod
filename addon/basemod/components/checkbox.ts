@@ -1,5 +1,5 @@
 import { Component, ComponentOptions, Frame, Element } from '../app'
-import { BASE_BACKDROP } from '../constants'
+
 export interface CheckButton extends WoWAPI.Frame {
   GetChecked: () => number | null
   SetChecked: (isChecked: number | boolean | null) => void
