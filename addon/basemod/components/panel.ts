@@ -14,6 +14,8 @@ import { Input } from './input'
 import { Grid } from './grid'
 import { Checkbox } from './checkbox'
 declare function ReloadUI (): void;
+declare function GetPlayerMapPosition (): void;
+console.log(GetPlayerMapPosition())
 
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
