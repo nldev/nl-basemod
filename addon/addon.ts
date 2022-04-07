@@ -7,6 +7,7 @@ import { AllChildren } from './basemod/utils'
 import { Panel } from './basemod/components/panel'
 
 export const app = new App(app => {
+  test()
   EasyLoot()
   Chests()
 })
@@ -121,5 +122,4 @@ const test = () => {
     }
   })
 }
-test()
 
