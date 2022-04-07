@@ -7,7 +7,6 @@ import { Mapping } from '../types'
 
 export interface PanelOptions extends ComponentOptions {
   nav?: DropdownItemOptions[]
-  pages?: Mapping<Element<any, any>>
   components?: Mapping<any>
   defaultSelectionId?: string
   isHiddenOnEmpty?: boolean
@@ -52,8 +51,8 @@ export const Panel: Component<PanelOptions> = options => {
   title.inner = b.ref
 
   // pages
+  const pages: Mapping<Element<any, any>> = {}
   const components = options.components
-  const pages = options.pages
 
   //dropdown
   const dropdown = Dropdown({
@@ -65,8 +64,8 @@ export const Panel: Component<PanelOptions> = options => {
     onSelect: ({ id }) => {
       $.store.Set('CHARACTER', `${options.name}-panel-selection`, id)
 
-      for (let key of Object.keys(options.pages)) {
-        const page = options.pages[key]
+      for (let key of Object.keys(pages)) {
+        const page = pages[key]
         page.ref.Hide()
       }
 

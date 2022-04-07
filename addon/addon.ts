@@ -31,79 +31,78 @@ const panel = Panel({
     'support': Frame,
   },
   nav: [
-   {
-     id: 'dev-tools',
-     text: '[dev] General',
-   },
-   {
-     id: 'dev-equip',
-     text: '[dev] Equipment',
-   },
-   {
-     id: 'dev-consume',
-     text: '[dev] Consumables',
-   },
-   {
-     id: 'profile',
-     text: 'Profile',
-     disabled: true,
-   },
-   {
-     id: 'abilities',
-     text: 'Abilities',
-   },
-   {
-     id: 'jobs',
-     text: 'Jobs',
-     disabled: true,
-   },
-   {
-     id: 'lfg',
-     text: 'Group Finder',
-     disabled: true,
-   },
-   {
-     id: 'stash',
-     text: 'Stash',
-     disabled: true,
-   },
-   {
-     id: 'market',
-     text: 'Market',
-     disabled: true,
-   },
-   {
-     id: 'clan',
-     text: 'Clan',
-     disabled: true,
-   },
-   {
-     id: 'mail',
-     text: 'Mail',
-     disabled: true,
-   },
-   {
-     id: 'journal',
-     text: 'Journal',
-     disabled: true,
-   },
-   {
-     id: 'settings',
-     text: 'Settings',
-     disabled: true,
-   },
-   {
-     id: 'feedback',
-     text: 'Feedback',
-     disabled: true,
-   },
-   {
-     id: 'support',
-     text: 'Support',
-     disabled: true,
-   },
+    {
+      id: 'dev-tools',
+      text: '[dev] General',
+    },
+    {
+      id: 'dev-equip',
+      text: '[dev] Equipment',
+    },
+    {
+      id: 'dev-consume',
+      text: '[dev] Consumables',
+    },
+    {
+      id: 'profile',
+      text: 'Profile',
+      disabled: true,
+    },
+    {
+      id: 'abilities',
+      text: 'Abilities',
+    },
+    {
+      id: 'jobs',
+      text: 'Jobs',
+      disabled: true,
+    },
+    {
+      id: 'lfg',
+      text: 'Group Finder',
+      disabled: true,
+    },
+    {
+      id: 'stash',
+      text: 'Stash',
+      disabled: true,
+    },
+    {
+      id: 'market',
+      text: 'Market',
+      disabled: true,
+    },
+    {
+      id: 'clan',
+      text: 'Clan',
+      disabled: true,
+    },
+    {
+      id: 'mail',
+      text: 'Mail',
+      disabled: true,
+    },
+    {
+      id: 'journal',
+      text: 'Journal',
+      disabled: true,
+    },
+    {
+      id: 'settings',
+      text: 'Settings',
+      disabled: true,
+    },
+    {
+      id: 'feedback',
+      text: 'Feedback',
+      disabled: true,
+    },
+    {
+      id: 'support',
+      text: 'Support',
+      disabled: true,
+    },
   ],
-  pages: {},
 })
 
 const test = () => {
