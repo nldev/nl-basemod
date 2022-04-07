@@ -12,6 +12,7 @@ export const app = new App(app => {
   test()
 
   const panel = Panel({
+    name: 'main',
     title: 'basemod v0.1.0',
     components: {
       'dev-tools': DevTools,
