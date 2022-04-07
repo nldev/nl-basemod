@@ -14,10 +14,99 @@ import { Input } from './input'
 import { Grid } from './grid'
 import { Checkbox } from './checkbox'
 declare function ReloadUI (): void
-declare function GetPlayerMapPosition (string: string): void
-declare function GetCurrentMapAreaID(): void
+// titleText.SetText('basemod v0.1.0')
+//    items: [
+//      {
+//        id: 'dev-tools',
+//        text: '[dev] General',
+//      },
+//      {
+//        id: 'dev-equip',
+//        text: '[dev] Equipment',
+//      },
+//      {
+//        id: 'dev-consume',
+//        text: '[dev] Consumables',
+//      },
+//      {
+//        id: 'profile',
+//        text: 'Profile',
+//        disabled: true,
+//      },
+//      {
+//        id: 'abilities',
+//        text: 'Abilities',
+//      },
+//      {
+//        id: 'jobs',
+//        text: 'Jobs',
+//        disabled: true,
+//      },
+//      {
+//        id: 'lfg',
+//        text: 'Group Finder',
+//        disabled: true,
+//      },
+//      {
+//        id: 'stash',
+//        text: 'Stash',
+//        disabled: true,
+//      },
+//      {
+//        id: 'market',
+//        text: 'Market',
+//        disabled: true,
+//      },
+//      {
+//        id: 'clan',
+//        text: 'Clan',
+//        disabled: true,
+//      },
+//      {
+//        id: 'mail',
+//        text: 'Mail',
+//        disabled: true,
+//      },
+//      {
+//        id: 'journal',
+//        text: 'Journal',
+//        disabled: true,
+//      },
+//      {
+//        id: 'settings',
+//        text: 'Settings',
+//        disabled: true,
+//      },
+//      {
+//        id: 'feedback',
+//        text: 'Feedback',
+//        disabled: true,
+//      },
+//      {
+//        id: 'support',
+//        text: 'Support',
+//        disabled: true,
+//      },
+//    ],
 
-console.log(GetCurrentMapAreaID())
+// const COMPONENTS: Mapping<Component> = {
+//   'dev-tools': DevTools,
+//   'dev-equip': Frame,
+//   'dev-consume': Frame,
+//   'profile': Frame,
+//   'abilities': Talents,
+//   'jobs': Frame,
+//   'lfg': Frame,
+//   'stash': Frame,
+//   'market': Frame,
+//   'clan': Frame,
+//   'mail': Frame,
+//   'notes': Frame,
+//   'settings': Frame,
+//   'feedback': Frame,
+//   'support': Frame,
+// }
+// const pages: Mapping<Element> = {}
 
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
@@ -196,10 +285,9 @@ export const DevTools: Component = options => {
 }
 
 export interface PanelOptions extends ComponentOptions {
-  // FIXME
   nav?: DropdownItemOptions[]
-  pages?: Mapping<Component>
-
+  pages?: Mapping<Element<any, any>>
+  components?: Mapping<Component>
   defaultSelectionId?: string
   isHiddenOnEmpty?: boolean
   title?: string
@@ -223,9 +311,8 @@ export const Panel: Component<PanelOptions> = options => {
   )
   titleText.SetParent(title.ref)
   titleText.SetPoint('CENTER')
-  // FIXME
-  titleText.SetText('basemod v0.1.0')
   titleText.SetFont('Fonts/FRIZQT__.TTF', 10)
+  titleText.SetText(options.title)
 
   // panel
   const a = Frame({ name: `${title.ref.GetName()}-panel`, parent: title })
@@ -244,119 +331,26 @@ export const Panel: Component<PanelOptions> = options => {
   title.inner = b.ref
 
   // pages
-  // FIXME
-  const COMPONENTS: Mapping<Component> = {
-    'dev-tools': DevTools,
-    'dev-equip': Frame,
-    'dev-consume': Frame,
-    'profile': Frame,
-    'abilities': Talents,
-    'jobs': Frame,
-    'lfg': Frame,
-    'stash': Frame,
-    'market': Frame,
-    'clan': Frame,
-    'mail': Frame,
-    'notes': Frame,
-    'settings': Frame,
-    'feedback': Frame,
-    'support': Frame,
-  }
-  const pages: Mapping<Element> = {}
+  const components = options.components
+  const pages = options.pages
 
   //dropdown
   const dropdown = Dropdown({
     name: `${a.ref.GetName()}-dropdown`,
     width: 168,
-    defaultSelectionId: $.store.Get('CHARACTER', 'test-dropdown-id', 'talents'),
-    // isSelectableEmpty: false,
+    defaultSelectionId: $.store.Get('CHARACTER', `${options.name}-panel-selection`, ''),
     isTriggerOnInit: true,
-    // isTriggerOnReselect: false,
-    // emptyText: 'Minimize',
-    items: [
-      {
-        id: 'dev-tools',
-        text: '[dev] General',
-      },
-      {
-        id: 'dev-equip',
-        text: '[dev] Equipment',
-      },
-      {
-        id: 'dev-consume',
-        text: '[dev] Consumables',
-      },
-      {
-        id: 'profile',
-        text: 'Profile',
-        disabled: true,
-      },
-      {
-        id: 'abilities',
-        text: 'Abilities',
-      },
-      {
-        id: 'jobs',
-        text: 'Jobs',
-        disabled: true,
-      },
-      {
-        id: 'lfg',
-        text: 'Group Finder',
-        disabled: true,
-      },
-      {
-        id: 'stash',
-        text: 'Stash',
-        disabled: true,
-      },
-      {
-        id: 'market',
-        text: 'Market',
-        disabled: true,
-      },
-      {
-        id: 'clan',
-        text: 'Clan',
-        disabled: true,
-      },
-      {
-        id: 'mail',
-        text: 'Mail',
-        disabled: true,
-      },
-      {
-        id: 'journal',
-        text: 'Journal',
-        disabled: true,
-      },
-      {
-        id: 'settings',
-        text: 'Settings',
-        disabled: true,
-      },
-      {
-        id: 'feedback',
-        text: 'Feedback',
-        disabled: true,
-      },
-      {
-        id: 'support',
-        text: 'Support',
-        disabled: true,
-      },
-    ],
+    items: options.nav,
     onSelect: ({ id }) => {
-      // FIXME
-      $.store.Set('CHARACTER', 'test-dropdown-id', id)
+      $.store.Set('CHARACTER', `${options.name}-panel-selection`, id)
 
-      for (let key of Object.keys(pages)) {
-        const page = pages[key]
+      for (let key of Object.keys(options.pages)) {
+        const page = options.pages[key]
         page.ref.Hide()
       }
 
-      if (!pages[id] && COMPONENTS[id]) {
-        const page = COMPONENTS[id]({ parent: b })
+      if (!pages[id] && components[id]) {
+        const page = components[id]({ parent: b })
 
         pages[id] = page
 
@@ -379,11 +373,11 @@ export const Panel: Component<PanelOptions> = options => {
   // toggle visibility
   const TogglePanel = () => {
     if (dropdown.ref.IsVisible()) {
-      $.store.Set('CHARACTER', 'test-panel-visibility', false)
+      $.store.Set('CHARACTER', `${options.name}-panel-visibility`, false)
       dropdown.ref.Hide()
       a.ref.Hide()
     } else {
-      $.store.Set('CHARACTER', 'test-panel-visibility', true)
+      $.store.Set('CHARACTER', `${options.name}-panel-visibility`, true)
       dropdown.ref.Show()
       a.ref.Show()
     }
@@ -397,7 +391,7 @@ export const Panel: Component<PanelOptions> = options => {
       TogglePanel()
   })
 
-  if (!$.store.Get('CHARACTER', 'test-panel-visibility')) {
+  if (!$.store.Get('CHARACTER', `${options.name}-panel-visibility`)) {
     dropdown.ref.Hide()
     a.ref.Hide()
   }
