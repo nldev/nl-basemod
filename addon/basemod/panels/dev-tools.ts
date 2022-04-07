@@ -1,12 +1,11 @@
-declare function ReloadUI (): void
-import { Get } from '../app'
-import { Component, Frame } from '../app'
+import { Component, Frame, Get } from '../app'
 import { Scroll } from '../components/scroll'
 import { Section } from '../components/section'
 import { Button } from '../components/button'
 import { Counter } from '../components/counter'
 import { Grid } from '../components/grid'
 import { Checkbox } from '../components/checkbox'
+declare function ReloadUI (): void
 
 export const DevTools: Component = options => {
   const f = Frame({ name: 'devtools', ...options })
@@ -172,3 +171,4 @@ export const DevTools: Component = options => {
 
   return f
 }
+
