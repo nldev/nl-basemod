@@ -1,4 +1,4 @@
-import { App, Frame } from './basemod/app'
+import { App, Frame, Get } from './basemod/app'
 import { Talents } from './basemod/talents'
 import { DevTools } from './basemod/panels/dev-tools'
 import { EasyLoot } from './basemod/easy-loot'
@@ -13,6 +13,7 @@ export const app = new App(app => {
 
 const panel = Panel({
   title: 'basemod v0.1.0',
+  parent: Get().root,
   components: {
     'dev-tools': DevTools,
     'dev-equip': Frame,
