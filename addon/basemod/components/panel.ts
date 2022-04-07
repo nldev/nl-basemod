@@ -26,18 +26,18 @@ export const DevTools: Component = options => {
 
   const scroll = Scroll({ name: 'devtools-scroll', parent: f, height: 300 })
 
-  const a = Section({
-    name: 'positioning',
-    title: 'Positioning',
-    parent: scroll,
-    height: 50,
-  })
+  // const a = Section({
+  //   name: 'positioning',
+  //   title: 'Positioning',
+  //   parent: scroll,
+  //   height: 50,
+  // })
 
   const b = Section({
     name: 'set-level',
     title: 'Character Level',
     parent: scroll,
-    previous: a,
+    // previous: a,
     height: 50,
   })
 
