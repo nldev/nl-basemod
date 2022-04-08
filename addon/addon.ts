@@ -20,11 +20,11 @@ export const app = new App(app => {
       'dev-consume': Frame,
       'profile': Frame,
       'abilities': Talents,
-      'jobs': Frame,
+      'missions': Frame,
       'lfg': Frame,
       'stash': Frame,
       'market': Frame,
-      'clan': Frame,
+      'groups': Frame,
       'mail': Frame,
       'notes': Frame,
       'settings': Frame,
@@ -54,8 +54,8 @@ export const app = new App(app => {
         text: 'Abilities',
       },
       {
-        id: 'jobs',
-        text: 'Jobs',
+        id: 'missions',
+        text: 'Missions',
         disabled: true,
       },
       {
@@ -74,8 +74,8 @@ export const app = new App(app => {
         disabled: true,
       },
       {
-        id: 'clan',
-        text: 'Clan',
+        id: 'groups',
+        text: 'Groups',
         disabled: true,
       },
       {
@@ -106,6 +106,7 @@ export const app = new App(app => {
     ],
   })
 
+  console.log("|cAARRGGBBText|r")
   _G['LMDDemoFrame'].Show()
 })
 
