@@ -27,7 +27,6 @@ export const app = new App(app => {
       'groups': Frame,
       'mail': Frame,
       'emotes': Frame,
-      'journal': Frame,
       'notes': Frame,
       'settings': Frame,
       'feedback': Frame,
