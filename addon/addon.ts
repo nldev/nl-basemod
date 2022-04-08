@@ -26,6 +26,8 @@ export const app = new App(app => {
       'market': Frame,
       'groups': Frame,
       'mail': Frame,
+      'emotes': Frame,
+      'journal': Frame,
       'notes': Frame,
       'settings': Frame,
       'feedback': Frame,
@@ -86,6 +88,11 @@ export const app = new App(app => {
       {
         id: 'journal',
         text: 'Journal',
+        disabled: true,
+      },
+      {
+        id: 'emotes',
+        text: 'Emotes',
         disabled: true,
       },
       {
