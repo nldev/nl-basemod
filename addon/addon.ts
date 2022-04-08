@@ -105,6 +105,8 @@ export const app = new App(app => {
       },
     ],
   })
+
+  _G['LMDDemoFrame'].Show()
 })
 
 const test = () => {

@@ -44,6 +44,7 @@ export const DevTools: Component = options => {
     previous: c,
     height: 150,
   })
+
   // const c = Section({
   //   name: 'c-sect',
   //   title: 'Notes',
