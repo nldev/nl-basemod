@@ -19,7 +19,8 @@ export const app = new App(app => {
       'dev-equip': Frame,
       'dev-consume': Frame,
       'profile': Frame,
-      'abilities': Talents,
+      'adventure': Frame,
+      'talents': Talents,
       'missions': Frame,
       'lfg': Frame,
       'stash': Frame,
@@ -51,8 +52,8 @@ export const app = new App(app => {
         disabled: true,
       },
       {
-        id: 'abilities',
-        text: 'Abilities',
+        id: 'talents',
+        text: 'Talents',
       },
       {
         id: 'missions',
