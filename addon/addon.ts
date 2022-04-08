@@ -52,6 +52,11 @@ export const app = new App(app => {
         disabled: true,
       },
       {
+        id: 'adventure',
+        text: 'Adventure',
+        disabled: true,
+      },
+      {
         id: 'talents',
         text: 'Talents',
       },
