@@ -155,7 +155,7 @@ export const Talent: Component<TalentOptions, TalentState, TalentFns> = options 
         if (CanAfford() || isOverride) {
           GameTooltip.AddLine('Left click to learn', ...rgb(253, 151, 31))
         } else {
-          GameTooltip.AddLine('Not enough ability points', ...rgb(249, 38, 114))
+          GameTooltip.AddLine('Not enough talent points', ...rgb(249, 38, 114))
         }
       } else {
         GameTooltip.AddLine('Learned', ...rgb(166, 226, 46))
