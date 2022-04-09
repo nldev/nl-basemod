@@ -886,6 +886,24 @@ function CreateCurrencies ($: Builder) {
   std.Spells.load(7929).CastTime.set(0).Reagents.clearAll().Reagents.add(silk.ID, 2)
 }
 
+const Grapple = ($: Builder) => {
+  const grapple = std.Spells.create($.Mod, 'grapple', 57882)
+  grapple.Name.enGB.set('Grapple')
+  grapple.Description.enGB.set('Grapple to a nearby location.')
+  grapple.Power.setEnergy(5)
+  grapple.Range.setSimple(0,55)
+  grapple.Cooldown.set(15000)
+  grapple.Effects.get(0).Type.JUMP_DEST.set()
+  grapple.Effects.get(0).PointsBase.set(-1)
+  grapple.Effects.get(0).PointsDieSides.set(1)
+  grapple.Effects.get(0).ImplicitTargetA.DEST_DEST.set()
+  grapple.Effects.get(0).MiscValueA.set(50)
+  grapple.Effects.get(1).Type.TRIGGER_SPELL.set()
+  grapple.Effects.get(1).ImplicitTargetA.DEST_DEST.set()
+  grapple.Effects.get(1).TriggerSpell.set(57883)
+  grapple.Visual.getRefCopy().cloneFromVisual(11055)
+}
+
 function Settings ($: Builder) {
   Recall()
   RemoveFlagDropDebuff()
@@ -899,5 +917,6 @@ function Settings ($: Builder) {
   CreateCurrencies($)
   CreateDevMovementBoots($)
   Rogue($)
+  Grapple($)
 }
 
