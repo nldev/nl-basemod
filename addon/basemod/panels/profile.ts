@@ -31,7 +31,6 @@ export const Profile: Component = options => {
     name: 'name-input',
     parent: a,
   })
-  name.ref.SetPoint('TOPLEFT')
 
   // class
   const b = Section({
