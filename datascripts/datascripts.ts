@@ -886,7 +886,7 @@ function CreateCurrencies ($: Builder) {
   std.Spells.load(7929).CastTime.set(0).Reagents.clearAll().Reagents.add(silk.ID, 2)
 }
 
-const Grapple = ($: Builder) => {
+function Grapple ($: Builder) {
   const grapple = std.Spells.create($.Mod, 'grapple', 57882)
   grapple.Name.enGB.set('Grapple')
   grapple.Description.enGB.set('Grapple to a nearby location.')
