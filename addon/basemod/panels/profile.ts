@@ -19,18 +19,42 @@ export const Profile: Component = options => {
 
   const scroll = Scroll({ name: 'profile-scroll', parent: f, height: 300 })
 
-  const a = Section({
+  const name = Section({
     name: 'name',
     title: 'Name',
     parent: scroll,
-    height: 40,
+    height: 50,
   })
 
-  const b = Section({
+  const cls = Section({
+    name: 'class',
+    title: 'Class',
+    parent: scroll,
+    previous: name,
+    height: 50,
+  })
+
+  const playerStatus = Section({
     name: 'player-status',
     title: 'Player Status',
     parent: scroll,
-    previous: a,
+    previous: cls,
+    height: 50,
+  })
+
+  const characterStatus = Section({
+    name: 'character-status',
+    title: 'Character Status',
+    parent: scroll,
+    previous: playerStatus,
+    height: 50,
+  })
+
+  const about = Section({
+    name: 'about',
+    title: 'About',
+    parent: scroll,
+    previous: characterStatus,
     height: 50,
   })
 
