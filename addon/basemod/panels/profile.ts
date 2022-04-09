@@ -27,10 +27,10 @@ export const Profile: Component = options => {
   })
 
   const b = Section({
-    name: 'PlayerStatus',
-    title: 'Character Level',
+    name: 'player-status',
+    title: 'Player Status',
     parent: scroll,
-    // previous: a,
+    previous: a,
     height: 50,
   })
 
