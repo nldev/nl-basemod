@@ -5,6 +5,7 @@ import { EasyLoot } from './basemod/easy-loot'
 import { Chests } from './basemod/chests'
 import { AllChildren } from './basemod/utils'
 import { Panel } from './basemod/components/panel'
+import { Profile } from './basemod/panels/profile'
 
 export const app = new App(app => {
   EasyLoot()
@@ -18,7 +19,7 @@ export const app = new App(app => {
       'dev-tools': DevTools,
       'dev-equip': Frame,
       'dev-consume': Frame,
-      'profile': Frame,
+      'profile': Profile,
       'talents': Talents,
       'adventure': Frame,
       'scenarios': Frame,
@@ -50,7 +51,6 @@ export const app = new App(app => {
       {
         id: 'profile',
         text: 'Profile',
-        disabled: true,
       },
       {
         id: 'talents',
