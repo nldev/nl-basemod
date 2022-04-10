@@ -5,6 +5,10 @@ import { List, ListState, ListFns } from './components/list'
 import { Movable } from './utils'
 declare const IsShiftKeyDown: any
 declare const ChatEdit_InsertLink: any
+declare const ChatEdit_ActivateChat: any
+declare const DEFAULT_CHAT_FRAME: {
+  editBox: WoWAPI.Frame
+}
 
 export interface LootItemFns {
 }
@@ -97,6 +101,7 @@ export const LootItem: Component<
       DressUpItemLink(GetItemInfo(options.itemId)[1])
     if (IsShiftKeyDown())
       ChatEdit_InsertLink(GetItemInfo(options.itemId)[1])
+    ChatEdit_ActivateChat(DEFAULT_CHAT_FRAME.editBox)
     if (!IsControlKeyDown() && !IsShiftKeyDown()) {
       SendAddonMessage('loot-item', `${options.itemId} ${options.amount}`, 'WHISPER', app.playerInfo.name)
       Detach()
