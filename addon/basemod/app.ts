@@ -120,16 +120,16 @@ export class Store {
       if (!text)
         return
 
-      const [primitive, type, storeKey, storeValue] = text.split(' ')
+      const [primitive, type, storeKey, ...storeValue] = text.split(' ')
 
       const n = Number(primitive)
       this.state[(type === '1') ? 'ACCOUNT' : 'CHARACTER'][storeKey] = (n === 0)
-        ? Number(storeValue)
+        ? Number(storeValue[0])
         : (n === 2)
-        ? ((storeValue === '1') ? true : false)
+        ? ((storeValue[0] === '1') ? true : false)
         : (n === 3)
         ? null
-        : storeValue
+        : storeValue.join(' ')
     })
 
     Events.ChatInfo.OnChatMsgAddon(app.root.ref, prefix => {
