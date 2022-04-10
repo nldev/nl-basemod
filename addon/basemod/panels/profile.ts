@@ -143,7 +143,7 @@ export const Profile: Component = options => {
     title: 'About',
     parent: scroll,
     previous: d,
-    height: 50,
+    height: 250,
   })
   // view
   const view = Frame({
@@ -158,9 +158,8 @@ export const Profile: Component = options => {
   // editor
   const editor = Textarea({
     name: 'editor-input',
-    height: 150,
     parent: e,
-    onChange: text => md(text)
+    onChange: text => md(text),
   })
   editor.ref.SetPoint('TOPLEFT')
 
