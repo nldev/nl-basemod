@@ -19,6 +19,8 @@ declare interface ILMD {
   ToHTML: (markdown: string) => string
 }
 declare const LibMarkdown: ILMD
+declare const DEFAULT_CHAT_FRAME: any
+declare const ChatEdit_ActivateChat: any
 
 export function Markdown (frame: WoWAPI.Frame) {
   const html: WoWAPI.Frame = CreateFrame('SimpleHTML', frame.GetName() + '-md', frame) as any
@@ -153,6 +155,11 @@ export const Profile: Component = options => {
     height: 250,
     parent: e,
     onChange: text => md(text),
+    onAccept: text => {
+      const eb = DEFAULT_CHAT_FRAME.editBox
+      ChatEdit_ActivateChat(eb)
+      eb.Insert(text)
+    }
   })
   editor.ref.SetPoint('TOPLEFT')
   const view = Frame({
