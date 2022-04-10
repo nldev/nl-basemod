@@ -141,6 +141,7 @@ export const Profile: Component = options => {
     parent: d,
     initial: $.store.Get('CHARACTER', 'rp-about', ''),
     onAccept: text => $.store.Set('CHARACTER', 'rp-about', text),
+    onCancel: text => $.store.Set('CHARACTER', 'rp-about', text),
     onChange: text => md(text),
   })
   editor.ref.SetPoint('TOPLEFT')
