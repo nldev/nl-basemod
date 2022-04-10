@@ -36,8 +36,9 @@ export function Markdown (frame: WoWAPI.Frame) {
   ;(html as any).SetTextColor('p', 1, 1, 1, 1)
   ;(html as any).SetHyperlinkFormat('[|cff3399ff|H%s|h%s|h|r]')
   return (text: string) => {
+    console.log(LibMarkdown.ToHTML(text))
     html.SetPoint('TOPLEFT')
-    ;(html as any).SetText(text)
+    ;(html as any).SetText(LibMarkdown.ToHTML(text))
   }
 }
 
