@@ -13,7 +13,17 @@ interface SlashCommands {
 declare const SlashCmdList: SlashCommands
 
 export const app = new App(app => {
-  SlashCmdList['BASEMOD'] = msg => panel.ref.IsShown() ? panel.ref.Hide() : panel.ref.Show()
+  SlashCmdList['BASEMOD'] = msg => {
+    const isShown = panel.ref.IsShown()
+
+    if (isShown) {
+      console.log('panel hidden')
+      panel.ref.Hide()
+    } else {
+      console.log('panel shown')
+      panel.ref.Show()
+    }
+  }
   _G['SLASH_BASEMOD1'] = '/basemod'
   EasyLoot()
   Chests()
