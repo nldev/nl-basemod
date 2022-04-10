@@ -1,7 +1,7 @@
 declare interface ILMD {
   ToHTML: (markdown: string) => string
 }
-declare const LMD: ILMD
+declare const LibMarkdown: ILMD
 
 export function Markdown () {
   const frame = CreateFrame('Frame', 'demo-frame', UIParent)
@@ -19,8 +19,7 @@ export function Markdown () {
   ;(html as any).SetFontObject('p', 'GameFontNormal')
   ;(html as any).SetTextColor('p', 1, 1, 1, 1)
   ;(html as any).SetHyperlinkFormat('[|cff3399ff|H%s|h%s|h|r]')
-  console.log(LMD.ToHTML(text))
-  ;(html as any).SetText(LMD.ToHTML(text))
+  ;(html as any).SetText(LibMarkdown.ToHTML(text))
 }
 
 const text = `
