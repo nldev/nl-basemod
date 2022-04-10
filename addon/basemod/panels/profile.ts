@@ -161,7 +161,7 @@ export const Profile: Component = options => {
     width: e.inner.GetWidth(),
     height: e.inner.GetHeight(),
   })
-  view.ref.SetPoint('BOTTOMLEFT', 0, -20)
+  view.ref.SetPoint('BOTTOMLEFT', 0, -260)
   const md = Markdown(view.ref)
 
   return frame
