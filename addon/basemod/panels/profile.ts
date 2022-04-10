@@ -18,7 +18,7 @@ import { BASE_BACKDROP } from '../constants'
 declare interface ILMD {
   ToHTML: (markdown: string) => string
 }
-declare const LMD: ILMD
+declare const LibMarkdown: ILMD
 
 export function Markdown (frame: WoWAPI.Frame) {
   const html: WoWAPI.Frame = CreateFrame('SimpleHTML', frame.GetName() + '-md', frame) as any
@@ -36,7 +36,7 @@ export function Markdown (frame: WoWAPI.Frame) {
   ;(html as any).SetTextColor('p', 1, 1, 1, 1)
   ;(html as any).SetHyperlinkFormat('[|cff3399ff|H%s|h%s|h|r]')
   return (text: string) => {
-    console.log(LMD.ToHTML(text))
+    console.log(LibMarkdown.ToHTML(text))
     html.SetPoint('TOPLEFT')
     ;(html as any).SetText(LMD.ToHTML(text))
   }
