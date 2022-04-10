@@ -5,13 +5,13 @@ import { EasyLoot } from './basemod/easy-loot'
 import { Chests } from './basemod/chests'
 import { AllChildren } from './basemod/utils'
 import { Panel } from './basemod/components/panel'
-import { Markdown } from './basemod/components/markdown'
+// import { Markdown } from './basemod/components/markdown'
 import { Profile } from './basemod/panels/profile'
 
 export const app = new App(app => {
   EasyLoot()
   Chests()
-  Markdown()
+  // Markdown()
   test()
 
   const panel = Panel({

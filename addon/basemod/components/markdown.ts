@@ -3,18 +3,6 @@ declare interface ILMD {
 }
 declare const LMD: ILMD
 
-const text = `
-# hello world
-
-- one
-- two
-- three
-
-## foo
-
-another line
-`
-
 export function Markdown () {
   const frame = CreateFrame('Frame', 'demo-frame', UIParent)
   const html: WoWAPI.Frame = CreateFrame('SimpleHTML', 'demo-frame-html', frame) as any
@@ -34,6 +22,18 @@ export function Markdown () {
   console.log(LMD.ToHTML(text))
   ;(html as any).SetText(LMD.ToHTML(text))
 }
+
+const text = `
+# hello world
+
+- one
+- two
+- three
+
+## foo
+
+another line
+`
 
 //
 // -- This is a minimal hyperlink handler...

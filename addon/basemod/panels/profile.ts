@@ -14,6 +14,28 @@ import { Checkbox } from '../components/checkbox'
 import { Input } from '../components/input'
 import { Textarea } from '../components/textarea'
 
+declare interface ILMD {
+  ToHTML: (markdown: string) => string
+}
+declare const LMD: ILMD
+
+export function Markdown (frame: WoWAPI.Frame) {
+  const html: WoWAPI.Frame = CreateFrame('SimpleHTML', frame.GetName() + '-md', frame) as any
+  html.SetAllPoints(frame)
+  ;(html as any).SetFontObject('h1', 'SubzoneTextFont')
+  ;(html as any).SetTextColor('h1', 0, 0.6, 1, 1)
+  ;(html as any).SetFontObject('h2', 'NumberFontNormalLarge')
+  ;(html as any).SetTextColor('h2', 0, 1, 0, 1)
+  ;(html as any).SetFontObject('h3', 'NumberFontNormalLarge')
+  ;(html as any).SetTextColor('h3', 0, 0.8, 0.4, 1)
+  ;(html as any).SetFontObject('p', 'GameFontNormal')
+  ;(html as any).SetTextColor('p', 1, 1, 1, 1)
+  ;(html as any).SetHyperlinkFormat('[|cff3399ff|H%s|h%s|h|r]')
+  return (text: string) => {
+    ;(html as any).SetText(text)
+  }
+}
+
 export const Profile: Component = options => {
   const frame = Frame({ name: 'profile', ...options })
   frame.ref.SetSize(290, 360)
@@ -32,6 +54,7 @@ export const Profile: Component = options => {
     name: 'editor-input',
     height: 150,
     parent: a,
+    onChange: text => md(text)
   })
   editor.ref.SetPoint('TOPLEFT')
 
@@ -49,6 +72,7 @@ export const Profile: Component = options => {
     height: b.inner.GetHeight(),
   })
   view.ref.SetPoint('TOPLEFT')
+  const md = Markdown(view.ref)
 
   // name
   // const a = Section({
