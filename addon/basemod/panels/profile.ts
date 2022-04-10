@@ -84,6 +84,7 @@ export const Profile: Component = options => {
   // })
   // editor.ref.SetPoint('TOPLEFT')
 
+  const $ = Get()
   // name
   const a = Section({
     name: 'name',
@@ -94,6 +95,8 @@ export const Profile: Component = options => {
   const name = Input({
     name: 'name-input',
     parent: a,
+    initial: $.store.Get('CHARACTER', 'rp-name', $.playerInfo.name),
+    onAccept: text => $.store.Set('CHARACTER', 'rp-name', text),
   })
   name.ref.SetPoint('TOPLEFT')
 
@@ -108,43 +111,33 @@ export const Profile: Component = options => {
   const cls = Input({
     name: 'class-input',
     parent: b,
+    initial: $.store.Get('CHARACTER', 'rp-class', $.playerInfo.chrClass.toLowerCase()),
+    onAccept: text => $.store.Set('CHARACTER', 'rp-class', text),
   })
   cls.ref.SetPoint('TOPLEFT')
 
-  // player-status
+  // status
   const c = Section({
-    name: 'player-status',
-    title: 'Player Status',
+    name: 'status',
+    title: 'Character Status',
     parent: scroll,
     previous: b,
     height: 50,
   })
-  const playerStatus = Input({
-    name: 'player-status-input',
+  const status = Input({
+    name: 'status-input',
     parent: c,
+    initial: $.store.Get('CHARACTER', 'rp-status', ''),
+    onAccept: text => $.store.Set('CHARACTER', 'rp-status', text),
   })
-  playerStatus.ref.SetPoint('TOPLEFT')
-
-  // character-status
-  const d = Section({
-    name: 'character-status',
-    title: 'Character Status',
-    parent: scroll,
-    previous: c,
-    height: 50,
-  })
-  const characterStatus = Input({
-    name: 'character-status-input',
-    parent: d,
-  })
-  characterStatus.ref.SetPoint('TOPLEFT')
+  status.ref.SetPoint('TOPLEFT')
 
   // about
-  const e = Section({
+  const d = Section({
     name: 'about',
     title: 'About',
     parent: scroll,
-    previous: d,
+    previous: c,
     height: 250,
   })
 
@@ -152,24 +145,26 @@ export const Profile: Component = options => {
   const editor = Textarea({
     name: 'editor-input',
     height: 250,
-    parent: e,
+    parent: d,
+    initial: $.store.Get('CHARACTER', 'rp-about', ''),
+    onAccept: text => $.store.Set('CHARACTER', 'rp-about', text),
     onChange: text => md(text),
   })
   editor.ref.SetPoint('TOPLEFT')
 
   // preview
-  const f = Section({
+  const e = Section({
     name: 'preview',
     title: 'Preview',
     parent: scroll,
-    previous: e,
+    previous: d,
     height: 250,
   })
   const view = Frame({
     name: 'md-frame',
-    parent: f,
-    width: f.inner.GetWidth(),
-    height: f.inner.GetHeight(),
+    parent: e,
+    width: e.inner.GetWidth(),
+    height: e.inner.GetHeight(),
   })
   view.ref.SetPoint('TOPLEFT', 0, -10)
   const md = Markdown(view.ref)
