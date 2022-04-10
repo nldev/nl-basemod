@@ -1,9 +1,3 @@
-// ## poc
-// - name (input)
-// - player status (input)
-// - character status (input)
-// - about (markdown)
-// - class (input)
 import { Component, Frame, Get } from '../app'
 import { Scroll } from '../components/scroll'
 import { Section } from '../components/section'
