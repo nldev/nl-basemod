@@ -130,6 +130,7 @@ export class Store {
         : (n === 3)
         ? null
         : storeValues.join(' ')
+      console.log(storeValues.join(' '))
     })
 
     Events.ChatInfo.OnChatMsgAddon(app.root.ref, prefix => {
