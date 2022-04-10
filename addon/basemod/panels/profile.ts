@@ -103,6 +103,11 @@ export const Profile: Component = options => {
     previous: a,
     height: 50,
   })
+  const cls = Input({
+    name: 'class-input',
+    parent: a,
+  })
+  cls.ref.SetPoint('TOPLEFT')
 
   // player-status
   const c = Section({
@@ -112,6 +117,11 @@ export const Profile: Component = options => {
     previous: b,
     height: 50,
   })
+  const playerStatus = Input({
+    name: 'player-status-input',
+    parent: a,
+  })
+  playerStatus.ref.SetPoint('TOPLEFT')
 
   // character-status
   const d = Section({
@@ -121,6 +131,11 @@ export const Profile: Component = options => {
     previous: c,
     height: 50,
   })
+  const characterStatus = Input({
+    name: 'character-status-input',
+    parent: a,
+  })
+  characterStatus.ref.SetPoint('TOPLEFT')
 
   // about
   const e = Section({
@@ -130,6 +145,24 @@ export const Profile: Component = options => {
     previous: d,
     height: 50,
   })
+  // view
+  const view = Frame({
+    name: 'md-frame',
+    parent: e,
+    width: e.inner.GetWidth(),
+    height: e.inner.GetHeight(),
+  })
+  view.ref.SetPoint('TOPLEFT', 0, -20)
+  const md = Markdown(view.ref)
+
+  // editor
+  const editor = Textarea({
+    name: 'editor-input',
+    height: 150,
+    parent: a,
+    onChange: text => md(text)
+  })
+  editor.ref.SetPoint('TOPLEFT')
 
   return frame
 }
