@@ -9,7 +9,7 @@ declare const ChatEdit_ActivateChat: any
 interface SlashCommands {
   [key: string]: (message: string) => void
 }
-declare const SlashCmdList: any
+declare const SlashCmdList: SlashCommands
 declare const DEFAULT_CHAT_FRAME: {
   AddMessage: any
 }
