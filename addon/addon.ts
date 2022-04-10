@@ -123,9 +123,6 @@ export const app = new App(app => {
       },
     ],
   })
-
-  console.log("|cAARRGGBBText|r")
-  _G['LMDDemoFrame'].Show()
 })
 
 const test = () => {

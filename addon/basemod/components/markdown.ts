@@ -1,10 +1,12 @@
 declare interface ILMD {
   ToHTML: (markdown: string) => string
 }
+_G['LMDDemoFrame'].Show()
 declare const tinsert: any
 declare const UISpecialFrames: any
+console.log('hello')
 
-const LMD: any = _G['LMD']
+const LMD = _G['LMD']
 
 const text = `
 `
@@ -50,7 +52,7 @@ html.SetPoint('TOPLEFT', frame, 'TOPLEFT', 0, -30)
 // frame.html:SetHyperlinkFormat("[|cff3399ff|H%s|h%s|h|r]");
 // tinsert(UISpecialFrames, 'demo-frame')
 // tinsert(UISpecialFrames, "LMDDemoFrame");
-;(html as any).SetText(LMD.ToHTML(text))
+// console.log(LMD.ToHTML(text))
 //
 // -- This is a minimal hyperlink handler...
 // --
