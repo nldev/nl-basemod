@@ -10,7 +10,7 @@ const text = `
 `
 
 export function Markdown () {
-  // _G['LMDDemoFrame'].Show()
+  _G['LMDDemoFrame'].Show()
 
   const frame = CreateFrame('Frame', 'demo-frame', UIParent)
   // local frame = _G["LMDDemoFrame"] or CreateFrame("Frame", "LMDDemoFrame", UIParent);
