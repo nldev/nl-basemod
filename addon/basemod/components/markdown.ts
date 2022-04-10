@@ -53,7 +53,7 @@ export function Markdown () {
   // frame.html:SetHyperlinkFormat("[|cff3399ff|H%s|h%s|h|r]");
   // tinsert(UISpecialFrames, 'demo-frame')
   // tinsert(UISpecialFrames, "LMDDemoFrame");
-  // console.log(LMD.ToHTML(text))
+  console.log(LMD.ToHTML(text))
   //
   // -- This is a minimal hyperlink handler...
   // --
