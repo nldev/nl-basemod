@@ -38,7 +38,7 @@ export function Markdown (frame: WoWAPI.Frame) {
   return (text: string) => {
     console.log(LibMarkdown.ToHTML(text))
     html.SetPoint('TOPLEFT')
-    ;(html as any).SetText(LMD.ToHTML(text))
+    ;(html as any).SetText(LibMarkdown.ToHTML(text))
   }
 }
 
