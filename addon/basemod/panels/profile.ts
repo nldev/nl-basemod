@@ -147,7 +147,6 @@ export const Profile: Component = options => {
     previous: d,
     height: 250,
   })
-  // view
 
   // editor
   const editor = Textarea({
@@ -157,13 +156,22 @@ export const Profile: Component = options => {
     onChange: text => md(text),
   })
   editor.ref.SetPoint('TOPLEFT')
+
+  // preview
+  const f = Section({
+    name: 'preview',
+    title: 'Preview',
+    parent: scroll,
+    previous: d,
+    height: 250,
+  })
   const view = Frame({
     name: 'md-frame',
     parent: e,
     width: e.inner.GetWidth(),
     height: e.inner.GetHeight(),
   })
-  view.ref.SetPoint('BOTTOMLEFT', 0, -260)
+  view.ref.SetPoint('TOPLEFT', 0, -10)
   const md = Markdown(view.ref)
 
   return frame
