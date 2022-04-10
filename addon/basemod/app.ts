@@ -120,7 +120,8 @@ export class Store {
       if (!text)
         return
 
-      const [primitive, type, storeKey, storeValue] = text.split(' ')
+      const [primitive, type, storeKey, ...storeValues] = text.split(' ')
+      const storeValue = storeValues.join(' ')
 
       const n = Number(primitive)
       this.state[(type === '1') ? 'ACCOUNT' : 'CHARACTER'][storeKey] = (n === 0)
