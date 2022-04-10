@@ -41,9 +41,8 @@ export const LootItem: Component<
   LootItemState,
   LootItemFns
 > = options => {
-  SlashCmdList['HELLOWORLD'] = msg => {
-    console.log(msg)
-  }
+  SlashCmdList['HELLOWORLD'] = msg => console.log(msg)
+  _G['SLASH_HELLOWORLD1'] = '/helloworld'
   // app
   const app = Get()
 
