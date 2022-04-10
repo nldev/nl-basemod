@@ -155,11 +155,6 @@ export const Profile: Component = options => {
     height: 250,
     parent: e,
     onChange: text => md(text),
-    onAccept: text => {
-      const eb = DEFAULT_CHAT_FRAME.editBox
-      ChatEdit_ActivateChat(eb)
-      eb.Insert(text)
-    }
   })
   editor.ref.SetPoint('TOPLEFT')
   const view = Frame({
