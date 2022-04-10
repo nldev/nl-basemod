@@ -49,88 +49,87 @@ export const Profile: Component = options => {
 
   const scroll = Scroll({ name: 'profile-scroll', parent: frame, height: 300 })
 
-  const a = Section({
-    name: 'editor',
-    title: 'Editor',
-    parent: scroll,
-    height: 150,
-  })
-  const b = Section({
-    name: 'view',
-    title: 'View',
-    parent: scroll,
-    previous: a,
-    height: 50,
-  })
-
-  // view
-  const view = Frame({
-    name: 'view-frame',
-    parent: b,
-    width: b.inner.GetWidth(),
-    height: b.inner.GetHeight(),
-  })
-  view.ref.SetPoint('TOPLEFT', 0, -20)
-  const md = Markdown(view.ref)
-
-  // editor
-  const editor = Textarea({
-    name: 'editor-input',
-    height: 150,
-    parent: a,
-    onChange: text => md(text)
-  })
-  editor.ref.SetPoint('TOPLEFT')
-
-
-  // name
   // const a = Section({
-  //   name: 'name',
-  //   title: 'Name',
+  //   name: 'editor',
+  //   title: 'Editor',
   //   parent: scroll,
-  //   height: 50,
+  //   height: 150,
   // })
-  // const name = Input({
-  //   name: 'name-input',
-  //   parent: a,
-  // })
-  // name.ref.SetPoint('TOPLEFT')
-
-  // // class
   // const b = Section({
-  //   name: 'class',
-  //   title: 'Class',
+  //   name: 'view',
+  //   title: 'View',
   //   parent: scroll,
   //   previous: a,
   //   height: 50,
   // })
 
-  // // player-status
-  // const c = Section({
-  //   name: 'player-status',
-  //   title: 'Player Status',
-  //   parent: scroll,
-  //   previous: b,
-  //   height: 50,
+  // view
+  // const view = Frame({
+  //   name: 'view-frame',
+  //   parent: b,
+  //   width: b.inner.GetWidth(),
+  //   height: b.inner.GetHeight(),
   // })
+  // view.ref.SetPoint('TOPLEFT', 0, -20)
+  // const md = Markdown(view.ref)
 
-  // // character-status
-  // const d = Section({
-  //   name: 'character-status',
-  //   title: 'Character Status',
-  //   parent: scroll,
-  //   previous: c,
-  //   height: 50,
+  // // editor
+  // const editor = Textarea({
+  //   name: 'editor-input',
+  //   height: 150,
+  //   parent: a,
+  //   onChange: text => md(text)
   // })
+  // editor.ref.SetPoint('TOPLEFT')
 
-  // // about
-  // const e = Section({
-  //   name: 'about',
-  //   title: 'About',
-  //   parent: scroll,
-  //   previous: d,
-  //   height: 50,
-  // })
+  // name
+  const a = Section({
+    name: 'name',
+    title: 'Name',
+    parent: scroll,
+    height: 50,
+  })
+  const name = Input({
+    name: 'name-input',
+    parent: a,
+  })
+  name.ref.SetPoint('TOPLEFT')
+
+  // class
+  const b = Section({
+    name: 'class',
+    title: 'Class',
+    parent: scroll,
+    previous: a,
+    height: 50,
+  })
+
+  // player-status
+  const c = Section({
+    name: 'player-status',
+    title: 'Player Status',
+    parent: scroll,
+    previous: b,
+    height: 50,
+  })
+
+  // character-status
+  const d = Section({
+    name: 'character-status',
+    title: 'Character Status',
+    parent: scroll,
+    previous: c,
+    height: 50,
+  })
+
+  // about
+  const e = Section({
+    name: 'about',
+    title: 'About',
+    parent: scroll,
+    previous: d,
+    height: 50,
+  })
 
   return frame
 }
