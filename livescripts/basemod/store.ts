@@ -57,7 +57,7 @@ export function Store (events: TSEvents) {
     const key = w[2]
     let value = ''
     for (let i = 3; i <= (w.length - 1); i++)
-      value = value + w[i]
+      value = i > 3 ? (value + ' ' + w[i]) : value
     const pGuid = sender.GetGUID()
     const aGuid = sender.GetAccountID()
     const guid = (type === '0') ? pGuid : aGuid
