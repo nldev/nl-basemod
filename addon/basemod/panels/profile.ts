@@ -13,6 +13,7 @@ import { Grid } from '../components/grid'
 import { Checkbox } from '../components/checkbox'
 import { Input } from '../components/input'
 import { Textarea } from '../components/textarea'
+import { BASE_BACKDROP } from '../constants'
 
 declare interface ILMD {
   ToHTML: (markdown: string) => string
