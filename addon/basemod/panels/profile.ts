@@ -70,7 +70,7 @@ export const Profile: Component = options => {
     width: b.inner.GetWidth(),
     height: b.inner.GetHeight(),
   })
-  view.ref.SetPoint('TOPLEFT')
+  view.ref.SetPoint('TOPLEFT', 0, 20)
   const md = Markdown(view.ref)
 
   // editor
