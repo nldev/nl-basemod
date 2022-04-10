@@ -3,7 +3,8 @@ declare interface ILMD {
 }
 declare const tinsert: any
 declare const UISpecialFrames: any
-declare const LMD: ILMD
+
+const LMD = _G['LMD']
 
 const text = `
 `
@@ -47,11 +48,9 @@ html.SetPoint('TOPLEFT', frame, 'TOPLEFT', 0, -30)
 //
 ;(html as any).SetHyperlinkFormat('[|cff3399ff|H%s|h%s|h|r]')
 // frame.html:SetHyperlinkFormat("[|cff3399ff|H%s|h%s|h|r]");
-tinsert(UISpecialFrames, 'demo-frame')
+// tinsert(UISpecialFrames, 'demo-frame')
 // tinsert(UISpecialFrames, "LMDDemoFrame");
-frame.SetScript('OnShow', self => {
-  ;(html as any).SetText(LMD.ToHTML(text))
-})
+;(html as any).SetText(LMD.ToHTML(text))
 //
 // -- This is a minimal hyperlink handler...
 // --
