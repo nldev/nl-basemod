@@ -123,6 +123,7 @@ export class Store {
       const [primitive, type, storeKey, ...storeValues] = text.split(' ')
 
       const n = Number(primitive)
+      console.log(n)
       this.state[(type === '1') ? 'ACCOUNT' : 'CHARACTER'][storeKey] = (n === 0)
         ? Number(storeValues[0])
         : (n === 2)
