@@ -129,7 +129,7 @@ export class Store {
         ? ((storeValues[0] === '1') ? true : false)
         : (n === 3)
         ? null
-        : storeValues.join(' ')
+        : storeValues.join(' ').substring(1)
     })
 
     Events.ChatInfo.OnChatMsgAddon(app.root.ref, prefix => {
