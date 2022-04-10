@@ -24,6 +24,7 @@ export function Markdown (frame: WoWAPI.Frame) {
   html.SetHeight(frame.GetHeight())
   html.SetWidth(frame.GetWidth())
   html.SetPoint('TOPLEFT')
+  html.SetBackdrop(BASE_BACKDROP)
   ;(html as any).SetFontObject('h1', 'SubzoneTextFont')
   ;(html as any).SetTextColor('h1', 0, 0.6, 1, 1)
   ;(html as any).SetFontObject('h2', 'NumberFontNormalLarge')
@@ -35,6 +36,7 @@ export function Markdown (frame: WoWAPI.Frame) {
   ;(html as any).SetHyperlinkFormat('[|cff3399ff|H%s|h%s|h|r]')
   return (text: string) => {
     console.log(LMD.ToHTML(text))
+    html.SetPoint('TOPLEFT')
     ;(html as any).SetText(LMD.ToHTML(text))
   }
 }
