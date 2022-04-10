@@ -4,7 +4,7 @@ import { Scroll } from './components/scroll'
 import { List, ListState, ListFns } from './components/list'
 import { Movable } from './utils'
 declare const IsShiftKeyDown: any
-declare const ChatEdit_InsertItem: any
+declare const ChatEdit_LinkItem: any
 
 export interface LootItemFns {
 }
@@ -96,7 +96,7 @@ export const LootItem: Component<
     if (IsControlKeyDown()) {
       DressUpItemLink(GetItemInfo(options.itemId)[1])
     } else if (IsShiftKeyDown()) {
-      ChatEdit_InsertItem(options.itemId, GetItemInfo(options.itemId)[1])
+      ChatEdit_LinkItem(options.itemId, GetItemInfo(options.itemId)[1])
     } else {
       SendAddonMessage('loot-item', `${options.itemId} ${options.amount}`, 'WHISPER', app.playerInfo.name)
       Detach()
