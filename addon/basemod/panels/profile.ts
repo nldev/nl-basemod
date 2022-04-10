@@ -162,7 +162,7 @@ export const Profile: Component = options => {
     name: 'preview',
     title: 'Preview',
     parent: scroll,
-    previous: d,
+    previous: e,
     height: 250,
   })
   const view = Frame({
