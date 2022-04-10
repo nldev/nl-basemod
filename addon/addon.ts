@@ -7,8 +7,14 @@ import { AllChildren } from './basemod/utils'
 import { Panel } from './basemod/components/panel'
 // import { Markdown } from './basemod/components/markdown'
 import { Profile } from './basemod/panels/profile'
+interface SlashCommands {
+  [key: string]: (message: string) => void
+}
+declare const SlashCmdList: SlashCommands
 
 export const app = new App(app => {
+  SlashCmdList['BASEMOD'] = msg => console.log('basemod v0.1.0')
+  _G['SLASH_BASEMOD1'] = '/basemod'
   EasyLoot()
   Chests()
   // Markdown()

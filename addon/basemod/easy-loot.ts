@@ -6,10 +6,6 @@ import { Movable } from './utils'
 declare const IsShiftKeyDown: any
 declare const ChatEdit_InsertLink: any
 declare const ChatEdit_ActivateChat: any
-interface SlashCommands {
-  [key: string]: (message: string) => void
-}
-declare const SlashCmdList: SlashCommands
 declare const DEFAULT_CHAT_FRAME: {
   AddMessage: any
 }
@@ -41,8 +37,6 @@ export const LootItem: Component<
   LootItemState,
   LootItemFns
 > = options => {
-  SlashCmdList['HELLOWORLD'] = msg => console.log(msg)
-  _G['SLASH_HELLOWORLD1'] = '/helloworld'
   // app
   const app = Get()
 
