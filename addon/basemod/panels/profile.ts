@@ -22,6 +22,7 @@ declare const LMD: ILMD
 
 export function Markdown (frame: WoWAPI.Frame) {
   const html: WoWAPI.Frame = CreateFrame('SimpleHTML', frame.GetName() + '-md', frame) as any
+  html.SetParent(frame)
   html.SetHeight(frame.GetHeight())
   html.SetWidth(frame.GetWidth())
   html.SetPoint('TOPLEFT')
@@ -49,13 +50,31 @@ export const Profile: Component = options => {
 
   const scroll = Scroll({ name: 'profile-scroll', parent: frame, height: 300 })
 
-  // editor
   const a = Section({
     name: 'editor',
     title: 'Editor',
     parent: scroll,
     height: 150,
   })
+  const b = Section({
+    name: 'view',
+    title: 'View',
+    parent: scroll,
+    previous: a,
+    height: 50,
+  })
+
+  // view
+  const view = Frame({
+    name: 'view-frame',
+    parent: b,
+    width: b.inner.GetWidth(),
+    height: b.inner.GetHeight(),
+  })
+  view.ref.SetPoint('TOPLEFT')
+  const md = Markdown(view.ref)
+
+  // editor
   const editor = Textarea({
     name: 'editor-input',
     height: 150,
@@ -64,21 +83,6 @@ export const Profile: Component = options => {
   })
   editor.ref.SetPoint('TOPLEFT')
 
-  // view
-  const b = Section({
-    name: 'view',
-    title: 'View',
-    parent: scroll,
-    previous: a,
-    height: 50,
-  })
-  const view = Frame({
-    name: 'view-frame',
-    width: b.inner.GetWidth(),
-    height: b.inner.GetHeight(),
-  })
-  view.ref.SetPoint('TOPLEFT')
-  const md = Markdown(view.ref)
 
   // name
   // const a = Section({
