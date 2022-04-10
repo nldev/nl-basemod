@@ -133,7 +133,6 @@ export const Profile: Component = options => {
     previous: c,
     height: 250,
   })
-
   const editor = Textarea({
     name: 'editor-input',
     height: 250,
