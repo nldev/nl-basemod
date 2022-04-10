@@ -82,9 +82,9 @@ export function rgb (red: number, green: number, blue: number): Rgb {
   return [red / 255, green / 255, blue / 255]
 }
 
-const turnSpeed = 34; //bigger = slower
-const dragSpeed = 100; //bigger = slower
-const zoomSpeed = 0.5; //smaller = slower
+const turnSpeed = 34  // bigger = slower
+const dragSpeed = 100 // bigger = slower
+const zoomSpeed = 0.5 // smaller = slower
 export function SetupModelZoomDragRotation(model: WoWAPI.DressUpModel) {
   model.SetPosition(0, 0, 0)
   model.EnableMouse(true)

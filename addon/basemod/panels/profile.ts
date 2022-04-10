@@ -105,7 +105,7 @@ export const Profile: Component = options => {
   })
   const cls = Input({
     name: 'class-input',
-    parent: a,
+    parent: b,
   })
   cls.ref.SetPoint('TOPLEFT')
 
@@ -119,7 +119,7 @@ export const Profile: Component = options => {
   })
   const playerStatus = Input({
     name: 'player-status-input',
-    parent: a,
+    parent: c,
   })
   playerStatus.ref.SetPoint('TOPLEFT')
 
@@ -133,7 +133,7 @@ export const Profile: Component = options => {
   })
   const characterStatus = Input({
     name: 'character-status-input',
-    parent: a,
+    parent: d,
   })
   characterStatus.ref.SetPoint('TOPLEFT')
 
@@ -159,7 +159,7 @@ export const Profile: Component = options => {
   const editor = Textarea({
     name: 'editor-input',
     height: 150,
-    parent: a,
+    parent: e,
     onChange: text => md(text)
   })
   editor.ref.SetPoint('TOPLEFT')
