@@ -26,10 +26,11 @@ export const Profile: Component = options => {
     name: 'editor',
     title: 'Editor',
     parent: scroll,
-    height: 50,
+    height: 150,
   })
   const editor = Textarea({
     name: 'editor-input',
+    height: 150,
     parent: a,
   })
   editor.ref.SetPoint('TOPLEFT')
