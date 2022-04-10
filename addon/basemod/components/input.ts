@@ -43,7 +43,7 @@ export const Input: Component<InputOptions> = options => {
     if (options.onChange)
       options.onChange(text, input)
   })
-  inner.inner = e as any
+  input.inner = e as any
   input.ref.EnableMouse(true)
   input.ref.SetScript('OnMouseDown', () => {
     e.SetFocus()
