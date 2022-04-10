@@ -125,7 +125,7 @@ export const Profile: Component = options => {
   })
   status.ref.SetPoint('TOPLEFT')
 
-  // about
+  // edit
   const d = Section({
     name: 'about',
     title: 'About',
@@ -134,7 +134,6 @@ export const Profile: Component = options => {
     height: 250,
   })
 
-  // editor
   const editor = Textarea({
     name: 'editor-input',
     height: 250,
