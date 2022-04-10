@@ -4,7 +4,7 @@ declare interface ILMD {
 declare const tinsert: any
 declare const UISpecialFrames: any
 
-const LMD = _G['LMD']
+const LMD: any = _G['LMD']
 
 const text = `
 `
