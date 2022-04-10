@@ -21,7 +21,9 @@ declare const LMD: ILMD
 
 export function Markdown (frame: WoWAPI.Frame) {
   const html: WoWAPI.Frame = CreateFrame('SimpleHTML', frame.GetName() + '-md', frame) as any
-  html.SetAllPoints(frame)
+  html.SetHeight(frame.GetHeight())
+  html.SetWidth(frame.GetWidth())
+  html.SetPoint('TOPLEFT')
   ;(html as any).SetFontObject('h1', 'SubzoneTextFont')
   ;(html as any).SetTextColor('h1', 0, 0.6, 1, 1)
   ;(html as any).SetFontObject('h2', 'NumberFontNormalLarge')
@@ -32,7 +34,8 @@ export function Markdown (frame: WoWAPI.Frame) {
   ;(html as any).SetTextColor('p', 1, 1, 1, 1)
   ;(html as any).SetHyperlinkFormat('[|cff3399ff|H%s|h%s|h|r]')
   return (text: string) => {
-    ;(html as any).SetText(text)
+    console.log(LMD.ToHTML(text))
+    ;(html as any).SetText(LMD.ToHTML(text))
   }
 }
 
