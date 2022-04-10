@@ -167,9 +167,9 @@ export const Profile: Component = options => {
   })
   const view = Frame({
     name: 'md-frame',
-    parent: e,
-    width: e.inner.GetWidth(),
-    height: e.inner.GetHeight(),
+    parent: f,
+    width: f.inner.GetWidth(),
+    height: f.inner.GetHeight(),
   })
   view.ref.SetPoint('TOPLEFT', 0, -10)
   const md = Markdown(view.ref)
