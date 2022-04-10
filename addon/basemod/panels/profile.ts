@@ -140,10 +140,8 @@ export const Profile: Component = options => {
     height: 250,
     parent: d,
     initial: $.store.Get('CHARACTER', 'rp-about', ''),
-    onAccept: text => {
-      console.log(text)
-      $.store.Set('CHARACTER', 'rp-about', text)
-    },
+    onAccept: text =>
+      $.store.Set('CHARACTER', 'rp-about', text),
     onChange: text => md(text),
   })
   editor.ref.SetPoint('TOPLEFT')
