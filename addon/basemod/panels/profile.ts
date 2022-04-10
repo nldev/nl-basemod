@@ -148,22 +148,21 @@ export const Profile: Component = options => {
   // view
 
   // editor
-  const view = Frame({
-    name: 'md-frame',
-    parent: e,
-    width: e.inner.GetWidth(),
-    height: e.inner.GetHeight(),
-  })
-  const md = Markdown(view.ref)
   const editor = Textarea({
     name: 'editor-input',
     height: 250,
     parent: e,
     onChange: text => md(text),
   })
-  view.ref.SetParent(editor.ref)
-  view.ref.SetPoint('BOTTOMLEFT', 0, -20)
   editor.ref.SetPoint('TOPLEFT')
+  const view = Frame({
+    name: 'md-frame',
+    parent: editor,
+    width: e.inner.GetWidth(),
+    height: e.inner.GetHeight(),
+  })
+  view.ref.SetPoint('BOTTOMLEFT', 0, -20)
+  const md = Markdown(view.ref)
 
   return frame
 }
