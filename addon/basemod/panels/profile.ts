@@ -12,6 +12,7 @@ import { Counter } from '../components/counter'
 import { Grid } from '../components/grid'
 import { Checkbox } from '../components/checkbox'
 import { Input } from '../components/input'
+import { Textarea } from '../components/textarea'
 
 export const Profile: Component = options => {
   const frame = Frame({ name: 'profile', ...options })
@@ -22,27 +23,28 @@ export const Profile: Component = options => {
 
   // editor
   const a = Section({
-    name: 'name',
-    title: 'Name',
+    name: 'editor',
+    title: 'Editor',
     parent: scroll,
     height: 50,
   })
-  const editor = Input({
-    name: 'editor',
+  const editor = Textarea({
+    name: 'editor-input',
     parent: a,
   })
   editor.ref.SetPoint('TOPLEFT')
 
   // view
   const b = Section({
-    name: 'name',
-    title: 'Name',
+    name: 'view',
+    title: 'View',
     parent: scroll,
     height: 50,
   })
-  const view = Input({
-    name: 'name-input',
-    parent: b,
+  const view = Frame({
+    name: 'view-frame',
+    width: b.inner.GetWidth(),
+    height: b.inner.GetHeight(),
   })
   view.ref.SetPoint('TOPLEFT')
 
