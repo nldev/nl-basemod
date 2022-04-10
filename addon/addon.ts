@@ -7,10 +7,10 @@ import { AllChildren } from './basemod/utils'
 import { Panel } from './basemod/components/panel'
 // import { Markdown } from './basemod/components/markdown'
 import { Profile } from './basemod/panels/profile'
-interface ISlashCmdList {
+interface SlashCmdList {
   [key: string]: (message: string) => void
 }
-declare const SlashCmdList: ISlashCmdList
+declare const SlashCmdList: SlashCmdList
 
 export const app = new App(app => {
   SlashCmdList['BASEMOD'] = msg => {
