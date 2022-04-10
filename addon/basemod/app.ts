@@ -123,14 +123,13 @@ export class Store {
       const [primitive, type, storeKey, ...storeValues] = text.split(' ')
 
       const n = Number(primitive)
-      console.log(n)
       this.state[(type === '1') ? 'ACCOUNT' : 'CHARACTER'][storeKey] = (n === 0)
         ? Number(storeValues[0])
         : (n === 2)
         ? ((storeValues[0] === '1') ? true : false)
         : (n === 3)
         ? null
-        : storeValues.join(' ').substring(1)
+        : storeValues.join(' ')
     })
 
     Events.ChatInfo.OnChatMsgAddon(app.root.ref, prefix => {
