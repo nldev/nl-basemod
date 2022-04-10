@@ -112,7 +112,7 @@ export const Profile: Component = options => {
   // status
   const c = Section({
     name: 'status',
-    title: 'Character Status',
+    title: 'Status',
     parent: scroll,
     previous: b,
     height: 50,
