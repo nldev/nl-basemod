@@ -6,10 +6,11 @@ declare const tinsert: any
 declare const UISpecialFrames: any
 
 const text = `
+# hello world
 `
 
-export function md () {
-  _G['LMDDemoFrame'].Show()
+export function Markdown () {
+  // _G['LMDDemoFrame'].Show()
 
   const frame = CreateFrame('Frame', 'demo-frame', UIParent)
   // local frame = _G["LMDDemoFrame"] or CreateFrame("Frame", "LMDDemoFrame", UIParent);
