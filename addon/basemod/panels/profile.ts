@@ -39,6 +39,7 @@ export const Profile: Component = options => {
     name: 'view',
     title: 'View',
     parent: scroll,
+    previous: a,
     height: 50,
   })
   const view = Frame({
