@@ -74,7 +74,6 @@ export interface TemplateOptions<T = any> {
   id?: string
   taskId?: string
   needs?: string[]
-  fn?: (result: any) => void
 }
 
 export interface Template<T = any> extends TemplateOptions {
@@ -82,7 +81,6 @@ export interface Template<T = any> extends TemplateOptions {
   id: string
   taskId: string
   needs: string[]
-  fn: (result: any) => void
 }
 
 export interface Task<T = any, O = any> {
@@ -162,7 +160,7 @@ export class Builder {
     cb(this)
 
     if (this.processQueue.length)
-      throw new Error(`${this.processQueue.length} items left in processing queue`)
+      throw new Error(`${this.processQueue.length} templates left in processing queue`)
   }
 
   public Process <T = any>(template: TemplateOptions<T>, lastId: (null | string) = null) {
@@ -204,7 +202,6 @@ export class Builder {
           needs: template.needs || [],
           taskId: template.taskId || '',
           id: template.id,
-          fn: template.fn || (() => {}),
         }
 
         task.process(this, t, this.config.tasks[task.id])
