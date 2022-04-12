@@ -1,5 +1,6 @@
 import fs from 'fs'
 import { std } from 'wow/wotlk'
+import { Spell } from 'wow/wotlk/std/Spell/Spell'
 
 import { ADDON_DATA_PATH, DEFAULT_MOD, DEFAULT_OPTIONS, DEFAULT_SPEED, DEFAULT_TABLE_PREFIX, DEFAULT_VERSION } from './constants'
 import { Database, Mapping, SQLTable } from './types'
@@ -16,6 +17,7 @@ export class Builder {
   public readonly Mod: string = DEFAULT_MOD
   public readonly Version: string = DEFAULT_VERSION
   public readonly BaseSpeed: number = DEFAULT_SPEED
+  public readonly Spells: Mapping<Spell> = {}
 
   protected readonly addonFiles: Mapping<boolean> = {}
   protected readonly databaseTables: Mapping<boolean> = {}
@@ -181,4 +183,6 @@ export class Builder {
     fs.writeFileSync(filePath, code, { encoding: 'utf8' })
   }
 }
+
+export default new Builder()
 

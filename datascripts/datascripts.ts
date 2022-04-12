@@ -519,31 +519,6 @@ function Kick () {
   s.Power.setEnergy(15)
 }
 
-function Guile ($: Builder) {
-  $.Process<SpellOptions>({
-    id: 'recover',
-    taskId: 'create-spell',
-    data: {
-      baseId: 24532,
-    },
-    fn: (spell: Spell) => {
-      const recover = spell.asset
-      recover.Attributes.NOT_BREAK_STEALTH.set(true)
-      recover.Name.enGB.set('Guile')
-      recover.Icon.setPath('spell_nature_healingway')
-      const e = recover.Effects.get(0)
-      e.PointsBase.set(60)
-      e.PointsPerLevel.set(0)
-      recover.Cooldown.set(1000 * 60 * 2, 0, 0, 0)
-      recover.Description.enGB.set('Instantly restores 60 energy.')
-      const v = recover.Visual.getRefCopy()
-      const k = v.CastKit.getRefCopy()
-      k.StartAnimation.set(-1)
-      k.Animation.set(-1)
-    },
-  })
-}
-
 function Rogue ($: Builder) {
   SetupPoisons()
   NormalizeSprint($)
