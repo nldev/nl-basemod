@@ -22,11 +22,13 @@ export const DEFAULT_ICON_SPELL_BASE = 56247
 export const DEFAULT_SPELL_DESCRIPTION = 'A spell.'
 export const DEFAULT_SPELL_AURA_DESCRIPTION = 'An aura.'
 
-export const DEFAULT_ITEM_BASE = 0 // FIXME: add real item id
+export const DEFAULT_ITEM_BASE = 2092
 export const DEFAULT_ITEM_NAME = 'Item'
 
-export const DEFAULT_NPC_BASE = 0 // FIXME: add real npc id
+export const DEFAULT_NPC_BASE = 525
 export const DEFAULT_NPC_NAME = 'Npc'
+
+export const DEFAULT_MAP = 0
 
 export const DEFAULT_MOUNT_NPC_BASE = 308
 export const DEFAULT_DIRECT_SPELL_BASE = 133

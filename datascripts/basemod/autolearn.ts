@@ -4,14 +4,14 @@ import { ClassMask } from './utils'
 import { CharacterClass } from './types'
 import { ALL_CLASSES } from './constants'
 
-export interface AutolearnTemplate {
+interface Template {
   id: string
   spellId: number
   level: number
   class: CharacterClass[]
 }
 
-const TEMPLATES: AutolearnTemplate[] = [
+const TEMPLATES: Template[] = [
   {
     id: 'recall',
     spellId: 8690,
