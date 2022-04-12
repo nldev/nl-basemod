@@ -1,48 +1,20 @@
 import { std } from 'wow/wotlk'
-import { Spell as TSSpell } from 'wow/wotlk/std/Spell/Spell'
-import { Task } from '.'
-import { AssetOptions, Asset } from './types'
-import { TitleCaseToDashCase } from './utils'
+import $ from '.'
 
-const DEFAULT_SPELL = 133 // fireball
+// guile
+export const Guile = std.Spells.create($.Mod, 'guile', 24532)
+Guile.Attributes.NOT_BREAK_STEALTH.set(true)
+Guile.Name.enGB.set('Guile')
+Guile.Icon.setPath('spell_nature_healingway')
+const e = Guile.Effects.get(0)
+e.PointsBase.set(60)
+e.PointsPerLevel.set(0)
+Guile.Cooldown.set(1000 * 60 * 2, 0, 0, 0)
+Guile.Description.enGB.set('Instantly restores 60 energy.')
+const v = Guile.Visual.getRefCopy()
+const k = v.CastKit.getRefCopy()
+k.StartAnimation.set(-1)
+k.Animation.set(-1)
+$.Spells['guile'] = Guile
 
-export interface Spell extends Asset {
-  asset: TSSpell
-}
-
-export interface SpellOptions extends AssetOptions {
-  asset?: TSSpell
-}
-
-export interface CreateSpellConfig {
-  // isPrefix?: boolean
-}
-
-export const CreateSpell: Task<SpellOptions, CreateSpellConfig> = {
-  id: 'create-spell',
-  identify: ($, config, options) => {
-    if (!config.data.baseId)
-      throw new Error('create-spell templates require a baseId to automatically assign ID')
-
-    return TitleCaseToDashCase(std.Spells.load(config.data.baseId).Name.enGB.get())
-  },
-  setup: ($, config) => {},
-  process: ($, template, config) => {
-    const baseId = template.data.baseId || DEFAULT_SPELL
-    const spell: Spell = {
-      baseId,
-      id: template.id,
-      isModify: (typeof template.data.isModify === 'boolean')
-        ? template.data.isModify
-        : false,
-      asset: template.data.isModify
-        ? std.Spells.load(baseId)
-        : std.Spells.create($.Mod, template.id, baseId),
-    }
-
-    template.fn(spell)
-
-    $.Set('spells', template.id, spell)
-  },
-}
 

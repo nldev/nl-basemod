@@ -10,6 +10,7 @@ Crashes/
 logs/
 Server.log
 DBErrors.log
+GM.log
 *.conf.dist
 *_backup/
 
