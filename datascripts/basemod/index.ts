@@ -2,7 +2,7 @@ import fs from 'fs'
 import { std } from 'wow/wotlk'
 
 import { ADDON_DATA_PATH, DEFAULT_MOD, DEFAULT_OPTIONS, DEFAULT_SPEED, DEFAULT_TABLE_PREFIX, DEFAULT_VERSION } from './constants'
-import { Database, Env, Mapping, SQLTable } from './types'
+import { Database, Mapping, SQLTable } from './types'
 import { Constantify } from './utils'
 
 export interface BuilderOptions {
@@ -17,7 +17,6 @@ export class Builder {
   public readonly Version: string = DEFAULT_VERSION
   public readonly BaseSpeed: number = DEFAULT_SPEED
 
-  protected readonly tasks: string[] = []
   protected readonly addonFiles: Mapping<boolean> = {}
   protected readonly databaseTables: Mapping<boolean> = {}
   protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
@@ -34,14 +33,6 @@ export class Builder {
 
     if (options.tablePrefix)
       this.Mod = options.tablePrefix
-  }
-
-  public Run <T>(id: string, fn: () => T): T {
-    if (this.tasks.includes(id))
-      throw 'A task with an ID of ${taskID} has already been ran'
-    const value = fn()
-    this.tasks.push(id)
-    return value
   }
 
   public Table (options: SQLTable) {
@@ -190,7 +181,4 @@ export class Builder {
     fs.writeFileSync(filePath, code, { encoding: 'utf8' })
   }
 }
-
-const $ = new Builder()
-const x = $.Run('hello', () => 5)
 

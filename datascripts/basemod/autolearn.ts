@@ -1,6 +1,6 @@
 import { std } from 'wow/wotlk'
-import { Task } from '.'
-import { ClassMask, TitleCaseToDashCase } from './utils'
+import { Builder } from '.'
+import { ClassMask, Dashify } from './utils'
 import { CharacterClass } from './types'
 
 export interface Autolearn {
@@ -10,6 +10,10 @@ export interface Autolearn {
 }
 
 export interface CreateAutolearnConfig {}
+
+
+export const Autolearn = ($: Builder) => {
+}
 
 export const CreateAutolearn: Task<Autolearn, CreateAutolearnConfig> = {
   id: 'create-autolearn',
