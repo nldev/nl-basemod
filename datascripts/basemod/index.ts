@@ -46,11 +46,8 @@ export class Builder {
   protected readonly addonFiles: Mapping<boolean> = {}
   protected readonly databaseTables: Mapping<boolean> = {}
   protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
-  protected readonly data: any = {}
-  protected readonly processQueue: Process[] = []
 
   constructor (
-    cb: ($: Builder) => void = () => {},
     protected readonly options: BuilderOptions = DEFAULT_OPTIONS,
     protected readonly config: BuilderConfig = DEFAULT_CONFIG,
   ) {
@@ -69,16 +66,13 @@ export class Builder {
 
     if (config.tablePrefix)
       this.Mod = config.tablePrefix
-
-    cb(this)
-
-    if (this.processQueue.length)
-      throw new Error(`${this.processQueue.length} templates left in processing queue`)
   }
 
-  public Run <T>(taskId: string, fn: () => T) {
+  public Run <T>(id: string, fn: () => T): T {
+    if (this.tasks.includes(id))
+      throw 'A task with an ID of ${taskID} has already been ran'
     const value = fn()
-    this.tasks.push(taskId)
+    this.tasks.push(id)
     return value
   }
 
@@ -168,7 +162,7 @@ export class Builder {
 
   public WriteToDatabase (table: string, data: any, database: Database = 'world') {
     if (!this.databaseTables[table])
-      throw new Error(`Database table ${database}.${this.tablePrefix}${table} does not exist, cannot insert record.`)
+      throw `Database table ${database}.${this.tablePrefix}${table} does not exist, cannot insert record.`
 
     let lines = [`insert into ${this.tablePrefix}${table} (`]
 
@@ -228,4 +222,7 @@ export class Builder {
     fs.writeFileSync(filePath, code, { encoding: 'utf8' })
   }
 }
+
+const $ = new Builder()
+const x = $.Run('hello', () => 5)
 
