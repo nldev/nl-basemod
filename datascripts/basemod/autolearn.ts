@@ -1,8 +1,8 @@
 import { std } from 'wow/wotlk'
-import { Builder } from '.'
 import { ClassMask } from './utils'
 import { CharacterClass } from './types'
 import { ALL_CLASSES } from './constants'
+import $ from '.'
 
 interface Template {
   id: string
@@ -242,7 +242,7 @@ const TEMPLATES: Template[] = [
   },
 ]
 
-function run ($: Builder) {
+function run () {
   for (let template of TEMPLATES) {
     const spell = std.Spells.load(template.spellId)
     if (spell.Rank.getFirstSpell() > 0)
@@ -261,7 +261,7 @@ function run ($: Builder) {
   }
 }
 
-function setup ($: Builder) {
+function setup () {
   $.Table({
     name: 'autolearn',
     database: 'world',
@@ -310,8 +310,8 @@ function setup ($: Builder) {
   })
 }
 
-export function Autolearn ($: Builder) {
-  setup($)
-  run($)
+export function Autolearn () {
+  setup()
+  run()
 }
 
