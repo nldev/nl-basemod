@@ -1,24 +1,16 @@
 import { std } from 'wow/wotlk'
+import { Mapping } from './basemod/types'
+import $ from './basemod'
 import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
 import { ItemQuality } from 'wow/wotlk/std/Item/ItemQuality'
-import { Builder } from './basemod'
-import { Mapping, SQLTable } from './basemod/types'
-import { TalentOptions } from './basemod/talents'
-import { Autolearn } from './basemod/autolearn'
-import { Speed } from './basemod/utils'
-import { MapOptions } from './basemod/maps'
-import { TABLES } from './config/tables'
-import { TALENTS } from './config/talents'
-import { AUTOLEARN } from './config/autolearn'
-import { MAPS } from './config/maps'
 import { ALL_CLASSES, CLASS_IDS, RACE_IDS } from './basemod/constants'
-import { Spell, SpellOptions } from './basemod/spells'
+import { Speed } from './basemod/utils'
 
 let currency_id = 0
 
 const SKILLS: Mapping<SkillLine> = {}
-std.SkillLines.forEach(e => {
-  SKILLS[e.Name.enGB.get()] = e
+  std.SkillLines.forEach(e => {
+    SKILLS[e.Name.enGB.get()] = e
 })
 
 const STATS: any = {
@@ -305,15 +297,59 @@ const UNUSED_STARTING_SPELLS = [
   7744,
 ]
 
-
-new Builder($ => {
-  $.ProcessMany<SQLTable>(TABLES)
-  $.ProcessMany<TalentOptions>(TALENTS)
-  $.ProcessMany<Autolearn>(AUTOLEARN)
-  $.ProcessMany<MapOptions>(MAPS)
-
-  Settings($)
-})
+function Store () {
+  $.Table({
+    name: 'store',
+    database: 'world',
+    isPersist: true,
+    columns: [
+      {
+        name: 'entry',
+        type: 'mediumint',
+        typeParams: {
+          size: 16,
+        },
+        isPrimaryKey: true,
+        isNotNullable: true,
+        isAutoIncrement: true,
+      },
+      {
+        name: 'guid',
+        type: 'mediumint',
+        typeParams: {
+          size: 16,
+        },
+        isNotNullable: true,
+      },
+      {
+        name: 'primitive',
+        type: 'mediumint',
+        typeParams: {
+          size: 16,
+        },
+        isNotNullable: true,
+      },
+      {
+        name: 'type',
+        type: 'mediumint',
+        typeParams: {
+          size: 16,
+        },
+        isNotNullable: true,
+      },
+      {
+        name: 'storeKey',
+        type: 'mediumtext',
+        isNotNullable: true,
+      },
+      {
+        name: 'storeValue',
+        type: 'mediumtext',
+        isNotNullable: true,
+      },
+    ],
+  })
+}
 
 function RemoveUnusedStartingItems () {
   std.Items.load(6948).delete() // hearthstone
@@ -350,7 +386,7 @@ function RemoveFlagDropDebuff () {
   std.Spells.load(2479).delete()
 }
 
-function CreateDevMovementBoots ($: Builder) {
+function CreateDevMovementBoots () {
   for (let i = 1; i <= 10; i++) {
     const amount = i * 10
     const boots = std.Items.create($.Mod, `dev-boots-${amount}`, 20903)
@@ -476,7 +512,7 @@ function Recall () {
   spell.Icon.setPath('Achievement_WorldEvent_Lunar')
 }
 
-function NormalizeSprint ($: Builder) {
+function NormalizeSprint () {
   // FIXME fix tooltip
   const sprint = std.Spells.load(11305)
   sprint.Effects.get(0).PointsBase.set(Speed($.BaseSpeed, 79))
@@ -519,19 +555,18 @@ function Kick () {
   s.Power.setEnergy(15)
 }
 
-function Rogue ($: Builder) {
+function Rogue () {
   SetupPoisons()
-  NormalizeSprint($)
+  NormalizeSprint()
   KidneyShot()
   CheapShot()
   Garrote()
   Ambush()
   Sap()
   Blind()
-  Guile($)
 }
 
-function InfiniteRangedWeapon ($: Builder) {
+function InfiniteRangedWeapon () {
   const b = std.Items.load(2504)
   b.Name.enGB.set('Bow')
   b.Damage.clearAll()
@@ -562,7 +597,7 @@ function InfiniteRangedWeapon ($: Builder) {
     .Description.enGB.set('')
 }
 
-function SetupSkills ($: Builder) {
+function SetupSkills () {
   // dual wield
   SKILLS['Dual Wield'].Autolearn.addMod(['ROGUE', 'SHAMAN', 'HUNTER', 'WARRIOR'], ALL_CLASSES as any, e => e.Rank.set(0))
   // dagger
@@ -603,7 +638,7 @@ function SetupSkills ($: Builder) {
   SKILLS['Mail'].Autolearn.addMod(['PALADIN', 'WARRIOR', 'HUNTER', 'SHAMAN'], ALL_CLASSES as any, e => e.Rank.set(0))
 }
 
-function SetupNpcStats ($: Builder) {
+function SetupNpcStats () {
   std.SQL.creature_classlevelstats.queryAll({}).forEach(v => v.delete())
   const npcWarriorMin = std.SQL.creature_classlevelstats.query({ level: 35, class: 1 })
   const npcWarriorMax = std.SQL.creature_classlevelstats.query({ level: 70, class: 1 })
@@ -702,7 +737,7 @@ function SetupNpcStats ($: Builder) {
   })
 }
 
-function SetupStats ($: Builder) {
+function SetupStats () {
   std.Classes.queryAll({}).forEach(cls => {
     if (cls.ID === 6)
       return
@@ -816,7 +851,7 @@ interface CurrencyOptions {
   category?: string
 }
 
-function Currency ($: Builder, options: CurrencyOptions) {
+function Currency (options: CurrencyOptions) {
   const c = std.Items.create($.Mod, options.id, 29434)
   c.Name.enGB.set(options.name)
   c.Bonding.NO_BOUNDS.set()
@@ -832,22 +867,22 @@ function Currency ($: Builder, options: CurrencyOptions) {
   return c
 }
 
-function CreateCurrencies ($: Builder) {
+function CreateCurrencies () {
   std.DBC.CurrencyTypes.queryAll({}).forEach(c => c.delete())
 
-  const linen = Currency($, {
+  const linen = Currency({
     id: 'linen-cloth',
     name: 'Linen Cloth',
     icon: 2589,
   })
 
-  const wool = Currency($, {
+  const wool = Currency({
     id: 'wool-cloth',
     name: 'Wool Cloth',
     icon: 2592,
   })
 
-  const silk = Currency($, {
+  const silk = Currency({
     id: 'silk-cloth',
     name: 'Silk Cloth',
     icon: 4306,
@@ -861,7 +896,7 @@ function CreateCurrencies ($: Builder) {
   std.Spells.load(7929).CastTime.set(0).Reagents.clearAll().Reagents.add(silk.ID, 2)
 }
 
-function Grapple ($: Builder) {
+function Grapple () {
   const grapple = std.Spells.create($.Mod, 'grapple', 57882)
   grapple.Name.enGB.set('Grapple')
   grapple.Description.enGB.set('Grapple to a nearby location.')
@@ -879,19 +914,18 @@ function Grapple ($: Builder) {
   grapple.Visual.getRefCopy().cloneFromVisual(11055)
 }
 
-function Settings ($: Builder) {
-  Recall()
-  RemoveFlagDropDebuff()
-  RemoveUnusedStartingSpells()
-  RemoveUnusedStartingItems()
-  SetStartingZone()
-  InfiniteRangedWeapon($)
-  SetupStats($)
-  SetupSkills($)
-  SetupNpcStats($)
-  CreateCurrencies($)
-  CreateDevMovementBoots($)
-  Rogue($)
-  Grapple($)
-}
+Store()
+Recall()
+RemoveFlagDropDebuff()
+RemoveUnusedStartingSpells()
+RemoveUnusedStartingItems()
+SetStartingZone()
+InfiniteRangedWeapon()
+SetupStats()
+SetupSkills()
+SetupNpcStats()
+CreateCurrencies()
+CreateDevMovementBoots()
+Rogue()
+Grapple()
 
