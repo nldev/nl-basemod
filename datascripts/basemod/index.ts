@@ -3,14 +3,7 @@ import { std } from 'wow/wotlk'
 
 import { ENV, DEFAULT_MOD, DEFAULT_TABLE_PREFIX } from './constants'
 import { Database, Env, Mapping, SQLTable } from './types'
-import { DashCaseToConstantCase } from './utils'
-import { CreateTable } from './sql'
-import { CreateSpell } from './spells'
-import { CreateItem } from './items'
-import { CreateNpc } from './npcs'
-import { CreateTalent } from './talents'
-import { CreateAutolearn } from './autolearn'
-import { CreateMap } from './maps'
+import { Constantify } from './utils'
 
 export const ADDON_PATH = __dirname + '/../../../addon'
 export const ADDON_DATA_PATH = ADDON_PATH + '/data'
@@ -23,85 +16,24 @@ export const DEFAULT_CONFIG = {
   env: ENV.DEV,
   baseSpeed: DEFAULT_SPEED,
   tablePrefix: DEFAULT_TABLE_PREFIX,
-  tasks: {
-    'create-table': true,
-    'create-spell': true,
-    'create-item': true,
-    'create-npc': true,
-    'create-talent': true,
-    'create-autolearn': true,
-    'create-map': true,
-  },
-  templates: [
-  ],
 }
 
-export type TaskOptions<T = any> = boolean | Mapping<T>
+export const DEFAULT_OPTIONS = {}
 
-export const DEFAULT_OPTIONS = {
-  tasks: [
-    CreateTable,
-    CreateSpell,
-    CreateItem,
-    CreateNpc,
-    CreateTalent,
-    CreateAutolearn,
-    CreateMap,
-  ],
-}
-
-export interface BuilderOptions {
-  tasks: Task[]
-}
+export interface BuilderOptions {}
 
 export interface BuilderConfig {
   mod: string
   version: string
   env: Env
-  tasks: Mapping<TaskOptions>
-  templates: TemplateOptions[]
+  tasks?: string[]
   baseSpeed?: number
   tablePrefix?: string
 }
 
-export interface Templates<T = any> {
-  taskId: string
-  list: TemplateOptions<T>[]
-}
-
-export interface TemplateOptions<T = any> {
-  data?: T
-  id?: string
-  taskId?: string
-  needs?: string[]
-}
-
-export interface Template<T = any> extends TemplateOptions {
-  data: T
+export interface Process {
   id: string
-  taskId: string
-  needs: string[]
-}
-
-export interface Task<T = any, O = any> {
-  id: string
-  identify?: ($: Builder, template: Template<T>, options: O) => string
-  setup?: ($: Builder, options: O) => void
-  process?: ($: Builder, template: Template<T>, options: O) => void
-}
-
-export function Select <T = any>(o: T, s: string): T | null {
-  s = s.replace(/\[(\w+)\]/g, '.$1').replace(/^\./, '')
-  const a = s.split('.')
-  for (let i = 0, n = a.length; i < n; ++i) {
-    const k = a[i]
-    if (k in o) {
-      o = (o as any)[k]
-    } else {
-      return null
-    }
-  }
-  return o
+  fn: () => void
 }
 
 export class Builder {
@@ -110,14 +42,12 @@ export class Builder {
   public readonly Env: Env = ENV.DEV
   public readonly BaseSpeed: number = DEFAULT_SPEED
 
-  protected readonly templates: TemplateOptions[] = []
-  protected readonly tasks: Mapping<Task> = {}
+  protected readonly tasks: string[] = []
   protected readonly addonFiles: Mapping<boolean> = {}
   protected readonly databaseTables: Mapping<boolean> = {}
   protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
   protected readonly data: any = {}
-  protected readonly ranTemplates: any = {}
-  protected readonly processQueue: TemplateOptions[] = []
+  protected readonly processQueue: Process[] = []
 
   constructor (
     cb: ($: Builder) => void = () => {},
@@ -140,107 +70,16 @@ export class Builder {
     if (config.tablePrefix)
       this.Mod = config.tablePrefix
 
-    if (config.templates)
-      config.templates.forEach(template => this.templates.push(template))
-
-    for (const [key, isActive] of Object.entries<TaskOptions>(config.tasks)) {
-      for (const task of options.tasks)
-        if ((task.id === key) && isActive)
-          this.tasks[key] = task
-    }
-
-    // init
-    for (const [_, task] of Object.entries<Task>(this.tasks))
-      if (task.setup)
-        task.setup(this, config.tasks[task.id])
-
-    for (const template of this.templates)
-      this.Process(template)
-
     cb(this)
 
     if (this.processQueue.length)
       throw new Error(`${this.processQueue.length} templates left in processing queue`)
   }
 
-  public Process <T = any>(template: TemplateOptions<T>, lastId: (null | string) = null) {
-    let isNeedsSatisfied = true
-
-    if (!template.id && template.taskId) {
-      const identify: any = this.tasks[template.taskId].identify
-      template.id = identify(this, template, this.config.tasks[template.taskId])
-    }
-
-    if (!template.id)
-      throw new Error(`Templates must have a unique ID`)
-
-    if (this.ranTemplates[template.id])
-      throw new Error(`Template ${template.id} has already been processed`)
-
-    if (template.needs)
-      template.needs.forEach(n => {
-        const t = this.ranTemplates[n]
-        if (!t)
-          isNeedsSatisfied = false
-      })
-
-    if (!isNeedsSatisfied) {
-      let isAlreadyExists = false
-      this.processQueue.forEach((item, i) => {
-        if (item.id === template.id)
-          isAlreadyExists = true
-      })
-      if (!isAlreadyExists)
-        this.processQueue.push(template)
-      return
-    }
-
-    for (const [_, task] of Object.entries<Task<T>>(this.tasks))
-      if (task.process && (task.id === template.taskId)) {
-        const t: Template = {
-          data: template.data || {},
-          needs: template.needs || [],
-          taskId: template.taskId || '',
-          id: template.id,
-        }
-
-        task.process(this, t, this.config.tasks[task.id])
-      }
-
-    this.processQueue.forEach((item, i) => {
-      if (item.id === template.id)
-        this.processQueue.splice(i, 1)
-    })
-
-    this.ranTemplates[template.id] = template
-
-    this.processQueue.forEach(item => this.Process(item, template.id))
-  }
-
-  public ProcessMany <T = any>({ taskId, list }: Templates<T>) {
-    for (const [_, task] of Object.entries<Task<T>>(this.tasks))
-      if (task.process)
-        for (const template of list)
-          if (task.id === taskId)
-            this.Process({ ...template, taskId })
-  }
-
-  public Start (id: string) {
-    this.ranTemplates[id] = false
-  }
-
-  public Complete (id: string) {
-    this.ranTemplates[id] = true
-  }
-
-  public Get <T = any>(selection: string): T {
-    return Select(this.data, selection)
-  }
-
-  public Set <T = any>(a: string, b: string, data: T) {
-    if (!this.data[a])
-      this.data[a] = {}
-    this.data[a][b] = data
+  public Run <T>(taskId: string, fn: () => T) {
+    const value = fn()
+    this.tasks.push(taskId)
+    return value
   }
 
   public Table (options: SQLTable) {
@@ -369,7 +208,7 @@ export class Builder {
     const list: string[] = []
 
     for (const key of Object.keys(data))
-      list.push(`export const ${DashCaseToConstantCase(key)} = ${JSON.stringify(data[key])};`)
+      list.push(`export const ${Constantify(key)} = ${JSON.stringify(data[key])};`)
 
     const filePath = `${ADDON_DATA_PATH}/${file}.ts`
 

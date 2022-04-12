@@ -12,23 +12,22 @@ export function Capitalize (string: string) {
   return words.join(' ')
 }
 
-export function TitleCaseToDashCase (string: string) {
+export function Dashify (string: string) {
   return string
     .replace(/[-|\s]+/g, '-')
     .replace(/[^-a-zA-Z0-9]/g,'')
     .toLowerCase()
 }
 
-export function DashCaseToConstantCase (string: string) {
+export function Constantify (string: string) {
   return string.toUpperCase().replace(/-/g, '_')
 }
 
-export function DashCaseToTitleCase (string: string) {
+export function Englishify (string: string) {
   return Capitalize(string.replace('-', ' '))
 }
 
-export function Gold (values: [number, number, number]) {
-  const [copper, silver, gold] = values
+export function Gold (copper: number, silver: number, gold: number) {
   return copper + (silver * 100) + (gold * 100 * 100)
 }
 
@@ -36,45 +35,6 @@ export function Speed (base: number, speed: number) {
   const multiplier = ((1 - base) / base) + 1
 
   return Math.abs(speed * multiplier)
-}
-
-// export function ItemSpellTrigger (trigger?: IST) {
-//   switch (trigger) {
-//     case ITEM_SPELL_TRIGGERS.ON_USE:
-//       return 0
-//     case ITEM_SPELL_TRIGGERS.ON_USE_NO_DELAY:
-//       return 5
-//     case ITEM_SPELL_TRIGGERS.CHANCE_ON_HIT:
-//       return 2
-//     case ITEM_SPELL_TRIGGERS.SOULSTONE:
-//       return 4
-//     case ITEM_SPELL_TRIGGERS.LEARN_SPELL:
-//       return 6
-//     case ITEM_SPELL_TRIGGERS.ON_EQUIP:
-//     default:
-//       return 1
-//   }
-// }
-
-export function ItemSpellCount (asset: TSItem) {
-  let count = 0
-
-  if (asset.Spells.get(0).Spell.exists())
-    count++
-
-  if (asset.Spells.get(1).Spell.exists())
-    count++
-
-  if (asset.Spells.get(2).Spell.exists())
-    count++
-
-  if (asset.Spells.get(3).Spell.exists())
-    count++
-
-  if (asset.Spells.get(4).Spell.exists())
-    count++
-
-  return count
 }
 
 export function RaceMask (...chrRaces: CharacterRace[]) {
@@ -106,4 +66,43 @@ export function ClassMask (...chrClasses: CharacterClass[]) {
 
   return mask
 }
+
+// export function ItemSpellTrigger (trigger?: IST) {
+//   switch (trigger) {
+//     case ITEM_SPELL_TRIGGERS.ON_USE:
+//       return 0
+//     case ITEM_SPELL_TRIGGERS.ON_USE_NO_DELAY:
+//       return 5
+//     case ITEM_SPELL_TRIGGERS.CHANCE_ON_HIT:
+//       return 2
+//     case ITEM_SPELL_TRIGGERS.SOULSTONE:
+//       return 4
+//     case ITEM_SPELL_TRIGGERS.LEARN_SPELL:
+//       return 6
+//     case ITEM_SPELL_TRIGGERS.ON_EQUIP:
+//     default:
+//       return 1
+//   }
+// }
+
+// export function ItemSpellCount (asset: TSItem) {
+//   let count = 0
+//
+//   if (asset.Spells.get(0).Spell.exists())
+//     count++
+//
+//   if (asset.Spells.get(1).Spell.exists())
+//     count++
+//
+//   if (asset.Spells.get(2).Spell.exists())
+//     count++
+//
+//   if (asset.Spells.get(3).Spell.exists())
+//     count++
+//
+//   if (asset.Spells.get(4).Spell.exists())
+//     count++
+//
+//   return count
+// }
 
