@@ -3,15 +3,21 @@ import { Map as TSMap } from 'wow/wotlk/std/Map/Map'
 import { Builder } from '.'
 
 interface Template {
-  id: string
-  baseId: number
   isModify: boolean
+  id: string
+  baseId?: number
   name: string
   asset?: TSMap
   timeOfDay?: number
 }
 
 const TEMPLATES: Template[] = [
+  {
+    id: 'dev',
+    name: 'World',
+    timeOfDay: 0,
+    isModify: false,
+  },
 ]
 
 function run ($: Builder) {
