@@ -907,7 +907,7 @@ function Grapple () {
   grapple.Description.enGB.set('Grapple to a nearby location.')
   grapple.Power.setEnergy(5)
   grapple.Range.setSimple(0,55)
-  grapple.Cooldown.set(15000)
+  grapple.Cooldown.set(3000)
   grapple.Effects.get(0).Type.JUMP_DEST.set()
   grapple.Effects.get(0).PointsBase.set(-1)
   grapple.Effects.get(0).PointsDieSides.set(1)
