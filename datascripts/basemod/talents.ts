@@ -694,7 +694,6 @@ function setup () {
   })
 }
 
-export function Talents () {
-  setup()
-  run()
-}
+setup()
+run()
+

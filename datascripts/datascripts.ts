@@ -4,12 +4,12 @@ import { SkillLine } from 'wow/wotlk/std/SkillLines/SkillLine'
 import { ItemQuality } from 'wow/wotlk/std/Item/ItemQuality'
 import { ALL_CLASSES, CLASS_IDS, RACE_IDS } from './basemod/constants'
 import { Speed } from './basemod/utils'
-import { Talents } from './basemod/talents'
-import { Autolearn } from './basemod/autolearn'
 import $ from './basemod'
 
-Talents()
-Autolearn()
+import './basemod/maps'
+import './basemod/spells'
+import './basemod/talents'
+import './basemod/autolearn'
 
 let currency_id = 0
 

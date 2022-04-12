@@ -310,8 +310,6 @@ function setup () {
   })
 }
 
-export function Autolearn () {
-  setup()
-  run()
-}
+setup()
+run()
 

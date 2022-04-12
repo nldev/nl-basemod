@@ -1,6 +1,6 @@
 import { std } from 'wow/wotlk'
 import { Map as TSMap } from 'wow/wotlk/std/Map/Map'
-import { Builder } from '.'
+import $ from '.'
 
 interface Template {
   isModify: boolean
@@ -20,7 +20,7 @@ const TEMPLATES: Template[] = [
   },
 ]
 
-function run ($: Builder) {
+function run () {
   for (let template of TEMPLATES) {
     const map = template.isModify
       ? std.Maps.load(template.baseId || 0)
@@ -35,7 +35,5 @@ function run ($: Builder) {
   }
 }
 
-export function Maps ($: Builder) {
-  run($)
-}
+run()
 
