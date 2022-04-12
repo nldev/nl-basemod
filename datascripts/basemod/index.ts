@@ -1,45 +1,20 @@
 import fs from 'fs'
 import { std } from 'wow/wotlk'
 
-import { ENV, DEFAULT_MOD, DEFAULT_TABLE_PREFIX } from './constants'
+import { ADDON_DATA_PATH, DEFAULT_MOD, DEFAULT_OPTIONS, DEFAULT_SPEED, DEFAULT_TABLE_PREFIX, DEFAULT_VERSION } from './constants'
 import { Database, Env, Mapping, SQLTable } from './types'
 import { Constantify } from './utils'
 
-export const ADDON_PATH = __dirname + '/../../../addon'
-export const ADDON_DATA_PATH = ADDON_PATH + '/data'
-export const DEFAULT_SPEED = 0.8
-export const DEFAULT_VERSION = '0.1.0'
-
-export const DEFAULT_CONFIG = {
-  mod: DEFAULT_MOD,
-  version: DEFAULT_VERSION,
-  env: ENV.DEV,
-  baseSpeed: DEFAULT_SPEED,
-  tablePrefix: DEFAULT_TABLE_PREFIX,
-}
-
-export const DEFAULT_OPTIONS = {}
-
-export interface BuilderOptions {}
-
-export interface BuilderConfig {
+export interface BuilderOptions {
   mod: string
   version: string
-  env: Env
-  tasks?: string[]
   baseSpeed?: number
   tablePrefix?: string
-}
-
-export interface Process {
-  id: string
-  fn: () => void
 }
 
 export class Builder {
   public readonly Mod: string = DEFAULT_MOD
   public readonly Version: string = DEFAULT_VERSION
-  public readonly Env: Env = ENV.DEV
   public readonly BaseSpeed: number = DEFAULT_SPEED
 
   protected readonly tasks: string[] = []
@@ -47,25 +22,18 @@ export class Builder {
   protected readonly databaseTables: Mapping<boolean> = {}
   protected readonly tablePrefix: string = DEFAULT_TABLE_PREFIX
 
-  constructor (
-    protected readonly options: BuilderOptions = DEFAULT_OPTIONS,
-    protected readonly config: BuilderConfig = DEFAULT_CONFIG,
-  ) {
-    // setup
-    if (config.mod)
-      this.Mod = config.mod
+  constructor (protected readonly options: BuilderOptions = DEFAULT_OPTIONS) {
+    if (options.mod)
+      this.Mod = options.mod
 
-    if (config.version)
-      this.Version = config.version
+    if (options.version)
+      this.Version = options.version
 
-    if (config.env)
-      this.Env = config.env
+    if (options.baseSpeed)
+      this.BaseSpeed = options.baseSpeed
 
-    if (config.baseSpeed)
-      this.BaseSpeed = config.baseSpeed
-
-    if (config.tablePrefix)
-      this.Mod = config.tablePrefix
+    if (options.tablePrefix)
+      this.Mod = options.tablePrefix
   }
 
   public Run <T>(id: string, fn: () => T): T {

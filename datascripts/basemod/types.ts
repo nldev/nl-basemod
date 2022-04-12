@@ -1,37 +1,29 @@
-// import { EnumCellWrapper } from 'wotlkdata/cell/cells/EnumCell'
-// import { LocSystem } from 'wotlkdata/cell/systems/CellSystem'
-
 import {
-   ACHIEVEMENT, ENV, ITEM, ITEM_SPELL_TRIGGER_CHANCE_ON_HIT, ITEM_SPELL_TRIGGER_LEARN_SPELL,
-   ITEM_SPELL_TRIGGER_ON_EQUIP, ITEM_SPELL_TRIGGER_ON_USE, ITEM_SPELL_TRIGGER_ON_USE_NO_DELAY,
-   ITEM_SPELL_TRIGGER_SOULSTONE, NPC, QUERY_EFFECT_POINTS, QUERY_ICON,
-   QUERY_ID, QUERY_MOUNT_NPC, SCHOOLS, SPELL, ROGUE, WARRIOR, DRUID, MAGE, WARLOCK, SHAMAN, PRIEST, PALADIN, HUNTER, HUMAN, ORC, DWARF, NIGHT_ELF, UNDEAD, TAUREN, GNOME, TROLL, BLOOD_ELF, DRAENEI
+  ENV,
+  ITEM_SPELL_TRIGGER_CHANCE_ON_HIT,
+  ITEM_SPELL_TRIGGER_LEARN_SPELL,
+  ITEM_SPELL_TRIGGER_ON_EQUIP,
+  ITEM_SPELL_TRIGGER_ON_USE,
+  ITEM_SPELL_TRIGGER_ON_USE_NO_DELAY,
+  ITEM_SPELL_TRIGGER_SOULSTONE,
+  SCHOOLS,
+  HUMAN,
+  ORC,
+  DWARF,
+  NIGHT_ELF,
+  UNDEAD,
+  TAUREN,
+  GNOME,
+  TROLL,
+  BLOOD_ELF,
+  DRAENEI,
 } from './constants'
-// import { NWSpell } from './spell'
 
 export type Env = typeof ENV.DEV | typeof ENV.TEST | typeof ENV.PROD
 
 export interface Mapping<T> {
   [key: string]: T
 }
-
-export type Effect<T> = T | [T] | [T, T] | [T, T, T]
-
-// copper, silver, gold
-export type Gold =
-  | number
-  | [number]
-  | [number, number]
-  | [number, number, number]
-
-// seconds, minutes, hours, days, weeks
-export type Duration =
-  | number
-  | [number]
-  | [number, number]
-  | [number, number, number]
-  | [number, number, number, number]
-  | [number, number, number, number, number]
 
 export type School =
   | typeof SCHOOLS.FIRE
@@ -63,6 +55,54 @@ export interface ItemSpell {
 export type ItemSpellOptions = Omit<Partial<ItemSpell>, 'spell'> & {
   iLevel: number
 }
+
+export type CharacterRace =
+  | typeof HUMAN
+  | typeof ORC
+  | typeof DWARF
+  | typeof NIGHT_ELF
+  | typeof UNDEAD
+  | typeof TAUREN
+  | typeof GNOME
+  | typeof TROLL
+  | typeof BLOOD_ELF
+  | typeof DRAENEI
+
+export interface RaceMap<T = boolean> {
+  HUMAN?: T
+  ORC?: T
+  DWARF?: T
+  NIGHT_ELF?: T
+  UNDEAD?: T
+  TAUREN?: T
+  GNOME?: T
+  TROLL?: T
+  BLOOD_ELF?: T
+  DRAENEI?: T
+}
+
+export interface ClassMap<T = boolean> {
+  WARRIOR?: T
+  ROGUE?: T
+  DRUID?: T
+  MAGE?: T
+  WARLOCK?: T
+  SHAMAN?: T
+  PRIEST?: T
+  PALADIN?: T
+  HUNTER?: T
+}
+
+export type CharacterClass =
+  | 'WARRIOR'
+  | 'ROGUE'
+  | 'DRUID'
+  | 'MAGE'
+  | 'WARLOCK'
+  | 'SHAMAN'
+  | 'PRIEST'
+  | 'PALADIN'
+  | 'HUNTER'
 
 export type Database = 'world' | 'auth'
 
@@ -268,71 +308,5 @@ export interface SQLTable {
   columns: SQLColumnDefinition[]
   database?: Database
   isPersist?: boolean
-}
-
-export type CharacterRace =
-  | typeof HUMAN
-  | typeof ORC
-  | typeof DWARF
-  | typeof NIGHT_ELF
-  | typeof UNDEAD
-  | typeof TAUREN
-  | typeof GNOME
-  | typeof TROLL
-  | typeof BLOOD_ELF
-  | typeof DRAENEI
-
-export interface RaceMap<T = boolean> {
-  HUMAN?: T
-  ORC?: T
-  DWARF?: T
-  NIGHT_ELF?: T
-  UNDEAD?: T
-  TAUREN?: T
-  GNOME?: T
-  TROLL?: T
-  BLOOD_ELF?: T
-  DRAENEI?: T
-}
-
-export interface ClassMap<T = boolean> {
-  WARRIOR?: T
-  ROGUE?: T
-  DRUID?: T
-  MAGE?: T
-  WARLOCK?: T
-  SHAMAN?: T
-  PRIEST?: T
-  PALADIN?: T
-  HUNTER?: T
-}
-
-export type CharacterClass =
-  | 'WARRIOR'
-  | 'ROGUE'
-  | 'DRUID'
-  | 'MAGE'
-  | 'WARLOCK'
-  | 'SHAMAN'
-  | 'PRIEST'
-  | 'PALADIN'
-  | 'HUNTER'
-
-export interface ExportData {
-  table: string
-  database: Database
-}
-
-export interface Asset<T = any> {
-  id: string
-  isModify: boolean
-  asset: T
-  baseId: number
-}
-
-export interface AssetOptions<T = any> {
-  isModify?: boolean
-  asset?: T
-  baseId?: number
 }
 
