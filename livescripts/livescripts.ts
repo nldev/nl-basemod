@@ -77,7 +77,12 @@ export function OutcomeTest (events: TSEvents) {
   // missing parry/dodge/block
 
   events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
-    // evasion
+    missChance.set(0)
+    dodgeChance.set(0)
+    blockChance.set(0)
+    parryChance.set(0)
+
+    // if has dodge-aura tag
     if (victim.HasAura(26669))
       dodgeChance.set(100)
   })
