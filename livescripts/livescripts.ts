@@ -82,10 +82,10 @@ export function OutcomeTest (events: TSEvents) {
         dodgeChance.set(100)
   })
 
-  // affects miss
-  events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond, damageClass) => {
+  events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
+    const dmgClass = spell.GetSpellInfo().GetDmgClass()
     // evasion
-    if (damageClass === 2)
+    if (dmgClass === 2)
       if (victim.HasAura(26669))
         missCond.set(3) // dodge
   })
