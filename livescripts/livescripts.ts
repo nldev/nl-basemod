@@ -77,19 +77,21 @@ export function OutcomeTest (events: TSEvents) {
   // missing parry/dodge/block
 
   // affects miss
-  events.Spells.OnCalcMeleeMiss((spell, miss, attacker, victim, attackType, skillDiff) => {})
-
+  events.Spells.OnCalcMiss((spell, caster, target, effectMask, missCond) => {
+    missCond.set(7)
+  })
   // also affects miss
   // does this happen before or after onCalcMeleeMiss?
-  events.Spells.OnCalcHit((spell, hitChance, attacker, defender) => {})
+  // events.Spells.OnCalcHit((spell, hitChance, attacker, defender) => {})
 
-  events.Spells.OnCalcResist((spell, resistChance, attacker, defender) => {})
-  events.Spells.OnCalcReflect((spell, reflectChance, attacker, victim) => {})
-  events.Spells.OnPeriodicDamage((aura, damage) => {})
-  events.Spells.OnDamageEarly((spell, damage, info, type, isCrit) => {})
-  events.Spells.OnDamageLate((spell, damage, info, type, isCrit) => {})
-  events.Spells.OnCalcCrit((spell, chance) => {})
-  events.Spells.OnCalcAuraCrit((aura, chance) => {})
-  events.Spells.OnTick(effect => {})
-  events.Spells.OnDamageEarly((spell, damage, info, type, isCrit) => {})
+  // events.Spells.OnCalcResist((spell, resistChance, attacker, defender) => {})
+  // events.Spells.OnCalcReflect((spell, reflectChance, attacker, victim) => {})
+  // events.Spells.OnPeriodicDamage((aura, damage) => {})
+  // events.Spells.OnDamageEarly((spell, damage, info, type, isCrit) => {})
+  // events.Spells.OnDamageLate((spell, damage, info, type, isCrit) => {})
+  // events.Spells.OnCalcCrit((spell, chance) => {})
+  // events.Spells.OnCalcAuraCrit((aura, chance) => {})
+  // events.Spells.OnTick(effect => {})
+  // events.Spells.OnDamageEarly((spell, damage, info, type, isCrit) => {})
+  // events.Unit.OnCalcMeleeOutcome
 }
