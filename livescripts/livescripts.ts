@@ -76,12 +76,18 @@ export function OutcomeTest (events: TSEvents) {
   // what counts as 'melee'?
   // missing parry/dodge/block
 
+  events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
+      const casterIsUnit = attacker.IsUnit()
+      if (victim.HasAura(26669))
+        dodgeChance.set(100)
+  })
+
   // affects miss
-  events.Spells.OnCalcMiss((spell, caster, target, effectMask, missCond, damageClass) => {
+  events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond, damageClass) => {
     // evasion
     if (damageClass === 2) {
-      const casterIsUnit = caster.IsUnit()
-      if (target.HasAura(26669)) {
+      const casterIsUnit = attacker.IsUnit()
+      if (victim.HasAura(26669)) {
         const info = spell.GetSpellInfo()
         missCond.set(3) // dodge
       }
