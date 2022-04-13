@@ -7,6 +7,10 @@ import { Autolearn } from './basemod/autolearn'
 import { Combat } from './basemod/combat/combat'
 import { Opcode } from './basemod/utils'
 
+const CHEAP_SHOT = 1833
+const AMBUSH = 11267
+const GARROTE = 11290
+
 function AddComboPoints (spell: TSSpell, amount: number) {
   const c = spell.GetCaster()
   const t = spell.GetTarget()
@@ -17,29 +21,14 @@ function AddComboPoints (spell: TSSpell, amount: number) {
   p.AddComboPoints(u, amount)
 }
 
-const CHEAP_SHOT = 1833
-const AMBUSH = 11267
-const GARROTE = 11290
-
-export function Main (events: TSEvents) {
-  Store(events)
-  EasyLoot(events)
-  Talents(events)
-  Rest(events)
-  Chests(events)
-  Autolearn(events)
-  Combat(events)
-
+function Rogue (events: TSEvents) {
   events.SpellID.OnHit(CHEAP_SHOT, s => AddComboPoints(s, 1))
   events.SpellID.OnHit(AMBUSH, s => AddComboPoints(s, 1))
   events.SpellID.OnHit(GARROTE, s => AddComboPoints(s, 1))
+}
 
-  events.Player.OnWhisper((sender, _, message) => {
-    if (message.get() === 'water')
-    if (sender.IsInWater())
-      sender.SendBroadcastMessage('is in water')
-  })
-
+function DevTools (events: TSEvents) {
+  // clear inventory
   events.Player.OnWhisper((sender, _, message) => {
     const opcode = Opcode('dev-clear-inventory')
     const str = message.get()
@@ -51,63 +40,56 @@ export function Main (events: TSEvents) {
         sender.RemoveItem(item, item.GetCount())
     }
   })
-
-  // events.Items.OnEquip((item, player, slot, isMerge) => {
-  //   player.SendBroadcastMessage(`EQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
-  // })
-  // events.Items.OnUnequip((item, player, isSwap, result) => {
-  //   player.SendBroadcastMessage(`${result.get()}`)
-  //   if (result.get() === 1)
-  //     player.SendBroadcastMessage(`UNEQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
-  // })
-
-  events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
-    missChance.set(0)
-    dodgeChance.set(0)
-    blockChance.set(0)
-    parryChance.set(0)
-  })
-
-  events.Spells.OnCalcResist((spell, resistChance, attacker, defender) => {
-    resistChance.set(0)
-  })
-
-  events.Spells.OnCalcMeleeMiss((spell, miss, attacker, victim, attackType, skillDiff) => {
-    miss.set(0)
-  })
-
-  // events.Unit.OnMeleeSpellHitResult((attacker, victim, dodgeChance, parryChance, blockChance, attackType) => {
-  //   dodgeChance.set(0)
-  //   parryChance.set(0)
-  //   blockChance.set(0)
-  //   if (attacker.IsPlayer())
-  //     attacker.ToPlayer().SendBroadcastMessage(`${dodgeChance.get()} ${blockChance.get()} ${parryChance.get()}`)
-  // })
 }
 
-  // events.Spells.OnApply((effect, application) => {
-  //   if (effect.GetID() === 8326) {
-  //     const player = application.GetTarget().ToPlayer()
-  //     player.AddNamedTimer('death', 20, -1, (o, t) => {
-  //       const p = o.ToPlayer()
-  //       if (p.IsNull())
-  //         t.Stop()
-  //       // const corpse = player.GetCorpse()
-  //       // if (!corpse.IsNull()) {
-  //         player.SendBroadcastMessage('hello')
-  //         // player.Teleport(corpse.GetMapID(), corpse.GetX(), corpse.GetY(), corpse.GetZ(), corpse.GetO())
-  //         t.Stop()
-  //       // }
-  //     })
-  //   }
-  // })
-  // events.Player.OnChat((player, _, msg) => {
-  //   if (msg.get() === 'dead') {
-  //     // player.AddAura(8326, player)
-  //   }
-  //   if (msg.get() === 'alive') {
-  //     player.ResurrectPlayer(1, false)
-  //     player.RemoveAura(8326)
-  //   }
-  // })
+export function Main (events: TSEvents) {
+  Store(events)
+  EasyLoot(events)
+  Talents(events)
+  Rest(events)
+  Chests(events)
+  Autolearn(events)
+  Combat(events)
+  DevTools(events)
+  Rogue(events)
 
+  EquipTest(events)
+  OutcomeTest(events)
+}
+
+function EquipTest (events: TSEvents) {
+  events.Items.OnEquip((item, player, slot, isMerge) => {
+    player.SendBroadcastMessage(`EQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
+  })
+
+  events.Items.OnUnequip((item, player, isSwap, result) => {
+    player.SendBroadcastMessage(`${result.get()}`)
+    if (result.get() === 1)
+      player.SendBroadcastMessage(`UNEQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
+  })
+}
+
+
+export function OutcomeTest (events: TSEvents) {
+  // what is immune or absorbed?
+  // can melee resist?
+  // what counts as 'melee'?
+  // missing parry/dodge/block
+
+  // affects miss
+  events.Spells.OnCalcMeleeMiss((spell, miss, attacker, victim, attackType, skillDiff) => {})
+
+  // also affects miss
+  // does this happen before or after onCalcMeleeMiss?
+  events.Spells.OnCalcHit((spell, hitChance, attacker, defender) => {})
+
+  events.Spells.OnCalcResist((spell, resistChance, attacker, defender) => {})
+  events.Spells.OnCalcReflect((spell, reflectChance, attacker, victim) => {})
+  events.Spells.OnPeriodicDamage((aura, damage) => {})
+  events.Spells.OnDamageEarly((spell, damage, info, type, isCrit) => {})
+  events.Spells.OnDamageLate((spell, damage, info, type, isCrit) => {})
+  events.Spells.OnCalcCrit((spell, chance) => {})
+  events.Spells.OnCalcAuraCrit((aura, chance) => {})
+  events.Spells.OnTick(effect => {})
+  events.Spells.OnDamageEarly((spell, damage, info, type, isCrit) => {})
+}
