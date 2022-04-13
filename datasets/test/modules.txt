@@ -1,1 +1,2 @@
 nl-basemod
+nl-basemod.config

@@ -43,15 +43,15 @@ function DevTools (events: TSEvents) {
 }
 
 export function Main (events: TSEvents) {
-  Store(events)
-  EasyLoot(events)
-  Talents(events)
-  Rest(events)
-  Chests(events)
-  Autolearn(events)
-  Combat(events)
-  DevTools(events)
-  Rogue(events)
+  // Store(events)
+  // EasyLoot(events)
+  // Talents(events)
+  // Rest(events)
+  // Chests(events)
+  // Autolearn(events)
+  // Combat(events)
+  // DevTools(events)
+  // Rogue(events)
 
   EquipTest(events)
   OutcomeTest(events)
@@ -78,6 +78,7 @@ export function OutcomeTest (events: TSEvents) {
 
   // affects miss
   events.Spells.OnCalcMiss((spell, caster, target, effectMask, missCond) => {
+    console.log(`${missCond.get()}`)
     missCond.set(7)
   })
   // also affects miss
