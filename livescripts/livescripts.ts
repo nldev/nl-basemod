@@ -43,15 +43,15 @@ function DevTools (events: TSEvents) {
 }
 
 export function Main (events: TSEvents) {
-  // Store(events)
-  // EasyLoot(events)
-  // Talents(events)
-  // Rest(events)
-  // Chests(events)
-  // Autolearn(events)
-  // Combat(events)
-  // DevTools(events)
-  // Rogue(events)
+  Store(events)
+  EasyLoot(events)
+  Talents(events)
+  Rest(events)
+  Chests(events)
+  Autolearn(events)
+  Combat(events)
+  DevTools(events)
+  Rogue(events)
 
   EquipTest(events)
   OutcomeTest(events)
@@ -77,15 +77,42 @@ export function OutcomeTest (events: TSEvents) {
   // missing parry/dodge/block
 
   events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
-      const casterIsUnit = attacker.IsUnit()
-      if (victim.HasAura(26669))
-        dodgeChance.set(100)
+    // evasion
+    if (victim.HasAura(26669))
+      dodgeChance.set(100)
   })
 
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
     const dmgClass = spell.GetSpellInfo().GetDmgClass()
-    // evasion
-    if (dmgClass === 2)
+
+    // if doesnt have block-aura tag && is parry
+    if ((missCond.get() === SpellMissInfo.PARRY)) {
+      missCond.set(SpellMissInfo.NONE)
+    }
+
+    // if doesnt have block-aura tag && is block
+    if (missCond.get() === SpellMissInfo.BLOCK) {
+      missCond.set(SpellMissInfo.NONE)
+    }
+
+    // if doesnt have miss-aura tag && is miss
+    if (missCond.get() === SpellMissInfo.MISS) {
+      missCond.set(SpellMissInfo.NONE)
+    }
+
+    // if doesnt have resist-aura tag && is resist
+    if (missCond.get() === SpellMissInfo.RESIST) {
+      missCond.set(SpellMissInfo.NONE)
+    }
+
+    // if doesnt have dodge-aura tag && is dodge
+    if ((missCond.get() === SpellMissInfo.DODGE)) {
+      if (!victim.HasAura(26669))
+        missCond.set(SpellMissInfo.NONE)
+    }
+
+    // if has dodge-aura tag && is hit && is melee
+    if (missCond.get() === SpellMissInfo.NONE && (dmgClass === 2))
       if (victim.HasAura(26669))
         missCond.set(SpellMissInfo.DODGE)
   })
