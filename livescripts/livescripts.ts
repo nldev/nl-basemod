@@ -87,7 +87,7 @@ export function OutcomeTest (events: TSEvents) {
     // evasion
     if (dmgClass === 2)
       if (victim.HasAura(26669))
-        missCond.set(3) // dodge
+        missCond.set(SpellMissInfo.DODGE)
   })
   // also affects miss
   // does this happen before or after onCalcMeleeMiss?
