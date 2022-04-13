@@ -90,7 +90,7 @@ export function OutcomeTest (events: TSEvents) {
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
     const dmgClass = spell.GetSpellInfo().GetDmgClass()
 
-    // if doesnt have block-aura tag && is parry
+    // if doesnt have parry-aura tag && is parry
     if ((missCond.get() === SpellMissInfo.PARRY)) {
       missCond.set(SpellMissInfo.NONE)
     }
