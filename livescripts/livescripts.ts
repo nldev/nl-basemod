@@ -82,8 +82,8 @@ export function OutcomeTest (events: TSEvents) {
     blockChance.set(0)
     parryChance.set(0)
 
-    // if has dodge-aura tag
-    if (victim.HasAura(26669))
+    // if has dodge-aura tag && is in front
+    if (victim.HasAura(26669) && attacker.IsInFront(victim, 80))
       dodgeChance.set(100)
   })
 
@@ -116,8 +116,8 @@ export function OutcomeTest (events: TSEvents) {
         missCond.set(SpellMissInfo.NONE)
     }
 
-    // if has dodge-aura tag && is hit && is melee
-    if (missCond.get() === SpellMissInfo.NONE && (dmgClass === 2))
+    // if has dodge-aura tag && is hit && is melee && is in front
+    if (missCond.get() === SpellMissInfo.NONE && (dmgClass === 2) && attacker.IsInFront(victim, 80))
       if (victim.HasAura(26669))
         missCond.set(SpellMissInfo.DODGE)
   })
