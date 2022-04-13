@@ -77,9 +77,15 @@ export function OutcomeTest (events: TSEvents) {
   // missing parry/dodge/block
 
   // affects miss
-  events.Spells.OnCalcMiss((spell, caster, target, effectMask, missCond) => {
-    console.log(`${missCond.get()}`)
-    missCond.set(7)
+  events.Spells.OnCalcMiss((spell, caster, target, effectMask, missCond, damageClass) => {
+    // evasion
+    if (damageClass === 2) {
+      const casterIsUnit = caster.IsUnit()
+      if (target.HasAura(26669)) {
+        const info = spell.GetSpellInfo()
+        missCond.set(3) // dodge
+      }
+    }
   })
   // also affects miss
   // does this happen before or after onCalcMeleeMiss?
