@@ -85,13 +85,9 @@ export function OutcomeTest (events: TSEvents) {
   // affects miss
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond, damageClass) => {
     // evasion
-    if (damageClass === 2) {
-      const casterIsUnit = attacker.IsUnit()
-      if (victim.HasAura(26669)) {
-        const info = spell.GetSpellInfo()
+    if (damageClass === 2)
+      if (victim.HasAura(26669))
         missCond.set(3) // dodge
-      }
-    }
   })
   // also affects miss
   // does this happen before or after onCalcMeleeMiss?
