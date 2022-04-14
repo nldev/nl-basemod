@@ -124,7 +124,7 @@ export function OutcomeTest (events: TSEvents) {
         if (attacker.IsGameObject() && victim.IsPlayer())
           victim.ToPlayer().SendBroadcastMessage('is gameobject')
         // FIXME: check reflectable object spell tags
-        if (attacker.IsUnit() && !attacker.IsCreature() && !attacker.ToUnit().IsCharmed())
+        if (attacker.IsUnit() && !attacker.IsCreature())
           caster.CastSpell(caster, spell.GetEntry(), true)
       }
   })
