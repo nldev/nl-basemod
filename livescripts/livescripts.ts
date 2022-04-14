@@ -121,11 +121,9 @@ export function OutcomeTest (events: TSEvents) {
       if (victim.IsUnit() && (reflectChance.get() === 100)) {
         victim.ToPlayer().SendBroadcastMessage('here')
         const caster = attacker.GetEffectiveOwner()
-        if (attacker.IsGameObject() && victim.IsPlayer())
-          victim.ToPlayer().SendBroadcastMessage('is gameobject')
-        // FIXME: check reflectable object spell tags
-        if (attacker.IsUnit() && !attacker.IsCreature())
-          caster.CastSpell(caster, spell.GetEntry(), true)
+        // FIXME: check for gameobject spells
+        if (caster.IsPlayer())
+          caster.AddAura(spell.GetEntry(), caster)
       }
   })
 
