@@ -99,42 +99,51 @@ export function OutcomeTest (events: TSEvents) {
     const info = spell.GetSpellInfo()
     const dmgClass = info.GetDmgClass()
     const entry = info.GetEntry()
+    const cond = missCond.get()
 
     // if doesnt have parry-aura tag && is parry
-    if ((missCond.get() === SpellMissInfo.PARRY)) {
+    if ((cond === SpellMissInfo.PARRY)) {
       missCond.set(SpellMissInfo.NONE)
     }
 
     // if doesnt have block-aura tag && is block
-    if (missCond.get() === SpellMissInfo.BLOCK) {
+    if (cond === SpellMissInfo.BLOCK) {
       missCond.set(SpellMissInfo.NONE)
     }
 
     // if doesnt have miss-aura tag && is miss
-    if (missCond.get() === SpellMissInfo.MISS) {
+    if (cond === SpellMissInfo.MISS) {
       missCond.set(SpellMissInfo.NONE)
     }
 
     // if doesnt have resist-aura tag && is resist
-    if (missCond.get() === SpellMissInfo.RESIST) {
+    if (cond === SpellMissInfo.RESIST) {
       missCond.set(SpellMissInfo.NONE)
     }
 
     // if doesnt have dodge-aura tag && is dodge
-    if (missCond.get() === SpellMissInfo.DODGE) {
+    if (cond === SpellMissInfo.DODGE) {
       const ids = GetIDTag('basemod', 'dodging')
       ids.forEach(id => {
-        if (id === entry)
+        if (victim.HasAura(id))
           missCond.set(SpellMissInfo.NONE)
       })
     }
 
-    // if has dodge-aura tag && spell does not have cannot-be-dodged attribute && player does not have cannot-be-dodged aura && is hit && is melee && is in front
-    if ((missCond.get() === SpellMissInfo.NONE) && (dmgClass === 2) && attacker.IsInFront(victim, 80)) {
+    // if is hit or dodge
+    // && is melee
+    // && has dodge-aura tag
+    // && spell does not have cannot-be-dodged attribute
+    // && player does not have cannot-be-dodged aura
+    // && is in front
+    if (
+      ((cond === SpellMissInfo.DODGE) || (cond === SpellMissInfo.NONE))
+        && (dmgClass === 2)
+        && attacker.IsInFront(victim, 80)
+    ) {
       const ids = GetIDTag('basemod', 'dodging')
       ids.forEach(id => {
-        console.log(entry)
-        if (id === entry)
+        if (victim.HasAura(id))
           missCond.set(SpellMissInfo.DODGE)
       })
     }
