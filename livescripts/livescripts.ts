@@ -205,7 +205,7 @@ export function OutcomeTest (events: TSEvents) {
     }
 
     // hunter trap reflect
-    if (attacker.IsGameObject()) {
+    if (attacker.IsUnit()) {
       const go = attacker.ToGameObject()
       const owner = attacker.GetEffectiveOwner()
       if (owner.IsPlayer()) {
