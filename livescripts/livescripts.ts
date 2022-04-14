@@ -238,7 +238,7 @@ export function OutcomeTest (events: TSEvents) {
       }
       if (castTime && vanishTime)
       if (castTime < vanishTime) {
-        procFlags.set(ProcFlagsHit.IMMUNE)
+        procFlags.set(ProcFlagsHit.MISS)
         missCond.set(SpellMissInfo.IMMUNE)
         // FIXME pass in target
         // FIXME dont cause combat on cast, only on hit
@@ -267,6 +267,9 @@ export function OutcomeTest (events: TSEvents) {
   events.Spells.OnHit(spell => {
     const caster = spell.GetCaster().ToPlayer()
     const target = spell.GetTarget()
+    // FIXME: apply combat if spell hits and player is visible€ý,€ý,
+    // if (caster.IsPlayer() && target.IsPlayer() && target.ToPlayer().IsVisibleForPlayer(caster))
+    //   caster.ToUnit().SetInCombatWith(target.ToUnit())
   })
   events.Unit.OnExitCombat(unit => {
     unit.SetBool('was-in-combat', false)
