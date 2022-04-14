@@ -98,37 +98,18 @@ export function OutcomeTest (events: TSEvents) {
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
     const info = spell.GetSpellInfo()
     const dmgClass = info.GetDmgClass()
-    const entry = info.GetEntry()
     const cond = missCond.get()
 
-    // if doesnt have parry-aura tag && is parry
-    if ((cond === SpellMissInfo.PARRY)) {
+    if (cond === SpellMissInfo.PARRY)
       missCond.set(SpellMissInfo.NONE)
-    }
-
-    // if doesnt have block-aura tag && is block
-    if (cond === SpellMissInfo.BLOCK) {
+    if (cond === SpellMissInfo.BLOCK)
       missCond.set(SpellMissInfo.NONE)
-    }
-
-    // if doesnt have miss-aura tag && is miss
-    if (cond === SpellMissInfo.MISS) {
+    if (cond === SpellMissInfo.MISS)
       missCond.set(SpellMissInfo.NONE)
-    }
-
-    // if doesnt have resist-aura tag && is resist
-    if (cond === SpellMissInfo.RESIST) {
+    if (cond === SpellMissInfo.RESIST)
       missCond.set(SpellMissInfo.NONE)
-    }
-
-    // if doesnt have dodge-aura tag && is dodge
-    if (cond === SpellMissInfo.DODGE) {
-      const ids = GetIDTag('basemod', 'dodging')
-      ids.forEach(id => {
-        if (victim.HasAura(id))
-          missCond.set(SpellMissInfo.NONE)
-      })
-    }
+    if (cond === SpellMissInfo.DODGE)
+      missCond.set(SpellMissInfo.NONE)
 
     // if is hit or dodge
     // && is melee
@@ -148,18 +129,4 @@ export function OutcomeTest (events: TSEvents) {
       })
     }
   })
-  // also affects miss
-  // does this happen before or after onCalcMeleeMiss?
-  // events.Spells.OnCalcHit((spell, hitChance, attacker, defender) => {})
-
-  // events.Spells.OnCalcResist((spell, resistChance, attacker, defender) => {})
-  // events.Spells.OnCalcReflect((spell, reflectChance, attacker, victim) => {})
-  // events.Spells.OnPeriodicDamage((aura, damage) => {})
-  // events.Spells.OnDamageEarly((spell, damage, info, type, isCrit) => {})
-  // events.Spells.OnDamageLate((spell, damage, info, type, isCrit) => {})
-  // events.Spells.OnCalcCrit((spell, chance) => {})
-  // events.Spells.OnCalcAuraCrit((aura, chance) => {})
-  // events.Spells.OnTick(effect => {})
-  // events.Spells.OnDamageEarly((spell, damage, info, type, isCrit) => {})
-  // events.Unit.OnCalcMeleeOutcome
 }
