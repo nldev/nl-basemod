@@ -247,11 +247,14 @@ export function OutcomeTest (events: TSEvents) {
   })
   events.Spells.OnCheckCast(spell => {
     const caster = spell.GetCaster()
-    const isInCombat = caster.IsInCombat()
-    if (isInCombat) {
-      caster.SetBool('was-in-combat', true)
-    } else {
-      caster.SetBool('was-in-combat', false)
+    if (caster.IsPlayer()) {
+      const c = caster.ToPlayer()
+      const isInCombat = c.IsInCombat()
+      if (isInCombat) {
+        c.SetBool('was-in-combat', true)
+      } else {
+        c.SetBool('was-in-combat', false)
+      }
     }
   })
   events.Spells.OnCast(spell => {
