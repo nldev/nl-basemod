@@ -210,8 +210,8 @@ export function OutcomeTest (events: TSEvents) {
       const castTime = GetCurrTime() - spell.GetCastTime()
       if (castTime < lastVanish)
         missCond.set(SpellMissInfo.IMMUNE)
-      victim.ToPlayer().SendBroadcastMessage(`${lastVanish}`)
-      victim.ToPlayer().SendBroadcastMessage(`${castTime}`)
+      victim.ToPlayer().SendBroadcastMessage(`last vanish: ${lastVanish}`)
+      victim.ToPlayer().SendBroadcastMessage(`cast time: ${castTime}`)
     }
     // check hunter trap outcome
   })
