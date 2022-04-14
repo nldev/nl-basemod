@@ -78,13 +78,9 @@ function EquipTest (events: TSEvents) {
   })
 }
 
+// check hunter spell outcome
 
 export function OutcomeTest (events: TSEvents) {
-  // what is immune or absorbed?
-  // can melee resist?
-  // what counts as 'melee'?
-  // missing parry/dodge/block
-
   events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
     missChance.set(0)
     dodgeChance.set(0)
@@ -121,6 +117,9 @@ export function OutcomeTest (events: TSEvents) {
       missCond.set(SpellMissInfo.NONE)
 
     const c2 = missCond.get()
+
+    console.log(spell.GetCastTime())
+    // check vanish
 
     // block
     // if (
