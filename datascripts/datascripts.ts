@@ -582,6 +582,7 @@ function Rogue () {
   Ambush()
   Sap()
   Blind()
+  Evasion()
 }
 
 function InfiniteRangedWeapon () {
