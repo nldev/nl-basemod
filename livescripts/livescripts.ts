@@ -120,12 +120,12 @@ export function OutcomeTest (events: TSEvents) {
 
   events.Spells.OnEffect((spell, cancel, info, mode, unit, item, obj, corpse) => {
     // check vanish
-    if (spell.GetTarget().IsNull())
+    if (spell.GetTarget())
       if (spell.GetTarget().GetInt('last-vanish')) {
         const lastVanish = spell.GetTarget().GetInt('last-vanish')
         const castTime = GetCurrTime() - spell.GetCastTime()
         if (castTime < lastVanish)
-          cancel.set(true)
+          console.log('lol')
         spell.GetCaster().ToPlayer().SendBroadcastMessage(`last vanish: ${lastVanish}`)
         spell.GetCaster().ToPlayer().SendBroadcastMessage(`cast time: ${castTime}`)
         spell.GetCaster().ToPlayer().SendBroadcastMessage(`curr time: ${spell.GetCastTime()}`)
