@@ -226,9 +226,7 @@ export function OutcomeTest (events: TSEvents) {
     if (caster && !caster.IsNull() && caster.IsPlayer())
       caster.ToPlayer().SendBroadcastMessage('is player')
   })
-  events.Spells.OnDetermineHitOutcome((spell, missCond) => {
-    const info = spell.GetSpellInfo()
-    const victim = spell.GetTarget()
+  events.Spells.OnDetermineHitOutcome((info, victim, missCond) => {
     if (victim && !victim.IsNull()) {
       // handle vanish
       const castTime = info.GetInt('cast-time')
