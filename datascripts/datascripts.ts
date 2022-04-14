@@ -12,6 +12,7 @@ import './basemod/talents'
 import './basemod/autolearn'
 
 const EVASION = 26669
+const CLOAK_OF_SHADOWS = 31224
 
 const FORCE_BLOCK = 'force-block'
 const FORCE_PARRY = 'force-parry'
@@ -566,6 +567,11 @@ function Blind () {
 function Kick () {
   const s = std.Spells.load(1766)
   s.Power.setEnergy(15)
+}
+
+function CloakOfShadows () {
+  const s = std.Spells.load(CLOAK_OF_SHADOWS)
+  s.Tags.add($.Mod, FORCE_RESIST)
 }
 
 function Evasion () {
