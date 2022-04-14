@@ -212,13 +212,5 @@ export function OutcomeTest (events: TSEvents) {
           missCond.set(SpellMissInfo.RESIST)
       })
     }
-
-    // hunter trap reflect
-    if (attacker.IsUnit() && (spell.GetEntry() === 3355)) {
-      const owner = attacker.GetEffectiveOwner()
-      if (owner.IsPlayer()) {
-        const p = owner.ToPlayer()
-      }
-    }
   })
 }
