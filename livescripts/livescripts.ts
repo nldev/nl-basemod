@@ -78,7 +78,7 @@ function EquipTest (events: TSEvents) {
   })
 }
 
-// check hunter spell outcome
+// check hunter trap outcome
 
 export function OutcomeTest (events: TSEvents) {
   events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
