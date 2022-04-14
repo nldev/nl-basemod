@@ -86,25 +86,25 @@ export function OutcomeTest (events: TSEvents) {
     parryChance.set(0)
 
     // miss
-    const forceMissIds = GetIDTag('basemod', 'force-miss')
-    forceMissIds.forEach(id => {
-      if (victim.HasAura(id))
-        missChance.set(100)
-    })
+    // const forceMissIds = GetIDTag('basemod', 'force-miss')
+    // forceMissIds.forEach(id => {
+    //   if (victim.HasAura(id))
+    //     missChance.set(100)
+    // })
 
     // block
-    const forceBlockIds = GetIDTag('basemod', 'force-miss')
-    forceBlockIds.forEach(id => {
-      if (victim.HasAura(id))
-        blockChance.set(100)
-    })
+    // const forceBlockIds = GetIDTag('basemod', 'force-miss')
+    // forceBlockIds.forEach(id => {
+    //   if (victim.HasAura(id))
+    //     blockChance.set(100)
+    // })
 
     // parry
-    const forceParryIds = GetIDTag('basemod', 'force-miss')
-    forceParryIds.forEach(id => {
-      if (victim.HasAura(id))
-        parryChance.set(100)
-    })
+    // const forceParryIds = GetIDTag('basemod', 'force-miss')
+    // forceParryIds.forEach(id => {
+    //   if (victim.HasAura(id))
+    //     parryChance.set(100)
+    // })
 
     // dodge
     const forceDodgeIds = GetIDTag('basemod', 'force-miss')
@@ -144,13 +144,13 @@ export function OutcomeTest (events: TSEvents) {
     // check hunter trap outcome
 
     // miss
-    if (c2 === SpellMissInfo.MISS) {
-      const ids = GetIDTag('basemod', 'force-miss')
-      ids.forEach(id => {
-        if (victim.HasAura(id))
-          missCond.set(SpellMissInfo.MISS)
-      })
-    }
+    // if (c2 === SpellMissInfo.MISS) {
+    //   const ids = GetIDTag('basemod', 'force-miss')
+    //   ids.forEach(id => {
+    //     if (victim.HasAura(id))
+    //       missCond.set(SpellMissInfo.MISS)
+    //   })
+    // }
 
     // block
     // if (
