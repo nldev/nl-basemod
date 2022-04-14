@@ -120,17 +120,17 @@ export function OutcomeTest (events: TSEvents) {
 
   events.Spells.OnEffect((spell, cancel, info, mode, unit, item, obj, corpse) => {
     // check vanish
-    if (spell.GetTarget().GetInt('last-vanish')) {
-      const lastVanish = spell.GetTarget().GetInt('last-vanish')
-      const castTime = GetCurrTime() - spell.GetCastTime()
-      if (castTime < lastVanish)
-        cancel.set(true)
-      spell.GetCaster().ToPlayer().SendBroadcastMessage(`last vanish: ${lastVanish}`)
-      spell.GetCaster().ToPlayer().SendBroadcastMessage(`cast time: ${castTime}`)
-      spell.GetCaster().ToPlayer().SendBroadcastMessage(`curr time: ${spell.GetCastTime()}`)
-    }
+    if (spell.GetTarget().IsNull())
+      if (spell.GetTarget().GetInt('last-vanish')) {
+        const lastVanish = spell.GetTarget().GetInt('last-vanish')
+        const castTime = GetCurrTime() - spell.GetCastTime()
+        if (castTime < lastVanish)
+          cancel.set(true)
+        spell.GetCaster().ToPlayer().SendBroadcastMessage(`last vanish: ${lastVanish}`)
+        spell.GetCaster().ToPlayer().SendBroadcastMessage(`cast time: ${castTime}`)
+        spell.GetCaster().ToPlayer().SendBroadcastMessage(`curr time: ${spell.GetCastTime()}`)
+      }
     // check hunter trap outcome
-    cancel.set(true)
   })
 
   events.Spells.OnDamageEarly((spell, damage, info, type, isCrit, effectMask) => {
