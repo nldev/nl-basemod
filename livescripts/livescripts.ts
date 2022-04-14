@@ -226,7 +226,7 @@ export function OutcomeTest (events: TSEvents) {
     if (caster && !caster.IsNull() && caster.IsPlayer())
       caster.ToPlayer().SendBroadcastMessage('is player')
   })
-  events.Spells.OnDetermineHitOutcome((info, victim, missCond) => {
+  events.Spells.OnDetermineHitOutcome((info, victim, procFlags, missCond) => {
     if (victim && !victim.IsNull()) {
       // handle vanish
       const castTime = info.GetInt('cast-time')
@@ -237,8 +237,10 @@ export function OutcomeTest (events: TSEvents) {
         victim.ToPlayer().SendBroadcastMessage(`missCond: ${missCond.get()}`)
       }
       if (castTime && vanishTime)
-        if (castTime < vanishTime)
-          missCond.set(SpellMissInfo.IMMUNE)
+      if (castTime < vanishTime) {
+        procFlags.set(ProcFlagsHit.IMMUNE)
+        missCond.set(SpellMissInfo.IMMUNE)
+      }
     }
   })
   events.Spells.OnDamageEarly((spell, damage, i) => {
