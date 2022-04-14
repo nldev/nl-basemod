@@ -78,8 +78,6 @@ function EquipTest (events: TSEvents) {
   })
 }
 
-// check hunter trap outcome
-
 export function OutcomeTest (events: TSEvents) {
   events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
     missChance.set(0)
@@ -120,6 +118,7 @@ export function OutcomeTest (events: TSEvents) {
 
     console.log(spell.GetCastTime())
     // check vanish
+    // check hunter trap outcome
 
     // block
     // if (
