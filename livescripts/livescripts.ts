@@ -120,8 +120,8 @@ export function OutcomeTest (events: TSEvents) {
 
   events.Spells.OnEffect((spell, cancel, info, mode, unit, item, obj, corpse) => {
     // check vanish
-    if (unit.GetInt('last-vanish')) {
-      const lastVanish = unit.GetInt('last-vanish')
+    if (spell.GetTarget().GetInt('last-vanish')) {
+      const lastVanish = spell.GetTarget().GetInt('last-vanish')
       const castTime = GetCurrTime() - spell.GetCastTime()
       if (castTime < lastVanish)
         cancel.set(true)
