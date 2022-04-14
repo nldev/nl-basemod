@@ -122,7 +122,7 @@ export function OutcomeTest (events: TSEvents) {
 
     // if doesnt have dodge-aura tag && is dodge
     if (missCond.get() === SpellMissInfo.DODGE) {
-      const ids = GetIDTag(MOD, DODGING)
+      const ids = GetIDTag('basemod', 'dodging')
       ids.forEach(id => {
         if (id === entry)
           missCond.set(SpellMissInfo.NONE)
@@ -131,8 +131,9 @@ export function OutcomeTest (events: TSEvents) {
 
     // if has dodge-aura tag && spell does not have cannot-be-dodged attribute && player does not have cannot-be-dodged aura && is hit && is melee && is in front
     if ((missCond.get() === SpellMissInfo.NONE) && (dmgClass === 2) && attacker.IsInFront(victim, 80)) {
-      const ids = GetIDTag(MOD, DODGING)
+      const ids = GetIDTag('basemod', 'dodging')
       ids.forEach(id => {
+        console.log(entry)
         if (id === entry)
           missCond.set(SpellMissInfo.DODGE)
       })

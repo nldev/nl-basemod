@@ -570,7 +570,7 @@ function Kick () {
 
 function Evasion () {
   const s = std.Spells.load(EVASION)
-  s.Tags.add($.Mod, DODGING)
+  s.Tags.add('basemod', 'dodging')
 }
 
 function Rogue () {
