@@ -245,6 +245,22 @@ export function OutcomeTest (events: TSEvents) {
       }
     }
   })
-  events.Spells.OnDamageEarly((spell, damage, i) => {
+  events.Spells.OnCheckCast(spell => {
+    const caster = spell.GetCaster()
+    const isInCombat = caster.IsInCombat()
+    if (isInCombat) {
+      caster.SetBool('was-in-combat', true)
+    } else {
+      caster.SetBool('was-in-combat', false)
+    }
+  })
+  events.Spells.OnCast(spell => {
+    const caster = spell.GetCaster()
+    const wasInCombat = caster.GetBool('was-in-combat')
+    if (wasInCombat)
+      caster.ClearInCombat()
+  })
+  events.Unit.OnExitCombat(unit => {
+    unit.SetBool('was-in-combat', false)
   })
 }
