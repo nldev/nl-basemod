@@ -121,30 +121,30 @@ export function OutcomeTest (events: TSEvents) {
       missCond.set(SpellMissInfo.NONE)
 
     // block
-    if (
-      ((cond === SpellMissInfo.BLOCK) || (cond === SpellMissInfo.NONE))
-        && ((dmgClass === 2) || (dmgClass === 3))
-        && attacker.IsInFront(victim, 80)
-    ) {
-      const ids = GetIDTag('basemod', 'force-block')
-      ids.forEach(id => {
-        if (victim.HasAura(id))
-          missCond.set(SpellMissInfo.BLOCK)
-      })
-    }
+    // if (
+    //   ((cond === SpellMissInfo.BLOCK) || (cond === SpellMissInfo.NONE))
+    //     && ((dmgClass === 2) || (dmgClass === 3))
+    //     && attacker.IsInFront(victim, 80)
+    // ) {
+    //   const ids = GetIDTag('basemod', 'force-block')
+    //   ids.forEach(id => {
+    //     if (victim.HasAura(id))
+    //       missCond.set(SpellMissInfo.BLOCK)
+    //   })
+    // }
 
     // parry
-    if (
-      ((cond === SpellMissInfo.PARRY) || (cond === SpellMissInfo.NONE))
-        && (dmgClass === 2)
-        && attacker.IsInFront(victim, 80)
-    ) {
-      const ids = GetIDTag('basemod', 'force-parry')
-      ids.forEach(id => {
-        if (victim.HasAura(id))
-          missCond.set(SpellMissInfo.PARRY)
-      })
-    }
+    // if (
+    //   ((cond === SpellMissInfo.PARRY) || (cond === SpellMissInfo.NONE))
+    //     && (dmgClass === 2)
+    //     && attacker.IsInFront(victim, 80)
+    // ) {
+    //   const ids = GetIDTag('basemod', 'force-parry')
+    //   ids.forEach(id => {
+    //     if (victim.HasAura(id))
+    //       missCond.set(SpellMissInfo.PARRY)
+    //   })
+    // }
 
     // dodge
     if (
