@@ -123,7 +123,7 @@ export function OutcomeTest (events: TSEvents) {
         // FIXME add all traps
         if (attacker.IsGameObject() && victim.IsPlayer())
           victim.ToPlayer().SendBroadcastMessage('is gameobject')
-        if (attacker.IsCreature())
+        if (attacker.IsUnit())
           victim.CastSpell(caster, spell.GetEntry(), true)
       }
   })
