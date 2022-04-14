@@ -85,9 +85,33 @@ export function OutcomeTest (events: TSEvents) {
     blockChance.set(0)
     parryChance.set(0)
 
-    // if has dodge-aura tag && is does not have cannot-be-dodged tag && is in front
-    if (victim.HasAura(26669) && attacker.IsInFront(victim, 80))
-      dodgeChance.set(100)
+    // miss
+    const forceMissIds = GetIDTag('basemod', 'force-miss')
+    forceMissIds.forEach(id => {
+      if (victim.HasAura(id))
+        missChance.set(100)
+    })
+
+    // block
+    const forceBlockIds = GetIDTag('basemod', 'force-miss')
+    forceBlockIds.forEach(id => {
+      if (victim.HasAura(id))
+        missChance.set(100)
+    })
+
+    // parry
+    const forceParryIds = GetIDTag('basemod', 'force-miss')
+    forceParryIds.forEach(id => {
+      if (victim.HasAura(id))
+        missChance.set(100)
+    })
+
+    // dodge
+    const forceDodgeIds = GetIDTag('basemod', 'force-miss')
+    forceDodgeIds.forEach(id => {
+      if (victim.HasAura(id))
+        missChance.set(100)
+    })
   })
 
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
@@ -119,6 +143,15 @@ export function OutcomeTest (events: TSEvents) {
     console.log(spell.GetCastTime())
     // check vanish
     // check hunter trap outcome
+
+    // miss
+    if (c2 === SpellMissInfo.MISS) {
+      const ids = GetIDTag('basemod', 'force-miss')
+      ids.forEach(id => {
+        if (victim.HasAura(id))
+          missCond.set(SpellMissInfo.MISS)
+      })
+    }
 
     // block
     // if (
