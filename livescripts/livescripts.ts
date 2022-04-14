@@ -100,7 +100,7 @@ export function OutcomeTest (events: TSEvents) {
     const info = spell.GetSpellInfo()
     const school = info.GetSchool()
     const dmgClass = info.GetDmgClass()
-    const cond = missCond.get()
+    const c1 = missCond.get()
     const isMagic = (dmgClass === 1)
       || ((HOLY_SCHOOL & school) !== 0)
       || ((FIRE_SCHOOL & school) !== 0)
@@ -109,16 +109,18 @@ export function OutcomeTest (events: TSEvents) {
       || ((SHADOW_SCHOOL & school) !== 0)
       || ((ARCANE_SCHOOL & school) !== 0)
 
-    if (cond === SpellMissInfo.PARRY)
+    if (c1 === SpellMissInfo.PARRY)
       missCond.set(SpellMissInfo.NONE)
-    if (cond === SpellMissInfo.BLOCK)
+    if (c1 === SpellMissInfo.BLOCK)
       missCond.set(SpellMissInfo.NONE)
-    if (cond === SpellMissInfo.MISS)
+    if (c1 === SpellMissInfo.MISS)
       missCond.set(SpellMissInfo.NONE)
-    if (cond === SpellMissInfo.RESIST)
+    if (c1 === SpellMissInfo.RESIST)
       missCond.set(SpellMissInfo.NONE)
-    if (cond === SpellMissInfo.DODGE)
+    if (c1 === SpellMissInfo.DODGE)
       missCond.set(SpellMissInfo.NONE)
+
+    const c2 = missCond.get()
 
     // block
     // if (
@@ -148,7 +150,7 @@ export function OutcomeTest (events: TSEvents) {
 
     // dodge
     if (
-      ((cond === SpellMissInfo.DODGE) || (cond === SpellMissInfo.NONE))
+      ((c2 === SpellMissInfo.DODGE) || (c2 === SpellMissInfo.NONE))
         && (dmgClass === 2)
         && attacker.IsInFront(victim, 80)
     ) {
@@ -159,9 +161,11 @@ export function OutcomeTest (events: TSEvents) {
       })
     }
 
+    console.log(SpellMissInfo.RESIST)
+    console.log(c2)
     // resist
     if (
-      ((cond === SpellMissInfo.RESIST) || (cond === SpellMissInfo.NONE))
+      ((c2 === SpellMissInfo.RESIST) || (c2 === SpellMissInfo.NONE))
         && isMagic
     ) {
       const ids = GetIDTag('basemod', 'force-resist')
