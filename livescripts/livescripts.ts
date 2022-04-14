@@ -199,18 +199,6 @@ export function OutcomeTest (events: TSEvents) {
           missCond.set(SpellMissInfo.RESIST)
       })
     }
-
-    // handle vanish
-    const castTime = info.GetInt('cast-time')
-    const vanishTime = victim.GetInt('vanish-time')
-    if (victim.IsPlayer()) {
-      victim.ToPlayer().SendBroadcastMessage(`cast time: ${castTime}`)
-      victim.ToPlayer().SendBroadcastMessage(`vanish time: ${vanishTime}`)
-    }
-    if (castTime && vanishTime) {
-      if (castTime < vanishTime)
-        missCond.set(SpellMissInfo.IMMUNE)
-    }
   })
 
   // handle reflect trap
@@ -234,5 +222,27 @@ export function OutcomeTest (events: TSEvents) {
   events.Spells.OnCast(spell => {
     const info = spell.GetSpellInfo()
     info.SetInt('cast-time', GetCurrTime())
+    const caster = spell.GetCaster()
+    if (caster && !caster.IsNull() && caster.IsPlayer())
+      caster.ToPlayer().SendBroadcastMessage('is player')
+  })
+  events.Spells.OnDetermineHitOutcome((spell, procFlags) => {
+    const info = spell.GetSpellInfo()
+    const victim = spell.GetTarget()
+    if (victim && !victim.IsNull()) {
+      // handle vanish
+      const castTime = info.GetInt('cast-time')
+      const vanishTime = victim.GetInt('vanish-time')
+      if (victim.IsPlayer()) {
+        victim.ToPlayer().SendBroadcastMessage(`cast time: ${castTime}`)
+        victim.ToPlayer().SendBroadcastMessage(`vanish time: ${vanishTime}`)
+        victim.ToPlayer().SendBroadcastMessage(`procflag: ${procFlags.get()}`)
+      }
+      if (castTime && vanishTime)
+        if (castTime < vanishTime)
+          procFlags.set(ProcFlagsHit.IMMUNE)
+    }
+  })
+  events.Spells.OnDamageEarly((spell, damage, i) => {
   })
 }
