@@ -113,6 +113,10 @@ export function OutcomeTest (events: TSEvents) {
         dodgeChance.set(100)
     })
   })
+  events.SpellID.OnEffect(1857, spell => {
+    const caster = spell.GetCaster()
+    caster.SetInt('last-vanish', GetCurrTime() + spell.GetCastTime() + 200)
+  })
 
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
     const info = spell.GetSpellInfo()
@@ -139,9 +143,6 @@ export function OutcomeTest (events: TSEvents) {
       missCond.set(SpellMissInfo.NONE)
 
     const c2 = missCond.get()
-
-    // check vanish
-    // check hunter trap outcome
 
     // miss
     // if (c2 === SpellMissInfo.MISS) {
@@ -202,5 +203,16 @@ export function OutcomeTest (events: TSEvents) {
           missCond.set(SpellMissInfo.RESIST)
       })
     }
+
+    // check vanish
+    if (victim.GetInt('last-vanish')) {
+      const lastVanish = victim.GetInt('last-vanish')
+      const castTime = GetCurrTime() - spell.GetCastTime()
+      if (castTime < lastVanish)
+        missCond.set(SpellMissInfo.IMMUNE)
+      victim.ToPlayer().SendBroadcastMessage(`${lastVanish}`)
+      victim.ToPlayer().SendBroadcastMessage(`${castTime}`)
+    }
+    // check hunter trap outcome
   })
 }
