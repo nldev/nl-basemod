@@ -118,24 +118,6 @@ export function OutcomeTest (events: TSEvents) {
     caster.SetInt('last-vanish', GetCurrTime() + spell.GetCastTime() + 200)
   })
 
-  events.Spells.OnEffect((spell, cancel, info, mode, unit, item, obj, corpse) => {
-    // check vanish
-    if (spell.GetTarget())
-      if (spell.GetTarget().GetInt('last-vanish')) {
-        const lastVanish = spell.GetTarget().GetInt('last-vanish')
-        const castTime = GetCurrTime() - spell.GetCastTime()
-        if (castTime < lastVanish)
-          console.log('lol')
-        spell.GetCaster().ToPlayer().SendBroadcastMessage(`last vanish: ${lastVanish}`)
-        spell.GetCaster().ToPlayer().SendBroadcastMessage(`cast time: ${castTime}`)
-        spell.GetCaster().ToPlayer().SendBroadcastMessage(`curr time: ${spell.GetCastTime()}`)
-      }
-    // check hunter trap outcome
-  })
-
-  events.Spells.OnDamageEarly((spell, damage, info, type, isCrit, effectMask) => {
-  })
-
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
     const info = spell.GetSpellInfo()
     const school = info.GetSchool()
@@ -220,6 +202,16 @@ export function OutcomeTest (events: TSEvents) {
         if (victim.HasAura(id))
           missCond.set(SpellMissInfo.RESIST)
       })
+    }
+
+    // hunter trap reflect
+    if (attacker.IsGameObject()) {
+      const go = attacker.ToGameObject()
+      const owner = attacker.GetEffectiveOwner()
+      if (owner.IsPlayer()) {
+        const p = owner.ToPlayer()
+        console.log(p.GetGUID())
+      }
     }
   })
 }
