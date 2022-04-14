@@ -93,21 +93,21 @@ export function OutcomeTest (events: TSEvents) {
     // })
 
     // block
-    // const forceBlockIds = GetIDTag('basemod', 'force-miss')
+    // const forceBlockIds = GetIDTag('basemod', 'force-block')
     // forceBlockIds.forEach(id => {
     //   if (victim.HasAura(id))
     //     blockChance.set(100)
     // })
 
     // parry
-    // const forceParryIds = GetIDTag('basemod', 'force-miss')
+    // const forceParryIds = GetIDTag('basemod', 'force-parry')
     // forceParryIds.forEach(id => {
     //   if (victim.HasAura(id))
     //     parryChance.set(100)
     // })
 
     // dodge
-    const forceDodgeIds = GetIDTag('basemod', 'force-miss')
+    const forceDodgeIds = GetIDTag('basemod', 'force-dodge')
     forceDodgeIds.forEach(id => {
       if (victim.HasAura(id))
         dodgeChance.set(100)
