@@ -13,11 +13,11 @@ import './basemod/autolearn'
 
 const EVASION = 26669
 
-const BLOCKING = 'blocking'
-const PARRYING = 'parrying'
-const MISSING = 'missing'
-const RESISTING = 'resisting'
-const DODGING = 'dodging'
+const FORCE_BLOCK = 'force-block'
+const FORCE_PARRY = 'force-parry'
+const FORCE_MISS = 'force-miss'
+const FORCE_RESIST = 'force-resist'
+const FORCE_DODGE = 'force-dodge'
 
 let currency_id = 0
 
@@ -570,7 +570,7 @@ function Kick () {
 
 function Evasion () {
   const s = std.Spells.load(EVASION)
-  s.Tags.add('basemod', 'dodging')
+  s.Tags.add($.Mod, FORCE_DODGE)
 }
 
 function Rogue () {

@@ -9,11 +9,12 @@ import { Opcode } from './basemod/utils'
 
 const MOD = 'basemod'
 
-const BLOCKING = 'blocking'
-const PARRYING = 'parrying'
-const MISSING = 'missing'
-const RESISTING = 'resisting'
-const DODGING = 'dodging'
+const HOLY_SCHOOL = 2
+const FIRE_SCHOOL = 4
+const NATURE_SCHOOL = 8
+const FROST_SCHOOL = 16
+const SHADOW_SCHOOL = 32
+const ARCANE_SCHOOL = 64
 
 const CHEAP_SHOT = 1833
 const AMBUSH = 11267
@@ -97,8 +98,16 @@ export function OutcomeTest (events: TSEvents) {
 
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
     const info = spell.GetSpellInfo()
+    const school = info.GetSchool()
     const dmgClass = info.GetDmgClass()
     const cond = missCond.get()
+    const isMagic = (dmgClass === 1)
+      || ((HOLY_SCHOOL & school) != 0)
+      || ((FIRE_SCHOOL & school) != 0)
+      || ((NATURE_SCHOOL & school) != 0)
+      || ((FROST_SCHOOL & school) != 0)
+      || ((SHADOW_SCHOOL & school) != 0)
+      || ((ARCANE_SCHOOL & school) != 0)
 
     if (cond === SpellMissInfo.PARRY)
       missCond.set(SpellMissInfo.NONE)
@@ -111,21 +120,54 @@ export function OutcomeTest (events: TSEvents) {
     if (cond === SpellMissInfo.DODGE)
       missCond.set(SpellMissInfo.NONE)
 
-    // if is hit or dodge
-    // && is melee
-    // && has dodge-aura tag
-    // && spell does not have cannot-be-dodged attribute
-    // && player does not have cannot-be-dodged aura
-    // && is in front
+    // block
+    if (
+      ((cond === SpellMissInfo.BLOCK) || (cond === SpellMissInfo.NONE))
+        && ((dmgClass === 2) || (dmgClass === 3))
+        && attacker.IsInFront(victim, 80)
+    ) {
+      const ids = GetIDTag('basemod', 'force-block')
+      ids.forEach(id => {
+        if (victim.HasAura(id))
+          missCond.set(SpellMissInfo.BLOCK)
+      })
+    }
+
+    // parry
+    if (
+      ((cond === SpellMissInfo.PARRY) || (cond === SpellMissInfo.NONE))
+        && (dmgClass === 2)
+        && attacker.IsInFront(victim, 80)
+    ) {
+      const ids = GetIDTag('basemod', 'force-parry')
+      ids.forEach(id => {
+        if (victim.HasAura(id))
+          missCond.set(SpellMissInfo.PARRY)
+      })
+    }
+
+    // dodge
     if (
       ((cond === SpellMissInfo.DODGE) || (cond === SpellMissInfo.NONE))
         && (dmgClass === 2)
         && attacker.IsInFront(victim, 80)
     ) {
-      const ids = GetIDTag('basemod', 'dodging')
+      const ids = GetIDTag('basemod', 'force-dodge')
       ids.forEach(id => {
         if (victim.HasAura(id))
           missCond.set(SpellMissInfo.DODGE)
+      })
+    }
+
+    // resist
+    if (
+      ((cond === SpellMissInfo.RESIST) || (cond === SpellMissInfo.NONE))
+        && isMagic
+    ) {
+      const ids = GetIDTag('basemod', 'force-resist')
+      ids.forEach(id => {
+        if (victim.HasAura(id))
+          missCond.set(SpellMissInfo.RESIST)
       })
     }
   })
