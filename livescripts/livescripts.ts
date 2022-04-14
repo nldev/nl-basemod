@@ -123,7 +123,8 @@ export function OutcomeTest (events: TSEvents) {
         const caster = attacker.GetEffectiveOwner()
         if (attacker.IsGameObject() && victim.IsPlayer())
           victim.ToPlayer().SendBroadcastMessage('is gameobject')
-        if (attacker.IsUnit() && !attacker.IsCreature() && !attacker.IsPlayer())
+        // FIXME: check reflectable object spell tags
+        if (attacker.IsUnit() && !attacker.IsCreature() && !attacker.ToUnit().IsCharmed())
           caster.CastSpell(caster, spell.GetEntry(), true)
       }
   })
