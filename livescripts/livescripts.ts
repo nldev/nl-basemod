@@ -9,12 +9,12 @@ import { Opcode } from './basemod/utils'
 
 const MOD = 'basemod'
 
-const HOLY_SCHOOL = 2
-const FIRE_SCHOOL = 4
-const NATURE_SCHOOL = 8
-const FROST_SCHOOL = 16
-const SHADOW_SCHOOL = 32
-const ARCANE_SCHOOL = 64
+const HOLY_SCHOOL: uint32 = 2
+const FIRE_SCHOOL: uint32 = 4
+const NATURE_SCHOOL: uint32 = 8
+const FROST_SCHOOL: uint32 = 16
+const SHADOW_SCHOOL: uint32 = 32
+const ARCANE_SCHOOL: uint32 = 64
 
 const CHEAP_SHOT = 1833
 const AMBUSH = 11267
@@ -102,12 +102,12 @@ export function OutcomeTest (events: TSEvents) {
     const dmgClass = info.GetDmgClass()
     const cond = missCond.get()
     const isMagic = (dmgClass === 1)
-      || ((HOLY_SCHOOL & school) != 0)
-      || ((FIRE_SCHOOL & school) != 0)
-      || ((NATURE_SCHOOL & school) != 0)
-      || ((FROST_SCHOOL & school) != 0)
-      || ((SHADOW_SCHOOL & school) != 0)
-      || ((ARCANE_SCHOOL & school) != 0)
+      || ((HOLY_SCHOOL & school) !== 0)
+      || ((FIRE_SCHOOL & school) !== 0)
+      || ((NATURE_SCHOOL & school) !== 0)
+      || ((FROST_SCHOOL & school) !== 0)
+      || ((SHADOW_SCHOOL & school) !== 0)
+      || ((ARCANE_SCHOOL & school) !== 0)
 
     if (cond === SpellMissInfo.PARRY)
       missCond.set(SpellMissInfo.NONE)

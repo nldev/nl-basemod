@@ -569,14 +569,14 @@ function Kick () {
   s.Power.setEnergy(15)
 }
 
-function CloakOfShadows () {
-  const s = std.Spells.load(CLOAK_OF_SHADOWS)
-  s.Tags.add($.Mod, FORCE_RESIST)
-}
-
 function Evasion () {
   const s = std.Spells.load(EVASION)
-  s.Tags.add($.Mod, FORCE_DODGE)
+  s.Tags.add('basemod', 'force-dodge')
+}
+
+function CloakOfShadows () {
+  const s = std.Spells.load(CLOAK_OF_SHADOWS)
+  s.Tags.add('basemod', 'force-resist')
 }
 
 function Rogue () {
@@ -589,6 +589,7 @@ function Rogue () {
   Sap()
   Blind()
   Evasion()
+  CloakOfShadows()
 }
 
 function InfiniteRangedWeapon () {
