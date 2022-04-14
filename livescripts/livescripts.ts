@@ -140,7 +140,6 @@ export function OutcomeTest (events: TSEvents) {
 
     const c2 = missCond.get()
 
-    console.log(spell.GetCastTime())
     // check vanish
     // check hunter trap outcome
 
