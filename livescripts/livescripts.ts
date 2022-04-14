@@ -118,6 +118,24 @@ export function OutcomeTest (events: TSEvents) {
     caster.SetInt('last-vanish', GetCurrTime() + spell.GetCastTime() + 200)
   })
 
+  events.Spells.OnEffect((spell, cancel, info, mode, unit, item, obj, corpse) => {
+    // check vanish
+    if (unit.GetInt('last-vanish')) {
+      const lastVanish = unit.GetInt('last-vanish')
+      const castTime = GetCurrTime() - spell.GetCastTime()
+      if (castTime < lastVanish)
+        cancel.set(true)
+      spell.GetCaster().ToPlayer().SendBroadcastMessage(`last vanish: ${lastVanish}`)
+      spell.GetCaster().ToPlayer().SendBroadcastMessage(`cast time: ${castTime}`)
+      spell.GetCaster().ToPlayer().SendBroadcastMessage(`curr time: ${spell.GetCastTime()}`)
+    }
+    // check hunter trap outcome
+    cancel.set(true)
+  })
+
+  events.Spells.OnDamageEarly((spell, damage, info, type, isCrit, effectMask) => {
+  })
+
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
     const info = spell.GetSpellInfo()
     const school = info.GetSchool()
@@ -203,16 +221,5 @@ export function OutcomeTest (events: TSEvents) {
           missCond.set(SpellMissInfo.RESIST)
       })
     }
-
-    // check vanish
-    if (victim.GetInt('last-vanish')) {
-      const lastVanish = victim.GetInt('last-vanish')
-      const castTime = GetCurrTime() - spell.GetCastTime()
-      if (castTime < lastVanish)
-        missCond.set(SpellMissInfo.IMMUNE)
-      victim.ToPlayer().SendBroadcastMessage(`last vanish: ${lastVanish}`)
-      victim.ToPlayer().SendBroadcastMessage(`cast time: ${castTime}`)
-    }
-    // check hunter trap outcome
   })
 }
