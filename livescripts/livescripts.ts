@@ -205,12 +205,11 @@ export function OutcomeTest (events: TSEvents) {
     }
 
     // hunter trap reflect
-    if (attacker.IsUnit()) {
-      const go = attacker.ToGameObject()
+    if (attacker.IsUnit() && (spell.GetEntry() === 3355)) {
       const owner = attacker.GetEffectiveOwner()
       if (owner.IsPlayer()) {
         const p = owner.ToPlayer()
-        console.log(p.GetGUID())
+        missCond.set(SpellMissInfo.IMMUNE)
       }
     }
   })
