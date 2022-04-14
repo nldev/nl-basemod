@@ -114,19 +114,6 @@ export function OutcomeTest (events: TSEvents) {
     })
   })
 
-  // handle reflect trap
-  events.Spells.OnCalcReflect((spell, reflectChance, attacker, victim) => {
-    if (attacker && !attacker.IsNull())
-      victim.ToPlayer().SendBroadcastMessage('attacker exists')
-      if (victim.IsUnit() && (reflectChance.get() === 100)) {
-        victim.ToPlayer().SendBroadcastMessage('here')
-        const caster = attacker.GetEffectiveOwner()
-        // FIXME: check for gameobject spells
-        if (caster.IsPlayer())
-          caster.AddAura(spell.GetEntry(), caster)
-      }
-  })
-
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
     const info = spell.GetSpellInfo()
     const school = info.GetSchool()
@@ -212,5 +199,36 @@ export function OutcomeTest (events: TSEvents) {
           missCond.set(SpellMissInfo.RESIST)
       })
     }
+
+    // handle vanish
+    const castTime = info.GetInt('cast-time')
+    const vanishTime = victim.GetInt('vanish-time')
+    if (castTime && vanishTime) {
+      if (castTime < vanishTime)
+        missCond.set(SpellMissInfo.IMMUNE)
+    }
+  })
+
+  // handle reflect trap
+  events.Spells.OnCalcReflect((spell, reflectChance, attacker, victim) => {
+    if (attacker && !attacker.IsNull())
+      victim.ToPlayer().SendBroadcastMessage('attacker exists')
+      if (victim.IsUnit() && (reflectChance.get() === 100)) {
+        victim.ToPlayer().SendBroadcastMessage('here')
+        const caster = attacker.GetEffectiveOwner()
+        // FIXME: check for gameobject spells
+        if (caster.IsPlayer())
+          caster.AddAura(spell.GetEntry(), caster)
+      }
+  })
+
+  // handle vanish
+  events.SpellID.OnEffect(1857, spell => {
+    const caster = spell.GetCaster()
+    caster.SetInt('vanish-time', GetCurrTime() + spell.GetCastTime() + 200)
+  })
+  events.Spells.OnCast(spell => {
+    const info = spell.GetSpellInfo()
+    info.SetInt('cast-time', GetCurrTime())
   })
 }
