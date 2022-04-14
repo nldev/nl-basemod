@@ -238,7 +238,7 @@ export function OutcomeTest (events: TSEvents) {
       }
       if (castTime && vanishTime)
       if (castTime < vanishTime) {
-        procFlags.set(ProcFlagsHit.MISS)
+        procFlags.set(ProcFlagsHit.IMMUNE)
         missCond.set(SpellMissInfo.IMMUNE)
         // FIXME pass in target
         // FIXME dont cause combat on cast, only on hit
