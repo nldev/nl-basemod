@@ -113,9 +113,18 @@ export function OutcomeTest (events: TSEvents) {
         dodgeChance.set(100)
     })
   })
-  events.SpellID.OnEffect(1857, spell => {
-    const caster = spell.GetCaster()
-    caster.SetInt('last-vanish', GetCurrTime() + spell.GetCastTime() + 200)
+
+  events.Spells.OnCalcReflect((spell, reflectChance, attacker, victim) => {
+    if (victim.IsPlayer()) {
+      if (attacker.IsPlayer())
+        victim.ToPlayer().SendBroadcastMessage('player')
+      if (attacker.IsCreature())
+        victim.ToPlayer().SendBroadcastMessage('creature')
+      if (attacker.IsUnit())
+        victim.ToPlayer().SendBroadcastMessage('unit')
+      if (attacker.IsGameObject())
+        victim.ToPlayer().SendBroadcastMessage('game object')
+    }
   })
 
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
@@ -209,7 +218,6 @@ export function OutcomeTest (events: TSEvents) {
       const owner = attacker.GetEffectiveOwner()
       if (owner.IsPlayer()) {
         const p = owner.ToPlayer()
-        missCond.set(SpellMissInfo.IMMUNE)
       }
     }
   })
