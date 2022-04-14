@@ -203,6 +203,8 @@ export function OutcomeTest (events: TSEvents) {
     // handle vanish
     const castTime = info.GetInt('cast-time')
     const vanishTime = victim.GetInt('vanish-time')
+    if (victim.IsPlayer())
+      victim.ToPlayer().SendBroadcastMessage(`${castTime}`)
     if (castTime && vanishTime) {
       if (castTime < vanishTime)
         missCond.set(SpellMissInfo.IMMUNE)
@@ -223,9 +225,9 @@ export function OutcomeTest (events: TSEvents) {
   })
 
   // handle vanish
-  events.SpellID.OnEffect(1857, spell => {
+  events.SpellID.OnCast(1857, spell => {
     const caster = spell.GetCaster()
-    caster.SetInt('vanish-time', GetCurrTime() + spell.GetCastTime() + 200)
+    caster.SetInt('vanish-time', GetCurrTime() + 200)
   })
   events.Spells.OnCast(spell => {
     const info = spell.GetSpellInfo()
