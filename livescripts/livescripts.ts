@@ -260,8 +260,9 @@ export function OutcomeTest (events: TSEvents) {
   events.Spells.OnCast(spell => {
     const caster = spell.GetCaster()
     const wasInCombat = caster.GetBool('was-in-combat')
-    if (wasInCombat)
-      caster.ClearInCombat()
+    if (caster.IsPlayer())
+      if (wasInCombat)
+        caster.ClearInCombat()
   })
   events.Unit.OnExitCombat(unit => {
     unit.SetBool('was-in-combat', false)
