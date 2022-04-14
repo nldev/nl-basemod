@@ -161,8 +161,6 @@ export function OutcomeTest (events: TSEvents) {
       })
     }
 
-    console.log(SpellMissInfo.RESIST)
-    console.log(c2)
     // resist
     if (
       ((c2 === SpellMissInfo.RESIST) || (c2 === SpellMissInfo.NONE))
