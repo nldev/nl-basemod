@@ -115,16 +115,17 @@ export function OutcomeTest (events: TSEvents) {
   })
 
   events.Spells.OnCalcReflect((spell, reflectChance, attacker, victim) => {
-    if (victim.IsPlayer()) {
-      if (attacker.IsPlayer())
-        victim.ToPlayer().SendBroadcastMessage('player')
-      if (attacker.IsCreature())
-        victim.ToPlayer().SendBroadcastMessage('creature')
-      if (attacker.IsUnit())
-        victim.ToPlayer().SendBroadcastMessage('unit')
-      if (attacker.IsGameObject())
-        victim.ToPlayer().SendBroadcastMessage('game object')
-    }
+    if (attacker && !attacker.IsNull())
+      victim.ToPlayer().SendBroadcastMessage('attacker exists')
+      if (victim.IsUnit() && (reflectChance.get() === 100)) {
+        victim.ToPlayer().SendBroadcastMessage('here')
+        const caster = attacker.GetEffectiveOwner()
+        // FIXME add all traps
+        if (attacker.IsGameObject() && victim.IsPlayer())
+          victim.ToPlayer().SendBroadcastMessage('is gameobject')
+        if (attacker.IsCreature())
+          victim.CastSpell(caster, spell.GetEntry(), true)
+      }
   })
 
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
