@@ -11,6 +11,14 @@ import './basemod/spells'
 import './basemod/talents'
 import './basemod/autolearn'
 
+const EVASION = 26669
+
+const BLOCKING = 'blocking'
+const PARRYING = 'parrying'
+const MISSING = 'missing'
+const RESISTING = 'resisting'
+const DODGING = 'dodging'
+
 let currency_id = 0
 
 const SKILLS: Mapping<SkillLine> = {}
@@ -558,6 +566,11 @@ function Blind () {
 function Kick () {
   const s = std.Spells.load(1766)
   s.Power.setEnergy(15)
+}
+
+function Evasion () {
+  const s = std.Spells.load(EVASION)
+  s.Tags.add($.Mod, DODGING)
 }
 
 function Rogue () {

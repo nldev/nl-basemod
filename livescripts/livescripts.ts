@@ -7,6 +7,14 @@ import { Autolearn } from './basemod/autolearn'
 import { Combat } from './basemod/combat/combat'
 import { Opcode } from './basemod/utils'
 
+const MOD = 'basemod'
+
+const BLOCKING = 'blocking'
+const PARRYING = 'parrying'
+const MISSING = 'missing'
+const RESISTING = 'resisting'
+const DODGING = 'dodging'
+
 const CHEAP_SHOT = 1833
 const AMBUSH = 11267
 const GARROTE = 11290
@@ -88,7 +96,9 @@ export function OutcomeTest (events: TSEvents) {
   })
 
   events.Spells.OnCalcMiss((spell, attacker, victim, effectMask, missCond) => {
-    const dmgClass = spell.GetSpellInfo().GetDmgClass()
+    const info = spell.GetSpellInfo()
+    const dmgClass = info.GetDmgClass()
+    const entry = info.GetEntry()
 
     // if doesnt have parry-aura tag && is parry
     if ((missCond.get() === SpellMissInfo.PARRY)) {
@@ -111,15 +121,22 @@ export function OutcomeTest (events: TSEvents) {
     }
 
     // if doesnt have dodge-aura tag && is dodge
-    if ((missCond.get() === SpellMissInfo.DODGE)) {
-      if (!victim.HasAura(26669))
-        missCond.set(SpellMissInfo.NONE)
+    if (missCond.get() === SpellMissInfo.DODGE) {
+      const ids = GetIDTag(MOD, DODGING)
+      ids.forEach(id => {
+        if (id === entry)
+          missCond.set(SpellMissInfo.NONE)
+      })
     }
 
     // if has dodge-aura tag && spell does not have cannot-be-dodged attribute && player does not have cannot-be-dodged aura && is hit && is melee && is in front
-    if (missCond.get() === SpellMissInfo.NONE && (dmgClass === 2) && attacker.IsInFront(victim, 80))
-      if (victim.HasAura(26669))
-        missCond.set(SpellMissInfo.DODGE)
+    if ((missCond.get() === SpellMissInfo.NONE) && (dmgClass === 2) && attacker.IsInFront(victim, 80)) {
+      const ids = GetIDTag(MOD, DODGING)
+      ids.forEach(id => {
+        if (id === entry)
+          missCond.set(SpellMissInfo.DODGE)
+      })
+    }
   })
   // also affects miss
   // does this happen before or after onCalcMeleeMiss?
