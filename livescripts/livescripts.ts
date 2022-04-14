@@ -217,7 +217,7 @@ export function OutcomeTest (events: TSEvents) {
   // handle vanish
   events.SpellID.OnCast(1857, spell => {
     const caster = spell.GetCaster()
-    caster.SetInt('vanish-time', GetCurrTime() + 200)
+    caster.SetInt('vanish-time', GetCurrTime())
   })
   events.Spells.OnCast(spell => {
     const info = spell.GetSpellInfo()
@@ -226,7 +226,7 @@ export function OutcomeTest (events: TSEvents) {
     if (caster && !caster.IsNull() && caster.IsPlayer())
       caster.ToPlayer().SendBroadcastMessage('is player')
   })
-  events.Spells.OnDetermineHitOutcome((spell, procFlags) => {
+  events.Spells.OnDetermineHitOutcome((spell, missCond) => {
     const info = spell.GetSpellInfo()
     const victim = spell.GetTarget()
     if (victim && !victim.IsNull()) {
@@ -236,11 +236,11 @@ export function OutcomeTest (events: TSEvents) {
       if (victim.IsPlayer()) {
         victim.ToPlayer().SendBroadcastMessage(`cast time: ${castTime}`)
         victim.ToPlayer().SendBroadcastMessage(`vanish time: ${vanishTime}`)
-        victim.ToPlayer().SendBroadcastMessage(`procflag: ${procFlags.get()}`)
+        victim.ToPlayer().SendBroadcastMessage(`missCond: ${missCond.get()}`)
       }
       if (castTime && vanishTime)
         if (castTime < vanishTime)
-          procFlags.set(ProcFlagsHit.IMMUNE)
+          missCond.set(SpellMissInfo.IMMUNE)
     }
   })
   events.Spells.OnDamageEarly((spell, damage, i) => {
