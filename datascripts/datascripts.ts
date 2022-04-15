@@ -579,6 +579,11 @@ function CloakOfShadows () {
   s.Tags.add('basemod', 'force-resist')
 }
 
+function FocusedAttacks () {
+  const s = std.Spells.load(51637)
+  s.Visual.getRefCopy().CastKit.getRefCopy().Animation.BATTLE_ROAR.set()
+}
+
 function Rogue () {
   SetupPoisons()
   NormalizeSprint()
@@ -590,6 +595,7 @@ function Rogue () {
   Blind()
   Evasion()
   CloakOfShadows()
+  FocusedAttacks()
 }
 
 function InfiniteRangedWeapon () {
