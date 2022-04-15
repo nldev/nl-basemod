@@ -96,12 +96,12 @@ export const Panel: Component<PanelOptions> = options => {
       $.store.Set('CHARACTER', `${options.name}-panel-visibility`, false)
       dropdown.ref.Hide()
       a.ref.Hide()
-      PlaySound(822)
+      PlaySound(853)
     } else {
       $.store.Set('CHARACTER', `${options.name}-panel-visibility`, true)
       dropdown.ref.Show()
       a.ref.Show()
-      PlaySound(821)
+      PlaySound(828)
     }
   }
 
