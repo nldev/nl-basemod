@@ -51,15 +51,16 @@ function DevTools (events: TSEvents) {
   })
 }
 
-export function GetPlayersInCombatWith (creature: TSCreature) {
-  const array: TSArray<TSPlayer> = []
+export function GetInCombatWith (creature: TSCreature) {
+  const array: TSArray<TSUnit> = []
 
   const units = creature.GetUnitsInRange(100, 0, 0)
   units.forEach(u => {
-    if (creature.IsInCombatWith(u)) {
-
-    }
+    if (creature.IsInCombatWith(u))
+      array.push(u)
   })
+
+  return array
 }
 
 export function Main (events: TSEvents) {
