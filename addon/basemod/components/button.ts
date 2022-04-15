@@ -42,6 +42,7 @@ export const Button: Component<ButtonOptions> = options => {
     e.SetBackdropColor(color[0] * 0.6, color[1] * 0.6, color[2] * 0.6, 1)
     if (options.onClick)
       options.onClick(f)
+    PlaySound(828)
   })
 
   f.ref.SetScript('OnMouseUp', (e, button) => {
