@@ -54,6 +54,7 @@ export const Numeric: Component<NumericOptions> = options => {
     e.ClearFocus()
     if (options.onAccept)
       options.onAccept(number, input)
+    PlaySound(806)
   }
   inner.ref.EnableMouseWheel(true)
   e.SetScript('OnTabPressed', () => fn())

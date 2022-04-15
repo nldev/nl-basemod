@@ -61,6 +61,7 @@ export const Textarea: Component<TextareaOptions> = options => {
     if (options.onAccept)
       options.onAccept(text)
     e.ClearFocus()
+    PlaySound(806)
   })
 
   if (options.max)
