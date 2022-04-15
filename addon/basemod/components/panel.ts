@@ -5,6 +5,8 @@ import { BASE_BACKDROP } from '../constants'
 import { Movable } from '../utils'
 import { Mapping } from '../types'
 
+let is_first_load = true
+
 export interface PanelOptions extends ComponentOptions {
   nav?: DropdownItemOptions[]
   components?: Mapping<any>
@@ -92,17 +94,21 @@ export const Panel: Component<PanelOptions> = options => {
 
   // toggle visibility
   const TogglePanel = () => {
+    if (is_first_load)
+      is_first_load = false
+
     if (dropdown.ref.IsVisible()) {
       $.store.Set('CHARACTER', `${options.name}-panel-visibility`, false)
       dropdown.ref.Hide()
       a.ref.Hide()
-      PlaySound(853)
     } else {
       $.store.Set('CHARACTER', `${options.name}-panel-visibility`, true)
       dropdown.ref.Show()
       a.ref.Show()
-      PlaySound(828)
     }
+
+    if (!is_first_load)
+      PlaySound(828)
   }
 
   title.ref.HookScript('OnEnter', () => title.ref.SetBackdropColor(0.21, 0.49, 1, 1))
