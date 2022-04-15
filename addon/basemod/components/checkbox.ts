@@ -36,12 +36,15 @@ export const Checkbox: Component<CheckboxOptions> = options => {
     const value = check.GetChecked()
     if ((value !== isChecked) && options.onChange)
       options.onChange(value, f)
-    if ((value === 1) && options.onCheck)
+    if ((value === 1) && options.onCheck) {
       options.onCheck(f)
-    if ((value === null) && options.onUncheck)
+      PlaySound(856)
+    }
+    if ((value === null) && options.onUncheck) {
       options.onUncheck(f)
+      PlaySound(857)
+    }
     isChecked = value
-    PlaySound(1115)
   })
 
   return f
