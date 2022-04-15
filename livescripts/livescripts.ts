@@ -63,7 +63,7 @@ export function Main (events: TSEvents) {
   Rogue(events)
 
   EquipTest(events)
-  OutcomeTest(events)
+  OutcomeTests(events)
 }
 
 function EquipTest (events: TSEvents) {
@@ -78,7 +78,7 @@ function EquipTest (events: TSEvents) {
   })
 }
 
-export function OutcomeTest (events: TSEvents) {
+export function OutcomeTests (events: TSEvents) {
   events.Unit.OnCalcMeleeOutcome((attacker, victim, missChance, critChance, dodgeChance, blockChance, parryChance, attackType) => {
     missChance.set(0)
     dodgeChance.set(0)
@@ -204,9 +204,7 @@ export function OutcomeTest (events: TSEvents) {
   // handle reflect trap
   events.Spells.OnCalcReflect((spell, reflectChance, attacker, victim) => {
     if (attacker && !attacker.IsNull())
-      victim.ToPlayer().SendBroadcastMessage('attacker exists')
       if (victim.IsUnit() && (reflectChance.get() === 100)) {
-        victim.ToPlayer().SendBroadcastMessage('here')
         const caster = attacker.GetEffectiveOwner()
         // FIXME: check for gameobject spells
         if (caster.IsPlayer())
@@ -219,23 +217,10 @@ export function OutcomeTest (events: TSEvents) {
     const caster = spell.GetCaster()
     caster.SetInt('vanish-time', GetCurrTime())
   })
-  events.Spells.OnCast(spell => {
-    const info = spell.GetSpellInfo()
-    info.SetInt('cast-time', GetCurrTime())
-    const caster = spell.GetCaster()
-    if (caster && !caster.IsNull() && caster.IsPlayer())
-      caster.ToPlayer().SendBroadcastMessage('is player')
-  })
   events.Spells.OnDetermineHitOutcome((info, victim, procFlags, missCond) => {
     if (victim && !victim.IsNull()) {
-      // handle vanish
       const castTime = info.GetInt('cast-time')
       const vanishTime = victim.GetInt('vanish-time')
-      if (victim.IsPlayer()) {
-        victim.ToPlayer().SendBroadcastMessage(`cast time: ${castTime}`)
-        victim.ToPlayer().SendBroadcastMessage(`vanish time: ${vanishTime}`)
-        victim.ToPlayer().SendBroadcastMessage(`missCond: ${missCond.get()}`)
-      }
       if (castTime && vanishTime)
         if (castTime < vanishTime) {
           procFlags.set(ProcFlagsHit.IMMUNE)
@@ -244,35 +229,6 @@ export function OutcomeTest (events: TSEvents) {
           // FIXME dont cause combat on cast, only on hit
         }
     }
-  })
-  events.Spells.OnCheckCast(spell => {
-    const caster = spell.GetCaster()
-    if (caster.IsPlayer()) {
-      const c = caster.ToPlayer()
-      const isInCombat = c.IsInCombat()
-      if (isInCombat) {
-        c.SetBool('was-in-combat', true)
-      } else {
-        c.SetBool('was-in-combat', false)
-      }
-    }
-  })
-  events.Spells.OnCast(spell => {
-    const caster = spell.GetCaster()
-    const wasInCombat = caster.GetBool('was-in-combat')
-    if (caster.IsPlayer())
-      if (wasInCombat)
-        caster.ToPlayer().ClearInCombat()
-  })
-  events.Spells.OnHit(spell => {
-    const caster = spell.GetCaster().ToPlayer()
-    const target = spell.GetTarget()
-    // FIXME: apply combat if spell hits and player is visible€ý,€ý,
-    // if (caster.IsPlayer() && target.IsPlayer() && target.ToPlayer().IsVisibleForPlayer(caster))
-    //   caster.ToUnit().SetInCombatWith(target.ToUnit())
-  })
-  events.Unit.OnExitCombat(unit => {
-    unit.SetBool('was-in-combat', false)
   })
 }
 
