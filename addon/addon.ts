@@ -10,6 +10,7 @@ import { Profile } from './basemod/panels/profile'
 interface SlashCmdList {
   [key: string]: (message: string) => void
 }
+declare const GetMouseFocus: any
 declare const SlashCmdList: SlashCmdList
 
 export const app = new App(app => {

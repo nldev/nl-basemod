@@ -5,6 +5,7 @@ import { BASE_BACKDROP, RESPONSES, REQUESTS } from './constants'
 import { Get } from './app'
 import { Grid } from './components/grid'
 import { Scroll } from './components/scroll'
+declare const GetMouseFocus: any
 
 export interface ClassSelection {
   WARRIOR: boolean,
