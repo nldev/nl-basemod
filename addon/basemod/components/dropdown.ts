@@ -139,7 +139,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   // toggle
   a.ref.EnableMouse(true)
   a.ref.HookScript('OnMouseDown', () => {
-    PlaySoundFile('sound\\interface\\uchatscrollbutton.ogg')
+    PlaySound(1115)
     if (p.ref.IsVisible()) {
       p.ref.Hide()
       button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
@@ -156,7 +156,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
   })
 
   button.HookScript('OnClick', () => {
-    PlaySoundFile('sound\\interface\\uchatscrollbutton.ogg')
+    PlaySound(1115)
     if (p.ref.IsVisible()) {
       p.ref.Hide()
       button.SetNormalTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up')
@@ -346,7 +346,10 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
           items[key].item.ref.text.SetPoint('LEFT', 12, 0)
       checkmark.ref.Hide()
     }
+
     texture.SetAllPoints()
+
+    PlaySound(1115)
   }
 
   // checkmark
