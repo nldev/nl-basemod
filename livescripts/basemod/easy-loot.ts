@@ -27,8 +27,9 @@ export function EasyLoot (events: TSEvents) {
     if (number === -1)
       return
     const group = player.GetGroup()
+    const guid = group.GetGUID()
     if (player.IsInGroup()) {
-      let current = LooterState.GetNumber(`${group.GetGUID}`, 0)
+      let current = LooterState.GetNumber(`${guid}`, 0)
       const count = group.GetMembersCount()
       if (current > count) {
         current = count - 1
@@ -36,21 +37,22 @@ export function EasyLoot (events: TSEvents) {
         current = 0
       }
       group.GetMembers().forEach((member, i) => {
-        if (i === current)
-          LooterState.SetNumber(`${group.GetGUID}`, current + 1)
-        const id = 0
-        const timer = 100
-        const mechanic = 0
-        for (let i = 0; i <= number; i++) {
-          const itemId = loot.GetItem(i).GetItemID()
-          const amount = loot.GetItem(i).GetCount()
-          member.SendItemQueryPacket(itemId)
-          member.SendAddonMessage(
-            'get-loot-item',
-            `${id} ${itemId} ${amount} ${timer} ${mechanic}`,
-            0,
-            member,
-          )
+        if (i === current) {
+          LooterState.SetNumber(`${guid}`, current + 1)
+          const id = 0
+          const timer = 100
+          const mechanic = 0
+          for (let i = 0; i <= number; i++) {
+            const itemId = loot.GetItem(i).GetItemID()
+            const amount = loot.GetItem(i).GetCount()
+            member.SendItemQueryPacket(itemId)
+            member.SendAddonMessage(
+              'get-loot-item',
+              `${id} ${itemId} ${amount} ${timer} ${mechanic}`,
+              0,
+              member,
+            )
+          }
         }
       })
     } else {
