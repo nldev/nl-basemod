@@ -61,7 +61,7 @@ export const Counter: Component<CounterOptions> = options => {
     if (typeof r === 'number')
       count = r
     i.SetNumber(count)
-    PlaySound(806)
+    PlaySound(1115)
   }
   const increment = () => {
     let current = i.GetNumber() + 1

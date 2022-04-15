@@ -51,6 +51,15 @@ function DevTools (events: TSEvents) {
   })
 }
 
+export function GetPlayersInCombatWith (creature: TSCreature) {
+  const array: TSArray<TSPlayer> = []
+
+    const units = creature.GetUnitsInRange(100, 0, 0)
+    units.forEach(u => {
+      // if (creature.IsInCombatWith(u)) {}
+    })
+}
+
 export function Main (events: TSEvents) {
   Store(events)
   EasyLoot(events)
@@ -62,11 +71,21 @@ export function Main (events: TSEvents) {
   DevTools(events)
   Rogue(events)
 
-  EquipTest(events)
+  EquipTests(events)
   OutcomeTests(events)
+  CombatAITests(events)
 }
 
-function EquipTest (events: TSEvents) {
+export function CombatAITests (events: TSEvents) {
+  events.CreatureID.OnJustEnteredCombat(6, (creature, target) => {
+    const players = creature.GetPlayersInRange(100, 0, 0)
+    players.forEach(p => {
+      p.SendBroadcastMessage(`combat: ${creature.GetGUID()}`)
+    })
+  })
+}
+
+function EquipTests (events: TSEvents) {
   events.Items.OnEquip((item, player, slot, isMerge) => {
     player.SendBroadcastMessage(`EQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
   })

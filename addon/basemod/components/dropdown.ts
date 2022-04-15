@@ -349,7 +349,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
 
     texture.SetAllPoints()
 
-    PlaySound(806)
+    PlaySound(1115)
   }
 
   // checkmark
