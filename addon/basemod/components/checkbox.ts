@@ -41,6 +41,7 @@ export const Checkbox: Component<CheckboxOptions> = options => {
     if ((value === null) && options.onUncheck)
       options.onUncheck(f)
     isChecked = value
+    PlaySound(1115)
   })
 
   return f
