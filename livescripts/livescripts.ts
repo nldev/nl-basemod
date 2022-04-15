@@ -63,7 +63,6 @@ export function GetInCombatWith (unit: TSUnit): TSArray<TSUnit> {
   return array
 }
 
-
 export function GetCombatTarget (unit: TSUnit): TSUnit {
   const guid = unit.GetTarget()
   const units = GetInCombatWith(unit)
