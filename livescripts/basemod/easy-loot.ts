@@ -21,6 +21,7 @@ export function EasyLoot (events: TSEvents) {
     }
   })
   events.Creatures.OnGenerateLoot((creature, player) => {
+    // FIXME refactor to use GetLootRecipientGroup()
     const loot = creature.GetLoot()
     loot.SetMoney(0)
     const number = loot.GetItemCount() - 1
