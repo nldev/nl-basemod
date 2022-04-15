@@ -38,11 +38,11 @@ export function EasyLoot (events: TSEvents) {
       }
       let valid = 0
       group.GetMembers().forEach((member, i) => {
-        if ((i === current) && !member.IsWithinDist(creature, 100, true))
+        if ((i === current) && member.IsWithinDist(creature, 100, true))
           valid = i
       })
       group.GetMembers().forEach((member, i) => {
-        if ((i === current)) {
+        if ((i === valid)) {
           LooterState.SetNumber(`${guid}`, current + 1)
           const id = 0
           const timer = 100
