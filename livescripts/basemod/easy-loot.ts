@@ -38,8 +38,12 @@ export function EasyLoot (events: TSEvents) {
       }
       let valid = 0
       group.GetMembers().forEach((member, i) => {
-        if ((i === current) && member.IsWithinDist(creature, 100, true))
+        const isWithinDist = member.IsWithinDist(creature, 100, true)
+        if ((i === current) && !isWithinDist) {
+          current = ((current + 1) > group.GetMembersCount()) ? 0 : (current + 1)
+        } else if ((i === current) && isWithinDist) {
           valid = i
+        }
       })
       group.GetMembers().forEach((member, i) => {
         if ((i === valid)) {
