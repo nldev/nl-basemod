@@ -53,6 +53,7 @@ export const Input: Component<InputOptions> = options => {
     e.ClearFocus()
     if (options.onAccept)
       options.onAccept(text, input)
+    PlaySound(806)
   }
   inner.ref.EnableMouseWheel(true)
   e.SetScript('OnTabPressed', () => fn())
