@@ -237,12 +237,12 @@ export function OutcomeTest (events: TSEvents) {
         victim.ToPlayer().SendBroadcastMessage(`missCond: ${missCond.get()}`)
       }
       if (castTime && vanishTime)
-      if (castTime < vanishTime) {
-        procFlags.set(ProcFlagsHit.IMMUNE)
-        missCond.set(SpellMissInfo.IMMUNE)
-        // FIXME pass in target
-        // FIXME dont cause combat on cast, only on hit
-      }
+        if (castTime < vanishTime) {
+          procFlags.set(ProcFlagsHit.IMMUNE)
+          missCond.set(SpellMissInfo.IMMUNE)
+          // FIXME pass in target
+          // FIXME dont cause combat on cast, only on hit
+        }
     }
   })
   events.Spells.OnCheckCast(spell => {
@@ -275,3 +275,4 @@ export function OutcomeTest (events: TSEvents) {
     unit.SetBool('was-in-combat', false)
   })
 }
+
