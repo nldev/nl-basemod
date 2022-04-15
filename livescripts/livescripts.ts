@@ -63,6 +63,20 @@ export function GetInCombatWith (unit: TSUnit): TSArray<TSUnit> {
   return array
 }
 
+
+export function GetCombatTarget (unit: TSUnit): TSUnit {
+  const guid = unit.GetTarget()
+  const units = GetInCombatWith(unit)
+  let result: TSUnit = NULL_UNIT()
+
+  units.forEach(u => {
+    if (u.GetGUID() === guid)
+      result = u
+  })
+
+  return result
+}
+
 export function Main (events: TSEvents) {
   Store(events)
   EasyLoot(events)
@@ -81,13 +95,16 @@ export function Main (events: TSEvents) {
 
 export function CombatAITests (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(6, (creature, target) => {
-    creature.AddTimer(500, 0, (owner, timer) => {
+    creature.AddTimer(500, -1, (owner, timer) => {
       const c = owner.ToCreature()
       const list = GetInCombatWith(c)
-      list.forEach((u, i) => {
-        if (u.IsPlayer())
-          u.ToPlayer().SendBroadcastMessage('hello')
-      })
+      const target = GetCombatTarget(c)
+      if (!target.IsNull() && target.IsPlayer())
+        target.ToPlayer().SendBroadcastMessage('hello world')
+      // list.forEach((u, i) => {
+      //   if (u.IsPlayer())
+      //     u.ToPlayer().SendBroadcastMessage('hello')
+      // })
     })
   })
 }
