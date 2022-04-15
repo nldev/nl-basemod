@@ -152,7 +152,7 @@ export const Dropdown: Component<DropdownOptions, DropdownState> = options => {
       button.SetPushedTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollUp-Down')
       button.SetDisabledTexture('Interface\\ChatFrame\\UI-ChatIcon-ScrollUp-Disabled')
     }
-    PlaySoundFile('sound\\interface\\uchatscrollbutton.ogg')
+    PlaySoundFile('UChatScrollButton')
   })
 
   button.HookScript('OnClick', () => {
