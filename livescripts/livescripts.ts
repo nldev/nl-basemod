@@ -51,12 +51,12 @@ function DevTools (events: TSEvents) {
   })
 }
 
-export function GetInCombatWith (creature: TSCreature) {
+export function GetInCombatWith (unit: TSUnit): TSArray<TSUnit> {
   const array: TSArray<TSUnit> = []
 
-  const units = creature.GetUnitsInRange(100, 0, 0)
+  const units = unit.GetUnitsInRange(100, 0, 0)
   units.forEach(u => {
-    if (creature.IsInCombatWith(u))
+    if (unit.IsInCombatWith(u))
       array.push(u)
   })
 
@@ -81,9 +81,13 @@ export function Main (events: TSEvents) {
 
 export function CombatAITests (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(6, (creature, target) => {
-    const players = creature.GetPlayersInRange(100, 0, 0)
-    players.forEach(p => {
-      p.SendBroadcastMessage(`combat: ${creature.GetGUID()}`)
+    creature.AddTimer(500, 0, (owner, timer) => {
+      const c = owner.ToCreature()
+      const list = GetInCombatWith(c)
+      list.forEach((u, i) => {
+        if (u.IsPlayer())
+          u.ToPlayer().SendBroadcastMessage('hello')
+      })
     })
   })
 }
