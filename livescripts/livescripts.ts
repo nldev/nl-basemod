@@ -54,7 +54,7 @@ function DevTools (events: TSEvents) {
 export function GetInCombatWith (unit: TSUnit): TSArray<TSUnit> {
   const array: TSArray<TSUnit> = []
 
-  const units = unit.GetUnitsInRange(100, 0, 0)
+  const units = unit.GetUnitsInRange(45, 0, 0)
   units.forEach(u => {
     if (unit.IsInCombatWith(u))
       array.push(u)
