@@ -1,5 +1,7 @@
 import { Opcode } from './utils'
 
+const LooterState = new TSJsonObject()
+
 export function EasyLoot (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
     const opcode = Opcode('loot-item')
@@ -24,19 +26,48 @@ export function EasyLoot (events: TSEvents) {
     const number = loot.GetItemCount() - 1
     if (number === -1)
       return
-    const id = 0
-    const timer = 100
-    const mechanic = 0
-    for (let i = 0; i <= number; i++) {
-      const itemId = loot.GetItem(i).GetItemID()
-      const amount = loot.GetItem(i).GetCount()
-      player.SendItemQueryPacket(itemId)
-      player.SendAddonMessage(
-        'get-loot-item',
-        `${id} ${itemId} ${amount} ${timer} ${mechanic}`,
-        0,
-        player,
-      )
+    const group = player.GetGroup()
+    if (player.IsInGroup()) {
+      let current = LooterState.GetNumber(`${group.GetGUID}`, 0)
+      const count = group.GetMembersCount()
+      if (current > count) {
+        current = count - 1
+      } else if (!current || (current === group.GetMembersCount())) {
+        current = 0
+      }
+      group.GetMembers().forEach((member, i) => {
+        if (i === current)
+          LooterState.SetNumber(`${group.GetGUID}`, current + 1)
+        const id = 0
+        const timer = 100
+        const mechanic = 0
+        for (let i = 0; i <= number; i++) {
+          const itemId = loot.GetItem(i).GetItemID()
+          const amount = loot.GetItem(i).GetCount()
+          member.SendItemQueryPacket(itemId)
+          member.SendAddonMessage(
+            'get-loot-item',
+            `${id} ${itemId} ${amount} ${timer} ${mechanic}`,
+            0,
+            member,
+          )
+        }
+      })
+    } else {
+      const id = 0
+      const timer = 100
+      const mechanic = 0
+      for (let i = 0; i <= number; i++) {
+        const itemId = loot.GetItem(i).GetItemID()
+        const amount = loot.GetItem(i).GetCount()
+        player.SendItemQueryPacket(itemId)
+        player.SendAddonMessage(
+          'get-loot-item',
+          `${id} ${itemId} ${amount} ${timer} ${mechanic}`,
+          0,
+          player,
+        )
+      }
     }
     loot.Filter(() => false)
   })
