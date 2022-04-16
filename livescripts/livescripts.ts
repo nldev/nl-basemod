@@ -96,6 +96,7 @@ export function CombatAITests (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(6, (creature, target) => {
     creature.AddTimer(500, -1, (owner, timer) => {
       const c = owner.ToCreature()
+      // c.GetRelativePoint()
       const list = GetInCombatWith(c)
       const target = GetCombatTarget(c)
       if (!target.IsNull() && target.IsPlayer())
