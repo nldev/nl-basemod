@@ -89,6 +89,18 @@ export function DetermineTarget (unit: TSUnit): TSUnit {
   return target
 }
 
+export function IsMeleeRange (unit: TSUnit) {
+  const target = DetermineTarget(unit)
+  const distance = unit.GetDistance(target)
+  return (distance <= 5) ? true : false
+}
+
+export function IsCastingRange (unit: TSUnit) {
+  const target = DetermineTarget(unit)
+  const distance = unit.GetDistance(target)
+  return (distance > 5) ? true : false
+}
+
 export function Main (events: TSEvents) {
   Store(events)
   EasyLoot(events)
@@ -108,17 +120,22 @@ export function Main (events: TSEvents) {
 // if-melee-range
 export function Attack (unit: TSCreature) {
   const target = DetermineTarget(unit)
-  if (!target.IsNull())
-    unit.AttackStart(target)
+  if (!target.IsNull()) {
+    const spells = unit.GetJsonArray('ai-cast-spells', new TSJsonArray())
+    if (spells.length === 0) {
+    } else {
+    }
+  }
+  unit.AttackStart(target)
 }
 
 // if-casting-range
 export function Cast (unit: TSCreature, spellId: number) {
-  const target = DetermineTarget(unit)
-  if (!target.IsNull())
-    unit.CastSpell(target, spellId, false)
+  const spells = unit.GetJsonArray('ai-cast-spells', new TSJsonArray())
+  for (let i = 0; i <= spells.length; i++) {
+    const id = spells.GetNumber
+  }
 }
-
 
 // if-stunned
 // if-melee-range
