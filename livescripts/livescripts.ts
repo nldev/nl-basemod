@@ -118,39 +118,37 @@ export function Main (events: TSEvents) {
 }
 
 // if-melee-range
-export function Attack (unit: TSCreature) {
-  const target = DetermineTarget(unit)
-  if (!target.IsNull()) {
-    const spells = unit.GetJsonArray('ai-cast-spells', new TSJsonArray())
-    if (spells.length === 0) {
-    } else {
-    }
-  }
-  unit.AttackStart(target)
+export function Attack (roll: string, unit: TSCreature) {
+  // if (roll === 'attack') {
+  //   const target = DetermineTarget(unit)
+  //   unit.AttackStart(target)
+  // }
+  // return 'attack'
 }
 
 // if-casting-range
-export function Cast (unit: TSCreature, spellId: number) {
-  const spells = unit.GetJsonArray('ai-cast-spells', new TSJsonArray())
-  for (let i = 0; i <= spells.length; i++) {
-    const id = spells.GetNumber
-  }
+export function Cast (roll: string, unit: TSCreature, spellId: number) {
+  // if (roll === `cast-${spellId}`) {
+  //   const target = DetermineTarget(unit)
+  //   if (is)
+  //   unit.CastSpell(target, spellId, false)
+  // }
 }
 
 // if-stunned
 // if-melee-range
-export function Blink (unit: TSCreature) {
-  unit.SetBool('ai-blink', true)
+export function Blink (roll: string, unit: TSCreature) {
+  // unit.SetBool('ai-blink', true)
 }
 
 // if-melee-range
-export function FrostNova (unit: TSCreature) {
-  unit.SetBool('ai-frost-nova', true)
+export function FrostNova (roll: string, unit: TSCreature) {
+  // unit.SetBool('ai-frost-nova', true)
 }
 
 // if-melee-range
-export function MoveAway (unit: TSCreature) {
-  unit.SetBool('ai-frost-nova', true)
+export function MoveAway (roll: string, unit: TSCreature) {
+  // unit.SetBool('ai-frost-nova', true)
 }
 
 export function CombatAITests (events: TSEvents) {
@@ -166,10 +164,11 @@ export function CombatAITests (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(6, (unit, target) => {
     unit.AddTimer(500, -1, (owner, timer) => {
       const c = owner.ToCreature()
-      Cast(c, 133)
-      Blink(c)
-      MoveAway(c)
-      FrostNova(c)
+      if (c.IsRooted()) {
+        const target = DetermineTarget(c)
+        if (target.IsPlayer())
+          target.ToPlayer().SendBroadcastMessage('is rooted')
+      }
       // is stunned
       // is melee range
       // is casting range
