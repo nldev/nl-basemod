@@ -7,6 +7,10 @@ import { Autolearn } from './basemod/autolearn'
 import { Combat } from './basemod/combat/combat'
 import { Opcode } from './basemod/utils'
 
+function Random (max: number) {
+  return Math.floor(Math.random() * max)
+}
+
 const MOD = 'basemod'
 
 const HOLY_SCHOOL: uint32 = 2
@@ -76,6 +80,15 @@ export function GetCombatTarget (unit: TSUnit): TSUnit {
   return result
 }
 
+export function DetermineTarget (unit: TSUnit): TSUnit {
+  let target = GetCombatTarget(unit) || NULL_UNIT()
+  if (target.IsNull()) {
+    const targets = GetInCombatWith(unit)
+    target = targets.get(Random(targets.length - 1))
+  }
+  return target
+}
+
 export function Main (events: TSEvents) {
   Store(events)
   EasyLoot(events)
@@ -92,9 +105,39 @@ export function Main (events: TSEvents) {
   CombatAITests(events)
 }
 
+export function Attack (unit: TSCreature) {
+  unit.SetBool('ai-attack', true)
+  const target = DetermineTarget(unit)
+  if (!target.IsNull())
+    unit.AttackStart(target)
+}
+export function Cast (unit: TSCreature, spellId: number) {
+  const target = DetermineTarget(unit)
+  if (!target.IsNull())
+    unit.CastSpell(target, spellId, false)
+}
+export function Blink (unit: TSCreature, ifTooClose: boolean, ifStunned: boolean) {
+  unit.SetBool('ai-blink', true)
+}
+export function FrostNova (unit: TSCreature) {
+  unit.SetBool('ai-frost-nova', true)
+}
+export function MoveAway (unit: TSCreature) {
+  unit.SetBool('ai-frost-nova', true)
+}
+
 export function CombatAITests (events: TSEvents) {
-  events.CreatureID.OnJustEnteredCombat(6, (creature, target) => {
-    creature.AddTimer(500, -1, (owner, timer) => {
+  // TODO things to implement
+  // wait in combat
+  // blink if in stun
+  // wait out stun
+  // last blink time
+  // move away if too close
+  // aoe spell if too close
+  // blink if too close
+  // cast spell if distance
+  events.CreatureID.OnJustEnteredCombat(6, (unit, target) => {
+    unit.AddTimer(500, -1, (owner, timer) => {
       const c = owner.ToCreature()
       // c.GetRelativePoint()
       const list = GetInCombatWith(c)
