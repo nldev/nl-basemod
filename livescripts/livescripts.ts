@@ -105,22 +105,33 @@ export function Main (events: TSEvents) {
   CombatAITests(events)
 }
 
+// if-melee-range
 export function Attack (unit: TSCreature) {
   const target = DetermineTarget(unit)
   if (!target.IsNull())
     unit.AttackStart(target)
 }
+
+// if-casting-range
 export function Cast (unit: TSCreature, spellId: number) {
   const target = DetermineTarget(unit)
   if (!target.IsNull())
     unit.CastSpell(target, spellId, false)
 }
-export function Blink (unit: TSCreature, ifTooClose: boolean, ifStunned: boolean) {
+
+
+// if-stunned
+// if-melee-range
+export function Blink (unit: TSCreature) {
   unit.SetBool('ai-blink', true)
 }
+
+// if-melee-range
 export function FrostNova (unit: TSCreature) {
   unit.SetBool('ai-frost-nova', true)
 }
+
+// if-melee-range
 export function MoveAway (unit: TSCreature) {
   unit.SetBool('ai-frost-nova', true)
 }
@@ -138,15 +149,13 @@ export function CombatAITests (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(6, (unit, target) => {
     unit.AddTimer(500, -1, (owner, timer) => {
       const c = owner.ToCreature()
-      // c.GetRelativePoint()
-      const list = GetInCombatWith(c)
-      const target = GetCombatTarget(c)
-      if (!target.IsNull() && target.IsPlayer())
-        target.ToPlayer().SendBroadcastMessage('hello world')
-      // list.forEach((u, i) => {
-      //   if (u.IsPlayer())
-      //     u.ToPlayer().SendBroadcastMessage('hello')
-      // })
+      Cast(c, 133)
+      Blink(c)
+      MoveAway(c)
+      FrostNova(c)
+      // is stunned
+      // is melee range
+      // is casting range
     })
   })
 }
