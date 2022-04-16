@@ -106,7 +106,6 @@ export function Main (events: TSEvents) {
 }
 
 export function Attack (unit: TSCreature) {
-  unit.SetBool('ai-attack', true)
   const target = DetermineTarget(unit)
   if (!target.IsNull())
     unit.AttackStart(target)
