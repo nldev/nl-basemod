@@ -7,7 +7,7 @@ import { Autolearn } from './basemod/autolearn'
 import { Combat } from './basemod/combat/combat'
 import { Opcode } from './basemod/utils'
 
-function Random (max: number) {
+function Random (max: number): number {
   return Math.floor(Math.random() * max)
 }
 
@@ -81,21 +81,21 @@ export function GetCombatTarget (unit: TSUnit): TSUnit {
 }
 
 export function DetermineTarget (unit: TSUnit): TSUnit {
-  let target = GetCombatTarget(unit) || NULL_UNIT()
-  if (target.IsNull()) {
+  let target = GetCombatTarget(unit)
+  if (!target.IsNull()) {
     const targets = GetInCombatWith(unit)
     target = targets.get(Random(targets.length - 1))
   }
   return target
 }
 
-export function IsMeleeRange (unit: TSUnit) {
+export function IsMeleeRange (unit: TSUnit): boolean {
   const target = DetermineTarget(unit)
   const distance = unit.GetDistance(target)
   return (distance <= 5) ? true : false
 }
 
-export function IsCastingRange (unit: TSUnit) {
+export function IsCastingRange (unit: TSUnit): boolean {
   const target = DetermineTarget(unit)
   const distance = unit.GetDistance(target)
   return (distance > 5) ? true : false
@@ -165,13 +165,11 @@ export function CombatAITests (events: TSEvents) {
     unit.AddTimer(500, -1, (owner, timer) => {
       const c = owner.ToCreature()
       if (c.IsRooted()) {
-        const target = DetermineTarget(c)
-        if (target.IsPlayer())
-          target.ToPlayer().SendBroadcastMessage('is rooted')
       }
-      // is stunned
-      // is melee range
-      // is casting range
+      if (IsMeleeRange(c)) {
+      }
+      if (IsCastingRange(c)) {
+      }
     })
   })
 }
