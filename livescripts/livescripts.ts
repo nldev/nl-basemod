@@ -174,8 +174,8 @@ export function CombatAITests (events: TSEvents) {
       }
       if (IsCastingRange(c) && !c.IsCasting()) {
         c.SetFacingToObject(t)
-        c.AttackStart(t)
         c.CastSpell(t, 133, false)
+        c.AttackStart(t)
       }
     })
   })
