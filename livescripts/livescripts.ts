@@ -119,7 +119,7 @@ export function Main (events: TSEvents) {
 
 export function CombatAITests (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(6, (unit, target) => {
-    unit.AddTimer(500, -1, (owner, timer) => {
+    unit.AddTimer(200, -1, (owner, timer) => {
       const c = owner.ToCreature()
       if (c.IsDead()) {
         timer.Stop()
@@ -128,6 +128,10 @@ export function CombatAITests (events: TSEvents) {
       const t = DetermineTarget(c)
       let ran = false
       if (!t.IsNull()) {
+        if (!ran && c.HasAura(3409)) {
+          ran = true
+          c.CastSpell(c, 3137, true)
+        }
         if (!ran && c.IsRooted()) {
           c.CastSpell(c, 1953, false)
           ran = true
@@ -136,10 +140,6 @@ export function CombatAITests (events: TSEvents) {
           const p = t.GetRelativePoint(8, 0)
           c.MoveTo(99999, p.x, p.y, p.z, true)
           ran = true
-        }
-        if (!ran && c.HasAura(3409)) {
-          ran = true
-          c.CastSpell(c, 3137, true)
         }
         if (!ran && IsCastingRange(c) && !c.IsCasting()) {
           c.SetFacingToObject(t)
