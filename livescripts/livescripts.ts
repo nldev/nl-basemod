@@ -162,13 +162,17 @@ export function CombatAITests (events: TSEvents) {
   // blink if too close
   // cast spell if distance
   events.CreatureID.OnJustEnteredCombat(6, (unit, target) => {
-    unit.AddTimer(500, -1, (owner, timer) => {
+    unit.AddTimer(300, -1, (owner, timer) => {
       const c = owner.ToCreature()
+      const t = DetermineTarget(c)
       if (c.IsRooted()) {
       }
       if (IsMeleeRange(c)) {
+        const p = t.GetRelativePoint(10, 0)
+        c.MoveTo(0, p.x, p.y, p.z, true)
       }
-      if (IsCastingRange(c)) {
+      if (IsCastingRange(c) && !c.IsCasting()) {
+        c.CastSpell(t, 133, false)
       }
     })
   })
