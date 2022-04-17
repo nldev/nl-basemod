@@ -166,12 +166,15 @@ export function CombatAITests (events: TSEvents) {
       const c = owner.ToCreature()
       const t = DetermineTarget(c)
       if (c.IsRooted()) {
+        c.CastSpell(t, 1953, true)
       }
       if (IsMeleeRange(c)) {
-        const p = t.GetRelativePoint(10, 0)
+        const p = t.GetRelativePoint(8, 0)
         c.MoveTo(0, p.x, p.y, p.z, true)
       }
       if (IsCastingRange(c) && !c.IsCasting()) {
+        c.SetFacingToObject(t)
+        c.AttackStart(t)
         c.CastSpell(t, 133, false)
       }
     })
