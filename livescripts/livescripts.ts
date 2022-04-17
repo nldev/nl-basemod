@@ -128,16 +128,16 @@ export function CombatAITests (events: TSEvents) {
       const t = DetermineTarget(c)
       let ran = false
       if (!t.IsNull()) {
-        if (!ran && c.HasAuraType(AuraType.MOD_MINIMUM_SPEED)) {
+        if (!ran && c.HasAuraType(AuraType.MOD_DECREASE_SPEED)) {
           ran = true
-          c.CastSpell(c, 3137, true)
-
+          c.CastSpell(c, 2893, false)
         }
         if (!ran && c.IsRooted()) {
           c.CastSpell(c, 1953, false)
           ran = true
         }
         if (!ran && IsMeleeRange(c)) {
+          c.CastSpell(t, 122, false)
           const p = t.GetRelativePoint(8, 0)
           c.MoveTo(99999, p.x, p.y, p.z, true)
           ran = true
