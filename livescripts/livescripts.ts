@@ -121,6 +121,8 @@ export function CombatAITests (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(6, (unit, target) => {
     unit.AddTimer(300, -1, (owner, timer) => {
       const c = owner.ToCreature()
+      if (c.IsDead())
+        timer.Stop()
       const t = DetermineTarget(c)
       if (c.IsRooted()) {
         c.CastSpell(c, 1953, false)
