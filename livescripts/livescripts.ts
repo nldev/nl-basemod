@@ -139,11 +139,10 @@ export function CombatAITests (events: TSEvents) {
         if (!ran && IsMeleeRange(c)) {
           c.CastSpell(t, 122, false)
           const p = t.GetRelativePoint(8, 0)
-          c.MoveTo(99999, p.x, p.y, p.z, true)
+          c.MoveJump(p.x, p.y, p.z, 5, 5, 0)
           ran = true
         }
         if (!ran && IsCastingRange(c) && !c.IsCasting()) {
-          c.SetFacingToObject(t)
           c.CastSpell(t, 133, false)
           c.AttackStart(t)
           ran = true
