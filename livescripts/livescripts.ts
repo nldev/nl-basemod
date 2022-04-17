@@ -126,18 +126,26 @@ export function CombatAITests (events: TSEvents) {
         return
       }
       const t = DetermineTarget(c)
+      let ran = false
       if (!t.IsNull()) {
-        if (c.IsRooted()) {
+        if (!ran && c.IsRooted()) {
           c.CastSpell(c, 1953, false)
+          ran = true
         }
-        if (IsMeleeRange(c)) {
+        if (!ran && IsMeleeRange(c)) {
           const p = t.GetRelativePoint(8, 0)
           c.MoveTo(99999, p.x, p.y, p.z, true)
+          ran = true
         }
-        if (IsCastingRange(c) && !c.IsCasting()) {
+        if (!ran && c.HasAura(3409)) {
+          ran = true
+          c.CastSpell(c, 3137, true)
+        }
+        if (!ran && IsCastingRange(c) && !c.IsCasting()) {
           c.SetFacingToObject(t)
           c.CastSpell(t, 133, false)
           c.AttackStart(t)
+          ran = true
         }
       }
     })
