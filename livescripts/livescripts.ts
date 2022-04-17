@@ -117,50 +117,7 @@ export function Main (events: TSEvents) {
   CombatAITests(events)
 }
 
-// if-melee-range
-export function Attack (roll: string, unit: TSCreature) {
-  // if (roll === 'attack') {
-  //   const target = DetermineTarget(unit)
-  //   unit.AttackStart(target)
-  // }
-  // return 'attack'
-}
-
-// if-casting-range
-export function Cast (roll: string, unit: TSCreature, spellId: number) {
-  // if (roll === `cast-${spellId}`) {
-  //   const target = DetermineTarget(unit)
-  //   if (is)
-  //   unit.CastSpell(target, spellId, false)
-  // }
-}
-
-// if-stunned
-// if-melee-range
-export function Blink (roll: string, unit: TSCreature) {
-  // unit.SetBool('ai-blink', true)
-}
-
-// if-melee-range
-export function FrostNova (roll: string, unit: TSCreature) {
-  // unit.SetBool('ai-frost-nova', true)
-}
-
-// if-melee-range
-export function MoveAway (roll: string, unit: TSCreature) {
-  // unit.SetBool('ai-frost-nova', true)
-}
-
 export function CombatAITests (events: TSEvents) {
-  // TODO things to implement
-  // wait in combat
-  // blink if in stun
-  // wait out stun
-  // last blink time
-  // move away if too close
-  // aoe spell if too close
-  // blink if too close
-  // cast spell if distance
   events.CreatureID.OnJustEnteredCombat(6, (unit, target) => {
     unit.AddTimer(300, -1, (owner, timer) => {
       const c = owner.ToCreature()
