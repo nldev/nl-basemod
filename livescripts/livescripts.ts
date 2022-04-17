@@ -128,9 +128,10 @@ export function CombatAITests (events: TSEvents) {
       const t = DetermineTarget(c)
       let ran = false
       if (!t.IsNull()) {
-        if (!ran && c.HasAura(3409)) {
+        if (!ran && c.HasAuraType(AuraType.MOD_MINIMUM_SPEED)) {
           ran = true
           c.CastSpell(c, 3137, true)
+
         }
         if (!ran && c.IsRooted()) {
           c.CastSpell(c, 1953, false)
