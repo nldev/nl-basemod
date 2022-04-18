@@ -118,7 +118,7 @@ export function Main (events: TSEvents) {
 }
 
 export function CombatAITests (events: TSEvents) {
-  events.CreatureID.OnJustEnteredCombat(6, (unit, target) => {
+  events.CreatureID.OnJustEnteredCombat(257, (unit, target) => {
     unit.AddTimer(200, -1, (owner, timer) => {
       const c = owner.ToCreature()
       if (!c) {
