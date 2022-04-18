@@ -140,10 +140,17 @@ export function CombatAITests (events: TSEvents) {
           c.CastSpell(t, 122, false)
           const p = t.GetRelativePoint(8, 0)
           c.MoveTo(0, p.x, p.y, p.z, true)
+          c.SetFacing(c.GetO())
           ran = true
         }
         if (!ran && IsCastingRange(c) && !c.IsCasting()) {
-          c.CastSpell(t, 133, false)
+          const num = Random(2)
+          if (num === 0)
+            c.CastSpell(t, 116, false)
+          if (num === 1)
+            c.CastSpell(t, 133, false)
+          if (num === 2)
+            c.CastSpell(t, 5782, false)
           c.AttackStart(t)
           ran = true
         }
