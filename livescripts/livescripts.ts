@@ -121,6 +121,10 @@ export function CombatAITests (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(6, (unit, target) => {
     unit.AddTimer(200, -1, (owner, timer) => {
       const c = owner.ToCreature()
+      if (!c) {
+        timer.Stop()
+        return
+      }
       if (c.IsDead()) {
         timer.Stop()
         return
@@ -144,7 +148,7 @@ export function CombatAITests (events: TSEvents) {
           ran = true
         }
         if (!ran && IsCastingRange(c) && !c.IsCasting()) {
-          const num = Random(2)
+          const num = Random(3)
           if (num === 0)
             c.CastSpell(t, 116, false)
           if (num === 1)
