@@ -149,6 +149,7 @@ export function CombatAITests (events: TSEvents) {
         }
         if (!ran && IsCastingRange(c) && !c.IsCasting()) {
           const num = Random(3)
+          t.ToPlayer().SendBroadcastMessage(`${num}`)
           if (num === 0)
             c.CastSpell(t, 116, false)
           if (num === 1)
