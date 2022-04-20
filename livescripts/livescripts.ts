@@ -119,6 +119,7 @@ export function Main (events: TSEvents) {
 
 export function CombatAITests (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(257, (unit, target) => {
+    unit.SetString('ai-command', '')
     unit.AddTimer(200, -1, (owner, timer) => {
       const c = owner.ToCreature()
       if (!c) {
@@ -132,32 +133,42 @@ export function CombatAITests (events: TSEvents) {
       const t = DetermineTarget(c)
       let ran = false
       if (!t.IsNull()) {
+        // perform command
+        const cmd = c.GetString('ai-command')
+        if (cmd === 'blink') {
+        } else if (cmd === 'abolish-poison') {
+        } else if (cmd === 'frost-nova') {
+        } else if (cmd === 'cast-random') {
+        }
+
+        // pick command
         if (!ran && c.IsRooted() && !c.IsCasting()) {
-          c.CastSpell(c, 1953, false)
-          ran = true
-        }
-        if (!ran && c.HasAuraType(AuraType.MOD_DECREASE_SPEED) && !c.IsCasting()) {
-          ran = true
-          c.CastSpell(c, 2893, false)
-        }
-        if (!ran && IsMeleeRange(c) && !c.IsCasting()) {
-          c.CastSpell(t, 122, false)
-          const p = t.GetRelativePoint(8, 0)
-          c.MoveTo(0, p.x, p.y, p.z, true)
-          c.SetFacing(c.GetO())
-          ran = true
-        }
-        if (!ran && IsCastingRange(c) && !c.IsCasting()) {
-          const num = Random(3)
-          t.ToPlayer().SendBroadcastMessage(`${num}`)
-          if (num === 0)
-            c.CastSpell(t, 116, false)
-          if (num === 1)
-            c.CastSpell(t, 133, false)
-          if (num === 2)
-            c.CastSpell(t, 5782, false)
-          c.AttackStart(t)
-          ran = true
+          // c.CastSpell(c, 1953, false)
+          // ran = true
+          c.SetString('ai-command', 'blink')
+        } else if (!ran && c.HasAuraType(AuraType.MOD_DECREASE_SPEED) && !c.IsCasting()) {
+          // c.CastSpell(c, 2893, false)
+          // ran = true
+          c.SetString('ai-command', 'abolish-poison')
+        } else if (!ran && IsMeleeRange(c) && !c.IsCasting()) {
+          // c.CastSpell(t, 122, false)
+          // const p = t.GetRelativePoint(8, 0)
+          // c.MoveTo(0, p.x, p.y, p.z, true)
+          // c.SetFacing(c.GetO())
+          // ran = true
+          c.SetString('ai-command', 'frost-nova')
+        } else if (!ran && IsCastingRange(c) && !c.IsCasting()) {
+          // const num = Random(3)
+          // t.ToPlayer().SendBroadcastMessage(`${num}`)
+          // if (num === 0)
+          //   c.CastSpell(t, 116, false)
+          // if (num === 1)
+          //   c.CastSpell(t, 133, false)
+          // if (num === 2)
+          //   c.CastSpell(t, 5782, false)
+          // c.AttackStart(t)
+          // ran = true
+          c.SetString('ai-command', 'cast-random')
         }
       }
     })
