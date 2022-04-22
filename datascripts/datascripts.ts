@@ -583,6 +583,21 @@ function FocusedAttacks () {
   const s = std.Spells.load(51637)
 }
 
+function Vanish () {
+  const s = std.Spells.load(1857)
+  s.Effects.clear(0)
+  const a = s.Effects.get(0)
+  const b = s.Effects.get(1)
+  a.Type.APPLY_AURA.set()
+  b.Type.APPLY_AURA.set()
+  a.Aura.MOD_IGNORE_SHAPESHIFT.set().ChainAmplitude.set(1)
+  b.Aura.MOD_SHAPESHIFT.set().Form.set(13)
+  s.Duration.set(75)
+  // FIXME apply shadow dance for extended duration (add stealth animation + slow, remove camouflage)
+  // FIXME figure out how to apply batches on map rather than session
+  // FIXME see if possible to batch aura updates separately from spell casts
+}
+
 function Rogue () {
   SetupPoisons()
   NormalizeSprint()
@@ -595,6 +610,7 @@ function Rogue () {
   Evasion()
   CloakOfShadows()
   FocusedAttacks()
+  Vanish()
 }
 
 function InfiniteRangedWeapon () {

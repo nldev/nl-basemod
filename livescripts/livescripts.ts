@@ -35,9 +35,26 @@ function AddComboPoints (spell: TSSpell, amount: number) {
 }
 
 function Rogue (events: TSEvents) {
+  events.Player.OnSay((p, m) => {
+    if (m.get() === 'v')
+      p.AddAura(1784, p)
+  })
   events.SpellID.OnHit(CHEAP_SHOT, s => AddComboPoints(s, 1))
   events.SpellID.OnHit(AMBUSH, s => AddComboPoints(s, 1))
   events.SpellID.OnHit(GARROTE, s => AddComboPoints(s, 1))
+
+  // vanish
+  events.SpellID.OnCast(1857, s => {
+    const caster = s.GetCaster()
+    caster.AddTimer(75, 1, 0, (o, t) => {
+      if (o.IsNull())
+        t.Stop()
+      if (o.IsUnit()) {
+        const p = o.ToUnit()
+        p.AddAura(11329, p)
+      }
+    })
+  })
 }
 
 function DevTools (events: TSEvents) {
@@ -308,6 +325,10 @@ export function OutcomeTests (events: TSEvents) {
           missCond.set(SpellMissInfo.RESIST)
       })
     }
+
+    // vanish
+    if (victim.HasAura(1857))
+      missCond.set(SpellMissInfo.IMMUNE)
   })
 
   // handle reflect trap
@@ -327,17 +348,18 @@ export function OutcomeTests (events: TSEvents) {
     caster.SetInt('vanish-time', GetCurrTime())
   })
   events.Spells.OnDetermineHitOutcome((info, victim, procFlags, missCond) => {
-    if (victim && !victim.IsNull()) {
-      const castTime = info.GetInt('cast-time')
-      const vanishTime = victim.GetInt('vanish-time')
-      if (castTime && vanishTime)
-        if (castTime < vanishTime) {
-          procFlags.set(ProcFlagsHit.IMMUNE)
-          missCond.set(SpellMissInfo.IMMUNE)
-          // FIXME pass in target
-          // FIXME dont cause combat on cast, only on hit
-        }
-    }
+    if (missCond.get() !== SpellMissInfo.IMMUNE)
+      if (victim && !victim.IsNull()) {
+        const castTime = info.GetInt('cast-time')
+        const vanishTime = victim.GetInt('vanish-time')
+        if (castTime && vanishTime)
+          if (castTime < vanishTime) {
+            procFlags.set(ProcFlagsHit.IMMUNE)
+            missCond.set(SpellMissInfo.IMMUNE)
+            // FIXME pass in target
+            // FIXME dont cause combat on cast, only on hit
+          }
+      }
   })
 }
 
