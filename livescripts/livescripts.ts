@@ -351,7 +351,6 @@ export function OutcomeTests (events: TSEvents) {
     const info = spell.GetSpellInfo()
     info.SetInt('cast-time', GetCurrTime())
   })
-  events.Spells.OnCast
   events.Spells.OnDetermineHitOutcome((info, victim, procFlags, missCond) => {
     if (victim.IsPlayer())
       victim.ToPlayer().SendBroadcastMessage('bbb')
