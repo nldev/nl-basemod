@@ -1,6 +1,6 @@
 function IsAbleToRest (player: TSPlayer): boolean {
   const p = player
-  if (p.IsDead() || p.IsMounted() || p.IsFlying() || p.IsInWater() || p.IsFlying() || p.IsInCombat()) {
+  if (p.IsDead() || p.IsMounted() || p.IsFlying() || p.IsInWater() || p.IsFlying() || p.IsInCombat() || p.IsCasting()) {
     return false
   } else {
     return true
