@@ -593,9 +593,8 @@ function Vanish () {
   a.Aura.MOD_IGNORE_SHAPESHIFT.set().ChainAmplitude.set(1)
   b.Aura.MOD_SHAPESHIFT.set().Form.set(13)
   s.Duration.set(75)
-  // FIXME apply shadow dance for extended duration (add stealth animation + slow, remove camouflage)
-  // FIXME figure out how to apply batches on map rather than session
-  // FIXME see if possible to batch aura updates separately from spell casts
+  // FIXME: apply level 1 stealth for 200ms
+  // FIXME: after 200ms, apply high stealth
 }
 
 function Rogue () {
