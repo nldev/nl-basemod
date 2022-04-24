@@ -351,18 +351,31 @@ export function OutcomeTests (events: TSEvents) {
     const info = spell.GetSpellInfo()
     info.SetInt('cast-time', GetCurrTime())
   })
+  events.Spells.OnDamageEarly((spell, damage, info, type, isCrit, effectMask) => {
+    const target = spell.GetTarget()
+    if (target.IsUnit() && target.ToUnit().HasAura(1857))
+      damage.set(0)
+  })
+  events.Spells.OnDamageLate((spell, damage, info, type, isCrit, effectMask) => {
+    const target = spell.GetTarget()
+    if (target.IsUnit() && target.ToUnit().HasAura(1857))
+      damage.set(0)
+  })
+  events.Spells.OnApply((effect, application, type) => {
+  })
   events.Spells.OnDetermineHitOutcome((info, victim, procFlags, missCond) => {
+    if (victim.IsPlayer())
+      victim.ToPlayer().SendBroadcastMessage('before')
     if (missCond.get() !== SpellMissInfo.IMMUNE)
       if (victim && !victim.IsNull()) {
         const castTime = info.GetInt('cast-time')
         const vanishTime = victim.GetInt('vanish-time')
-        if (castTime && vanishTime)
-          if (castTime < vanishTime) {
-            procFlags.set(ProcFlagsHit.IMMUNE)
-            missCond.set(SpellMissInfo.IMMUNE)
-            // FIXME pass in target
-            // FIXME dont cause combat on cast, only on hit
-          }
+        if (victim.HasAura(1857) || (castTime && vanishTime && (castTime < vanishTime))) {
+          procFlags.set(ProcFlagsHit.IMMUNE)
+          missCond.set(SpellMissInfo.IMMUNE)
+          if (victim.IsPlayer())
+            victim.ToPlayer().SendBroadcastMessage('hit')
+        }
       }
   })
 }
