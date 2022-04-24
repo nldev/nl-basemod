@@ -349,7 +349,8 @@ export function OutcomeTests (events: TSEvents) {
   })
   events.Spells.OnCast(spell => {
     const info = spell.GetSpellInfo()
-    info.SetInt('cast-time', GetCurrTime())
+    info.SetInt('cast-time', GetCurrTime() - spell.GetCastTime())
+    info.SetInt('caster-guid', spell.GetCaster().GetGUID())
   })
   events.Spells.OnDamageEarly((spell, damage, info, type, isCrit, effectMask) => {
     const target = spell.GetTarget()
@@ -364,17 +365,13 @@ export function OutcomeTests (events: TSEvents) {
   events.Spells.OnApply((effect, application, type) => {
   })
   events.Spells.OnDetermineHitOutcome((info, victim, procFlags, missCond) => {
-    if (victim.IsPlayer())
-      victim.ToPlayer().SendBroadcastMessage('before')
     if (missCond.get() !== SpellMissInfo.IMMUNE)
       if (victim && !victim.IsNull()) {
         const castTime = info.GetInt('cast-time')
         const vanishTime = victim.GetInt('vanish-time')
-        if (victim.HasAura(1857) || (castTime && vanishTime && (castTime < vanishTime))) {
+        if ((victim.GetGUID() !== info.GetInt('caster-guid')) && (victim.HasAura(1857) || (castTime && vanishTime && (castTime <= vanishTime)))) {
           procFlags.set(ProcFlagsHit.IMMUNE)
           missCond.set(SpellMissInfo.IMMUNE)
-          if (victim.IsPlayer())
-            victim.ToPlayer().SendBroadcastMessage('hit')
         }
       }
   })
