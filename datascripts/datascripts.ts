@@ -585,13 +585,6 @@ function FocusedAttacks () {
 
 function Vanish () {
   const s = std.Spells.load(1857)
-  s.Effects.clear(0)
-  const a = s.Effects.get(0)
-  const b = s.Effects.get(1)
-  a.Type.APPLY_AURA.set()
-  b.Type.APPLY_AURA.set()
-  a.Aura.MOD_IGNORE_SHAPESHIFT.set().ChainAmplitude.set(1)
-  b.Aura.MOD_SHAPESHIFT.set().Form.set(13)
   s.Duration.set(75)
   // FIXME: apply level 1 stealth for 200ms
   // FIXME: after 200ms, apply high stealth
