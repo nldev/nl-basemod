@@ -185,7 +185,7 @@ const TEMPLATES: Template[] = [
   {
     id: 'seal-fate',
     spellId: 14195,
-    cost: 10,
+    cost: 14,
     class: { ROGUE: true },
   },
   {
