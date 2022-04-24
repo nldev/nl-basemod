@@ -13,6 +13,7 @@ DBErrors.log
 GM.log
 *.conf.dist
 *_backup/
+*.pdb
 
 # Extracted client data
 **/datasets/*/dbc_source
