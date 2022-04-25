@@ -602,6 +602,7 @@ function Rogue () {
   Evasion()
   CloakOfShadows()
   FocusedAttacks()
+  Kick()
   Vanish()
 }
 
