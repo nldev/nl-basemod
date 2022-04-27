@@ -44,6 +44,10 @@ export function IsCastingRange (unit: TSUnit, target: TSUnit): boolean {
   return (distance > 5) ? true : false
 }
 
+export function IsSilenced (unit: TSCreature): boolean {
+  return unit.HasSpellCooldown(unit.GetNumber('combat-primary-spell') || 0)
+}
+
 export function PrimarySpell (unit: TSUnit, spell: number = 133, dice: number = 0) {
   unit.SetNumber('combat-primary-spell', spell)
   unit.SetNumber('combat-primary-dice', dice)
@@ -54,7 +58,7 @@ export function SecondarySpell (unit: TSUnit, spell: number = 133, dice: number 
   unit.SetNumber('combat-secondary-dice', dice)
 }
 
-export function Caster (unit: TSCreature) {
+export function Cast (unit: TSCreature) {
   const primary = unit.GetNumber('combat-primary-spell')
   const secondary = unit.GetNumber('combat-secondary-spell')
   const primaryDice = unit.GetNumber('combat-primary-dice')
@@ -112,6 +116,7 @@ export function SlowMelee (unit: TSCreature, dice: number = 0, every: number = 5
 }
 
 export function CleanseSlow (unit: TSCreature, dice: number = 0, every: number = 5000) {
+  const isSilenced = IsSilenced(unit)
   const isCasting = unit.IsCasting()
   const isMoving = !unit.IsStopped()
   const isSlowed = unit.HasAuraType(AuraType.MOD_DECREASE_SPEED)
@@ -128,14 +133,14 @@ export function CleanseSlow (unit: TSCreature, dice: number = 0, every: number =
   }
 
   // roll
-  if (canOccur && isSlowed && !isCasting && isMoving)
+  if (canOccur && isSlowed && !isCasting && isMoving && !isSilenced)
     unit.SetBool('combat-cleanse-slow-enable', true)
 }
 
 export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: number = 0) {
   const target = DetermineTarget(unit)
   if (!target.IsNull()) {
-    const isSilenced = unit.HasSpellCooldown(unit.GetNumber('combat-primary-spell') || 0)
+    const isSilenced = IsSilenced(unit)
     const isMeleeRange = IsMeleeRange(unit, target)
     const isCasting = unit.IsCasting()
     const isMoving = !unit.IsStopped()
@@ -160,6 +165,7 @@ export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: numb
         unit.SetNumber('combat-move-to-cast-last-occurred', current)
         unit.SetString('combat-move-to-cast-state', 'unstarted')
         unit.SetString('combat-action', '')
+        Cast(unit)
       }
     }
 
@@ -187,7 +193,7 @@ export function FaerieDragon (events: TSEvents) {
       BlinkRoot(c)
       CleanseSlow(c)
       MoveToRanged(c)
-      Caster(c)
+      Cast(c)
       Melee(c)
       // const t = DetermineTarget(c)
       // if (!t.IsNull()) {
