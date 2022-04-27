@@ -1,54 +1,4 @@
-import { Random } from '../utils'
-
-export function MessageTarget (unit: TSUnit, message: string) {
-  const target = DetermineTarget(unit)
-  if (target.IsPlayer())
-    target.ToPlayer().SendBroadcastMessage(message)
-}
-
-export function GetInCombatWith (unit: TSUnit): TSArray<TSUnit> {
-  const array: TSArray<TSUnit> = []
-
-  const units = unit.GetUnitsInRange(45, 0, 0)
-  units.forEach(u => {
-    if (unit.IsInCombatWith(u))
-      array.push(u)
-  })
-
-  return array
-}
-
-export function GetCombatTarget (unit: TSUnit): TSUnit {
-  const guid = unit.GetTarget()
-  const units = GetInCombatWith(unit)
-  let result: TSUnit = NULL_UNIT()
-
-  units.forEach(u => {
-    if (u.GetGUID() === guid)
-      result = u
-  })
-
-  return result
-}
-
-export function DetermineTarget (unit: TSUnit): TSUnit {
-  let target = GetCombatTarget(unit)
-  if (!target.IsNull()) {
-    const targets = GetInCombatWith(unit)
-    target = targets.get(Random(targets.length - 1))
-  }
-  return target
-}
-
-export function IsMeleeRange (unit: TSUnit, target: TSUnit): boolean {
-  const distance = unit.GetDistance(target)
-  return (distance <= 5) ? true : false
-}
-
-export function IsCastingRange (unit: TSUnit, target: TSUnit): boolean {
-  const distance = unit.GetDistance(target)
-  return (distance > 5) ? true : false
-}
+import { Random, MessageTarget, DetermineTarget, IsMeleeRange } from '../utils'
 
 export function IsSilenced (unit: TSCreature): boolean {
   return unit.HasSpellCooldown(unit.GetNumber('combat-primary-spell') || 0)
@@ -71,8 +21,13 @@ export function Cast (unit: TSCreature) {
   const secondaryDice = unit.GetNumber('combat-secondary-dice', 0)
   const combatAction = unit.GetString('combat-action', '')
   const isCasting = unit.IsCasting()
+  const isSilenced = IsSilenced(unit)
 
   if (combatAction === '' && !isCasting && primary) {
+    if (isSilenced) {
+      Melee(unit)
+      return
+    }
     const target = DetermineTarget(unit)
     if (!target.IsNull()) {
       const rollA = Random(secondaryDice)
@@ -159,29 +114,26 @@ export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: numb
     const current = GetCurrTime()
     const lastOccurred = unit.GetNumber('combat-move-to-cast-last-occurred', 0)
     const canOccur = current >= (lastOccurred + every)
-    MessageTarget(unit, isMoving ? 'yes' : 'no')
+    MessageTarget(unit, isSilenced ? 'yes' : 'no')
 
     // run
     if (combatAction === 'move-to-cast') {
-      if (target.IsPlayer())
-        target.ToPlayer().SendBroadcastMessage(`amount: ${current - lastOccurred}`)
+      if (state === 'started') {
+        unit.SetNumber('combat-move-to-cast-last-occurred', current)
+        unit.SetString('combat-move-to-cast-state', 'unstarted')
+        unit.SetString('combat-action', '')
+        Cast(unit)
+      }
 
       if ((state === 'unstarted') && !isCasting && !isSilenced) {
         const position = target.GetRelativePoint(8, 0)
         unit.MoveTo(0, position.x, position.y, position.z, true)
         unit.SetString('combat-move-to-cast-state', 'started')
       }
-
-      if ((state === 'started') && !isMoving) {
-        unit.SetNumber('combat-move-to-cast-last-occurred', current)
-        unit.SetString('combat-move-to-cast-state', 'unstarted')
-        unit.SetString('combat-action', '')
-        Cast(unit)
-      }
     }
 
     // roll
-    if (canOccur && (combatAction === '') && isMeleeRange)
+    if (canOccur && (combatAction === '') && isMeleeRange && !isMoving && !isSilenced)
       if (Random(dice) === 0)
         unit.SetString('combat-action', 'move-to-cast')
   }
@@ -205,7 +157,6 @@ export function FaerieDragon (events: TSEvents) {
       MoveToRanged(c)
       CleanseSlow(c)
       Cast(c)
-      Melee(c)
       // const t = DetermineTarget(c)
       // if (!t.IsNull()) {
       //   // perform command
