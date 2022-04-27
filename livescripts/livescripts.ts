@@ -4,12 +4,8 @@ import { Talents } from './basemod/talents'
 import { Rest } from './basemod/rest'
 import { Chests } from './basemod/chests'
 import { Autolearn } from './basemod/autolearn'
-import { Combat } from './basemod/combat/combat'
+import { CombatAI } from './basemod/combat/combat'
 import { Opcode } from './basemod/utils'
-
-function Random (max: number): number {
-  return Math.floor(Math.random() * max)
-}
 
 const MOD = 'basemod'
 
@@ -72,52 +68,6 @@ function DevTools (events: TSEvents) {
   })
 }
 
-export function GetInCombatWith (unit: TSUnit): TSArray<TSUnit> {
-  const array: TSArray<TSUnit> = []
-
-  const units = unit.GetUnitsInRange(45, 0, 0)
-  units.forEach(u => {
-    if (unit.IsInCombatWith(u))
-      array.push(u)
-  })
-
-  return array
-}
-
-export function GetCombatTarget (unit: TSUnit): TSUnit {
-  const guid = unit.GetTarget()
-  const units = GetInCombatWith(unit)
-  let result: TSUnit = NULL_UNIT()
-
-  units.forEach(u => {
-    if (u.GetGUID() === guid)
-      result = u
-  })
-
-  return result
-}
-
-export function DetermineTarget (unit: TSUnit): TSUnit {
-  let target = GetCombatTarget(unit)
-  if (!target.IsNull()) {
-    const targets = GetInCombatWith(unit)
-    target = targets.get(Random(targets.length - 1))
-  }
-  return target
-}
-
-export function IsMeleeRange (unit: TSUnit): boolean {
-  const target = DetermineTarget(unit)
-  const distance = unit.GetDistance(target)
-  return (distance <= 5) ? true : false
-}
-
-export function IsCastingRange (unit: TSUnit): boolean {
-  const target = DetermineTarget(unit)
-  const distance = unit.GetDistance(target)
-  return (distance > 5) ? true : false
-}
-
 export function Main (events: TSEvents) {
   Store(events)
   EasyLoot(events)
@@ -125,81 +75,22 @@ export function Main (events: TSEvents) {
   Rest(events)
   Chests(events)
   Autolearn(events)
-  Combat(events)
+  CombatAI(events)
   DevTools(events)
   Rogue(events)
 
   EquipTests(events)
   OutcomeTests(events)
-  CombatAITests(events)
-}
-
-export function CombatAITests (events: TSEvents) {
-  events.CreatureID.OnJustEnteredCombat(257, (unit, target) => {
-    unit.SetString('ai-command', '')
-    unit.AddTimer(200, -1, (owner, timer) => {
-      const c = owner.ToCreature()
-      if (!c) {
-        timer.Stop()
-        return
-      }
-      if (c.IsDead()) {
-        timer.Stop()
-        return
-      }
-      const t = DetermineTarget(c)
-      let ran = false
-      if (!t.IsNull()) {
-        // perform command
-        const cmd = c.GetString('ai-command')
-        if (cmd === 'blink') {
-        } else if (cmd === 'abolish-poison') {
-        } else if (cmd === 'frost-nova') {
-        } else if (cmd === 'cast-random') {
-        }
-
-        // pick command
-        if (!ran && c.IsRooted() && !c.IsCasting()) {
-          // c.CastSpell(c, 1953, false)
-          // ran = true
-          c.SetString('ai-command', 'blink')
-        } else if (!ran && c.HasAuraType(AuraType.MOD_DECREASE_SPEED) && !c.IsCasting()) {
-          // c.CastSpell(c, 2893, false)
-          // ran = true
-          c.SetString('ai-command', 'abolish-poison')
-        } else if (!ran && IsMeleeRange(c) && !c.IsCasting()) {
-          // c.CastSpell(t, 122, false)
-          // const p = t.GetRelativePoint(8, 0)
-          // c.MoveTo(0, p.x, p.y, p.z, true)
-          // c.SetFacing(c.GetO())
-          // ran = true
-          c.SetString('ai-command', 'frost-nova')
-        } else if (!ran && IsCastingRange(c) && !c.IsCasting()) {
-          // const num = Random(3)
-          // t.ToPlayer().SendBroadcastMessage(`${num}`)
-          // if (num === 0)
-          //   c.CastSpell(t, 116, false)
-          // if (num === 1)
-          //   c.CastSpell(t, 133, false)
-          // if (num === 2)
-          //   c.CastSpell(t, 5782, false)
-          // c.AttackStart(t)
-          // ran = true
-          c.SetString('ai-command', 'cast-random')
-        }
-      }
-    })
-  })
 }
 
 function EquipTests (events: TSEvents) {
   events.Items.OnEquip((item, player, slot, isMerge) => {
-    player.SendBroadcastMessage(`EQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
+    if (!item.IsNull())
+      player.SendBroadcastMessage(`EQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
   })
 
   events.Items.OnUnequip((item, player, isSwap, result) => {
-    player.SendBroadcastMessage(`${result.get()}`)
-    if (result.get() === 1)
+    if (!item.IsNull())
       player.SendBroadcastMessage(`UNEQUIP ${item.GetName()} ${item.GetGUIDLow()}`)
   })
 }
@@ -361,8 +252,6 @@ export function OutcomeTests (events: TSEvents) {
     const target = spell.GetTarget()
     if (target.IsUnit() && target.ToUnit().HasAura(1857))
       damage.set(0)
-  })
-  events.Spells.OnApply((effect, application, type) => {
   })
   events.Spells.OnDetermineHitOutcome((info, victim, procFlags, missCond) => {
     if (missCond.get() !== SpellMissInfo.IMMUNE)
