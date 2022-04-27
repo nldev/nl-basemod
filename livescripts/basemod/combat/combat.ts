@@ -98,7 +98,7 @@ export function BlinkRoot (unit: TSCreature, dice: number = 0, every: number = 1
 
   // run
   if (isEnabled) {
-    unit.CastSpell(unit, 1953, true)
+    unit.CastSpell(unit, 1953, false)
     unit.SetNumber('combat-blink-last-occurred', current)
     unit.SetBool('combat-blink-root-enable', false)
   }
@@ -135,6 +135,7 @@ export function CleanseSlow (unit: TSCreature, dice: number = 0, every: number =
 export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: number = 0) {
   const target = DetermineTarget(unit)
   if (!target.IsNull()) {
+    const isSilenced = unit.HasSpellCooldown(unit.GetNumber('combat-primary-spell') || 0)
     const isMeleeRange = IsMeleeRange(unit, target)
     const isCasting = unit.IsCasting()
     const isMoving = !unit.IsStopped()
@@ -149,7 +150,7 @@ export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: numb
       if (target.IsPlayer())
         target.ToPlayer().SendBroadcastMessage(`amount: ${current - lastOccurred}`)
 
-      if ((state === 'unstarted') && !isCasting) {
+      if ((state === 'unstarted') && !isCasting && !isSilenced) {
         const position = target.GetRelativePoint(8, 0)
         unit.MoveTo(0, position.x, position.y, position.z, true)
         unit.SetString('combat-move-to-cast-state', 'started')
@@ -163,7 +164,7 @@ export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: numb
     }
 
     // roll
-    if (canOccur && (combatAction === '') && isMeleeRange)
+    if (canOccur && (combatAction === '') && isMeleeRange && !isSilenced)
       if (Random(dice) === 0)
         unit.SetString('combat-action', 'move-to-cast')
   }
