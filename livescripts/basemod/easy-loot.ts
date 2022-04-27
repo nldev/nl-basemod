@@ -1,9 +1,18 @@
+// FIXME:
+// create loot instance table
+// svae generated loot to instance table
+// send loot instance data to client
+// receive loot instance data from client
+// persist loot/dismiss info on table
+// get loot info on login
+
 import { Opcode } from './utils'
 
 const LooterState = new TSJsonObject()
 
 export function EasyLoot (events: TSEvents) {
   events.Player.OnWhisper((sender, _, message) => {
+    // FIXME: check from table
     const opcode = Opcode('loot-item')
     const str = message.get()
     if (!str.includes(opcode))
@@ -21,15 +30,14 @@ export function EasyLoot (events: TSEvents) {
     }
   })
   events.Creatures.OnGenerateLoot((creature, player) => {
-    // FIXME refactor to use GetLootRecipientGroup()
     const loot = creature.GetLoot()
     loot.SetMoney(0)
     const number = loot.GetItemCount() - 1
     if (number === -1)
       return
     const group = player.GetGroup()
-    const guid = group.GetGUID()
-    if (player.IsInGroup()) {
+    if (player.IsInGroup() && !group.IsNull()) {
+      const guid = group.GetGUID()
       let current = LooterState.GetNumber(`${guid}`, 0)
       const count = group.GetMembersCount()
       if (current > count) {
@@ -55,6 +63,7 @@ export function EasyLoot (events: TSEvents) {
           for (let i = 0; i <= number; i++) {
             const itemId = loot.GetItem(i).GetItemID()
             const amount = loot.GetItem(i).GetCount()
+            // FIXME: push to table
             member.SendItemQueryPacket(itemId)
             member.SendAddonMessage(
               'get-loot-item',

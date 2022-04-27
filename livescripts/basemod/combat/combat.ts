@@ -84,12 +84,12 @@ export function BlinkRootAndSlow (unit: TSCreature, dice: number = 0, every: num
     unit.SetBool('combat-blink-root-enable', true)
 }
 
-export function SlowMelee (unit: TSCreature, dice: number = 0, every: number = 5000) {
+export function SlowMelee (unit: TSCreature, dice: number = 0, every: number = 3000) {
   const isSilenced = IsSilenced(unit)
   const isCasting = unit.IsCasting()
   const isMoving = !unit.IsStopped()
   const current = GetCurrTime()
-  const lastOccurred = unit.GetNumber('combat-slow-melee-last-occurred', 0)
+  const lastOccurred = unit.GetNumber('combat-slow-melee-last-occurred')
   const canOccur = current >= (lastOccurred + every)
   const isEnabled = unit.GetBool('combat-slow-melee-enable', false)
 
@@ -114,7 +114,7 @@ export function CleanseSlow (unit: TSCreature, dice: number = 0, every: number =
   const isMoving = !unit.IsStopped()
   const isSlowed = unit.HasAuraType(AuraType.MOD_DECREASE_SPEED)
   const current = GetCurrTime()
-  const lastOccurred = unit.GetNumber('combat-cleanse-slow-last-occurred', 0)
+  const lastOccurred = unit.GetNumber('combat-cleanse-slow-last-occurred')
   const canOccur = current >= (lastOccurred + every)
   const isEnabled = unit.GetBool('combat-cleanse-slow-enable', false)
 
@@ -141,18 +141,18 @@ export function MoveToRanged (unit: TSCreature, every: number = 6000, dice: numb
     const combatAction = unit.GetString('combat-action')
     const state = unit.GetString('combat-move-to-cast-state', 'unstarted')
     const current = GetCurrTime()
-    const started = unit.GetNumber('combat-move-to-cast-started', 0)
-    const lastOccurred = unit.GetNumber('combat-move-to-cast-last-occurred', 0)
+    const started = unit.GetNumber('combat-move-to-cast-started')
+    const lastOccurred = unit.GetNumber('combat-move-to-cast-last-occurred')
     const canOccur = current >= (lastOccurred + every)
 
     // run
     if (combatAction === 'move-to-cast') {
-      if (state === 'started' && (current >= (started + 2200))) {
+      if (state === 'started' && (current >= (started + 3500))) {
         unit.SetNumber('combat-move-to-cast-last-occurred', current)
         unit.SetString('combat-move-to-cast-state', 'unstarted')
         unit.SetString('combat-action', '')
       } else if ((state === 'unstarted') && !isSilenced && !isCasting) {
-        const position = target.GetRelativePoint(12, 0)
+        const position = target.GetRelativePoint(25, 0)
         unit.MoveTo(0, position.x, position.y, position.z, true)
         unit.SetString('combat-move-to-cast-state', 'started')
         unit.SetNumber('combat-move-to-cast-started', current)
@@ -171,7 +171,7 @@ export function FaerieDragon (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(257, unit => {
     PrimarySpell(unit, 8417)
     SecondarySpell(unit, 30451)
-    unit.AddTimer(10, -1, (owner, timer) => {
+    unit.AddTimer(100, -1, (owner, timer) => {
       const c = owner.ToCreature()
       if (!c) {
         timer.Stop()
@@ -184,8 +184,16 @@ export function FaerieDragon (events: TSEvents) {
       Cast(c)
       BlinkRootAndSlow(c)
       MoveToRanged(c)
-      SlowMelee(c)
       CleanseSlow(c)
+      SlowMelee(c)
+      // lesser blink (cast time while stunned)
+      // polymorph (non-target)
+      // dispersion (fast cast, trigger on melee, immune damage + speed)
+      // counterspell (any caster)
+      // aoe slow (aoe at melee target)
+      // starfall (aoe at caster target)
+      // arcane pillars (pillars of aoe moonfire leading to target)
+
       // const t = DetermineTarget(c)
       // if (!t.IsNull()) {
       //   // perform command
