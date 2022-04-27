@@ -50,16 +50,8 @@ export function PrimarySpell (unit: TSUnit, spell: number = 133, dice: number = 
 }
 
 export function SecondarySpell (unit: TSUnit, spell: number = 133, dice: number = 10) {
-  const combatAction = unit.GetString('combat-action', '')
-  const isCasting = unit.IsCasting()
   unit.SetNumber('combat-secondary-spell', spell)
   unit.SetNumber('combat-secondary-dice', dice)
-  if (combatAction === '' && !isCasting) {
-    const target = DetermineTarget(unit)
-    if (!target.IsNull()) {
-      unit.CastSpell(target, spell, false)
-    }
-  }
 }
 
 export function Caster (unit: TSCreature) {
@@ -179,7 +171,8 @@ export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: numb
 
 export function FaerieDragon (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(257, (unit, target) => {
-    unit.SetString('ai-command', '')
+    PrimarySpell(unit, 8417)
+    SecondarySpell(unit, 30451)
     unit.AddTimer(200, -1, (owner, timer) => {
       const c = owner.ToCreature()
       if (!c) {
@@ -190,13 +183,11 @@ export function FaerieDragon (events: TSEvents) {
         timer.Stop()
         return
       }
-
-      PrimarySpell(c, 8417)
-      SecondarySpell(c, 30451)
-      Caster(c)
-      MoveToRanged(c)
-      CleanseSlow(c)
       BlinkRoot(c)
+      CleanseSlow(c)
+      MoveToRanged(c)
+      Caster(c)
+      Melee(c)
       // const t = DetermineTarget(c)
       // if (!t.IsNull()) {
       //   // perform command
