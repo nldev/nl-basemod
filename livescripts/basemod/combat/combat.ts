@@ -1,5 +1,9 @@
 import { Random, MessageTarget, DetermineTarget, IsMeleeRange } from '../utils'
 
+export function HasAction (unit: TSCreature): boolean {
+  return unit.GetString('combat-action', '') !== ''
+}
+
 export function IsSilenced (unit: TSCreature): boolean {
   return unit.HasSpellCooldown(unit.GetNumber('combat-primary-spell') || 0)
 }
@@ -23,7 +27,7 @@ export function Cast (unit: TSCreature) {
   const isCasting = unit.IsCasting()
   const isSilenced = IsSilenced(unit)
 
-  if (combatAction === '' && !isCasting && primary) {
+  if (!HasAction(unit) && !isCasting && primary) {
     if (isSilenced) {
       Melee(unit)
       return
@@ -46,7 +50,7 @@ export function Melee (unit: TSCreature) {
   const isCasting = unit.IsCasting()
   const combatAction = unit.GetString('combat-action', '')
 
-  if (combatAction === '' && !isCasting) {
+  if (!HasAction(unit) && !isCasting) {
     const target = DetermineTarget(unit)
     if (!target.IsNull()) {
       unit.AttackStart(target)
@@ -70,10 +74,11 @@ export function BlinkRoot (unit: TSCreature, dice: number = 0, every: number = 1
     unit.SetBool('combat-blink-root-enable', false)
     unit.SetString('combat-action', '')
     Cast(unit)
+    return
   }
 
   // roll
-  if (canOccur && isRooted && !isCasting)
+  if (!HasAction(unit) && canOccur && isRooted && !isCasting)
     unit.SetBool('combat-blink-root-enable', true)
 }
 
@@ -95,6 +100,7 @@ export function CleanseSlow (unit: TSCreature, dice: number = 0, every: number =
     unit.CastSpell(unit, 4987, false)
     unit.SetNumber('combat-cleanse-slow-last-occurred', current)
     unit.SetBool('combat-cleanse-slow-enable', false)
+    return
   }
 
   // roll
@@ -114,26 +120,24 @@ export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: numb
     const current = GetCurrTime()
     const lastOccurred = unit.GetNumber('combat-move-to-cast-last-occurred', 0)
     const canOccur = current >= (lastOccurred + every)
-    MessageTarget(unit, isSilenced ? 'yes' : 'no')
 
     // run
     if (combatAction === 'move-to-cast') {
-      if (state === 'started') {
+      MessageTarget(unit, combatAction)
+      if ((state === 'started') && !isMoving && !isCasting) {
         unit.SetNumber('combat-move-to-cast-last-occurred', current)
         unit.SetString('combat-move-to-cast-state', 'unstarted')
         unit.SetString('combat-action', '')
-        Cast(unit)
-      }
-
-      if ((state === 'unstarted') && !isCasting && !isSilenced) {
+      } else if ((state === 'unstarted') && !isSilenced) {
         const position = target.GetRelativePoint(8, 0)
         unit.MoveTo(0, position.x, position.y, position.z, true)
         unit.SetString('combat-move-to-cast-state', 'started')
       }
+      return
     }
 
     // roll
-    if (canOccur && (combatAction === '') && isMeleeRange && !isMoving && !isSilenced)
+    if (!HasAction(unit) && canOccur && (combatAction === '') && isMeleeRange && !isMoving && !isSilenced)
       if (Random(dice) === 0)
         unit.SetString('combat-action', 'move-to-cast')
   }
