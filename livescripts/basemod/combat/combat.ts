@@ -1,7 +1,7 @@
 import { Random, MessageTarget, DetermineTarget, IsMeleeRange } from '../utils'
 
 export function HasAction (unit: TSCreature): boolean {
-  return unit.GetString('combat-action', '') !== ''
+  return unit.GetString('combat-action') !== ''
 }
 
 export function IsSilenced (unit: TSCreature): boolean {
@@ -23,7 +23,7 @@ export function Cast (unit: TSCreature) {
   const secondary = unit.GetNumber('combat-secondary-spell')
   const primaryDice = unit.GetNumber('combat-primary-dice')
   const secondaryDice = unit.GetNumber('combat-secondary-dice', 0)
-  const combatAction = unit.GetString('combat-action', '')
+  const combatAction = unit.GetString('combat-action')
   const isCasting = unit.IsCasting()
   const isSilenced = IsSilenced(unit)
 
@@ -36,9 +36,9 @@ export function Cast (unit: TSCreature) {
     if (!target.IsNull()) {
       const rollA = Random(secondaryDice)
       const rollB = Random(primaryDice)
-      if (rollA === 0)
+      if ((rollA === 0) && secondary) {
         unit.CastSpell(target, secondary, false)
-      if (secondary) {
+      } else {
         if (rollB === 0)
         unit.CastSpell(target, primary, false)
       }
@@ -48,7 +48,7 @@ export function Cast (unit: TSCreature) {
 
 export function Melee (unit: TSCreature) {
   const isCasting = unit.IsCasting()
-  const combatAction = unit.GetString('combat-action', '')
+  const combatAction = unit.GetString('combat-action')
 
   if (!HasAction(unit) && !isCasting) {
     const target = DetermineTarget(unit)
@@ -59,7 +59,7 @@ export function Melee (unit: TSCreature) {
   }
 }
 
-export function BlinkRoot (unit: TSCreature, dice: number = 0, every: number = 12000) {
+export function BlinkRootAndSlow (unit: TSCreature, dice: number = 0, every: number = 12000) {
   const isCasting = unit.IsCasting()
   const isRooted = unit.IsRooted()
   const current = GetCurrTime()
@@ -73,6 +73,8 @@ export function BlinkRoot (unit: TSCreature, dice: number = 0, every: number = 1
     unit.SetNumber('combat-blink-last-occurred', current)
     unit.SetBool('combat-blink-root-enable', false)
     unit.SetString('combat-action', '')
+    const target = DetermineTarget(unit)
+    unit.CastSpell(target, 31589, false)
     Cast(unit)
     return
   }
@@ -83,9 +85,30 @@ export function BlinkRoot (unit: TSCreature, dice: number = 0, every: number = 1
 }
 
 export function SlowMelee (unit: TSCreature, dice: number = 0, every: number = 5000) {
+  const isSilenced = IsSilenced(unit)
+  const isCasting = unit.IsCasting()
+  const isMoving = !unit.IsStopped()
+  const current = GetCurrTime()
+  const lastOccurred = unit.GetNumber('combat-slow-melee-last-occurred', 0)
+  const canOccur = current >= (lastOccurred + every)
+  const isEnabled = unit.GetBool('combat-slow-melee-enable', false)
+
+  // run
+  if (isEnabled) {
+    const target = DetermineTarget(unit)
+    if (target)
+      unit.CastSpell(target, 31589, false)
+    unit.SetNumber('combat-slow-melee-last-occurred', current)
+    unit.SetBool('combat-slow-melee-enable', false)
+    return
+  }
+
+  // roll
+  if (canOccur && !isCasting && isMoving && !isSilenced)
+    unit.SetBool('combat-slow-melee-enable', true)
 }
 
-export function CleanseSlow (unit: TSCreature, dice: number = 0, every: number = 5000) {
+export function CleanseSlow (unit: TSCreature, dice: number = 0, every: number = 2000) {
   const isSilenced = IsSilenced(unit)
   const isCasting = unit.IsCasting()
   const isMoving = !unit.IsStopped()
@@ -115,23 +138,24 @@ export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: numb
     const isMeleeRange = IsMeleeRange(unit, target)
     const isCasting = unit.IsCasting()
     const isMoving = !unit.IsStopped()
-    const combatAction = unit.GetString('combat-action', '')
+    const combatAction = unit.GetString('combat-action')
     const state = unit.GetString('combat-move-to-cast-state', 'unstarted')
     const current = GetCurrTime()
+    const started = unit.GetNumber('combat-move-to-cast-started', 0)
     const lastOccurred = unit.GetNumber('combat-move-to-cast-last-occurred', 0)
     const canOccur = current >= (lastOccurred + every)
 
     // run
     if (combatAction === 'move-to-cast') {
-      MessageTarget(unit, combatAction)
-      if ((state === 'started') && !isMoving && !isCasting) {
+      if (state === 'started' && (current >= (started + 2200))) {
         unit.SetNumber('combat-move-to-cast-last-occurred', current)
         unit.SetString('combat-move-to-cast-state', 'unstarted')
         unit.SetString('combat-action', '')
-      } else if ((state === 'unstarted') && !isSilenced) {
-        const position = target.GetRelativePoint(8, 0)
+      } else if ((state === 'unstarted') && !isSilenced && !isCasting) {
+        const position = target.GetRelativePoint(12, 0)
         unit.MoveTo(0, position.x, position.y, position.z, true)
         unit.SetString('combat-move-to-cast-state', 'started')
+        unit.SetNumber('combat-move-to-cast-started', current)
       }
       return
     }
@@ -144,10 +168,10 @@ export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: numb
 }
 
 export function FaerieDragon (events: TSEvents) {
-  events.CreatureID.OnJustEnteredCombat(257, (unit, target) => {
+  events.CreatureID.OnJustEnteredCombat(257, unit => {
     PrimarySpell(unit, 8417)
     SecondarySpell(unit, 30451)
-    unit.AddTimer(200, -1, (owner, timer) => {
+    unit.AddTimer(100, -1, (owner, timer) => {
       const c = owner.ToCreature()
       if (!c) {
         timer.Stop()
@@ -157,10 +181,11 @@ export function FaerieDragon (events: TSEvents) {
         timer.Stop()
         return
       }
-      BlinkRoot(c)
-      MoveToRanged(c)
-      CleanseSlow(c)
       Cast(c)
+      BlinkRootAndSlow(c)
+      MoveToRanged(c)
+      SlowMelee(c)
+      CleanseSlow(c)
       // const t = DetermineTarget(c)
       // if (!t.IsNull()) {
       //   // perform command
