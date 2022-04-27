@@ -131,7 +131,7 @@ export function CleanseSlow (unit: TSCreature, dice: number = 0, every: number =
     unit.SetBool('combat-cleanse-slow-enable', true)
 }
 
-export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: number = 0) {
+export function MoveToRanged (unit: TSCreature, every: number = 6000, dice: number = 0) {
   const target = DetermineTarget(unit)
   if (!target.IsNull()) {
     const isSilenced = IsSilenced(unit)
@@ -171,7 +171,7 @@ export function FaerieDragon (events: TSEvents) {
   events.CreatureID.OnJustEnteredCombat(257, unit => {
     PrimarySpell(unit, 8417)
     SecondarySpell(unit, 30451)
-    unit.AddTimer(100, -1, (owner, timer) => {
+    unit.AddTimer(10, -1, (owner, timer) => {
       const c = owner.ToCreature()
       if (!c) {
         timer.Stop()
