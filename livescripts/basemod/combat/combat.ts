@@ -44,45 +44,137 @@ export function IsCastingRange (unit: TSUnit, target: TSUnit): boolean {
   return (distance > 5) ? true : false
 }
 
-export function Melee (unit: TSCreature) {
+export function PrimarySpell (unit: TSUnit, spell: number = 133, dice: number = 0) {
+  unit.SetNumber('combat-primary-spell', spell)
+  unit.SetNumber('combat-primary-dice', dice)
+}
+
+export function SecondarySpell (unit: TSUnit, spell: number = 133, dice: number = 10) {
   const combatAction = unit.GetString('combat-action', '')
-  if (combatAction === '') {
-    unit.AttackStart(DetermineTarget(unit))
+  const isCasting = unit.IsCasting()
+  unit.SetNumber('combat-secondary-spell', spell)
+  unit.SetNumber('combat-secondary-dice', dice)
+  if (combatAction === '' && !isCasting) {
+    const target = DetermineTarget(unit)
+    if (!target.IsNull()) {
+      unit.CastSpell(target, spell, false)
+    }
   }
 }
 
-export function MoveToCast (unit: TSCreature, every: number = 5000, dice: number = 0) {
-  const target = DetermineTarget(unit)
-  const isMeleeRange = IsMeleeRange(unit, target)
-  const isCasting = unit.IsCasting()
-  const isMoving = !unit.IsStopped()
+export function Caster (unit: TSCreature) {
+  const primary = unit.GetNumber('combat-primary-spell')
+  const secondary = unit.GetNumber('combat-secondary-spell')
+  const primaryDice = unit.GetNumber('combat-primary-dice')
+  const secondaryDice = unit.GetNumber('combat-secondary-dice', 0)
   const combatAction = unit.GetString('combat-action', '')
-  const state = unit.GetString('combat-move-to-cast-state', 'unstarted')
+  const isCasting = unit.IsCasting()
+
+  if (combatAction === '' && !isCasting) {
+    const target = DetermineTarget(unit)
+    if (!target.IsNull()) {
+      const rollA = Random(secondaryDice)
+      const rollB = Random(primaryDice)
+      if (rollA === 0)
+        unit.CastSpell(target, secondary, false)
+      if (secondary) {
+        if (rollB === 0)
+        unit.CastSpell(target, primary, false)
+      }
+    }
+  }
+}
+
+export function Melee (unit: TSCreature) {
+  const combatAction = unit.GetString('combat-action', '')
+  if (combatAction === '') {
+    const target = DetermineTarget(unit)
+    if (!target.IsNull()) {
+      unit.AttackStart(target)
+      unit.MoveChase(target, 0, 0)
+    }
+  }
+}
+
+export function BlinkRoot (unit: TSCreature, dice: number = 0, every: number = 12000) {
+  const isCasting = unit.IsCasting()
+  const isRooted = unit.IsRooted()
   const current = GetCurrTime()
-  const lastOccurred = unit.GetNumber('combat-move-to-cast-last-occurred', 0)
+  const lastOccurred = unit.GetNumber('combat-blink-last-occurred', 0)
+  const canOccur = current >= (lastOccurred + every)
+  const isEnabled = unit.GetBool('combat-blink-root-enable', false)
 
   // run
-  if (combatAction === 'move-to-cast') {
-    if (target.IsPlayer())
-      target.ToPlayer().SendBroadcastMessage(`amount: ${current - lastOccurred}`)
-
-    if ((state === 'unstarted') && !isCasting) {
-      const position = target.GetRelativePoint(8, 0)
-      unit.MoveTo(0, position.x, position.y, position.z, true)
-      unit.SetString('combat-move-to-cast-state', 'started')
-    }
-
-    if ((state === 'started') && isMeleeRange && !isMoving) {
-      unit.SetNumber('combat-move-to-cast-last-occurred', current)
-      unit.SetString('combat-move-to-cast-state', 'unstarted')
-      unit.SetString('combat-action', '')
-    }
+  if (isEnabled) {
+    unit.CastSpell(unit, 1953, true)
+    unit.SetNumber('combat-blink-last-occurred', current)
+    unit.SetBool('combat-blink-root-enable', false)
   }
 
   // roll
-  if ((current >= (lastOccurred + every)) && (combatAction === ''))
-    if (Random(dice) === 0)
-      unit.SetString('combat-action', 'move-to-cast')
+  if (canOccur && isRooted && !isCasting)
+    unit.SetBool('combat-blink-root-enable', true)
+}
+
+export function SlowMelee (unit: TSCreature, dice: number = 0, every: number = 5000) {
+}
+
+export function CleanseSlow (unit: TSCreature, dice: number = 0, every: number = 5000) {
+  const isCasting = unit.IsCasting()
+  const isMoving = !unit.IsStopped()
+  const isSlowed = unit.HasAuraType(AuraType.MOD_DECREASE_SPEED)
+  const current = GetCurrTime()
+  const lastOccurred = unit.GetNumber('combat-cleanse-slow-last-occurred', 0)
+  const canOccur = current >= (lastOccurred + every)
+  const isEnabled = unit.GetBool('combat-cleanse-slow-enable', false)
+
+  // run
+  if (isEnabled) {
+    unit.CastSpell(unit, 4987, false)
+    unit.SetNumber('combat-cleanse-slow-last-occurred', current)
+    unit.SetBool('combat-cleanse-slow-enable', false)
+  }
+
+  // roll
+  if (canOccur && isSlowed && !isCasting && isMoving)
+    unit.SetBool('combat-cleanse-slow-enable', true)
+}
+
+export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: number = 0) {
+  const target = DetermineTarget(unit)
+  if (!target.IsNull()) {
+    const isMeleeRange = IsMeleeRange(unit, target)
+    const isCasting = unit.IsCasting()
+    const isMoving = !unit.IsStopped()
+    const combatAction = unit.GetString('combat-action', '')
+    const state = unit.GetString('combat-move-to-cast-state', 'unstarted')
+    const current = GetCurrTime()
+    const lastOccurred = unit.GetNumber('combat-move-to-cast-last-occurred', 0)
+    const canOccur = current >= (lastOccurred + every)
+
+    // run
+    if (combatAction === 'move-to-cast') {
+      if (target.IsPlayer())
+        target.ToPlayer().SendBroadcastMessage(`amount: ${current - lastOccurred}`)
+
+      if ((state === 'unstarted') && !isCasting) {
+        const position = target.GetRelativePoint(8, 0)
+        unit.MoveTo(0, position.x, position.y, position.z, true)
+        unit.SetString('combat-move-to-cast-state', 'started')
+      }
+
+      if ((state === 'started') && !isMoving) {
+        unit.SetNumber('combat-move-to-cast-last-occurred', current)
+        unit.SetString('combat-move-to-cast-state', 'unstarted')
+        unit.SetString('combat-action', '')
+      }
+    }
+
+    // roll
+    if (canOccur && (combatAction === '') && isMeleeRange)
+      if (Random(dice) === 0)
+        unit.SetString('combat-action', 'move-to-cast')
+  }
 }
 
 export function FaerieDragon (events: TSEvents) {
@@ -99,8 +191,12 @@ export function FaerieDragon (events: TSEvents) {
         return
       }
 
-      Melee(c)
-      MoveToCast(c)
+      PrimarySpell(c, 8417)
+      SecondarySpell(c, 30451)
+      Caster(c)
+      MoveToRanged(c)
+      CleanseSlow(c)
+      BlinkRoot(c)
       // const t = DetermineTarget(c)
       // if (!t.IsNull()) {
       //   // perform command
