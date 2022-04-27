@@ -1,5 +1,11 @@
 import { Random } from '../utils'
 
+export function MessageTarget (unit: TSUnit, message: string) {
+  const target = DetermineTarget(unit)
+  if (target.IsPlayer())
+    target.ToPlayer().SendBroadcastMessage(message)
+}
+
 export function GetInCombatWith (unit: TSUnit): TSArray<TSUnit> {
   const array: TSArray<TSUnit> = []
 
@@ -66,7 +72,7 @@ export function Cast (unit: TSCreature) {
   const combatAction = unit.GetString('combat-action', '')
   const isCasting = unit.IsCasting()
 
-  if (combatAction === '' && !isCasting) {
+  if (combatAction === '' && !isCasting && primary) {
     const target = DetermineTarget(unit)
     if (!target.IsNull()) {
       const rollA = Random(secondaryDice)
@@ -82,8 +88,10 @@ export function Cast (unit: TSCreature) {
 }
 
 export function Melee (unit: TSCreature) {
+  const isCasting = unit.IsCasting()
   const combatAction = unit.GetString('combat-action', '')
-  if (combatAction === '') {
+
+  if (combatAction === '' && !isCasting) {
     const target = DetermineTarget(unit)
     if (!target.IsNull()) {
       unit.AttackStart(target)
@@ -105,6 +113,8 @@ export function BlinkRoot (unit: TSCreature, dice: number = 0, every: number = 1
     unit.CastSpell(unit, 1953, false)
     unit.SetNumber('combat-blink-last-occurred', current)
     unit.SetBool('combat-blink-root-enable', false)
+    unit.SetString('combat-action', '')
+    Cast(unit)
   }
 
   // roll
@@ -149,6 +159,7 @@ export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: numb
     const current = GetCurrTime()
     const lastOccurred = unit.GetNumber('combat-move-to-cast-last-occurred', 0)
     const canOccur = current >= (lastOccurred + every)
+    MessageTarget(unit, isMoving ? 'yes' : 'no')
 
     // run
     if (combatAction === 'move-to-cast') {
@@ -170,7 +181,7 @@ export function MoveToRanged (unit: TSCreature, every: number = 5000, dice: numb
     }
 
     // roll
-    if (canOccur && (combatAction === '') && isMeleeRange && !isSilenced)
+    if (canOccur && (combatAction === '') && isMeleeRange)
       if (Random(dice) === 0)
         unit.SetString('combat-action', 'move-to-cast')
   }
@@ -191,8 +202,8 @@ export function FaerieDragon (events: TSEvents) {
         return
       }
       BlinkRoot(c)
-      CleanseSlow(c)
       MoveToRanged(c)
+      CleanseSlow(c)
       Cast(c)
       Melee(c)
       // const t = DetermineTarget(c)
