@@ -1,11 +1,11 @@
-// FIXME:
+// FIXME: round robin (first iteration)
 // create loot instance table
-// svae generated loot to instance table
+// save generated loot to instance table
 // send loot instance data to client
 // receive loot instance data from client
 // persist loot/dismiss info on table
 // get loot info on login
-
+// dismissed loot gets redistributed (until everyone dismisses)
 import { Opcode } from './utils'
 
 const LooterState = new TSJsonObject()
