@@ -29,7 +29,6 @@ export const app = new App(app => {
   EasyLoot()
   Chests()
   // Markdown()
-  test()
 
   const panel = Panel({
     name: 'main',
@@ -143,21 +142,4 @@ export const app = new App(app => {
     ],
   })
 })
-
-const test = () => {
-  let txt = ''
-  app.root.ref.SetScript('OnUpdate', () => {
-    const f = GetMouseFocus()
-    if (!f)
-      return
-    const name = f.GetName()
-    if (txt !== name) {
-      txt = name
-      if (name === 'DropDownList1') {
-        const a: WoWAPI.Frame = f as any
-        AllChildren(a).forEach(c => console.log(c.GetName()))
-      }
-    }
-  })
-}
 
