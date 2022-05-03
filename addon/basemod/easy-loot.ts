@@ -6,8 +6,6 @@ import { Movable } from './utils'
 declare const DressUpItemLink: any
 declare const IsShiftKeyDown: any
 declare const IsControlKeyDown: any
-declare const ChatEdit_InsertLink: any
-declare const ChatEdit_ActivateChat: any
 declare const DEFAULT_CHAT_FRAME: {
   AddMessage: any
 }
